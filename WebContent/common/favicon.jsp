@@ -1,4 +1,4 @@
-<link rel="shortcut icon" href="/anveloper/assets/img/favi/favicon.ico">
+<link rel="shortcut icon" href="assets/img/favi/favicon.ico">
 <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
 <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
 <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
