@@ -1,6 +1,6 @@
 anveloper
 =========
-<img src="WebContent/assets/img/signature.png" width="50%" height="50%" title="signature" alt="anveloper"/>
+<img src="/WebContent/assets/img/signature.png" width="50%" height="50%" title="signature" alt="anveloper"/>
 
 ### 개인 홈페이지 만들기
 
