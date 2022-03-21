@@ -4,48 +4,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-	<meta name="description" content="" />
-	<meta name="author" content="" />
-	<title>ANVELOPER - steady developer</title>
-	<%@ include file="common/favicon.jsp"%>
-	
-	<link rel="manifest" href="/manifest.json">
-	<meta name="msapplication-TileColor" content="#ffffff">
-	<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
-	<meta name="theme-color" content="#ffffff">
-	<!-- Font Awesome icons (free version)-->
-	<script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"
-		crossorigin="anonymous"></script>
-	<!-- Google fonts-->
-	<link
-		href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700"
-		rel="stylesheet" type="text/css" />
-	<link
-		href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i"
-		rel="stylesheet" type="text/css" />
-	<!-- Core theme CSS (includes Bootstrap)-->
-	<link href="/anveloper/css/styles.css" rel="stylesheet" />
+<meta charset="utf-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="description" content="" />
+<meta name="author" content="" />
+<title>ANVELOPER - steady developer</title>
+<!-- include favicon -->
+<%@ include file="common/favicon.jsp"%>
+<!-- Font Awesome icons (free version)-->
+<script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"
+	crossorigin="anonymous"></script>
+<!-- Google fonts-->
+<link
+	href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700"
+	rel="stylesheet" type="text/css" />
+<link
+	href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i"
+	rel="stylesheet" type="text/css" />
+<!-- Core theme CSS (includes Bootstrap)-->
+<link href="css/styles.css" rel="stylesheet" />
 </head>
 <body id="page-top">
-	<%@ include file="common/navigation.jsp" %>
+	<!-- include navigation -->
+	<%@ include file="common/navigation.jsp"%>
 	<!-- Page Content-->
 	<div class="container-fluid p-0">
 		<!-- About-->
 		<section class="resume-section" id="about">
 			<div class="resume-section-content">
 				<h1 class="mb-0">
-					Clarence <span class="text-primary">Taylor</span>
+					Steady <span class="text-primary">ANVELOPER</span>
 				</h1>
 				<div class="subheading mb-5">
 					Dong-gu, Daejeon, Republic of Korea · 000-0000-0000 · <a
 						href="mailto:name@email.com">hitedin@gmail.com</a>
 				</div>
-				<p class="lead mb-5">I am experienced in leveraging agile
-					frameworks to provide a robust synopsis for high level overviews.
-					Iterative approaches to corporate strategy foster collaborative
-					thinking to further the overall value proposition.</p>
+				<p class="lead mb-5">안녕하세요. 프로그래밍을 공부중인 anveloper입니다. Java가 주
+					사용언어이며, Spring Framework 환경에 익숙하며(?) 백엔드 개발을 지향하고 있는 프론트도 가능한
+					개발자입니다.</p>
+				<hr>
+				<p class="lead mb-5">asdfasdfㅁㄴㅇㄻㄴㅇㄹ</p>
 				<div class="social-icons">
 					<a class="social-icon" href="#!"><i class="fab fa-linkedin-in"></i></a>
 					<a class="social-icon" href="#!"><i class="fab fa-github"></i></a>
@@ -234,6 +233,6 @@
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 	<!-- Core theme JS-->
-	<script src="/anveloper/js/scripts.js"></script>
+	<script src="js/scripts.js"></script>
 </body>
 </html>
