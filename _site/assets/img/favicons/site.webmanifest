@@ -1,9 +1,9 @@
 
 
 {
-  "name": "Chirpy",
-  "short_name": "Chirpy",
-  "description": "A minimal, responsive and feature-rich Jekyll theme for technical writing.",
+  "name": "Anveloper Devlog",
+  "short_name": "Anveloper Devlog",
+  "description": "Anveloper 개발자 블로그",
   "icons": [
     {
       "src": "/assets/img/favicons/android-chrome-192x192.png",
