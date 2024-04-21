@@ -63,8 +63,7 @@ social_preview_image: # string, local or CORS resources
 toc: true
 
 comments:
-  # Global switch for the post comment system. Keeping it empty means disabled.
-  provider: giscus
+  active: giscus
   giscus:
     repo: anveloper/anveloper.github.io
     repo_id: R_kgDOHCTsEQ
