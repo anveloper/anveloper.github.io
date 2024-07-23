@@ -1,0 +1,11 @@
+{
+  "prettier.bracketSpacing": true,
+  "prettier.endOfLine": "auto",
+  "prettier.printWidth": 200,
+  "prettier.quoteProps": "consistent",
+  "prettier.semi": true,
+  "prettier.tabWidth": 2,
+  "prettier.trailingComma": "es5",
+  "prettier.useTabs": false,
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
+}

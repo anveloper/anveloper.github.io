@@ -2,29 +2,26 @@
   "name": "anveloper.github.io",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://anveloper.github.io",
+  "homepage": "https://anveloper",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "predeploy": "npm run build",
-    "deploy": "touch out/.nojekyll && gh-pages -d out --dotfiles",
-    "start": "next start",
-    "lint": "next lint"
+    "deploy": "touch out/.nojekyll && gh-pages -d out --dotfiles"
   },
   "dependencies": {
-    "gh-pages": "^6.1.1",
-    "next": "14.2.5",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "next": "14.2.5"
   },
   "devDependencies": {
+    "typescript": "^5",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
-    "eslint": "^8",
-    "eslint-config-next": "14.2.5",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
-    "typescript": "^5"
+    "eslint": "^8",
+    "eslint-config-next": "14.2.5"
   }
 }
