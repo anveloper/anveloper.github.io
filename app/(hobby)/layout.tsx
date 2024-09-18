@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 
-const layout = async ({ children }: { children: ReactNode }) => {
+const HobbyLayout = async ({ children }: Readonly<{ children: ReactNode }>) => {
   return <>{children}</>;
 };
 
-export default layout;
+export default HobbyLayout;
