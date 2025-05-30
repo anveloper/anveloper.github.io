@@ -1,8 +1,0 @@
-.navigation {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  gap: 8px;
-  padding-right: var(--body-margin-right);
-  padding-left: var(--body-margin-left);
-}
