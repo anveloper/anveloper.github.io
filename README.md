@@ -1,36 +1,55 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## 웹 개발자 안성진 입니다.
 
-## Getting Started
+### 이 포트폴리오에 사용된 기술스택
 
-First, run the development server:
+### 프레임워크 & 언어
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Next.js 15.3 (App Router, output: 'export')
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+  - 정적 사이트로 빌드되는 최신 라우팅 기반
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- React 19
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+  - React Compiler 및 자동 리렌더링 최적화 포함
 
-## Learn More
+- TypeScript 5
 
-To learn more about Next.js, take a look at the following resources:
+  - 정적 타입 지원으로 개발 생산성 향상
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 스타일링 & UI 구성
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Tailwind CSS 4
 
-## Deploy on Vercel
+  - 최신 유틸리티 CSS 프레임워크, @layer, @theme inline, CSS 변수 사용
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### UI 컴포넌트
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- shadcn/ui 스타일 구조 채택
+
+  - components/ui, lib/utils.ts 기반 구성
+
+- Radix UI (Tooltip, Separator, Slot)
+
+  - 접근성과 키보드 내비게이션이 보장된 컴포넌트
+
+- Lucide Icons
+
+  - Feather 기반 아이콘 컴포넌트
+
+### 애니메이션
+
+- motion@12 (framer-motion)
+
+  - 페이지 및 요소 단위의 트랜지션, 슬라이딩, 페이드 효과
+
+  - AnimatePresence, motion.div 등 사용
+
+### 빌드 & 배포
+
+- GitHub Actions
+
+  - /out 폴더를 GitHub Pages로 자동 배포
+
+- GitHub Pages
+
+  - 커스텀 도메인 anveloper.dev에 정적 사이트로 배포

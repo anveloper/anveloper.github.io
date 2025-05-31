@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - main
+    paths-ignore:
+      - "*.md"
+      - "cspell.config.json"
 
 permissions:
   contents: write
