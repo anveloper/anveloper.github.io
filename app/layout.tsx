@@ -1,6 +1,7 @@
 import FaviconSwitcher from "@/components/favicon-switcher";
+import { NavBar } from "@/components/nav-bar";
+import { Providers } from "@/components/providers";
 import { ThemeToggle } from "@/components/theme-toggle-button";
-import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 import "./globals.css";
 
@@ -21,17 +22,11 @@ const RootLayout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
         <link rel="apple-touch-icon" href="/favicon-light.svg" />
       </head>
       <body>
-        <main
-          className={cn(
-            "pt-14 pb-4 px-40",
-            "flex items-center justify-between",
-            "relative break-words h-dvh min-h-screen max-md:p-4 bg-transparent max-sm:pt-20",
-            "bg-[radial-gradient(#88888830_1px,transparent_1px)] [background-size:24px_24px]"
-          )}
-        >
+        <Providers>
           {children}
           <ThemeToggle />
-        </main>
+          <NavBar />
+        </Providers>
         <FaviconSwitcher />
       </body>
     </html>
