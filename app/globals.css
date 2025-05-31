@@ -5,11 +5,13 @@
   font-display: swap;
   font-style: normal;
 }
+
 @font-face {
   font-family: "D2Coding Ligature";
   src: url("/fonts/D2CodingLigature.woff2") format("woff2");
   font-display: swap;
 }
+
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -136,4 +138,47 @@
 html {
   color-scheme: dark light;
   transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.name-underline::after {
+  content: "";
+  display: block;
+  width: 6rem;
+  height: 0.6rem;
+  background-color: hsl(var(--primary-sky));
+}
+
+.animate-text-slide {
+  animation: text-slide 12.5s cubic-bezier(0.83, 0, 0.17, 1) infinite;
+}
+
+@keyframes text-slide {
+  0%,
+  16% {
+    transform: translateY(0%);
+  }
+
+  20%,
+  36% {
+    transform: translateY(-16.66%);
+  }
+
+  40%,
+  56% {
+    transform: translateY(-33.33%);
+  }
+
+  60%,
+  76% {
+    transform: translateY(-50%);
+  }
+
+  80%,
+  96% {
+    transform: translateY(-66.66%);
+  }
+
+  100% {
+    transform: translateY(-83.33%);
+  }
 }
