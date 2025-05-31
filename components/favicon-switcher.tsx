@@ -5,15 +5,22 @@ import { useEffect } from "react";
 const FaviconSwitcher = () => {
   useEffect(() => {
     const setFavicon = (theme: "light" | "dark") => {
-      let link = document.querySelector("link[rel='icon']") as HTMLLinkElement | null;
+      const faviconHref = theme === "dark" ? "/favicon-dark.svg" : "/favicon-light.svg";
 
-      if (!link) {
-        link = document.createElement("link");
-        link.rel = "icon";
-        document.head.appendChild(link);
-      }
+      const rels = ["icon", "shortcut icon", "apple-touch-icon"];
 
-      link.href = theme === "dark" ? "/favicon-dark.svg" : "/favicon-light.svg";
+      rels.forEach((rel) => {
+        let link = document.querySelector(`link[rel='${rel}']`) as HTMLLinkElement | null;
+
+        if (!link) {
+          link = document.createElement("link");
+          link.rel = rel;
+          link.type = "image/svg+xml";
+          document.head.appendChild(link);
+        }
+
+        link.href = faviconHref;
+      });
 
       document.documentElement.classList.remove("light", "dark");
       document.documentElement.classList.add(theme);
@@ -27,7 +34,6 @@ const FaviconSwitcher = () => {
       return saved ?? (media.matches ? "dark" : "light");
     };
 
-    // 초기 적용
     setFavicon(getPreferredTheme());
 
     const handler = () => {
