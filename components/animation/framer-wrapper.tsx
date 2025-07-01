@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 
 type FramerMotionProps = {
   children: React.ReactNode;
-  className?: any;
+  className?: string;
   y?: number;
   x?: number;
   delay?: number;
