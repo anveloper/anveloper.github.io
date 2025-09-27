@@ -1,55 +1,86 @@
-## 웹 개발자 안성진 입니다.
+# anveloper.github.io
 
-### 이 포트폴리오에 사용된 기술스택
+## 🚀 소개
 
-### 프레임워크 & 언어
+이 프로젝트는 Next.js 14와 MDX를 기반으로 구축된 개인 포트폴리오 및 기술 블로그 웹사이트입니다. 개발자의 경험, 프로젝트, 기술 스택 및 생각을 공유하기 위해 설계되었습니다. 깔끔하고 현대적인 UI/UX를 제공하며, 다크 모드 지원 및 반응형 디자인을 통해 다양한 환경에서 최적의 사용자 경험을 제공합니다.
 
-- Next.js 15.3 (App Router, output: 'export')
+## ✨ 주요 기능
 
-  - 정적 사이트로 빌드되는 최신 라우팅 기반
+*   **MDX 기반 블로그 및 프로젝트 페이지**: 마크다운(Markdown)과 JSX를 함께 사용하여 동적이고 풍부한 콘텐츠를 작성할 수 있습니다.
+*   **반응형 내비게이션**: 모바일 및 데스크톱 환경에 최적화된 내비게이션 메뉴를 제공합니다.
+*   **테마 토글**: 사용자가 라이트 모드와 다크 모드를 자유롭게 전환할 수 있습니다.
+*   **애니메이션 및 UI 컴포넌트**: Framer Motion 및 Magic UI를 활용하여 시각적으로 매력적인 사용자 인터페이스를 구현했습니다.
+*   **SEO 최적화**: Next.js의 기능을 활용하여 검색 엔진 최적화에 유리하도록 설계되었습니다.
 
-- React 19
+## 🛠️ 기술 스택
 
-  - React Compiler 및 자동 리렌더링 최적화 포함
+이 프로젝트는 다음과 같은 기술 스택으로 구축되었습니다.
 
-- TypeScript 5
+*   **프레임워크**: Next.js 14 (App Router)
+*   **언어**: TypeScript
+*   **스타일링**: Tailwind CSS
+*   **콘텐츠**: MDX
+*   **애니메이션**: Framer Motion
+*   **UI 컴포넌트**: Magic UI
+*   **패키지 관리**: npm
 
-  - 정적 타입 지원으로 개발 생산성 향상
+## ⚙️ 설치 및 실행
 
-### 스타일링 & UI 구성
+프로젝트를 로컬 환경에서 설정하고 실행하는 방법입니다.
 
-- Tailwind CSS 4
+### 1. 저장소 클론
 
-  - 최신 유틸리티 CSS 프레임워크, @layer, @theme inline, CSS 변수 사용
+```bash
+git clone https://github.com/anveloper/anveloper.github.io.git
+cd anveloper.github.io
+```
 
-### UI 컴포넌트
+### 2. 의존성 설치
 
-- shadcn/ui 스타일 구조 채택
+```bash
+npm install
+```
 
-  - components/ui, lib/utils.ts 기반 구성
+### 3. 개발 서버 실행
 
-- Radix UI (Tooltip, Separator, Slot)
+```bash
+npm run dev
+```
 
-  - 접근성과 키보드 내비게이션이 보장된 컴포넌트
+개발 서버가 `http://localhost:3000`에서 실행됩니다.
 
-- Lucide Icons
+### 4. 빌드 및 배포
 
-  - Feather 기반 아이콘 컴포넌트
+프로덕션 빌드를 생성하려면 다음 명령어를 사용합니다.
 
-### 애니메이션
+```bash
+npm run build
+npm run start
+```
 
-- motion@12 (framer-motion)
+## 📝 사용법
 
-  - 페이지 및 요소 단위의 트랜지션, 슬라이딩, 페이드 효과
+*   **블로그 게시물 작성**: `_posts` 디렉토리에 `.mdx` 파일을 추가하여 새로운 블로그 게시물을 작성할 수 있습니다.
+*   **프로젝트 추가**: `_projects` 디렉토리에 `.mdx` 파일을 추가하여 포트폴리오 프로젝트를 추가할 수 있습니다.
+*   **테마 변경**: 웹사이트 상단의 테마 토글 버튼을 클릭하여 라이트/다크 모드를 전환할 수 있습니다.
 
-  - AnimatePresence, motion.div 등 사용
+## 📂 프로젝트 구조
 
-### 빌드 & 배포
-
-- GitHub Actions
-
-  - /out 폴더를 GitHub Pages로 자동 배포
-
-- GitHub Pages
-
-  - 커스텀 도메인 anveloper.dev에 정적 사이트로 배포
+```
+anveloper.github.io/
+├── app/                  # Next.js App Router 페이지 및 레이아웃
+├── components/           # 재사용 가능한 UI 컴포넌트
+│   ├── animation/        # Framer Motion 기반 애니메이션 컴포넌트
+│   ├── magicui/          # Magic UI 컴포넌트
+│   └── ui/               # 기본 UI 요소 (버튼, 구분선 등)
+├── hooks/                # 커스텀 React Hooks
+├── lib/                  # 유틸리티 함수 및 MDX 관련 설정
+├── public/               # 정적 파일 (이미지, 폰트, 파비콘 등)
+├── _posts/               # 블로그 게시물 MDX 파일
+├── _projects/            # 포트폴리오 프로젝트 MDX 파일
+├── .github/              # GitHub 관련 설정 (PR 템플릿, 워크플로우 등)
+├── next.config.ts        # Next.js 설정
+├── tailwind.config.ts    # Tailwind CSS 설정
+├── tsconfig.json         # TypeScript 설정
+└── package.json          # 프로젝트 의존성 및 스크립트
+```
