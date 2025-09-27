@@ -1,0 +1,18 @@
+{
+  "project_type": "nextjs-static-blog",
+  "deployment_target": "github-pages",
+  "user_goal": "Create a static blog with Next.js for GitHub Pages, with a 'vibe coding' style.",
+  "key_files": [
+    "next.config.ts",
+    "package.json",
+    "app/layout.tsx",
+    "tailwind.config.ts",
+    "app/page.tsx"
+  ],
+  "commands": {
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  }
+}
