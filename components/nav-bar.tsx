@@ -39,7 +39,7 @@ const navItems = [
 const socialLinks = [
   { name: "GitHub", url: "https://github.com/anveloper", icon: Icons.github },
   { name: "LinkedIn", url: "https://www.linkedin.com/in/anveloper/", icon: Icons.linkedin },
-  { name: "Email", url: "/email", icon: MailIcon, internal: true },
+  { name: "Contact", url: "/contact", icon: MailIcon, internal: true },
 ];
 
 export const NavBar = () => {
@@ -54,7 +54,7 @@ export const NavBar = () => {
       className={cn(
         "px-6 py-4 min-h-14 flex items-center",
         "sm:px-8 md:px-12 md:py-2 lg:px-16",
-        "fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm"
+        "fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm transition-colors"
       )}
     >
       <nav className={cn("w-full max-w-4xl mx-auto", "flex items-center justify-between flex-wrap gap-1")}>

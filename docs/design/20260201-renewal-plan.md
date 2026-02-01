@@ -26,7 +26,7 @@ anveloper.github.io 포트폴리오 사이트의 전면 리뉴얼을 진행합�
 | `/skills` | 미완성 |
 | `/education` | 미완성 |
 | `/overview` | 미완성 |
-| `/email` | 미완성 |
+| `/contact` | 미완성 |
 
 ---
 
