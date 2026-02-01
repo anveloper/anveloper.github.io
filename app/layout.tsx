@@ -1,7 +1,6 @@
 import FaviconSwitcher from "@/components/favicon-switcher";
 import { NavBar } from "@/components/nav-bar";
 import { Providers } from "@/components/providers";
-import { ThemeToggle } from "@/components/theme-toggle-button";
 import type { Metadata } from "next";
 import "./globals.css";
 
@@ -57,14 +56,9 @@ const RootLayout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
       </head>
       <body className="min-h-screen flex flex-col bg-background text-foreground antialiased">
         <Providers>
-          {/* Main content area */}
-          <main className="flex-1 flex flex-col">
-            {children}
-          </main>
-
-          {/* Fixed UI elements */}
-          <ThemeToggle />
           <NavBar />
+
+          <main className="flex-1 flex flex-col">{children}</main>
         </Providers>
         <FaviconSwitcher />
       </body>
