@@ -1,9 +1,9 @@
 import { PageContainer } from "@/components/page-container";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { promises as fs } from "fs";
 import matter from "gray-matter";
-import { Calendar, ArrowRight, FileText } from "lucide-react";
+import { ArrowRight, Calendar, FileText } from "lucide-react";
 import Link from "next/link";
 import path from "path";
 
@@ -63,12 +63,10 @@ export default async function PostsPage() {
                         {post.frontmatter.title}
                       </CardTitle>
                       {post.frontmatter.description && (
-                        <CardDescription className="line-clamp-2">
-                          {post.frontmatter.description}
-                        </CardDescription>
+                        <CardDescription className="line-clamp-2">{post.frontmatter.description}</CardDescription>
                       )}
                     </div>
-                    <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:text-primary-sky group-hover:translate-x-1 transition-all flex-shrink-0 mt-1" />
+                    <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:text-primary-sky group-hover:translate-x-1 transition-all shrink-0 mt-1" />
                   </div>
                 </CardHeader>
                 <CardContent>

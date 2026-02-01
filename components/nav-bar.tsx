@@ -1,10 +1,6 @@
 "use client";
 
-import {
-  FolderGit2,
-  HomeIcon,
-  MailIcon,
-} from "lucide-react";
+import { FolderGit2, HomeIcon, MailIcon } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 
@@ -52,7 +48,7 @@ export const NavBar = () => {
       <nav className="max-w-4xl mx-auto px-6 h-14 flex items-center justify-between">
         {/* Logo / Name */}
         <Link href="/" className="font-semibold text-foreground hover:text-primary-sky transition-colors">
-          anveloper
+          anveloper.dev
         </Link>
 
         {/* Navigation Links */}
@@ -65,9 +61,7 @@ export const NavBar = () => {
                 href={item.href}
                 className={cn(
                   "px-3 py-2 text-sm font-medium rounded-md transition-colors",
-                  isActive
-                    ? "text-primary-sky"
-                    : "text-muted-foreground hover:text-foreground"
+                  isActive ? "text-primary-sky" : "text-muted-foreground hover:text-foreground"
                 )}
               >
                 <span className="hidden sm:inline">{item.label}</span>
