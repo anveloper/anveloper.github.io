@@ -1,9 +1,11 @@
 "use client";
 
-import { FolderGit2, HomeIcon, MailIcon } from "lucide-react";
+import { FolderGit2, HomeIcon, MailIcon, Moon, Sun } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 
+import { useMounted } from "@/hooks/use-mounted";
+import { useThemeClass } from "@/hooks/use-theme-class";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
 
@@ -42,6 +44,10 @@ const socialLinks = [
 
 export const NavBar = () => {
   const pathname = usePathname();
+  const { theme, setTheme } = useThemeClass();
+  const mounted = useMounted();
+
+  if (!mounted) return null;
 
   return (
     <header
@@ -76,10 +82,8 @@ export const NavBar = () => {
             );
           })}
 
-          {/* Divider */}
           <div className="w-px h-4 bg-border mx-2" />
 
-          {/* Social Links */}
           {socialLinks.map((social) => (
             <Link
               key={social.name}
@@ -92,6 +96,15 @@ export const NavBar = () => {
               <social.icon className="w-4 h-4" />
             </Link>
           ))}
+
+          <div className="w-px h-4 bg-border mx-2" />
+
+          <button
+            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            className="p-2 text-muted-foreground hover:text-foreground transition-colors"
+          >
+            {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+          </button>
         </div>
       </nav>
     </header>
