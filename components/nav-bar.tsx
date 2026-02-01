@@ -39,7 +39,7 @@ const navItems = [
 const socialLinks = [
   { name: "GitHub", url: "https://github.com/anveloper", icon: Icons.github },
   { name: "LinkedIn", url: "https://www.linkedin.com/in/anveloper/", icon: Icons.linkedin },
-  { name: "Email", url: "/email", icon: MailIcon, internal: true },
+  { name: "Contact", url: "/contact", icon: MailIcon, internal: true },
 ];
 
 export const NavBar = () => {
