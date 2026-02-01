@@ -12,13 +12,14 @@
 
 | 분류 | 기술 |
 |------|------|
-| 프레임워크 | Next.js 15.3.3 (App Router, Turbopack) |
-| UI | React 19, TypeScript |
-| 스타일링 | Tailwind CSS v4, CVA (class-variance-authority) |
-| 애니메이션 | Motion (Framer Motion) |
+| 프레임워크 | Next.js 16.1.6 (App Router, Turbopack) |
+| UI | React 19.2.4, TypeScript 5.9.3 |
+| 스타일링 | Tailwind CSS v4.1.18, CVA (class-variance-authority) |
+| 애니메이션 | Motion 12.29.2 (Framer Motion) |
 | UI 컴포넌트 | Radix UI, shadcn/ui |
 | 콘텐츠 | MDX + gray-matter |
 | 아이콘 | lucide-react |
+| 패키지 매니저 | pnpm |
 
 ## 디렉토리 구조
 
@@ -27,13 +28,20 @@ app/                 # Next.js App Router 페이지
 ├── layout.tsx       # 루트 레이아웃
 ├── page.tsx         # 홈페이지
 ├── globals.css      # 전역 스타일 (Tailwind + 커스텀)
+├── about/           # 소개 페이지
+├── skills/          # 기술 스택 페이지
+├── education/       # 학력 페이지
+├── overview/        # 경력 개요 페이지
+├── contact/         # 연락처 페이지
 ├── posts/[slug]/    # 블로그 포스트
 └── projects/[slug]/ # 프로젝트
 
 components/          # 재사용 컴포넌트
-├── ui/              # 기본 UI (Button, Tooltip 등)
+├── ui/              # 기본 UI (Button, Tooltip, Card, Badge 등)
 ├── magicui/         # Magic UI 컴포넌트
-└── animation/       # 애니메이션 래퍼
+├── animation/       # 애니메이션 래퍼
+├── nav-bar.tsx      # 네비게이션 헤더
+└── page-container.tsx # 페이지 컨테이너
 
 hooks/               # 커스텀 React Hooks
 lib/                 # 유틸리티 함수
@@ -41,6 +49,7 @@ _posts/              # 블로그 MDX 파일
 _projects/           # 프로젝트 MDX 파일
 public/              # 정적 파일 (폰트, 이미지, 파비콘)
 docs/                # 프로젝트 문서
+.claude/skills/      # Claude Code 스킬
 ```
 
 ## 코딩 컨벤션
@@ -141,10 +150,10 @@ refactor: 컴포넌트 구조 개선 (ui)
 ## 개발 명령어
 
 ```bash
-npm run dev      # 개발 서버 (Turbopack)
-npm run build    # 정적 빌드
-npm run start    # 빌드된 사이트 실행
-npm run lint     # ESLint 검사
+pnpm dev      # 개발 서버 (Turbopack)
+pnpm build    # 정적 빌드
+pnpm start    # 빌드된 사이트 실행
+pnpm lint     # ESLint 검사
 ```
 
 ## 주요 작업 지침
@@ -172,7 +181,7 @@ npm run lint     # ESLint 검사
 ### 현재 상태
 
 - 홈페이지, 포스트, 프로젝트 페이지 완성
-- About, Skills, Education, Overview, Email 페이지 개발 중
+- About, Skills, Education, Overview, Contact 페이지 완성
 
 ### 리뉴얼 시 고려사항
 
