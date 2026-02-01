@@ -9,12 +9,7 @@ type PageContainerProps = {
   withPattern?: boolean;
 };
 
-export const PageContainer = ({
-  children,
-  className,
-  fullHeight = false,
-  withPattern = true,
-}: PageContainerProps) => {
+export const PageContainer = ({ children, className, fullHeight = false, withPattern = true }: PageContainerProps) => {
   return (
     <div
       className={cn(
@@ -25,18 +20,11 @@ export const PageContainer = ({
         // 높이 설정
         fullHeight ? "min-h-screen flex flex-col" : "min-h-screen",
         // 배경 패턴
-        withPattern && "bg-[radial-gradient(oklch(0.5_0_0/15%)_1px,transparent_1px)] [background-size:20px_20px]",
+        withPattern && "bg-[radial-gradient(oklch(0.5_0_0/15%)_1px,transparent_1px)] bg-size-[20px_20px]",
         className
       )}
     >
-      <div
-        className={cn(
-          "w-full max-w-4xl mx-auto",
-          fullHeight && "flex-1 flex flex-col"
-        )}
-      >
-        {children}
-      </div>
+      <div className={cn("w-full max-w-4xl mx-auto", fullHeight && "flex-1 flex flex-col")}>{children}</div>
     </div>
   );
 };
