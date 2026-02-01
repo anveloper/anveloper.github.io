@@ -44,8 +44,14 @@ export const NavBar = () => {
   const pathname = usePathname();
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm">
-      <nav className="max-w-4xl mx-auto px-6 h-14 flex items-center justify-between">
+    <header
+      className={cn(
+        "px-6 py-4 min-h-14 flex items-center",
+        "sm:px-8 md:px-12 md:py-2 lg:px-16",
+        "fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm"
+      )}
+    >
+      <nav className={cn("w-full max-w-4xl mx-auto", "flex items-center justify-between flex-wrap gap-1")}>
         {/* Logo / Name */}
         <Link href="/" className="font-semibold text-foreground hover:text-primary-sky transition-colors">
           anveloper.dev

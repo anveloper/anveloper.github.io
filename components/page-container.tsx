@@ -14,9 +14,9 @@ export const PageContainer = ({ children, className, fullHeight = false, withPat
     <div
       className={cn(
         // 기본 패딩: NavBar 공간 확보
-        "pt-16 pb-8 px-6",
+        "pt-28 pb-8 px-6",
         // 반응형 패딩
-        "sm:px-8 md:px-12 lg:px-16",
+        "sm:px-8 md:px-12 lg:px-16 md:pt-20",
         // 높이 설정
         fullHeight ? "min-h-screen flex flex-col" : "min-h-screen",
         // 배경 패턴
