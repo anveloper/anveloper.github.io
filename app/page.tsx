@@ -130,6 +130,28 @@ const timeline: TimelineItem[] = [
   },
 ];
 
+// Projects Data
+const projects = [
+  {
+    title: "DPS (Design Plug Shop)",
+    description: "판매자와 제조사를 연결하는 B2B 주문형 굿즈·인쇄 제작 플랫폼",
+    tags: ["Next.js", "TypeScript", "Prisma", "NextAuth"],
+    slug: "dps",
+  },
+  {
+    title: "DPS Store (디플샵 스토어)",
+    description: "멀티테넌트 기반 팝업 스토어 플랫폼 — 테넌트별 독립 온라인 스토어 운영",
+    tags: ["Next.js", "TypeScript", "Prisma", "Caddy"],
+    slug: "dps-store",
+  },
+  {
+    title: "정보보안기사 시험 대비 웹 앱",
+    description: "이론 학습, 문제 풀이, 모의고사 기능을 갖춘 PWA 웹 애플리케이션",
+    tags: ["React", "TypeScript", "Vite", "PWA"],
+    slug: "information-security-engineer",
+  },
+];
+
 // Contact Data
 const contactLinks = [
   {
@@ -364,11 +386,27 @@ const HomePage = () => {
         className="mb-16"
       >
         <SectionHeader href="/projects">Projects</SectionHeader>
-        <Card>
-          <CardContent className="pt-6">
-            <p className="text-muted-foreground text-center py-4">프로젝트 목록은 자세히 보기를 클릭해주세요.</p>
-          </CardContent>
-        </Card>
+        <div className="space-y-3">
+          {projects.map((project) => (
+            <Link key={project.slug} href={`/projects/${project.slug}`} className="block group">
+              <Card className="hover:border-primary-sky/50 transition-colors">
+                <CardContent className="py-4">
+                  <h3 className="font-semibold group-hover:text-primary-sky transition-colors">
+                    {project.title}
+                  </h3>
+                  <p className="text-sm text-muted-foreground mt-1">{project.description}</p>
+                  <div className="flex flex-wrap gap-1 mt-2">
+                    {project.tags.map((tag) => (
+                      <Badge key={tag} variant="secondary" className="text-xs">
+                        {tag}
+                      </Badge>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </Link>
+          ))}
+        </div>
       </motion.section>
 
       {/* Contact Section */}
