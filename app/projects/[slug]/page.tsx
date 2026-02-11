@@ -1,7 +1,7 @@
 import { getAllProjects, getProjectBySlug } from "@/_projects";
 import { PageContainer } from "@/components/page-container";
+import { TechBadge } from "@/components/skill-badge";
 import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { mdxComponents } from "@/lib/mdx-components";
 import { mdxOptions } from "@/lib/mdx-options";
 import { Calendar, ArrowLeft, ExternalLink, Github } from "lucide-react";
@@ -72,9 +72,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
           {project.frontmatter.tags && (
             <div className="flex flex-wrap gap-2">
               {(project.frontmatter.tags as string[]).map((tag) => (
-                <Badge key={tag} variant="sky">
-                  {tag}
-                </Badge>
+                <TechBadge key={tag} name={tag} variant="sky" />
               ))}
             </div>
           )}

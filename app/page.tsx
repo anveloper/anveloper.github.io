@@ -1,9 +1,11 @@
 "use client";
 
 import { PageContainer } from "@/components/page-container";
+import { SkillBadge, TechBadge } from "@/components/skill-badge";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import type { Skill, SkillCategory } from "@/lib/skill-data";
 import {
   ArrowRight,
   Award,
@@ -12,7 +14,6 @@ import {
   Database,
   ExternalLink,
   FileText,
-  Flame,
   Github,
   GraduationCap,
   Heart,
@@ -29,9 +30,6 @@ import Link from "next/link";
 const interests = ["풀스택 개발", "UX 최적화", "클린 아키텍처", "기술 리더십", "스마트 제조", "안드로이드 개발"];
 
 // Skills Data
-type Skill = { name: string; level: 1 | 2 | 3 };
-type SkillCategory = { title: string; icon: React.ReactNode; skills: Skill[] };
-
 const skillCategories: SkillCategory[] = [
   {
     title: "Frontend",
@@ -195,17 +193,6 @@ const contactLinks = [
     value: "Notion",
   },
 ];
-
-const SkillBadge = ({ skill }: { skill: Skill }) => (
-  <Badge variant="secondary" className="flex items-center gap-1">
-    {skill.name}
-    <span className="flex ml-1">
-      {Array.from({ length: skill.level }).map((_, i) => (
-        <Flame key={i} className="w-3 h-3 text-orange-500 fill-orange-500" />
-      ))}
-    </span>
-  </Badge>
-);
 
 const getTimelineIcon = (type: TimelineItem["type"]) => {
   switch (type) {
@@ -424,9 +411,7 @@ const HomePage = () => {
                   <p className="text-sm text-muted-foreground mt-1">{project.description}</p>
                   <div className="flex flex-wrap gap-1 mt-2">
                     {project.tags.map((tag) => (
-                      <Badge key={tag} variant="secondary" className="text-xs">
-                        {tag}
-                      </Badge>
+                      <TechBadge key={tag} name={tag} />
                     ))}
                   </div>
                 </CardContent>

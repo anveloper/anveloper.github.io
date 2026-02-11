@@ -1,6 +1,6 @@
 import { getAllProjects } from "@/_projects";
 import { PageContainer } from "@/components/page-container";
-import { Badge } from "@/components/ui/badge";
+import { TechBadge } from "@/components/skill-badge";
 import { FolderKanban } from "lucide-react";
 import Link from "next/link";
 
@@ -39,9 +39,7 @@ export default async function ProjectsPage() {
               {project.frontmatter.tags && (
                 <div className="flex flex-wrap gap-1 mb-3 sm:ml-24">
                   {(project.frontmatter.tags as string[]).map((tag) => (
-                    <Badge key={tag} variant="secondary" className="text-xs">
-                      {tag}
-                    </Badge>
+                    <TechBadge key={tag} name={tag} />
                   ))}
                 </div>
               )}

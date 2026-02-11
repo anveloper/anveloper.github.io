@@ -1,21 +1,11 @@
 "use client";
 
 import { PageContainer } from "@/components/page-container";
+import { SkillBadge } from "@/components/skill-badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import type { SkillCategory } from "@/lib/skill-data";
 import { Code, Server, Database, Wrench, Flame } from "lucide-react";
 import { motion } from "motion/react";
-
-type Skill = {
-  name: string;
-  level: 1 | 2 | 3;
-};
-
-type SkillCategory = {
-  title: string;
-  icon: React.ReactNode;
-  skills: Skill[];
-};
 
 const skillCategories: SkillCategory[] = [
   {
@@ -75,19 +65,6 @@ const skillCategories: SkillCategory[] = [
     ],
   },
 ];
-
-const SkillBadge = ({ skill }: { skill: Skill }) => {
-  return (
-    <Badge variant="secondary" className="flex items-center gap-1">
-      {skill.name}
-      <span className="flex ml-1">
-        {Array.from({ length: skill.level }).map((_, i) => (
-          <Flame key={i} className="w-3 h-3 text-orange-500 fill-orange-500" />
-        ))}
-      </span>
-    </Badge>
-  );
-};
 
 const SkillsPage = () => {
   return (
