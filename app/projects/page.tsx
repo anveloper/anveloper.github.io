@@ -22,36 +22,35 @@ export default async function ProjectsPage() {
       ) : (
         <div className="divide-y divide-border">
           {projects.map((project) => (
-            <div key={project.slug} className="py-6">
-              <div className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4 mb-2">
-                <time className="text-sm text-muted-foreground shrink-0">
-                  {project.frontmatter.date}
-                </time>
-                <h2 className="text-xl font-semibold text-foreground">
-                  {project.frontmatter.title}
-                </h2>
-              </div>
-              {project.frontmatter.description && (
-                <p className="text-muted-foreground mb-3 sm:ml-24">
-                  {project.frontmatter.description}
-                </p>
-              )}
-              {project.frontmatter.tags && (
-                <div className="flex flex-wrap gap-1 mb-3 sm:ml-24">
-                  {(project.frontmatter.tags as string[]).map((tag) => (
-                    <TechBadge key={tag} name={tag} />
-                  ))}
+            <Link key={project.slug} href={`/projects/${project.slug}`} className="block group">
+              <div className="py-6">
+                <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4 mb-2">
+                  <time className="text-sm text-muted-foreground shrink-0">
+                    {project.frontmatter.date}
+                  </time>
+                  <div className="flex items-center gap-2">
+                    {project.icon && (
+                      <img src={project.icon} alt="" className="w-6 h-6 rounded" />
+                    )}
+                    <h2 className="text-xl font-semibold text-foreground group-hover:text-primary-sky transition-colors">
+                      {project.frontmatter.title}
+                    </h2>
+                  </div>
                 </div>
-              )}
-              <div className="sm:ml-24">
-                <Link
-                  href={`/projects/${project.slug}`}
-                  className="text-sm text-primary-sky hover:underline"
-                >
-                  자세히 보기 →
-                </Link>
+                {project.frontmatter.description && (
+                  <p className="text-muted-foreground mb-3 sm:ml-24">
+                    {project.frontmatter.description}
+                  </p>
+                )}
+                {project.frontmatter.tags && (
+                  <div className="flex flex-wrap gap-1 sm:ml-24">
+                    {(project.frontmatter.tags as string[]).map((tag) => (
+                      <TechBadge key={tag} name={tag} />
+                    ))}
+                  </div>
+                )}
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       )}
