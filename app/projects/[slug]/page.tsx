@@ -4,14 +4,44 @@ import { TechBadge } from "@/components/skill-badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { mdxComponents } from "@/lib/mdx-components";
 import { mdxOptions } from "@/lib/mdx-options";
+import type { Metadata } from "next";
 import { Calendar, ArrowLeft, ExternalLink, Github } from "lucide-react";
 import { MDXRemote } from "next-mdx-remote/rsc";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
 export async function generateStaticParams() {
   const projects = await getAllProjects();
   return projects.map((project) => ({ slug: project.slug }));
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const project = await getProjectBySlug(slug);
+  if (!project) return {};
+
+  const { title, description, tags } = project.frontmatter;
+  const images = project.thumbnail ? [project.thumbnail] : undefined;
+
+  return {
+    title,
+    description,
+    keywords: tags as string[] | undefined,
+    openGraph: {
+      title,
+      description,
+      type: "article",
+      url: `/projects/${slug}`,
+      images,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images,
+    },
+  };
 }
 
 export default async function ProjectPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -31,6 +61,18 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
         <ArrowLeft className="w-4 h-4" />
         <span>프로젝트 목록으로 돌아가기</span>
       </Link>
+
+      {project.thumbnail && (
+        <div className="relative w-full aspect-[1200/630] mb-8 rounded-lg overflow-hidden border border-border">
+          <Image
+            src={project.thumbnail}
+            alt={project.frontmatter.title as string}
+            fill
+            className="object-cover"
+            priority
+          />
+        </div>
+      )}
 
       <Card className="mb-8">
         <CardContent className="pt-6">
