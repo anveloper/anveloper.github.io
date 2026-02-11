@@ -1,25 +1,54 @@
 ---
 name: analyze-project
-description: 다른 디렉토리의 프로젝트를 분석하여 _projects/ 에 MDX 콘텐츠를 작성합니다.
+description: 로컬 경로 또는 GitHub URL의 프로젝트를 분석하여 _projects/ 에 MDX 콘텐츠를 작성합니다.
 disable-model-invocation: true
 allowed-tools: Bash, Read, Write, Edit, Glob, Grep, Task
-argument-hint: "<프로젝트 경로>"
+argument-hint: "<프로젝트 경로 또는 GitHub URL>"
 ---
 
 # 프로젝트 분석 및 콘텐츠 작성
 
 분석 대상: `$ARGUMENTS`
 
+## 0단계: 대상 경로 결정
+
+인자가 GitHub URL인지 로컬 경로인지 판별합니다.
+
+### GitHub URL 판별 규칙
+
+다음 패턴 중 하나에 해당하면 GitHub URL로 간주:
+- `https://github.com/<owner>/<repo>`
+- `github.com/<owner>/<repo>`
+- `<owner>/<repo>` (슬래시 1개, 로컬 경로에 해당하는 파일/디렉토리가 없는 경우)
+
+### GitHub URL인 경우
+
+```bash
+# /tmp 하위에 클론
+REPO_DIR=$(mktemp -d /tmp/analyze-project-XXXXXX)
+gh repo clone <owner>/<repo> "$REPO_DIR" -- --depth 1
+```
+
+- 클론된 `$REPO_DIR`을 이후 단계에서 프로젝트 경로로 사용
+- GitHub URL에서 `<owner>/<repo>` 추출하여 frontmatter의 `github` 필드에 자동 기입
+- 분석 완료 후 5단계에서 `$REPO_DIR` 삭제
+
+### 로컬 경로인 경우
+
+- `$ARGUMENTS`를 그대로 프로젝트 경로로 사용
+
+> 이하 단계에서 `$PROJECT_PATH`는 위에서 결정된 실제 경로를 의미합니다.
+
 ## 1단계: 대상 프로젝트 탐색
 
-인자로 전달된 경로의 프로젝트를 전체적으로 탐색합니다.
+결정된 프로젝트 경로를 전체적으로 탐색합니다.
 
 ### 1.1 기본 구조 파악
 
 ```bash
 # 디렉토리 구조 확인 (2단계 깊이)
-ls -la $ARGUMENTS
-find $ARGUMENTS -maxdepth 2 -type f | head -50
+ls -la $PROJECT_PATH
+find $PROJECT_PATH -maxdepth 2 -type f | head -50
 ```
 
 ### 1.2 프로젝트 설정 파일 확인
@@ -41,9 +70,9 @@ find $ARGUMENTS -maxdepth 2 -type f | head -50
 
 ```bash
 # 주요 소스 디렉토리 파악
-ls -la $ARGUMENTS/src/ 2>/dev/null
-ls -la $ARGUMENTS/app/ 2>/dev/null
-ls -la $ARGUMENTS/lib/ 2>/dev/null
+ls -la $PROJECT_PATH/src/ 2>/dev/null
+ls -la $PROJECT_PATH/app/ 2>/dev/null
+ls -la $PROJECT_PATH/lib/ 2>/dev/null
 ```
 
 핵심 파일 탐색:
@@ -56,8 +85,8 @@ ls -la $ARGUMENTS/lib/ 2>/dev/null
 
 ```bash
 # 문서 파일 찾기
-find $ARGUMENTS -name "*.md" -maxdepth 3 | head -20
-find $ARGUMENTS/docs -type f 2>/dev/null | head -20
+find $PROJECT_PATH -name "*.md" -maxdepth 3 | head -20
+find $PROJECT_PATH/docs -type f 2>/dev/null | head -20
 ```
 
 ## 2단계: 분석 정보 정리
@@ -167,6 +196,13 @@ demo: '<Demo URL>'      # 선택
 - 불필요한 세부사항 생략, 핵심만 간결하게
 
 ## 5단계: 결과 보고
+
+GitHub URL로 클론한 경우 임시 디렉토리를 삭제합니다:
+
+```bash
+# GitHub 클론인 경우에만 실행
+rm -rf $REPO_DIR
+```
 
 ```
 생성된 파일: _projects/<slug>.mdx
