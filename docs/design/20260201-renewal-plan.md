@@ -97,7 +97,7 @@ anveloper.github.io 포트폴리오 사이트의 전면 리뉴얼을 진행합�
 #### Phase 1: 안전한 업그레이드 (패치/마이너)
 
 ```bash
-npm update
+pnpm update
 ```
 
 - Tailwind CSS, Motion, Radix UI 등 패치/마이너 업데이트
@@ -106,7 +106,7 @@ npm update
 #### Phase 2: 메이저 업그레이드 (Next.js 16)
 
 ```bash
-npm install next@latest eslint-config-next@latest @next/mdx@latest
+pnpm add next@latest eslint-config-next@latest @next/mdx@latest
 ```
 
 - Next.js 16 마이그레이션 가이드 참조
@@ -116,7 +116,7 @@ npm install next@latest eslint-config-next@latest @next/mdx@latest
 #### Phase 3: 타입 업그레이드
 
 ```bash
-npm install -D @types/node@latest
+pnpm add -D @types/node@latest
 ```
 
 - Node.js 타입 v25 적용
@@ -171,28 +171,28 @@ npm install -D @types/node@latest
 
 ```bash
 # 1. 마이너/패치 업데이트
-npm update
+pnpm update
 
 # 2. Next.js 16 및 관련 패키지 업그레이드
-npm install next@latest react@latest react-dom@latest
-npm install -D eslint-config-next@latest @next/mdx@latest @types/node@latest @types/react@latest @types/react-dom@latest
+pnpm add next@latest react@latest react-dom@latest
+pnpm add -D eslint-config-next@latest @next/mdx@latest @types/node@latest @types/react@latest @types/react-dom@latest
 
 # 3. 기타 최신 버전
-npm install motion@latest lucide-react@latest tailwind-merge@latest
-npm install -D eslint@latest typescript@latest tailwindcss@latest @tailwindcss/postcss@latest tw-animate-css@latest
+pnpm add motion@latest lucide-react@latest tailwind-merge@latest
+pnpm add -D eslint@latest typescript@latest tailwindcss@latest @tailwindcss/postcss@latest tw-animate-css@latest
 ```
 
 ### 4.2 업그레이드 후 확인
 
 ```bash
 # 빌드 테스트
-npm run build
+pnpm build
 
 # 개발 서버 확인
-npm run dev
+pnpm dev
 
 # 린트 확인
-npm run lint
+pnpm lint
 ```
 
 ---
@@ -212,12 +212,12 @@ npm run lint
 
 - [ ] 현재 브랜치 확인 (develop)
 - [ ] 변경사항 커밋 완료
-- [ ] package-lock.json 백업
+- [ ] pnpm-lock.yaml 백업
 
 ### 업그레이드 후
 
-- [ ] `npm run build` 성공
-- [ ] `npm run dev` 정상 동작
+- [ ] `pnpm build` 성공
+- [ ] `pnpm dev` 정상 동작
 - [ ] 모든 페이지 렌더링 확인
 - [ ] 다크/라이트 모드 동작 확인
 - [ ] 반응형 디자인 확인
@@ -233,11 +233,11 @@ npm run lint
 # 1. node_modules 삭제
 rm -rf node_modules
 
-# 2. package-lock.json 복원
-git checkout package-lock.json
+# 2. pnpm-lock.yaml 복원
+git checkout pnpm-lock.yaml
 
 # 3. 재설치
-npm install
+pnpm install
 ```
 
 ---

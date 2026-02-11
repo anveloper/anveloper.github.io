@@ -1,0 +1,143 @@
+---
+title: 'Prisma 7 업그레이드: 서버/클라이언트 경로 분리 패턴'
+date: '2026-02-02'
+description: 'Prisma 5에서 7로 업그레이드하며 마주한 서버/클라이언트 import 경로 분리 문제와 해결 과정을 정리했다.'
+tags: ['Prisma', 'ORM', 'Next.js', 'Migration']
+---
+
+# Prisma 7 업그레이드: 서버/클라이언트 경로 분리 패턴
+
+## 배경
+
+운영 중인 대규모 프로젝트에서 Prisma 5.20을 7.3으로 업그레이드했다. 버전 숫자만 보면 단순해 보이지만, 이번 업그레이드의 핵심은 **서버 모듈과 클라이언트 모듈의 경계가 엄격해졌다**는 점이다.
+
+| 패키지 | 이전 버전 | 현재 버전 |
+|--------|----------|----------|
+| prisma | 5.20 | 7.3.0 |
+| @prisma/client | 5.20 | 7.3.0 |
+| @prisma/adapter-mariadb | - | 7.3.0 (신규) |
+
+## 무엇이 달라졌는가
+
+### 클라이언트 생성 방식
+
+Prisma 7에서는 설정 파일 기반으로 클라이언트를 생성한다. 특히 멀티 스키마를 사용하는 경우 각각의 config 파일을 지정해야 한다.
+
+```bash
+# 메인 DB
+pnpm exec prisma generate --config=prisma.config.ts
+
+# EC DB (전자상거래)
+pnpm exec prisma generate --config=prisma-ec.config.ts
+```
+
+### 서버/클라이언트 Import 분리
+
+이번 업그레이드에서 가장 많은 시간을 쏟은 부분이다. Prisma 7에서는 `@prisma/client`를 클라이언트 컴포넌트(`"use client"`)에서 직접 import하면 서버 모듈 오류가 발생한다.
+
+```typescript
+// 서버 컴포넌트, API route → 기존과 동일
+import { PrismaClient, ProductStatus } from "@prisma/client";
+
+// 클라이언트 컴포넌트 → 오류 발생
+import { ProductStatus } from "@prisma/client"; // ❌ 서버 모듈 import 오류
+```
+
+Prisma 5에서는 Enum이나 타입을 서버/클라이언트 구분 없이 `@prisma/client`에서 가져올 수 있었다. Prisma 7에서는 이것이 불가능해졌다.
+
+## 해결 방법: browser.ts 패턴
+
+클라이언트 컴포넌트 전용 export 파일을 만들어 해결했다.
+
+### 파일 구조
+
+```
+lib/prisma/
+├── browser.ts         # 메인 스키마 브라우저 호환 export
+└── ec/
+    ├── browser.ts     # EC 스키마 브라우저 호환 export
+    └── enums.ts       # EC Enum 전용 export
+```
+
+### browser.ts 구현
+
+```typescript
+// lib/prisma/browser.ts
+export {
+  ProductStatus,
+  OrderStatus,
+  PaymentStatus,
+  // ... 기타 Enum
+} from "@prisma/client/browser";
+
+export type {
+  Product,
+  Order,
+  Payment,
+  // ... 기타 타입
+} from "@prisma/client";
+```
+
+핵심은 `@prisma/client/browser` 경로다. Prisma 7에서 브라우저 환경용으로 제공하는 별도 엔트리포인트로, 서버 의존성 없이 Enum과 타입만 export한다.
+
+### 사용 예시
+
+```typescript
+// 서버 코드 → 기존과 동일
+import { ProductStatus, OrderStatus } from "@prisma/client";
+
+// 클라이언트 코드 → browser.ts 경로
+import { ProductStatus, OrderStatus } from "@/lib/prisma/browser";
+```
+
+타입만 사용하는 경우에도 클라이언트 컴포넌트에서는 반드시 browser 경로를 사용해야 한다.
+
+```typescript
+// 클라이언트 컴포넌트에서 타입 import
+import type { Product } from "@/lib/prisma/browser"; // ✅
+import type { Product } from "@prisma/client";       // ❌
+```
+
+## 멀티 스키마 환경에서의 처리
+
+이 프로젝트는 메인 DB와 서브 DB, 두 개의 MySQL 데이터베이스를 사용한다. 각 스키마별로 browser.ts를 별도로 관리해야 했다.
+
+```typescript
+// 메인 스키마 Enum (클라이언트)
+import { ProductStatus } from "@/lib/prisma/browser";
+
+// EC 스키마 Enum (클라이언트)
+import { ECStatus } from "@/lib/prisma/ec/browser";
+// 또는
+import { ECStatus } from "@/lib/prisma/ec/enums";
+```
+
+서버 코드에서는 각각 `@prisma/client`와 `@/lib/prisma/ec`에서 import한다. 경로 규칙이 서버/클라이언트, 메인/EC 조합으로 4가지가 되므로, 팀 내에서 이 규칙을 명확히 공유하는 것이 중요하다.
+
+## 마이그레이션 과정
+
+단계별로 커밋을 분리하여 진행했다.
+
+| 단계 | 작업 | 파일 수 |
+|------|------|---------|
+| 1 | Prisma 7 패키지 업그레이드 및 클라이언트 생성 | - |
+| 2 | browser.ts, ec/browser.ts, ec/enums.ts 생성 | 3개 |
+| 3 | import 경로 변경 및 validator 변환 | - |
+| 4 | 클라이언트 컴포넌트 import 경로 변경 | 20개 |
+| 5 | types, components, config, utils import 변경 | 33개 |
+| 6 | EC enum import 경로 변경 | - |
+
+전체적으로 50개 이상의 파일을 수정했다. 빌드 시 오류로 잡히기 때문에 누락은 없었지만, 한 번에 모두 변경하면 디버깅이 어려우므로 단계별로 나누어 진행하는 것을 권장한다.
+
+## 정리
+
+Prisma 7 업그레이드의 핵심은 **서버와 클라이언트의 모듈 경계가 엄격해졌다**는 점이다.
+
+**기억해야 할 규칙**:
+
+- 서버 코드: `@prisma/client`에서 직접 import (기존과 동일)
+- 클라이언트 코드: `@/lib/prisma/browser`에서 import (필수 변경)
+- `type`만 사용하는 경우에도 클라이언트에서는 browser 경로 사용
+- 멀티 스키마 환경에서는 스키마별 browser.ts를 각각 관리
+
+서버/클라이언트 경계의 강화는 Next.js App Router의 방향성과 맞닿아 있다. 처음에는 번거롭게 느껴지지만, 서버 전용 코드가 클라이언트 번들에 포함되는 것을 원천적으로 방지한다는 점에서 합리적인 변경이라 생각한다.
