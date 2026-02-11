@@ -1,19 +1,12 @@
 "use client";
 
 import { PageContainer } from "@/components/page-container";
-import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { User, Heart, Target, Briefcase, Award } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Award, Briefcase, Heart, Target, User } from "lucide-react";
 import { motion } from "motion/react";
 
-const interests = [
-  "풀스택 개발",
-  "UX 최적화",
-  "클린 아키텍처",
-  "기술 리더십",
-  "스마트 제조",
-  "안드로이드 개발",
-];
+const interests = ["풀스택 개발", "UX 최적화", "클린 아키텍처", "기술 리더십", "스마트 제조", "안드로이드 개발"];
 
 const AboutPage = () => {
   return (
@@ -46,11 +39,13 @@ const AboutPage = () => {
                     기술을 학습하는데 있어 빠른 습득 속도를 자부합니다.
                     <br />
                     교육 과정이나 업무 실적에서 중상 이상을 달성해왔습니다.
-                    <br /><br />
+                    <br />
+                    <br />
                     개발의 시작은 Java로 시작하였지만,
                     <br />
                     현재는 Next.js, Typescript, Prisma를 가장 잘 사용합니다.
-                    <br /><br />
+                    <br />
+                    <br />
                     안드로이드 Kotlin(Jetpack Compose) 개발 능력이 있으며,
                     <br />
                     Vanilla JS만으로도 웹 개발이 가능합니다.
@@ -76,7 +71,7 @@ const AboutPage = () => {
                 </div>
                 <div>
                   <h2 className="text-2xl font-semibold mb-2">현재</h2>
-                  <p className="text-primary-sky font-medium">(주) 위피엔피</p>
+                  <p className="text-primary-sky font-medium">(주) TILS AI</p>
                   <p className="text-muted-foreground">UX개발팀장 / 기술연구원</p>
                   <p className="text-sm text-muted-foreground mt-1">2023.03 ~ 재직중</p>
                 </div>
@@ -148,9 +143,8 @@ const AboutPage = () => {
                 <div>
                   <h2 className="text-2xl font-semibold mb-2">목표</h2>
                   <p className="text-muted-foreground leading-relaxed">
-                    기술을 통해 사람들의 일상을 더 편리하게 만드는 것이 목표입니다.
-                    복잡한 문제를 단순하게, 어려운 기술을 쉽게 전달하며
-                    함께 성장하는 개발 문화를 만들어가고자 합니다.
+                    기술을 통해 사람들의 일상을 더 편리하게 만드는 것이 목표입니다. 복잡한 문제를 단순하게, 어려운
+                    기술을 쉽게 전달하며 함께 성장하는 개발 문화를 만들어가고자 합니다.
                   </p>
                 </div>
               </div>

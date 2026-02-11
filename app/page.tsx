@@ -91,7 +91,7 @@ const timeline: TimelineItem[] = [
   {
     type: "experience",
     title: "UX개발팀장 / 기술연구원",
-    organization: "(주) 위피엔피",
+    organization: "(주) TILS AI",
     period: "2023.03 ~ 재직중",
     description:
       "Next.js, Remix.js, Typescript 기반 플랫폼 PM, 개발 리드\nCafe24, Shopby, Shopify 플랫폼 사용자화, 유지보수",
@@ -248,7 +248,7 @@ const HomePage = () => {
                     <Briefcase className="w-5 h-5 text-primary-sky" />
                   </div>
                   <div>
-                    <p className="text-primary-sky font-medium">(주) 위피엔피</p>
+                    <p className="text-primary-sky font-medium">(주) TILS AI</p>
                     <p className="text-sm text-muted-foreground">UX개발팀장 · 2023.03 ~</p>
                   </div>
                 </div>
