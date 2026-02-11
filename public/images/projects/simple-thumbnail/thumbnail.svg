@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#1c1917"/>
+      <stop offset="100%" stop-color="#0a0908"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#f97316"/>
+      <stop offset="50%" stop-color="#ec4899"/>
+      <stop offset="100%" stop-color="#8b5cf6"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <g opacity="0.04" stroke="#fff" stroke-width="1">
+    <line x1="0" y1="60" x2="1200" y2="60"/><line x1="0" y1="120" x2="1200" y2="120"/>
+    <line x1="0" y1="180" x2="1200" y2="180"/><line x1="0" y1="240" x2="1200" y2="240"/>
+    <line x1="0" y1="300" x2="1200" y2="300"/><line x1="0" y1="360" x2="1200" y2="360"/>
+    <line x1="0" y1="420" x2="1200" y2="420"/><line x1="0" y1="480" x2="1200" y2="480"/>
+    <line x1="0" y1="540" x2="1200" y2="540"/>
+  </g>
+  <!-- Thumbnail preview frames -->
+  <g transform="translate(150, 170)">
+    <rect x="0" y="30" width="140" height="105" rx="8" fill="#f97316" opacity="0.08" stroke="#f97316" stroke-width="1" stroke-opacity="0.2"/>
+    <rect x="80" y="10" width="140" height="105" rx="8" fill="#ec4899" opacity="0.08" stroke="#ec4899" stroke-width="1" stroke-opacity="0.2"/>
+    <rect x="160" y="50" width="140" height="105" rx="8" fill="#8b5cf6" opacity="0.08" stroke="#8b5cf6" stroke-width="1" stroke-opacity="0.2"/>
+    <!-- Text lines inside frame -->
+    <rect x="100" y="40" width="80" height="8" rx="4" fill="#fff" opacity="0.15"/>
+    <rect x="100" y="55" width="60" height="6" rx="3" fill="#fff" opacity="0.08"/>
+    <rect x="180" y="80" width="80" height="8" rx="4" fill="#fff" opacity="0.15"/>
+    <rect x="180" y="95" width="60" height="6" rx="3" fill="#fff" opacity="0.08"/>
+  </g>
+  <!-- Title -->
+  <text x="560" y="230" font-family="system-ui, sans-serif" font-size="48" font-weight="700" fill="#fff">Simple Thumbnail</text>
+  <text x="560" y="280" font-family="system-ui, sans-serif" font-size="20" fill="#94a3b8">3초 만에 블로그·유튜브 썸네일 제작</text>
+  <!-- Pills -->
+  <g transform="translate(560, 320)">
+    <rect x="0" y="0" width="130" height="34" rx="17" fill="#f97316" opacity="0.2"/>
+    <text x="65" y="22" font-family="system-ui, sans-serif" font-size="13" fill="#fdba74" text-anchor="middle">배경 커스텀</text>
+    <rect x="142" y="0" width="130" height="34" rx="17" fill="#ec4899" opacity="0.2"/>
+    <text x="207" y="22" font-family="system-ui, sans-serif" font-size="13" fill="#f9a8d4" text-anchor="middle">텍스트 편집</text>
+    <rect x="284" y="0" width="130" height="34" rx="17" fill="#8b5cf6" opacity="0.2"/>
+    <text x="349" y="22" font-family="system-ui, sans-serif" font-size="13" fill="#c4b5fd" text-anchor="middle">실시간 프리뷰</text>
+    <rect x="426" y="0" width="120" height="34" rx="17" fill="#fff" opacity="0.05"/>
+    <text x="486" y="22" font-family="system-ui, sans-serif" font-size="13" fill="#a8a29e" text-anchor="middle">PNG 다운</text>
+  </g>
+  <!-- Aspect ratios -->
+  <g transform="translate(560, 400)">
+    <rect x="0" y="0" width="40" height="40" rx="4" stroke="#a8a29e" stroke-width="1.5" fill="none" opacity="0.3"/>
+    <text x="20" y="55" font-family="system-ui, sans-serif" font-size="10" fill="#78716c" text-anchor="middle">1:1</text>
+    <rect x="60" y="5" width="48" height="35" rx="4" stroke="#a8a29e" stroke-width="1.5" fill="none" opacity="0.3"/>
+    <text x="84" y="55" font-family="system-ui, sans-serif" font-size="10" fill="#78716c" text-anchor="middle">4:3</text>
+    <rect x="128" y="8" width="56" height="32" rx="4" stroke="#a8a29e" stroke-width="1.5" fill="none" opacity="0.3"/>
+    <text x="156" y="55" font-family="system-ui, sans-serif" font-size="10" fill="#78716c" text-anchor="middle">16:9</text>
+  </g>
+  <!-- Tech -->
+  <g transform="translate(560, 490)">
+    <text x="0" y="0" font-family="system-ui, sans-serif" font-size="15" fill="#a8a29e">React</text>
+    <text x="55" y="0" font-family="system-ui, sans-serif" font-size="15" fill="#57534e">·</text>
+    <text x="67" y="0" font-family="system-ui, sans-serif" font-size="15" fill="#a8a29e">TypeScript</text>
+    <text x="162" y="0" font-family="system-ui, sans-serif" font-size="15" fill="#57534e">·</text>
+    <text x="174" y="0" font-family="system-ui, sans-serif" font-size="15" fill="#a8a29e">Vite</text>
+    <text x="210" y="0" font-family="system-ui, sans-serif" font-size="15" fill="#57534e">·</text>
+    <text x="222" y="0" font-family="system-ui, sans-serif" font-size="15" fill="#a8a29e">Tailwind CSS</text>
+  </g>
+  <rect x="0" y="620" width="1200" height="10" fill="url(#accent)"/>
+</svg>
