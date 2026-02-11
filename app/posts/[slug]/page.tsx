@@ -4,6 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { mdxComponents } from "@/lib/mdx-components";
 import { mdxOptions } from "@/lib/mdx-options";
+import type { Metadata } from "next";
 import { Calendar, ArrowLeft } from "lucide-react";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import Link from "next/link";
@@ -12,6 +13,31 @@ import { notFound } from "next/navigation";
 export async function generateStaticParams() {
   const posts = await getAllPosts();
   return posts.map((post) => ({ slug: post.slug }));
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const post = await getPostBySlug(slug);
+  if (!post) return {};
+
+  const { title, description, tags } = post.frontmatter;
+
+  return {
+    title,
+    description,
+    keywords: tags as string[] | undefined,
+    openGraph: {
+      title,
+      description,
+      type: "article",
+      url: `/posts/${slug}`,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+    },
+  };
 }
 
 export default async function PostPage({ params }: { params: Promise<{ slug: string }> }) {
