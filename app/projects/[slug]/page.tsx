@@ -1,53 +1,22 @@
+import { getAllProjects, getProjectBySlug } from "@/_projects";
 import { PageContainer } from "@/components/page-container";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { mdxComponents } from "@/lib/mdx-components";
-import { promises as fs } from "fs";
-import matter from "gray-matter";
+import { mdxOptions } from "@/lib/mdx-options";
 import { Calendar, ArrowLeft, ExternalLink, Github } from "lucide-react";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import path from "path";
-
-const projectsDirectory = path.join(process.cwd(), "_projects");
 
 export async function generateStaticParams() {
-  try {
-    const filenames = await fs.readdir(projectsDirectory);
-    return filenames
-      .filter((filename) => filename.endsWith(".mdx"))
-      .map((filename) => ({
-        slug: filename.replace(/\.mdx$/, ""),
-      }));
-  } catch (error) {
-    if (error instanceof Error && "code" in error && (error as { code: string }).code === "ENOENT") {
-      return [];
-    }
-    throw error;
-  }
-}
-
-async function getProject(slug: string) {
-  const filePath = path.join(projectsDirectory, `${slug}.mdx`);
-  try {
-    const fileContents = await fs.readFile(filePath, "utf8");
-    const { data, content } = matter(fileContents);
-    return {
-      frontmatter: data,
-      content,
-    };
-  } catch (error) {
-    if (error instanceof Error && "code" in error && (error as { code: string }).code === "ENOENT") {
-      return null;
-    }
-    throw error;
-  }
+  const projects = await getAllProjects();
+  return projects.map((project) => ({ slug: project.slug }));
 }
 
 export default async function ProjectPage({ params }: { params: Promise<{ slug: string }> }) {
-  const resolvedParams = await params;
-  const project = await getProject(resolvedParams.slug);
+  const { slug } = await params;
+  const project = await getProjectBySlug(slug);
 
   if (!project) {
     notFound();
@@ -113,7 +82,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
       </Card>
 
       <article className="prose prose-neutral dark:prose-invert max-w-none">
-        <MDXRemote source={project.content} components={mdxComponents} />
+        <MDXRemote source={project.content} components={mdxComponents} options={mdxOptions} />
       </article>
     </PageContainer>
   );

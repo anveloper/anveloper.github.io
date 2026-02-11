@@ -1,41 +1,12 @@
+import { getAllPosts } from "@/_posts";
 import { PageContainer } from "@/components/page-container";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { promises as fs } from "fs";
-import matter from "gray-matter";
 import { ArrowRight, Calendar, FileText } from "lucide-react";
 import Link from "next/link";
-import path from "path";
-
-const postsDirectory = path.join(process.cwd(), "_posts");
-
-async function getPosts() {
-  try {
-    const filenames = await fs.readdir(postsDirectory);
-    const posts = await Promise.all(
-      filenames
-        .filter((filename) => filename.endsWith(".mdx"))
-        .map(async (filename) => {
-          const filePath = path.join(postsDirectory, filename);
-          const fileContents = await fs.readFile(filePath, "utf8");
-          const { data } = matter(fileContents);
-          return {
-            slug: filename.replace(/\.mdx$/, ""),
-            frontmatter: data,
-          };
-        })
-    );
-    return posts.sort((a, b) => (a.frontmatter.date < b.frontmatter.date ? 1 : -1));
-  } catch (error) {
-    if (error instanceof Error && "code" in error && (error as { code: string }).code === "ENOENT") {
-      return [];
-    }
-    throw error;
-  }
-}
 
 export default async function PostsPage() {
-  const posts = await getPosts();
+  const posts = await getAllPosts();
 
   return (
     <PageContainer>
