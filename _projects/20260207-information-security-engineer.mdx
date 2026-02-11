@@ -1,0 +1,124 @@
+---
+title: '정보보안기사 시험 대비 웹 앱'
+date: '2026-02-07'
+description: '정보보안기사 자격증 시험 대비를 위한 이론 학습, 문제 풀이, 모의고사 기능을 갖춘 PWA 웹 애플리케이션'
+tags: ['React', 'TypeScript', 'Vite', 'Tailwind CSS', 'MDX', 'Mermaid', 'PWA', 'React Router']
+github: 'study-anveloper/information-security-engineer'
+demo: 'https://security-engineer.anveloper.dev'
+---
+
+# 정보보안기사 시험 대비 웹 앱
+
+## 개요
+
+정보보안기사 자격증 필기시험을 준비하는 사용자를 위한 학습 플랫폼입니다. 5과목 전 범위의 이론 콘텐츠와 760여 개의 객관식 문제를 제공하며, 오답 노트와 모의고사 기능으로 효율적인 시험 대비를 지원합니다.
+
+서버 없이 GitHub Pages로 배포되는 정적 SPA이며, PWA를 지원하여 모바일에서 앱처럼 설치하고 오프라인으로 학습할 수 있습니다.
+
+## 주요 기능
+
+### 이론 학습
+
+- MDX 기반 5과목 30+ 챕터의 이론 콘텐츠
+- Mermaid 다이어그램으로 보안 아키텍처·프로토콜 흐름 시각화
+- remark-gfm, rehype-highlight 플러그인으로 GFM 테이블, 코드 하이라이팅 지원
+- Tailwind Typography 기반 가독성 높은 콘텐츠 스타일링
+
+### 문제 풀이
+
+- 과목별·챕터별 760+ 4지선다 문제
+- 실시간 정답/오답 피드백 및 해설·키워드 표시
+- 진행률 바와 문제 번호 네비게이터로 학습 현황 파악
+- 오답 자동 저장 (localStorage)
+
+### 오답 노트
+
+- 틀린 문제 자동 수집 및 과목별 그룹핑
+- 내 선택(빨간색) vs 정답(초록색) 비교 표시
+- 해설 토글, 개별/일괄 삭제, 다시 풀기 링크
+
+### 모의고사
+
+- 실제 시험과 동일한 과목당 20문제 랜덤 출제
+- 경과 시간 타이머, 과목별 문제 네비게이터
+- 합격 기준 판정: 과목당 40점 이상 + 전체 평균 60점 이상
+- 과락 감지, 과목별 점수 분석, 틀린 문제 해설 제공
+
+### PWA (오프라인 학습)
+
+- vite-plugin-pwa + Workbox 기반 Service Worker
+- 정적 자산 프리캐싱으로 오프라인 학습 지원
+- Android 네이티브 설치 프롬프트 + iOS 수동 설치 안내 배너
+- `usePwaInstall` 훅으로 플랫폼 감지·설치 상태 관리
+
+## 기술 스택
+
+| 분류 | 기술 |
+|------|------|
+| Frontend | React 19, TypeScript 5.9 |
+| Build Tool | Vite 7 |
+| Styling | Tailwind CSS v4, @tailwindcss/typography |
+| Routing | React Router v7 |
+| Content | MDX 3.1, remark-gfm, rehype-highlight |
+| Diagrams | Mermaid 11 (커스텀 remark 플러그인) |
+| PWA | vite-plugin-pwa, Workbox |
+| SEO | 빌드 후 정적 HTML 생성 (OG/Twitter 메타태그) |
+| Deployment | GitHub Pages |
+
+## 프로젝트 구조
+
+```
+src/
+├── content/
+│   ├── theory/          # 이론 MDX 콘텐츠 (5과목)
+│   └── questions/       # 문제 JSON 데이터 (5과목)
+├── pages/               # 페이지 컴포넌트 (9개)
+├── components/          # 공통 컴포넌트 (Header, Layout, Mermaid 등)
+├── hooks/               # 커스텀 훅 (다크모드, PWA, SEO)
+├── plugins/             # remark-mermaid 플러그인
+├── utils/               # 오답 관리 유틸리티
+└── types/               # TypeScript 타입 정의
+scripts/
+└── generate-static-pages.mjs  # SEO용 정적 페이지 생성
+```
+
+## 콘텐츠 구성
+
+정보보안기사 필기시험 5과목 전 범위를 다룹니다.
+
+| 과목 | 이론 챕터 | 문제 수 |
+|------|-----------|---------|
+| 시스템 보안 | 6개 | 180+ |
+| 네트워크 보안 | 3개 | 90+ |
+| 어플리케이션 보안 | 3개 | 90+ |
+| 정보보안 일반 | 3개 | 90+ |
+| 정보보안 관리 및 법규 | 3개 | 90+ |
+
+## 담당 역할
+
+1인 개발로 기획부터 배포까지 전체를 담당했습니다.
+
+- **콘텐츠 설계**: 정보보안기사 출제기준 분석, 5과목 이론·문제 구조 설계
+- **프론트엔드**: React + TypeScript 기반 SPA, 문제 풀이·모의고사 인터랙션 구현
+- **콘텐츠 시스템**: MDX 기반 이론 콘텐츠, 커스텀 remark-mermaid 플러그인 개발
+- **PWA**: Service Worker 설정, 플랫폼별 설치 배너 구현
+- **SEO**: 빌드 후 200+ 정적 HTML 생성 스크립트 개발 (소셜 미디어 미리보기 대응)
+- **배포**: GitHub Pages + 커스텀 도메인 설정
+
+## 기술적 의사결정
+
+### 서버리스 아키텍처
+
+백엔드 없이 GitHub Pages만으로 운영합니다. 문제 데이터는 JSON, 이론은 MDX로 번들에 포함하고, 사용자 진행 데이터는 localStorage에 저장합니다. 서버 비용 없이 오프라인 학습까지 지원하는 구조입니다.
+
+### MDX + 커스텀 Mermaid 플러그인
+
+이론 콘텐츠에 테이블, 코드 블록, 다이어그램이 혼합되어야 했습니다. MDX를 채택하고, Mermaid 코드 블록을 React 컴포넌트로 변환하는 커스텀 remark 플러그인을 작성하여 보안 아키텍처와 프로토콜 흐름을 시각적으로 표현했습니다.
+
+### 정적 HTML 프리렌더링
+
+SPA를 GitHub Pages에 배포하면 소셜 미디어 크롤러가 메타태그를 읽지 못합니다. 빌드 후 소스 파일에서 메타데이터를 추출하여 200+ 라우트별 정적 HTML을 생성하는 스크립트를 작성하여 OG 태그 문제를 해결했습니다.
+
+## 회고
+
+자격증 시험 대비라는 명확한 목적 아래, 이론 학습 → 문제 풀이 → 오답 복습 → 모의고사라는 점진적 학습 흐름을 설계한 프로젝트입니다. 서버 없이도 PWA로 오프라인 학습을 지원하고, MDX와 커스텀 플러그인으로 풍부한 교육 콘텐츠를 제공할 수 있다는 점을 확인했습니다.

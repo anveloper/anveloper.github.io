@@ -1,16 +1,27 @@
 "use client";
 
 import { PageContainer } from "@/components/page-container";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
-  User, Heart, Target, Briefcase, Award,
-  Code, Server, Database, Wrench, Flame,
-  GraduationCap, Shield,
-  Mail, Github, FileText, ExternalLink,
+  Award,
+  Briefcase,
+  Code,
+  Database,
+  ExternalLink,
+  FileText,
+  Flame,
+  Github,
+  GraduationCap,
+  Heart,
+  Mail,
+  Server,
+  Shield,
+  User,
+  Wrench,
 } from "lucide-react";
 import { motion } from "motion/react";
-import { Button } from "@/components/ui/button";
 
 // About Data
 const interests = ["풀스택 개발", "UX 최적화", "클린 아키텍처", "기술 리더십", "스마트 제조", "안드로이드 개발"];
@@ -24,31 +35,42 @@ const skillCategories: SkillCategory[] = [
     title: "Frontend",
     icon: <Code className="w-5 h-5" />,
     skills: [
-      { name: "Next.js", level: 3 }, { name: "React", level: 2 }, { name: "TypeScript", level: 2 },
-      { name: "JavaScript (ES6)", level: 3 }, { name: "CSS", level: 2 },
+      { name: "Next.js", level: 3 },
+      { name: "React", level: 2 },
+      { name: "TypeScript", level: 2 },
+      { name: "JavaScript (ES6)", level: 3 },
+      { name: "CSS", level: 2 },
     ],
   },
   {
     title: "Backend",
     icon: <Server className="w-5 h-5" />,
     skills: [
-      { name: "Java", level: 2 }, { name: "JPA", level: 1 }, { name: "Node.js", level: 1 },
-      { name: "Nest.js", level: 1 }, { name: "Prisma", level: 1 }, { name: "PHP", level: 1 },
+      { name: "Java", level: 2 },
+      { name: "JPA", level: 1 },
+      { name: "Node.js", level: 1 },
+      { name: "Nest.js", level: 1 },
+      { name: "Prisma", level: 1 },
+      { name: "PHP", level: 1 },
     ],
   },
   {
     title: "Android",
     icon: <Database className="w-5 h-5" />,
     skills: [
-      { name: "Kotlin", level: 1 }, { name: "Jetpack Compose", level: 1 },
+      { name: "Kotlin", level: 1 },
+      { name: "Jetpack Compose", level: 1 },
     ],
   },
   {
     title: "DevOps & Tools",
     icon: <Wrench className="w-5 h-5" />,
     skills: [
-      { name: "AWS (EC2, S3)", level: 1 }, { name: "MySQL", level: 1 },
-      { name: "Git", level: 2 }, { name: "GitHub", level: 2 }, { name: "VS Code", level: 2 },
+      { name: "AWS (EC2, S3)", level: 1 },
+      { name: "MySQL", level: 1 },
+      { name: "Git", level: 2 },
+      { name: "GitHub", level: 2 },
+      { name: "VS Code", level: 2 },
     ],
   },
 ];
@@ -67,9 +89,10 @@ const timeline: TimelineItem[] = [
   {
     type: "experience",
     title: "UX개발팀장 / 기술연구원",
-    organization: "(주) 위피엔피",
+    organization: "(주) TILS AI",
     period: "2023.03 ~ 재직중",
-    description: "Next.js, Remix.js, Typescript 기반 플랫폼 PM, 개발 리드\nCafe24, Shopby, Shopify 플랫폼 사용자화, 유지보수",
+    description:
+      "Next.js, Remix.js, Typescript 기반 플랫폼 PM, 개발 리드\nCafe24, Shopby, Shopify 플랫폼 사용자화, 유지보수",
     badges: ["팀 리딩", "풀스택 개발", "플랫폼 개발"],
   },
   {
@@ -107,9 +130,19 @@ const timeline: TimelineItem[] = [
 
 // Contact Data
 const contactLinks = [
-  { title: "Email", href: "mailto:hello@anveloper.dev", icon: <Mail className="w-5 h-5" />, value: "hello@anveloper.dev" },
+  {
+    title: "Email",
+    href: "mailto:hello@anveloper.dev",
+    icon: <Mail className="w-5 h-5" />,
+    value: "hello@anveloper.dev",
+  },
   { title: "GitHub", href: "https://github.com/anveloper", icon: <Github className="w-5 h-5" />, value: "anveloper" },
-  { title: "Resume", href: "https://anveloper-dev.notion.site/ca13ffc984be4ce399d73659aebbe303", icon: <FileText className="w-5 h-5" />, value: "Notion" },
+  {
+    title: "Resume",
+    href: "https://anveloper-dev.notion.site/ca13ffc984be4ce399d73659aebbe303",
+    icon: <FileText className="w-5 h-5" />,
+    value: "Notion",
+  },
 ];
 
 const SkillBadge = ({ skill }: { skill: Skill }) => (
@@ -125,9 +158,12 @@ const SkillBadge = ({ skill }: { skill: Skill }) => (
 
 const getTimelineIcon = (type: TimelineItem["type"]) => {
   switch (type) {
-    case "education": return <GraduationCap className="w-4 h-4 text-primary-sky" />;
-    case "experience": return <Briefcase className="w-4 h-4 text-primary-sky" />;
-    case "military": return <Shield className="w-4 h-4 text-primary-sky" />;
+    case "education":
+      return <GraduationCap className="w-4 h-4 text-primary-sky" />;
+    case "experience":
+      return <Briefcase className="w-4 h-4 text-primary-sky" />;
+    case "military":
+      return <Shield className="w-4 h-4 text-primary-sky" />;
   }
 };
 
@@ -164,7 +200,8 @@ const OverviewPage = () => {
                     개발의 시작은 Java로 시작하였지만,
                     <br />
                     현재는 Next.js, Typescript, Prisma를 가장 잘 사용합니다.
-                    <br /><br />
+                    <br />
+                    <br />
                     안드로이드 Kotlin(Jetpack Compose) 개발과
                     <br />
                     Vanilla JS 웹 개발, PHP에서 React/Remix.js 마이그레이션 경험이 있습니다.
@@ -181,7 +218,7 @@ const OverviewPage = () => {
                     <Briefcase className="w-5 h-5 text-primary-sky" />
                   </div>
                   <div>
-                    <p className="text-primary-sky font-medium">(주) 위피엔피</p>
+                    <p className="text-primary-sky font-medium">(주) TILS AI</p>
                     <p className="text-sm text-muted-foreground">UX개발팀장 · 2023.03 ~</p>
                   </div>
                 </div>
@@ -209,7 +246,9 @@ const OverviewPage = () => {
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {interests.map((interest) => (
-                    <Badge key={interest} variant="sky">{interest}</Badge>
+                    <Badge key={interest} variant="sky">
+                      {interest}
+                    </Badge>
                   ))}
                 </div>
               </div>
@@ -231,9 +270,7 @@ const OverviewPage = () => {
             <Card key={category.title}>
               <CardHeader className="pb-3">
                 <CardTitle className="flex items-center gap-3 text-base">
-                  <div className="p-1.5 bg-primary-sky/10 rounded-lg text-primary-sky">
-                    {category.icon}
-                  </div>
+                  <div className="p-1.5 bg-primary-sky/10 rounded-lg text-primary-sky">{category.icon}</div>
                   {category.title}
                 </CardTitle>
               </CardHeader>
@@ -262,9 +299,7 @@ const OverviewPage = () => {
             <Card key={`${item.title}-${index}`}>
               <CardContent className="py-4">
                 <div className="flex items-start gap-3">
-                  <div className="p-2 bg-primary-sky/10 rounded-lg mt-0.5">
-                    {getTimelineIcon(item.type)}
-                  </div>
+                  <div className="p-2 bg-primary-sky/10 rounded-lg mt-0.5">{getTimelineIcon(item.type)}</div>
                   <div className="flex-1 min-w-0">
                     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
                       <h3 className="font-semibold">{item.title}</h3>
@@ -277,7 +312,9 @@ const OverviewPage = () => {
                     {item.badges && (
                       <div className="flex flex-wrap gap-1 mt-2">
                         {item.badges.map((badge) => (
-                          <Badge key={badge} variant="sky" className="text-xs">{badge}</Badge>
+                          <Badge key={badge} variant="sky" className="text-xs">
+                            {badge}
+                          </Badge>
                         ))}
                       </div>
                     )}
@@ -300,9 +337,7 @@ const OverviewPage = () => {
           {contactLinks.map((link) => (
             <Card key={link.title} className="hover:border-primary-sky/50 transition-colors">
               <CardContent className="pt-6 flex flex-col items-center text-center">
-                <div className="p-3 bg-primary-sky/10 rounded-full text-primary-sky mb-3">
-                  {link.icon}
-                </div>
+                <div className="p-3 bg-primary-sky/10 rounded-full text-primary-sky mb-3">{link.icon}</div>
                 <h3 className="font-semibold mb-1">{link.title}</h3>
                 <p className="text-sm text-primary-sky mb-3">{link.value}</p>
                 <Button variant="outline" size="sm" asChild className="w-full">

@@ -32,23 +32,13 @@ Caddy의 **On-Demand TLS**가 결정적이었다. 설정 파일 수정 없이, �
 
 ## 아키텍처
 
-```
-[사용자]
-    ├── store.example.com/acme  (경로)
-    ├── acme.mystore.app        (서브도메인)
-    └── shop.acme.com           (커스텀 도메인)
-    │
-    ▼
-[Caddy] — 443 (HTTPS)
-    │  - 경로: store.example.com 단일 인증서
-    │  - 서브도메인: *.mystore.app 와일드카드
-    │  - 커스텀 도메인: On-Demand TLS (동적 발급)
-    │
-    ▼
-[Next.js 앱] — 4033 (내부)
-    │  Host 헤더 + 경로로 테넌트 식별
-    ▼
-[Database]
+```mermaid
+flowchart TD
+  User[사용자] -->|"store.example.com/acme (경로)\nacme.mystore.app (서브도메인)\nshop.acme.com (커스텀 도메인)"| Caddy
+
+  Caddy["Caddy — 443 (HTTPS)\n경로: 단일 인증서\n서브도메인: 와일드카드\n커스텀 도메인: On-Demand TLS"] --> Next["Next.js 앱 — 4033 (내부)\nHost 헤더 + 경로로 테넌트 식별"]
+
+  Next --> DB[Database]
 ```
 
 ## Caddyfile 설정

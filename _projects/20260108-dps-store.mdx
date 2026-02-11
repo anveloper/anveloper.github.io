@@ -92,22 +92,13 @@ DPS Store는 업체(테넌트)별 독립적인 온라인 스토어를 운영할 
 
 ## 아키텍처
 
-```
-[클라이언트] ← 커스텀 도메인 / tenantName 경로
-     ↕
-[Caddy] ← 리버스 프록시, SSL 자동 발급
-     ↕
-[DPS Store (Next.js 16)]
-     ├── proxy.ts ← 도메인 라우팅
-     ├── app/[tenant]/ ← 테넌트별 고객 페이지
-     ├── app/api/ ← API 라우트
-     └── lib/ ← 서비스, 유틸리티
-           ↕                    ↕
-     [MariaDB + Prisma]    [DPS API]
-     (설정/참조 정보)      (상품/주문 실시간)
-           ↕
-     [Object Storage]
-     (파일/이미지)
+```mermaid
+flowchart TD
+  Client["클라이언트\n커스텀 도메인 / tenantName 경로"] <--> Caddy["Caddy\n리버스 프록시, SSL 자동 발급"]
+  Caddy <--> Store["DPS Store (Next.js 16)\nproxy.ts | app/[tenant]/ | app/api/ | lib/"]
+  Store <--> DB["MariaDB + Prisma\n(설정/참조 정보)"]
+  Store <--> API["DPS API\n(상품/주문 실시간)"]
+  DB <--> S3["Object Storage\n(파일/이미지)"]
 ```
 
 ## 담당 역할

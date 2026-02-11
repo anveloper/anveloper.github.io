@@ -1,7 +1,9 @@
 import type { MDXComponents } from "mdx/types";
 import { createElement } from "react";
+import { Mermaid } from "@/components/mermaid";
 
 export const mdxComponents: MDXComponents = {
+  Mermaid,
   h1: (props) =>
     createElement("h1", {
       ...props,

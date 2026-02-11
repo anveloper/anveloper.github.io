@@ -1,9 +1,9 @@
 "use client";
 
 import { PageContainer } from "@/components/page-container";
-import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { GraduationCap, Briefcase, Award, Shield } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Award, Briefcase, GraduationCap, Shield } from "lucide-react";
 import { motion } from "motion/react";
 
 type TimelineItem = {
@@ -19,9 +19,10 @@ const timeline: TimelineItem[] = [
   {
     type: "experience",
     title: "UX개발팀장 / 기술연구원",
-    organization: "(주) 위피엔피",
+    organization: "(주) TILS AI",
     period: "2023.03 ~ 재직중",
-    description: "Next.js, Remix.js, Typescript 기반 플랫폼 PM, 개발 리드\nCafe24, Shopby, Shopify 플랫폼 사용자화, 유지보수",
+    description:
+      "Next.js, Remix.js, Typescript 기반 플랫폼 PM, 개발 리드\nCafe24, Shopby, Shopify 플랫폼 사용자화, 유지보수",
     badges: ["팀 리딩", "풀스택 개발", "플랫폼 개발"],
   },
   {
@@ -37,7 +38,8 @@ const timeline: TimelineItem[] = [
     title: "삼성 청년 SW아카데미 (SSAFY)",
     organization: "7기",
     period: "2022.01 ~ 2022.12",
-    description: "삼성 주관 고용 노동부 후원 개발자 양성 과정. NAYA(최우수), README-NFT(우수), 당신의 계절(우수), SSAFIT(우수) 프로젝트 수행",
+    description:
+      "삼성 주관 고용 노동부 후원 개발자 양성 과정. NAYA(최우수), README-NFT(우수), 당신의 계절(우수), SSAFIT(우수) 프로젝트 수행",
     badges: ["최우수상 1회", "우수상 3회"],
   },
   {
