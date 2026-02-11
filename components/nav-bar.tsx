@@ -1,6 +1,6 @@
 "use client";
 
-import { FolderGit2, HomeIcon, MailIcon, Moon, Sun } from "lucide-react";
+import { FolderGit2, HomeIcon, LayoutGrid, MailIcon, Moon, Sun } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 
@@ -34,6 +34,7 @@ const Icons = {
 const navItems = [
   { href: "/", icon: HomeIcon, label: "About" },
   { href: "/posts", icon: FolderGit2, label: "Posts" },
+  { href: "/projects", icon: LayoutGrid, label: "Projects" },
 ];
 
 const socialLinks = [
@@ -66,7 +67,7 @@ export const NavBar = () => {
         {/* Navigation Links */}
         <div className="flex items-center gap-1">
           {navItems.map((item) => {
-            const isActive = pathname === item.href;
+            const isActive = item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
             return (
               <Link
                 key={item.label}

@@ -1,8 +1,7 @@
 import { getAllProjects } from "@/_projects";
 import { PageContainer } from "@/components/page-container";
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { ArrowRight, Calendar, FolderKanban } from "lucide-react";
+import { TechBadge } from "@/components/skill-badge";
+import { FolderKanban } from "lucide-react";
 import Link from "next/link";
 
 export default async function ProjectsPage() {
@@ -16,47 +15,43 @@ export default async function ProjectsPage() {
       </header>
 
       {projects.length === 0 ? (
-        <Card>
-          <CardContent className="pt-6 flex flex-col items-center">
-            <FolderKanban className="w-12 h-12 text-muted-foreground mb-4" />
-            <p className="text-center text-muted-foreground">아직 등록된 프로젝트가 없습니다.</p>
-          </CardContent>
-        </Card>
+        <div className="py-16 flex flex-col items-center">
+          <FolderKanban className="w-12 h-12 text-muted-foreground mb-4" />
+          <p className="text-muted-foreground">아직 등록된 프로젝트가 없습니다.</p>
+        </div>
       ) : (
-        <div className="grid gap-6 md:grid-cols-2">
+        <div className="divide-y divide-border">
           {projects.map((project) => (
-            <Link key={project.slug} href={`/projects/${project.slug}`}>
-              <Card className="h-full hover:border-primary-sky/50 hover:shadow-md transition-all group cursor-pointer">
-                <CardHeader>
-                  <div className="flex items-start justify-between gap-2">
-                    <CardTitle className="text-xl group-hover:text-primary-sky transition-colors">
-                      {project.frontmatter.title}
-                    </CardTitle>
-                    <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:text-primary-sky group-hover:translate-x-1 transition-all shrink-0" />
-                  </div>
-                  {project.frontmatter.description && (
-                    <CardDescription className="line-clamp-2">{project.frontmatter.description}</CardDescription>
-                  )}
-                </CardHeader>
-                <CardContent>
-                  <div className="flex items-center justify-between gap-4">
-                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                      <Calendar className="w-4 h-4" />
-                      <span>{project.frontmatter.date}</span>
-                    </div>
-                    {project.frontmatter.tags && (
-                      <div className="flex flex-wrap gap-1">
-                        {(project.frontmatter.tags as string[]).slice(0, 2).map((tag) => (
-                          <Badge key={tag} variant="secondary" className="text-xs">
-                            {tag}
-                          </Badge>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                </CardContent>
-              </Card>
-            </Link>
+            <div key={project.slug} className="py-6">
+              <div className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4 mb-2">
+                <time className="text-sm text-muted-foreground shrink-0">
+                  {project.frontmatter.date}
+                </time>
+                <h2 className="text-xl font-semibold text-foreground">
+                  {project.frontmatter.title}
+                </h2>
+              </div>
+              {project.frontmatter.description && (
+                <p className="text-muted-foreground mb-3 sm:ml-24">
+                  {project.frontmatter.description}
+                </p>
+              )}
+              {project.frontmatter.tags && (
+                <div className="flex flex-wrap gap-1 mb-3 sm:ml-24">
+                  {(project.frontmatter.tags as string[]).map((tag) => (
+                    <TechBadge key={tag} name={tag} />
+                  ))}
+                </div>
+              )}
+              <div className="sm:ml-24">
+                <Link
+                  href={`/projects/${project.slug}`}
+                  className="text-sm text-primary-sky hover:underline"
+                >
+                  자세히 보기 →
+                </Link>
+              </div>
+            </div>
           ))}
         </div>
       )}

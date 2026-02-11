@@ -1,9 +1,11 @@
 "use client";
 
 import { PageContainer } from "@/components/page-container";
+import { SkillBadge, TechBadge } from "@/components/skill-badge";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import type { Skill, SkillCategory } from "@/lib/skill-data";
 import {
   ArrowRight,
   Award,
@@ -12,7 +14,6 @@ import {
   Database,
   ExternalLink,
   FileText,
-  Flame,
   Github,
   GraduationCap,
   Heart,
@@ -29,31 +30,42 @@ import Link from "next/link";
 const interests = ["풀스택 개발", "UX 최적화", "클린 아키텍처", "기술 리더십", "스마트 제조", "안드로이드 개발"];
 
 // Skills Data
-type Skill = { name: string; level: 1 | 2 | 3 };
-type SkillCategory = { title: string; icon: React.ReactNode; skills: Skill[] };
-
 const skillCategories: SkillCategory[] = [
   {
     title: "Frontend",
     icon: <Code className="w-5 h-5" />,
     skills: [
       { name: "Next.js", level: 3 },
-      { name: "React", level: 2 },
-      { name: "TypeScript", level: 2 },
+      { name: "React", level: 3 },
+      { name: "TypeScript", level: 3 },
       { name: "JavaScript (ES6)", level: 3 },
-      { name: "CSS", level: 2 },
+      { name: "Tailwind CSS", level: 2 },
     ],
   },
   {
     title: "Backend",
     icon: <Server className="w-5 h-5" />,
     skills: [
+      { name: "Prisma", level: 3 },
       { name: "Java", level: 2 },
-      { name: "JPA", level: 1 },
+      { name: "Spring Boot", level: 2 },
+      { name: "JPA", level: 2 },
       { name: "Node.js", level: 1 },
-      { name: "Nest.js", level: 1 },
-      { name: "Prisma", level: 1 },
-      { name: "PHP", level: 1 },
+      { name: "Redis", level: 1 },
+      { name: "Kafka", level: 1 },
+    ],
+  },
+  {
+    title: "DevOps & Tools",
+    icon: <Wrench className="w-5 h-5" />,
+    skills: [
+      { name: "AWS (EC2, S3)", level: 2 },
+      { name: "Caddy", level: 2 },
+      { name: "MySQL", level: 2 },
+      { name: "Git", level: 2 },
+      { name: "IntelliJ IDEA", level: 2 },
+      { name: "VS Code", level: 2 },
+      { name: "Naver Cloud", level: 1 },
     ],
   },
   {
@@ -62,17 +74,6 @@ const skillCategories: SkillCategory[] = [
     skills: [
       { name: "Kotlin", level: 1 },
       { name: "Jetpack Compose", level: 1 },
-    ],
-  },
-  {
-    title: "DevOps & Tools",
-    icon: <Wrench className="w-5 h-5" />,
-    skills: [
-      { name: "AWS (EC2, S3)", level: 1 },
-      { name: "MySQL", level: 1 },
-      { name: "Git", level: 2 },
-      { name: "GitHub", level: 2 },
-      { name: "VS Code", level: 2 },
     ],
   },
 ];
@@ -130,6 +131,52 @@ const timeline: TimelineItem[] = [
   },
 ];
 
+// Projects Data
+const projects = [
+  {
+    title: "DPS (Design Plug Shop)",
+    description: "판매자와 제조사를 연결하는 B2B 주문형 굿즈·인쇄 제작 플랫폼",
+    tags: ["Next.js", "TypeScript", "Prisma", "NextAuth"],
+    slug: "dps",
+  },
+  {
+    title: "DPS Store (디플샵 스토어)",
+    description: "멀티테넌트 기반 팝업 스토어 플랫폼 — 테넌트별 독립 온라인 스토어 운영",
+    tags: ["Next.js", "TypeScript", "Prisma", "Caddy"],
+    slug: "dps-store",
+  },
+  {
+    title: "정보보안기사 시험 대비 웹 앱",
+    description: "이론 학습, 문제 풀이, 모의고사 기능을 갖춘 PWA 웹 애플리케이션",
+    tags: ["React", "TypeScript", "Vite", "PWA"],
+    slug: "information-security-engineer",
+  },
+  {
+    title: "NAYA",
+    description: "멀티미디어 소개 카드와 명함을 제작·공유·관리하는 크로스 플랫폼 서비스",
+    tags: ["Kotlin", "Jetpack Compose", "CameraX", "Room", "React", "Spring Boot"],
+    slug: "naya",
+  },
+  {
+    title: "README",
+    description: "그림 퀴즈 게임으로 NFT를 생성하고 거래하는 블록체인 기반 플랫폼",
+    tags: ["React", "TypeScript", "Redux", "Socket.io", "Web3.js", "Solidity"],
+    slug: "readme-nft",
+  },
+  {
+    title: "당신의 계절",
+    description: "퍼스널 컬러 자가 진단 및 전문 컨설턴트 1:1 화상 진단 서비스",
+    tags: ["React", "Redux", "Material-UI", "OpenVidu", "Spring Boot", "Redis"],
+    slug: "your-seasons",
+  },
+  {
+    title: "SSAFIT",
+    description: "운동 영상 관리, 운동 기록 추적, 식단 관리를 통합한 피트니스 웹 애플리케이션",
+    tags: ["Vue.js", "Vuex", "Chart.js", "Spring Boot", "MyBatis", "MySQL"],
+    slug: "ssafit",
+  },
+];
+
 // Contact Data
 const contactLinks = [
   {
@@ -146,17 +193,6 @@ const contactLinks = [
     value: "Notion",
   },
 ];
-
-const SkillBadge = ({ skill }: { skill: Skill }) => (
-  <Badge variant="secondary" className="flex items-center gap-1">
-    {skill.name}
-    <span className="flex ml-1">
-      {Array.from({ length: skill.level }).map((_, i) => (
-        <Flame key={i} className="w-3 h-3 text-orange-500 fill-orange-500" />
-      ))}
-    </span>
-  </Badge>
-);
 
 const getTimelineIcon = (type: TimelineItem["type"]) => {
   switch (type) {
@@ -364,11 +400,25 @@ const HomePage = () => {
         className="mb-16"
       >
         <SectionHeader href="/projects">Projects</SectionHeader>
-        <Card>
-          <CardContent className="pt-6">
-            <p className="text-muted-foreground text-center py-4">프로젝트 목록은 자세히 보기를 클릭해주세요.</p>
-          </CardContent>
-        </Card>
+        <div className="space-y-3">
+          {projects.map((project) => (
+            <Link key={project.slug} href={`/projects/${project.slug}`} className="block group">
+              <Card className="hover:border-primary-sky/50 transition-colors">
+                <CardContent className="py-4">
+                  <h3 className="font-semibold group-hover:text-primary-sky transition-colors">
+                    {project.title}
+                  </h3>
+                  <p className="text-sm text-muted-foreground mt-1">{project.description}</p>
+                  <div className="flex flex-wrap gap-1 mt-2">
+                    {project.tags.map((tag) => (
+                      <TechBadge key={tag} name={tag} />
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </Link>
+          ))}
+        </div>
       </motion.section>
 
       {/* Contact Section */}

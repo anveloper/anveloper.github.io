@@ -27,7 +27,7 @@ export default async function PostsPage() {
               href={`/posts/${post.slug}`}
               className="block py-5 group"
             >
-              <div className="flex items-baseline gap-4 mb-1">
+              <div className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4 mb-1">
                 <time className="text-sm text-muted-foreground shrink-0">
                   {post.frontmatter.date}
                 </time>
@@ -36,12 +36,12 @@ export default async function PostsPage() {
                 </h2>
               </div>
               {post.frontmatter.description && (
-                <p className="text-sm text-muted-foreground line-clamp-1 ml-24">
+                <p className="text-sm text-muted-foreground line-clamp-1 sm:ml-24">
                   {post.frontmatter.description}
                 </p>
               )}
               {post.frontmatter.tags && (
-                <div className="flex flex-wrap gap-1 mt-2 ml-24">
+                <div className="flex flex-wrap gap-1 mt-2 sm:ml-24">
                   {(post.frontmatter.tags as string[]).slice(0, 3).map((tag) => (
                     <Badge key={tag} variant="secondary" className="text-xs">
                       {tag}
