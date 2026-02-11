@@ -1,41 +1,12 @@
+import { getAllProjects } from "@/_projects";
 import { PageContainer } from "@/components/page-container";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { promises as fs } from "fs";
-import matter from "gray-matter";
 import { ArrowRight, Calendar, FolderKanban } from "lucide-react";
 import Link from "next/link";
-import path from "path";
-
-const projectsDirectory = path.join(process.cwd(), "_projects");
-
-async function getProjects() {
-  try {
-    const filenames = await fs.readdir(projectsDirectory);
-    const projects = await Promise.all(
-      filenames
-        .filter((filename) => filename.endsWith(".mdx"))
-        .map(async (filename) => {
-          const filePath = path.join(projectsDirectory, filename);
-          const fileContents = await fs.readFile(filePath, "utf8");
-          const { data } = matter(fileContents);
-          return {
-            slug: filename.replace(/\.mdx$/, ""),
-            frontmatter: data,
-          };
-        })
-    );
-    return projects.sort((a, b) => (a.frontmatter.date < b.frontmatter.date ? 1 : -1));
-  } catch (error) {
-    if (error instanceof Error && "code" in error && (error as { code: string }).code === "ENOENT") {
-      return [];
-    }
-    throw error;
-  }
-}
 
 export default async function ProjectsPage() {
-  const projects = await getProjects();
+  const projects = await getAllProjects();
 
   return (
     <PageContainer>
