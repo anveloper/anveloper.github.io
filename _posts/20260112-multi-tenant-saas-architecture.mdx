@@ -38,11 +38,11 @@ Next.js 16의 `proxy.ts`에서 Host 헤더를 분석하여 서브도메인과 �
 
 이 시스템의 가장 큰 특징은 상품·주문 정보를 자체 DB에 저장하지 않는다는 점이다.
 
-```
-[클라이언트] ↔ [DPS Store] ↔ [DPS API]
-                   ↕
-              [MariaDB]
-           (설정/참조 정보만)
+```mermaid
+flowchart LR
+  Client[클라이언트] <--> Store[DPS Store]
+  Store <--> API[DPS API]
+  Store <--> DB["MariaDB\n(설정/참조 정보만)"]
 ```
 
 DB에는 테넌트 설정, 페이지 레이아웃, 고객 정보, 장바구니, 주문 메타데이터만 저장하고, 상품명·가격·이미지 같은 실제 상품 정보는 DPS API에서 실시간으로 조회한다.
@@ -61,26 +61,29 @@ model OrderItem {
 
 전체 스키마는 16개 테이블로 구성된다. 핵심 관계를 요약하면 다음과 같다.
 
-```
-Tenant (테넌트)
-  ├── Theme (테마: 로고, 컬러, 공통 스타일)
-  ├── Page (페이지: 레이아웃, 스타일)
-  │    └── PageFile (페이지-파일 N:N)
-  ├── Product (상품 설정)
-  │    ├── ProductCategory (상품-카테고리 N:N)
-  │    └── ProductDisplay (상품-전시 N:N)
-  ├── Category (카테고리)
-  ├── Display (전시)
-  ├── Terms (약관)
-  ├── TenantFont (테넌트-폰트 N:N)
-  ├── Cart → CartItem (장바구니)
-  ├── Order → OrderItem (주문)
-  └── File (파일)
+```mermaid
+graph TD
+  Tenant[Tenant 테넌트]
+  Tenant --> Theme[Theme 테마]
+  Tenant --> Page[Page 페이지]
+  Page --> PageFile[PageFile N:N]
+  Tenant --> Product[Product 상품 설정]
+  Product --> ProductCategory[ProductCategory N:N]
+  Product --> ProductDisplay[ProductDisplay N:N]
+  Tenant --> Category[Category 카테고리]
+  Tenant --> Display[Display 전시]
+  Tenant --> Terms[Terms 약관]
+  Tenant --> TenantFont[TenantFont N:N]
+  Tenant --> Cart[Cart 장바구니]
+  Cart --> CartItem[CartItem]
+  Tenant --> Order[Order 주문]
+  Order --> OrderItem[OrderItem]
+  Tenant --> File[File 파일]
 
-Customer (고객)
-  ├── Cart (장바구니)
-  ├── Order (주문)
-  └── CustomerConsent (약관 동의)
+  Customer[Customer 고객]
+  Customer --> Cart
+  Customer --> Order
+  Customer --> CustomerConsent[CustomerConsent 약관 동의]
 ```
 
 테넌트별 데이터 격리는 모든 주요 테이블에 `tenantId` 외래키를 통해 구현했다.
@@ -174,8 +177,9 @@ return styleConfig.backgroundColor;
 
 스토어의 고객 플로우를 8개 페이지 타입으로 정의했다.
 
-```
-HERO → SIGNUP → PRODUCT_LIST → OPTION_SELECT → CART → ORDER_FORM → ORDER_RESULT → MY_PAGE
+```mermaid
+flowchart LR
+  HERO --> SIGNUP --> PRODUCT_LIST --> OPTION_SELECT --> CART --> ORDER_FORM --> ORDER_RESULT --> MY_PAGE
 ```
 
 각 페이지는 활성화/비활성화가 가능하며, 비활성화된 페이지는 자동으로 건너뛴다. 예를 들어 CART를 비활성화하면 상품 선택 후 바로 주문으로 넘어가는 빠른 주문 플로우가 된다.
