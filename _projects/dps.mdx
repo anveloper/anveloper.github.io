@@ -1,0 +1,116 @@
+---
+title: 'DPS (Design Plug Shop)'
+date: '2024-08-01'
+description: '판매자와 제조사를 연결하는 B2B 주문형 굿즈·인쇄 제작 플랫폼'
+tags: ['Next.js', 'React', 'TypeScript', 'Prisma', 'MySQL', 'Zustand', 'TanStack Query', 'NextAuth', 'AWS S3']
+---
+
+# DPS (Design Plug Shop)
+
+## 개요
+
+DPS는 판매자와 제조사를 연결하는 B2B 주문형 굿즈·인쇄 제작 플랫폼입니다. 주문, 디자인, 제작, 배송까지의 전 과정을 클라우드로 자동화하여 소상공인의 제작 비용 절감과 효율적인 운영을 지원합니다.
+
+관리자(Admin), 파트너/판매자(Partner), 스토어/크리에이터(Store/Creator) 3가지 역할 기반의 멀티 테넌트 아키텍처로 설계되었습니다.
+
+## 주요 기능
+
+### 멀티 테넌트 역할 시스템
+
+- **관리자**: 상품/SKU 관리, 정산 처리, 회원·고객사 관리, 플랫폼 운영(배너, 팝업, 게시판), 통계 대시보드
+- **파트너(판매자)**: 상품 등록·관리, 재고 관리, 주문 처리·배송, 정산 조회, 그룹·멤버 관리
+- **스토어(크리에이터)**: 상품 카탈로그, 자체 상품 관리, 주문 접수, 결제 관리, 외부 채널 연결
+
+### 주문 자동화 및 배치 처리
+
+10개 이상의 스케줄된 배치 작업이 플랫폼 운영을 자동화합니다.
+
+| 작업 | 주기 | 목적 |
+|------|------|------|
+| 승인 처리 | 매 1시간 | 주문 승인 자동화 |
+| 결제 처리 | 매 5분 | 결제 상태 갱신 |
+| 배송 처리·추적 | 매 10~30분 | 배송 정보 동기화 |
+| 외부 API 동기화 | 매 5~10분 | 스마트스토어, Cafe24 주문 연동 |
+| 통계 생성 | 매일 새벽 1시 | 일일 통계 자동 생성 |
+| 메일·알림톡 발송 | 매 1분 | 대기 메일·알림 처리 |
+
+### 외부 서비스 연동
+
+- **네이버 스마트스토어**: OAuth 인증, 주문 동기화
+- **Cafe24**: 스토어 연동, 주문 동기화
+- **카카오 알림톡**: 주문·배송 알림 발송
+- **Innopay**: PG 결제 처리
+- **AWS S3**: 파일·이미지 업로드 및 관리
+- **Jarvis(CIPOD)**: 디자인 에디터 플랫폼 연동
+
+## 기술 스택
+
+| 분류 | 기술 |
+|------|------|
+| Framework | Next.js 16 (App Router) |
+| Language | TypeScript (strict mode) |
+| UI | React 19, Tailwind CSS 4, Radix UI, shadcn/ui |
+| 상태 관리 | Zustand 5, TanStack Query 5 |
+| 폼 처리 | React Hook Form 7 + Zod 3 |
+| ORM | Prisma 7 (MySQL/MariaDB, 멀티 DB) |
+| 인증 | NextAuth 5 (Credentials, 3역할 분리) |
+| 에디터 | Tiptap 2 (리치 텍스트) |
+| 차트 | Recharts 2 |
+| 국제화 | next-intl 4 (ko-KR, en-US) |
+| 파일 처리 | ExcelJS 4, jsPDF 4 |
+| 로깅 | Winston 3 (Daily Rotate) |
+| 배포 | PM2, node-cron |
+
+## 아키텍처
+
+### 프로젝트 구조
+
+```
+app/
+├── admin/          # 관리자 (23개 모듈)
+├── partner/        # 파트너/판매자 (25개 모듈)
+├── store/          # 스토어/크리에이터 (27개 모듈)
+├── creator/        # 크리에이터 (10개 모듈)
+├── api/
+│   ├── v1/         # REST API (admin, seller, supplier, common)
+│   ├── schedule/   # 배치 스케줄러 (12개 작업)
+│   ├── auth/       # NextAuth 인증
+│   └── upload/     # 파일 업로드
+└── auth/           # 외부 인증 (Innopay, NHN, 스마트스토어, Cafe24)
+
+components/         # 재사용 컴포넌트 (365개 파일)
+services/           # 비즈니스 로직 (admin, seller, supplier, external)
+lib/
+├── repositories/   # Prisma 데이터 레포지토리
+├── providers/      # React Context Providers
+├── tanstack-query/ # 데이터 페칭 설정
+└── zod/            # 스키마 검증 (11개 도메인)
+types/              # TypeScript 타입 정의
+utils/              # 유틸리티 함수
+prisma/             # DB 스키마 (메인 DB + EC DB)
+```
+
+### 레이어 구조
+
+역할별 페이지(app/) → 컴포넌트(components/) → 서비스(services/) → 레포지토리(lib/repositories/) → Prisma ORM → MySQL/MariaDB 구조로, 관심사가 명확히 분리되어 있습니다.
+
+### 멀티 데이터베이스
+
+메인 DB(`dps`)와 전자상거래 DB(`make-status`) 두 개의 독립적인 MySQL 데이터베이스를 Prisma 멀티 스키마로 관리합니다.
+
+## 담당 역할
+
+풀스택 개발자로 프론트엔드와 백엔드 전반을 담당했습니다.
+
+- **프론트엔드**: 관리자·파트너·스토어 페이지 UI/UX 개발, 상태 관리 설계, 폼 검증 체계 구축
+- **백엔드**: REST API 설계·구현, Prisma ORM 기반 DB 설계, NextAuth 인증 시스템 구축
+- **외부 연동**: 네이버 스마트스토어·Cafe24 OAuth 연동, 카카오 알림톡·Innopay 결제 연동
+- **자동화**: 배치 스케줄러 설계·구현 (주문 승인, 결제, 배송 추적, 통계 등)
+- **인프라**: PM2 기반 프로덕션 배포, Winston 로깅 체계 구축
+
+## 성과
+
+- 관리자·판매자·스토어 3개 역할 통합 플랫폼 구축 (80개 이상 페이지)
+- 10개 이상 배치 작업 자동화로 수작업 운영 비용 절감
+- 네이버 스마트스토어, Cafe24 등 외부 채널 주문 통합 처리
+- Next.js 16, Prisma 7 등 최신 기술 스택 마이그레이션 완료
