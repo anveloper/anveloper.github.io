@@ -23,7 +23,7 @@ export default async function ProjectsPage() {
         <div className="divide-y divide-border">
           {projects.map((project) => (
             <div key={project.slug} className="py-6">
-              <div className="flex items-baseline gap-4 mb-2">
+              <div className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4 mb-2">
                 <time className="text-sm text-muted-foreground shrink-0">
                   {project.frontmatter.date}
                 </time>
@@ -32,12 +32,12 @@ export default async function ProjectsPage() {
                 </h2>
               </div>
               {project.frontmatter.description && (
-                <p className="text-muted-foreground mb-3 ml-24">
+                <p className="text-muted-foreground mb-3 sm:ml-24">
                   {project.frontmatter.description}
                 </p>
               )}
               {project.frontmatter.tags && (
-                <div className="flex flex-wrap gap-1 mb-3 ml-24">
+                <div className="flex flex-wrap gap-1 mb-3 sm:ml-24">
                   {(project.frontmatter.tags as string[]).map((tag) => (
                     <Badge key={tag} variant="secondary" className="text-xs">
                       {tag}
@@ -45,7 +45,7 @@ export default async function ProjectsPage() {
                   ))}
                 </div>
               )}
-              <div className="ml-24">
+              <div className="sm:ml-24">
                 <Link
                   href={`/projects/${project.slug}`}
                   className="text-sm text-primary-sky hover:underline"
