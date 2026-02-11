@@ -138,42 +138,49 @@ const projects = [
     description: "판매자와 제조사를 연결하는 B2B 주문형 굿즈·인쇄 제작 플랫폼",
     tags: ["Next.js", "TypeScript", "Prisma", "NextAuth"],
     slug: "dps",
+    icon: "/images/projects/dps/icon.png",
   },
   {
     title: "DPS Store (디플샵 스토어)",
     description: "멀티테넌트 기반 팝업 스토어 플랫폼 — 테넌트별 독립 온라인 스토어 운영",
     tags: ["Next.js", "TypeScript", "Prisma", "Caddy"],
     slug: "dps-store",
+    icon: "/images/projects/dps-store/icon.svg",
   },
   {
     title: "정보보안기사 시험 대비 웹 앱",
     description: "이론 학습, 문제 풀이, 모의고사 기능을 갖춘 PWA 웹 애플리케이션",
     tags: ["React", "TypeScript", "Vite", "PWA"],
     slug: "information-security-engineer",
+    icon: "/images/projects/information-security-engineer/icon.svg",
   },
   {
     title: "NAYA",
     description: "멀티미디어 소개 카드와 명함을 제작·공유·관리하는 크로스 플랫폼 서비스",
     tags: ["Kotlin", "Jetpack Compose", "CameraX", "Room", "React", "Spring Boot"],
     slug: "naya",
+    icon: "/images/projects/naya/icon.svg",
   },
   {
     title: "README",
     description: "그림 퀴즈 게임으로 NFT를 생성하고 거래하는 블록체인 기반 플랫폼",
     tags: ["React", "TypeScript", "Redux", "Socket.io", "Web3.js", "Solidity"],
     slug: "readme-nft",
+    icon: "/images/projects/readme-nft/icon.svg",
   },
   {
     title: "당신의 계절",
     description: "퍼스널 컬러 자가 진단 및 전문 컨설턴트 1:1 화상 진단 서비스",
     tags: ["React", "Redux", "Material-UI", "OpenVidu", "Spring Boot", "Redis"],
     slug: "your-seasons",
+    icon: "/images/projects/your-seasons/icon.png",
   },
   {
     title: "SSAFIT",
     description: "운동 영상 관리, 운동 기록 추적, 식단 관리를 통합한 피트니스 웹 애플리케이션",
     tags: ["Vue.js", "Vuex", "Chart.js", "Spring Boot", "MyBatis", "MySQL"],
     slug: "ssafit",
+    icon: "/images/projects/ssafit/icon.svg",
   },
 ];
 
@@ -405,9 +412,14 @@ const HomePage = () => {
             <Link key={project.slug} href={`/projects/${project.slug}`} className="block group">
               <Card className="hover:border-primary-sky/50 transition-colors">
                 <CardContent className="py-4">
-                  <h3 className="font-semibold group-hover:text-primary-sky transition-colors">
-                    {project.title}
-                  </h3>
+                  <div className="flex items-center gap-2">
+                    {project.icon && (
+                      <img src={project.icon} alt="" className="w-6 h-6 rounded" />
+                    )}
+                    <h3 className="font-semibold group-hover:text-primary-sky transition-colors">
+                      {project.title}
+                    </h3>
+                  </div>
                   <p className="text-sm text-muted-foreground mt-1">{project.description}</p>
                   <div className="flex flex-wrap gap-1 mt-2">
                     {project.tags.map((tag) => (
