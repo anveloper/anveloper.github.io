@@ -10,11 +10,11 @@ export const metadata: Metadata = {
     template: "%s | 안성진",
   },
   description: "언어로 세상을 표현하는 개발자, 안성진입니다. Full-Stack Developer & UX Team Lead",
-  metadataBase: new URL("https://anveloper.github.io"),
+  metadataBase: new URL("https://anveloper.dev"),
   openGraph: {
     title: "안성진 | Full-Stack Developer",
     description: "언어로 세상을 표현하는 개발자",
-    url: "https://anveloper.github.io",
+    url: "https://anveloper.dev",
     siteName: "안성진 포트폴리오",
     locale: "ko_KR",
     type: "website",

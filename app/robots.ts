@@ -8,6 +8,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://anveloper.github.io/sitemap.xml",
+    sitemap: "https://anveloper.dev/sitemap.xml",
   };
 }
