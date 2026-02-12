@@ -15,20 +15,22 @@ tags: ["FastAPI", "SSE", "LangGraph", "Streaming", "Python"]
 
 ## 전체 아키텍처
 
-```
-Client (Next.js)         Backend (Next.js API)      AI Server (FastAPI)
-    │                          │                          │
-    │  POST /api/generate      │                          │
-    │─────────────────────────>│  POST /api/generate/stream│
-    │                          │─────────────────────────>│
-    │                          │                          │  LangGraph 워크플로우 시작
-    │                          │  SSE: agent_start         │
-    │  SSE: agent_start        │<─────────────────────────│
-    │<─────────────────────────│                          │
-    │        ...               │        ...               │
-    │                          │  SSE: result              │
-    │  SSE: result             │<─────────────────────────│
-    │<─────────────────────────│                          │
+```mermaid
+sequenceDiagram
+    participant C as Client (Next.js)
+    participant B as Backend (Next.js API)
+    participant A as AI Server (FastAPI)
+
+    C->>B: POST /api/generate
+    B->>A: POST /api/generate/stream
+    Note right of A: LangGraph 워크플로우 시작
+    A-->>B: SSE: agent_start
+    B-->>C: SSE: agent_start
+    A-->>B: SSE: agent_complete
+    B-->>C: SSE: agent_complete
+    Note over A: ... (단계 반복)
+    A-->>B: SSE: result
+    B-->>C: SSE: result
 ```
 
 Backend는 AI 서버의 SSE 스트림을 **그대로 릴레이**한다. 직접 이벤트를 생성하지 않고, AI 서버의 응답 body를 클라이언트에 투명하게 전달하는 구조다.
@@ -126,32 +128,40 @@ async def generate_stream(request: GenerateRequest, mock: bool = False):
 
 ### 정상 흐름
 
-```
-agent_start(orchestrating)
-agent_complete(orchestrating)
-agent_start(retrieving)
-agent_complete(retrieving)
-agent_start(analyzing)
-agent_complete(analyzing)
-agent_start(generating)
-agent_complete(generating)
-agent_start(validating)
-agent_complete(validating)
-result(xml)
+```mermaid
+sequenceDiagram
+    participant S as Server
+    participant C as Client
+
+    S-->>C: agent_start(orchestrating)
+    S-->>C: agent_complete(orchestrating)
+    S-->>C: agent_start(retrieving)
+    S-->>C: agent_complete(retrieving)
+    S-->>C: agent_start(analyzing)
+    S-->>C: agent_complete(analyzing)
+    S-->>C: agent_start(generating)
+    S-->>C: agent_complete(generating)
+    S-->>C: agent_start(validating)
+    S-->>C: agent_complete(validating)
+    S-->>C: result(xml)
 ```
 
 ### 재시도 흐름
 
 Validator가 실패하면 `generate → validate` 루프가 반복된다.
 
-```
-...
-agent_complete(validating)  ← FAIL
-agent_start(generating)     ← 재생성
-agent_complete(generating)
-agent_start(validating)
-agent_complete(validating)  ← PASS
-result(xml)
+```mermaid
+sequenceDiagram
+    participant S as Server
+    participant C as Client
+
+    Note over S,C: ... (이전 단계 생략)
+    S-->>C: agent_complete(validating) — FAIL
+    S-->>C: agent_start(generating) — 재생성
+    S-->>C: agent_complete(generating)
+    S-->>C: agent_start(validating)
+    S-->>C: agent_complete(validating) — PASS
+    S-->>C: result(xml)
 ```
 
 ## 두 가지 수준의 스트리밍
