@@ -169,6 +169,9 @@ pnpm lint     # ESLint 검사
 1. `_posts/` - 블로그 포스트
 2. `_projects/` - 프로젝트 설명
 3. Frontmatter 필수: `title`, `date`
+4. MDX 파일 생성 시 이미지 디렉토리도 함께 생성
+   - 포스트: `public/images/posts/{slug}/`
+   - 프로젝트: `public/images/projects/{slug}/`
 
 ### 스타일 가이드
 
