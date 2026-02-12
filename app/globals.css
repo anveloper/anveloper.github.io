@@ -174,24 +174,37 @@ html {
   background: var(--muted-foreground);
 }
 
-/* rehype-pretty-code: dual theme switching */
+/* rehype-pretty-code: shiki dual theme (CSS variables) */
 [data-rehype-pretty-code-figure] pre,
 [data-rehype-pretty-code-figure] code,
 [data-rehype-pretty-code-figure] code span {
   transition: none;
 }
 
-[data-rehype-pretty-code-figure] code[data-theme="dark"],
-[data-rehype-pretty-code-figure] pre[data-theme="dark"] {
-  display: none;
+[data-rehype-pretty-code-figure] pre {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+  font-size: 0.875rem;
+  line-height: 1.7;
+  border: 1px solid var(--border);
+  background-color: var(--muted);
+  color: var(--shiki-light);
 }
 
-.dark [data-rehype-pretty-code-figure] code[data-theme="dark"],
-.dark [data-rehype-pretty-code-figure] pre[data-theme="dark"] {
-  display: block;
+[data-rehype-pretty-code-figure] code {
+  font-family: var(--font-mono);
 }
 
-.dark [data-rehype-pretty-code-figure] code[data-theme="light"],
-.dark [data-rehype-pretty-code-figure] pre[data-theme="light"] {
-  display: none;
+[data-rehype-pretty-code-figure] code span {
+  color: var(--shiki-light);
+}
+
+.dark [data-rehype-pretty-code-figure] pre {
+  background-color: var(--muted);
+  color: var(--shiki-dark);
+}
+
+.dark [data-rehype-pretty-code-figure] code span {
+  color: var(--shiki-dark);
 }
