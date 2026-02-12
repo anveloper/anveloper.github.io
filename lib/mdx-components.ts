@@ -7,27 +7,27 @@ export const mdxComponents: MDXComponents = {
   h1: (props) =>
     createElement("h1", {
       ...props,
-      className: "text-4xl font-bold mt-8 mb-4 text-foreground",
+      className: "text-4xl font-bold mt-10 mb-5 text-foreground",
     }),
   h2: (props) =>
     createElement("h2", {
       ...props,
-      className: "text-3xl font-semibold mt-6 mb-3 text-foreground border-b border-border pb-2",
+      className: "text-3xl font-semibold mt-9 mb-4 text-foreground border-b border-border pb-2",
     }),
   h3: (props) =>
     createElement("h3", {
       ...props,
-      className: "text-2xl font-semibold mt-5 mb-2 text-foreground",
+      className: "text-2xl font-semibold mt-8 mb-3 text-foreground",
     }),
   h4: (props) =>
     createElement("h4", {
       ...props,
-      className: "text-xl font-semibold mt-4 mb-2 text-foreground",
+      className: "text-xl font-semibold mt-6 mb-3 text-foreground",
     }),
   p: (props) =>
     createElement("p", {
       ...props,
-      className: "my-4 leading-7 text-foreground/90",
+      className: "my-5 leading-7 text-foreground/90",
     }),
   a: (props) =>
     createElement("a", {
@@ -39,12 +39,12 @@ export const mdxComponents: MDXComponents = {
   ul: (props) =>
     createElement("ul", {
       ...props,
-      className: "my-4 ml-6 list-disc space-y-2",
+      className: "my-5 ml-6 list-disc space-y-2",
     }),
   ol: (props) =>
     createElement("ol", {
       ...props,
-      className: "my-4 ml-6 list-decimal space-y-2",
+      className: "my-5 ml-6 list-decimal space-y-2",
     }),
   li: (props) =>
     createElement("li", {
@@ -54,19 +54,18 @@ export const mdxComponents: MDXComponents = {
   blockquote: (props) =>
     createElement("blockquote", {
       ...props,
-      className: "border-l-4 border-primary-sky pl-4 my-4 italic text-muted-foreground",
+      className: "border-l-4 border-primary-sky pl-4 my-6 italic text-muted-foreground",
     }),
   figure: (props) => {
     const isCodeFigure = props["data-rehype-pretty-code-figure"] !== undefined;
     return createElement("figure", {
       ...props,
-      className: isCodeFigure ? "not-prose my-4" : props.className,
+      className: isCodeFigure ? "not-prose my-6" : props.className,
     });
   },
   code: (props) => {
-    const isHighlighted = !!props["data-theme"];
-    if (isHighlighted) {
-      return createElement("code", { ...props });
+    if (props["data-theme"]) {
+      return createElement("code", props);
     }
     return createElement("code", {
       ...props,
@@ -74,16 +73,12 @@ export const mdxComponents: MDXComponents = {
     });
   },
   pre: (props) => {
-    const isHighlighted = !!props["data-theme"];
-    if (isHighlighted) {
-      return createElement("pre", {
-        ...props,
-        className: "p-4 rounded-lg overflow-x-auto my-0 font-mono text-sm",
-      });
+    if (props["data-theme"]) {
+      return createElement("pre", props);
     }
     return createElement("pre", {
       ...props,
-      className: "bg-muted p-4 rounded-lg overflow-x-auto my-4 font-mono text-sm",
+      className: "bg-muted p-4 rounded-lg overflow-x-auto my-6 font-mono text-sm",
     });
   },
   hr: (props) =>
@@ -94,7 +89,7 @@ export const mdxComponents: MDXComponents = {
   table: ({ children, ...props }) =>
     createElement(
       "div",
-      { className: "my-6 overflow-x-auto" },
+      { className: "my-8 overflow-x-auto bg-card rounded-lg border border-border" },
       createElement("table", { ...props, className: "w-full border-collapse" }, children)
     ),
   thead: (props) =>
@@ -105,17 +100,17 @@ export const mdxComponents: MDXComponents = {
   th: (props) =>
     createElement("th", {
       ...props,
-      className: "border border-border px-4 py-2 text-left font-semibold",
+      className: "border-b border-r border-border px-4 py-2 text-left font-semibold last:border-r-0",
     }),
   td: (props) =>
     createElement("td", {
       ...props,
-      className: "border border-border px-4 py-2",
+      className: "border-b border-r border-border px-4 py-2 last:border-r-0 [tr:last-child_&]:border-b-0",
     }),
   img: (props) =>
     createElement("img", {
       ...props,
-      className: "rounded-lg my-4 max-w-full h-auto",
+      className: "rounded-lg my-6 max-w-full h-auto",
     }),
   strong: (props) =>
     createElement("strong", {
