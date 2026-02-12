@@ -1,9 +1,11 @@
 import { getAllPosts, getPostBySlug } from "@/_posts";
 import { PageContainer } from "@/components/page-container";
+import { TableOfContents } from "@/components/table-of-contents";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { mdxComponents } from "@/lib/mdx-components";
 import { mdxOptions } from "@/lib/mdx-options";
+import { extractToc } from "@/lib/toc";
 import type { Metadata } from "next";
 import { Calendar, ArrowLeft } from "lucide-react";
 import { MDXRemote } from "next-mdx-remote/rsc";
@@ -48,8 +50,11 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
     notFound();
   }
 
+  const tocItems = extractToc(post.content);
+
   return (
     <PageContainer>
+      <TableOfContents items={tocItems} />
       <Link
         href="/posts"
         className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors mb-6"

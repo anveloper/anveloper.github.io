@@ -1,5 +1,6 @@
 import type { Options } from "rehype-pretty-code";
 import rehypePrettyCode from "rehype-pretty-code";
+import rehypeSlug from "rehype-slug";
 import remarkGfm from "remark-gfm";
 import remarkMermaid from "./plugins/remark-mermaid";
 
@@ -15,6 +16,7 @@ export const mdxOptions = {
   mdxOptions: {
     remarkPlugins: [remarkGfm, remarkMermaid],
     rehypePlugins: [
+      rehypeSlug,
       [rehypePrettyCode, prettyCodeOptions] as [typeof rehypePrettyCode, Options],
     ],
   },
