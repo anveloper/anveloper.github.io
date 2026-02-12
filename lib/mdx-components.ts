@@ -56,16 +56,36 @@ export const mdxComponents: MDXComponents = {
       ...props,
       className: "border-l-4 border-primary-sky pl-4 my-4 italic text-muted-foreground",
     }),
-  code: (props) =>
-    createElement("code", {
+  figure: (props) => {
+    const isCodeFigure = props["data-rehype-pretty-code-figure"] !== undefined;
+    return createElement("figure", {
+      ...props,
+      className: isCodeFigure ? "not-prose my-4" : props.className,
+    });
+  },
+  code: (props) => {
+    const isHighlighted = !!props["data-theme"];
+    if (isHighlighted) {
+      return createElement("code", { ...props });
+    }
+    return createElement("code", {
       ...props,
       className: "bg-muted px-1.5 py-0.5 rounded text-sm font-mono text-foreground",
-    }),
-  pre: (props) =>
-    createElement("pre", {
+    });
+  },
+  pre: (props) => {
+    const isHighlighted = !!props["data-theme"];
+    if (isHighlighted) {
+      return createElement("pre", {
+        ...props,
+        className: "p-4 rounded-lg overflow-x-auto my-0 font-mono text-sm",
+      });
+    }
+    return createElement("pre", {
       ...props,
       className: "bg-muted p-4 rounded-lg overflow-x-auto my-4 font-mono text-sm",
-    }),
+    });
+  },
   hr: (props) =>
     createElement("hr", {
       ...props,

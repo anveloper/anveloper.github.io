@@ -173,3 +173,25 @@ html {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--muted-foreground);
 }
+
+/* rehype-pretty-code: dual theme switching */
+[data-rehype-pretty-code-figure] pre,
+[data-rehype-pretty-code-figure] code,
+[data-rehype-pretty-code-figure] code span {
+  transition: none;
+}
+
+[data-rehype-pretty-code-figure] code[data-theme="dark"],
+[data-rehype-pretty-code-figure] pre[data-theme="dark"] {
+  display: none;
+}
+
+.dark [data-rehype-pretty-code-figure] code[data-theme="dark"],
+.dark [data-rehype-pretty-code-figure] pre[data-theme="dark"] {
+  display: block;
+}
+
+.dark [data-rehype-pretty-code-figure] code[data-theme="light"],
+.dark [data-rehype-pretty-code-figure] pre[data-theme="light"] {
+  display: none;
+}
