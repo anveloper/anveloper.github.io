@@ -1,8 +1,8 @@
 ---
-title: 'JSON 노드 트리로 페이지 빌더 만들기'
-date: '2026-01-29'
-description: 'React.createElement에서 영감을 받은 노드 기반 동적 UI 렌더링 시스템 구현기'
-tags: ['React', 'TypeScript', 'Page Builder', 'WYSIWYG', 'Architecture']
+title: "JSON 노드 트리로 페이지 빌더 만들기"
+date: "2026-01-29"
+description: "React.createElement에서 영감을 받은 노드 기반 동적 UI 렌더링 시스템 구현기"
+tags: ["React", "TypeScript", "Page Builder", "WYSIWYG", "Architecture"]
 ---
 
 # JSON 노드 트리로 페이지 빌더 만들기
@@ -34,25 +34,25 @@ switch (component.type) {
 
 ```typescript
 interface UINode {
-  id: string;               // 노드 고유 ID
-  element: ElementType;     // 요소 타입 (div, h1, product-list 등)
-  text?: NodeText;          // 텍스트 콘텐츠 (다국어)
-  props?: NodeProps;        // 요소 속성
-  style?: NodeStyle;        // 스타일 (Tailwind + 인라인)
-  children?: UINode[];      // 자식 노드
+  id: string; // 노드 고유 ID
+  element: ElementType; // 요소 타입 (div, h1, product-list 등)
+  text?: NodeText; // 텍스트 콘텐츠 (다국어)
+  props?: NodeProps; // 요소 속성
+  style?: NodeStyle; // 스타일 (Tailwind + 인라인)
+  children?: UINode[]; // 자식 노드
 }
 
 interface NodeText {
-  text: string;             // 기본 텍스트 (한국어)
+  text: string; // 기본 텍스트 (한국어)
   i18n?: {
-    en?: string;            // 영어
-    jp?: string;            // 일본어
+    en?: string; // 영어
+    jp?: string; // 일본어
   };
 }
 
 interface NodeStyle {
-  inline?: Record<string, string>;  // CSS 인라인 스타일
-  className?: string;               // Tailwind 클래스
+  inline?: Record<string, string>; // CSS 인라인 스타일
+  className?: string; // Tailwind 클래스
 }
 ```
 
@@ -97,13 +97,13 @@ interface NodeStyle {
 
 **특수 컴포넌트**: 비즈니스 로직이 필요한 요소는 별도 컴포넌트로 구현했다.
 
-| 컴포넌트 | 설명 | 주요 props |
-|---------|------|-----------|
-| `product-list` | 상품 목록 그리드 | `maxItems`, `columns`, `displayId` |
-| `logo` | 테넌트 로고 | `size`, `fileId` |
-| `language-selector` | 언어 전환 | `scale` |
-| `cart-button` | 장바구니 버튼 | `showBadge` |
-| `signup-form` | 회원가입 폼 | `requireVerification` |
+| 컴포넌트            | 설명             | 주요 props                         |
+| ------------------- | ---------------- | ---------------------------------- |
+| `product-list`      | 상품 목록 그리드 | `maxItems`, `columns`, `displayId` |
+| `logo`              | 테넌트 로고      | `size`, `fileId`                   |
+| `language-selector` | 언어 전환        | `scale`                            |
+| `cart-button`       | 장바구니 버튼    | `showBadge`                        |
+| `signup-form`       | 회원가입 폼      | `requireVerification`              |
 
 특수 컴포넌트는 렌더러에서 별도로 처리한다.
 
@@ -146,9 +146,7 @@ function NodeRenderer({ node, depth = 0 }: { node: UINode; depth?: number }) {
       style: style.inline,
     },
     textContent,
-    node.children?.map((child) => (
-      <NodeRenderer key={child.id} node={child} depth={depth + 1} />
-    ))
+    node.children?.map((child) => <NodeRenderer key={child.id} node={child} depth={depth + 1} />)
   );
 }
 ```
@@ -174,14 +172,14 @@ if (isNodeLayoutConfig(layoutConfig)) {
 
 ### 검증 항목
 
-| 항목 | 방법 |
-|------|------|
-| 요소 타입 | `ALLOWED_HTML_ELEMENTS` 화이트리스트 |
-| CSS 속성 | `ALLOWED_CSS_PROPERTIES` 화이트리스트 |
-| CSS 값 | `javascript:`, `expression(`, `url(data:)` 차단 |
-| Tailwind 클래스 | 영문/숫자/하이픈/콜론만 허용 |
-| href | `javascript:`, `data:`, `vbscript:` 프로토콜 차단 |
-| 트리 깊이 | MAX_DEPTH = 10 |
+| 항목            | 방법                                              |
+| --------------- | ------------------------------------------------- |
+| 요소 타입       | `ALLOWED_HTML_ELEMENTS` 화이트리스트              |
+| CSS 속성        | `ALLOWED_CSS_PROPERTIES` 화이트리스트             |
+| CSS 값          | `javascript:`, `expression(`, `url(data:)` 차단   |
+| Tailwind 클래스 | 영문/숫자/하이픈/콜론만 허용                      |
+| href            | `javascript:`, `data:`, `vbscript:` 프로토콜 차단 |
+| 트리 깊이       | MAX_DEPTH = 10                                    |
 
 ### 정제 함수
 
@@ -212,7 +210,7 @@ const parent = findParentNode(rootNode, "node-id");
 
 // 노드 수정 (불변성 유지 — 새 트리 반환)
 const newRoot = updateNode(rootNode, "node-id", {
-  text: { text: "새 텍스트" }
+  text: { text: "새 텍스트" },
 });
 
 // 노드 추가/삭제/이동

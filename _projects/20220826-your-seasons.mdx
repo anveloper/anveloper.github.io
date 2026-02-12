@@ -1,9 +1,9 @@
 ---
-title: '당신의 계절'
-date: '2022-08-26'
-description: '퍼스널 컬러 자가 진단 및 전문 컨설턴트 1:1 화상 진단 서비스'
-tags: ['React', 'Redux', 'Material-UI', 'OpenVidu', 'Spring Boot', 'JPA', 'MySQL', 'Redis']
-github: 'ssafy-anveloper/your-seasons'
+title: "당신의 계절"
+date: "2022-08-26"
+description: "퍼스널 컬러 자가 진단 및 전문 컨설턴트 1:1 화상 진단 서비스"
+tags: ["React", "Redux", "Material-UI", "OpenVidu", "Spring Boot", "JPA", "MySQL", "Redis"]
+github: "ssafy-anveloper/your-seasons"
 ---
 
 # 당신의 계절
@@ -47,13 +47,13 @@ React 프론트엔드와 Spring Boot 백엔드, OpenVidu WebRTC 서버로 구성
 
 ## 기술 스택
 
-| 분류 | 기술 |
-|------|------|
-| Frontend | React 18, JavaScript, Redux Toolkit, Material-UI 5, Emotion |
-| 실시간 통신 | OpenVidu 2.19 (WebRTC), WebSocket (채팅) |
-| Backend | Java 8, Spring Boot 2.7, Spring Security, JPA, JWT |
-| Database | MySQL 8.0, Redis (세션·이메일 인증 토큰) |
-| 인프라 | AWS EC2, Docker, Nginx, Let's Encrypt SSL |
+| 분류        | 기술                                                        |
+| ----------- | ----------------------------------------------------------- |
+| Frontend    | React 18, JavaScript, Redux Toolkit, Material-UI 5, Emotion |
+| 실시간 통신 | OpenVidu 2.19 (WebRTC), WebSocket (채팅)                    |
+| Backend     | Java 8, Spring Boot 2.7, Spring Security, JPA, JWT          |
+| Database    | MySQL 8.0, Redis (세션·이메일 인증 토큰)                    |
+| 인프라      | AWS EC2, Docker, Nginx, Let's Encrypt SSL                   |
 
 ## 아키텍처
 
@@ -70,17 +70,17 @@ flowchart TD
 
 ## 데이터 모델
 
-| 엔티티 | 설명 |
-|--------|------|
-| Member | 기본 회원 (Customer / Consultant 상속) |
-| Consultant | 컨설턴트 프로필, 자격증(License), 휴무일(ClosedDay) |
-| Customer | 일반 고객 |
-| Reservation | 예약 (고객 ↔ 컨설턴트, 날짜·시간) |
-| Consulting | 화상 상담 세션 (OpenVidu sessionId) |
-| ConsultingResult | 진단 결과 (BestColorSet, WorstColorSet) |
-| SelfConsulting | 셀프 진단 결과 (톤 비율 Percentage) |
-| Review | 별점·후기 (고객 → 컨설턴트) |
-| Tone / Color | 시즌 톤 및 컬러 팔레트 |
+| 엔티티           | 설명                                                |
+| ---------------- | --------------------------------------------------- |
+| Member           | 기본 회원 (Customer / Consultant 상속)              |
+| Consultant       | 컨설턴트 프로필, 자격증(License), 휴무일(ClosedDay) |
+| Customer         | 일반 고객                                           |
+| Reservation      | 예약 (고객 ↔ 컨설턴트, 날짜·시간)                   |
+| Consulting       | 화상 상담 세션 (OpenVidu sessionId)                 |
+| ConsultingResult | 진단 결과 (BestColorSet, WorstColorSet)             |
+| SelfConsulting   | 셀프 진단 결과 (톤 비율 Percentage)                 |
+| Review           | 별점·후기 (고객 → 컨설턴트)                         |
+| Tone / Color     | 시즌 톤 및 컬러 팔레트                              |
 
 ## 담당 역할
 

@@ -4,7 +4,7 @@
 
 **anveloper.github.io**는 웹 개발자 안성진의 포트폴리오 및 기술 블로그 웹사이트입니다.
 
-- **프레임워크**: Next.js 15 (App Router)
+- **프레임워크**: Next.js 16 (App Router)
 - **배포**: GitHub Pages (정적 빌드)
 - **언어**: TypeScript, 한국어 콘텐츠
 
@@ -17,7 +17,9 @@
 | 스타일링 | Tailwind CSS v4.1.18, CVA (class-variance-authority) |
 | 애니메이션 | Motion 12.29.2 (Framer Motion) |
 | UI 컴포넌트 | Radix UI, shadcn/ui |
-| 콘텐츠 | MDX + gray-matter |
+| 콘텐츠 | MDX + gray-matter, remark-gfm, mermaid |
+| 구문 하이라이팅 | rehype-pretty-code + shiki (듀얼 테마) |
+| 목차(TOC) | rehype-slug + github-slugger |
 | 아이콘 | lucide-react |
 | 패키지 매니저 | pnpm |
 
@@ -41,10 +43,24 @@ components/          # 재사용 컴포넌트
 ├── magicui/         # Magic UI 컴포넌트
 ├── animation/       # 애니메이션 래퍼
 ├── nav-bar.tsx      # 네비게이션 헤더
-└── page-container.tsx # 페이지 컨테이너
+├── page-container.tsx # 페이지 컨테이너
+├── table-of-contents.tsx # 플로팅 목차 (xl 이상)
+├── mermaid.tsx      # Mermaid 다이어그램 렌더러
+├── skill-badge.tsx  # shields.io 기술 뱃지
+├── favicon-switcher.tsx # 다크/라이트 파비콘 전환
+└── providers.tsx    # 전역 Provider 래퍼
 
 hooks/               # 커스텀 React Hooks
+├── use-mounted.ts   # SSR 마운트 상태 감지
+├── use-theme-class.ts # 다크/라이트 테마 감지
+└── use-active-heading.ts # 스크롤 스파이 (TOC용)
+
 lib/                 # 유틸리티 함수
+├── utils.ts         # cn() 클래스 병합 등
+├── mdx-options.ts   # MDX 플러그인 설정
+├── mdx-components.ts # MDX 렌더링 컴포넌트
+├── toc.ts           # 목차 추출 유틸리티
+└── skill-data.ts    # shields.io 뱃지 데이터
 _posts/              # 블로그 MDX 파일
 _projects/           # 프로젝트 MDX 파일
 public/              # 정적 파일 (폰트, 이미지, 파비콘)
@@ -141,6 +157,39 @@ refactor: 컴포넌트 구조 개선 (ui)
 3. 리뷰 후 머지
 4. 배포 준비 완료 시 `main`으로 머지
 
+## PR 규칙
+
+- `gh pr create` 명령어로 생성
+- `.github/PULL_REQUEST_TEMPLATE.md` 템플릿을 따름
+- Claude 협력 문구는 반드시 제외
+
+### 템플릿 구조
+
+```markdown
+## Summary
+- 변경 사항 1-3줄 요약
+
+## Changes
+### 기능
+### 스타일
+### 기타
+
+## Test plan
+- [ ] `pnpm build` 성공
+- [ ] `pnpm lint` 성공
+- [ ] 개발 서버 정상 동작 확인
+- [ ] 주요 페이지 렌더링 확인
+
+## Screenshots
+## Notes
+```
+
+### 제목 규칙
+
+- 형식: `<source> → <target>: <설명>`
+- 예시: `develop → main: 콘텐츠 추가, Mermaid 지원, shields.io 뱃지 및 UI 개선`
+- 한글로 작성, 변경 범위를 명확히 표현
+
 ## 개발 일지
 
 - 하루 작업 종료 시 `docs/logs/YYYYMMDD-{title}.md` 파일 생성
@@ -169,6 +218,9 @@ pnpm lint     # ESLint 검사
 1. `_posts/` - 블로그 포스트
 2. `_projects/` - 프로젝트 설명
 3. Frontmatter 필수: `title`, `date`
+4. MDX 파일 생성 시 이미지 디렉토리도 함께 생성
+   - 포스트: `public/images/posts/{slug}/`
+   - 프로젝트: `public/images/projects/{slug}/`
 
 ### 스타일 가이드
 

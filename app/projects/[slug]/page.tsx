@@ -1,9 +1,11 @@
 import { getAllProjects, getProjectBySlug } from "@/_projects";
 import { PageContainer } from "@/components/page-container";
+import { TableOfContents } from "@/components/table-of-contents";
 import { TechBadge } from "@/components/skill-badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { mdxComponents } from "@/lib/mdx-components";
 import { mdxOptions } from "@/lib/mdx-options";
+import { extractToc } from "@/lib/toc";
 import type { Metadata } from "next";
 import { Calendar, ArrowLeft, ExternalLink, Github } from "lucide-react";
 import { MDXRemote } from "next-mdx-remote/rsc";
@@ -52,8 +54,11 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
     notFound();
   }
 
+  const tocItems = extractToc(project.content);
+
   return (
     <PageContainer>
+      <TableOfContents items={tocItems} />
       <Link
         href="/projects"
         className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors mb-6"

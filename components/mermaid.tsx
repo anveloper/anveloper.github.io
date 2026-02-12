@@ -55,7 +55,7 @@ export function Mermaid({ chart }: { chart: string }) {
   return (
     <div
       ref={containerRef}
-      className="my-6 flex justify-center overflow-x-auto [&_svg]:max-w-full"
+      className="my-6 flex justify-center overflow-x-auto bg-card rounded-lg border border-border p-4 [&_svg]:max-w-full"
       dangerouslySetInnerHTML={{ __html: svg }}
     />
   );
