@@ -1,8 +1,8 @@
 ---
-title: 'DPS (Design Plug Shop)'
-date: '2024-08-01'
-description: '판매자와 제조사를 연결하는 B2B 주문형 굿즈·인쇄 제작 플랫폼'
-tags: ['Next.js', 'React', 'TypeScript', 'Prisma', 'MySQL', 'Zustand', 'TanStack Query', 'NextAuth', 'AWS S3']
+title: "DPS (Design Plug Shop)"
+date: "2024-08-01"
+description: "판매자와 제조사를 연결하는 B2B 주문형 굿즈·인쇄 제작 플랫폼"
+tags: ["Next.js", "React", "TypeScript", "Prisma", "MySQL", "Zustand", "TanStack Query", "NextAuth", "AWS S3"]
 ---
 
 # DPS (Design Plug Shop)
@@ -25,14 +25,14 @@ DPS는 판매자와 제조사를 연결하는 B2B 주문형 굿즈·인쇄 제�
 
 10개 이상의 스케줄된 배치 작업이 플랫폼 운영을 자동화합니다.
 
-| 작업 | 주기 | 목적 |
-|------|------|------|
-| 승인 처리 | 매 1시간 | 주문 승인 자동화 |
-| 결제 처리 | 매 5분 | 결제 상태 갱신 |
-| 배송 처리·추적 | 매 10~30분 | 배송 정보 동기화 |
-| 외부 API 동기화 | 매 5~10분 | 스마트스토어, Cafe24 주문 연동 |
-| 통계 생성 | 매일 새벽 1시 | 일일 통계 자동 생성 |
-| 메일·알림톡 발송 | 매 1분 | 대기 메일·알림 처리 |
+| 작업             | 주기          | 목적                           |
+| ---------------- | ------------- | ------------------------------ |
+| 승인 처리        | 매 1시간      | 주문 승인 자동화               |
+| 결제 처리        | 매 5분        | 결제 상태 갱신                 |
+| 배송 처리·추적   | 매 10~30분    | 배송 정보 동기화               |
+| 외부 API 동기화  | 매 5~10분     | 스마트스토어, Cafe24 주문 연동 |
+| 통계 생성        | 매일 새벽 1시 | 일일 통계 자동 생성            |
+| 메일·알림톡 발송 | 매 1분        | 대기 메일·알림 처리            |
 
 ### 외부 서비스 연동
 
@@ -45,21 +45,21 @@ DPS는 판매자와 제조사를 연결하는 B2B 주문형 굿즈·인쇄 제�
 
 ## 기술 스택
 
-| 분류 | 기술 |
-|------|------|
-| Framework | Next.js 16 (App Router) |
-| Language | TypeScript (strict mode) |
-| UI | React 19, Tailwind CSS 4, Radix UI, shadcn/ui |
-| 상태 관리 | Zustand 5, TanStack Query 5 |
-| 폼 처리 | React Hook Form 7 + Zod 3 |
-| ORM | Prisma 7 (MySQL/MariaDB, 멀티 DB) |
-| 인증 | NextAuth 5 (Credentials, 3역할 분리) |
-| 에디터 | Tiptap 2 (리치 텍스트) |
-| 차트 | Recharts 2 |
-| 국제화 | next-intl 4 (ko-KR, en-US) |
-| 파일 처리 | ExcelJS 4, jsPDF 4 |
-| 로깅 | Winston 3 (Daily Rotate) |
-| 배포 | PM2, node-cron |
+| 분류      | 기술                                          |
+| --------- | --------------------------------------------- |
+| Framework | Next.js 16 (App Router)                       |
+| Language  | TypeScript (strict mode)                      |
+| UI        | React 19, Tailwind CSS 4, Radix UI, shadcn/ui |
+| 상태 관리 | Zustand 5, TanStack Query 5                   |
+| 폼 처리   | React Hook Form 7 + Zod 3                     |
+| ORM       | Prisma 7 (MySQL/MariaDB, 멀티 DB)             |
+| 인증      | NextAuth 5 (Credentials, 3역할 분리)          |
+| 에디터    | Tiptap 2 (리치 텍스트)                        |
+| 차트      | Recharts 2                                    |
+| 국제화    | next-intl 4 (ko-KR, en-US)                    |
+| 파일 처리 | ExcelJS 4, jsPDF 4                            |
+| 로깅      | Winston 3 (Daily Rotate)                      |
+| 배포      | PM2, node-cron                                |
 
 ## 아키텍처
 

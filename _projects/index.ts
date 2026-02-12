@@ -1,5 +1,4 @@
-import { existsSync } from "fs";
-import { promises as fs } from "fs";
+import { existsSync, promises as fs } from "fs";
 import matter from "gray-matter";
 import path from "path";
 
