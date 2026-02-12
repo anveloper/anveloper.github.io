@@ -1,8 +1,8 @@
 ---
-title: 'Next.js 14에서 16까지: 실무 프로젝트 마이그레이션 기록'
-date: '2026-02-02'
-description: 'Next.js 14에서 16으로, React 18에서 19로, NextAuth v4에서 v5로. 대규모 프로젝트의 메이저 업그레이드 과정을 정리했다.'
-tags: ['Next.js', 'React', 'NextAuth', 'Migration']
+title: "Next.js 14에서 16까지: 실무 프로젝트 마이그레이션 기록"
+date: "2026-02-02"
+description: "Next.js 14에서 16으로, React 18에서 19로, NextAuth v4에서 v5로. 대규모 프로젝트의 메이저 업그레이드 과정을 정리했다."
+tags: ["Next.js", "React", "NextAuth", "Migration"]
 ---
 
 # Next.js 14에서 16까지: 실무 프로젝트 마이그레이션 기록
@@ -11,11 +11,11 @@ tags: ['Next.js', 'React', 'NextAuth', 'Migration']
 
 운영 중인 대규모 프로젝트(900개 이상 파일, 80개 이상 페이지)를 Next.js 14에서 16까지 단계적으로 업그레이드했다. React 18에서 19로, NextAuth v4에서 v5로의 전환도 함께 진행되었기에 단순한 버전 범프와는 거리가 멀었다.
 
-| 패키지 | 시작 버전 | 중간 버전 | 최종 버전 |
-|--------|----------|----------|----------|
-| next | 14.2.35 | 15.5.11 | 16.1.6 |
-| react | 18.3.1 | 18.3.1 | 19.2.4 |
-| next-auth | 4.x | 4.x | 5.0.0-beta.30 |
+| 패키지    | 시작 버전 | 중간 버전 | 최종 버전     |
+| --------- | --------- | --------- | ------------- |
+| next      | 14.2.35   | 15.5.11   | 16.1.6        |
+| react     | 18.3.1    | 18.3.1    | 19.2.4        |
+| next-auth | 4.x       | 4.x       | 5.0.0-beta.30 |
 
 업그레이드는 14→15→16 순서로 진행했다. 한 번에 두 메이저 버전을 건너뛰는 것은 위험하므로, 각 단계에서 빌드가 정상적으로 통과하는 것을 확인한 뒤 다음 단계로 넘어갔다. 이 글에서는 각 단계에서 만난 주요 변경사항과 대응 방법을 정리한다.
 
@@ -36,11 +36,7 @@ export default function Page({ params }: { params: { id: string } }) {
 }
 
 // Next.js 15
-export default async function Page({
-  params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
+export default async function Page({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
 }
 ```
@@ -168,12 +164,12 @@ const nextConfig = {
 
 14에서 16까지, 두 번의 메이저 업그레이드에서 수정된 파일 수를 정리하면 다음과 같다.
 
-| 단계 | 변경 항목 | 영향 파일 수 |
-|------|----------|------------|
-| 14 → 15 | Async Request API (codemod) | 173개 |
-| 15 → 16 | NextAuth v5 전환 | 206개 |
-| 15 → 16 | React 19 타입 호환성 | - |
-| 15 → 16 | SVG Import 변환 | 9개 |
+| 단계    | 변경 항목                   | 영향 파일 수 |
+| ------- | --------------------------- | ------------ |
+| 14 → 15 | Async Request API (codemod) | 173개        |
+| 15 → 16 | NextAuth v5 전환            | 206개        |
+| 15 → 16 | React 19 타입 호환성        | -            |
+| 15 → 16 | SVG Import 변환             | 9개          |
 
 **핵심 교훈**:
 

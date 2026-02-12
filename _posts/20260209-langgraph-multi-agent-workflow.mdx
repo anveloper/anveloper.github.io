@@ -1,8 +1,8 @@
 ---
-title: 'LangGraph로 Multi-Agent 워크플로우 구축하기'
-date: '2026-02-09'
-description: 'Mixture-of-Agents 패턴을 LangGraph StateGraph로 구현하여 디자인 템플릿을 자동 생성하는 멀티 에이전트 시스템을 설계한 과정을 정리했다.'
-tags: ['LangGraph', 'Multi-Agent', 'Python', 'Claude API', 'AI']
+title: "LangGraph로 Multi-Agent 워크플로우 구축하기"
+date: "2026-02-09"
+description: "Mixture-of-Agents 패턴을 LangGraph StateGraph로 구현하여 디자인 템플릿을 자동 생성하는 멀티 에이전트 시스템을 설계한 과정을 정리했다."
+tags: ["LangGraph", "Multi-Agent", "Python", "Claude API", "AI"]
 ---
 
 # LangGraph로 Multi-Agent 워크플로우 구축하기
@@ -26,20 +26,20 @@ LangChain 팀이 만든 그래프 기반 에이전트 오케스트레이션 프�
 
 MoA 패턴을 디자인 템플릿 도메인에 맞게 5개 에이전트로 구성했다.
 
-| 에이전트 | LLM | 역할 |
-|---------|-----|------|
-| Orchestrator | Claude Sonnet | 프롬프트 분석, 작업 분해, 생산 타입 분류 |
-| Retriever | OpenAI Embedding + pgvector | 유사 템플릿 벡터 검색 (RAG) |
-| Analyzer | Claude Haiku | 참조 템플릿 패턴 분석 |
-| Generator | Claude Sonnet | XML 템플릿 생성 |
-| Validator | 규칙 기반 (lxml) | XML 유효성 검증 |
+| 에이전트     | LLM                         | 역할                                     |
+| ------------ | --------------------------- | ---------------------------------------- |
+| Orchestrator | Claude Sonnet               | 프롬프트 분석, 작업 분해, 생산 타입 분류 |
+| Retriever    | OpenAI Embedding + pgvector | 유사 템플릿 벡터 검색 (RAG)              |
+| Analyzer     | Claude Haiku                | 참조 템플릿 패턴 분석                    |
+| Generator    | Claude Sonnet               | XML 템플릿 생성                          |
+| Validator    | 규칙 기반 (lxml)            | XML 유효성 검증                          |
 
 Claude API는 **이중 모델 전략**을 사용한다. 복잡한 추론이 필요한 오케스트레이션과 생성에는 Sonnet, 패턴 인식 위주의 분석에는 비용이 낮은 Haiku를 배정했다.
 
-| 모델 | 용도 | Input | Output |
-|------|------|-------|--------|
-| Claude Sonnet 4.5 | 오케스트레이션, XML 생성 | $3 / MTok | $15 / MTok |
-| Claude Haiku 4.5 | 패턴 분석, 분류 | $0.80 / MTok | $4 / MTok |
+| 모델              | 용도                     | Input        | Output     |
+| ----------------- | ------------------------ | ------------ | ---------- |
+| Claude Sonnet 4.5 | 오케스트레이션, XML 생성 | $3 / MTok    | $15 / MTok |
+| Claude Haiku 4.5  | 패턴 분석, 분류          | $0.80 / MTok | $4 / MTok  |
 
 ## 워크플로우 구조
 
@@ -195,33 +195,33 @@ async for chunk in compiled.astream(initial_state, stream_mode="updates"):
 
 노드와 SSE 스테이지의 매핑:
 
-| 노드 | SSE 스테이지 |
-|------|------------|
+| 노드        | SSE 스테이지  |
+| ----------- | ------------- |
 | orchestrate | orchestrating |
-| retrieve | retrieving |
-| analyze | analyzing |
-| generate | generating |
-| validate | validating |
+| retrieve    | retrieving    |
+| analyze     | analyzing     |
+| generate    | generating    |
+| validate    | validating    |
 
 ## 에러 처리
 
 각 노드는 외부 서비스(LLM API, DB) 호출 시 에러를 처리한다.
 
-| 에러 | 대응 |
-|------|------|
-| `RateLimitError` | exponential backoff (1초 → 2초 → 4초) |
-| `APIConnectionError` | 에러 종료, SSE error 이벤트 |
-| DB 연결 실패 | 빈 결과 반환, 워크플로우 계속 |
+| 에러                 | 대응                                  |
+| -------------------- | ------------------------------------- |
+| `RateLimitError`     | exponential backoff (1초 → 2초 → 4초) |
+| `APIConnectionError` | 에러 종료, SSE error 이벤트           |
+| DB 연결 실패         | 빈 결과 반환, 워크플로우 계속         |
 
 ## 성능 프로파일
 
-| 단계 | 에이전트 | 예상 소요 시간 |
-|------|---------|-------------|
-| 1 | Orchestrator (Claude Sonnet) | ~2초 |
-| 2 | Retriever (Embedding + pgvector) | ~1.5초 |
-| 3 | Analyzer (Claude Haiku) | ~3초 |
-| 4 | Generator (Claude Sonnet) | ~10-15초 |
-| 5 | Validator (lxml) | 0.1초 미만 |
+| 단계 | 에이전트                         | 예상 소요 시간 |
+| ---- | -------------------------------- | -------------- |
+| 1    | Orchestrator (Claude Sonnet)     | ~2초           |
+| 2    | Retriever (Embedding + pgvector) | ~1.5초         |
+| 3    | Analyzer (Claude Haiku)          | ~3초           |
+| 4    | Generator (Claude Sonnet)        | ~10-15초       |
+| 5    | Validator (lxml)                 | 0.1초 미만     |
 
 전체 성공 시 ~17-22초, 재시도 1회 시 ~30-37초. Generator가 전체 시간의 50-70%를 차지하는 병목이다.
 
@@ -229,11 +229,11 @@ async for chunk in compiled.astream(initial_state, stream_mode="updates"):
 
 워크플로우 1회 실행 비용:
 
-| 에이전트 | 모델 | Input 토큰 | Output 토큰 | 호출당 비용 |
-|---------|------|-----------|------------|-----------|
-| Orchestrator | Sonnet | ~500 | ~300 | ~$0.006 |
-| Analyzer | Haiku | ~2,000 | ~500 | ~$0.004 |
-| Generator | Sonnet | ~3,000 | ~4,000 | ~$0.069 |
+| 에이전트     | 모델   | Input 토큰 | Output 토큰 | 호출당 비용 |
+| ------------ | ------ | ---------- | ----------- | ----------- |
+| Orchestrator | Sonnet | ~500       | ~300        | ~$0.006     |
+| Analyzer     | Haiku  | ~2,000     | ~500        | ~$0.004     |
+| Generator    | Sonnet | ~3,000     | ~4,000      | ~$0.069     |
 
 - 성공 시: ~$0.08
 - 재시도 1회: ~$0.15

@@ -1,8 +1,8 @@
 ---
-title: '멀티테넌트 SaaS 아키텍처 설계기 — DPS Store'
-date: '2026-01-12'
-description: '테넌트별 독립 스토어를 운영하는 팝업 스토어 플랫폼의 멀티테넌트 아키텍처 설계 과정'
-tags: ['Architecture', 'Multi-tenant', 'Next.js', 'Prisma', 'SaaS']
+title: "멀티테넌트 SaaS 아키텍처 설계기 — DPS Store"
+date: "2026-01-12"
+description: "테넌트별 독립 스토어를 운영하는 팝업 스토어 플랫폼의 멀티테넌트 아키텍처 설계 과정"
+tags: ["Architecture", "Multi-tenant", "Next.js", "Prisma", "SaaS"]
 ---
 
 # 멀티테넌트 SaaS 아키텍처 설계기
@@ -17,11 +17,11 @@ tags: ['Architecture', 'Multi-tenant', 'Next.js', 'Prisma', 'SaaS']
 
 멀티테넌트 시스템의 첫 번째 과제는 "요청이 어느 테넌트의 것인지 어떻게 알 것인가"다. 세 가지 접근 방식을 지원하기로 했다.
 
-| 방식 | 예시 | 특징 |
-|------|------|------|
-| 경로 | `store.example.com/acme` | 가장 간단, 기본 제공 |
-| 서브도메인 | `acme.mystore.app` | 테넌트별 독립 URL |
-| 커스텀 도메인 | `shop.acme.com` | 테넌트가 직접 등록 |
+| 방식          | 예시                     | 특징                 |
+| ------------- | ------------------------ | -------------------- |
+| 경로          | `store.example.com/acme` | 가장 간단, 기본 제공 |
+| 서브도메인    | `acme.mystore.app`       | 테넌트별 독립 URL    |
+| 커스텀 도메인 | `shop.acme.com`          | 테넌트가 직접 등록   |
 
 이를 Prisma 스키마에서는 다음과 같이 표현했다.
 
@@ -136,11 +136,11 @@ AI가 브랜드와 니즈에 맞게 페이지를 자동 생성하는 방식으�
 
 이를 해결하기 위해 설정값을 3계층으로 분리했다.
 
-| 계층 | 저장 위치 | 항목 |
-|------|-----------|------|
-| 정책 | `Tenant.policyConfig` | 배송비 정책, 주문 흐름, 인증/약관 정책 |
-| 공통 스타일 | `Theme.commonStyleConfig` | 로고 크기, 배경색, 디바이스 스케일, 버튼 스타일 |
-| 페이지별 | `Page.layoutConfig/styleConfig` | 텍스트, 이미지, 페이지 고유 스타일 |
+| 계층        | 저장 위치                       | 항목                                            |
+| ----------- | ------------------------------- | ----------------------------------------------- |
+| 정책        | `Tenant.policyConfig`           | 배송비 정책, 주문 흐름, 인증/약관 정책          |
+| 공통 스타일 | `Theme.commonStyleConfig`       | 로고 크기, 배경색, 디바이스 스케일, 버튼 스타일 |
+| 페이지별    | `Page.layoutConfig/styleConfig` | 텍스트, 이미지, 페이지 고유 스타일              |
 
 ```typescript
 interface TenantPolicyConfig {

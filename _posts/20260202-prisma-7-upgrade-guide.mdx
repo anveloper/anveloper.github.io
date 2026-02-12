@@ -1,8 +1,8 @@
 ---
-title: 'Prisma 7 업그레이드: 서버/클라이언트 경로 분리 패턴'
-date: '2026-02-02'
-description: 'Prisma 5에서 7로 업그레이드하며 마주한 서버/클라이언트 import 경로 분리 문제와 해결 과정을 정리했다.'
-tags: ['Prisma', 'ORM', 'Next.js', 'Migration']
+title: "Prisma 7 업그레이드: 서버/클라이언트 경로 분리 패턴"
+date: "2026-02-02"
+description: "Prisma 5에서 7로 업그레이드하며 마주한 서버/클라이언트 import 경로 분리 문제와 해결 과정을 정리했다."
+tags: ["Prisma", "ORM", "Next.js", "Migration"]
 ---
 
 # Prisma 7 업그레이드: 서버/클라이언트 경로 분리 패턴
@@ -11,11 +11,11 @@ tags: ['Prisma', 'ORM', 'Next.js', 'Migration']
 
 운영 중인 대규모 프로젝트에서 Prisma 5.20을 7.3으로 업그레이드했다. 버전 숫자만 보면 단순해 보이지만, 이번 업그레이드의 핵심은 **서버 모듈과 클라이언트 모듈의 경계가 엄격해졌다**는 점이다.
 
-| 패키지 | 이전 버전 | 현재 버전 |
-|--------|----------|----------|
-| prisma | 5.20 | 7.3.0 |
-| @prisma/client | 5.20 | 7.3.0 |
-| @prisma/adapter-mariadb | - | 7.3.0 (신규) |
+| 패키지                  | 이전 버전 | 현재 버전    |
+| ----------------------- | --------- | ------------ |
+| prisma                  | 5.20      | 7.3.0        |
+| @prisma/client          | 5.20      | 7.3.0        |
+| @prisma/adapter-mariadb | -         | 7.3.0 (신규) |
 
 ## 무엇이 달라졌는가
 
@@ -95,7 +95,7 @@ import { ProductStatus, OrderStatus } from "@/lib/prisma/browser";
 ```typescript
 // 클라이언트 컴포넌트에서 타입 import
 import type { Product } from "@/lib/prisma/browser"; // ✅
-import type { Product } from "@prisma/client";       // ❌
+import type { Product } from "@prisma/client"; // ❌
 ```
 
 ## 멀티 스키마 환경에서의 처리
@@ -118,14 +118,14 @@ import { ECStatus } from "@/lib/prisma/ec/enums";
 
 단계별로 커밋을 분리하여 진행했다.
 
-| 단계 | 작업 | 파일 수 |
-|------|------|---------|
-| 1 | Prisma 7 패키지 업그레이드 및 클라이언트 생성 | - |
-| 2 | browser.ts, ec/browser.ts, ec/enums.ts 생성 | 3개 |
-| 3 | import 경로 변경 및 validator 변환 | - |
-| 4 | 클라이언트 컴포넌트 import 경로 변경 | 20개 |
-| 5 | types, components, config, utils import 변경 | 33개 |
-| 6 | EC enum import 경로 변경 | - |
+| 단계 | 작업                                          | 파일 수 |
+| ---- | --------------------------------------------- | ------- |
+| 1    | Prisma 7 패키지 업그레이드 및 클라이언트 생성 | -       |
+| 2    | browser.ts, ec/browser.ts, ec/enums.ts 생성   | 3개     |
+| 3    | import 경로 변경 및 validator 변환            | -       |
+| 4    | 클라이언트 컴포넌트 import 경로 변경          | 20개    |
+| 5    | types, components, config, utils import 변경  | 33개    |
+| 6    | EC enum import 경로 변경                      | -       |
 
 전체적으로 50개 이상의 파일을 수정했다. 빌드 시 오류로 잡히기 때문에 누락은 없었지만, 한 번에 모두 변경하면 디버깅이 어려우므로 단계별로 나누어 진행하는 것을 권장한다.
 
