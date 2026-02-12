@@ -7,6 +7,31 @@ tags: ["Prisma", "ORM", "Next.js", "Migration"]
 
 # Prisma 7 업그레이드: 서버/클라이언트 경로 분리 패턴
 
+## Prisma 7이란
+
+2025년 출시된 Prisma 7은 ORM의 아키텍처를 근본적으로 바꾼 메이저 업데이트다. 가장 큰 변화는 **Rust Query Engine의 제거**다. Prisma 6까지 쿼리 실행에 사용하던 ~14MB의 Rust 바이너리를 걷어내고, 순수 TypeScript/JavaScript로 재작성했다. 결과적으로 번들 크기가 **90% 감소**(14MB → 1.6MB)하고, 대규모 결과셋에서 쿼리 속도가 최대 **3배 향상**되었다.
+
+### 주요 Breaking Changes
+
+| 변경사항 | 이전 (v5/v6) | 이후 (v7) |
+|---------|-------------|----------|
+| 모듈 형식 | CJS + ESM | **ESM 전용** |
+| 클라이언트 생성 | `node_modules`에 생성 | **프로젝트 소스 코드에 생성** |
+| DB 연결 | `datasource.url`로 직접 연결 | **Driver Adapter 필수** (예: `@prisma/adapter-pg`) |
+| generator provider | `prisma-client-js` | **`prisma-client`** |
+| 설정 파일 | `schema.prisma`만 | **`prisma.config.ts`** 도입 |
+| MongoDB | 지원 | 미지원 (v7.x에서 추가 예정) |
+
+### Prisma 5 → 6 → 7 변경 흐름
+
+**Prisma 5** (2023): JSON Protocol 기본 적용, `findUniqueOrThrow`/`findFirstOrThrow` 안정화
+
+**Prisma 6** (2024): TypedSQL Preview, `prisma.config.ts` Preview, `strictUndefinedChecks` Preview, `relationJoins` (N+1 → JOIN) Preview, Node.js 16 지원 종료
+
+**Prisma 7** (2025): Rust Engine 제거, ESM 전용, Driver Adapter 필수, Preview Feature들의 GA 전환, `@prisma/client` import 경로 대폭 변경
+
+이 글에서는 이 중 **서버/클라이언트 import 경로 분리** 문제에 집중한다. Next.js App Router 환경에서 가장 많은 파일 수정이 필요한 변경사항이기 때문이다.
+
 ## 배경
 
 운영 중인 대규모 프로젝트에서 Prisma 5.20을 7.3으로 업그레이드했다. 버전 숫자만 보면 단순해 보이지만, 이번 업그레이드의 핵심은 **서버 모듈과 클라이언트 모듈의 경계가 엄격해졌다**는 점이다.
