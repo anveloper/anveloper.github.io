@@ -157,6 +157,39 @@ refactor: 컴포넌트 구조 개선 (ui)
 3. 리뷰 후 머지
 4. 배포 준비 완료 시 `main`으로 머지
 
+## PR 규칙
+
+- `gh pr create` 명령어로 생성
+- `.github/PULL_REQUEST_TEMPLATE.md` 템플릿을 따름
+- Claude 협력 문구는 반드시 제외
+
+### 템플릿 구조
+
+```markdown
+## Summary
+- 변경 사항 1-3줄 요약
+
+## Changes
+### 기능
+### 스타일
+### 기타
+
+## Test plan
+- [ ] `pnpm build` 성공
+- [ ] `pnpm lint` 성공
+- [ ] 개발 서버 정상 동작 확인
+- [ ] 주요 페이지 렌더링 확인
+
+## Screenshots
+## Notes
+```
+
+### 제목 규칙
+
+- 형식: `<source> → <target>: <설명>`
+- 예시: `develop → main: 콘텐츠 추가, Mermaid 지원, shields.io 뱃지 및 UI 개선`
+- 한글로 작성, 변경 범위를 명확히 표현
+
 ## 개발 일지
 
 - 하루 작업 종료 시 `docs/logs/YYYYMMDD-{title}.md` 파일 생성

@@ -1,3 +1,5 @@
+<!-- PR 제목: <source> → <target>: <설명> (예: develop → main: 콘텐츠 추가 및 UI 개선) -->
+
 ## Summary
 
 <!-- 변경 사항을 간략히 설명해주세요 (1-3 bullet points) -->
