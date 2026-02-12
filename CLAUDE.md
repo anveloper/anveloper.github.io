@@ -4,7 +4,7 @@
 
 **anveloper.github.io**는 웹 개발자 안성진의 포트폴리오 및 기술 블로그 웹사이트입니다.
 
-- **프레임워크**: Next.js 15 (App Router)
+- **프레임워크**: Next.js 16 (App Router)
 - **배포**: GitHub Pages (정적 빌드)
 - **언어**: TypeScript, 한국어 콘텐츠
 
@@ -17,7 +17,9 @@
 | 스타일링 | Tailwind CSS v4.1.18, CVA (class-variance-authority) |
 | 애니메이션 | Motion 12.29.2 (Framer Motion) |
 | UI 컴포넌트 | Radix UI, shadcn/ui |
-| 콘텐츠 | MDX + gray-matter |
+| 콘텐츠 | MDX + gray-matter, remark-gfm, mermaid |
+| 구문 하이라이팅 | rehype-pretty-code + shiki (듀얼 테마) |
+| 목차(TOC) | rehype-slug + github-slugger |
 | 아이콘 | lucide-react |
 | 패키지 매니저 | pnpm |
 
@@ -41,10 +43,24 @@ components/          # 재사용 컴포넌트
 ├── magicui/         # Magic UI 컴포넌트
 ├── animation/       # 애니메이션 래퍼
 ├── nav-bar.tsx      # 네비게이션 헤더
-└── page-container.tsx # 페이지 컨테이너
+├── page-container.tsx # 페이지 컨테이너
+├── table-of-contents.tsx # 플로팅 목차 (xl 이상)
+├── mermaid.tsx      # Mermaid 다이어그램 렌더러
+├── skill-badge.tsx  # shields.io 기술 뱃지
+├── favicon-switcher.tsx # 다크/라이트 파비콘 전환
+└── providers.tsx    # 전역 Provider 래퍼
 
 hooks/               # 커스텀 React Hooks
+├── use-mounted.ts   # SSR 마운트 상태 감지
+├── use-theme-class.ts # 다크/라이트 테마 감지
+└── use-active-heading.ts # 스크롤 스파이 (TOC용)
+
 lib/                 # 유틸리티 함수
+├── utils.ts         # cn() 클래스 병합 등
+├── mdx-options.ts   # MDX 플러그인 설정
+├── mdx-components.ts # MDX 렌더링 컴포넌트
+├── toc.ts           # 목차 추출 유틸리티
+└── skill-data.ts    # shields.io 뱃지 데이터
 _posts/              # 블로그 MDX 파일
 _projects/           # 프로젝트 MDX 파일
 public/              # 정적 파일 (폰트, 이미지, 파비콘)
