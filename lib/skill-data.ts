@@ -51,7 +51,6 @@ const SKILL_BADGE_MAP: Record<string, BadgeInfo> = {
   Solidity: { logo: "Solidity", color: "363636", logoColor: "white" },
   IPFS: { logo: "IPFS", color: "65C2CB", logoColor: "white" },
   Vite: { logo: "Vite", color: "646CFF", logoColor: "white" },
-  "Material-UI": { logo: "MUI", color: "007FFF", logoColor: "white" },
   Zustand: { logo: "Zustand", color: "433E38", logoColor: "white" },
   "TanStack Query": { logo: "ReactQuery", color: "FF4154", logoColor: "white" },
   NextAuth: { logo: "NextAuth", color: "000000", logoColor: "white" },

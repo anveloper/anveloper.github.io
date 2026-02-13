@@ -5,7 +5,7 @@ import { SkillBadge, TechBadge } from "@/components/skill-badge";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import type { Skill, SkillCategory } from "@/lib/skill-data";
+import type { SkillCategory } from "@/lib/skill-data";
 import {
   ArrowRight,
   Award,
@@ -171,7 +171,7 @@ const projects = [
   {
     title: "당신의 계절",
     description: "퍼스널 컬러 자가 진단 및 전문 컨설턴트 1:1 화상 진단 서비스",
-    tags: ["React", "Redux", "Material-UI", "OpenVidu", "Spring Boot", "Redis"],
+    tags: ["React", "Redux", "OpenVidu", "Spring Boot", "Redis"],
     slug: "your-seasons",
     icon: "/images/projects/your-seasons/icon.png",
   },
@@ -418,12 +418,8 @@ const HomePage = () => {
               <Card className="hover:border-primary-sky/50 transition-colors">
                 <CardContent className="py-4">
                   <div className="flex items-center gap-2">
-                    {project.icon && (
-                      <img src={project.icon} alt="" className="w-6 h-6 rounded" />
-                    )}
-                    <h3 className="font-semibold group-hover:text-primary-sky transition-colors">
-                      {project.title}
-                    </h3>
+                    {project.icon && <img src={project.icon} alt="" className="w-6 h-6 rounded" />}
+                    <h3 className="font-semibold group-hover:text-primary-sky transition-colors">{project.title}</h3>
                   </div>
                   <p className="text-sm text-muted-foreground mt-1">{project.description}</p>
                   <div className="flex flex-wrap gap-1 mt-2">
