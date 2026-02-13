@@ -114,7 +114,33 @@ docs/logs/YYYYMMDD-<title>.md
 - 디렉토리 구조 변경 반영
 - 새 규칙/패턴 추가
 
-## 5단계: 결과 보고
+## 5단계: 커밋
+
+문서 변경사항을 기능별로 묶어서 커밋합니다.
+
+### 커밋 규칙
+
+- 타입: `docs`
+- 한글로 작성, 첫 글자 소문자, 마침표 없음
+- 관련 파일끼리 묶어서 커밋
+
+```bash
+git add <변경된 문서 파일들>
+git commit -m "$(cat <<'EOF'
+docs: <한글 설명>
+EOF
+)"
+```
+
+### 예시
+
+```bash
+# CLAUDE.md + 작업 일지를 함께 커밋
+git add CLAUDE.md docs/logs/20260213-header-logo-refactor.md
+git commit -m "docs: HeaderLogo 분리 작업 일지 및 디렉토리 구조 갱신"
+```
+
+## 6단계: 결과 보고
 
 ### 분석 요약
 ```
