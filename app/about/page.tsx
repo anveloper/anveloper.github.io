@@ -46,6 +46,11 @@ const AboutPage = () => {
                     현재는 Next.js, Typescript, Prisma를 가장 잘 사용합니다.
                     <br />
                     <br />
+                    판매사·공급사·어드민 다중 플랫폼 설계·개발 경험과
+                    <br />
+                    멀티테넌트 기반 다중 도메인 플랫폼 개발 경험이 있습니다.
+                    <br />
+                    <br />
                     안드로이드 Kotlin(Jetpack Compose) 개발 능력이 있으며,
                     <br />
                     Vanilla JS만으로도 웹 개발이 가능합니다.

@@ -95,8 +95,8 @@ const timeline: TimelineItem[] = [
     organization: "(주) TILS AI",
     period: "2023.03 ~ 재직중",
     description:
-      "Next.js, Remix.js, Typescript 기반 플랫폼 PM, 개발 리드\nCafe24, Shopby, Shopify 플랫폼 사용자화, 유지보수",
-    badges: ["팀 리딩", "풀스택 개발", "플랫폼 개발"],
+      "Next.js, Remix.js, Typescript 기반 플랫폼 PM, 개발 리드\n판매사·공급사·어드민 다중 플랫폼 설계·개발\n멀티테넌트 기반 다중 도메인 플랫폼 개발\nCafe24, Shopby, Shopify 플랫폼 사용자화, 유지보수",
+    badges: ["팀 리딩", "풀스택 개발", "다중 플랫폼", "멀티테넌트"],
   },
   {
     type: "education",
@@ -275,6 +275,11 @@ const HomePage = () => {
                 개발의 시작은 Java로 시작하였지만,
                 <br />
                 현재는 Next.js, Typescript, Prisma를 가장 잘 사용합니다.
+                <br />
+                <br />
+                판매사·공급사·어드민 다중 플랫폼 설계·개발 경험과
+                <br />
+                멀티테넌트 기반 다중 도메인 플랫폼 개발 경험이 있습니다.
                 <br />
                 <br />
                 안드로이드 Kotlin(Jetpack Compose) 개발과
