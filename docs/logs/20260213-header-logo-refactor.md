@@ -1,4 +1,4 @@
-# HeaderLogo 컴포넌트 분리 및 헤더 개선
+# 헤더 개선 및 포스트 추가
 
 > 작업일: 2026-02-13
 
@@ -12,6 +12,23 @@
 - Link 래핑을 HeaderLogo 컴포넌트 내부로 이동
 - 네비게이션 메뉴 순서 변경: About → Projects → Posts
 
+## style
+
+### 헤더 모바일 반응형 레이아웃 개선
+
+- `nav-bar.tsx`: 모바일에서 세로 배치, md 이상에서 가로 배치 (`flex-col` → `md:flex-row`)
+- `header-logo.tsx`: `w-full` 클래스 추가
+- 네비게이션·소셜 링크 패딩 반응형 조정 (`p-2 md:px-3`)
+
+## docs
+
+### GitHub 프로필 경력 자동 갱신 포스트 추가
+
+- `20260213-github-profile-auto-update-period.mdx` 신규 작성
+- GitHub Actions schedule cron으로 프로필 README 경력 개월차 자동 갱신하는 방법
+
 ## 관련 커밋
 
 - `76a944c` refactor: HeaderLogo 컴포넌트 분리 및 로고 텍스트 개선 (nav)
+- `508ec82` style: 헤더 모바일 반응형 레이아웃 개선 (nav)
+- `4a6829d` docs: GitHub 프로필 경력 자동 갱신 포스트 추가 (posts)
