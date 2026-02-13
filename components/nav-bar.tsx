@@ -58,7 +58,13 @@ export const NavBar = () => {
         "fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm transition-colors"
       )}
     >
-      <nav className={cn("w-full max-w-4xl mx-auto", "flex items-center justify-between flex-wrap gap-1")}>
+      <nav
+        className={cn(
+          "w-full max-w-4xl mx-auto",
+          "flex flex-col flex-wrap gap-1 items-start justify-center",
+          "md:flex-row md:items-center md:justify-between "
+        )}
+      >
         <HeaderLogo />
 
         {/* Navigation Links */}
@@ -70,7 +76,7 @@ export const NavBar = () => {
                 key={item.label}
                 href={item.href}
                 className={cn(
-                  "px-3 py-2 text-sm font-medium rounded-md transition-colors",
+                  "p-2 md:px-3 text-sm font-medium rounded-md transition-colors",
                   isActive ? "text-primary-sky" : "text-muted-foreground hover:text-foreground"
                 )}
               >
@@ -89,7 +95,7 @@ export const NavBar = () => {
               target={social.internal ? undefined : "_blank"}
               rel={social.internal ? undefined : "noopener noreferrer"}
               aria-label={social.name}
-              className="p-2 text-muted-foreground hover:text-foreground transition-colors"
+              className="p-2 md:px-3 text-muted-foreground hover:text-foreground transition-colors"
             >
               <social.icon className="w-4 h-4" />
             </Link>

@@ -26,7 +26,10 @@ const HeaderLogo = ({ autoSwitch = true, interval = 3_000, activeIndex: controll
   const activeIndex = autoSwitch ? internalIndex : (controlledIndex ?? 0);
 
   return (
-    <Link href="/" className="flex flex-1 font-semibold text-foreground hover:text-primary-sky transition-colors">
+    <Link
+      href="/"
+      className="w-full flex flex-1 font-semibold text-foreground hover:text-primary-sky transition-colors"
+    >
       <span className="w-full relative">
         {logoTexts.map((text, textIdx) => {
           const chars = text.split("");
