@@ -13,14 +13,14 @@ tags: ["Prisma", "ORM", "Next.js", "Migration"]
 
 ### 주요 Breaking Changes
 
-| 변경사항 | 이전 (v5/v6) | 이후 (v7) |
-|---------|-------------|----------|
-| 모듈 형식 | CJS + ESM | **ESM 전용** |
-| 클라이언트 생성 | `node_modules`에 생성 | **프로젝트 소스 코드에 생성** |
-| DB 연결 | `datasource.url`로 직접 연결 | **Driver Adapter 필수** (예: `@prisma/adapter-pg`) |
-| generator provider | `prisma-client-js` | **`prisma-client`** |
-| 설정 파일 | `schema.prisma`만 | **`prisma.config.ts`** 도입 |
-| MongoDB | 지원 | 미지원 (v7.x에서 추가 예정) |
+| 변경사항           | 이전 (v5/v6)                 | 이후 (v7)                                          |
+| ------------------ | ---------------------------- | -------------------------------------------------- |
+| 모듈 형식          | CJS + ESM                    | **ESM 전용**                                       |
+| 클라이언트 생성    | `node_modules`에 생성        | **프로젝트 소스 코드에 생성**                      |
+| DB 연결            | `datasource.url`로 직접 연결 | **Driver Adapter 필수** (예: `@prisma/adapter-pg`) |
+| generator provider | `prisma-client-js`           | **`prisma-client`**                                |
+| 설정 파일          | `schema.prisma`만            | **`prisma.config.ts`** 도입                        |
+| MongoDB            | 지원                         | 미지원 (v7.x에서 추가 예정)                        |
 
 ### Prisma 5 → 6 → 7 변경 흐름
 

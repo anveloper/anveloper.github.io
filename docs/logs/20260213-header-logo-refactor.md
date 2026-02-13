@@ -35,9 +35,21 @@
 - `20260213-github-profile-auto-update-period.mdx` 신규 작성
 - GitHub Actions schedule cron으로 프로필 README 경력 개월차 자동 갱신하는 방법
 
+### 경력 자동 갱신 포스트에 마커 기반 개선사항 추가
+
+- 회사명 마스킹 처리
+- 기존 방식의 한계 정리 및 마커 기반 자동 감지 개선 워크플로우 추가
+- 개선된 흐름 Mermaid 다이어그램, 단계별 해설, 변경점 비교 테이블 추가
+
+### 마크다운 테이블 포맷팅 정리
+
+- 7개 포스트의 마크다운 테이블 컬럼 정렬 포맷팅 통일
+
 ## 관련 커밋
 
 - `76a944c` refactor: HeaderLogo 컴포넌트 분리 및 로고 텍스트 개선 (nav)
 - `508ec82` style: 헤더 모바일 반응형 레이아웃 개선 (nav)
 - `4a6829d` docs: GitHub 프로필 경력 자동 갱신 포스트 추가 (posts)
 - `b9fbbbb` feat: About 소개에 다중 플랫폼·멀티테넌트 경험 추가
+- `77ff794` docs: 경력 자동 갱신 포스트에 마커 기반 개선사항 추가 (posts)
+- `ad11c63` style: 마크다운 테이블 포맷팅 정리 (posts)
