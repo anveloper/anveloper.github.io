@@ -41,7 +41,7 @@ const HeaderLogo = ({ autoSwitch = true, interval = 3_000, activeIndex: controll
                   key={`${textIdx}-${i}`}
                   style={{
                     opacity: isActive ? 1 : 0,
-                    transition: `opacity 0.3s ease ${i * 0.05}s`,
+                    transition: `opacity 0.3s ease ${i * 0.07}s`,
                   }}
                 >
                   {char}
