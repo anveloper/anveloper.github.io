@@ -13,13 +13,13 @@ Caddy는 Go로 작성된 웹 서버로, **자동 HTTPS**를 최초로 기본 내
 
 Caddy의 핵심 기능 중 하나인 **On-Demand TLS**는 설정 파일에 도메인을 미리 등록하지 않아도, TLS 핸드셰이크 시점에 인증서를 동적으로 발급하는 기술이다. 새로운 도메인으로 첫 HTTPS 요청이 들어오면 핸드셰이크를 잠시 보류하고, 검증 API(`ask` 엔드포인트)를 호출하여 허용 여부를 확인한 뒤 인증서를 자동 발급한다. 이 기능 덕분에 수만 개의 도메인을 동적으로 관리할 수 있어, 멀티테넌트 SaaS의 커스텀 도메인 지원에 적합하다.
 
-| 기능 | Caddy | Nginx + certbot |
-|------|-------|-----------------|
-| HTTPS | 기본 제공 (Let's Encrypt/ZeroSSL) | 수동 설정 (certbot 별도 설치) |
-| 인증서 갱신 | 자동 (만료 30일 전) | 크론잡 필요 |
-| 동적 도메인 | On-Demand TLS (핸드셰이크 시점 발급) | 설정 수정 + reload 필요 |
-| ACME 챌린지 | HTTP, TLS-ALPN, DNS 모두 지원 | HTTP만 기본, DNS는 별도 플러그인 |
-| OCSP Stapling | 자동 | 수동 설정 |
+| 기능          | Caddy                                | Nginx + certbot                  |
+| ------------- | ------------------------------------ | -------------------------------- |
+| HTTPS         | 기본 제공 (Let's Encrypt/ZeroSSL)    | 수동 설정 (certbot 별도 설치)    |
+| 인증서 갱신   | 자동 (만료 30일 전)                  | 크론잡 필요                      |
+| 동적 도메인   | On-Demand TLS (핸드셰이크 시점 발급) | 설정 수정 + reload 필요          |
+| ACME 챌린지   | HTTP, TLS-ALPN, DNS 모두 지원        | HTTP만 기본, DNS는 별도 플러그인 |
+| OCSP Stapling | 자동                                 | 수동 설정                        |
 
 이 글에서는 Caddy의 On-Demand TLS를 활용하여 멀티테넌트 플랫폼에서 경로/서브도메인/커스텀 도메인 3가지 방식의 SSL을 하나의 Caddyfile로 자동화한 과정을 정리한다.
 

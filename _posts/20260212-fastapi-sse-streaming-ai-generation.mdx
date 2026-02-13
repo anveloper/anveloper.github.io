@@ -11,13 +11,13 @@ tags: ["FastAPI", "SSE", "LangGraph", "Streaming", "Python"]
 
 Server-Sent Events(SSE)는 서버에서 클라이언트로 단방향 실시간 데이터를 전송하는 HTTP 기반 프로토콜이다. WebSocket과 달리 별도의 프로토콜 업그레이드 없이 표준 HTTP 위에서 동작하며, 브라우저의 `EventSource` API로 별도 라이브러리 없이 사용할 수 있다.
 
-| 항목 | SSE | WebSocket |
-|------|-----|-----------|
-| 통신 방향 | 서버 → 클라이언트 (단방향) | 양방향 |
-| 프로토콜 | HTTP/HTTPS | ws:// / wss:// (프로토콜 업그레이드) |
-| 자동 재연결 | 내장 (`EventSource` 자동 처리) | 직접 구현 필요 |
-| 로드밸런서 | 표준 HTTP 인프라 그대로 | WebSocket 지원 설정 필요 |
-| 브라우저 지원 | `EventSource` 내장 | `WebSocket` 내장 |
+| 항목          | SSE                            | WebSocket                            |
+| ------------- | ------------------------------ | ------------------------------------ |
+| 통신 방향     | 서버 → 클라이언트 (단방향)     | 양방향                               |
+| 프로토콜      | HTTP/HTTPS                     | ws:// / wss:// (프로토콜 업그레이드) |
+| 자동 재연결   | 내장 (`EventSource` 자동 처리) | 직접 구현 필요                       |
+| 로드밸런서    | 표준 HTTP 인프라 그대로        | WebSocket 지원 설정 필요             |
+| 브라우저 지원 | `EventSource` 내장             | `WebSocket` 내장                     |
 
 2025년 AI 생태계에서 SSE는 LLM 토큰 스트리밍의 **사실상 표준**이 되었다. OpenAI, Anthropic, Google 등 주요 AI API가 모두 SSE 기반 스트리밍을 제공한다. "사용자가 요청하면, 서버가 토큰을 흘려보낸다"는 단방향 패턴에 SSE가 정확히 맞기 때문이다. WebSocket의 양방향 기능은 LLM 스트리밍에서는 불필요한 복잡성이며, 커넥션 풀링, 재시도, 로드밸런싱 등 운영 부담이 크다.
 
