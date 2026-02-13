@@ -42,6 +42,7 @@ components/          # 재사용 컴포넌트
 ├── ui/              # 기본 UI (Button, Tooltip, Card, Badge 등)
 ├── magicui/         # Magic UI 컴포넌트
 ├── animation/       # 애니메이션 래퍼
+├── header-logo.tsx  # 로고 텍스트 애니메이션
 ├── nav-bar.tsx      # 네비게이션 헤더
 ├── page-container.tsx # 페이지 컨테이너
 ├── table-of-contents.tsx # 플로팅 목차 (xl 이상)
