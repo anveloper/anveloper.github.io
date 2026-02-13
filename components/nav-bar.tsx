@@ -1,13 +1,13 @@
 "use client";
 
-import { FolderGit2, HomeIcon, LayoutGrid, MailIcon, Moon, Sun } from "lucide-react";
-import Link from "next/link";
-import React from "react";
-
 import { useMounted } from "@/hooks/use-mounted";
 import { useThemeClass } from "@/hooks/use-theme-class";
 import { cn } from "@/lib/utils";
+import { FolderGit2, HomeIcon, LayoutGrid, MailIcon, Moon, Sun } from "lucide-react";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
+import React from "react";
+import HeaderLogo from "./header-logo";
 
 export type IconProps = React.HTMLAttributes<SVGElement>;
 
@@ -33,8 +33,8 @@ const Icons = {
 
 const navItems = [
   { href: "/", icon: HomeIcon, label: "About" },
-  { href: "/posts", icon: FolderGit2, label: "Posts" },
   { href: "/projects", icon: LayoutGrid, label: "Projects" },
+  { href: "/posts", icon: FolderGit2, label: "Posts" },
 ];
 
 const socialLinks = [
@@ -58,11 +58,14 @@ export const NavBar = () => {
         "fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm transition-colors"
       )}
     >
-      <nav className={cn("w-full max-w-4xl mx-auto", "flex items-center justify-between flex-wrap gap-1")}>
-        {/* Logo / Name */}
-        <Link href="/" className="font-semibold text-foreground hover:text-primary-sky transition-colors">
-          anveloper.dev
-        </Link>
+      <nav
+        className={cn(
+          "w-full max-w-4xl mx-auto",
+          "flex flex-col flex-wrap gap-1 items-start justify-center",
+          "md:flex-row md:items-center md:justify-between "
+        )}
+      >
+        <HeaderLogo />
 
         {/* Navigation Links */}
         <div className="flex items-center gap-1">
@@ -73,7 +76,7 @@ export const NavBar = () => {
                 key={item.label}
                 href={item.href}
                 className={cn(
-                  "px-3 py-2 text-sm font-medium rounded-md transition-colors",
+                  "p-2 md:px-3 text-sm font-medium rounded-md transition-colors",
                   isActive ? "text-primary-sky" : "text-muted-foreground hover:text-foreground"
                 )}
               >
@@ -92,7 +95,7 @@ export const NavBar = () => {
               target={social.internal ? undefined : "_blank"}
               rel={social.internal ? undefined : "noopener noreferrer"}
               aria-label={social.name}
-              className="p-2 text-muted-foreground hover:text-foreground transition-colors"
+              className="p-2 md:px-3 text-muted-foreground hover:text-foreground transition-colors"
             >
               <social.icon className="w-4 h-4" />
             </Link>
