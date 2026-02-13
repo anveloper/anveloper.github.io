@@ -1,4 +1,4 @@
-:HL["/_next/static/chunks/2fa0ba0e22870313.css","style"]
+:HL["/_next/static/chunks/709cbf3d82731a33.css","style"]
 :HL["/images/projects/information-security-engineer/icon.svg","image"]
 :HL["/images/projects/dps-store/icon.svg","image"]
 :HL["/images/projects/dps/icon.png","image"]
@@ -7,4 +7,4 @@
 :HL["/images/projects/readme-nft/icon.svg","image"]
 :HL["/images/projects/your-seasons/icon.png","image"]
 :HL["/images/projects/ssafit/icon.svg","image"]
-0:{"buildId":"Uih8rdmo0yxMcB2Q0zZaq","tree":{"name":"","paramType":null,"paramKey":"","hasRuntimePrefetch":false,"slots":{"children":{"name":"projects","paramType":null,"paramKey":"projects","hasRuntimePrefetch":false,"slots":{"children":{"name":"__PAGE__","paramType":null,"paramKey":"__PAGE__","hasRuntimePrefetch":false,"slots":null,"isRootLayout":false}},"isRootLayout":false}},"isRootLayout":true},"staleTime":300}
+0:{"buildId":"axnbkR_Z1aBIINA7cu07o","tree":{"name":"","paramType":null,"paramKey":"","hasRuntimePrefetch":false,"slots":{"children":{"name":"projects","paramType":null,"paramKey":"projects","hasRuntimePrefetch":false,"slots":{"children":{"name":"__PAGE__","paramType":null,"paramKey":"__PAGE__","hasRuntimePrefetch":false,"slots":null,"isRootLayout":false}},"isRootLayout":false}},"isRootLayout":true},"staleTime":300}
