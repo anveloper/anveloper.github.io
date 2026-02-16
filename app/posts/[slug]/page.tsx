@@ -1,13 +1,12 @@
 import { getAllPosts, getPostBySlug } from "@/_posts";
 import { PageContainer } from "@/components/page-container";
 import { TableOfContents } from "@/components/table-of-contents";
-import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { mdxComponents } from "@/lib/mdx-components";
 import { mdxOptions } from "@/lib/mdx-options";
 import { extractToc } from "@/lib/toc";
 import type { Metadata } from "next";
-import { Calendar, ArrowLeft } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -63,30 +62,25 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
         <span>포스트 목록으로 돌아가기</span>
       </Link>
 
-      <Card className="mb-8">
-        <CardContent className="pt-6">
-          <h1 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
-            {post.frontmatter.title}
-          </h1>
+      <header className="border-b border-border pb-6 mb-8">
+        <h1 className="text-2xl sm:text-3xl font-bold text-foreground mb-4">
+          {post.frontmatter.title}
+        </h1>
 
-          <div className="flex flex-wrap items-center gap-4 mb-4">
-            <div className="flex items-center gap-2 text-muted-foreground">
-              <Calendar className="w-4 h-4" />
-              <span>{post.frontmatter.date}</span>
-            </div>
+        <div className="flex flex-wrap items-center gap-4 mb-4">
+          <span className="text-sm text-muted-foreground">{post.frontmatter.date}</span>
+        </div>
+
+        {post.frontmatter.tags && (
+          <div className="flex flex-wrap gap-2">
+            {(post.frontmatter.tags as string[]).map((tag) => (
+              <Badge key={tag} variant="secondary">
+                {tag}
+              </Badge>
+            ))}
           </div>
-
-          {post.frontmatter.tags && (
-            <div className="flex flex-wrap gap-2">
-              {(post.frontmatter.tags as string[]).map((tag) => (
-                <Badge key={tag} variant="sky">
-                  {tag}
-                </Badge>
-              ))}
-            </div>
-          )}
-        </CardContent>
-      </Card>
+        )}
+      </header>
 
       <article className="prose prose-neutral dark:prose-invert max-w-none">
         <MDXRemote source={post.content} components={mdxComponents} options={mdxOptions} />
