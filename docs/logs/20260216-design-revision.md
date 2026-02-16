@@ -26,6 +26,9 @@
 ### 푸터 컴포넌트 추가
 - `components/footer.tsx` 생성, `layout.tsx`에 적용
 
+### Google Search Console 소유권 인증
+- `layout.tsx` metadata에 verification.google 메타태그 추가
+
 ## style
 
 ### 공통 스타일 개선
@@ -53,6 +56,10 @@
 - PretendardVariable: 2.0MB → 215KB (한글 상용 946자 + 라틴)
 - D2CodingLigature: 1.4MB → 138KB (코드 블록용 서브셋)
 - 원본 유지, CSS에서 서브셋 파일 참조
+
+### 리소스 로딩 최적화
+- 폰트 preload 추가 (CSS→폰트 체인 제거)
+- shields.io preconnect 추가 (LCP -80ms)
 
 ## fix
 
