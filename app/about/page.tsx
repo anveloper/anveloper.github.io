@@ -1,161 +1,62 @@
-"use client";
-
 import { PageContainer } from "@/components/page-container";
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent } from "@/components/ui/card";
-import { Award, Briefcase, Heart, Target, User } from "lucide-react";
-import { motion } from "motion/react";
 
 const interests = ["풀스택 개발", "UX 최적화", "클린 아키텍처", "기술 리더십", "스마트 제조", "안드로이드 개발"];
 
 const AboutPage = () => {
   return (
     <PageContainer>
-      <motion.header
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="mb-8"
-      >
-        <h1 className="text-4xl font-bold text-foreground mb-2">About</h1>
-        <p className="text-muted-foreground text-lg">언어로 세상을 표현하는 개발자</p>
-      </motion.header>
+      <header className="mb-10">
+        <h1 className="text-xl font-semibold text-foreground tracking-tight">About</h1>
+        <p className="text-sm text-muted-foreground mt-1">언어로 세상을 표현하는 개발자</p>
+      </header>
 
-      <div className="space-y-6">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-        >
-          <Card>
-            <CardContent className="pt-6">
-              <div className="flex items-start gap-4">
-                <div className="p-3 bg-primary-sky/10 rounded-lg">
-                  <User className="w-6 h-6 text-primary-sky" />
-                </div>
-                <div>
-                  <h2 className="text-2xl font-semibold mb-2">안성진</h2>
-                  <p className="text-muted-foreground leading-relaxed">
-                    기술을 학습하는데 있어 빠른 습득 속도를 자부합니다.
-                    <br />
-                    교육 과정이나 업무 실적에서 중상 이상을 달성해왔습니다.
-                    <br />
-                    <br />
-                    개발의 시작은 Java로 시작하였지만,
-                    <br />
-                    현재는 Next.js, Typescript, Prisma를 가장 잘 사용합니다.
-                    <br />
-                    <br />
-                    판매사·공급사·어드민 다중 플랫폼 설계·개발 경험과
-                    <br />
-                    멀티테넌트 기반 다중 도메인 플랫폼 개발 경험이 있습니다.
-                    <br />
-                    <br />
-                    안드로이드 Kotlin(Jetpack Compose) 개발 능력이 있으며,
-                    <br />
-                    Vanilla JS만으로도 웹 개발이 가능합니다.
-                    <br />
-                    PHP 환경을 React, Remix.js 환경으로 마이그레이션한 경험이 있습니다.
-                  </p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </motion.div>
+      <div className="space-y-0">
+        {/* 자기소개 */}
+        <section className="py-5 border-b border-border/60">
+          <h2 className="text-sm font-medium text-foreground mb-3">소개</h2>
+          <div className="space-y-2 text-muted-foreground leading-relaxed">
+            <p>
+              기술을 학습하는데 있어 빠른 습득 속도를 자부합니다. 교육 과정이나 업무 실적에서 중상 이상을 달성해왔습니다.
+            </p>
+            <p>
+              개발의 시작은 Java로 시작하였지만, 현재는 Next.js, Typescript, Prisma를 가장 잘 사용합니다.
+            </p>
+            <p>
+              판매사·공급사·어드민 다중 플랫폼 설계·개발 경험과 멀티테넌트 기반 다중 도메인 플랫폼 개발 경험이 있습니다.
+              안드로이드 Kotlin(Jetpack Compose) 개발 능력이 있으며, Vanilla JS만으로도 웹 개발이 가능합니다.
+              PHP 환경을 React, Remix.js 환경으로 마이그레이션한 경험이 있습니다.
+            </p>
+          </div>
+        </section>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-        >
-          <Card>
-            <CardContent className="pt-6">
-              <div className="flex items-start gap-4">
-                <div className="p-3 bg-primary-sky/10 rounded-lg">
-                  <Briefcase className="w-6 h-6 text-primary-sky" />
-                </div>
-                <div>
-                  <h2 className="text-2xl font-semibold mb-2">현재</h2>
-                  <p className="text-primary-sky font-medium">(주) TILS AI</p>
-                  <p className="text-muted-foreground">UX개발팀장 / 기술연구원</p>
-                  <p className="text-sm text-muted-foreground mt-1">2023.03 ~ 재직중</p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </motion.div>
+        {/* 현재 직장 */}
+        <section className="py-5 border-b border-border/60">
+          <h2 className="text-sm font-medium text-foreground mb-3">현재</h2>
+          <p className="text-muted-foreground">
+            <span className="text-primary-sky font-medium">(주) TILS AI</span> UX개발팀장 / 기술연구원 · 2023.03 ~ 재직중
+          </p>
+        </section>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-        >
-          <Card>
-            <CardContent className="pt-6">
-              <div className="flex items-start gap-4">
-                <div className="p-3 bg-primary-sky/10 rounded-lg">
-                  <Heart className="w-6 h-6 text-primary-sky" />
-                </div>
-                <div>
-                  <h2 className="text-2xl font-semibold mb-4">관심 분야</h2>
-                  <div className="flex flex-wrap gap-2">
-                    {interests.map((interest) => (
-                      <Badge key={interest} variant="sky">
-                        {interest}
-                      </Badge>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </motion.div>
+        {/* 관심 분야 */}
+        <section className="py-5 border-b border-border/60">
+          <h2 className="text-sm font-medium text-foreground mb-3">관심 분야</h2>
+          <p className="text-sm text-muted-foreground">{interests.join(" / ")}</p>
+        </section>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-        >
-          <Card>
-            <CardContent className="pt-6">
-              <div className="flex items-start gap-4">
-                <div className="p-3 bg-primary-sky/10 rounded-lg">
-                  <Award className="w-6 h-6 text-primary-sky" />
-                </div>
-                <div>
-                  <h2 className="text-2xl font-semibold mb-4">자격증</h2>
-                  <div className="flex flex-wrap gap-2">
-                    <Badge variant="secondary">정보처리기사 (2023.11)</Badge>
-                    <Badge variant="secondary">SQLD (2022.09)</Badge>
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </motion.div>
+        {/* 자격증 */}
+        <section className="py-5 border-b border-border/60">
+          <h2 className="text-sm font-medium text-foreground mb-3">자격증</h2>
+          <p className="text-sm text-muted-foreground">정보처리기사 (2023.11) · SQLD (2022.09)</p>
+        </section>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.5 }}
-        >
-          <Card>
-            <CardContent className="pt-6">
-              <div className="flex items-start gap-4">
-                <div className="p-3 bg-primary-sky/10 rounded-lg">
-                  <Target className="w-6 h-6 text-primary-sky" />
-                </div>
-                <div>
-                  <h2 className="text-2xl font-semibold mb-2">목표</h2>
-                  <p className="text-muted-foreground leading-relaxed">
-                    기술을 통해 사람들의 일상을 더 편리하게 만드는 것이 목표입니다. 복잡한 문제를 단순하게, 어려운
-                    기술을 쉽게 전달하며 함께 성장하는 개발 문화를 만들어가고자 합니다.
-                  </p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </motion.div>
+        {/* 목표 */}
+        <section className="py-5">
+          <h2 className="text-sm font-medium text-foreground mb-3">목표</h2>
+          <p className="text-muted-foreground leading-relaxed">
+            기술을 통해 사람들의 일상을 더 편리하게 만드는 것이 목표입니다.
+            복잡한 문제를 단순하게, 어려운 기술을 쉽게 전달하며 함께 성장하는 개발 문화를 만들어가고자 합니다.
+          </p>
+        </section>
       </div>
     </PageContainer>
   );

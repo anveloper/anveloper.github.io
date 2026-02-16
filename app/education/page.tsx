@@ -1,13 +1,8 @@
-"use client";
-
 import { PageContainer } from "@/components/page-container";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardContent } from "@/components/ui/card";
-import { Award, Briefcase, GraduationCap, Shield } from "lucide-react";
-import { motion } from "motion/react";
+import { cn } from "@/lib/utils";
 
 type TimelineItem = {
-  type: "education" | "experience" | "military" | "certificate";
   title: string;
   organization: string;
   period: string;
@@ -17,7 +12,6 @@ type TimelineItem = {
 
 const timeline: TimelineItem[] = [
   {
-    type: "experience",
     title: "UX개발팀장 / 기술연구원",
     organization: "(주) TILS AI",
     period: "2023.03 ~ 재직중",
@@ -26,7 +20,6 @@ const timeline: TimelineItem[] = [
     badges: ["팀 리딩", "풀스택 개발", "플랫폼 개발"],
   },
   {
-    type: "education",
     title: "항해 플러스",
     organization: "프론트엔드 5기 / 백엔드 9기",
     period: "2025.03 ~ 2025.09",
@@ -34,7 +27,6 @@ const timeline: TimelineItem[] = [
     badges: ["블랙배지 1%", "회고상 2회"],
   },
   {
-    type: "education",
     title: "삼성 청년 SW아카데미 (SSAFY)",
     organization: "7기",
     period: "2022.01 ~ 2022.12",
@@ -43,7 +35,6 @@ const timeline: TimelineItem[] = [
     badges: ["최우수상 1회", "우수상 3회"],
   },
   {
-    type: "military",
     title: "대한민국 육군 장교",
     organization: "대위 전역 (6년 4개월)",
     period: "2015.03 ~ 2021.06",
@@ -51,7 +42,6 @@ const timeline: TimelineItem[] = [
     badges: ["인헌상", "충무상", "보안 상훈 2건"],
   },
   {
-    type: "education",
     title: "충남대학교",
     organization: "천문우주과학 전공 (ROTC 53기)",
     period: "2011.03 ~ 2015.02",
@@ -59,72 +49,46 @@ const timeline: TimelineItem[] = [
   },
 ];
 
-const getIcon = (type: TimelineItem["type"]) => {
-  switch (type) {
-    case "education":
-      return <GraduationCap className="w-5 h-5 text-primary-sky" />;
-    case "experience":
-      return <Briefcase className="w-5 h-5 text-primary-sky" />;
-    case "military":
-      return <Shield className="w-5 h-5 text-primary-sky" />;
-    case "certificate":
-      return <Award className="w-5 h-5 text-primary-sky" />;
-  }
-};
-
 const EducationPage = () => {
   return (
     <PageContainer>
-      <motion.header
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="mb-8"
-      >
-        <h1 className="text-4xl font-bold text-foreground mb-2">Education & Experience</h1>
-        <p className="text-muted-foreground text-lg">학력 및 경력 사항</p>
-      </motion.header>
+      <header className="mb-10">
+        <h1 className="text-xl font-semibold text-foreground tracking-tight">Education & Experience</h1>
+        <p className="text-sm text-muted-foreground mt-1">학력 및 경력 사항</p>
+      </header>
 
-      <div className="relative">
-        <div className="absolute left-6 top-0 bottom-0 w-0.5 bg-border" />
-
-        <div className="space-y-6">
-          {timeline.map((item, index) => (
-            <motion.div
-              key={`${item.title}-${index}`}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 * (index + 1) }}
-              className="relative pl-16"
-            >
-              <div className="absolute left-3 -translate-x-1/2 p-2 bg-background border border-border rounded-full">
-                {getIcon(item.type)}
+      <div className="space-y-0">
+        {timeline.map((item, index) => (
+          <div
+            key={`${item.title}-${index}`}
+            className={cn(
+              "flex flex-col sm:flex-row gap-1 sm:gap-6 py-4",
+              index < timeline.length - 1 && "border-b border-border/60"
+            )}
+          >
+            <span className="text-sm text-muted-foreground tabular-nums w-36 shrink-0">
+              {item.period}
+            </span>
+            <div className="flex-1 min-w-0">
+              <div className="flex flex-col sm:flex-row sm:items-center gap-1">
+                <h3 className="font-semibold text-foreground">{item.title}</h3>
+                <span className="text-sm text-primary-sky">{item.organization}</span>
               </div>
-
-              <Card>
-                <CardContent className="pt-6">
-                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-2">
-                    <h3 className="text-xl font-semibold">{item.title}</h3>
-                    <span className="text-sm text-muted-foreground">{item.period}</span>
-                  </div>
-                  <p className="text-primary-sky font-medium mb-2">{item.organization}</p>
-                  {item.description && (
-                    <p className="text-muted-foreground mb-3 whitespace-pre-line">{item.description}</p>
-                  )}
-                  {item.badges && (
-                    <div className="flex flex-wrap gap-2">
-                      {item.badges.map((badge) => (
-                        <Badge key={badge} variant="sky">
-                          {badge}
-                        </Badge>
-                      ))}
-                    </div>
-                  )}
-                </CardContent>
-              </Card>
-            </motion.div>
-          ))}
-        </div>
+              {item.description && (
+                <p className="text-sm text-muted-foreground mt-1 whitespace-pre-line">{item.description}</p>
+              )}
+              {item.badges && (
+                <div className="flex flex-wrap gap-1 mt-2">
+                  {item.badges.map((badge) => (
+                    <Badge key={badge} variant="secondary" className="text-xs">
+                      {badge}
+                    </Badge>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        ))}
       </div>
     </PageContainer>
   );
