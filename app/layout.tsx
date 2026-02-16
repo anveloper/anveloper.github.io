@@ -54,6 +54,8 @@ const RootLayout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
     <html lang="ko" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+        <link rel="preload" href="/fonts/PretendardVariable-subset.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://img.shields.io" />
         <link rel="shortcut icon" href="/favicon-light.svg" />
         <link rel="icon" href="/favicon-light.svg" />
         <link rel="apple-touch-icon" href="/favicon-light.svg" />
