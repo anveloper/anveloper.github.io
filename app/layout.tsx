@@ -31,6 +31,9 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  verification: {
+    google: "kpYkq06WB0cQDLByVOdZD_5HXLkbxzFAvQKQ-Rp9sKY",
+  },
 };
 
 const themeInitScript = `
