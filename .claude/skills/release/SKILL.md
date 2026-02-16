@@ -27,14 +27,24 @@ git diff
 - 첫 글자 소문자, 마침표 없음
 - 기능별로 잘게 쪼개서 커밋
 
-## 2단계: 문서 동기화 (sync-docs)
+## 2단계: 원격 브랜치 동기화
 
-main과 develop 사이의 모든 커밋을 대상으로 문서 동기화:
+로컬 브랜치가 원격과 다를 수 있으므로, 비교 전 반드시 fetch:
 
 ```bash
-# main 이후 develop 커밋 조회
-git log main..develop --oneline
-git log main..develop --stat
+git fetch origin main develop
+```
+
+**중요**: 이후 모든 비교는 `origin/main`을 기준으로 합니다 (로컬 `main` 사용 금지).
+
+## 3단계: 문서 동기화 (sync-docs)
+
+origin/main과 develop 사이의 모든 커밋을 대상으로 문서 동기화:
+
+```bash
+# origin/main 이후 develop 커밋 조회
+git log origin/main..develop --oneline
+git log origin/main..develop --stat
 ```
 
 ### 문서 필요 여부 판단
@@ -65,7 +75,7 @@ git add <변경된 문서 파일들>
 git commit -m "docs: <한글 설명>"
 ```
 
-## 3단계: 원격 develop 푸시
+## 4단계: 원격 develop 푸시
 
 ```bash
 # 원격과 동기화 상태 확인
@@ -76,16 +86,16 @@ git log origin/develop..develop --oneline
 git push -u origin develop
 ```
 
-## 4단계: PR 생성
+## 5단계: PR 생성
 
 ### 변경 범위 분석
 
 ```bash
-# main과 develop 사이의 전체 커밋
-git log main..develop --oneline
+# origin/main과 develop 사이의 커밋 (반드시 origin/main 사용)
+git log origin/main..develop --oneline
 
 # 변경 파일 통계
-git diff main...develop --stat
+git diff origin/main...develop --stat
 ```
 
 모든 커밋을 분석하여 PR 본문 작성에 활용합니다.
@@ -141,9 +151,9 @@ EOF
 - Claude 협력 문구 제외
 - HEREDOC으로 본문 전달
 
-## 5단계: 결과 보고
+## 6단계: 결과 보고
 
 - 정리된 커밋 목록 (1단계)
-- 동기화된 문서 목록 (2단계)
-- 푸시 결과 (3단계)
-- PR URL (4단계)
+- 동기화된 문서 목록 (3단계)
+- 푸시 결과 (4단계)
+- PR URL (5단계)
