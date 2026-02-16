@@ -9,7 +9,7 @@ export const SkillBadge = ({ skill }: { skill: Skill }) => {
   return (
     <span className="inline-flex items-center gap-1 rounded-md ring-1 ring-border/50 pr-1">
       {shieldUrl ? (
-        <img src={shieldUrl} alt={skill.name} className="h-5" loading="lazy" />
+        <img src={shieldUrl} alt={skill.name} className="h-5 w-auto" width={80} height={20} loading="lazy" />
       ) : (
         <Badge variant="secondary">{skill.name}</Badge>
       )}
@@ -28,7 +28,7 @@ export const TechBadge = ({ name, variant = "secondary" }: { name: string; varia
   if (shieldUrl) {
     return (
       <span className="inline-flex rounded-md ring-1 ring-border/50">
-        <img src={shieldUrl} alt={name} className="h-5" loading="lazy" />
+        <img src={shieldUrl} alt={name} className="h-5 w-auto" width={80} height={20} loading="lazy" />
       </span>
     );
   }

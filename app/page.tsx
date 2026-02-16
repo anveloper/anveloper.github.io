@@ -124,7 +124,7 @@ const projects = [
     description: "판매자와 제조사를 연결하는 B2B 주문형 굿즈·인쇄 제작 플랫폼",
     tags: ["Next.js", "TypeScript", "Prisma", "NextAuth"],
     slug: "dps",
-    icon: "/images/projects/dps/icon.png",
+    icon: "/images/projects/dps/icon.webp",
   },
   {
     title: "DPS Store (디플샵 스토어)",
@@ -159,7 +159,7 @@ const projects = [
     description: "퍼스널 컬러 자가 진단 및 전문 컨설턴트 1:1 화상 진단 서비스",
     tags: ["React", "Redux", "OpenVidu", "Spring Boot", "Redis"],
     slug: "your-seasons",
-    icon: "/images/projects/your-seasons/icon.png",
+    icon: "/images/projects/your-seasons/icon.webp",
   },
   {
     title: "SSAFIT",
@@ -216,7 +216,7 @@ const HomePage = () => {
       >
         <div className="flex items-center gap-4 mb-4">
           <div className="relative w-14 h-14 rounded-full overflow-hidden border-2 border-border shrink-0">
-            <Image src="/profile.png" alt="안성진 프로필" fill className="object-cover" priority />
+            <Image src="/profile.webp" alt="안성진 프로필" fill className="object-cover" priority />
           </div>
           <div>
             <h1 className="text-2xl font-bold text-foreground">안성진</h1>
