@@ -7,7 +7,7 @@ export type Skill = {
 
 export type SkillCategory = {
   title: string;
-  icon: React.ReactNode;
+  icon?: React.ReactNode;
   skills: Skill[];
 };
 
