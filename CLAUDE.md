@@ -10,18 +10,18 @@
 
 ## 기술 스택
 
-| 분류 | 기술 |
-|------|------|
-| 프레임워크 | Next.js 16.1.6 (App Router, Turbopack) |
-| UI | React 19.2.4, TypeScript 5.9.3 |
-| 스타일링 | Tailwind CSS v4.1.18, CVA (class-variance-authority) |
-| 애니메이션 | Motion 12.29.2 (Framer Motion) |
-| UI 컴포넌트 | Radix UI, shadcn/ui |
-| 콘텐츠 | MDX + gray-matter, remark-gfm, mermaid |
-| 구문 하이라이팅 | rehype-pretty-code + shiki (듀얼 테마) |
-| 목차(TOC) | rehype-slug + github-slugger |
-| 아이콘 | lucide-react |
-| 패키지 매니저 | pnpm |
+| 분류            | 기술                                                 |
+| --------------- | ---------------------------------------------------- |
+| 프레임워크      | Next.js 16.1.6 (App Router, Turbopack)               |
+| UI              | React 19.2.4, TypeScript 5.9.3                       |
+| 스타일링        | Tailwind CSS v4.1.18, CVA (class-variance-authority) |
+| 애니메이션      | Motion 12.29.2 (Framer Motion)                       |
+| UI 컴포넌트     | Radix UI, shadcn/ui                                  |
+| 콘텐츠          | MDX + gray-matter, remark-gfm, mermaid               |
+| 구문 하이라이팅 | rehype-pretty-code + shiki (듀얼 테마)               |
+| 목차(TOC)       | rehype-slug + github-slugger                         |
+| 아이콘          | lucide-react                                         |
+| 패키지 매니저   | pnpm                                                 |
 
 ## 디렉토리 구조
 
@@ -117,17 +117,17 @@ Claude 협력 문구는 반드시 제외합니다.
 
 ### 타입
 
-| 타입 | 설명 |
-|------|------|
-| `feat` | 새로운 기능 |
-| `fix` | 버그 수정 |
-| `docs` | 문서만 변경 |
-| `style` | 코드 의미에 영향 없는 변경 (포맷팅 등) |
-| `refactor` | 리팩토링 (기능 추가/버그 수정 아님) |
-| `perf` | 성능 개선 |
-| `test` | 테스트 추가/수정 |
-| `chore` | 빌드, 설정 등 보조 작업 |
-| `revert` | 이전 커밋 되돌리기 |
+| 타입       | 설명                                   |
+| ---------- | -------------------------------------- |
+| `feat`     | 새로운 기능                            |
+| `fix`      | 버그 수정                              |
+| `docs`     | 문서만 변경                            |
+| `style`    | 코드 의미에 영향 없는 변경 (포맷팅 등) |
+| `refactor` | 리팩토링 (기능 추가/버그 수정 아님)    |
+| `perf`     | 성능 개선                              |
+| `test`     | 테스트 추가/수정                       |
+| `chore`    | 빌드, 설정 등 보조 작업                |
+| `revert`   | 이전 커밋 되돌리기                     |
 
 ### 제목 규칙
 
