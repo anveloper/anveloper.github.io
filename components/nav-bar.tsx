@@ -106,6 +106,7 @@ export const NavBar = () => {
           <button
             onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
             className="p-2 text-muted-foreground hover:text-foreground transition-colors"
+            aria-label={theme === "dark" ? "라이트 모드로 전환" : "다크 모드로 전환"}
           >
             {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
           </button>
