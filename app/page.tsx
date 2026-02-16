@@ -3,25 +3,11 @@
 import { PageContainer } from "@/components/page-container";
 import { SkillBadge, TechBadge } from "@/components/skill-badge";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import type { Skill, SkillCategory } from "@/lib/skill-data";
-import {
-  ArrowRight,
-  Award,
-  Briefcase,
-  Code,
-  Database,
-  ExternalLink,
-  FileText,
-  Github,
-  GraduationCap,
-  Heart,
-  Mail,
-  Server,
-  Shield,
-  Wrench,
-} from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import { sectionReveal, staggerContainer, staggerItem } from "@/lib/animation";
+import type { SkillCategory } from "@/lib/skill-data";
+import { cn } from "@/lib/utils";
+import { ArrowUpRight, Code, Database, Server, Wrench } from "lucide-react";
 import { motion } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
@@ -171,7 +157,7 @@ const projects = [
   {
     title: "당신의 계절",
     description: "퍼스널 컬러 자가 진단 및 전문 컨설턴트 1:1 화상 진단 서비스",
-    tags: ["React", "Redux", "Material-UI", "OpenVidu", "Spring Boot", "Redis"],
+    tags: ["React", "Redux", "OpenVidu", "Spring Boot", "Redis"],
     slug: "your-seasons",
     icon: "/images/projects/your-seasons/icon.png",
   },
@@ -189,276 +175,231 @@ const contactLinks = [
   {
     title: "Email",
     href: "mailto:hello@anveloper.dev",
-    icon: <Mail className="w-5 h-5" />,
     value: "hello@anveloper.dev",
   },
-  { title: "GitHub", href: "https://github.com/anveloper", icon: <Github className="w-5 h-5" />, value: "anveloper" },
+  {
+    title: "GitHub",
+    href: "https://github.com/anveloper",
+    value: "anveloper",
+  },
   {
     title: "Resume",
     href: "https://anveloper-dev.notion.site/ca13ffc984be4ce399d73659aebbe303",
-    icon: <FileText className="w-5 h-5" />,
     value: "Notion",
   },
 ];
 
-const getTimelineIcon = (type: TimelineItem["type"]) => {
-  switch (type) {
-    case "education":
-      return <GraduationCap className="w-4 h-4 text-primary-sky" />;
-    case "experience":
-      return <Briefcase className="w-4 h-4 text-primary-sky" />;
-    case "military":
-      return <Shield className="w-4 h-4 text-primary-sky" />;
+const SectionHeader = ({ children, href }: { children: React.ReactNode; href?: string }) => {
+  const heading = <h2 className="text-lg font-semibold text-foreground tracking-tight">{children}</h2>;
+  if (href) {
+    return (
+      <Link href={href} className="group flex items-center gap-1.5 mb-8 w-fit">
+        {heading}
+        <ArrowUpRight className="w-4 h-4 text-muted-foreground opacity-0 -translate-y-0.5 translate-x-[-2px] transition-all group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0" />
+      </Link>
+    );
   }
+  return <div className="mb-8">{heading}</div>;
 };
 
-const SectionHeader = ({ children, href }: { children: React.ReactNode; href?: string }) => (
-  <div className="flex items-center justify-between mb-6">
-    <h2 className="text-2xl font-bold text-foreground flex items-center gap-3">
-      <div className="h-1 w-8 bg-primary-sky rounded-full" />
-      {children}
-    </h2>
-    {href && (
-      <Link href={href}>
-        <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-primary-sky">
-          자세히 보기 <ArrowRight className="w-4 h-4 ml-1" />
-        </Button>
-      </Link>
-    )}
-  </div>
-);
+const viewportConfig = { once: true, margin: "-80px" as const };
 
 const HomePage = () => {
   return (
-    <PageContainer withPattern={false}>
+    <PageContainer>
       {/* Hero Section */}
       <motion.section
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="mb-16"
+        variants={sectionReveal}
+        initial="hidden"
+        animate="visible"
+        className="mb-20"
       >
-        <div className="flex flex-col sm:flex-row items-center gap-8">
-          {/* Profile Image */}
-          <div className="relative w-40 h-40 sm:w-48 sm:h-48 rounded-full overflow-hidden border-4 border-primary-sky/20 shrink-0">
+        <div className="flex items-center gap-4 mb-4">
+          <div className="relative w-14 h-14 rounded-full overflow-hidden border-2 border-border shrink-0">
             <Image src="/profile.png" alt="안성진 프로필" fill className="object-cover" priority />
           </div>
-
-          {/* Hero Text */}
-          <div className="text-center sm:text-left">
-            <p className="text-primary-sky font-medium mb-2">안녕하세요</p>
-            <h1 className="text-4xl sm:text-5xl font-bold text-foreground mb-3">안성진</h1>
-            <p className="text-xl text-muted-foreground mb-4">언어로 세상을 표현하는 개발자</p>
-            <div className="flex flex-wrap justify-center sm:justify-start gap-2 text-sm text-muted-foreground">
-              <span className="text-foreground/80">Full-Stack Developer</span>
-              <span className="text-border">|</span>
-              <span className="text-foreground/80">UX Team Lead</span>
-            </div>
+          <div>
+            <h1 className="text-2xl font-bold text-foreground">안성진</h1>
+            <p className="text-sm text-muted-foreground">Full-Stack Developer, UX Team Lead</p>
           </div>
+        </div>
+        <div className="space-y-2 text-muted-foreground leading-relaxed">
+          <p>언어로 세상을 표현하는 개발자입니다.</p>
+          <p>Next.js, TypeScript, Prisma를 중심으로 사용자 경험에 집중하는 풀스택 개발을 합니다.</p>
         </div>
       </motion.section>
 
       {/* About Section */}
       <motion.section
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.1 }}
-        className="mb-16"
+        variants={sectionReveal}
+        initial="hidden"
+        whileInView="visible"
+        viewport={viewportConfig}
+        className="mb-20"
       >
         <SectionHeader href="/about">About</SectionHeader>
         <div className="space-y-4">
-          <Card>
-            <CardContent className="pt-6">
-              <p className="text-muted-foreground leading-relaxed">
-                기술을 학습하는데 있어 빠른 습득 속도를 자부합니다.
-                <br />
-                개발의 시작은 Java로 시작하였지만,
-                <br />
-                현재는 Next.js, Typescript, Prisma를 가장 잘 사용합니다.
-                <br />
-                <br />
-                판매사·공급사·어드민 다중 플랫폼 설계·개발 경험과
-                <br />
-                멀티테넌트 기반 다중 도메인 플랫폼 개발 경험이 있습니다.
-                <br />
-                <br />
-                안드로이드 Kotlin(Jetpack Compose) 개발과
-                <br />
-                Vanilla JS 웹 개발, PHP에서 React/Remix.js 마이그레이션 경험이 있습니다.
-              </p>
-            </CardContent>
-          </Card>
-          <div className="grid gap-4 sm:grid-cols-2">
-            <Card>
-              <CardContent className="pt-6">
-                <div className="flex items-start gap-3">
-                  <div className="p-2 bg-primary-sky/10 rounded-lg">
-                    <Briefcase className="w-5 h-5 text-primary-sky" />
-                  </div>
-                  <div>
-                    <p className="text-primary-sky font-medium">(주) TILS AI</p>
-                    <p className="text-sm text-muted-foreground">UX개발팀장 · 2023.03 ~</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent className="pt-6">
-                <div className="flex items-start gap-3">
-                  <div className="p-2 bg-primary-sky/10 rounded-lg">
-                    <Award className="w-5 h-5 text-primary-sky" />
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    <Badge variant="secondary">정보처리기사 (2023.11)</Badge>
-                    <Badge variant="secondary">SQLD (2022.09)</Badge>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+          <div className="space-y-2 text-muted-foreground leading-relaxed">
+            <p>
+              기술을 학습하는데 있어 빠른 습득 속도를 자부합니다.
+              개발의 시작은 Java로 시작하였지만,
+              현재는 Next.js, Typescript, Prisma를 가장 잘 사용합니다.
+            </p>
+            <p>
+              판매사·공급사·어드민 다중 플랫폼 설계·개발 경험과
+              멀티테넌트 기반 다중 도메인 플랫폼 개발 경험이 있습니다.
+              안드로이드 Kotlin(Jetpack Compose) 개발과
+              Vanilla JS 웹 개발, PHP에서 React/Remix.js 마이그레이션 경험이 있습니다.
+            </p>
           </div>
-          <Card>
-            <CardContent className="pt-6">
-              <div className="flex items-start gap-3">
-                <div className="p-2 bg-primary-sky/10 rounded-lg">
-                  <Heart className="w-5 h-5 text-primary-sky" />
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  {interests.map((interest) => (
-                    <Badge key={interest} variant="sky">
-                      {interest}
-                    </Badge>
-                  ))}
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+          <p className="text-sm text-muted-foreground">
+            <span className="text-primary-sky font-medium">(주) TILS AI</span> UX개발팀장 2023.03 ~
+            {" · "}정보처리기사{" · "}SQLD
+          </p>
+          <p className="text-sm text-muted-foreground">
+            {interests.join(" / ")}
+          </p>
         </div>
       </motion.section>
 
       {/* Skills Section */}
       <motion.section
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.2 }}
-        className="mb-16"
+        variants={sectionReveal}
+        initial="hidden"
+        whileInView="visible"
+        viewport={viewportConfig}
+        className="mb-20"
       >
         <SectionHeader href="/skills">Skills</SectionHeader>
-        <div className="grid gap-4 sm:grid-cols-2">
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportConfig}
+          className="space-y-4"
+        >
           {skillCategories.map((category) => (
-            <Card key={category.title}>
-              <CardHeader className="pb-3">
-                <CardTitle className="flex items-center gap-3 text-base">
-                  <div className="p-1.5 bg-primary-sky/10 rounded-lg text-primary-sky">{category.icon}</div>
-                  {category.title}
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="flex flex-wrap gap-2">
-                  {category.skills.map((skill) => (
-                    <SkillBadge key={skill.name} skill={skill} />
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
+            <motion.div
+              key={category.title}
+              variants={staggerItem}
+              className="flex flex-col sm:flex-row gap-2 sm:gap-4"
+            >
+              <span className="text-sm font-medium text-foreground w-28 sm:text-right shrink-0 pt-0.5">
+                {category.title}
+              </span>
+              <div className="flex flex-wrap gap-2">
+                {category.skills.map((skill) => (
+                  <SkillBadge key={skill.name} skill={skill} />
+                ))}
+              </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </motion.section>
 
-      {/* Education & Experience Section */}
+      {/* Experience & Education Section */}
       <motion.section
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.3 }}
-        className="mb-16"
+        variants={sectionReveal}
+        initial="hidden"
+        whileInView="visible"
+        viewport={viewportConfig}
+        className="mb-20"
       >
-        <SectionHeader href="/education">Education & Experience</SectionHeader>
-        <div className="space-y-3">
+        <SectionHeader href="/education">Experience & Education</SectionHeader>
+        <div className="space-y-0">
           {timeline.map((item, index) => (
-            <Card key={`${item.title}-${index}`}>
-              <CardContent className="py-4">
-                <div className="flex items-start gap-3">
-                  <div className="p-2 bg-primary-sky/10 rounded-lg mt-0.5">{getTimelineIcon(item.type)}</div>
-                  <div className="flex-1 min-w-0">
-                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
-                      <h3 className="font-semibold">{item.title}</h3>
-                      <span className="text-sm text-muted-foreground">{item.period}</span>
-                    </div>
-                    <p className="text-sm text-primary-sky">{item.organization}</p>
-                    {item.description && (
-                      <p className="text-sm text-muted-foreground mt-1 whitespace-pre-line">{item.description}</p>
-                    )}
-                    {item.badges && (
-                      <div className="flex flex-wrap gap-1 mt-2">
-                        {item.badges.map((badge) => (
-                          <Badge key={badge} variant="sky" className="text-xs">
-                            {badge}
-                          </Badge>
-                        ))}
-                      </div>
-                    )}
-                  </div>
+            <div
+              key={`${item.title}-${index}`}
+              className={cn(
+                "flex flex-col sm:flex-row gap-1 sm:gap-6 py-4",
+                index < timeline.length - 1 && "border-b border-border/60"
+              )}
+            >
+              <span className="text-sm text-muted-foreground tabular-nums w-36 shrink-0">
+                {item.period}
+              </span>
+              <div className="flex-1 min-w-0">
+                <div className="flex flex-col sm:flex-row sm:items-center gap-1">
+                  <h3 className="font-semibold text-foreground">{item.title}</h3>
+                  <span className="text-sm text-primary-sky">{item.organization}</span>
                 </div>
-              </CardContent>
-            </Card>
+                {item.description && (
+                  <p className="text-sm text-muted-foreground mt-1 whitespace-pre-line">{item.description}</p>
+                )}
+                {item.badges && (
+                  <div className="flex flex-wrap gap-1 mt-2">
+                    {item.badges.map((badge) => (
+                      <Badge key={badge} variant="secondary" className="text-xs">
+                        {badge}
+                      </Badge>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
           ))}
         </div>
       </motion.section>
 
       {/* Projects Section */}
       <motion.section
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.4 }}
-        className="mb-16"
+        variants={sectionReveal}
+        initial="hidden"
+        whileInView="visible"
+        viewport={viewportConfig}
+        className="mb-20"
       >
         <SectionHeader href="/projects">Projects</SectionHeader>
-        <div className="space-y-3">
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportConfig}
+          className="grid gap-3 sm:grid-cols-2"
+        >
           {projects.map((project) => (
-            <Link key={project.slug} href={`/projects/${project.slug}`} className="block group">
-              <Card className="hover:border-primary-sky/50 transition-colors">
-                <CardContent className="py-4">
-                  <div className="flex items-center gap-2">
-                    {project.icon && (
-                      <img src={project.icon} alt="" className="w-6 h-6 rounded" />
-                    )}
-                    <h3 className="font-semibold group-hover:text-primary-sky transition-colors">
-                      {project.title}
-                    </h3>
-                  </div>
-                  <p className="text-sm text-muted-foreground mt-1">{project.description}</p>
-                  <div className="flex flex-wrap gap-1 mt-2">
-                    {project.tags.map((tag) => (
-                      <TechBadge key={tag} name={tag} />
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            </Link>
+            <motion.div key={project.slug} variants={staggerItem}>
+              <Link href={`/projects/${project.slug}`} className="block group">
+                <Card className="hover:border-foreground/20 transition-colors h-full">
+                  <CardContent className="p-4">
+                    <div className="flex items-center gap-2">
+                      {project.icon && <img src={project.icon} alt="" className="w-6 h-6 rounded" />}
+                      <h3 className="font-semibold group-hover:text-primary-sky transition-colors">{project.title}</h3>
+                    </div>
+                    <p className="text-sm text-muted-foreground mt-1">{project.description}</p>
+                    <div className="flex flex-wrap gap-1 mt-2">
+                      {project.tags.slice(0, 4).map((tag) => (
+                        <TechBadge key={tag} name={tag} />
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              </Link>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </motion.section>
 
       {/* Contact Section */}
       <motion.section
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.5 }}
+        variants={sectionReveal}
+        initial="hidden"
+        whileInView="visible"
+        viewport={viewportConfig}
       >
         <SectionHeader>Contact</SectionHeader>
-        <div className="grid gap-4 sm:grid-cols-3">
+        <div className="space-y-3">
           {contactLinks.map((link) => (
-            <Card key={link.title} className="hover:border-primary-sky/50 transition-colors">
-              <CardContent className="pt-6 flex flex-col items-center text-center">
-                <div className="p-3 bg-primary-sky/10 rounded-full text-primary-sky mb-3">{link.icon}</div>
-                <h3 className="font-semibold mb-1">{link.title}</h3>
-                <p className="text-sm text-primary-sky mb-3">{link.value}</p>
-                <Button variant="outline" size="sm" asChild className="w-full">
-                  <a href={link.href} target="_blank" rel="noopener noreferrer">
-                    방문 <ExternalLink className="w-3 h-3 ml-1" />
-                  </a>
-                </Button>
-              </CardContent>
-            </Card>
+            <div key={link.title} className="flex items-center gap-4">
+              <span className="text-sm font-medium text-foreground w-16">{link.title}</span>
+              <a
+                href={link.href}
+                {...(link.title !== "Email" ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                className="text-sm text-muted-foreground underline underline-offset-4 hover:text-foreground transition-colors"
+              >
+                {link.value}
+              </a>
+            </div>
           ))}
         </div>
       </motion.section>

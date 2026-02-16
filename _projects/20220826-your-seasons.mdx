@@ -2,7 +2,7 @@
 title: "당신의 계절"
 date: "2022-08-26"
 description: "퍼스널 컬러 자가 진단 및 전문 컨설턴트 1:1 화상 진단 서비스"
-tags: ["React", "Redux", "Material-UI", "OpenVidu", "Spring Boot", "JPA", "MySQL", "Redis"]
+tags: ["React", "Redux", "OpenVidu", "Spring Boot", "JPA", "MySQL", "Redis"]
 github: "ssafy-anveloper/your-seasons"
 ---
 
@@ -49,7 +49,7 @@ React 프론트엔드와 Spring Boot 백엔드, OpenVidu WebRTC 서버로 구성
 
 | 분류        | 기술                                                        |
 | ----------- | ----------------------------------------------------------- |
-| Frontend    | React 18, JavaScript, Redux Toolkit, Material-UI 5, Emotion |
+| Frontend    | React 18, JavaScript, Redux Toolkit, Emotion                |
 | 실시간 통신 | OpenVidu 2.19 (WebRTC), WebSocket (채팅)                    |
 | Backend     | Java 8, Spring Boot 2.7, Spring Security, JPA, JWT          |
 | Database    | MySQL 8.0, Redis (세션·이메일 인증 토큰)                    |
@@ -59,7 +59,7 @@ React 프론트엔드와 Spring Boot 백엔드, OpenVidu WebRTC 서버로 구성
 
 ```mermaid
 flowchart TD
-  Frontend["React SPA\nRedux · Material-UI"] <--> Nginx["Nginx\nReverse Proxy · SSL"]
+  Frontend["React SPA\nRedux"] <--> Nginx["Nginx\nReverse Proxy · SSL"]
   Nginx <--> Backend["Spring Boot API\nJava 8 · JPA · JWT"]
   Nginx <--> OpenVidu["OpenVidu Server\nWebRTC 화상 통화"]
   Backend <--> MySQL["MySQL\nMember · Consulting · Reservation"]

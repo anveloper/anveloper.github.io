@@ -14,16 +14,16 @@ Next.js 16과 MDX를 기반으로 구축된 개인 포트폴리오 및 기술 �
 
 ## 기술 스택
 
-| 분류 | 기술 |
-|------|------|
-| 프레임워크 | Next.js 16 (App Router, Turbopack) |
-| UI | React 19, TypeScript |
-| 스타일링 | Tailwind CSS v4, CVA (class-variance-authority) |
-| 애니메이션 | Motion (Framer Motion) |
-| UI 컴포넌트 | Radix UI, shadcn/ui, Magic UI |
-| 콘텐츠 | MDX + gray-matter |
-| 아이콘 | lucide-react |
-| 패키지 매니저 | pnpm |
+| 분류          | 기술                                            |
+| ------------- | ----------------------------------------------- |
+| 프레임워크    | Next.js 16 (App Router, Turbopack)              |
+| UI            | React 19, TypeScript                            |
+| 스타일링      | Tailwind CSS v4, CVA (class-variance-authority) |
+| 애니메이션    | Motion (Framer Motion)                          |
+| UI 컴포넌트   | Radix UI, shadcn/ui, Magic UI                   |
+| 콘텐츠        | MDX + gray-matter                               |
+| 아이콘        | lucide-react                                    |
+| 패키지 매니저 | pnpm                                            |
 
 ## 설치 및 실행
 

@@ -151,8 +151,8 @@ html {
 
 /* Selection color */
 ::selection {
-  background-color: var(--primary-sky);
-  color: white;
+  background-color: var(--accent);
+  color: var(--accent-foreground);
 }
 
 /* Scrollbar styling */

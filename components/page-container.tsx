@@ -5,11 +5,9 @@ type PageContainerProps = {
   className?: string;
   /** 홈페이지처럼 전체 화면을 채우는 경우 true */
   fullHeight?: boolean;
-  /** 배경 도트 패턴 사용 여부 */
-  withPattern?: boolean;
 };
 
-export const PageContainer = ({ children, className, fullHeight = false, withPattern = true }: PageContainerProps) => {
+export const PageContainer = ({ children, className, fullHeight = false }: PageContainerProps) => {
   return (
     <div
       className={cn(
@@ -19,8 +17,6 @@ export const PageContainer = ({ children, className, fullHeight = false, withPat
         "sm:px-8 md:px-12 lg:px-16 md:pt-20",
         // 높이 설정
         fullHeight ? "min-h-screen flex flex-col" : "min-h-screen",
-        // 배경 패턴
-        withPattern && "bg-[radial-gradient(oklch(0.5_0_0/15%)_1px,transparent_1px)] bg-size-[20px_20px]",
         className
       )}
     >

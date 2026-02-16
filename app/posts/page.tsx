@@ -9,14 +9,14 @@ export default async function PostsPage() {
 
   return (
     <PageContainer>
-      <header className="mb-8">
-        <h1 className="text-4xl font-bold text-foreground mb-2">Posts</h1>
-        <p className="text-muted-foreground text-lg">기술 블로그 포스트</p>
+      <header className="mb-10">
+        <h1 className="text-xl font-semibold text-foreground tracking-tight">Posts</h1>
+        <p className="text-sm text-muted-foreground mt-1">기술 블로그 포스트</p>
       </header>
 
       {posts.length === 0 ? (
         <div className="py-16 flex flex-col items-center">
-          <FileText className="w-12 h-12 text-muted-foreground mb-4" />
+          <FileText className="w-8 h-8 text-muted-foreground mb-4" />
           <p className="text-muted-foreground">아직 작성된 포스트가 없습니다.</p>
         </div>
       ) : (
