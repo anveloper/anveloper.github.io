@@ -6,7 +6,7 @@ const directory = path.join(process.cwd(), "_projects");
 const imageDir = path.join(process.cwd(), "public", "images", "projects");
 
 function findImage(slug: string, name: string): string | null {
-  for (const ext of ["png", "jpg", "svg"]) {
+  for (const ext of ["webp", "png", "jpg", "svg"]) {
     if (existsSync(path.join(imageDir, slug, `${name}.${ext}`))) {
       return `/images/projects/${slug}/${name}.${ext}`;
     }
