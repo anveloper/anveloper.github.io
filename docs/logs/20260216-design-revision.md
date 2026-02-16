@@ -41,6 +41,26 @@
 - `animation.ts`: `pageFadeIn` 제거
 - `skill-data.ts`: `SkillCategory.icon` optional로 변경
 
+## perf
+
+### 이미지 WebP 변환
+- profile.png (898KB) → profile.webp (2.2KB)
+- DPS icon.png (11KB) → icon.webp (1.2KB)
+- 당신의계절 icon.png (8KB) → icon.webp (0.7KB)
+- `_projects/index.ts` findImage 탐색 순서에 webp 추가
+
+### 폰트 서브셋 적용
+- PretendardVariable: 2.0MB → 215KB (한글 상용 946자 + 라틴)
+- D2CodingLigature: 1.4MB → 138KB (코드 블록용 서브셋)
+- 원본 유지, CSS에서 서브셋 파일 참조
+
+## fix
+
+### Lighthouse 접근성 개선
+- shields.io `<img>`에 width/height 속성 추가 (CLS 개선)
+- 라이트 모드 색상 대비 WCAG AA 충족 (muted-foreground 3.61→5.18:1, primary-sky 2.86→4.81:1)
+- 테마 토글 버튼 aria-label 추가
+
 ## docs
 
 ### 디자인 수정 계획 문서 갱신
