@@ -22,7 +22,7 @@ export const SkillBadge = ({ skill }: { skill: Skill }) => {
   );
 };
 
-export const TechBadge = ({ name, variant = "secondary" }: { name: string; variant?: "secondary" | "sky" }) => {
+export const TechBadge = ({ name, variant = "secondary" }: { name: string; variant?: "secondary" }) => {
   const shieldUrl = getShieldUrl(name);
 
   if (shieldUrl) {
