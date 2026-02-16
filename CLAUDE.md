@@ -39,11 +39,10 @@ app/                 # Next.js App Router 페이지
 └── projects/[slug]/ # 프로젝트
 
 components/          # 재사용 컴포넌트
-├── ui/              # 기본 UI (Button, Tooltip, Card, Badge 등)
-├── magicui/         # Magic UI 컴포넌트
-├── animation/       # 애니메이션 래퍼
+├── ui/              # 기본 UI (Tooltip, Card, Badge 등)
 ├── header-logo.tsx  # 로고 텍스트 애니메이션
 ├── nav-bar.tsx      # 네비게이션 헤더
+├── footer.tsx       # 푸터
 ├── page-container.tsx # 페이지 컨테이너
 ├── table-of-contents.tsx # 플로팅 목차 (xl 이상)
 ├── mermaid.tsx      # Mermaid 다이어그램 렌더러
@@ -58,6 +57,7 @@ hooks/               # 커스텀 React Hooks
 
 lib/                 # 유틸리티 함수
 ├── utils.ts         # cn() 클래스 병합 등
+├── animation.ts     # 모션 variants (sectionReveal, stagger 등)
 ├── mdx-options.ts   # MDX 플러그인 설정
 ├── mdx-components.ts # MDX 렌더링 컴포넌트
 ├── toc.ts           # 목차 추출 유틸리티
