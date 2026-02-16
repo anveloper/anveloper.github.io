@@ -1,4 +1,5 @@
 import FaviconSwitcher from "@/components/favicon-switcher";
+import { Footer } from "@/components/footer";
 import { NavBar } from "@/components/nav-bar";
 import { Providers } from "@/components/providers";
 import type { Metadata } from "next";
@@ -59,6 +60,7 @@ const RootLayout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
           <NavBar />
 
           <main className="flex-1 flex flex-col">{children}</main>
+          <Footer />
         </Providers>
         <FaviconSwitcher />
       </body>
