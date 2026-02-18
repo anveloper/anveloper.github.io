@@ -1,0 +1,33 @@
+---
+title: "BOJ 1000 - A+B"
+date: "2026-02-18"
+description: "두 정수를 입력받아 합을 출력하는 기본 입출력 문제"
+tags: ["구현", "수학"]
+platform: "boj"
+problem_number: "1000"
+problem_url: "https://www.acmicpc.net/problem/1000"
+difficulty: "브론즈 V"
+language: "python"
+---
+
+## 문제
+
+[BOJ 1000 - A+B](https://www.acmicpc.net/problem/1000)
+
+> 두 정수 A와 B를 입력받은 다음, A+B를 출력하는 프로그램을 작성하시오.
+
+## 풀이
+
+표준 입력으로 두 정수를 받아 합을 출력하는 기본 입출력 문제다. Python의 `input()`과 `split()`을 사용하여 한 줄에서 두 정수를 분리한 뒤 더한다.
+
+## 코드
+
+```python
+a, b = map(int, input().split())
+print(a + b)
+```
+
+## 복잡도
+
+- 시간: O(1)
+- 공간: O(1)
