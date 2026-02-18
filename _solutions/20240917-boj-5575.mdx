@@ -1,0 +1,52 @@
+---
+title: "BOJ 5575 - 타임 카드"
+date: "2024-09-17"
+description: "출근 시각과 퇴근 시각의 차이를 계산하는 문제"
+tags: ["수학", "구현"]
+platform: "boj"
+problem_number: "5575"
+problem_url: "https://www.acmicpc.net/problem/5575"
+difficulty: "브론즈 IV"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 5575 - 타임 카드](https://www.acmicpc.net/problem/5575)
+
+> 3명의 직원에 대해 출근 시각과 퇴근 시각이 주어질 때, 각각의 근무 시간을 시/분/초로 출력한다.
+
+## 풀이
+
+출근과 퇴근 시각을 모두 초 단위로 변환한 뒤 차이를 구하고, 다시 시/분/초로 변환하여 출력한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int main()
+{
+  int sh, sm, ss, eh, em, es;
+  int start, end, t, h, m, s;
+  for (int i = 0; i < 3; i++)
+  {
+    cin >> sh >> sm >> ss >> eh >> em >> es;
+    start = (sh * 3600) + (sm * 60) + ss;
+    end = (eh * 3600) + (em * 60) + es;
+    t = end - start;
+    h = t / 3600;
+    m = (t % 3600) / 60;
+    s = (t % 3600) % 60;
+
+    cout << h << " " << m << " " << s << endl;
+  }
+  return 0;
+}
+```
+
+## 복잡도
+
+- 시간: O(1)
+- 공간: O(1)

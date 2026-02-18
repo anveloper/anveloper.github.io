@@ -1,0 +1,46 @@
+---
+title: "BOJ 4998 - 저금"
+date: "2024-12-30"
+description: "복리 이자로 목표 금액에 도달하는 최소 연수를 구하는 문제"
+tags: ["수학", "시뮬레이션"]
+platform: "boj"
+problem_number: "4998"
+problem_url: "https://www.acmicpc.net/problem/4998"
+difficulty: "브론즈 II"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 4998 - 저금](https://www.acmicpc.net/problem/4998)
+
+> 초기 금액 n, 연이율 b%, 목표 금액 m이 주어질 때 복리로 목표에 도달하는 최소 연수를 구한다.
+
+## 풀이
+
+로그를 이용하여 n × (1 + b/100)^t = m을 만족하는 최소 t를 계산한다. t = ceil(log(m/n) / log(1 + b/100))으로 올림하여 출력한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+
+double n, b, m;
+
+int main()
+{
+  while (cin >> n >> b >> m)
+  {
+    cout << ceil(log(m / n) / log(1 + b / 100)) << "\n";
+  }
+  return 0;
+}
+```
+
+## 복잡도
+
+- 시간: O(T)
+- 공간: O(1)

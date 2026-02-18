@@ -1,0 +1,56 @@
+---
+title: "BOJ 6679 - 싱기한 네자리 숫자"
+date: "2024-09-24"
+description: "10진법, 12진법, 16진법 자릿수 합이 같은 네 자리 수를 구하는 문제"
+tags: ["수학", "브루트포스 알고리즘"]
+platform: "boj"
+problem_number: "6679"
+problem_url: "https://www.acmicpc.net/problem/6679"
+difficulty: "브론즈 II"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 6679 - 싱기한 네자리 숫자](https://www.acmicpc.net/problem/6679)
+
+> 1000부터 9999까지의 수 중 10진법, 12진법, 16진법에서 각 자릿수의 합이 모두 같은 수를 출력한다.
+
+## 풀이
+
+1000부터 9999까지 모든 수를 순회하면서, 각 진법(10, 12, 16)에서 자릿수의 합을 계산하는 함수를 적용한다. 세 진법의 자릿수 합이 모두 같은 경우에만 출력한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+int calc(int num, int base)
+{
+  int ret = 0;
+  while (num)
+    ret += num % base, num /= base;
+  return ret;
+}
+
+int main()
+{
+  ios::sync_with_stdio(false);
+  cin.tie(NULL);
+  cout.tie(NULL);
+  for (int i = 1000; i < 10000; ++i)
+  {
+    int dec = calc(i, 10);
+    if (dec == calc(i, 12) && dec == calc(i, 16))
+      cout << i << '\n';
+  }
+  return 0;
+}
+```
+
+## 복잡도
+
+- 시간: O(9000 * log N) (각 수에 대해 3개 진법의 자릿수 합 계산)
+- 공간: O(1)

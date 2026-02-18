@@ -1,0 +1,45 @@
+---
+title: "BOJ 3004 - 체스판 조각"
+date: "2024-09-06"
+description: "N번의 가로/세로 절단으로 만들 수 있는 최대 조각 수를 구하는 문제"
+tags: ["수학", "구현"]
+platform: "boj"
+problem_number: "3004"
+problem_url: "https://www.acmicpc.net/problem/3004"
+difficulty: "브론즈 III"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 3004 - 체스판 조각](https://www.acmicpc.net/problem/3004)
+
+> 체스판을 N번 자를 때 만들 수 있는 최대 조각 수를 구한다.
+
+## 풀이
+
+가로 x번, 세로 y번 자르면 조각 수는 `(x+1) * (y+1)`이다. N번의 절단을 가로와 세로에 최대한 균등하게 배분하면 최댓값을 얻는다. 초기값 2에서 시작하여 `i = 2`부터 N까지 `1 + i/2`를 더해나가는 방식으로 계산한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int main()
+{
+  int n, total = 0;
+  cin >> n;
+  total = 2;
+  for (int i = 2; i <= n; i++)
+  {
+    total += 1 + (i / 2);
+  }
+  cout << total;
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(1)

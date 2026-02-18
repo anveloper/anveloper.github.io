@@ -1,0 +1,63 @@
+---
+title: "BOJ 4504 - 배수 찾기"
+date: "2024-08-26"
+description: "주어진 수가 특정 수의 배수인지 판별하는 문제"
+tags: ["수학", "사칙연산"]
+platform: "boj"
+problem_number: "4504"
+problem_url: "https://www.acmicpc.net/problem/4504"
+difficulty: "브론즈 III"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 4504 - 배수 찾기](https://www.acmicpc.net/problem/4504)
+
+> 정수 B가 주어지고, 이후 입력되는 정수들이 B의 배수인지 판별한다. 0이 입력되면 종료한다.
+
+## 풀이
+
+먼저 B를 입력받고, 이후 반복적으로 정수 A를 입력받으며 `A % B == 0`이면 배수, 아니면 배수가 아님을 출력한다. 0이 입력되면 종료한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+
+  ios::sync_with_stdio(0);
+  cin.tie(0);
+  cout.tie(0);
+
+  int b;
+  cin >> b;
+
+  while (true)
+  {
+    int a;
+    cin >> a;
+
+    if (a == 0)
+    {
+      break;
+    }
+
+    if (a % b == 0)
+    {
+      cout << a << " is a multiple of " << b << ".\n";
+    }
+    else
+      cout << a << " is NOT a multiple of " << b << ".\n";
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N) (N: 입력 횟수)
+- 공간: O(1)

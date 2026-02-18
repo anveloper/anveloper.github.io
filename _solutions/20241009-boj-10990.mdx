@@ -1,0 +1,64 @@
+---
+title: "BOJ 10990 - 별 찍기 - 15"
+date: "2024-10-09"
+description: "삼각형 테두리만 별로 출력하는 구현 문제"
+tags: ["구현"]
+platform: "boj"
+problem_number: "10990"
+problem_url: "https://www.acmicpc.net/problem/10990"
+difficulty: "브론즈 III"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 10990 - 별 찍기 - 15](https://www.acmicpc.net/problem/10990)
+
+> 첫째 줄부터 N번째 줄까지 차례대로 별을 출력한다. 첫 줄은 별 하나, 이후 줄은 양 끝에만 별을 출력한다.
+
+## 풀이
+
+첫 줄은 별 하나만 출력하고, 2번째 줄부터는 앞쪽 공백 후 별 하나, 안쪽 공백(2*(i-1)-1개), 별 하나를 출력한다. 조건 분기로 첫 줄과 나머지 줄을 구분하여 처리한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+  int n;
+  cin >> n;
+
+  for (int i = 1; i < n + 1; i++)
+  {
+    for (int j = n - i; j > 0; j--)
+    {
+      cout << " ";
+    }
+
+    if (i == 1)
+    {
+      cout << "*\n";
+    }
+    else
+    {
+      cout << "*";
+      for (int j = 0; j < 2 * (i - 1) - 1; j++)
+      {
+        cout << " ";
+      }
+      cout << "*\n";
+    }
+  }
+
+  return 0;
+}
+```
+
+## 복잡도
+
+- 시간: O(N^2)
+- 공간: O(1)

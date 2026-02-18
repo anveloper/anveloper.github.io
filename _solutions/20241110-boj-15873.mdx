@@ -1,0 +1,64 @@
+---
+title: "BOJ 15873 - 공백 없는 A+B"
+date: "2024-11-10"
+description: "공백 없이 이어 붙인 두 수의 합을 구하는 문제"
+tags: ["수학", "사칙연산"]
+platform: "boj"
+problem_number: "15873"
+problem_url: "https://www.acmicpc.net/problem/15873"
+difficulty: "브론즈 IV"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 15873 - 공백 없는 A+B](https://www.acmicpc.net/problem/15873)
+
+> 1~10 범위의 두 수가 공백 없이 이어 붙여진 형태로 입력될 때 두 수의 합을 구한다.
+
+## 풀이
+
+입력을 하나의 정수로 읽은 뒤 자릿수를 분석하여 두 수를 분리한다. 1010인 경우(10+10), 끝 두 자리가 10인 경우, 앞 두 자리가 10인 경우, 한 자리+한 자리 경우를 각각 처리하여 합을 출력한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int main()
+{
+  int a;
+  int b = 0;
+  cin >> a;
+
+  if (a == 1010)
+  { // 1010
+    cout << 20;
+  }
+  else if (a % 10 == 0)
+  { // a10
+    a /= 100;
+    cout << 10 + a;
+  }
+  else
+  {
+    b += a % 10;
+    a /= 10;
+    if (a == 10)
+    { // 10b
+      cout << 10 + b;
+    }
+    else
+    { // ab
+      cout << a + b;
+    }
+  }
+  return 0;
+}
+```
+
+## 복잡도
+
+- 시간: O(1)
+- 공간: O(1)

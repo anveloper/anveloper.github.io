@@ -1,0 +1,54 @@
+---
+title: "BOJ 11575 - Affine Cipher"
+date: "2024-11-28"
+description: "아핀 암호화 공식으로 문자열을 암호화하는 문제"
+tags: ["구현", "문자열"]
+platform: "boj"
+problem_number: "11575"
+problem_url: "https://www.acmicpc.net/problem/11575"
+difficulty: "브론즈 II"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 11575 - Affine Cipher](https://www.acmicpc.net/problem/11575)
+
+> 아핀 암호 E(x) = (ax + b) mod 26을 적용하여 대문자 문자열을 암호화한다.
+
+## 풀이
+
+각 테스트 케이스마다 a, b 값과 문자열을 입력받는다. 문자열의 각 대문자에 대해 (a * (문자 - 'A') + b) % 26으로 변환하여 새 문자를 만든다.
+
+## 코드
+
+```cpp
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int main()
+{
+  int n, a, b;
+  string word;
+  cin >> n;
+
+  for (int i = 0; i < n; i++)
+  {
+    cin >> a >> b >> word;
+    for (int j = 0; j < word.length(); j++)
+    {
+      word[j] = char(((a * word[j] - 'A' + b) % 26) + 'A');
+    }
+    cout << word << endl;
+  }
+
+  return 0;
+}
+```
+
+## 복잡도
+
+- 시간: O(N * L) (N: 테스트 케이스, L: 문자열 길이)
+- 공간: O(L)

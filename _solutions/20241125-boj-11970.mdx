@@ -1,0 +1,48 @@
+---
+title: "BOJ 11970 - Fence Painting"
+date: "2024-11-25"
+description: "두 구간이 칠해진 울타리의 총 칠해진 길이를 구하는 문제"
+tags: ["수학", "구현"]
+platform: "boj"
+problem_number: "11970"
+problem_url: "https://www.acmicpc.net/problem/11970"
+difficulty: "브론즈 III"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 11970 - Fence Painting](https://www.acmicpc.net/problem/11970)
+
+> 두 구간이 주어질 때, 울타리에서 한 번이라도 칠해진 총 길이를 구한다.
+
+## 풀이
+
+크기 101의 배열을 사용하여 각 구간에 해당하는 인덱스에 표시를 한다. 두 구간에 대해 각각 범위를 순회하며 표시한 뒤, 배열 전체를 순회하여 표시된 칸의 수를 센다.
+
+## 코드
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+int ans, fence[101], a[4];
+int main()
+{
+  cin >> a[0] >> a[1] >> a[2] >> a[3];
+  for (int i = a[0]; i < a[1]; i++)
+    fence[i]++;
+  for (int i = a[2]; i < a[3]; i++)
+    fence[i]++;
+  for (int i = 0; i <= 100; i++)
+  {
+    if (fence[i])
+      ans++;
+  }
+  cout << ans;
+}
+```
+
+## 복잡도
+
+- 시간: O(N) (N: 울타리 범위, 최대 100)
+- 공간: O(N)

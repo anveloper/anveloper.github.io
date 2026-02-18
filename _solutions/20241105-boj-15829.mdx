@@ -1,0 +1,54 @@
+---
+title: "BOJ 15829 - Hashing"
+date: "2024-11-05"
+description: "문자열 해시 값을 계산하는 구현 문제"
+tags: ["구현", "문자열", "해싱"]
+platform: "boj"
+problem_number: "15829"
+problem_url: "https://www.acmicpc.net/problem/15829"
+difficulty: "브론즈 II"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 15829 - Hashing](https://www.acmicpc.net/problem/15829)
+
+> 문자열이 주어지면 각 문자에 대해 (문자값) * r^i 를 모두 더한 해시 값을 M으로 나눈 나머지를 구한다.
+
+## 풀이
+
+r=31, M=1234567891로 설정하고 문자열을 순회하며 각 문자의 알파벳 순서(a=1)에 r의 거듭제곱을 곱한 값을 누적한다. 매 단계마다 M으로 나머지를 취해 오버플로를 방지한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+#include <string>
+#define r 31
+#define M 1234567891
+
+using namespace std;
+
+int main()
+{
+  int l, i;
+  long long hash = 0, R = 1;
+  string str;
+
+  cin >> l >> str;
+
+  for (i = 0; i < str.length(); i++)
+  {
+    hash += ((str[i] - 'a' + 1) * R) % M;
+    hash %= M;
+    R = (R * r) % M;
+  }
+  cout << hash;
+}
+```
+
+## 복잡도
+
+- 시간: O(L) (L: 문자열 길이)
+- 공간: O(L)

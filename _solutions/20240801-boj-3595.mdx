@@ -1,0 +1,67 @@
+---
+title: "BOJ 3595 - 맥주 냉장고"
+date: "2024-08-01"
+description: "부피 N인 직육면체의 겉넓이를 최소화하는 세 변의 길이를 구하는 문제"
+tags: ["수학", "브루트포스 알고리즘"]
+platform: "boj"
+problem_number: "3595"
+problem_url: "https://www.acmicpc.net/problem/3595"
+difficulty: "브론즈 I"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 3595 - 맥주 냉장고](https://www.acmicpc.net/problem/3595)
+
+> 부피가 N인 직육면체에서 겉넓이가 최소가 되는 세 변의 길이를 구한다.
+
+## 풀이
+
+세 변 i, j, k(i ≤ j ≤ k)를 i*i*i ≤ N, i*j*j ≤ N 조건으로 탐색하며, N이 i*j로 나누어떨어질 때 k = N/(i*j)로 결정한다. 겉넓이 2(ab+bc+ca)가 최소인 조합을 찾는다.
+
+## 코드
+
+```cpp
+#include <iostream>
+#include <vector>
+using namespace std;
+
+inline int calc(int a, int b, int c)
+{
+  return 2 * (a * b + b * c + c * a);
+}
+
+int main(void)
+{
+  ios::sync_with_stdio(false);
+  cin.tie(nullptr);
+
+  int n;
+  cin >> n;
+
+  vector<int> ans(3, 1e4);
+  for (int i = 1; i * i * i <= n; i++)
+  {
+    for (int j = i; i * j * j <= n; j++)
+    {
+      if (n % (i * j))
+        continue;
+      int k = n / (i * j);
+      if (calc(i, j, k) < calc(ans[0], ans[1], ans[2]))
+      {
+        ans[0] = i;
+        ans[1] = j;
+        ans[2] = k;
+      }
+    }
+  }
+  cout << ans[0] << " " << ans[1] << " " << ans[2];
+  return 0;
+}
+```
+
+## 복잡도
+
+- 시간: O(N^(2/3))
+- 공간: O(1)

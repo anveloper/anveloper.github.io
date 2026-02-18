@@ -1,0 +1,65 @@
+---
+title: "BOJ 3023 - 마술사 이민혁"
+date: "2024-08-16"
+description: "패턴의 좌우 및 상하 대칭을 만들고 특정 좌표를 반전하는 문제"
+tags: ["구현", "문자열"]
+platform: "boj"
+problem_number: "3023"
+problem_url: "https://www.acmicpc.net/problem/3023"
+difficulty: "브론즈 I"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 3023 - 마술사 이민혁](https://www.acmicpc.net/problem/3023)
+
+> R x C 크기의 패턴 좌상단이 주어지면 좌우, 상하 대칭으로 확장한 뒤 특정 좌표의 문자를 반전한다.
+
+## 풀이
+
+입력받은 R x C 패턴의 각 행을 좌우 대칭으로 확장(각 행을 역순으로 이어붙임)한 뒤, 상하 대칭으로 아래쪽 절반을 채운다. 이후 주어진 좌표 (y, x)의 문자가 `#`이면 `.`으로, `.`이면 `#`으로 반전하여 전체 패턴을 출력한다.
+
+## 코드
+
+```cpp
+#include <vector>
+#include <iostream>
+#include <algorithm>
+
+using namespace std;
+int r, c;
+int main(void)
+{
+  cin >> r >> c;
+  string str[2 * r];
+  for (int i = 0; i < r; i++)
+    cin >> str[i];
+  for (int i = 0; i < r; i++)
+  {
+    for (int j = c - 1; j >= 0; j--)
+    {
+      str[i] += str[i][j];
+    }
+  }
+  for (int i = 0; i < r; i++)
+  {
+    str[2 * r - 1 - i] = str[i];
+  }
+  int y, x;
+  cin >> y >> x;
+  if (str[y - 1][x - 1] == '#')
+    str[y - 1][x - 1] = '.';
+  else
+    str[y - 1][x - 1] = '#';
+  for (int i = 0; i < 2 * r; i++)
+    cout << str[i] << "\n";
+
+  return 0;
+}
+```
+
+## 복잡도
+
+- 시간: O(R * C)
+- 공간: O(R * C)

@@ -1,0 +1,56 @@
+---
+title: "BOJ 2979 - 트럭 주차"
+date: "2024-07-30"
+description: "시간대별 동시 주차 트럭 수에 따른 주차 요금을 계산하는 문제"
+tags: ["구현", "시뮬레이션"]
+platform: "boj"
+problem_number: "2979"
+problem_url: "https://www.acmicpc.net/problem/2979"
+difficulty: "브론즈 II"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 2979 - 트럭 주차](https://www.acmicpc.net/problem/2979)
+
+> 3대의 트럭 주차 시간이 주어질 때, 동시 주차 대수에 따라 다른 요금을 적용하여 총 주차비를 구한다.
+
+## 풀이
+
+시간 배열에 각 트럭의 주차 구간을 표시(카운팅)한 뒤, 각 시간대의 동시 주차 대수에 따라 해당 요금(A, B, C)을 곱하여 합산한다.
+
+## 코드
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+int a, b, c, ans = 0;
+int t[101];
+int main()
+{
+  cin >> a >> b >> c;
+  for (int i = 0; i < 3; i++)
+  {
+    int s, e;
+    cin >> s >> e;
+    for (int j = s; j < e; j++)
+      t[j]++;
+  }
+  for (int i = 1; i <= 100; i++)
+  {
+    if (t[i] == 1)
+      ans += t[i] * a;
+    else if (t[i] == 2)
+      ans += t[i] * b;
+    else
+      ans += t[i] * c;
+  }
+  cout << ans << '\n';
+}
+```
+
+## 복잡도
+
+- 시간: O(1) (최대 시간 범위 100 고정)
+- 공간: O(1)

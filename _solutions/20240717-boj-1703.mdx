@@ -1,0 +1,58 @@
+---
+title: "BOJ 1703 - 생장점"
+date: "2024-07-17"
+description: "나무의 가지 분화와 꺾인 가지 수로 최종 생장점 수를 구하는 문제"
+tags: ["수학", "구현"]
+platform: "boj"
+problem_number: "1703"
+problem_url: "https://www.acmicpc.net/problem/1703"
+difficulty: "브론즈 III"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 1703 - 생장점](https://www.acmicpc.net/problem/1703)
+
+> 매 단계마다 가지가 a배로 분화하고 b개가 꺾이는 과정을 반복했을 때 최종 생장점 수를 구한다.
+
+## 풀이
+
+초기 생장점 1개에서 시작하여 각 단계마다 현재 수에 a를 곱하고 b를 빼는 과정을 반복한다. 입력이 0이면 종료한다.
+
+## 코드
+
+```cpp
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main()
+{
+  ios::sync_with_stdio(false);
+  cin.tie(nullptr);
+  cout.tie(nullptr);
+
+  while (1)
+  {
+    int n, a, b, cnt = 1;
+
+    cin >> n;
+
+    if (n == 0)
+      break;
+
+    while (n--)
+      cin >> a >> b, cnt *= a, cnt -= b;
+
+    cout << cnt << '\n';
+  }
+
+  return 0;
+}
+```
+
+## 복잡도
+
+- 시간: O(N) (N: 단계 수)
+- 공간: O(1)

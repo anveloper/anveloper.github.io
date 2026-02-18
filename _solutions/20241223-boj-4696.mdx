@@ -1,0 +1,44 @@
+---
+title: "BOJ 4696 - St. Ives"
+date: "2024-12-23"
+description: "등비급수를 이용해 전체 합을 구하는 문제"
+tags: ["수학", "사칙연산"]
+platform: "boj"
+problem_number: "4696"
+problem_url: "https://www.acmicpc.net/problem/4696"
+difficulty: "브론즈 IV"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 4696 - St. Ives](https://www.acmicpc.net/problem/4696)
+
+> 주어진 수 a에 대해 1 + a + a^2 + a^3 + a^4를 계산하여 출력한다.
+
+## 풀이
+
+입력값 a에 대해 1부터 a의 4제곱까지의 합(1 + a + a^2 + a^3 + a^4)을 계산하여 소수점 둘째 자리까지 출력한다. 0이 입력되면 종료한다.
+
+## 코드
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+double a;
+int main()
+{
+  while (1)
+  {
+    cin >> a;
+    if (a == 0)
+      break;
+    printf("%.2f\n", 1 + a + pow(a, 2) + pow(a, 3) + pow(a, 4));
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(T)
+- 공간: O(1)

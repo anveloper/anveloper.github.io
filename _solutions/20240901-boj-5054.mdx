@@ -1,0 +1,65 @@
+---
+title: "BOJ 5054 - 주차의 신"
+date: "2024-09-01"
+description: "여러 가게를 방문할 때 최소 이동 거리를 구하는 문제"
+tags: ["수학", "구현"]
+platform: "boj"
+problem_number: "5054"
+problem_url: "https://www.acmicpc.net/problem/5054"
+difficulty: "브론즈 II"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 5054 - 주차의 신](https://www.acmicpc.net/problem/5054)
+
+> 일직선 도로의 여러 가게를 모두 방문할 때 최소 이동 거리를 구한다.
+
+## 풀이
+
+모든 가게를 방문하는 최소 거리는 가장 왼쪽 가게에서 가장 오른쪽 가게까지의 거리의 2배이다. 입력에서 최솟값과 최댓값을 구한 뒤 `2 * (MAX - MIN)`을 계산한다. 주차 위치에서 출발하여 한쪽 끝으로 갔다 반대쪽 끝으로 가고 돌아오면 된다.
+
+## 코드
+
+```cpp
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+  int T;
+
+  cin >> T;
+
+  for (int i = 0; i < T; i++)
+  {
+    int n;
+    int arr[20];
+    int sum = 0;
+    int space;
+    int MIN = 100, MAX = 0;
+    cin >> n;
+    for (int j = 0; j < n; j++)
+    {
+      cin >> arr[j];
+      sum += arr[j];
+      if (MIN > arr[j])
+        MIN = arr[j];
+      if (MAX < arr[j])
+        MAX = arr[j];
+    }
+    space = sum / n;
+
+    int result = 2 * (MAX - space) + 2 * (space - MIN);
+
+    cout << result << "\n";
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(T * N) (T: 테스트 케이스 수, N: 가게 수)
+- 공간: O(N)

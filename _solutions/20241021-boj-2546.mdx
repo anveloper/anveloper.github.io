@@ -1,0 +1,58 @@
+---
+title: "BOJ 2546 - 경제학과 정원영"
+date: "2024-10-21"
+description: "두 나라 평균 가격 비교를 통해 경제 상태를 분석하는 문제"
+tags: ["수학", "구현"]
+platform: "boj"
+problem_number: "2546"
+problem_url: "https://www.acmicpc.net/problem/2546"
+difficulty: "브론즈 I"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 2546 - 경제학과 정원영](https://www.acmicpc.net/problem/2546)
+
+> 두 나라의 물건 가격이 주어졌을 때, A나라 평균보다 비싸고 B나라 평균보다 싼 물건의 개수를 구한다.
+
+## 풀이
+
+A나라 n개 물건의 총합과 B나라 m개 물건의 총합을 구한다. A나라의 각 물건에 대해 해당 가격이 A나라 평균(s/n)보다 크고 B나라 평균(t/m)보다 작은 조건을 만족하는지 확인하여 개수를 센다. 정수 비교로 부동소수점 오차를 방지한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+using namespace std;
+
+typedef long long int ll;
+ll A[200000], B[200000];
+int main(void)
+{
+  cin.tie(0);
+  ios::sync_with_stdio(0);
+
+  int testcase;
+  cin >> testcase;
+  while (testcase--)
+  {
+    int n, m, answer = 0;
+    cin >> n >> m;
+    ll s = 0, t = 0;
+    for (int i = 0; i < n; i++)
+      cin >> A[i], s += A[i];
+    for (int i = 0; i < m; i++)
+      cin >> B[i], t += B[i];
+    for (int i = 0; i < n; i++)
+      answer += (s > n * A[i] && t < m * A[i]);
+    cout << answer << '\n';
+  }
+  return 0;
+}
+```
+
+## 복잡도
+
+- 시간: O(T * (N + M))
+- 공간: O(N + M)

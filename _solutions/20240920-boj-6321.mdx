@@ -1,0 +1,57 @@
+---
+title: "BOJ 6321 - IBM 빼기 1"
+date: "2024-09-20"
+description: "각 문자를 알파벳 순서로 한 칸 뒤로 이동시키는 문제"
+tags: ["문자열", "구현"]
+platform: "boj"
+problem_number: "6321"
+problem_url: "https://www.acmicpc.net/problem/6321"
+difficulty: "브론즈 III"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 6321 - IBM 빼기 1](https://www.acmicpc.net/problem/6321)
+
+> 문자열의 각 문자를 알파벳 순서에서 다음 문자로 바꿔 출력한다. Z는 A가 된다.
+
+## 풀이
+
+각 문자에 대해 'A' 기준으로 1을 더하고 26으로 나눈 나머지를 구해 다시 'A'에 더한다. 이렇게 하면 Z 다음이 A로 순환된다.
+
+## 코드
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <string>
+using namespace std;
+
+int main(int argc, char *argv[])
+{
+  int ts;
+  string s;
+
+  cin >> ts;
+
+  for (int i = 1; i <= ts; ++i)
+  {
+    cin >> s;
+    cout << "String #" << i << "\n";
+    for (int j = 0; j < s.length(); ++j)
+    {
+      cout << (char)((s[j] - 'A' + 1) % 26 + 'A');
+    }
+    cout << "\n\n";
+  }
+
+  return 0;
+}
+```
+
+## 복잡도
+
+- 시간: O(T * L) (T: 테스트 케이스 수, L: 문자열 길이)
+- 공간: O(L)

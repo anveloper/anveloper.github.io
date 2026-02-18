@@ -1,0 +1,55 @@
+---
+title: "BOJ 2947 - 나무 조각"
+date: "2024-07-29"
+description: "버블 정렬 과정의 매 교환마다 배열 상태를 출력하는 문제"
+tags: ["구현", "시뮬레이션"]
+platform: "boj"
+problem_number: "2947"
+problem_url: "https://www.acmicpc.net/problem/2947"
+difficulty: "브론즈 I"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 2947 - 나무 조각](https://www.acmicpc.net/problem/2947)
+
+> 5개의 나무 조각을 버블 정렬할 때, 인접 원소를 교환할 때마다 현재 배열 상태를 출력한다.
+
+## 풀이
+
+5개 원소에 대해 버블 정렬을 수행하며, 교환이 발생할 때마다 전체 배열을 출력한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+#include <algorithm>
+using namespace std;
+int p[6];
+
+int main()
+{
+  for (int i = 1; i <= 5; i++)
+    cin >> p[i];
+
+  for (int i = 5; i >= 1; i--)
+  {
+    for (int j = 1; j < i; j++)
+    {
+      if (p[j] > p[j + 1])
+      {
+        swap(p[j], p[j + 1]);
+        for (int k = 1; k <= 5; k++)
+          cout << p[k] << " ";
+        cout << endl;
+      }
+    }
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(1) (고정 크기 5)
+- 공간: O(1)

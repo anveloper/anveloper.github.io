@@ -1,0 +1,43 @@
+---
+title: "BOJ 11320 - 삼각 무늬 - 1"
+date: "2024-11-15"
+description: "큰 삼각형 넓이 안에 들어가는 작은 삼각형 개수를 구하는 문제"
+tags: ["수학", "사칙연산"]
+platform: "boj"
+problem_number: "11320"
+problem_url: "https://www.acmicpc.net/problem/11320"
+difficulty: "브론즈 III"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 11320 - 삼각 무늬 - 1](https://www.acmicpc.net/problem/11320)
+
+> 큰 삼각형의 한 변 A와 작은 삼각형의 한 변 B가 주어질 때, 큰 삼각형 안에 들어가는 작은 삼각형의 개수를 구한다.
+
+## 풀이
+
+큰 삼각형의 넓이를 작은 삼각형의 넓이로 나누되, 정삼각형 넓이의 비는 변의 비의 제곱에 비례하므로 (A/B)^2를 올림하여 출력한다. `ceil((a*a)/(b*b))`로 계산한다.
+
+## 코드
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+double t, a, b;
+int main()
+{
+  cin >> t;
+  while (t--)
+  {
+    cin >> a >> b;
+    cout << (int)ceil((a * a) / (b * b)) << '\n';
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(T) (T: 테스트 케이스 수)
+- 공간: O(1)

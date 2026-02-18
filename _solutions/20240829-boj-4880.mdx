@@ -1,0 +1,47 @@
+---
+title: "BOJ 4880 - 다음수"
+date: "2024-08-29"
+description: "세 수가 등차수열인지 등비수열인지 판별하여 다음 항을 구하는 문제"
+tags: ["수학", "사칙연산"]
+platform: "boj"
+problem_number: "4880"
+problem_url: "https://www.acmicpc.net/problem/4880"
+difficulty: "브론즈 III"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 4880 - 다음수](https://www.acmicpc.net/problem/4880)
+
+> 세 수가 주어지면 등차수열(AP)인지 등비수열(GP)인지 판별하고 다음 항을 출력한다.
+
+## 풀이
+
+세 수 a[0], a[1], a[2]의 연속 차이가 같고 0이 아니면 등차수열(AP)로 판단하여 공차를 더한다. 그 외에는 등비수열(GP)로 판단하여 공비를 곱한다. 세 수가 모두 0이면 종료한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+using namespace std;
+int main()
+{
+  int a[3];
+  while (1)
+  {
+    cin >> a[0] >> a[1] >> a[2];
+    if (!a[0] && !a[1] && !a[2])
+      break;
+    if (a[1] - a[0] == a[2] - a[1] && a[1] - a[0] != 0)
+      cout << "AP " << a[1] - a[0] + a[2] << '\n';
+    else
+      cout << "GP " << a[1] / a[0] * a[2] << '\n';
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(T) (T: 테스트 케이스 수)
+- 공간: O(1)

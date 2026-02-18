@@ -1,0 +1,44 @@
+---
+title: "BOJ 13118 - 뉴턴과 사과"
+date: "2024-12-06"
+description: "사과가 떨어지는 위치에 있는 사람의 번호를 찾는 문제"
+tags: ["구현"]
+platform: "boj"
+problem_number: "13118"
+problem_url: "https://www.acmicpc.net/problem/13118"
+difficulty: "브론즈 IV"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 13118 - 뉴턴과 사과](https://www.acmicpc.net/problem/13118)
+
+> 4명의 x좌표와 사과의 x좌표가 주어질 때, 사과가 떨어지는 위치에 있는 사람의 번호를 출력한다.
+
+## 풀이
+
+4명의 x좌표를 배열에 저장하고, 사과의 x좌표와 일치하는 사람의 번호(1~4)를 출력한다. 일치하는 사람이 없으면 0을 출력한다.
+
+## 코드
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+int p[5], x, y, r, ans;
+int main()
+{
+  cin >> p[1] >> p[2] >> p[3] >> p[4] >> x >> y >> r;
+  for (int i = 1; i <= 4; i++)
+  {
+    if (x == p[i])
+      ans = i;
+  }
+  cout << ans;
+}
+```
+
+## 복잡도
+
+- 시간: O(1)
+- 공간: O(1)

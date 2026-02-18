@@ -1,0 +1,51 @@
+---
+title: "BOJ 2393 - Rook"
+date: "2024-08-05"
+description: "체스 룩 모양의 ASCII 아트를 출력하는 문제"
+tags: ["구현"]
+platform: "boj"
+problem_number: "2393"
+problem_url: "https://www.acmicpc.net/problem/2393"
+difficulty: "브론즈 V"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 2393 - Rook](https://www.acmicpc.net/problem/2393)
+
+> 체스의 룩 모양 ASCII 아트를 그대로 출력한다.
+
+## 풀이
+
+정해진 ASCII 아트 문자열을 printf로 한 줄씩 출력한다.
+
+## 코드
+
+```cpp
+#include <stdio.h>
+
+int main()
+{
+  printf("  ___  ___  ___\n");
+  printf("  | |__| |__| |\n");
+  printf("  |           |\n");
+  printf("   \\_________/\n");
+  printf("    \\_______/\n");
+  printf("     |     |\n");
+  printf("     |     |\n");
+  printf("     |     |\n");
+  printf("     |     |\n");
+  printf("     |_____|\n");
+  printf("  __/       \\__\n");
+  printf(" /             \\\n");
+  printf("/_______________\\\n");
+
+  return 0;
+}
+```
+
+## 복잡도
+
+- 시간: O(1)
+- 공간: O(1)

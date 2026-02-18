@@ -1,0 +1,50 @@
+---
+title: "BOJ 11365 - !밀비 급일"
+date: "2024-10-12"
+description: "문자열을 뒤집어 출력하는 구현 문제"
+tags: ["구현", "문자열"]
+platform: "boj"
+problem_number: "11365"
+problem_url: "https://www.acmicpc.net/problem/11365"
+difficulty: "브론즈 IV"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 11365 - !밀비 급일](https://www.acmicpc.net/problem/11365)
+
+> 입력으로 주어지는 문자열을 뒤집어서 출력한다. "END"가 입력되면 종료한다.
+
+## 풀이
+
+`getline`으로 한 줄씩 읽어 "END"가 나올 때까지 반복한다. 각 문자열을 끝에서부터 처음까지 역순으로 출력한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int main()
+{
+  while (1)
+  {
+    string s;
+    getline(cin, s);
+    if (s == "END")
+      break;
+    for (int i = s.length() - 1; i >= 0; i--)
+    {
+      cout << s[i];
+    }
+    cout << endl;
+  }
+  return 0;
+}
+```
+
+## 복잡도
+
+- 시간: O(N * L) (N: 줄 수, L: 문자열 길이)
+- 공간: O(L)

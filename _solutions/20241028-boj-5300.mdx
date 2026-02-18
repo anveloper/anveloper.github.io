@@ -1,0 +1,51 @@
+---
+title: "BOJ 5300 - Fill the Rowboats!"
+date: "2024-10-28"
+description: "6의 배수 또는 마지막 번호마다 'Go!'를 출력하는 구현 문제"
+tags: ["구현"]
+platform: "boj"
+problem_number: "5300"
+problem_url: "https://www.acmicpc.net/problem/5300"
+difficulty: "브론즈 IV"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 5300 - Fill the Rowboats!](https://www.acmicpc.net/problem/5300)
+
+> 1부터 N까지의 번호를 출력하면서, 6의 배수이거나 마지막 번호일 때 "Go!"를 함께 출력한다.
+
+## 풀이
+
+1부터 N까지 순회하면서 각 번호를 출력한다. 6의 배수이거나 마지막 번호(N)이면 "Go!"를 추가로 출력한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int main()
+{
+  int N;
+  cin >> N;
+  for (int i = 1; i <= N; i++)
+  {
+    if (i != N)
+    {
+      if (i % 6 == 0)
+        cout << i << " Go! ";
+      else
+        cout << i << " ";
+    }
+    else
+      cout << i << " Go! ";
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(1)

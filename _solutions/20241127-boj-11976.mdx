@@ -1,0 +1,50 @@
+---
+title: "BOJ 11976 - Promotion Counting"
+date: "2024-11-27"
+description: "4구간의 차이값을 누적하여 승급 인원을 계산하는 문제"
+tags: ["수학", "사칙연산"]
+platform: "boj"
+problem_number: "11976"
+problem_url: "https://www.acmicpc.net/problem/11976"
+difficulty: "브론즈 I"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 11976 - Promotion Counting](https://www.acmicpc.net/problem/11976)
+
+> 4개 구간의 시작과 끝 값이 주어질 때, 각 구간의 차이를 역순으로 누적하여 출력한다.
+
+## 풀이
+
+4개의 (시작, 끝) 쌍을 입력받아 각각의 차이를 배열에 저장한다. 마지막 3개 구간의 차이를 역순으로 누적하여 3줄에 걸쳐 출력한다. 즉 diff[3]+diff[2]+diff[1], diff[3]+diff[2], diff[3] 순서로 출력한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+#include <algorithm>
+
+using namespace std;
+
+int diff[4];
+int main(void)
+{
+  for (int i = 0; i < 4; ++i)
+  {
+    int a, b;
+    cin >> a >> b;
+    diff[i] = b - a;
+  }
+  cout << diff[3] + diff[2] + diff[1] << "\n";
+  cout << diff[3] + diff[2] << "\n";
+  cout << diff[3] << "\n";
+  return 0;
+}
+```
+
+## 복잡도
+
+- 시간: O(1) (고정 4회 입력)
+- 공간: O(1)

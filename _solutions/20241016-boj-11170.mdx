@@ -1,0 +1,72 @@
+---
+title: "BOJ 11170 - 0의 개수"
+date: "2024-10-16"
+description: "N부터 M까지 숫자에서 0이 나타나는 횟수를 구하는 문제"
+tags: ["수학", "브루트포스 알고리즘"]
+platform: "boj"
+problem_number: "11170"
+problem_url: "https://www.acmicpc.net/problem/11170"
+difficulty: "브론즈 I"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 11170 - 0의 개수](https://www.acmicpc.net/problem/11170)
+
+> N 이상 M 이하의 정수에서 숫자 0이 총 몇 번 등장하는지 구한다.
+
+## 풀이
+
+자릿수별로 0의 등장 횟수를 수학적으로 계산하는 함수 `solve(v)`를 구현한다. 0부터 v까지 0의 개수를 구한 뒤, `solve(M) - solve(N-1)`로 구간 내 0의 개수를 계산한다. 각 자릿수 위치에서 해당 자리가 0인 수의 개수를 누적하는 방식이다.
+
+## 코드
+
+```cpp
+#include <iostream>
+#include <iomanip>
+
+using namespace std;
+
+int solve(int v)
+{
+  if (v < 0)
+    return 0;
+  if (v == 0)
+    return 1;
+  int ans = 1;
+  int pv = 1;
+  for (int pos = 0;; pos++)
+  {
+    if (v / pv / 10 == 0)
+      break;
+    ans += (v / pv / 10 - 1) * pv;
+    if (v / pv % 10 == 0)
+      ans += (v % pv) + 1;
+    else
+      ans += pv;
+    pv *= 10;
+  }
+  return ans;
+}
+
+int main()
+{
+  ios_base::sync_with_stdio(false);
+  cin.tie(nullptr);
+  int T;
+  cin >> T;
+  while (T-- > 0)
+  {
+    int n, m;
+    cin >> n >> m;
+    cout << solve(m) - solve(n - 1) << "\n";
+  }
+  return 0;
+}
+```
+
+## 복잡도
+
+- 시간: O(T * log M) (자릿수만큼 반복)
+- 공간: O(1)

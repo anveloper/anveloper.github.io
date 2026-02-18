@@ -1,0 +1,57 @@
+---
+title: "BOJ 2592 - 대표값"
+date: "2024-08-07"
+description: "10개의 자연수에서 평균과 최빈값을 구하는 문제"
+tags: ["수학", "구현"]
+platform: "boj"
+problem_number: "2592"
+problem_url: "https://www.acmicpc.net/problem/2592"
+difficulty: "브론즈 II"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 2592 - 대표값](https://www.acmicpc.net/problem/2592)
+
+> 10개의 자연수의 평균과 최빈값을 구한다.
+
+## 풀이
+
+10개의 수를 입력받으며 합을 구하고, 빈도 배열에 각 수의 등장 횟수를 기록한다. 합/10으로 평균을, 빈도 배열에서 가장 많이 나온 수로 최빈값을 구한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+using namespace std;
+int main()
+{
+  int a[10];
+  int b[1001]{0};
+  int sum = 0;
+  for (int i = 0; i < 10; i++)
+  {
+    cin >> a[i];
+    sum += a[i];
+    b[a[i]]++;
+  }
+  int max = 0;
+  int num = 0;
+  for (int i = 0; i <= 1000; i++)
+  {
+    if (b[i] > max)
+    {
+      max = b[i];
+      num = i;
+    }
+  }
+  cout << sum / 10 << "\n";
+  cout << num;
+}
+```
+
+## 복잡도
+
+- 시간: O(1) (고정 크기 10 + 1000)
+- 공간: O(1)

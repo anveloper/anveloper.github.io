@@ -1,0 +1,48 @@
+---
+title: "BOJ 15792 - A/B - 2"
+date: "2024-11-04"
+description: "큰 정수의 나눗셈 결과를 소수점 아래 1000자리까지 출력하는 문제"
+tags: ["수학", "큰 수 연산"]
+platform: "boj"
+problem_number: "15792"
+problem_url: "https://www.acmicpc.net/problem/15792"
+difficulty: "브론즈 I"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 15792 - A/B - 2](https://www.acmicpc.net/problem/15792)
+
+> A를 B로 나눈 결과를 소수점 아래 1000자리 이상까지 정확하게 출력한다.
+
+## 풀이
+
+먼저 정수 부분(A/B)을 출력하고 소수점을 찍은 뒤, A를 A%B로 갱신하며 반복적으로 10을 곱하고 B로 나눈 몫을 출력하는 긴 나눗셈(long division)을 1001회 반복한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+#include <stdio.h>
+using namespace std;
+
+int main()
+{
+  int A, B;
+  cin >> A >> B;
+  cout << int(A / B) << ".";
+  A = A % B;
+  for (int i = 0; i <= 1000; i++)
+  {
+    A *= 10;
+    cout << A / B;
+    A = A - (A / B) * B;
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(D) (D: 출력할 소수점 자릿수, 약 1001)
+- 공간: O(1)

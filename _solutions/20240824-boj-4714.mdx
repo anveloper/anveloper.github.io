@@ -1,0 +1,45 @@
+---
+title: "BOJ 4714 - Lunacy"
+date: "2024-08-24"
+description: "지구 무게를 달 무게로 환산하는 단위 변환 문제"
+tags: ["수학", "사칙연산"]
+platform: "boj"
+problem_number: "4714"
+problem_url: "https://www.acmicpc.net/problem/4714"
+difficulty: "브론즈 IV"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 4714 - Lunacy](https://www.acmicpc.net/problem/4714)
+
+> 지구에서의 무게가 주어지면 달에서의 무게(지구 무게의 16.7%)를 계산하여 출력한다.
+
+## 풀이
+
+음수가 입력되면 종료하고, 그 외에는 지구 무게에 0.167을 곱하여 소수점 둘째 자리까지 출력한다.
+
+## 코드
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+  while (1)
+  {
+    double x;
+    cin >> x;
+    if (x < 0)
+      break;
+    printf("Objects weighing %.2f on Earth will weigh %.2f on the moon.\n", x, x * 0.167);
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(T) (T: 테스트 케이스 수)
+- 공간: O(1)

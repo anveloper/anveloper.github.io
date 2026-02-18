@@ -1,0 +1,60 @@
+---
+title: "BOJ 2506 - 점수계산"
+date: "2024-07-27"
+description: "연속 정답 시 보너스 점수가 누적되는 채점 규칙으로 총점을 구하는 문제"
+tags: ["수학", "구현"]
+platform: "boj"
+problem_number: "2506"
+problem_url: "https://www.acmicpc.net/problem/2506"
+difficulty: "브론즈 III"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 2506 - 점수계산](https://www.acmicpc.net/problem/2506)
+
+> 연속으로 맞히면 보너스 점수가 1씩 누적되고, 틀리면 보너스가 초기화되는 채점 규칙에 따라 총점을 구한다.
+
+## 풀이
+
+정답(1)이면 기본 1점에 이전에도 정답이었으면 보너스를 1씩 증가시켜 추가 점수를 더한다. 오답(0)이면 보너스를 초기화한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int main()
+{
+  int n, score = 0, res[100], bonus = 0;
+  cin >> n;
+
+  for (int i = 1; i < n + 1; i++)
+  {
+    cin >> res[i];
+    if (res[i] == 1)
+    {
+      score++;
+      if (res[i - 1] == 1)
+      {
+        bonus++;
+        score += bonus;
+      }
+      else
+      {
+        bonus = 0;
+      }
+    }
+  }
+  cout << score;
+
+  return 0;
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

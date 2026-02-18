@@ -1,0 +1,60 @@
+---
+title: "BOJ 11557 - Yangjojang of The Year"
+date: "2024-10-15"
+description: "술 소비량이 가장 많은 학교를 출력하는 정렬 문제"
+tags: ["구현", "정렬"]
+platform: "boj"
+problem_number: "11557"
+problem_url: "https://www.acmicpc.net/problem/11557"
+difficulty: "브론즈 I"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 11557 - Yangjojang of The Year](https://www.acmicpc.net/problem/11557)
+
+> 각 테스트 케이스마다 N개 학교의 이름과 술 소비량이 주어질 때, 가장 많이 소비한 학교를 출력한다.
+
+## 풀이
+
+각 테스트 케이스에서 학교 이름과 소비량을 pair로 저장한 뒤 내림차순 정렬하여 첫 번째 원소의 이름을 출력한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+int main()
+{
+  ios_base::sync_with_stdio(false);
+  cin.tie(0);
+
+  int T;
+  cin >> T;
+
+  while (T--)
+  {
+    int N;
+    cin >> N;
+    vector<pair<int, string>> v;
+    for (int i = 0; i < N; i++)
+    {
+      string S;
+      int L;
+      cin >> S >> L;
+      v.push_back({L, S});
+    }
+    sort(v.begin(), v.end(), greater<>());
+    cout << v.front().second << "\n";
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(T * N log N)
+- 공간: O(N)

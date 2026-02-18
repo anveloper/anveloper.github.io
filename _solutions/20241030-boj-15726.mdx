@@ -1,0 +1,45 @@
+---
+title: "BOJ 15726 - 이칙연산"
+date: "2024-10-30"
+description: "세 수에 곱셈과 나눗셈을 적용하여 최대값을 구하는 문제"
+tags: ["수학", "사칙연산"]
+platform: "boj"
+problem_number: "15726"
+problem_url: "https://www.acmicpc.net/problem/15726"
+difficulty: "브론즈 IV"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 15726 - 이칙연산](https://www.acmicpc.net/problem/15726)
+
+> 세 수 A, B, C가 주어지고, 두 연산자(곱셈, 나눗셈)를 하나씩 사이에 넣어 결과의 최대값을 구한다.
+
+## 풀이
+
+두 가지 경우를 비교한다: (A*B)/C와 (A/B)*C. 두 결과 중 더 큰 값을 출력한다. 정수 나눗셈 특성상 나눗셈이 뒤에 올수록 손실이 적을 수 있으므로 양쪽 모두 계산한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+using namespace std;
+int main()
+{
+  long long a, b, c, x, y;
+  cin >> a >> b >> c;
+  x = (double)(a * b) / c;
+  y = ((double)a / b) * c;
+  if (x > y)
+    cout << x;
+  else
+    cout << y;
+  return 0;
+}
+```
+
+## 복잡도
+
+- 시간: O(1)
+- 공간: O(1)

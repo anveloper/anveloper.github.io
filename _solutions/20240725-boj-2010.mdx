@@ -1,0 +1,54 @@
+---
+title: "BOJ 2010 - 플러그"
+date: "2024-07-25"
+description: "멀티탭 여러 개를 연결했을 때 사용 가능한 플러그 수를 구하는 문제"
+tags: ["수학", "사칙연산"]
+platform: "boj"
+problem_number: "2010"
+problem_url: "https://www.acmicpc.net/problem/2010"
+difficulty: "브론즈 III"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 2010 - 플러그](https://www.acmicpc.net/problem/2010)
+
+> N개의 멀티탭을 연결할 때 사용 가능한 최대 플러그 수를 구한다.
+
+## 풀이
+
+각 멀티탭의 구멍 수에서 1을 빼고(다음 멀티탭 연결용) 모두 합한 뒤 마지막에 1을 더한다. 즉 전체 구멍 합에서 (N-1)을 빼면 된다.
+
+## 코드
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int main()
+{
+  ios::sync_with_stdio(false);
+  cin.tie(NULL);
+  cout.tie(NULL);
+
+  int N = 0;
+  cin >> N;
+
+  int Input = 0, Sum = 0;
+  for (int i = 0; i < N; ++i)
+  {
+    cin >> Input;
+    Sum += Input - 1;
+  }
+
+  cout << ++Sum;
+
+  return 0;
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(1)

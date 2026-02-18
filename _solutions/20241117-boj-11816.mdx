@@ -1,0 +1,62 @@
+---
+title: "BOJ 11816 - 8진수, 10진수, 16진수"
+date: "2024-11-17"
+description: "접두사에 따라 8진수, 10진수, 16진수를 판별하여 10진수로 변환하는 문제"
+tags: ["문자열", "수학", "파싱"]
+platform: "boj"
+problem_number: "11816"
+problem_url: "https://www.acmicpc.net/problem/11816"
+difficulty: "브론즈 II"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 11816 - 8진수, 10진수, 16진수](https://www.acmicpc.net/problem/11816)
+
+> 0x로 시작하면 16진수, 0으로 시작하면 8진수, 그 외에는 10진수로 판별하여 10진수 값을 출력한다.
+
+## 풀이
+
+입력 문자열의 접두사를 확인한다. "0x"이면 16진수, "0"이면 8진수, 그 외에는 10진수로 판단하여 `stoi`에 적절한 base를 전달해 변환한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int main()
+{
+  string number;
+  cin >> number;
+
+  if (number.length() > 1)
+  {
+    // 16진수
+    if (number.substr(0, 2) == "0x")
+    {
+      cout << stoi(number, nullptr, 16);
+    }
+    // 8진수
+    else if (number.substr(0, 1) == "0")
+    {
+      cout << stoi(number, nullptr, 8);
+    }
+    // 10진수
+    else
+    {
+      cout << number;
+    }
+  }
+
+  return 0;
+}
+```
+
+## 복잡도
+
+- 시간: O(L) (L: 입력 문자열 길이)
+- 공간: O(L)

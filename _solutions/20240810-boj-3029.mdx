@@ -1,0 +1,52 @@
+---
+title: "BOJ 3029 - 경고"
+date: "2024-08-10"
+description: "현재 시각과 목표 시각의 차이를 HH:MM:SS 형태로 구하는 문제"
+tags: ["구현", "문자열"]
+platform: "boj"
+problem_number: "3029"
+problem_url: "https://www.acmicpc.net/problem/3029"
+difficulty: "브론즈 III"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 3029 - 경고](https://www.acmicpc.net/problem/3029)
+
+> 현재 시각과 알람 시각이 주어질 때, 알람이 울릴 때까지 남은 시간을 구한다.
+
+## 풀이
+
+시각 문자열을 초 단위 정수로 변환한 뒤 차이를 구한다. 차이가 음수면 24시간을 더하고, 0이면 24:00:00을 출력한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int ttoi(char t[])
+{
+  return ((t[0] & 15) * 10 + (t[1] & 15)) * 60 * 60 + ((t[3] & 15) * 10 + (t[4] & 15)) * 60 + ((t[6] & 15) * 10 + (t[7] & 15));
+}
+
+int main()
+{
+  char ct[9], na[9];
+  cin >> ct >> na;
+  int c = ttoi(ct), e = ttoi(na), t = e - c;
+  if (t < 0)
+    t += 24 * 60 * 60;
+  if (t == 0)
+    cout << "24:00:00";
+  else
+    printf("%02d:%02d:%02d", t / 60 / 60, t / 60 % 60, t % 60);
+  return 0;
+}
+```
+
+## 복잡도
+
+- 시간: O(1)
+- 공간: O(1)
