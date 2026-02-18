@@ -1,0 +1,37 @@
+---
+title: "BOJ 21591 - Laptop Sticker"
+date: "2024-06-07"
+description: "노트북 뚜껑에 스티커를 붙일 수 있는지 판별하는 문제"
+tags: ["수학", "구현"]
+platform: "boj"
+problem_number: "21591"
+problem_url: "https://www.acmicpc.net/problem/21591"
+difficulty: "브론즈 IV"
+language: "python"
+---
+
+## 문제
+
+[BOJ 21591 - Laptop Sticker](https://www.acmicpc.net/problem/21591)
+
+> 노트북 뚜껑 크기와 스티커 크기가 주어졌을 때, 양쪽에 1cm 여백을 두고 스티커를 붙일 수 있는지 판별한다.
+
+## 풀이
+
+노트북 뚜껑의 가로와 세로에서 각각 양쪽 1cm(총 2cm)를 뺀 사용 가능 영역이 스티커 크기 이상이면 1, 아니면 0을 출력한다.
+
+## 코드
+
+```python
+wc, hc, ws, hs = map(int, input().split())
+
+if wc >= ws + 2 and hc >= hs + 2:
+    print(1)
+else:
+    print(0)
+```
+
+## 복잡도
+
+- 시간: O(1)
+- 공간: O(1)

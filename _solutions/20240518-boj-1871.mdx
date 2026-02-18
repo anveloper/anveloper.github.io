@@ -1,0 +1,38 @@
+---
+title: "BOJ 1871 - 좋은 자동차 번호판"
+date: "2024-05-18"
+description: "자동차 번호판의 문자부와 숫자부 차이가 100 이하인지 판별"
+tags: ["구현", "문자열"]
+platform: "boj"
+problem_number: "1871"
+problem_url: "https://www.acmicpc.net/problem/1871"
+difficulty: "브론즈 II"
+language: "python"
+---
+
+## 문제
+
+[BOJ 1871 - 좋은 자동차 번호판](https://www.acmicpc.net/problem/1871)
+
+> LLL-DDDD 형태의 번호판에서 문자부(26진수)와 숫자부의 차이가 100 이하이면 nice, 아니면 not nice를 출력한다.
+
+## 풀이
+
+문자 3자리를 26진수로 변환하고, 숫자 4자리와의 차이의 절대값을 비교한다.
+
+## 코드
+
+```python
+for _ in range(int(input())):
+  L, D = input().split('-')
+  n = int(D)
+  s = 0
+  for i in range(3):
+    s += (ord(L[i])-65) * 26**(2-i)
+  print("nice" if abs(s-n) <= 100 else "not nice")
+```
+
+## 복잡도
+
+- 시간: O(T) — T는 테스트 케이스 수
+- 공간: O(1)

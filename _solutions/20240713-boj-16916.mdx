@@ -1,0 +1,33 @@
+---
+title: "BOJ 16916 - 부분 문자열"
+date: "2024-07-13"
+description: "문자열 포함 여부를 파이썬 내장 함수로 판별하는 문제"
+tags: ["문자열", "구현"]
+platform: "boj"
+problem_number: "16916"
+problem_url: "https://www.acmicpc.net/problem/16916"
+difficulty: "브론즈 II"
+language: "python"
+---
+
+## 문제
+
+[BOJ 16916 - 부분 문자열](https://www.acmicpc.net/problem/16916)
+
+> 문자열 S에 패턴 P가 부분 문자열로 존재하는지 판별한다.
+
+## 풀이
+
+파이썬의 `__contains__` 메서드(내부적으로 Boyer-Moore 등 최적화된 문자열 검색)를 활용하여 S에 P가 포함되어 있으면 1, 아니면 0을 출력한다.
+
+## 코드
+
+```python
+s, p = (input().rstrip() for _ in range(2))
+print([0, 1][s.__contains__(p)])
+```
+
+## 복잡도
+
+- 시간: O(N + M) (N: S 길이, M: P 길이)
+- 공간: O(1)

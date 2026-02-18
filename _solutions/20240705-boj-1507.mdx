@@ -1,0 +1,51 @@
+---
+title: "BOJ 1507 - 궁금한 민호"
+date: "2024-07-05"
+description: "플로이드-워셜 역추적으로 최단 경로를 만족하는 최소 간선 집합을 구하는 문제"
+tags: ["그래프", "최단 경로", "플로이드-워셜"]
+platform: "boj"
+problem_number: "1507"
+problem_url: "https://www.acmicpc.net/problem/1507"
+difficulty: "골드 II"
+language: "python"
+---
+
+## 문제
+
+[BOJ 1507 - 궁금한 민호](https://www.acmicpc.net/problem/1507)
+
+> 모든 쌍 최단 거리 행렬이 주어질 때, 이를 만족하는 최소 도로 수의 총 거리 합을 구한다.
+
+## 풀이
+
+플로이드-워셜의 역과정을 수행한다. 모든 중간 노드 k에 대해, i→j 직접 거리가 i→k→j 경유 거리보다 크면 모순이므로 -1을 출력한다. 같으면 i→j 직접 간선이 불필요하므로 제거한다. 삼각 부등식 위반이 없는 경우 남은 직접 간선들의 가중치 합을 구한다.
+
+## 코드
+
+```python
+import sys
+
+input = sys.stdin.readline
+
+N = int(input())
+maps = [list(map(int, input().split())) for _ in range(N)]
+direct = [[True] * N for _ in range(N)]
+for k in range(N):
+    for i in range(N):
+        for j in range(N):
+            if i == j or i == k or k == j:
+                continue
+            if maps[i][j] > maps[i][k] + maps[k][j]:
+                print(-1)
+                exit()
+            elif maps[i][j] == maps[i][k] + maps[k][j]:
+                direct[i][j] = direct[j][i] = False
+
+maps = [[maps[i][j] if direct[i][j] else 0 for j in range(N)] for i in range(N)]
+print(sum(map(sum, maps)) // 2)
+```
+
+## 복잡도
+
+- 시간: O(N^3)
+- 공간: O(N^2)

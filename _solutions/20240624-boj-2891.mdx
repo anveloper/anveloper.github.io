@@ -1,0 +1,56 @@
+---
+title: "BOJ 2891 - 카약과 강풍"
+date: "2024-06-24"
+description: "카약이 부서진 팀에게 인접 팀의 여분 카약을 빌려주는 그리디 문제"
+tags: ["구현", "그리디"]
+platform: "boj"
+problem_number: "2891"
+problem_url: "https://www.acmicpc.net/problem/2891"
+difficulty: "실버 IV"
+language: "python"
+---
+
+## 문제
+
+[BOJ 2891 - 카약과 강풍](https://www.acmicpc.net/problem/2891)
+
+> 카약이 부서진 팀은 바로 옆 팀에서 여분 카약을 빌릴 수 있을 때, 출발하지 못하는 팀 수를 최소화한다.
+
+## 풀이
+
+부서진 팀과 여분이 있는 팀이 겹치면 먼저 자기 카약을 수리한다. 그 후 부서진 팀을 순서대로 순회하며, 왼쪽 인접 팀의 여분을 우선 빌리고 없으면 오른쪽 인접 팀의 여분을 빌린다. 빌리지 못한 팀의 수가 답이다.
+
+## 코드
+
+```python
+N, S, R = map(int, input().split())
+
+team_a = set(map(int, input().split()))
+team_b = set(map(int, input().split()))
+
+ans = 0
+
+diff = team_a & team_b
+team_a = list(team_a - diff)
+team_b = list(team_b - diff)
+
+if not team_a:
+    ans = 0
+else:
+    team_a.sort()
+
+    for t in team_a:
+        if t - 1 in team_b:
+            team_b.remove(t - 1)
+        elif t + 1 in team_b:
+            team_b.remove(t + 1)
+        else:
+            ans += 1
+
+print(ans)
+```
+
+## 복잡도
+
+- 시간: O(S * R)
+- 공간: O(S + R)

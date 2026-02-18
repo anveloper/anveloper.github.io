@@ -1,0 +1,35 @@
+---
+title: "BOJ 12833 - XORXORXOR"
+date: "2024-05-21"
+description: "XOR 연산을 C번 반복한 결과를 구하는 문제"
+tags: ["수학", "비트마스킹"]
+platform: "boj"
+problem_number: "12833"
+problem_url: "https://www.acmicpc.net/problem/12833"
+difficulty: "브론즈 I"
+language: "python"
+---
+
+## 문제
+
+[BOJ 12833 - XORXORXOR](https://www.acmicpc.net/problem/12833)
+
+> A에 B를 C번 XOR한 결과를 구한다.
+
+## 풀이
+
+XOR은 두 번 적용하면 원래 값으로 돌아오므로, C가 홀수일 때만 A XOR B를 적용하면 된다.
+
+## 코드
+
+```python
+a, b, c = map(int, input().split())
+for i in range(c % 2):
+    a ^= b
+print(a)
+```
+
+## 복잡도
+
+- 시간: O(1)
+- 공간: O(1)

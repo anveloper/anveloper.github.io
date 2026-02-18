@@ -1,0 +1,43 @@
+---
+title: "BOJ 1323 - 숫자 연결하기"
+date: "2024-07-08"
+description: "숫자 N을 반복 연결하여 K로 나누어떨어지는 최소 횟수를 나머지 연산으로 구하는 문제"
+tags: ["수학", "정수론"]
+platform: "boj"
+problem_number: "1323"
+problem_url: "https://www.acmicpc.net/problem/1323"
+difficulty: "골드 IV"
+language: "python"
+---
+
+## 문제
+
+[BOJ 1323 - 숫자 연결하기](https://www.acmicpc.net/problem/1323)
+
+> 숫자 N을 반복 이어 붙여 만든 수가 K의 배수가 되는 최소 반복 횟수를 구한다.
+
+## 풀이
+
+N을 GCD로 약분한 뒤, N을 이어 붙이는 과정을 나머지 연산으로 시뮬레이션한다. N의 자릿수만큼 10의 거듭제곱을 곱하고 N을 더한 뒤 K로 나눈 나머지를 추적한다. 나머지가 0이 되면 횟수를 출력하고, 이전에 나왔던 나머지가 반복되면 -1을 출력한다.
+
+## 코드
+
+```python
+import math, sys
+
+N, K = map(int, input().split())
+len = len(str(N))
+N, K = N // math.gcd(N, K), K // math.gcd(N, K)
+tmp = N
+for i in range(K):
+    if tmp % K == 0:
+        print(i + 1)
+        sys.exit()
+    tmp = (tmp * 10**len + N) % K
+print(-1)
+```
+
+## 복잡도
+
+- 시간: O(K)
+- 공간: O(1)

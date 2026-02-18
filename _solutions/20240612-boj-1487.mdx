@@ -1,0 +1,54 @@
+---
+title: "BOJ 1487 - 물건 팔기"
+date: "2024-06-12"
+description: "모든 가격 후보에 대해 순이익을 계산하여 최대 이익을 구하는 문제"
+tags: ["브루트포스"]
+platform: "boj"
+problem_number: "1487"
+problem_url: "https://www.acmicpc.net/problem/1487"
+difficulty: "실버 IV"
+language: "python"
+---
+
+## 문제
+
+[BOJ 1487 - 물건 팔기](https://www.acmicpc.net/problem/1487)
+
+> N명의 고객에 대해 물건 가격을 정할 때, 순이익을 최대화하는 가격을 구한다.
+
+## 풀이
+
+가능한 가격 후보는 고객들이 지불할 수 있는 최대 금액의 집합이다. 각 가격에 대해, 해당 가격 이상을 지불할 수 있고 배송비가 가격보다 작은 고객들에게 물건을 팔아 순이익을 계산한다. 모든 후보를 순회하며 최대 이익을 달성하는 가격을 출력한다.
+
+## 코드
+
+```python
+n = int(input())
+c_list = []
+d_list = []
+for i in range(n):
+    cost, deli = map(int, input().split())
+    c_list.append(cost)
+    d_list.append(deli)
+
+c_set = sorted(set(c_list))
+
+max_m = 0
+ans = 0
+for i in c_set:
+    money = 0
+    for j in range(n):
+        if i <= c_list[j] and i > d_list[j]:
+            money += i - d_list[j]
+
+    if max_m < money:
+        max_m = money
+        ans = i
+
+print(ans)
+```
+
+## 복잡도
+
+- 시간: O(N^2)
+- 공간: O(N)

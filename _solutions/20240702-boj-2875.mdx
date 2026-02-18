@@ -1,0 +1,39 @@
+---
+title: "BOJ 2875 - 대회 or 인턴"
+date: "2024-07-02"
+description: "여학생 2명 남학생 1명으로 팀을 구성할 때 인턴 인원을 고려한 최대 팀 수를 구하는 문제"
+tags: ["수학", "구현"]
+platform: "boj"
+problem_number: "2875"
+problem_url: "https://www.acmicpc.net/problem/2875"
+difficulty: "브론즈 III"
+language: "python"
+---
+
+## 문제
+
+[BOJ 2875 - 대회 or 인턴](https://www.acmicpc.net/problem/2875)
+
+> 여학생 N명, 남학생 M명 중 K명은 반드시 인턴을 해야 할 때, 여2+남1로 구성 가능한 최대 팀 수를 구한다.
+
+## 풀이
+
+여학생 2명과 남학생 1명을 한 팀으로 묶으면서, 남은 인원(N+M - 3*팀수)이 K명 이상이어야 한다는 조건을 만족할 때까지 반복하여 최대 팀 수를 구한다.
+
+## 코드
+
+```python
+N, M, K = map(int, input().split())
+ans = 0
+
+while N >= 2 and M >= 1 and N + M >= K + 3:
+    N -= 2
+    M -= 1
+    ans += 1
+print(ans)
+```
+
+## 복잡도
+
+- 시간: O(min(N, M))
+- 공간: O(1)

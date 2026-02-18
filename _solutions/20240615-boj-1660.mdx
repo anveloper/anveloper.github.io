@@ -1,0 +1,53 @@
+---
+title: "BOJ 1660 - 캡틴 이다솜"
+date: "2024-06-15"
+description: "사면체 수를 이용한 최소 분할 개수를 DP로 구하는 문제"
+tags: ["DP"]
+platform: "boj"
+problem_number: "1660"
+problem_url: "https://www.acmicpc.net/problem/1660"
+difficulty: "골드 V"
+language: "python"
+---
+
+## 문제
+
+[BOJ 1660 - 캡틴 이다솜](https://www.acmicpc.net/problem/1660)
+
+> N개의 대포알을 사면체 모양으로 쌓을 때, 필요한 최소 사면체 개수를 구한다.
+
+## 풀이
+
+먼저 N 이하의 사면체 수(1, 4, 10, 20, ...)를 모두 구한다. 사면체 수 i번째는 삼각수의 누적합이다. 이후 DP로 각 수를 사면체 수의 합으로 나타내는 최소 개수를 구한다. 전형적인 동전 교환 문제와 동일한 구조이다.
+
+## 코드
+
+```python
+import sys
+
+input = sys.stdin.readline
+
+n = int(input().rstrip())
+balls = []
+b = 0
+i = 1
+while b < n:
+    b += (i * (i + 1)) // 2
+    balls.append(b)
+    i += 1
+MAX = sys.maxsize
+dp = [MAX] * (n + 1)
+for i in range(1, n + 1):
+    for b in balls:
+        if b >= i:
+            if b == i:
+                dp[i] = 1
+            break
+        dp[i] = min(dp[i], 1 + dp[i - b])
+print(dp[n])
+```
+
+## 복잡도
+
+- 시간: O(N * T), T는 사면체 수의 개수
+- 공간: O(N)

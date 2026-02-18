@@ -1,0 +1,47 @@
+---
+title: "BOJ 1418 - K-세준수"
+date: "2024-06-10"
+description: "K 이하의 소인수만 가진 수의 개수를 에라토스테네스의 체로 구하는 문제"
+tags: ["수학", "브루트포스", "정수론", "에라토스테네스의 체"]
+platform: "boj"
+problem_number: "1418"
+problem_url: "https://www.acmicpc.net/problem/1418"
+difficulty: "실버 V"
+language: "python"
+---
+
+## 문제
+
+[BOJ 1418 - K-세준수](https://www.acmicpc.net/problem/1418)
+
+> 1부터 N까지의 수 중 K보다 큰 소인수를 가지지 않는 수(K-세준수)의 개수를 구한다.
+
+## 풀이
+
+에라토스테네스의 체로 소수를 구한 뒤, K보다 큰 소수의 배수를 모두 제거한다. 남은 수의 개수가 K-세준수의 개수이다. 1은 세준수이므로 초기값을 모두 1로 설정하고, K보다 큰 소수의 배수를 0으로 표시한 후 합산한다.
+
+## 코드
+
+```python
+N = int(input())
+K = int(input())
+
+primeList = [True] * (N + 1)
+for i in range(2, int(N**0.5) + 1):
+    if primeList[i]:
+        for j in range(2 * i, N + 1, i):
+            primeList[j] = False
+k_number = [1] * (N + 1)
+
+for i in range(2, N + 1):
+    if primeList[i] and i > K:
+        for j in range(i, N + 1, i):
+            k_number[j] = 0
+
+print(sum(k_number) - 1)
+```
+
+## 복잡도
+
+- 시간: O(N log log N)
+- 공간: O(N)
