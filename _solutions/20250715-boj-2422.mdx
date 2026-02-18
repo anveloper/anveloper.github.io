@@ -1,0 +1,49 @@
+---
+title: "BOJ 2422 - 한윤정이 이탈리아에 가서 아이스크림을 사먹는데"
+date: "2025-07-15"
+description: "브루트포스 알고리즘 문제"
+tags: ["브루트포스 알고리즘"]
+platform: "boj"
+problem_number: "2422"
+problem_url: "https://www.acmicpc.net/problem/2422"
+difficulty: "실버 IV"
+language: "python"
+---
+
+## 문제
+
+[BOJ 2422 - 한윤정이 이탈리아에 가서 아이스크림을 사먹는데](https://www.acmicpc.net/problem/2422)
+
+## 풀이
+
+가능한 모든 경우를 탐색하여 답을 구한다.
+
+## 코드
+
+```python
+import sys
+
+input = sys.stdin.readline
+
+n, m = map(int, input().split())
+ice = [[False for _ in range(n)] for _ in range(n)]
+for i in range(m):
+    i1, i2 = map(int, input().split())
+    ice[i1 - 1][i2 - 1] = True
+    ice[i2 - 1][i1 - 1] = True
+
+result = 0
+
+for i in range(n):
+    for j in range(i + 1, n):
+        for k in range(j + 1, n):
+            if not ice[i][j] and not ice[i][k] and not ice[j][k]:
+                result += 1
+
+print(result)
+```
+
+## 복잡도
+
+- 시간: O(N²)
+- 공간: O(N)

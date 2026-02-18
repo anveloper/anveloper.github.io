@@ -1,0 +1,96 @@
+---
+title: "BOJ 1786 - 찾기"
+date: "2022-06-13"
+description: "문자열, KMP 문제"
+tags: ["문자열", "KMP"]
+platform: "boj"
+problem_number: "1786"
+problem_url: "https://www.acmicpc.net/problem/1786"
+difficulty: "플래티넘 V"
+language: "java"
+---
+
+## 문제
+
+[BOJ 1786 - 찾기](https://www.acmicpc.net/problem/1786)
+
+## 풀이
+
+문자열 처리를 통해 문제를 해결한다.
+
+## 코드
+
+```java
+package com.ssafy.an.day149;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Day126BOJ1786문자열 { // 1786 찾기
+	static int N, M;
+	static int[] pi;
+	static String str, ptn;
+	static List<Integer> list;
+
+	public static void main(String args[]) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringBuilder sb = new StringBuilder();
+		str = br.readLine();
+		ptn = br.readLine();
+		list = new ArrayList<Integer>();
+
+		pi = getPi(ptn);
+		kmp();
+
+		for (int ele : list)
+			sb.append(ele).append(" ");
+
+		System.out.println(list.size());
+		System.out.println(sb.toString());
+		br.close();
+	}
+
+	static void kmp() {
+		int j = 0;
+		N = str.length();
+		M = ptn.length();
+
+		for (int i = 0; i < N; i++) {
+			while (j > 0 && str.charAt(i) != ptn.charAt(j))
+				j = pi[j - 1];
+
+			if (str.charAt(i) == ptn.charAt(j)) {
+				if (j + 1 == M) {
+					list.add(i - M + 2);
+					j = pi[j];
+				} else {
+					j++;
+				}
+			}
+		}
+	}
+
+	static int[] getPi(String str) {
+		int j = 0;
+		int n = str.length();
+		int[] pi = new int[n];
+
+		for (int i = 1; i < n; i++) {
+			while (j > 0 && str.charAt(j) != str.charAt(i))
+				j = pi[j - 1];
+
+			if (str.charAt(j) == str.charAt(i))
+				pi[i] = ++j;
+		}
+
+		return pi;
+	}
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

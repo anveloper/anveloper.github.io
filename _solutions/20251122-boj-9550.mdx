@@ -1,0 +1,54 @@
+---
+title: "BOJ 9550 - 아이들은 사탕을 좋아해"
+date: "2025-11-22"
+description: "수학, 사칙연산 문제"
+tags: ["수학", "사칙연산"]
+platform: "boj"
+problem_number: "9550"
+problem_url: "https://www.acmicpc.net/problem/9550"
+difficulty: "브론즈 III"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 9550 - 아이들은 사탕을 좋아해](https://www.acmicpc.net/problem/9550)
+
+## 풀이
+
+수학적 성질을 이용하여 풀이한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+
+using namespace std;
+
+int t, n, k, candy, result;
+
+int main()
+{
+  ios_base::sync_with_stdio(false);
+  cin.tie(NULL);
+  cout.tie(NULL);
+  cin >> t;
+  while (t--)
+  {
+    cin >> n >> k;
+    result = 0;
+    for (int i = 0; i < n; i++)
+    {
+      cin >> candy;
+      result += candy / k;
+    }
+    cout << result << "\n";
+  }
+  return 0;
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

@@ -1,0 +1,72 @@
+---
+title: "BOJ 1248 - Guess"
+date: "2024-04-08"
+description: "부분 합의 부호 행렬이 주어질 때 원래 수열을 복원하는 문제"
+tags: ["브루트포스", "백트래킹"]
+platform: "boj"
+problem_number: "1248"
+problem_url: "https://www.acmicpc.net/problem/1248"
+difficulty: "골드 III"
+language: "javascript"
+---
+
+## 문제
+
+[BOJ 1248 - Guess](https://www.acmicpc.net/problem/1248)
+
+> 길이 N인 수열에서 S[i][j]가 A[i]+...+A[j]의 부호(+, -, 0)일 때, 부호 행렬이 주어지면 원래 수열을 복원한다.
+
+## 풀이
+
+백트래킹으로 -10~10 범위의 수를 하나씩 배치하며, 배치할 때마다 현재까지의 부분 합이 부호 행렬과 일치하는지 검증한다.
+
+## 코드
+
+```javascript
+const solution = (input) => {
+  const N = +input[0];
+  const str = input[1].trim();
+  const sign = Array.from({ length: N }, () => Array(N).fill(""));
+  let idx = 0;
+  for (let i = 0; i < N; i++) {
+    for (let j = i; j < N; j++) {
+      sign[i][j] = str[idx++];
+    }
+  }
+
+  const arr = Array(N).fill(0);
+
+  const check = (pos) => {
+    let sum = 0;
+    for (let i = pos; i >= 0; i--) {
+      sum += arr[i];
+      const s = sign[i][pos];
+      if (s === "+" && sum <= 0) return false;
+      if (s === "-" && sum >= 0) return false;
+      if (s === "0" && sum !== 0) return false;
+    }
+    return true;
+  };
+
+  const recur = (pos) => {
+    if (pos === N) return true;
+    for (let v = -10; v <= 10; v++) {
+      arr[pos] = v;
+      if (check(pos) && recur(pos + 1)) return true;
+    }
+    return false;
+  };
+
+  recur(0);
+  return arr.join(" ");
+};
+
+const fs = require("fs");
+const input = fs.readFileSync("/dev/stdin").toString().trim().split("\n");
+console.log(solution(input));
+```
+
+## 복잡도
+
+- 시간: O(21^N) (백트래킹 가지치기로 실제 훨씬 빠름)
+- 공간: O(N²)

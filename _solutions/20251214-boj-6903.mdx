@@ -1,0 +1,54 @@
+---
+title: "BOJ 6903 - Trident"
+date: "2025-12-14"
+description: "구현 문제"
+tags: ["구현"]
+platform: "boj"
+problem_number: "6903"
+problem_url: "https://www.acmicpc.net/problem/6903"
+difficulty: "브론즈 III"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 6903 - Trident](https://www.acmicpc.net/problem/6903)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int main()
+{
+  cin.tie(nullptr);
+  cout.tie(nullptr);
+  ios_base::sync_with_stdio(false);
+
+  int t, s, h;
+  cin >> t >> s >> h;
+
+  for (int i = 0; i < t; ++i)
+  {
+    cout << '*' << string(s, ' ') << '*' << string(s, ' ') << '*';
+    cout << '\n';
+  }
+
+  cout << string(2 * s + 3, '*') << '\n';
+
+  for (int i = 0; i < h; ++i)
+  {
+    cout << string(s + 1, ' ') << '*' << '\n';
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

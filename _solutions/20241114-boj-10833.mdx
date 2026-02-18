@@ -1,0 +1,44 @@
+---
+title: "BOJ 10833 - 사과"
+date: "2024-11-14"
+description: "각 학교에 사과를 나눠줄 때 남는 사과의 총합을 구하는 문제"
+tags: ["수학", "사칙연산"]
+platform: "boj"
+problem_number: "10833"
+problem_url: "https://www.acmicpc.net/problem/10833"
+difficulty: "브론즈 III"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 10833 - 사과](https://www.acmicpc.net/problem/10833)
+
+> 각 학교의 학생 수와 사과 수가 주어질 때, 사과를 학생 수로 나눈 나머지의 총합을 구한다.
+
+## 풀이
+
+각 학교마다 사과 수를 학생 수로 나눈 나머지를 구하고, 모든 학교의 나머지를 합산하여 출력한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+using namespace std;
+int main()
+{
+  int student, apple, num, sum = 0;
+  cin >> num;
+  for (int i = 0; i < num; i++)
+  {
+    cin >> student >> apple;
+    sum += apple % student;
+  }
+  cout << sum << '\n';
+}
+```
+
+## 복잡도
+
+- 시간: O(N) (N: 학교 수)
+- 공간: O(1)

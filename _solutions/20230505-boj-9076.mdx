@@ -1,0 +1,51 @@
+---
+title: "BOJ 9076 - 점수 집계"
+date: "2023-05-05"
+description: "구현, 정렬 문제"
+tags: ["구현", "정렬"]
+platform: "boj"
+problem_number: "9076"
+problem_url: "https://www.acmicpc.net/problem/9076"
+difficulty: "브론즈 II"
+language: "java"
+---
+
+## 문제
+
+[BOJ 9076 - 점수 집계](https://www.acmicpc.net/problem/9076)
+
+## 풀이
+
+정렬을 활용하여 문제를 해결한다.
+
+## 코드
+
+```java
+package day499;
+
+import java.util.*;
+
+public class Day453BOJ9076점수집계 {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int num = sc.nextInt();
+    int[] score = new int[5];
+    for (int i = 0; i < num; i++) {
+      for (int j = 0; j < score.length; j++) {
+        score[j] = sc.nextInt();
+      }
+      Arrays.sort(score);
+      if (score[3] - score[1] >= 4) {
+        System.out.println("KIN");
+      } else
+        System.out.println(score[1] + score[2] + score[3]);
+    }
+    sc.close();
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N log N)
+- 공간: O(N)

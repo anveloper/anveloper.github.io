@@ -1,0 +1,49 @@
+---
+title: "BOJ 1676 - 팩토리얼 0의 개수"
+date: "2023-05-09"
+description: "수학 문제"
+tags: ["수학"]
+platform: "boj"
+problem_number: "1676"
+problem_url: "https://www.acmicpc.net/problem/1676"
+difficulty: "실버 V"
+language: "java"
+---
+
+## 문제
+
+[BOJ 1676 - 팩토리얼 0의 개수](https://www.acmicpc.net/problem/1676)
+
+## 풀이
+
+수학적 성질을 이용하여 풀이한다.
+
+## 코드
+
+```java
+package day499;
+
+import java.util.Scanner;
+
+public class Day457BOJ1676팩토리얼0의개수 {
+
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+
+    int num = sc.nextInt();
+    int ans = 0;
+
+    while (num >= 5) {
+      ans += num / 5;
+      num /= 5;
+    }
+    System.out.println(ans);
+    sc.close();
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

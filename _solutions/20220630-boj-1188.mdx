@@ -1,0 +1,54 @@
+---
+title: "BOJ 1188 - 음식 평론가"
+date: "2022-06-30"
+description: "수학, 정수론, 유클리드 호제법 문제"
+tags: ["수학", "정수론", "유클리드 호제법"]
+platform: "boj"
+problem_number: "1188"
+problem_url: "https://www.acmicpc.net/problem/1188"
+difficulty: "골드 IV"
+language: "java"
+---
+
+## 문제
+
+[BOJ 1188 - 음식 평론가](https://www.acmicpc.net/problem/1188)
+
+## 풀이
+
+수학적 성질을 이용하여 풀이한다.
+
+## 코드
+
+```java
+package com.ssafy.an.day149;
+
+import java.util.Scanner;
+
+public class Day143BOJ1188최대공약수 { // 1188 음식 평론가
+	public static void main(String[] args) throws Exception {
+		Scanner sc = new Scanner(System.in);
+		int N = sc.nextInt();
+		int M = sc.nextInt();
+		System.out.println(M - gcd(N, M));
+		sc.close();
+	}
+
+	private static int gcd(int n, int m) {
+		return n % m == 0 ? m : gcd(m, n % m);
+	}
+}
+//	static int gcd(int a, int b) { //최대공약수 구하는 함수
+//		while (b != 0) {
+//			int r = a % b;	
+//			a = b;
+//			b = r;
+//		}
+//		return a;
+//	}
+```
+
+## 복잡도
+
+- 시간: O(log N)
+- 공간: O(1)

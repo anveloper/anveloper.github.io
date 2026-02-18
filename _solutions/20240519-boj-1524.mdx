@@ -1,0 +1,41 @@
+---
+title: "BOJ 1524 - 세준세비"
+date: "2024-05-19"
+description: "두 군대의 병사 전투력을 비교하여 승자를 결정하는 문제"
+tags: ["구현", "정렬"]
+platform: "boj"
+problem_number: "1524"
+problem_url: "https://www.acmicpc.net/problem/1524"
+difficulty: "브론즈 I"
+language: "python"
+---
+
+## 문제
+
+[BOJ 1524 - 세준세비](https://www.acmicpc.net/problem/1524)
+
+> 세준이와 세비의 병사들이 전투할 때, 가장 약한 병사가 먼저 죽는 규칙으로 승자를 결정한다.
+
+## 풀이
+
+각 군대의 병사를 정렬한 뒤, 가장 강한 병사의 전투력을 비교하면 된다. 전투력이 같으면 세비 병사가 죽으므로 세준이 유리하다.
+
+## 코드
+
+```python
+n = int(input())
+for i in range(n):
+  tmp = input()
+  n, m = map(int,input().split())
+  n = max(list(map(int,input().split())))
+  m = max(list(map(int,input().split())))
+  if n >= m:
+    print("S")
+  else:
+    print("B")
+```
+
+## 복잡도
+
+- 시간: O(T × (N + M))
+- 공간: O(N + M)

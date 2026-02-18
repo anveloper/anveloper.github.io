@@ -1,0 +1,74 @@
+---
+title: "BOJ 1253 - 좋다"
+date: "2023-02-20"
+description: "자료 구조, 정렬, 이분 탐색 문제"
+tags: ["자료 구조", "정렬", "이분 탐색", "두 포인터"]
+platform: "boj"
+problem_number: "1253"
+problem_url: "https://www.acmicpc.net/problem/1253"
+difficulty: "골드 IV"
+language: "java"
+---
+
+## 문제
+
+[BOJ 1253 - 좋다](https://www.acmicpc.net/problem/1253)
+
+## 풀이
+
+이분 탐색을 통해 최적의 값을 탐색한다. 투 포인터 기법을 활용한다.
+
+## 코드
+
+```java
+package day399;
+
+import java.io.*;
+import java.util.*;
+
+public class Day378BOJ1253좋다 {
+  static int N, ans = 0;
+  static int[] arr;
+
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    StringTokenizer st = new StringTokenizer(br.readLine());
+
+    N = Integer.parseInt(st.nextToken());
+    arr = new int[N];
+
+    st = new StringTokenizer(br.readLine());
+    for (int i = 0; i < N; i++)
+      arr[i] = Integer.parseInt(st.nextToken());
+
+    Arrays.sort(arr);
+    for (int i = 0; i < N; i++) {
+      int l = 0, r = N - 1, num = arr[i];
+      while (l < r) {
+        int tmp = arr[l] + arr[r];
+        if (tmp < num)
+          l++;
+        else if (tmp > num)
+          r--;
+        else {
+          if (l == i)
+            l++;
+          else if (r == i)
+            r--;
+          else {
+            ans++;
+            break;
+          }
+        }
+      }
+    }
+    System.out.println(ans);
+    br.close();
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N log N)
+- 공간: O(N)

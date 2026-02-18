@@ -1,0 +1,50 @@
+---
+title: "BOJ 1085 - 직사각형에서 탈출"
+date: "2023-08-13"
+description: "수학, 기하학 문제"
+tags: ["수학", "기하학"]
+platform: "boj"
+problem_number: "1085"
+problem_url: "https://www.acmicpc.net/problem/1085"
+difficulty: "브론즈 III"
+language: "java"
+---
+
+## 문제
+
+[BOJ 1085 - 직사각형에서 탈출](https://www.acmicpc.net/problem/1085)
+
+## 풀이
+
+수학적 성질을 이용하여 풀이한다.
+
+## 코드
+
+```java
+package day599;
+
+import java.io.*;
+import java.util.*;
+
+public class Day553BOJ1085직사각형 {
+
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+
+    int x = Integer.parseInt(st.nextToken());
+    int y = Integer.parseInt(st.nextToken());
+    int w = Integer.parseInt(st.nextToken());
+    int h = Integer.parseInt(st.nextToken());
+
+    int x_min = Math.min(x, w - x);
+    int y_min = Math.min(y, h - y);
+    System.out.println(Math.min(x_min, y_min));
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

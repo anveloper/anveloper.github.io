@@ -1,0 +1,63 @@
+---
+title: "BOJ 1822 - 차집합"
+date: "2023-10-19"
+description: "자료 구조, 정렬, 집합과 맵 문제"
+tags: ["자료 구조", "정렬", "집합과 맵", "해시를 사용한 집합과 맵", "트리를 사용한 집합과 맵"]
+platform: "boj"
+problem_number: "1822"
+problem_url: "https://www.acmicpc.net/problem/1822"
+difficulty: "실버 IV"
+language: "java"
+---
+
+## 문제
+
+[BOJ 1822 - 차집합](https://www.acmicpc.net/problem/1822)
+
+## 풀이
+
+정렬을 활용하여 문제를 해결한다.
+
+## 코드
+
+```java
+package day649;
+
+import java.io.*;
+import java.util.*;
+
+public class Day622BOJ1822차집합 {
+
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    StringTokenizer st = new StringTokenizer(br.readLine());
+    StringBuilder sb = new StringBuilder();
+
+    int A = Integer.parseInt(st.nextToken());
+    int B = Integer.parseInt(st.nextToken());
+
+    TreeSet<Integer> Aset = new TreeSet<>();
+
+    st = new StringTokenizer(br.readLine());
+    for (int i = 0; i < A; i++) {
+      Aset.add(Integer.parseInt(st.nextToken()));
+    }
+    st = new StringTokenizer(br.readLine());
+    for (int j = 0; j < B; j++) {
+      int Bnum = Integer.parseInt(st.nextToken());
+      Aset.remove(Bnum);
+    }
+
+    sb.append(Aset.size() + "\n");
+    for (Integer num : Aset) {
+      sb.append(num + " ");
+    }
+    System.out.println(sb);
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N log N)
+- 공간: O(N)

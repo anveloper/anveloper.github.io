@@ -1,0 +1,55 @@
+---
+title: "BOJ 3076 - 상근이의 체스판"
+date: "2024-09-08"
+description: "R x C 체스판을 A x B 크기 블록으로 확대하여 출력하는 문제"
+tags: ["구현", "문자열"]
+platform: "boj"
+problem_number: "3076"
+problem_url: "https://www.acmicpc.net/problem/3076"
+difficulty: "브론즈 II"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 3076 - 상근이의 체스판](https://www.acmicpc.net/problem/3076)
+
+> R x C 체스판의 각 칸을 A x B 크기로 확대하여 출력한다. 짝수 칸은 X, 홀수 칸은 .으로 채운다.
+
+## 풀이
+
+행 인덱스 i와 열 인덱스 k의 합이 짝수이면 `X`, 홀수이면 `.`을 출력한다. 각 칸은 가로 B개, 세로 A개로 확대되므로 4중 반복문으로 처리한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+using namespace std;
+int main()
+{
+  int r, c, a, b;
+  cin >> r >> c >> a >> b;
+  for (int i = 0; i < r; i++)
+  {
+    for (int j = 0; j < a; j++)
+    {
+      for (int k = 0; k < c; k++)
+      {
+        for (int l = 0; l < b; l++)
+        {
+          if ((i + k) % 2 == 0)
+            cout << "X";
+          else
+            cout << ".";
+        }
+      }
+      cout << endl;
+    }
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(R * C * A * B)
+- 공간: O(1)

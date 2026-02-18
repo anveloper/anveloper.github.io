@@ -1,0 +1,54 @@
+---
+title: "BOJ 6118 - 숨바꼭질"
+date: "2025-07-15"
+description: "그래프 이론, 그래프 탐색, 너비 우선 탐색 문제"
+tags: ["그래프 이론", "그래프 탐색", "너비 우선 탐색"]
+platform: "boj"
+problem_number: "6118"
+problem_url: "https://www.acmicpc.net/problem/6118"
+difficulty: "실버 I"
+language: "python"
+---
+
+## 문제
+
+[BOJ 6118 - 숨바꼭질](https://www.acmicpc.net/problem/6118)
+
+## 풀이
+
+그래프 탐색(BFS/DFS)을 활용하여 탐색한다.
+
+## 코드
+
+```python
+from collections import deque
+
+
+def bfs(node):
+    q = deque()
+    q.append(node)
+    check[node] = 1
+    while q:
+        node = q.popleft()
+        for n in graph[node]:
+            if check[n] == 0:
+                check[n] = check[node] + 1
+                q.append(n)
+
+
+N, M = map(int, input().split())
+graph = [[] for _ in range(N + 1)]
+for _ in range(M):
+    u, v = map(int, input().split())
+    graph[u].append(v)
+    graph[v].append(u)
+check = [0] * (N + 1)
+bfs(1)
+m = max(check)
+print(check.index(m), m - 1, check.count(m))
+```
+
+## 복잡도
+
+- 시간: O(V + E)
+- 공간: O(V + E)

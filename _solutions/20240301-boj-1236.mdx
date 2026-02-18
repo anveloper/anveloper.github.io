@@ -1,0 +1,67 @@
+---
+title: "BOJ 1236 - 성 지키기"
+date: "2024-03-01"
+description: "구현 문제"
+tags: ["구현"]
+platform: "boj"
+problem_number: "1236"
+problem_url: "https://www.acmicpc.net/problem/1236"
+difficulty: "브론즈 I"
+language: "java"
+---
+
+## 문제
+
+[BOJ 1236 - 성 지키기](https://www.acmicpc.net/problem/1236)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```java
+package day799;
+
+import java.io.*;
+import java.util.*;
+
+public class Day759BOJ1236성지키기 {
+	
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		int N = Integer.parseInt(st.nextToken());
+		int M = Integer.parseInt(st.nextToken());
+		int count = 0;
+		String[] arr = new String[N];
+		
+		for(int i = 0; i < N; i++) {
+			arr[i] = br.readLine();
+			if(arr[i].contains("X") == false) {
+				count++;
+			}
+		}
+		int max = count;
+		count = 0;
+		
+		for(int i = 0; i < M; i++) {
+			int counts = 0;
+			for(int j = 0; j < N; j++) {
+				if(arr[j].charAt(i) == '.') {
+					counts++;
+				}
+			}
+			if(counts == N) count++;
+		}
+		max = Math.max(max, count);
+		
+		System.out.println(max);
+	}
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

@@ -1,0 +1,47 @@
+---
+title: "BOJ 11720 - 숫자의 합"
+date: "2023-01-25"
+description: "구현, 수학, 문자열 문제"
+tags: ["구현", "수학", "문자열"]
+platform: "boj"
+problem_number: "11720"
+problem_url: "https://www.acmicpc.net/problem/11720"
+difficulty: "브론즈 IV"
+language: "java"
+---
+
+## 문제
+
+[BOJ 11720 - 숫자의 합](https://www.acmicpc.net/problem/11720)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```java
+package day399;
+
+import java.io.*;
+
+public class Day352BOJ11720숫자의합 {
+    public static void main(String[] args) throws Exception {
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        br.readLine();
+
+        int sum = 0;
+
+        for (byte value : br.readLine().getBytes())
+            sum += (value - '0');
+
+        System.out.print(sum);
+    }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

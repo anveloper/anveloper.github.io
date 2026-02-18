@@ -1,0 +1,84 @@
+---
+title: "BOJ 2456 - 나는 학급회장이다"
+date: "2024-08-08"
+description: "투표 점수와 다중 조건 분기로 학급회장을 선출하는 문제"
+tags: ["구현", "많은 조건 분기"]
+platform: "boj"
+problem_number: "2456"
+problem_url: "https://www.acmicpc.net/problem/2456"
+difficulty: "브론즈 I"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 2456 - 나는 학급회장이다](https://www.acmicpc.net/problem/2456)
+
+> 3명의 후보에 대한 투표 결과에서 가중 점수가 가장 높은 사람을 학급회장으로 선출한다. 동점이면 3점 득표 수, 2점 득표 수 순으로 비교한다.
+
+## 풀이
+
+각 후보별로 1점, 2점, 3점 득표 수를 집계하고 가중 합계를 구한다. 최고 점수를 가진 후보를 찾되, 동점이면 3점 수, 2점 수 순서로 비교하여 결정한다. 끝까지 동일하면 0을 출력한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int score[3][4];
+
+int main()
+{
+  cin.tie(NULL);
+  ios_base::sync_with_stdio(false);
+  int n;
+  cin >> n;
+  for (int i = 0; i < n; i++)
+  {
+    int f, s, t;
+    cin >> f >> s >> t;
+    score[0][f - 1]++;
+    score[1][s - 1]++;
+    score[2][t - 1]++;
+  }
+  int idx = -1, max = 0;
+  bool check = false;
+  for (int i = 0; i < 3; i++)
+  {
+    score[i][3] = score[i][0] * 1 + score[i][1] * 2 + score[i][2] * 3;
+    if (max < score[i][3])
+    {
+      max = score[i][3];
+      idx = i;
+      check = true;
+    }
+    else if (max == score[i][3])
+    {
+      if (score[idx][0] < score[i][0])
+      {
+        idx = i;
+        check = true;
+      }
+      else if (score[idx][0] == score[i][0] && score[idx][1] < score[i][1])
+      {
+        idx = i;
+        check = true;
+      }
+      else if (score[idx][0] == score[i][0] && score[idx][1] == score[i][1])
+      {
+        check = false;
+      }
+    }
+  }
+  if (check == false)
+    idx = -1;
+  cout << idx + 1 << " " << max;
+  return 0;
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(1)

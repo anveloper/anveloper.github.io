@@ -1,0 +1,59 @@
+---
+title: "BOJ 2230 - 수 고르기"
+date: "2023-01-27"
+description: "정렬, 두 포인터 문제"
+tags: ["정렬", "두 포인터"]
+platform: "boj"
+problem_number: "2230"
+problem_url: "https://www.acmicpc.net/problem/2230"
+difficulty: "골드 V"
+language: "java"
+---
+
+## 문제
+
+[BOJ 2230 - 수 고르기](https://www.acmicpc.net/problem/2230)
+
+## 풀이
+
+정렬을 활용하여 문제를 해결한다. 투 포인터 기법을 활용한다.
+
+## 코드
+
+```java
+import java.io.*;
+import java.util.*;
+
+public class Day354BOJ2230수고르기 {
+    static int N, M, s, e, tmp, ans = Integer.MAX_VALUE;
+    static int[] arr;
+
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        N = Integer.parseInt(st.nextToken());
+        M = Integer.parseInt(st.nextToken());
+
+        arr = new int[N];
+
+        for (int i = 0; i < N; i++)
+            arr[i] = Integer.parseInt(br.readLine());
+        Arrays.sort(arr);
+
+        for (s = 0; s < N; s++) {
+            while (e < N - 1 && arr[e] - arr[s] < M)
+                e++;
+
+            if (arr[e] - arr[s] >= M)
+                ans = Math.min(ans, arr[e] - arr[s]);
+        }
+        System.out.println(ans);
+        br.close();
+    }
+}
+```
+
+## 복잡도
+
+- 시간: O(N log N)
+- 공간: O(N)

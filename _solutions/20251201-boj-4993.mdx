@@ -1,0 +1,106 @@
+---
+title: "BOJ 4993 - Red and Black"
+date: "2025-12-01"
+description: "너비 우선 탐색, 깊이 우선 탐색, 그래프 이론 문제"
+tags: ["너비 우선 탐색", "깊이 우선 탐색", "그래프 이론", "그래프 탐색"]
+platform: "boj"
+problem_number: "4993"
+problem_url: "https://www.acmicpc.net/problem/4993"
+difficulty: "실버 I"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 4993 - Red and Black](https://www.acmicpc.net/problem/4993)
+
+## 풀이
+
+그래프 탐색(BFS/DFS)을 활용하여 탐색한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+#include <queue>
+#include <cstring>
+using namespace std;
+
+int W, H;
+char grid[21][21];
+bool visited[21][21];
+
+// 상하좌우 이동
+int dx[] = {-1, 1, 0, 0};
+int dy[] = {0, 0, -1, 1};
+
+int bfs(int startX, int startY)
+{
+  queue<pair<int, int>> q;
+  q.push({startX, startY});
+  visited[startX][startY] = true;
+  int count = 1;
+
+  while (!q.empty())
+  {
+    int x = q.front().first;
+    int y = q.front().second;
+    q.pop();
+
+    for (int i = 0; i < 4; i++)
+    {
+      int nx = x + dx[i];
+      int ny = y + dy[i];
+
+      // 범위 체크 및 방문 가능 여부 확인
+      if (nx >= 0 && nx < H && ny >= 0 && ny < W &&
+          !visited[nx][ny] && grid[nx][ny] != '#')
+      {
+        visited[nx][ny] = true;
+        q.push({nx, ny});
+        count++;
+      }
+    }
+  }
+
+  return count;
+}
+
+int main()
+{
+  while (true)
+  {
+    cin >> W >> H;
+
+    if (W == 0 && H == 0)
+      break;
+
+    memset(visited, false, sizeof(visited));
+
+    int startX, startY;
+
+    // 그리드 입력 및 시작 위치 찾기
+    for (int i = 0; i < H; i++)
+    {
+      for (int j = 0; j < W; j++)
+      {
+        cin >> grid[i][j];
+        if (grid[i][j] == '@')
+        {
+          startX = i;
+          startY = j;
+        }
+      }
+    }
+
+    cout << bfs(startX, startY) << '\n';
+  }
+
+  return 0;
+}
+```
+
+## 복잡도
+
+- 시간: O(V + E)
+- 공간: O(V + E)

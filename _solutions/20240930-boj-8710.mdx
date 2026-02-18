@@ -1,0 +1,51 @@
+---
+title: "BOJ 8710 - Koszykarz"
+date: "2024-09-30"
+description: "목표 키에 도달하기 위해 필요한 신발 수를 구하는 문제"
+tags: ["수학", "사칙연산"]
+platform: "boj"
+problem_number: "8710"
+problem_url: "https://www.acmicpc.net/problem/8710"
+difficulty: "브론즈 IV"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 8710 - Koszykarz](https://www.acmicpc.net/problem/8710)
+
+> 현재 키 K, 목표 키 W, 신발 한 켤레당 증가 높이 M이 주어질 때, 목표에 도달하기 위한 최소 신발 수를 구한다.
+
+## 풀이
+
+목표 키와 현재 키의 차이를 구한 뒤, 신발 한 켤레의 높이로 나누어 올림 값을 계산한다. 이미 목표 이상이면 0을 출력한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int main()
+{
+  int k, w, m;
+  cin >> k >> w >> m;
+  k = w - k;
+  if (k <= 0)
+    cout << 0;
+  else
+  {
+    w = k / m;
+    if (k % m)
+      ++w;
+    cout << w;
+  }
+
+  return 0;
+}
+```
+
+## 복잡도
+
+- 시간: O(1)
+- 공간: O(1)

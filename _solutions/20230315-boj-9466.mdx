@@ -1,0 +1,82 @@
+---
+title: "BOJ 9466 - 텀 프로젝트"
+date: "2023-03-15"
+description: "그래프 이론, 그래프 탐색, 깊이 우선 탐색 문제"
+tags: ["그래프 이론", "그래프 탐색", "깊이 우선 탐색"]
+platform: "boj"
+problem_number: "9466"
+problem_url: "https://www.acmicpc.net/problem/9466"
+difficulty: "골드 III"
+language: "java"
+---
+
+## 문제
+
+[BOJ 9466 - 텀 프로젝트](https://www.acmicpc.net/problem/9466)
+
+## 풀이
+
+그래프 탐색(BFS/DFS)을 활용하여 탐색한다. 깊이 우선 탐색(DFS)을 활용하여 탐색한다.
+
+## 코드
+
+```java
+package day449;
+
+import java.util.*;
+import java.io.*;
+
+public class Day402BOJ9466텀프로젝트 {
+  static int T, N, cnt;
+  static int[] arr;
+  static boolean[] visit, check;
+
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    StringBuilder sb = new StringBuilder();
+    StringTokenizer st = null;
+
+    T = Integer.parseInt(br.readLine());
+
+    for (int tc = 0; tc < T; tc++) {
+      N = Integer.parseInt(br.readLine());
+      arr = new int[N + 1];
+      visit = new boolean[N + 1];
+      check = new boolean[N + 1];
+      cnt = 0;
+
+      st = new StringTokenizer(br.readLine());
+      for (int i = 1; i < N + 1; i++)
+        arr[i] = Integer.parseInt(st.nextToken());
+
+      for (int i = 1; i < N + 1; i++)
+        dfs(i);
+      sb.append(N - cnt).append("\n");
+    }
+    System.out.println(sb);
+    br.close();
+  }
+
+  static void dfs(int cur) {
+    if (visit[cur])
+      return;
+    visit[cur] = true;
+    int next = arr[cur];
+    if (!visit[next])
+      dfs(next);
+    else {
+      if (!check[next]) {
+        cnt++;
+        for (int i = next; i != cur; i = arr[i])
+          cnt++;
+      }
+    }
+    check[cur] = true;
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(V + E)
+- 공간: O(V + E)

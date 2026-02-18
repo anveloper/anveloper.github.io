@@ -1,0 +1,69 @@
+---
+title: "BOJ 7513 - 준살 프로그래밍 대회"
+date: "2025-12-20"
+description: "구현, 문자열 문제"
+tags: ["구현", "문자열"]
+platform: "boj"
+problem_number: "7513"
+problem_url: "https://www.acmicpc.net/problem/7513"
+difficulty: "브론즈 II"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 7513 - 준살 프로그래밍 대회](https://www.acmicpc.net/problem/7513)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+using namespace std;
+int tc, m, n, k, idx;
+string words[51];
+int main()
+{
+  ios::sync_with_stdio(0), cin.tie(0);
+
+  cin >> tc;
+
+  for (int t = 1; t <= tc; ++t)
+  {
+    cout << "Scenario #" << t << ":\n";
+
+    cin >> m;
+
+    for (int i = 0; i < m; ++i)
+    {
+      cin >> words[i];
+    }
+
+    cin >> n;
+
+    while (n--)
+    {
+      cin >> k;
+
+      while (k--)
+      {
+        cin >> idx;
+
+        cout << words[idx];
+      }
+      cout << "\n";
+    }
+
+    cout << "\n";
+  }
+  return 0;
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

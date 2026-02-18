@@ -1,0 +1,53 @@
+---
+title: "BOJ 6780 - Sumac Sequences"
+date: "2026-01-29"
+description: "수학, 구현, 사칙연산 문제"
+tags: ["수학", "구현", "사칙연산"]
+platform: "boj"
+problem_number: "6780"
+problem_url: "https://www.acmicpc.net/problem/6780"
+difficulty: "브론즈 III"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 6780 - Sumac Sequences](https://www.acmicpc.net/problem/6780)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+  ios::sync_with_stdio(false);
+  cin.tie(nullptr);
+  long long t1, t2;
+  if (!(cin >> t1))
+    return 0;
+  cin >> t2;
+  int len = 2;
+  long long a = t1, b = t2;
+  while (a >= b)
+  {
+    long long c = a - b;
+    a = b;
+    b = c;
+    ++len;
+  }
+  cout << len << '\n';
+  return 0;
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

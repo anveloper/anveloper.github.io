@@ -1,0 +1,61 @@
+---
+title: "BOJ 3943 - 헤일스톤 수열"
+date: "2024-08-13"
+description: "콜라츠 추측에 따라 수열을 생성하며 최댓값을 구하는 시뮬레이션 문제"
+tags: ["구현", "시뮬레이션"]
+platform: "boj"
+problem_number: "3943"
+problem_url: "https://www.acmicpc.net/problem/3943"
+difficulty: "브론즈 II"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 3943 - 헤일스톤 수열](https://www.acmicpc.net/problem/3943)
+
+> 양의 정수 N이 주어졌을 때, 홀수면 3N+1, 짝수면 N/2를 반복하여 1이 될 때까지의 수열에서 최댓값을 구한다.
+
+## 풀이
+
+콜라츠 추측(헤일스톤 수열)을 시뮬레이션하는 문제다. N이 1보다 클 동안 홀수면 `3*N+1`, 짝수면 `N/2`를 반복하면서 매 단계 최댓값을 갱신한다. 비트 AND 연산(`n & 1`)으로 홀짝을 판별하며, 값이 커질 수 있으므로 `unsigned long long`을 사용한다.
+
+## 코드
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+#define ullint unsigned long long int
+
+int main()
+{
+  ios_base::sync_with_stdio(0);
+  cin.tie(0);
+  cout.tie(0);
+  int T;
+  cin >> T;
+  while (T--)
+  {
+    ullint n;
+    cin >> n;
+    ullint tck_max = n;
+    while (n > 1)
+    {
+      n = n & 1 ? n * 3 + 1 : n / 2;
+      tck_max = max(tck_max, n);
+    }
+    cout << tck_max;
+    if (T)
+    {
+      cout << '\n';
+    }
+  }
+  return 0;
+}
+```
+
+## 복잡도
+
+- 시간: O(T * K) (K는 수열이 1에 도달할 때까지의 반복 횟수)
+- 공간: O(1)

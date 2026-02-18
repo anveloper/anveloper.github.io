@@ -1,0 +1,78 @@
+---
+title: "BOJ 11497 - 통나무 건너뛰기"
+date: "2023-07-21"
+description: "그리디 알고리즘, 정렬 문제"
+tags: ["그리디 알고리즘", "정렬"]
+platform: "boj"
+problem_number: "11497"
+problem_url: "https://www.acmicpc.net/problem/11497"
+difficulty: "실버 I"
+language: "java"
+---
+
+## 문제
+
+[BOJ 11497 - 통나무 건너뛰기](https://www.acmicpc.net/problem/11497)
+
+## 풀이
+
+그리디 알고리즘으로 매 단계 최선의 선택을 한다.
+
+## 코드
+
+```java
+package day549;
+
+import java.io.*;
+import java.util.*;
+
+public class Day530BOJ11497통나무건너뛰기 {
+  static int t, n;
+  static int arr[];
+  static StringBuilder sb = new StringBuilder();
+
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+    t = Integer.parseInt(br.readLine());
+
+    while (t > 0) {
+      t--;
+      n = Integer.parseInt(br.readLine());
+      int min = Integer.MAX_VALUE;
+      arr = new int[n];
+      String[] t = br.readLine().split(" ");
+      for (int i = 0; i < n; i++) {
+        arr[i] = Integer.parseInt(t[i]);
+      }
+
+      int ans[] = new int[n];
+      int left = 0;
+      int right = n - 1;
+
+      Arrays.sort(arr);
+
+      for (int i = 0; i < n; i++) {
+        if (i % 2 != 0) {
+          ans[left] = arr[i];
+          left += 1;
+        } else {
+          ans[right] = arr[i];
+          right -= 1;
+        }
+      }
+      min = Math.abs(ans[0] - ans[n - 1]);
+      for (int i = 1; i < n; i++) {
+        min = Math.max(min, Math.abs(ans[i] - ans[i - 1]));
+      }
+      System.out.println(min);
+    }
+
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N log N)
+- 공간: O(N)

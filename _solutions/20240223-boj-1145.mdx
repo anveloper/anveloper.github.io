@@ -1,0 +1,60 @@
+---
+title: "BOJ 1145 - 적어도 대부분의 배수"
+date: "2024-02-23"
+description: "브루트포스 알고리즘 문제"
+tags: ["브루트포스 알고리즘"]
+platform: "boj"
+problem_number: "1145"
+problem_url: "https://www.acmicpc.net/problem/1145"
+difficulty: "브론즈 I"
+language: "java"
+---
+
+## 문제
+
+[BOJ 1145 - 적어도 대부분의 배수](https://www.acmicpc.net/problem/1145)
+
+## 풀이
+
+가능한 모든 경우를 탐색하여 답을 구한다.
+
+## 코드
+
+```java
+package day799;
+
+import java.io.*;
+import java.util.*;
+
+public class Day752BOJ1145적어도대부분배수 {
+
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    int N = 0;
+    int cnt = 0;
+    int[] arr = new int[5];
+
+    StringTokenizer st = new StringTokenizer(br.readLine());
+    for (int i = 0; i < 5; i++) {
+      arr[i] = Integer.parseInt(st.nextToken());
+    }
+
+    while (true) {
+      N++;
+      for (int i = 0; i < 5; i++) {
+        if (N >= arr[i] && N % arr[i] == 0)
+          cnt++;
+      }
+      if (cnt > 2)
+        break;
+      cnt = 0;
+    }
+    System.out.println(N);
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N²)
+- 공간: O(N)

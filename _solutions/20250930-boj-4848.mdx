@@ -1,0 +1,76 @@
+---
+title: "BOJ 4848 - 집합 숫자 표기법"
+date: "2025-09-30"
+description: "자료 구조, 해시를 사용한 집합과 맵, 문자열 문제"
+tags: ["자료 구조", "해시를 사용한 집합과 맵", "문자열", "집합과 맵"]
+platform: "boj"
+problem_number: "4848"
+problem_url: "https://www.acmicpc.net/problem/4848"
+difficulty: "실버 II"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 4848 - 집합 숫자 표기법](https://www.acmicpc.net/problem/4848)
+
+## 풀이
+
+문자열 처리를 통해 문제를 해결한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+
+using namespace std;
+
+int main(void)
+{
+  int T = 0;
+  string DP[16];
+  string str1;
+  string str2;
+
+  cin >> T;
+
+  DP[0] = "{}";
+  DP[1] = "{{}}";
+  DP[2] = "{{},{{}}}";
+
+  for (int i = 3; i < 16; i++)
+  {
+    DP[i] = '{';
+
+    for (int j = 0; j < i; j++)
+    {
+      DP[i] += DP[j] + ",";
+    }
+
+    DP[i].at(DP[i].size() - 1) = '}';
+  }
+
+  for (int t = 0; t < T; t++)
+  {
+    cin >> str1 >> str2;
+    int num1 = 0, num2 = 0;
+
+    for (int i = 0; i < 16; i++)
+    {
+      if (str1 == DP[i])
+        num1 = i;
+      if (str2 == DP[i])
+        num2 = i;
+    }
+
+    cout << DP[num1 + num2] << endl;
+  }
+
+  return 0;
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

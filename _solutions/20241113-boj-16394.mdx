@@ -1,0 +1,41 @@
+---
+title: "BOJ 16394 - 홍익대학교"
+date: "2024-11-13"
+description: "입력 연도에서 1946을 빼는 사칙연산 문제"
+tags: ["수학", "사칙연산"]
+platform: "boj"
+problem_number: "16394"
+problem_url: "https://www.acmicpc.net/problem/16394"
+difficulty: "브론즈 V"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 16394 - 홍익대학교](https://www.acmicpc.net/problem/16394)
+
+> 연도가 주어지면 홍익대학교 개교 후 몇 주년인지 구한다.
+
+## 풀이
+
+홍익대학교는 1946년에 개교하였으므로 입력 연도에서 1946을 빼서 출력한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int main(int argc, char *argv[])
+{
+  int n;
+  cin >> n;
+  cout << n - 1946 << endl;
+  return 0;
+}
+```
+
+## 복잡도
+
+- 시간: O(1)
+- 공간: O(1)

@@ -1,0 +1,40 @@
+---
+title: "BOJ 1564 - 팩토리얼5"
+date: "2024-05-03"
+description: "N!의 0이 아닌 마지막 5자리를 구하는 문제"
+tags: ["수학", "구현"]
+platform: "boj"
+problem_number: "1564"
+problem_url: "https://www.acmicpc.net/problem/1564"
+difficulty: "실버 I"
+language: "javascript"
+---
+
+## 문제
+
+[BOJ 1564 - 팩토리얼5](https://www.acmicpc.net/problem/1564)
+
+> N!에서 뒤의 0을 제거한 후 마지막 5자리를 구한다.
+
+## 풀이
+
+팩토리얼을 순차적으로 곱하면서 뒤의 0을 제거하고, 하위 12자리만 유지하여 오버플로를 방지한다.
+
+## 코드
+
+```javascript
+const solution = (input) => {
+  const N = Number(input);
+  let ans = 1;
+  for (let i = 2; i <= N; i++) { ans *= i; while (ans % 10 === 0) ans /= 10; ans %= 1000000000000; }
+  return (ans % 100000).toString().padStart(5, "0");
+};
+const fs = require("fs");
+const input = fs.readFileSync("/dev/stdin").toString().trim().split("\n");
+console.log(solution(input));
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(1)

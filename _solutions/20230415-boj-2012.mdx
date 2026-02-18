@@ -1,0 +1,55 @@
+---
+title: "BOJ 2012 - 등수 매기기"
+date: "2023-04-15"
+description: "그리디 알고리즘, 정렬 문제"
+tags: ["그리디 알고리즘", "정렬"]
+platform: "boj"
+problem_number: "2012"
+problem_url: "https://www.acmicpc.net/problem/2012"
+difficulty: "실버 III"
+language: "java"
+---
+
+## 문제
+
+[BOJ 2012 - 등수 매기기](https://www.acmicpc.net/problem/2012)
+
+## 풀이
+
+그리디 알고리즘으로 매 단계 최선의 선택을 한다.
+
+## 코드
+
+```java
+package day449;
+
+import java.io.*;
+import java.util.*;
+
+public class Day434BOJ2012등수매기기 {
+  static int N;
+  static int[] arr;
+  static long ans = 0;
+
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    N = Integer.parseInt(br.readLine());
+    arr = new int[N + 1];
+    arr[0] = 0;
+    for (int i = 1; i <= N; i++) {
+      arr[i] = Integer.parseInt(br.readLine());
+    }
+    Arrays.sort(arr);
+
+    for (int i = 1; i <= N; i++)
+      ans += Math.abs(i - arr[i]);
+
+    System.out.println(ans);
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N log N)
+- 공간: O(N)

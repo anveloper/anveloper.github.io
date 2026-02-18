@@ -1,0 +1,59 @@
+---
+title: "BOJ 5596 - 시험 점수"
+date: "2024-09-14"
+description: "두 학생의 4과목 점수 합을 비교하여 큰 값을 출력하는 문제"
+tags: ["수학", "사칙연산"]
+platform: "boj"
+problem_number: "5596"
+problem_url: "https://www.acmicpc.net/problem/5596"
+difficulty: "브론즈 IV"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 5596 - 시험 점수](https://www.acmicpc.net/problem/5596)
+
+> 두 학생의 4과목 점수 합계를 비교하여 더 큰 쪽(같으면 첫 번째)을 출력한다.
+
+## 풀이
+
+각 학생의 4개 과목 점수를 입력받아 합산한 뒤, 두 합을 비교하여 크거나 같은 값을 출력한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+
+  int s, t;
+  int sum = 0, sum1 = 0;
+  for (int i = 0; i < 4; i++)
+  {
+
+    cin >> s;
+    sum += s;
+  }
+
+  for (int j = 0; j < 4; j++)
+  {
+
+    cin >> t;
+    sum1 += t;
+  }
+
+  if (sum > sum1 || sum == sum1)
+    cout << sum;
+  else
+    cout << sum1;
+}
+```
+
+## 복잡도
+
+- 시간: O(1)
+- 공간: O(1)

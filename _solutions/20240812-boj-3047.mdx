@@ -1,0 +1,48 @@
+---
+title: "BOJ 3047 - ABC"
+date: "2024-08-12"
+description: "세 수를 정렬한 뒤 주어진 순서대로 출력하는 문제"
+tags: ["구현"]
+platform: "boj"
+problem_number: "3047"
+problem_url: "https://www.acmicpc.net/problem/3047"
+difficulty: "브론즈 III"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 3047 - ABC](https://www.acmicpc.net/problem/3047)
+
+> 세 수가 주어지고, A는 가장 작은 수, B는 중간, C는 가장 큰 수일 때, 주어진 문자 순서대로 출력한다.
+
+## 풀이
+
+세 수를 오름차순 정렬한 뒤, 입력된 A/B/C 문자 순서에 따라 num[0], num[1], num[2]를 매핑하여 출력한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+int main()
+{
+  int num[3];
+  cin >> num[0] >> num[1] >> num[2];
+  sort(num, num + 3); // O(nlgn)
+
+  for (int i = 0; i < 3; i++)
+  {
+    char tmp;
+    cin >> tmp;
+    cout << num[tmp - 'A'] << ' ';
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(1) (고정 크기 3)
+- 공간: O(1)

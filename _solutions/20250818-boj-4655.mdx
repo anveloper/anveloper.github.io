@@ -1,0 +1,57 @@
+---
+title: "BOJ 4655 - Hangover"
+date: "2025-08-18"
+description: "수학, 구현 문제"
+tags: ["수학", "구현"]
+platform: "boj"
+problem_number: "4655"
+problem_url: "https://www.acmicpc.net/problem/4655"
+difficulty: "브론즈 III"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 4655 - Hangover](https://www.acmicpc.net/problem/4655)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+#define ll long long
+using namespace std;
+
+int main()
+{
+  ios_base::sync_with_stdio(false);
+  cin.tie(NULL);
+  double N;
+
+  while (true)
+  {
+    cin >> N;
+    if (N == 0)
+      break;
+
+    double i = 2, sum = 0;
+    for (;; i += 1)
+    {
+      sum += 1 / i;
+      if (sum >= N)
+      {
+        cout << i - 1 << " card(s)\n";
+        break;
+      }
+    }
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

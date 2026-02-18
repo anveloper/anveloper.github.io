@@ -1,0 +1,56 @@
+---
+title: "BOJ 1159 - 농구 경기"
+date: "2024-01-22"
+description: "구현, 문자열 문제"
+tags: ["구현", "문자열"]
+platform: "boj"
+problem_number: "1159"
+problem_url: "https://www.acmicpc.net/problem/1159"
+difficulty: "브론즈 II"
+language: "java"
+---
+
+## 문제
+
+[BOJ 1159 - 농구 경기](https://www.acmicpc.net/problem/1159)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```java
+package day749;
+
+import java.io.*;
+
+public class Day720BOJ1159농구경기 {
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    int[] arr = new int[26];
+    int n = Integer.parseInt(br.readLine());
+    boolean possible = false;
+    for (int i = 0; i < n; i++) {
+      String name = br.readLine();
+      char c = name.charAt(0);
+      arr[c - 97]++;
+      if (arr[c - 97] == 5)
+        possible = true;
+    }
+    if (possible) {
+      for (int i = 0; i < 26; i++) {
+        if (arr[i] >= 5)
+          System.out.print((char) (i + 97));
+      }
+    } else {
+      System.out.print("PREDAJA");
+    }
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

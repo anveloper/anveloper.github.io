@@ -1,0 +1,37 @@
+---
+title: "BOJ 2954 - 창영이의 일기장"
+date: "2025-07-15"
+description: "구현, 문자열 문제"
+tags: ["구현", "문자열"]
+platform: "boj"
+problem_number: "2954"
+problem_url: "https://www.acmicpc.net/problem/2954"
+difficulty: "브론즈 II"
+language: "python"
+---
+
+## 문제
+
+[BOJ 2954 - 창영이의 일기장](https://www.acmicpc.net/problem/2954)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```python
+sentence = input()
+i = 0
+vowels = ["a", "e", "i", "o", "u"]
+while i < len(sentence):
+    print(sentence[i], end="")
+    if sentence[i] in vowels:
+        i += 2
+    i += 1
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

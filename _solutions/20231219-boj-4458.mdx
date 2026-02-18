@@ -1,0 +1,49 @@
+---
+title: "BOJ 4458 - 첫 글자를 대문자로"
+date: "2023-12-19"
+description: "구현, 문자열 문제"
+tags: ["구현", "문자열"]
+platform: "boj"
+problem_number: "4458"
+problem_url: "https://www.acmicpc.net/problem/4458"
+difficulty: "브론즈 III"
+language: "java"
+---
+
+## 문제
+
+[BOJ 4458 - 첫 글자를 대문자로](https://www.acmicpc.net/problem/4458)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```java
+package day699;
+
+import java.io.*;
+
+public class Day682BOJ4458대문자 {
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    StringBuilder sb = new StringBuilder();
+    int n = Integer.parseInt(br.readLine());
+    while (n-- > 0) {
+      String input = br.readLine();
+      char c = input.charAt(0);
+      if ('a' <= c && c <= 'z')
+        sb.append((char) (c - 'a' + 'A')).append(input.substring(1)).append('\n');
+      else
+        sb.append(input).append('\n');
+    }
+    System.out.print(sb);
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

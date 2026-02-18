@@ -1,0 +1,68 @@
+---
+title: "BOJ 6491 - Perfection"
+date: "2025-11-01"
+description: "수학, 구현, 브루트포스 알고리즘 문제"
+tags: ["수학", "구현", "브루트포스 알고리즘", "정수론"]
+platform: "boj"
+problem_number: "6491"
+problem_url: "https://www.acmicpc.net/problem/6491"
+difficulty: "브론즈 III"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 6491 - Perfection](https://www.acmicpc.net/problem/6491)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```cpp
+#include <vector>
+#include <iostream>
+using namespace std;
+
+vector<int> getDivisor(int x)
+{
+  vector<int> div;
+  for (int i = 1; i < x; i++)
+  {
+    if (x % i == 0)
+      div.push_back(i);
+  }
+  return div;
+}
+
+string getResult(int x)
+{
+  int sum = 0;
+  vector<int> div = getDivisor(x);
+  for (auto d : div)
+    sum += d;
+  if (sum == x)
+    return "PERFECT\n";
+  if (sum < x)
+    return "DEFICIENT\n";
+  return "ABUNDANT\n";
+}
+
+int main()
+{
+  while (1)
+  {
+    int x;
+    cin >> x;
+    if (!x)
+      break;
+    cout << x << ' ' << getResult(x);
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N²)
+- 공간: O(N)

@@ -1,0 +1,55 @@
+---
+title: "BOJ 5340 - Secret Location"
+date: "2025-12-09"
+description: "구현, 문자열 문제"
+tags: ["구현", "문자열"]
+platform: "boj"
+problem_number: "5340"
+problem_url: "https://www.acmicpc.net/problem/5340"
+difficulty: "브론즈 III"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 5340 - Secret Location](https://www.acmicpc.net/problem/5340)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+int main()
+{
+  ios::sync_with_stdio(false);
+  cin.tie(nullptr);
+
+  vector<int> coord(6);
+  for (int i = 0; i < 6; i++)
+  {
+    string line;
+    getline(cin, line);
+    if (*(line.end() - 1) == ' ')
+      line.pop_back();
+    coord[i] = line.length();
+  }
+
+  cout << "Latitude " << coord[0] << ":" << coord[1] << ":" << coord[2] << "\n";
+  cout << "Longitude " << coord[3] << ":" << coord[4] << ":" << coord[5] << "\n";
+
+  return 0;
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

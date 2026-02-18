@@ -1,0 +1,42 @@
+---
+title: "BOJ 3077 - 임진왜란"
+date: "2025-07-15"
+description: "자료 구조, 브루트포스 알고리즘, 집합과 맵 문제"
+tags: ["자료 구조", "브루트포스 알고리즘", "집합과 맵", "해시를 사용한 집합과 맵"]
+platform: "boj"
+problem_number: "3077"
+problem_url: "https://www.acmicpc.net/problem/3077"
+difficulty: "실버 III"
+language: "python"
+---
+
+## 문제
+
+[BOJ 3077 - 임진왜란](https://www.acmicpc.net/problem/3077)
+
+## 풀이
+
+가능한 모든 경우를 탐색하여 답을 구한다.
+
+## 코드
+
+```python
+n = int(input())
+answer = {}
+j = 0
+for i in input().split():
+    answer[i] = j
+    j += 1
+my_answer = [answer[i] for i in input().split()]
+cnt = 0
+for i in range(len(my_answer) - 1):
+    for j in range(i, len(my_answer)):
+        if my_answer[i] < my_answer[j]:
+            cnt += 1
+print(f"{cnt}/{int(n*(n-1)/2)}")
+```
+
+## 복잡도
+
+- 시간: O(N²)
+- 공간: O(N)

@@ -1,0 +1,57 @@
+---
+title: "BOJ 13304 - 방 배정"
+date: "2024-12-03"
+description: "성별과 학년 기준으로 방 배정에 필요한 최소 방 수를 구하는 문제"
+tags: ["수학", "구현"]
+platform: "boj"
+problem_number: "13304"
+problem_url: "https://www.acmicpc.net/problem/13304"
+difficulty: "브론즈 II"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 13304 - 방 배정](https://www.acmicpc.net/problem/13304)
+
+> 학생들을 성별과 학년 기준으로 5개 그룹으로 나눈 뒤, 각 그룹에서 K명씩 한 방에 배정할 때 필요한 최소 방 수를 구한다.
+
+## 풀이
+
+학생을 성별과 학년(저학년/고학년)에 따라 5개 그룹으로 분류한다. 각 그룹별 인원을 K로 나누어 올림한 값을 모두 합산하여 필요한 총 방 수를 계산한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int n, k, q, w, a[5];
+int main()
+{
+  cin >> n >> k;
+  while (n--)
+  {
+    cin >> q >> w;
+    if (w < 3)
+      a[0]++;
+    else if (w < 5)
+      if (q)
+        a[1]++;
+      else
+        a[2]++;
+    else if (q)
+      a[3]++;
+    else
+      a[4]++;
+  }
+  for (q = 0, w = 0; q < 5; q++)
+    w += a[q] / k + (a[q] % k ? 1 : 0);
+  cout << w << endl;
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(1)

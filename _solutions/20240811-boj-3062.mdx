@@ -1,0 +1,67 @@
+---
+title: "BOJ 3062 - 수 뒤집기"
+date: "2024-08-11"
+description: "수를 뒤집어 더한 결과가 회문인지 판별하는 문제"
+tags: ["수학", "구현"]
+platform: "boj"
+problem_number: "3062"
+problem_url: "https://www.acmicpc.net/problem/3062"
+difficulty: "브론즈 II"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 3062 - 수 뒤집기](https://www.acmicpc.net/problem/3062)
+
+> 주어진 수와 그 수를 뒤집은 수를 더한 결과가 회문(팰린드롬)인지 판별한다.
+
+## 풀이
+
+수를 문자열로 입력받아 뒤집은 후 원래 수와 더하고, 결과가 앞뒤로 대칭인지 확인한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+int main()
+{
+  int T, numi;
+  string num;
+  bool flag;
+
+  cin >> T;
+  while (T--)
+  {
+    cin >> num;
+    numi = stoi(num);
+    reverse(num.begin(), num.end());
+    numi += stoi(num);
+    num = to_string(numi);
+    flag = true;
+    for (int i = 0; i < num.length() / 2; i++)
+    {
+      if (num[i] != num[num.length() - 1 - i])
+      {
+        flag = false;
+      }
+    }
+    if (flag)
+    {
+      cout << "YES\n";
+    }
+    else
+    {
+      cout << "NO\n";
+    }
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(T * D) (D: 자릿수)
+- 공간: O(D)

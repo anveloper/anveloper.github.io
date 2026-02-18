@@ -1,0 +1,54 @@
+---
+title: "BOJ 2257 - 화학식량"
+date: "2025-07-15"
+description: "자료 구조, 문자열, 스택 문제"
+tags: ["자료 구조", "문자열", "스택"]
+platform: "boj"
+problem_number: "2257"
+problem_url: "https://www.acmicpc.net/problem/2257"
+difficulty: "실버 I"
+language: "python"
+---
+
+## 문제
+
+[BOJ 2257 - 화학식량](https://www.acmicpc.net/problem/2257)
+
+## 풀이
+
+스택을 활용하여 문제를 해결한다.
+
+## 코드
+
+```python
+input = __import__('sys').stdin.readline
+
+sent = input().strip()
+stack = []
+for i in sent:
+    if i == "(":
+        stack.append(i)
+    elif i == ")":
+        temp = 0
+        while True:
+            ans = stack.pop()
+            if ans == "(":
+                break
+            temp += ans
+        stack.append(temp)
+    elif i == 'H':
+        stack.append(1)
+    elif i == 'C':
+        stack.append(12)
+    elif i == 'O':
+        stack.append(16)
+    else:
+        stack.append(stack.pop() * int(i))
+
+print(sum(stack))
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

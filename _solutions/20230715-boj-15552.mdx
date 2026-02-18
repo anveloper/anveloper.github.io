@@ -1,0 +1,50 @@
+---
+title: "BOJ 15552 - 빠른 A+B"
+date: "2023-07-15"
+description: "구현, 사칙연산, 수학 문제"
+tags: ["구현", "사칙연산", "수학"]
+platform: "boj"
+problem_number: "15552"
+problem_url: "https://www.acmicpc.net/problem/15552"
+difficulty: "브론즈 IV"
+language: "java"
+---
+
+## 문제
+
+[BOJ 15552 - 빠른 A+B](https://www.acmicpc.net/problem/15552)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```java
+package day749;
+
+import java.io.*;
+import java.util.*;
+
+public class Day700BOJ15552빠른AB {
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    StringBuilder sb = new StringBuilder();
+    int N = Integer.parseInt(br.readLine());
+
+    StringTokenizer st;
+
+    for (int i = 0; i < N; i++) {
+      st = new StringTokenizer(br.readLine(), " ");
+      sb.append((Integer.parseInt(st.nextToken()) + Integer.parseInt(st.nextToken())) + "\n");
+    }
+    System.out.println(sb);
+    br.close();
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

@@ -1,0 +1,83 @@
+---
+title: "BOJ 11586 - 지영 공주님의 마법 거울"
+date: "2024-10-17"
+description: "거울 반사 방식에 따라 문자열을 변환하여 출력하는 구현 문제"
+tags: ["문자열", "구현"]
+platform: "boj"
+problem_number: "11586"
+problem_url: "https://www.acmicpc.net/problem/11586"
+difficulty: "브론즈 III"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 11586 - 지영 공주님의 마법 거울](https://www.acmicpc.net/problem/11586)
+
+> N줄의 문자열이 주어지고, k값에 따라 원본(1), 좌우 반전(2), 상하 반전(3) 중 하나로 출력한다.
+
+## 풀이
+
+k가 1이면 입력 그대로 출력하고, k가 2이면 각 줄의 문자열을 뒤집어 출력하며, k가 3이면 줄의 순서를 역순으로 출력한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+#include <string>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+int main()
+{
+
+  int test;
+  cin >> test;
+
+  string str;
+
+  vector<string> vec;
+
+  for (int i = 0; i < test; i++)
+  {
+    cin >> str;
+    vec.push_back(str);
+  }
+
+  int k;
+  cin >> k;
+  if (k == 1)
+  {
+    for (int i = 0; i < test; i++)
+    {
+      cout << vec[i] << "\n";
+    }
+  }
+
+  else if (k == 2)
+  {
+    for (int i = 0; i < test; i++)
+    {
+      reverse(vec[i].begin(), vec[i].end());
+      cout << vec[i] << "\n";
+    }
+  }
+
+  else
+  {
+    for (int i = test - 1; i >= 0; i--)
+    {
+      cout << vec[i] << "\n";
+    }
+  }
+
+  return 0;
+}
+```
+
+## 복잡도
+
+- 시간: O(N * L) (N: 줄 수, L: 문자열 길이)
+- 공간: O(N * L)

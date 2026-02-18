@@ -1,0 +1,66 @@
+---
+title: "BOJ 1301 - 비즈 공예"
+date: "2024-04-17"
+description: "N종류 구슬로 연속 2개가 같지 않게 배열하는 경우의 수"
+tags: ["DP"]
+platform: "boj"
+problem_number: "1301"
+problem_url: "https://www.acmicpc.net/problem/1301"
+difficulty: "골드 II"
+language: "javascript"
+---
+
+## 문제
+
+[BOJ 1301 - 비즈 공예](https://www.acmicpc.net/problem/1301)
+
+> N종류(최대 5)의 구슬이 각각 주어진 개수만큼 있을 때, 연속으로 같은 종류가 2개 이상 오지 않도록 배열하는 경우의 수를 구한다.
+
+## 풀이
+
+7차원 메모이제이션 DP(이전 2개 색상 + 각 색상 남은 수)로 유효한 배열 수를 재귀적으로 계산한다. 이전 2개와 같은 색은 선택하지 않는 조건으로 가지치기한다.
+
+## 코드
+
+```javascript
+const solution = (input) => {
+  const N = +input[0];
+  const cnt = [];
+  for (let i = 1; i <= N; i++) cnt.push(+input[i]);
+  while (cnt.length < 5) cnt.push(0);
+
+  const memo = new Map();
+
+  const key = (a, b, c, d, e, p1, p2) =>
+    `${a},${b},${c},${d},${e},${p1},${p2}`;
+
+  const recur = (a, b, c, d, e, prev1, prev2) => {
+    if (a + b + c + d + e === 0) return 1;
+    const k = key(a, b, c, d, e, prev1, prev2);
+    if (memo.has(k)) return memo.get(k);
+
+    let result = 0;
+    const arr = [a, b, c, d, e];
+    for (let i = 0; i < 5; i++) {
+      if (arr[i] === 0 || i === prev1 || i === prev2) continue;
+      arr[i]--;
+      result += recur(arr[0], arr[1], arr[2], arr[3], arr[4], i, prev1);
+      arr[i]++;
+    }
+
+    memo.set(k, result);
+    return result;
+  };
+
+  return recur(cnt[0], cnt[1], cnt[2], cnt[3], cnt[4], -1, -1);
+};
+
+const fs = require("fs");
+const input = fs.readFileSync("/dev/stdin").toString().trim().split("\n");
+console.log(solution(input));
+```
+
+## 복잡도
+
+- 시간: O(상태 수 × 5) (메모이제이션으로 중복 제거)
+- 공간: O(상태 수)

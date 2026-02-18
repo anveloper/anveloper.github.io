@@ -1,0 +1,42 @@
+---
+title: "BOJ 1343 - 폴리오미노"
+date: "2024-01-20"
+description: "구현, 그리디 알고리즘, 문자열 문제"
+tags: ["구현", "그리디 알고리즘", "문자열"]
+platform: "boj"
+problem_number: "1343"
+problem_url: "https://www.acmicpc.net/problem/1343"
+difficulty: "실버 V"
+language: "java"
+---
+
+## 문제
+
+[BOJ 1343 - 폴리오미노](https://www.acmicpc.net/problem/1343)
+
+## 풀이
+
+그리디 알고리즘으로 매 단계 최선의 선택을 한다.
+
+## 코드
+
+```java
+package day749;
+
+import java.io.*;
+
+public class Day718BOJ1343폴리오미노 {
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    String str = br.readLine();
+    str = str.replaceAll("XXXX", "AAAA");
+    str = str.replaceAll("XX", "BB");
+    System.out.println(str.contains("X") ? -1 : str);
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

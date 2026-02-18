@@ -1,0 +1,75 @@
+---
+title: "BOJ 1135 - 뉴스 전하기"
+date: "2023-05-01"
+description: "다이나믹 프로그래밍, 그리디 알고리즘, 정렬 문제"
+tags: ["다이나믹 프로그래밍", "그리디 알고리즘", "정렬", "트리", "트리에서의 다이나믹 프로그래밍"]
+platform: "boj"
+problem_number: "1135"
+problem_url: "https://www.acmicpc.net/problem/1135"
+difficulty: "골드 II"
+language: "java"
+---
+
+## 문제
+
+[BOJ 1135 - 뉴스 전하기](https://www.acmicpc.net/problem/1135)
+
+## 풀이
+
+다이나믹 프로그래밍을 사용하여 부분 문제의 해를 메모이제이션하며 풀이한다.
+
+## 코드
+
+```java
+package day449;
+
+import java.io.*;
+import java.util.*;
+
+public class Day449BOJ1135뉴스전하기 {
+
+  static int N;
+  static int[] arr, dp;
+  static boolean[] used;
+  static ArrayList<Integer>[] list;
+
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+    N = Integer.parseInt(br.readLine());
+
+    StringTokenizer st = new StringTokenizer(br.readLine());
+    st.nextToken();
+    list = new ArrayList[N];
+    for (int i = 0; i < N; i++)
+      list[i] = new ArrayList<>();
+    for (int i = 1; i < N; i++)
+      list[Integer.parseInt(st.nextToken())].add(i);
+
+    dp = new int[N];
+    arr = new int[N];
+    used = new boolean[N];
+    Arrays.fill(dp, -1);
+    System.out.print(dfs(0));
+  }
+
+  public static int dfs(int now) {
+    ArrayList<Integer> tmp = new ArrayList<>();
+    for (int num : list[now]) {
+      tmp.add(dfs(num));
+    }
+
+    int result = 0;
+    Collections.sort(tmp, Collections.reverseOrder());
+    for (int i = 0; i < list[now].size(); i++) {
+      result = Math.max(result, i + 1 + tmp.get(i));
+    }
+    return result;
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

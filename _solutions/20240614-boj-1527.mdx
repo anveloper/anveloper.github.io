@@ -1,0 +1,53 @@
+---
+title: "BOJ 1527 - 금민수의 개수"
+date: "2024-06-14"
+description: "4와 7로만 이루어진 금민수를 재귀적으로 생성하여 범위 내 개수를 구하는 문제"
+tags: ["브루트포스"]
+platform: "boj"
+problem_number: "1527"
+problem_url: "https://www.acmicpc.net/problem/1527"
+difficulty: "실버 I"
+language: "python"
+---
+
+## 문제
+
+[BOJ 1527 - 금민수의 개수](https://www.acmicpc.net/problem/1527)
+
+> A 이상 B 이하의 수 중 4와 7로만 이루어진 금민수의 개수를 구한다.
+
+## 풀이
+
+"0"부터 시작하여 "4"와 "7"을 한 자리씩 추가하며 재귀적으로 모든 금민수를 생성한다. 생성된 수가 10^9을 초과하면 중단하고, [A, B] 범위에 속하면 카운트한다. 금민수의 최대 개수는 2 + 4 + ... + 2^10 = 약 2046개로 충분히 탐색 가능하다.
+
+## 코드
+
+```python
+import sys
+
+input = sys.stdin.readline
+A, B = map(int, input().split())
+res = 0
+
+
+def check(n):
+    global res
+    num = int(n)
+
+    if num > 1e9:
+        return
+    if A <= num and num <= B:
+        res += 1
+    check(n + "4")
+    check(n + "7")
+
+
+check("0")
+
+print(res)
+```
+
+## 복잡도
+
+- 시간: O(2^k), k는 최대 자릿수 (약 10)
+- 공간: O(k) (재귀 스택)

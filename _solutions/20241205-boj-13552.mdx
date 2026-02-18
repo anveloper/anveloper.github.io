@@ -1,0 +1,63 @@
+---
+title: "BOJ 13552 - 구와 쿼리"
+date: "2024-12-05"
+description: "3차원 공간에서 구 내부에 포함된 점의 개수를 구하는 문제"
+tags: ["기하학", "피타고라스 정리"]
+platform: "boj"
+problem_number: "13552"
+problem_url: "https://www.acmicpc.net/problem/13552"
+difficulty: "브론즈 I"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 13552 - 구와 쿼리](https://www.acmicpc.net/problem/13552)
+
+> N개의 3차원 좌표가 주어지고, 각 쿼리마다 구의 중심과 반지름이 주어질 때 구 내부에 포함된 점의 개수를 구한다.
+
+## 풀이
+
+각 쿼리마다 모든 점에 대해 구의 중심과의 유클리드 거리의 제곱을 계산하여 반지름의 제곱 이하인 점의 개수를 센다. 거리 비교 시 제곱근 연산을 피하기 위해 제곱 상태로 비교한다.
+
+## 코드
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+const int N = 300005, INF = 1000000000;
+array<int, 3> vs[N];
+int n, q;
+int main()
+{
+  cin.tie(0)->sync_with_stdio(0);
+  cin >> n;
+  for (int i = 0; i < n; i++)
+  {
+    cin >> vs[i][0] >> vs[i][1] >> vs[i][2];
+  }
+  cin >> q;
+  while (q--)
+  {
+    long long x, y, z;
+    long long r;
+    cin >> x >> y >> z >> r;
+    r = r * r;
+    int ans = 0;
+    for (int i = 0; i < n; i++)
+    {
+      auto [X, Y, Z] = vs[i];
+      long long d = (x - X) * (x - X) + (y - Y) * (y - Y) + (z - Z) * (z - Z);
+      if (d <= r)
+        ans++;
+    }
+    cout << ans << "\n";
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N × Q)
+- 공간: O(N)

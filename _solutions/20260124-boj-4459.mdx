@@ -1,0 +1,64 @@
+---
+title: "BOJ 4459 - Always Follow the Rules in Zombieland"
+date: "2026-01-24"
+description: "구현, 문자열 문제"
+tags: ["구현", "문자열"]
+platform: "boj"
+problem_number: "4459"
+problem_url: "https://www.acmicpc.net/problem/4459"
+difficulty: "브론즈 III"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 4459 - Always Follow the Rules in Zombieland](https://www.acmicpc.net/problem/4459)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+#include <map>
+#include <string>
+using namespace std;
+
+int main()
+{
+  ios_base::sync_with_stdio(false);
+  cin.tie(nullptr);
+  int n = 0;
+
+  cin >> n;
+  string str = "";
+  map<int, string> mp;
+  cin.ignore();
+  for (int i = 0; i < n; i++)
+  {
+    getline(cin, str);
+    mp.insert({i + 1, str});
+  }
+  int m = 0;
+  int t = 0;
+  cin >> m;
+  while (m--)
+  {
+    cin >> t;
+    cout << "Rule ";
+    if (mp.find(t) != mp.end())
+      cout << t << ": " << mp[t] << '\n';
+    else
+      cout << t << ": " << "No such rule" << '\n';
+  }
+
+  return 0;
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

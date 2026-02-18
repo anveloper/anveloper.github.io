@@ -1,0 +1,70 @@
+---
+title: "BOJ 2467 - 용액"
+date: "2023-01-20"
+description: "이분 탐색, 두 포인터 문제"
+tags: ["이분 탐색", "두 포인터"]
+platform: "boj"
+problem_number: "2467"
+problem_url: "https://www.acmicpc.net/problem/2467"
+difficulty: "골드 V"
+language: "java"
+---
+
+## 문제
+
+[BOJ 2467 - 용액](https://www.acmicpc.net/problem/2467)
+
+## 풀이
+
+이분 탐색을 통해 최적의 값을 탐색한다. 투 포인터 기법을 활용한다.
+
+## 코드
+
+```java
+package day399;
+
+import java.io.*;
+import java.util.*;
+
+public class Day352BOJ2467용액 {
+    static int N, s, e, ans = Integer.MAX_VALUE;
+    static int[] arr;
+
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        N = Integer.parseInt(st.nextToken());
+        s = 0;
+        e = N - 1;
+        arr = new int[N];
+
+        st = new StringTokenizer(br.readLine());
+        for (int i = 0; i < N; i++)
+            arr[i] = Integer.parseInt(st.nextToken());
+
+        int i = 0, j = N - 1;
+        while (s < e) {
+            int tmp = arr[s] + arr[e];
+            if (Math.abs(ans) > Math.abs(tmp)) {
+                ans = tmp;
+                i = s;
+                j = e;
+            }
+
+            if (tmp == 0)
+                break;
+            else if (tmp < 0)
+                s++;
+            else if (tmp > 0)
+                e--;
+        }
+        System.out.println(arr[i] + " " + arr[j]);
+        br.close();
+    }
+}
+```
+
+## 복잡도
+
+- 시간: O(N log X)
+- 공간: O(N)

@@ -1,0 +1,67 @@
+---
+title: "BOJ 7490 - 0 만들기"
+date: "2023-01-19"
+description: "구현, 문자열, 브루트포스 알고리즘 문제"
+tags: ["구현", "문자열", "브루트포스 알고리즘", "백트래킹"]
+platform: "boj"
+problem_number: "7490"
+problem_url: "https://www.acmicpc.net/problem/7490"
+difficulty: "골드 V"
+language: "java"
+---
+
+## 문제
+
+[BOJ 7490 - 0 만들기](https://www.acmicpc.net/problem/7490)
+
+## 풀이
+
+백트래킹으로 가능한 경우를 탐색한다.
+
+## 코드
+
+```java
+package day349;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
+public class Day346BOJ7490영만들기 {
+    static int N, T;
+    static StringBuilder ans;
+    static StringBuilder sb;
+
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        sb = new StringBuilder();
+        T = Integer.parseInt(br.readLine());
+
+        for (int i = 0; i < T; i++) {
+            N = Integer.parseInt(br.readLine());
+            ans = new StringBuilder();
+            dfs(1, 1, 0, 1, "1");
+            // sb.append(ans);
+            System.out.println(ans);
+        }
+        // System.out.println(sb);
+        br.close();
+    }
+
+    private static void dfs(int d, int n, int sum, int op, String str) {
+        if (d == N) {
+            sum += (n * op);
+            if (sum == 0)
+                ans.append(str + "\n");
+            return;
+        }
+        dfs(d + 1, n * 10 + (d + 1), sum, op, str + " " + Integer.toString(d + 1));
+        dfs(d + 1, d + 1, sum + (n * op), 1, str + "+" + Integer.toString(d + 1));
+        dfs(d + 1, d + 1, sum + (n * op), -1, str + "-" + Integer.toString(d + 1));
+    }
+}
+```
+
+## 복잡도
+
+- 시간: O(N!)
+- 공간: O(N)

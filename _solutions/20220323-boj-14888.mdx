@@ -1,0 +1,83 @@
+---
+title: "BOJ 14888 - 연산자 끼워넣기"
+date: "2022-03-23"
+description: "브루트포스 알고리즘, 백트래킹 문제"
+tags: ["브루트포스 알고리즘", "백트래킹"]
+platform: "boj"
+problem_number: "14888"
+problem_url: "https://www.acmicpc.net/problem/14888"
+difficulty: "실버 I"
+language: "java"
+---
+
+## 문제
+
+[BOJ 14888 - 연산자 끼워넣기](https://www.acmicpc.net/problem/14888)
+
+## 풀이
+
+백트래킹으로 가능한 경우를 탐색한다.
+
+## 코드
+
+```java
+package com.ssafy.an.day049;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
+
+public class Day44BOJ14888연산자끼워넣기DFS { // 14888 연산자 끼워넣기 DFS
+	static int N;
+	static int max = Integer.MIN_VALUE;
+	static int min = Integer.MAX_VALUE;
+	static int[] op = new int[4];
+	static int[] arr;
+
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st = null;
+		N = Integer.parseInt(br.readLine());
+		arr = new int[N];
+		st = new StringTokenizer(br.readLine());
+		for (int i = 0; i < N; i++) {
+			arr[i] = Integer.parseInt(st.nextToken());
+		}
+		st = new StringTokenizer(br.readLine());
+		for (int i = 0; i < 4; i++) {
+			op[i] = Integer.parseInt(st.nextToken());
+		}
+
+		dfs(arr[0], 1);
+
+		System.out.println(max);
+		System.out.println(min);
+		br.close();
+	}
+
+	private static void dfs(int num, int idx) {
+		if (idx == N) {
+			max = Math.max(max, num);
+			min = Math.min(min, num);
+			return;
+		}
+		for (int i = 0; i < 4; i++) {
+			if (op[i] > 0) {
+				op[i]--;
+				switch (i) {				 
+				case 0:	dfs(num + arr[idx], idx + 1);	break;
+				case 1:	dfs(num - arr[idx], idx + 1);	break;
+				case 2:	dfs(num * arr[idx], idx + 1);	break;
+				case 3:	dfs(num / arr[idx], idx + 1);	break; 
+				}
+				op[i]++;
+			}
+		}
+	}
+}
+```
+
+## 복잡도
+
+- 시간: O(N!)
+- 공간: O(N)

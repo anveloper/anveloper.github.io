@@ -1,0 +1,81 @@
+---
+title: "BOJ 1277 - 발전소 설치"
+date: "2024-04-12"
+description: "발전소 간 최소 케이블 길이로 1번에서 N번까지 연결하는 문제"
+tags: ["그래프", "데이크스트라"]
+platform: "boj"
+problem_number: "1277"
+problem_url: "https://www.acmicpc.net/problem/1277"
+difficulty: "골드 IV"
+language: "javascript"
+---
+
+## 문제
+
+[BOJ 1277 - 발전소 설치](https://www.acmicpc.net/problem/1277)
+
+> N개의 발전소 좌표와 기존 연결 정보, 최대 케이블 길이 W가 주어질 때, 1번에서 N번 발전소까지 연결하는 최소 케이블 총 길이를 구한다.
+
+## 풀이
+
+기존 연결은 거리 0, 나머지는 유클리드 거리로 가중치를 설정하여 데이크스트라 알고리즘을 적용한다. 거리가 W를 초과하는 간선은 제외한다.
+
+## 코드
+
+```javascript
+const solution = (input) => {
+  const [N, W] = input[0].split(" ").map(Number);
+  const M = +input[1];
+  const coords = [];
+  for (let i = 2; i < 2 + N; i++) {
+    coords.push(input[i].trim().split(" ").map(Number));
+  }
+
+  const adj = Array.from({ length: N }, () => []);
+
+  for (let i = 0; i < N; i++) {
+    for (let j = i + 1; j < N; j++) {
+      const dist = Math.sqrt(
+        (coords[i][0] - coords[j][0]) ** 2 + (coords[i][1] - coords[j][1]) ** 2
+      );
+      if (dist <= W) {
+        adj[i].push([j, dist]);
+        adj[j].push([i, dist]);
+      }
+    }
+  }
+
+  for (let i = 2 + N; i < 2 + N + M; i++) {
+    const [u, v] = input[i].trim().split(" ").map(Number);
+    adj[u - 1].push([v - 1, 0]);
+    adj[v - 1].push([u - 1, 0]);
+  }
+
+  const dist = Array(N).fill(Infinity);
+  dist[0] = 0;
+  const pq = [[0, 0]];
+
+  while (pq.length) {
+    pq.sort((a, b) => a[0] - b[0]);
+    const [d, u] = pq.shift();
+    if (d > dist[u]) continue;
+    for (const [v, w] of adj[u]) {
+      if (dist[u] + w < dist[v]) {
+        dist[v] = dist[u] + w;
+        pq.push([dist[v], v]);
+      }
+    }
+  }
+
+  return Math.floor(dist[N - 1] * 1000);
+};
+
+const fs = require("fs");
+const input = fs.readFileSync("/dev/stdin").toString().trim().split("\n");
+console.log(solution(input));
+```
+
+## 복잡도
+
+- 시간: O(N² log N)
+- 공간: O(N²)

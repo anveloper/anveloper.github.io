@@ -1,0 +1,35 @@
+---
+title: "BOJ 7120 - String"
+date: "2025-07-15"
+description: "문자열 문제"
+tags: ["문자열"]
+platform: "boj"
+problem_number: "7120"
+problem_url: "https://www.acmicpc.net/problem/7120"
+difficulty: "브론즈 II"
+language: "python"
+---
+
+## 문제
+
+[BOJ 7120 - String](https://www.acmicpc.net/problem/7120)
+
+## 풀이
+
+문자열 처리를 통해 문제를 해결한다.
+
+## 코드
+
+```python
+a = input()
+b = ""
+for i in a:
+    if b != i:
+        print(i, end="")
+    b = i
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

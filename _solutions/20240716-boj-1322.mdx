@@ -1,0 +1,69 @@
+---
+title: "BOJ 1322 - X와 K"
+date: "2024-07-16"
+description: "X와 K가 주어질 때 X+Y=X|Y를 만족하는 K번째 Y를 비트마스킹으로 구하는 문제"
+tags: ["수학", "비트마스킹"]
+platform: "boj"
+problem_number: "1322"
+problem_url: "https://www.acmicpc.net/problem/1322"
+difficulty: "골드 IV"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 1322 - X와 K](https://www.acmicpc.net/problem/1322)
+
+> X+Y = X|Y를 만족하는 Y 중 K번째로 작은 수를 구한다.
+
+## 풀이
+
+X+Y = X|Y가 성립하려면 X와 Y의 AND가 0이어야 한다. 즉 Y는 X의 비트가 0인 위치에만 1을 가질 수 있다. X의 비트가 0인 위치들을 순서대로 찾아 K의 이진 표현의 각 비트를 해당 위치에 매핑하여 Y를 구성한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+
+typedef long long ll;
+
+using namespace std;
+
+ll X, K;
+
+void input()
+{
+  cin >> X >> K;
+}
+
+void solve()
+{
+  ll Y = 0;
+  int kidx = 0;
+  for (int i = 0; i < 65; i++)
+  {
+    if ((X >> i) & 1LL)
+      continue;
+    if ((K >> kidx) & 1LL)
+    {
+      Y |= (1LL << i);
+    }
+    kidx++;
+  }
+
+  cout << Y;
+}
+
+int main()
+{
+  input();
+  solve();
+
+  return 0;
+}
+```
+
+## 복잡도
+
+- 시간: O(64) ≈ O(1)
+- 공간: O(1)

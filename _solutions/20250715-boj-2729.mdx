@@ -1,0 +1,35 @@
+---
+title: "BOJ 2729 - 이진수 덧셈"
+date: "2025-07-15"
+description: "수학, 구현, 사칙연산 문제"
+tags: ["수학", "구현", "사칙연산"]
+platform: "boj"
+problem_number: "2729"
+problem_url: "https://www.acmicpc.net/problem/2729"
+difficulty: "브론즈 I"
+language: "python"
+---
+
+## 문제
+
+[BOJ 2729 - 이진수 덧셈](https://www.acmicpc.net/problem/2729)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```python
+n = int(input())
+for _ in range(n):
+    a,b = input().split(" ")
+    a = int(a,2)
+    b = int(b,2)
+    print(bin(a+b).replace("0b",""))
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

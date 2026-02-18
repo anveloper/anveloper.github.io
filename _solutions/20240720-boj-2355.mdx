@@ -1,0 +1,49 @@
+---
+title: "BOJ 2355 - 시그마"
+date: "2024-07-20"
+description: "A부터 B까지의 합을 등차수열의 합 공식으로 구하는 문제"
+tags: ["수학", "사칙연산"]
+platform: "boj"
+problem_number: "2355"
+problem_url: "https://www.acmicpc.net/problem/2355"
+difficulty: "브론즈 II"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 2355 - 시그마](https://www.acmicpc.net/problem/2355)
+
+> 두 정수 A, B가 주어질 때 A부터 B까지의 합을 구한다.
+
+## 풀이
+
+A와 B의 크기를 정렬한 뒤 등차수열의 합 공식 (B-A+1)*(A+B)/2를 적용하여 한 번에 계산한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+int main()
+{
+
+  long long a, b;
+  scanf("%lld %lld", &a, &b);
+
+  if (a > b)
+  {
+    swap(a, b);
+  }
+  printf("%lld", (b - a + 1) * (b + a) / 2);
+
+  return 0;
+}
+```
+
+## 복잡도
+
+- 시간: O(1)
+- 공간: O(1)

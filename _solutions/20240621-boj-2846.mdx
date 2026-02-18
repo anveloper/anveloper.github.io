@@ -1,0 +1,43 @@
+---
+title: "BOJ 2846 - 오르막길"
+date: "2024-06-21"
+description: "연속으로 증가하는 구간 중 가장 큰 높이 차이를 구하는 문제"
+tags: ["구현"]
+platform: "boj"
+problem_number: "2846"
+problem_url: "https://www.acmicpc.net/problem/2846"
+difficulty: "브론즈 I"
+language: "python"
+---
+
+## 문제
+
+[BOJ 2846 - 오르막길](https://www.acmicpc.net/problem/2846)
+
+> 길의 높이가 순서대로 주어질 때, 연속으로 높이가 증가하는 구간 중 가장 큰 높이 차이를 구한다.
+
+## 풀이
+
+배열을 순회하면서 현재 값이 이전 값보다 크면 오르막 구간의 누적 높이를 더한다. 감소하거나 같으면 현재까지의 누적 높이를 저장하고 새 구간을 시작한다. 마지막 구간도 포함하여 저장된 값 중 최댓값을 출력한다.
+
+## 코드
+
+```python
+n = int(input())
+li = list(map(int, input().split()))
+a = 0
+re = []
+for i in range(n - 1):
+    if li[i] < li[i + 1]:
+        a += li[i + 1] - li[i]
+    else:
+        re.append(a)
+        a = 0
+re.append(a)
+print(max(re))
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

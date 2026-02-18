@@ -1,0 +1,62 @@
+---
+title: "BOJ 3412 - Darts"
+date: "2026-01-16"
+description: "기하학, 피타고라스 정리 문제"
+tags: ["기하학", "피타고라스 정리"]
+platform: "boj"
+problem_number: "3412"
+problem_url: "https://www.acmicpc.net/problem/3412"
+difficulty: "브론즈 I"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 3412 - Darts](https://www.acmicpc.net/problem/3412)
+
+## 풀이
+
+문제의 조건에 맞게 풀이한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+int main()
+{
+  cin.tie(nullptr);
+  ios_base::sync_with_stdio(false);
+  int T;
+  cin >> T;
+  for (int t = 0; t < T; t++)
+  {
+    int n;
+    cin >> n;
+    double total = 0;
+    for (int i = 0; i < n; i++)
+    {
+      double x, y;
+      cin >> x >> y;
+      double dist = x * x + y * y;
+      for (int j = 1; j <= 10; j++)
+      {
+        if (dist <= pow(20 * j, 2))
+        {
+          total += 11 - j;
+          break;
+        }
+      }
+    }
+    cout << (int)total << "\n";
+  }
+  return 0;
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

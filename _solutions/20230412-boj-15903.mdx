@@ -1,0 +1,65 @@
+---
+title: "BOJ 15903 - 카드 합체 놀이"
+date: "2023-04-12"
+description: "자료 구조, 그리디 알고리즘, 우선순위 큐 문제"
+tags: ["자료 구조", "그리디 알고리즘", "우선순위 큐"]
+platform: "boj"
+problem_number: "15903"
+problem_url: "https://www.acmicpc.net/problem/15903"
+difficulty: "실버 I"
+language: "java"
+---
+
+## 문제
+
+[BOJ 15903 - 카드 합체 놀이](https://www.acmicpc.net/problem/15903)
+
+## 풀이
+
+그리디 알고리즘으로 매 단계 최선의 선택을 한다.
+
+## 코드
+
+```java
+package day449;
+
+import java.io.*;
+import java.util.*;
+
+public class Day430BOJ15903카드합체놀이 {
+  static int N, M;
+  static long ans = 0;
+  static PriorityQueue<Long> pq = new PriorityQueue<>();
+
+  public static void main(String[] args) throws IOException {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    StringTokenizer st = new StringTokenizer(br.readLine());
+
+    N = Integer.parseInt(st.nextToken());
+    M = Integer.parseInt(st.nextToken());
+
+    st = new StringTokenizer(br.readLine());
+
+    for (int i = 0; i < N; i++)
+      pq.add(Long.parseLong(st.nextToken()));
+
+    for (int i = 0; i < M; i++) {
+      Long a = pq.poll();
+      Long b = pq.poll();
+      pq.add(a + b);
+      pq.add(a + b);
+    }
+
+    while (!pq.isEmpty())
+      ans += pq.poll();
+
+    System.out.println(ans);
+    br.close();
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

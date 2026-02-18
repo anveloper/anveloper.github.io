@@ -1,0 +1,59 @@
+---
+title: "BOJ 15926 - 현욱은 괄호왕이야!!"
+date: "2023-01-24"
+description: "자료 구조, 스택 문제"
+tags: ["자료 구조", "스택"]
+platform: "boj"
+problem_number: "15926"
+problem_url: "https://www.acmicpc.net/problem/15926"
+difficulty: "골드 III"
+language: "java"
+---
+
+## 문제
+
+[BOJ 15926 - 현욱은 괄호왕이야!!](https://www.acmicpc.net/problem/15926)
+
+## 풀이
+
+스택을 활용하여 문제를 해결한다.
+
+## 코드
+
+```java
+package day399;
+
+import java.util.*;
+import java.io.*;
+
+public class Day351BOJ15926괄호왕 {
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int num = Integer.parseInt(br.readLine());
+        String str = br.readLine();
+        Stack<Integer> s = new Stack<>();
+        s.add(-1);
+        int answer = 0;
+        for (int i = 0; i < num; i++) {
+            char c = str.charAt(i);
+            if (c == '(')
+                s.add(i);
+            else {
+                s.pop();
+                if (s.empty()) {
+                    s.add(i);
+                    continue;
+                }
+                int idx = s.peek();
+                answer = Math.max(answer, i - idx);
+            }
+        }
+        System.out.print(answer);
+    }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

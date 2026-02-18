@@ -1,0 +1,49 @@
+---
+title: "BOJ 7130 - Milk and Honey"
+date: "2026-01-31"
+description: "수학, 그리디 알고리즘, 사칙연산 문제"
+tags: ["수학", "그리디 알고리즘", "사칙연산"]
+platform: "boj"
+problem_number: "7130"
+problem_url: "https://www.acmicpc.net/problem/7130"
+difficulty: "브론즈 III"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 7130 - Milk and Honey](https://www.acmicpc.net/problem/7130)
+
+## 풀이
+
+그리디 알고리즘으로 매 단계 최선의 선택을 한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+int main()
+{
+  ios::sync_with_stdio(0);
+  cin.tie(0);
+  int m, h, n;
+  cin >> m >> h >> n;
+  long long ans = 0;
+  while (n--)
+  {
+    int c, b;
+    cin >> c >> b;
+    ans += max(c * m, b * h);
+  }
+  cout << ans << "\n";
+  return 0;
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

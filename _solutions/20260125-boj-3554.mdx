@@ -1,0 +1,96 @@
+---
+title: "BOJ 3554 - Enigmatic Device"
+date: "2026-01-25"
+description: "구현 문제"
+tags: ["구현"]
+platform: "boj"
+problem_number: "3554"
+problem_url: "https://www.acmicpc.net/problem/3554"
+difficulty: "브론즈 III"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 3554 - Enigmatic Device](https://www.acmicpc.net/problem/3554)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <array>
+#include <unordered_set>
+
+using namespace std;
+using ll = long long;
+using ull = uint64_t;
+using ld = long double;
+
+#pragma GCC target("avx2")
+#pragma GCC optimize("O3")
+#pragma GCC optimize("unroll-loops")
+
+int s[2020];
+int a[50000];
+
+int main()
+{
+  ios::sync_with_stdio(0);
+  cin.tie(0);
+
+  for (int i = 0; i < 2020; i++)
+  {
+    s[i] = (i * i) % 2010;
+  }
+
+  int N, M;
+  if (!(cin >> N))
+    return 0;
+
+  for (int i = 0; i < N; i++)
+  {
+    cin >> a[i];
+  }
+
+  if (!(cin >> M))
+    return 0;
+
+  int q, b, e;
+  for (int i = 0; i < M; i++)
+  {
+    cin >> q >> b >> e;
+
+    if (q == 1)
+    {
+      // 업데이트 쿼리
+      for (int j = b - 1; j < e; j++)
+      {
+        a[j] = s[a[j]];
+      }
+    }
+    else
+    {
+      // 구간 합 쿼리
+      int ans = 0;
+      for (int j = b - 1; j < e; j++)
+      {
+        ans += a[j];
+      }
+      cout << ans << '\n';
+    }
+  }
+
+  return 0;
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

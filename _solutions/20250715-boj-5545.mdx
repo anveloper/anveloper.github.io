@@ -1,0 +1,52 @@
+---
+title: "BOJ 5545 - 최고의 피자"
+date: "2025-07-15"
+description: "그리디 알고리즘, 정렬 문제"
+tags: ["그리디 알고리즘", "정렬"]
+platform: "boj"
+problem_number: "5545"
+problem_url: "https://www.acmicpc.net/problem/5545"
+difficulty: "실버 III"
+language: "python"
+---
+
+## 문제
+
+[BOJ 5545 - 최고의 피자](https://www.acmicpc.net/problem/5545)
+
+## 풀이
+
+그리디 알고리즘으로 매 단계 최선의 선택을 한다.
+
+## 코드
+
+```python
+import sys
+
+input = sys.stdin.readline
+
+N = int(input())
+A, B = map(int, input().split())
+C = int(input())
+toppings = [int(input()) for _ in range(N)]
+
+total_cal = C
+total_price = A
+best_ratio = total_cal // total_price
+
+toppings.sort(reverse=True)
+
+for i in range(N):
+    total_cal += toppings[i]
+    total_price += B
+    current_ratio = total_cal // total_price
+    if current_ratio > best_ratio:
+        best_ratio = current_ratio
+
+print(best_ratio)
+```
+
+## 복잡도
+
+- 시간: O(N log N)
+- 공간: O(N)

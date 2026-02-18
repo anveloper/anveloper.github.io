@@ -1,0 +1,84 @@
+---
+title: "BOJ 9489 - 사촌"
+date: "2023-05-12"
+description: "자료 구조, 트리 문제"
+tags: ["자료 구조", "트리"]
+platform: "boj"
+problem_number: "9489"
+problem_url: "https://www.acmicpc.net/problem/9489"
+difficulty: "골드 IV"
+language: "java"
+---
+
+## 문제
+
+[BOJ 9489 - 사촌](https://www.acmicpc.net/problem/9489)
+
+## 풀이
+
+문제의 조건에 맞게 풀이한다.
+
+## 코드
+
+```java
+package day499;
+
+import java.io.*;
+import java.util.*;
+
+public class Day460BOJ9489사촌 {
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    StringBuilder sb = new StringBuilder();
+    StringTokenizer st;
+
+    while (true) {
+      st = new StringTokenizer(br.readLine());
+
+      int n = Integer.parseInt(st.nextToken());
+      int k = Integer.parseInt(st.nextToken());
+
+      if (n == 0 && k == 0)
+        break;
+
+      int levels[] = new int[n + 1];
+      levels[0] = -1;
+
+      int idx = 0;
+      int level = -1;
+      int prev = -1;
+
+      st = new StringTokenizer(br.readLine());
+
+      for (int i = 1; i <= n; i++) {
+        int num = Integer.parseInt(st.nextToken());
+
+        if (num == k)
+          idx = i;
+
+        if (num != prev + 1)
+          ++level;
+
+        levels[i] = level;
+        prev = num;
+      }
+
+      int ans = 0;
+
+      for (int i = 1; i <= n; i++) {
+        if (levels[i] != levels[idx] && levels[levels[i]] == levels[levels[idx]])
+          ++ans;
+      }
+      sb.append(ans).append('\n');
+    }
+
+    System.out.println(sb);
+    br.close();
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

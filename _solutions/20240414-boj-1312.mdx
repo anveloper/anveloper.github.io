@@ -1,0 +1,49 @@
+---
+title: "BOJ 1312 - 소수"
+date: "2024-04-14"
+description: "A/B의 소수점 아래 N번째 자리 숫자를 구하는 문제"
+tags: ["수학"]
+platform: "boj"
+problem_number: "1312"
+problem_url: "https://www.acmicpc.net/problem/1312"
+difficulty: "실버 V"
+language: "javascript"
+---
+
+## 문제
+
+[BOJ 1312 - 소수](https://www.acmicpc.net/problem/1312)
+
+> 자연수 A, B와 N이 주어질 때, A/B의 소수점 아래 N번째 자리 숫자를 출력한다.
+
+## 풀이
+
+나머지에 10을 곱하며 N번 반복하여 소수점 아래 N번째 자리를 직접 계산한다. 매 반복마다 나머지를 갱신한다.
+
+## 코드
+
+```javascript
+const solution = (input) => {
+  const [A, B, N] = input[0].trim().split(" ").map(Number);
+
+  let remainder = A % B;
+  let result = 0;
+
+  for (let i = 0; i < N; i++) {
+    remainder *= 10;
+    result = Math.floor(remainder / B);
+    remainder %= B;
+  }
+
+  return result;
+};
+
+const fs = require("fs");
+const input = fs.readFileSync("/dev/stdin").toString().trim().split("\n");
+console.log(solution(input));
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(1)

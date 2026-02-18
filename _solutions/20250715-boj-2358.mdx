@@ -1,0 +1,60 @@
+---
+title: "BOJ 2358 - 평행선"
+date: "2025-07-15"
+description: "자료 구조, 집합과 맵, 해시를 사용한 집합과 맵 문제"
+tags: ["자료 구조", "집합과 맵", "해시를 사용한 집합과 맵"]
+platform: "boj"
+problem_number: "2358"
+problem_url: "https://www.acmicpc.net/problem/2358"
+difficulty: "실버 IV"
+language: "python"
+---
+
+## 문제
+
+[BOJ 2358 - 평행선](https://www.acmicpc.net/problem/2358)
+
+## 풀이
+
+문제의 조건에 맞게 풀이한다.
+
+## 코드
+
+```python
+import sys
+
+n = int(sys.stdin.readline())
+c = {}
+y = {}
+check_x = []
+check_y = []
+for _ in range(n):
+    a, b = map(int, sys.stdin.readline().split(" "))
+    check_x.append(a)
+    check_y.append(b)
+    if a in c:
+        c[a].append(b)
+    else:
+        c[a] = []
+
+    if b in y:
+        y[b].append(a)
+    else:
+        y[b] = []
+check_y = list(set(check_y))
+check_x = list(set(check_x))
+
+ans = 0
+for i in check_x:
+    if c[i]:
+        ans += 1
+for i in check_y:
+    if y[i]:
+        ans += 1
+print(ans)
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

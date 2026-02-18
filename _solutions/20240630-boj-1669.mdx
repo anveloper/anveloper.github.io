@@ -1,0 +1,47 @@
+---
+title: "BOJ 1669 - 멍멍이 쓰다듬기"
+date: "2024-06-30"
+description: "키 차이를 최소 일수로 줄이기 위한 수학적 규칙을 찾는 문제"
+tags: ["수학"]
+platform: "boj"
+problem_number: "1669"
+problem_url: "https://www.acmicpc.net/problem/1669"
+difficulty: "골드 V"
+language: "python"
+---
+
+## 문제
+
+[BOJ 1669 - 멍멍이 쓰다듬기](https://www.acmicpc.net/problem/1669)
+
+> 원숭이와 강아지의 키 차이가 주어질 때, 하루에 변화량을 1씩 증감시키며 같은 키로 만드는 최소 일수를 구한다.
+
+## 풀이
+
+키 차이를 rest라 하면, 하루에 변화시킬 수 있는 양이 1, 2, 3, ..., k, ..., 3, 2, 1처럼 대칭적으로 증가했다 감소해야 한다. i*(i+1)과 (i+1)*(i+2) 사이의 범위에 rest가 위치하는 구간을 찾아 필요한 일수를 계산한다.
+
+## 코드
+
+```python
+mok, dog = map(int, input().split())
+rest = dog - mok
+if rest == 0:
+    print(0)
+elif rest == 1:
+    print(1)
+elif rest == 2:
+    print(2)
+else:
+    for i in range(1, 100000000):
+        if i * (i + 1) < rest <= i * (i + 1) + (i + 1):
+            print(i * 2 + 1)
+            break
+        if i * (i + 1) + (i + 1) < rest <= (i + 1) * (i + 2):
+            print(i * 2 + 2)
+            break
+```
+
+## 복잡도
+
+- 시간: O(sqrt(D)) (D: 키 차이)
+- 공간: O(1)

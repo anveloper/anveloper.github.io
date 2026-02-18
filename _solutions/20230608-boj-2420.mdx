@@ -1,0 +1,44 @@
+---
+title: "BOJ 2420 - 사파리월드"
+date: "2023-06-08"
+description: "구현, 사칙연산, 수학 문제"
+tags: ["구현", "사칙연산", "수학"]
+platform: "boj"
+problem_number: "2420"
+problem_url: "https://www.acmicpc.net/problem/2420"
+difficulty: "브론즈 V"
+language: "java"
+---
+
+## 문제
+
+[BOJ 2420 - 사파리월드](https://www.acmicpc.net/problem/2420)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```java
+package day649;
+
+import java.io.*;
+import java.util.*;
+
+public class Day620BOJ2420사파리월드 {
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    StringTokenizer st = new StringTokenizer(br.readLine());
+
+    long n = Long.parseLong(st.nextToken());
+    long m = Long.parseLong(st.nextToken());
+    System.out.print(Math.abs(n - m));
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

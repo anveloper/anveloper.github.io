@@ -1,0 +1,47 @@
+---
+title: "BOJ 2033 - 반올림"
+date: "2024-07-26"
+description: "일의 자리부터 차례로 반올림하여 0이 아닌 자리까지 반복하는 문제"
+tags: ["수학", "구현"]
+platform: "boj"
+problem_number: "2033"
+problem_url: "https://www.acmicpc.net/problem/2033"
+difficulty: "브론즈 I"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 2033 - 반올림](https://www.acmicpc.net/problem/2033)
+
+> 일의 자리에서부터 시작하여 반올림을 반복하되, 해당 자리가 0이 아닌 동안 계속 반올림한다.
+
+## 풀이
+
+자릿수를 10부터 시작하여 키워가며, 현재 자릿수의 값이 절반 이상이면 올림, 아니면 버림 처리한다. 결과가 현재 단위 이상인 동안 반복한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+using namespace std;
+int main()
+{
+  long long n;
+  cin >> n;
+
+  long long tmp = 10;
+
+  while (n >= tmp)
+  {
+    (n % tmp) >= tmp / 2 ? n = ((long long)((int)n / tmp) + 1) *tmp : n = ((long long)(int)n / tmp) * tmp;
+    tmp *= 10;
+  }
+  cout << n << endl;
+}
+```
+
+## 복잡도
+
+- 시간: O(log N)
+- 공간: O(1)

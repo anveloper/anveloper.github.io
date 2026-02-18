@@ -1,0 +1,46 @@
+---
+title: "BOJ 4562 - No Brainer"
+date: "2024-12-21"
+description: "좀비의 뇌 보유량과 필요량을 비교하는 문제"
+tags: ["구현"]
+platform: "boj"
+problem_number: "4562"
+problem_url: "https://www.acmicpc.net/problem/4562"
+difficulty: "브론즈 IV"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 4562 - No Brainer](https://www.acmicpc.net/problem/4562)
+
+> 좀비가 가진 뇌의 수와 필요한 뇌의 수가 주어질 때, 충분하면 MMM BRAINS, 부족하면 NO BRAINS를 출력한다.
+
+## 풀이
+
+각 테스트케이스마다 보유량 a와 필요량 b를 비교하여, a가 b 이상이면 MMM BRAINS, 아니면 NO BRAINS를 출력한다.
+
+## 코드
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+int a, b, t;
+int main()
+{
+  cin >> t;
+  while (t--)
+  {
+    cin >> a >> b;
+    if (a >= b)
+      cout << "MMM BRAINS\n";
+    else
+      cout << "NO BRAINS\n";
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(T)
+- 공간: O(1)

@@ -1,0 +1,62 @@
+---
+title: "BOJ 6615 - 콜라츠 추측"
+date: "2025-09-24"
+description: "구현, 브루트포스 알고리즘 문제"
+tags: ["구현", "브루트포스 알고리즘"]
+platform: "boj"
+problem_number: "6615"
+problem_url: "https://www.acmicpc.net/problem/6615"
+difficulty: "실버 III"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 6615 - 콜라츠 추측](https://www.acmicpc.net/problem/6615)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+using namespace std;
+using ll = long long;
+
+const ll NL = 1e6;
+ll A, B, C, S[2][NL + 2];
+
+void calc(ll f, ll n)
+{
+  for (S[f][0] = 1; n != 1;)
+  {
+    S[f][S[f][0]++] = n;
+    if (n & 1)
+      n = n * 3 + 1;
+    else
+      n /= 2;
+  }
+  S[f][S[f][0]++] = n;
+}
+
+int main()
+{
+  cin.tie(0)->sync_with_stdio(0);
+  while (cin >> A >> B && A && B)
+  {
+    calc(0, A), calc(1, B);
+    while (S[0][0] > 0 && S[1][0] > 0 && S[0][--S[0][0]] == S[1][--S[1][0]])
+      C = S[0][S[0][0]];
+    if (A == B)
+      C = A;
+    cout << A << " needs " << S[0][0] << " steps, " << B << " needs " << S[1][0] << " steps, they meet at " << C << "\n";
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N²)
+- 공간: O(N)

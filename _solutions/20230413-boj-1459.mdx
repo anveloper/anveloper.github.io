@@ -1,0 +1,56 @@
+---
+title: "BOJ 1459 - 걷기"
+date: "2023-04-13"
+description: "수학, 많은 조건 분기 문제"
+tags: ["수학", "많은 조건 분기"]
+platform: "boj"
+problem_number: "1459"
+problem_url: "https://www.acmicpc.net/problem/1459"
+difficulty: "실버 III"
+language: "java"
+---
+
+## 문제
+
+[BOJ 1459 - 걷기](https://www.acmicpc.net/problem/1459)
+
+## 풀이
+
+수학적 성질을 이용하여 풀이한다.
+
+## 코드
+
+```java
+package day449;
+
+import java.io.*;
+import java.util.*;
+
+public class Day431BOJ1459걷기 {
+  static long X, Y, W, S;
+
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    StringTokenizer st = new StringTokenizer(br.readLine());
+
+    X = Long.parseLong(st.nextToken());
+    Y = Long.parseLong(st.nextToken());
+    W = Long.parseLong(st.nextToken());
+    S = Long.parseLong(st.nextToken());
+
+    System.out.println(
+        Math.min(
+            Math.min(
+                (X + Y) * W,
+                (X + Y) % 2 == 0
+                    ? Math.max(X, Y) * S
+                    : (Math.max(X, Y) - 1) * S + W),
+            Math.min(X, Y) * S + Math.abs(X - Y) * W));
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

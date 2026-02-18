@@ -1,0 +1,58 @@
+---
+title: "BOJ 1241 - 머리 톡톡"
+date: "2024-04-05"
+description: "각 학생의 번호를 약수로 가지는 다른 학생 수를 구하는 문제"
+tags: ["수학", "정수론", "조화수"]
+platform: "boj"
+problem_number: "1241"
+problem_url: "https://www.acmicpc.net/problem/1241"
+difficulty: "골드 V"
+language: "javascript"
+---
+
+## 문제
+
+[BOJ 1241 - 머리 톡톡](https://www.acmicpc.net/problem/1241)
+
+> N명의 학생이 각각 번호를 가지고 있을 때, 자신의 번호가 다른 학생 번호의 약수인 경우의 수를 구한다.
+
+## 풀이
+
+카운팅 배열로 각 번호의 등장 횟수를 기록한다. 각 번호 i에 대해 i의 배수인 번호들의 hit 값을 갱신한다. 자기 자신은 제외해야 하므로 같은 번호끼리는 cnt-1을 더한다. 조화수 급수 성질로 O(M log M) 시간에 해결한다.
+
+## 코드
+
+```javascript
+const solution = (input) => {
+  const MAX_SIZE = 1_000_000;
+  const cnt = new Array(MAX_SIZE + 1).fill(0);
+  const hit = new Array(MAX_SIZE + 1).fill(0);
+  let ans = "";
+
+  for (let i = 1; i < input.length; i += 1) {
+    cnt[input[i]] += 1;
+  }
+
+  for (let i = 1; i <= MAX_SIZE; i += 1) {
+    if (cnt[i] === 0) continue;
+    hit[i] += cnt[i] - 1;
+    for (let j = i * 2; j <= MAX_SIZE; j += i) {
+      hit[j] += cnt[i];
+    }
+  }
+
+  for (let i = 1; i < input.length; i += 1) {
+    ans += hit[input[i]] + "\n";
+  }
+  return ans;
+};
+
+const fs = require("fs");
+const input = fs.readFileSync("/dev/stdin").toString().trim().split("\n").map(Number);
+console.log(solution(input));
+```
+
+## 복잡도
+
+- 시간: O(M log M) — M은 최대 번호
+- 공간: O(M)

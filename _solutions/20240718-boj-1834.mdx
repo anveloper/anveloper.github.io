@@ -1,0 +1,51 @@
+---
+title: "BOJ 1834 - 나머지와 몫이 같은 수"
+date: "2024-07-18"
+description: "N으로 나눈 나머지와 몫이 같은 모든 자연수의 합을 구하는 문제"
+tags: ["수학"]
+platform: "boj"
+problem_number: "1834"
+problem_url: "https://www.acmicpc.net/problem/1834"
+difficulty: "브론즈 I"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 1834 - 나머지와 몫이 같은 수](https://www.acmicpc.net/problem/1834)
+
+> 자연수 N이 주어질 때, A를 N으로 나눈 몫과 나머지가 같은 모든 A의 합을 구한다.
+
+## 풀이
+
+A = N*q + r에서 q = r이 되려면 A = (N+1)*q이고 q는 1부터 N-1까지 가능하다. 따라서 i를 1부터 N-1까지 순회하며 (N+1)*i를 누적합한다.
+
+## 코드
+
+```cpp
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main()
+{
+  ios_base::sync_with_stdio(false);
+  cin.tie(NULL);
+  cout.tie(NULL);
+
+  long long num;
+  long long result = 0;
+  cin >> num;
+  for (long long i = 1; i < num; i++)
+    result += (num + 1) * i;
+
+  cout << result;
+
+  return 0;
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(1)

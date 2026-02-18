@@ -1,0 +1,59 @@
+---
+title: "BOJ 2812 - 크게 만들기"
+date: "2023-02-14"
+description: "자료 구조, 그리디 알고리즘, 스택 문제"
+tags: ["자료 구조", "그리디 알고리즘", "스택"]
+platform: "boj"
+problem_number: "2812"
+problem_url: "https://www.acmicpc.net/problem/2812"
+difficulty: "골드 III"
+language: "java"
+---
+
+## 문제
+
+[BOJ 2812 - 크게 만들기](https://www.acmicpc.net/problem/2812)
+
+## 풀이
+
+그리디 알고리즘으로 매 단계 최선의 선택을 한다.
+
+## 코드
+
+```java
+import java.util.*;
+import java.io.*;
+
+public class Day372BOJ2812크게만들기 {
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        StringBuilder sb = new StringBuilder();
+
+        int N = Integer.parseInt(st.nextToken());
+        int K = Integer.parseInt(st.nextToken());
+        String number = br.readLine();
+        int last = 0;
+
+        for (int i = 0; i < N - K; i++) {
+            int max = -1;
+            for (int j = last; j < i + K + 1; j++) {
+                int now = number.charAt(j) - '0';
+                if (now > max) {
+                    max = now;
+                    last = j + 1;
+                }
+                if (max == 9)
+                    break;
+            }
+            sb.append(max);
+        }
+        System.out.println(sb);
+    }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

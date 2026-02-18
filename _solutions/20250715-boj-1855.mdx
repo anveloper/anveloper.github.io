@@ -1,0 +1,48 @@
+---
+title: "BOJ 1855 - 암호"
+date: "2025-07-15"
+description: "구현, 문자열 문제"
+tags: ["구현", "문자열"]
+platform: "boj"
+problem_number: "1855"
+problem_url: "https://www.acmicpc.net/problem/1855"
+difficulty: "브론즈 I"
+language: "python"
+---
+
+## 문제
+
+[BOJ 1855 - 암호](https://www.acmicpc.net/problem/1855)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```python
+K = int(input())
+ciphertext = input()
+
+table = []
+
+for i in range(0, len(ciphertext), K * 2):
+    if i + K <= len(ciphertext):
+        table.append(ciphertext[i:i + K])
+
+    if i + (K * 2) <= len(ciphertext):
+        table.append(ciphertext[i + K:i + (K * 2)][::-1])
+
+plaintext = ''
+
+for j in range(K):
+    for char in table:
+        plaintext += char[j]
+
+print(plaintext)
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

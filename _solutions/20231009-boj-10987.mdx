@@ -1,0 +1,46 @@
+---
+title: "BOJ 10987 - 모음의 개수"
+date: "2023-10-09"
+description: "구현, 문자열 문제"
+tags: ["구현", "문자열"]
+platform: "boj"
+problem_number: "10987"
+problem_url: "https://www.acmicpc.net/problem/10987"
+difficulty: "브론즈 IV"
+language: "java"
+---
+
+## 문제
+
+[BOJ 10987 - 모음의 개수](https://www.acmicpc.net/problem/10987)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```java
+package day699;
+
+import java.io.*;
+
+public class Day670BOJ10987모음갯수 {
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    int cnt = 0;
+    String s = br.readLine();
+    for (int i = 0; i < s.length(); i++) {
+      char c = s.charAt(i);
+      if (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u')
+        cnt++;
+    }
+    System.out.print(cnt);
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

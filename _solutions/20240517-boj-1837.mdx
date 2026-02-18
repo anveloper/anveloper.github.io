@@ -1,0 +1,39 @@
+---
+title: "BOJ 1837 - 암호제작"
+date: "2024-05-17"
+description: "큰 수 P가 K 미만의 소인수를 가지는지 판별하는 문제"
+tags: ["수학", "브루트포스", "정수론"]
+platform: "boj"
+problem_number: "1837"
+problem_url: "https://www.acmicpc.net/problem/1837"
+difficulty: "브론즈 III"
+language: "python"
+---
+
+## 문제
+
+[BOJ 1837 - 암호제작](https://www.acmicpc.net/problem/1837)
+
+> 두 소수의 곱 P가 주어질 때, K보다 작은 소인수가 존재하면 BAD, 아니면 GOOD을 출력한다.
+
+## 풀이
+
+2부터 K-1까지 순회하며 P를 나눌 수 있는 수가 있으면 BAD과 해당 수를 출력한다. 없으면 GOOD을 출력한다.
+
+## 코드
+
+```python
+P, K = map(int, input().split())
+
+for i in range(2, K):
+  if P % i == 0:
+    print("BAD", i)
+    break
+else:
+  print("GOOD")
+```
+
+## 복잡도
+
+- 시간: O(K)
+- 공간: O(1)

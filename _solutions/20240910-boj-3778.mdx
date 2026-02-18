@@ -1,0 +1,66 @@
+---
+title: "BOJ 3778 - 애너그램 거리"
+date: "2024-09-10"
+description: "두 문자열의 알파벳 빈도 차이를 구하는 문제"
+tags: ["구현", "문자열"]
+platform: "boj"
+problem_number: "3778"
+problem_url: "https://www.acmicpc.net/problem/3778"
+difficulty: "브론즈 II"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 3778 - 애너그램 거리](https://www.acmicpc.net/problem/3778)
+
+> 두 문자열이 주어질 때, 애너그램 거리(한 문자열을 다른 문자열로 바꾸기 위해 추가하거나 삭제해야 하는 문자의 수)를 구한다.
+
+## 풀이
+
+알파벳 26자에 대한 빈도 배열을 만들어 첫 번째 문자열에서는 증가, 두 번째 문자열에서는 감소시킨다. 각 알파벳의 빈도 차이의 절댓값을 합산하면 애너그램 거리가 된다.
+
+## 코드
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int main()
+{
+  cin.tie(NULL);
+  cin.sync_with_stdio(false);
+  int t;
+  cin >> t;
+  cin.ignore();
+  for (int c = 1; c <= t; ++c)
+  {
+    char cnt[26] = {};
+    char a[50], b[50];
+    cin.getline(a, 100);
+    cin.getline(b, 100);
+    int ret = 0;
+
+    for (int i = 0; a[i]; ++i)
+    {
+      ++cnt[a[i] - 'a'];
+    }
+
+    for (int i = 0; b[i]; ++i)
+    {
+      --cnt[b[i] - 'a'];
+    }
+
+    for (int i = 0; i < 26; ++i)
+    {
+      ret += cnt[i] < 0 ? -cnt[i] : cnt[i];
+    }
+    cout << "Case #" << c << ": " << ret << '\n';
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(T * (N + M)) (T: 테스트 케이스 수, N, M: 각 문자열 길이)
+- 공간: O(1)

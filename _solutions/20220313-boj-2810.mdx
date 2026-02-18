@@ -1,0 +1,52 @@
+---
+title: "BOJ 2810 - 컵홀더"
+date: "2022-03-13"
+description: "구현, 그리디 알고리즘, 문자열 문제"
+tags: ["구현", "그리디 알고리즘", "문자열"]
+platform: "boj"
+problem_number: "2810"
+problem_url: "https://www.acmicpc.net/problem/2810"
+difficulty: "브론즈 I"
+language: "java"
+---
+
+## 문제
+
+[BOJ 2810 - 컵홀더](https://www.acmicpc.net/problem/2810)
+
+## 풀이
+
+그리디 알고리즘으로 매 단계 최선의 선택을 한다.
+
+## 코드
+
+```java
+package com.ssafy.an.day049;
+
+import java.util.Scanner;
+
+public class Day11BOJ2810컵홀더 {// 2810
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int T = Integer.parseInt(sc.nextLine());
+		String s = sc.nextLine();
+		int cnt = 1;
+		for (int i = 0; i < T; i++) {
+			char c = s.charAt(i);
+			if (c == 'S')
+				cnt++;
+			else if (c == 'L') {
+				cnt++;
+				i++;
+			}
+		} // 컵의 최대 갯수는 사람 수를 넘지 않는다!!!!!
+		System.out.println(cnt <= T ? cnt : T);
+		sc.close();
+	}
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

@@ -1,0 +1,46 @@
+---
+title: "BOJ 8387 - Dyslexia"
+date: "2025-11-19"
+description: "구현, 문자열 문제"
+tags: ["구현", "문자열"]
+platform: "boj"
+problem_number: "8387"
+problem_url: "https://www.acmicpc.net/problem/8387"
+difficulty: "브론즈 III"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 8387 - Dyslexia](https://www.acmicpc.net/problem/8387)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+  ios::sync_with_stdio(false), cin.tie(NULL);
+  register int N, ans = 0;
+  char arr1[100001], arr2[100001];
+  cin >> N;
+  cin >> arr1 >> arr2;
+  for (register int n = 0; n < N; ++n)
+    if (arr1[n] != arr2[n])
+      ++ans;
+  cout << N - ans;
+  return 0;
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

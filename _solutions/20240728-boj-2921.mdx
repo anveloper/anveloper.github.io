@@ -1,0 +1,51 @@
+---
+title: "BOJ 2921 - 도미노"
+date: "2024-07-28"
+description: "0부터 N까지의 도미노 세트에 있는 모든 점의 합을 구하는 문제"
+tags: ["수학"]
+platform: "boj"
+problem_number: "2921"
+problem_url: "https://www.acmicpc.net/problem/2921"
+difficulty: "브론즈 III"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 2921 - 도미노](https://www.acmicpc.net/problem/2921)
+
+> 0부터 N까지의 수가 적힌 도미노 세트에서 모든 도미노의 점 합을 구한다.
+
+## 풀이
+
+이중 반복문으로 모든 (i, j) 조합(i ≤ j)에 대해 i+j를 누적한다. 이는 도미노 세트의 모든 점을 합하는 것과 같다.
+
+## 코드
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int main()
+{
+  int n;
+  int sum = 0;
+  cin >> n;
+
+  for (int i = 0; i < n + 1; i++)
+  {
+    for (int j = 0; j < i + 1; j++)
+    {
+      sum += i + j;
+    }
+  }
+  cout << sum;
+
+  return 0;
+}
+```
+
+## 복잡도
+
+- 시간: O(N^2)
+- 공간: O(1)

@@ -1,0 +1,95 @@
+---
+title: "BOJ 2206 - 벽 부수고 이동하기"
+date: "2023-02-02"
+description: "그래프 이론, 그래프 탐색, 너비 우선 탐색 문제"
+tags: ["그래프 이론", "그래프 탐색", "너비 우선 탐색", "격자 그래프"]
+platform: "boj"
+problem_number: "2206"
+problem_url: "https://www.acmicpc.net/problem/2206"
+difficulty: "골드 III"
+language: "java"
+---
+
+## 문제
+
+[BOJ 2206 - 벽 부수고 이동하기](https://www.acmicpc.net/problem/2206)
+
+## 풀이
+
+그래프 탐색(BFS/DFS)을 활용하여 탐색한다.
+
+## 코드
+
+```java
+import java.io.*;
+import java.util.*;
+
+public class Day360BOJ2206벽부수고이동하기 {
+    static int N, M;
+    static int[] dr = { -1, 1, 0, 0 }, dc = { 0, 0, -1, 1 };
+    static int[][] map;
+    static int[][][] cnt;
+
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+
+        N = Integer.parseInt(st.nextToken());
+        M = Integer.parseInt(st.nextToken());
+        map = new int[N][M];
+        cnt = new int[N][M][2];
+
+        for (int i = 0; i < N; i++) {
+            String str = br.readLine();
+            for (int j = 0; j < M; j++)
+                map[i][j] = str.charAt(j) - '0';
+        }
+
+        System.out.println(bfs());
+        br.close();
+    }
+
+    private static int bfs() {
+        Queue<int[]> q = new LinkedList<>();
+        cnt[0][0][0] = 1;
+        q.add(new int[] { 0, 0, 0 });
+
+        while (!q.isEmpty()) {
+            int[] cur = q.poll();
+            int r = cur[0], c = cur[1], stroy = cur[2];
+
+            if (r == N - 1 && c == M - 1)
+                return cnt[r][c][stroy];
+
+            for (int dir = 0; dir < 4; dir++) {
+                int nr = r + dr[dir];
+                int nc = c + dc[dir];
+
+                if (index(nr, nc))
+                    continue;
+
+                if (map[nr][nc] == 0 && cnt[nr][nc][stroy] == 0) {
+                    cnt[nr][nc][stroy] = cnt[r][c][stroy] + 1;
+                    q.add(new int[] { nr, nc, stroy });
+                }
+
+                else if (map[nr][nc] == 1 && cnt[nr][nc][stroy] == 0 && stroy == 0) {
+                    cnt[nr][nc][1] = cnt[r][c][0] + 1;
+                    q.add(new int[] { nr, nc, 1 });
+                }
+            }
+        }
+
+        return -1;
+    }
+
+    private static boolean index(int nr, int nc) {
+        return nr < 0 || nr >= N || nc < 0 || nc >= M;
+    }
+}
+```
+
+## 복잡도
+
+- 시간: O(NM)
+- 공간: O(NM)

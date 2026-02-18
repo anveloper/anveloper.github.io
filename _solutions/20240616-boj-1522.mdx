@@ -1,0 +1,46 @@
+---
+title: "BOJ 1522 - 문자열 교환"
+date: "2024-06-16"
+description: "슬라이딩 윈도우로 'a'를 모두 연속시키기 위한 최소 교환 횟수를 구하는 문제"
+tags: ["브루트포스", "슬라이딩 윈도우"]
+platform: "boj"
+problem_number: "1522"
+problem_url: "https://www.acmicpc.net/problem/1522"
+difficulty: "실버 I"
+language: "python"
+---
+
+## 문제
+
+[BOJ 1522 - 문자열 교환](https://www.acmicpc.net/problem/1522)
+
+> 'a'와 'b'로 이루어진 원형 문자열에서 모든 'a'를 연속으로 모으기 위한 최소 교환 횟수를 구한다.
+
+## 풀이
+
+문자열 내 'a'의 총 개수를 윈도우 크기로 설정한다. 원형 문자열이므로 문자열을 두 번 이어붙인 뒤, 윈도우를 한 칸씩 슬라이딩하면서 윈도우 내 'a'의 최대 개수를 구한다. 전체 'a' 개수에서 윈도우 내 최대 'a' 개수를 빼면 최소 교환 횟수이다.
+
+## 코드
+
+```python
+def min_a(word):
+    tot = word.count("a")
+    ac = word + word
+    cur = ac[:tot].count("a")
+    max_a = cur
+    for i in range(1, len(word)):
+        if ac[i - 1] == "a":
+            cur -= 1
+        if ac[tot + i - 1] == "a":
+            cur += 1
+        max_a = max(max_a, cur)
+    return tot - max_a
+
+
+print(min_a(input()))
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

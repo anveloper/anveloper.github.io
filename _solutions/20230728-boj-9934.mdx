@@ -1,0 +1,79 @@
+---
+title: "BOJ 9934 - 완전 이진 트리"
+date: "2023-07-28"
+description: "트리, 재귀 문제"
+tags: ["트리", "재귀"]
+platform: "boj"
+problem_number: "9934"
+problem_url: "https://www.acmicpc.net/problem/9934"
+difficulty: "실버 I"
+language: "java"
+---
+
+## 문제
+
+[BOJ 9934 - 완전 이진 트리](https://www.acmicpc.net/problem/9934)
+
+## 풀이
+
+문제의 조건에 맞게 풀이한다.
+
+## 코드
+
+```java
+package day549;
+
+import java.io.*;
+import java.util.*;
+
+public class Day537BOJ9934완전이진트리 {
+  static int k;
+  static int[] arr;
+  static List<ArrayList<Integer>> list;
+
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    k = Integer.parseInt(br.readLine());
+    StringTokenizer st = new StringTokenizer(br.readLine());
+    StringBuilder sb = new StringBuilder();
+
+    arr = new int[(int) Math.pow(2, k) - 1];
+
+    for (int i = 0; i < arr.length; i++) {
+      arr[i] = Integer.parseInt(st.nextToken());
+    }
+
+    list = new ArrayList<>();
+    for (int i = 0; i < k; i++) {
+      list.add(new ArrayList<>());
+    }
+
+    search(0, arr.length - 1, 0);
+
+    for (int i = 0; i < k; i++) {
+      for (int j : list.get(i)) {
+        sb.append(j).append(" ");
+      }
+      sb.append("\n");
+    }
+
+    System.out.println(sb);
+  }
+
+  static void search(int start, int end, int depth) {
+    if (depth == k) {
+      return;
+    }
+
+    int mid = (start + end) / 2;
+    list.get(depth).add(arr[mid]);
+    search(start, mid - 1, depth + 1);
+    search(mid + 1, end, depth + 1);
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

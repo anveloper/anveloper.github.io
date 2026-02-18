@@ -1,0 +1,71 @@
+---
+title: "BOJ 1141 - 접두사"
+date: "2024-01-24"
+description: "그리디 알고리즘, 문자열, 정렬 문제"
+tags: ["그리디 알고리즘", "문자열", "정렬"]
+platform: "boj"
+problem_number: "1141"
+problem_url: "https://www.acmicpc.net/problem/1141"
+difficulty: "실버 I"
+language: "java"
+---
+
+## 문제
+
+[BOJ 1141 - 접두사](https://www.acmicpc.net/problem/1141)
+
+## 풀이
+
+그리디 알고리즘으로 매 단계 최선의 선택을 한다.
+
+## 코드
+
+```java
+package day749;
+
+import java.io.*;
+import java.util.*;
+
+public class Day722BOJ1141접두사 {
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+    int N = Integer.parseInt(br.readLine());
+    String[] arr = new String[N];
+
+    for (int i = 0; i < N; i++) {
+      arr[i] = br.readLine();
+    }
+
+    Arrays.sort(arr, (o1, o2) -> o2.length() - o1.length());
+    List<String> list = new ArrayList<>();
+
+    for (String cur : arr) {
+      if (list.size() == 0) {
+        list.add(cur);
+        continue;
+      }
+
+      boolean flag = false;
+
+      for (String str : list) {
+        if (str.indexOf(cur) == 0) {
+          flag = true;
+          break;
+        }
+      }
+
+      if (!flag) {
+        list.add(cur);
+      }
+    }
+
+    System.out.println(list.size());
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N log N)
+- 공간: O(N)

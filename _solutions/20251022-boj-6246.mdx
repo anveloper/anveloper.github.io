@@ -1,0 +1,60 @@
+---
+title: "BOJ 6246 - 풍선 놀이"
+date: "2025-10-22"
+description: "구현 문제"
+tags: ["구현"]
+platform: "boj"
+problem_number: "6246"
+problem_url: "https://www.acmicpc.net/problem/6246"
+difficulty: "브론즈 II"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 6246 - 풍선 놀이](https://www.acmicpc.net/problem/6246)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+  int f[10001] = {};
+  int n, tc;
+  int s, t;
+  cin >> n >> tc;
+  for (int i = 0; i < tc; i++)
+  {
+    cin >> s >> t;
+    for (int j = s; j <= n; j += t)
+    {
+      if (f[j] == 0)
+      {
+        f[j] = 1;
+      }
+    }
+  }
+  int tot = 0;
+  for (int i = 1; i <= n; i++)
+  {
+    if (f[i] == 0)
+    {
+      tot++;
+    }
+  }
+  cout << tot;
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

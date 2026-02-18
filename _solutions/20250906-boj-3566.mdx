@@ -1,0 +1,63 @@
+---
+title: "BOJ 3566 - 대형 스크린"
+date: "2025-09-06"
+description: "수학, 구현, 사칙연산 문제"
+tags: ["수학", "구현", "사칙연산"]
+platform: "boj"
+problem_number: "3566"
+problem_url: "https://www.acmicpc.net/problem/3566"
+difficulty: "브론즈 I"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 3566 - 대형 스크린](https://www.acmicpc.net/problem/3566)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <cmath>
+
+using namespace std;
+
+int rh, rv, sh, sv;
+int n, rhi, rvi, shi, svi, pi;
+int answer = 987654321;
+
+int main()
+{
+  cin.tie(NULL);
+  ios::sync_with_stdio(false);
+
+  cin >> rh >> rv >> sh >> sv;
+
+  cin >> n;
+
+  for (int i = 0; i < n; i++)
+  {
+    cin >> rhi >> rvi >> shi >> svi >> pi;
+
+    int h = max(ceil((double)rh / rhi), ceil((double)sh / shi));
+    int v = max(ceil((double)rv / rvi), ceil((double)sv / svi));
+    answer = min(answer, h * v * pi);
+
+    h = max(ceil((double)rh / rvi), ceil((double)sh / svi));
+    v = max(ceil((double)rv / rhi), ceil((double)sv / shi));
+    answer = min(answer, h * v * pi);
+  }
+
+  cout << answer;
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

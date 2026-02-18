@@ -1,0 +1,42 @@
+---
+title: "BOJ 2520 - 팬케이크 사랑"
+date: "2025-07-15"
+description: "수학, 구현, 사칙연산 문제"
+tags: ["수학", "구현", "사칙연산"]
+platform: "boj"
+problem_number: "2520"
+problem_url: "https://www.acmicpc.net/problem/2520"
+difficulty: "브론즈 II"
+language: "python"
+---
+
+## 문제
+
+[BOJ 2520 - 팬케이크 사랑](https://www.acmicpc.net/problem/2520)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```python
+import sys
+from math import floor
+
+for _ in range(int(sys.stdin.readline())):
+    sys.stdin.readline()
+
+    c, y, sugar, salt, f = map(int, sys.stdin.readline().split())
+    b, gs, gc, w = map(int, sys.stdin.readline().split())
+
+    pancake = floor(min([c / 8, y / 8, sugar / 4, salt, f / 9]) * 16)
+    topping = b + gs // 30 + gc // 25 + w // 10
+
+    print(min(pancake, topping))
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

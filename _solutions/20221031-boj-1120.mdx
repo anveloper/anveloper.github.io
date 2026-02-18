@@ -1,0 +1,57 @@
+---
+title: "BOJ 1120 - 문자열"
+date: "2022-10-31"
+description: "문자열, 브루트포스 알고리즘 문제"
+tags: ["문자열", "브루트포스 알고리즘"]
+platform: "boj"
+problem_number: "1120"
+problem_url: "https://www.acmicpc.net/problem/1120"
+difficulty: "실버 IV"
+language: "java"
+---
+
+## 문제
+
+[BOJ 1120 - 문자열](https://www.acmicpc.net/problem/1120)
+
+## 풀이
+
+가능한 모든 경우를 탐색하여 답을 구한다.
+
+## 코드
+
+```java
+package ASP_study.day299;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
+
+public class Day266BOJ1120문자열 {
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		char[] str1 = st.nextToken().toCharArray();
+		char[] str2 = st.nextToken().toCharArray();
+		int result = str1.length;
+		for (int i = 0; i < str2.length - str1.length + 1; i++) {
+			int tmp = 0;
+			for (int j = 0; j < str1.length; j++) {
+				if (str1[j] != str2[j + i]) {
+					tmp++;
+				}
+			}
+			if (result > tmp) {
+				result = tmp;
+			}
+		}
+		System.out.println(result);
+		br.close();
+	}
+}
+```
+
+## 복잡도
+
+- 시간: O(N²)
+- 공간: O(N)

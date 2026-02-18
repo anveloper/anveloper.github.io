@@ -1,0 +1,47 @@
+---
+title: "BOJ 10797 - 10부제"
+date: "2023-06-08"
+description: "구현 문제"
+tags: ["구현"]
+platform: "boj"
+problem_number: "10797"
+problem_url: "https://www.acmicpc.net/problem/10797"
+difficulty: "브론즈 IV"
+language: "java"
+---
+
+## 문제
+
+[BOJ 10797 - 10부제](https://www.acmicpc.net/problem/10797)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```java
+package day749;
+
+import java.io.*;
+import java.util.*;
+
+public class Day732BOJ1079710부제 {
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    int n = Integer.parseInt(br.readLine());
+    StringTokenizer st = new StringTokenizer(br.readLine());
+    int cnt = 0;
+    while (st.hasMoreTokens()) {
+      if (n == Integer.parseInt(st.nextToken()))
+        cnt++;
+    }
+    System.out.print(cnt);
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

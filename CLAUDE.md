@@ -1,5 +1,12 @@
 # Claude Code 프로젝트 가이드
 
+## 응답 규칙
+
+- 사용자가 영어로 질문할 경우: **한국어로 답변** + **원래 질문의 교정된 영어 문장**을 함께 제공
+- 원격 환경에서 한글 입력이 불가할 때 영어로 입력하는 경우가 있음
+- 교정된 영어 문장은 사용자의 영어 학습 목적
+- 형식 예시: 답변 끝에 `> Corrected English: "교정된 문장"` 포함
+
 ## 프로젝트 개요
 
 **anveloper.github.io**는 웹 개발자 안성진의 포트폴리오 및 기술 블로그 웹사이트입니다.
@@ -80,7 +87,7 @@ docs/                # 프로젝트 문서
 
 ### React/Next.js
 
-- 함수형 컴포넌트만 사용
+- `const` 함수형 컴포넌트만 사용
 - Server Components 기본, 필요시 `"use client"` 명시
 - Next.js 15: `params`는 Promise이므로 `await` 필수
 - 컴포넌트 파일명: kebab-case (예: `nav-bar.tsx`)

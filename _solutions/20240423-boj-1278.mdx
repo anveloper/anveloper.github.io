@@ -1,0 +1,51 @@
+---
+title: "BOJ 1278 - 연극"
+date: "2024-04-23"
+description: "N명의 배우가 하노이 탑 규칙으로 연극하는 횟수를 구하는 문제"
+tags: ["수학", "비트마스킹", "재귀"]
+platform: "boj"
+problem_number: "1278"
+problem_url: "https://www.acmicpc.net/problem/1278"
+difficulty: "골드 III"
+language: "javascript"
+---
+
+## 문제
+
+[BOJ 1278 - 연극](https://www.acmicpc.net/problem/1278)
+
+> N명의 배우가 하노이 탑 규칙에 따라 무대 위치를 옮길 때, 총 이동 횟수와 각 이동을 출력한다.
+
+## 풀이
+
+하노이 탑의 재귀 구조를 활용한다. 총 이동 횟수는 2^N - 1이며, 재귀적으로 각 단계의 이동을 출력한다.
+
+## 코드
+
+```javascript
+const solution = (input) => {
+  const N = +input[0];
+  const result = [];
+
+  const hanoi = (n, from, to, via) => {
+    if (n === 0) return;
+    hanoi(n - 1, from, via, to);
+    result.push(`${from} ${to}`);
+    hanoi(n - 1, via, to, from);
+  };
+
+  const total = BigInt(2) ** BigInt(N) - 1n;
+  hanoi(N, 1, 3, 2);
+
+  return [total.toString(), ...result].join("\n");
+};
+
+const fs = require("fs");
+const input = fs.readFileSync("/dev/stdin").toString().trim().split("\n");
+console.log(solution(input));
+```
+
+## 복잡도
+
+- 시간: O(2^N)
+- 공간: O(2^N)

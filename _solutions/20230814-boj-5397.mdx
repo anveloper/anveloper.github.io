@@ -1,0 +1,78 @@
+---
+title: "BOJ 5397 - 키로거"
+date: "2023-08-14"
+description: "자료 구조, 스택, 연결 리스트 문제"
+tags: ["자료 구조", "스택", "연결 리스트"]
+platform: "boj"
+problem_number: "5397"
+problem_url: "https://www.acmicpc.net/problem/5397"
+difficulty: "실버 II"
+language: "java"
+---
+
+## 문제
+
+[BOJ 5397 - 키로거](https://www.acmicpc.net/problem/5397)
+
+## 풀이
+
+스택을 활용하여 문제를 해결한다.
+
+## 코드
+
+```java
+package day599;
+
+import java.io.*;
+import java.util.*;
+
+public class Day554BOJ5397키로거 {
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+
+    int n = Integer.parseInt(br.readLine());
+
+    for (int i = 0; i < n; i++) {
+      LinkedList<Character> list = new LinkedList<>();
+      ListIterator<Character> iter = list.listIterator();
+      String str = br.readLine();
+
+      for (int j = 0; j < str.length(); j++) {
+        char command = str.charAt(j);
+        switch (command) {
+          case '<':
+            if (iter.hasPrevious()) {
+              iter.previous();
+            }
+            break;
+          case '>':
+            if (iter.hasNext()) {
+              iter.next();
+            }
+            break;
+          case '-':
+            if (iter.hasPrevious()) {
+              iter.previous();
+              iter.remove();
+            }
+            break;
+          default:
+            iter.add(command);
+        }
+      }
+      for (char c : list) {
+        bw.write(c);
+      }
+      bw.newLine();
+    }
+    br.close();
+    bw.close();
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

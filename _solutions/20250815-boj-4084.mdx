@@ -1,0 +1,60 @@
+---
+title: "BOJ 4084 - Viva la Diferencia"
+date: "2025-08-15"
+description: "수학, 구현, 사칙연산 문제"
+tags: ["수학", "구현", "사칙연산", "시뮬레이션"]
+platform: "boj"
+problem_number: "4084"
+problem_url: "https://www.acmicpc.net/problem/4084"
+difficulty: "브론즈 III"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 4084 - Viva la Diferencia](https://www.acmicpc.net/problem/4084)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+#include <cstdlib>
+
+#define endl '\n'
+
+using namespace std;
+
+int main()
+{
+  ios_base::sync_with_stdio(false);
+  cin.tie(NULL);
+  int a, b, c, d, tmp, cnt;
+  while (cin >> a >> b >> c >> d)
+  {
+    cnt = 0;
+    if (a + b + c + d == 0)
+      break;
+    while (a - b != b - c || b - c != c - d || d - a != a - b)
+    {
+      tmp = a;
+      a = abs(a - b);
+      b = abs(b - c);
+      c = abs(c - d);
+      d = abs(d - tmp);
+      cnt++;
+    }
+    cout << cnt << endl;
+  }
+
+  return 0;
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

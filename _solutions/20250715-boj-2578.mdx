@@ -1,0 +1,59 @@
+---
+title: "BOJ 2578 - 빙고"
+date: "2025-07-15"
+description: "구현, 시뮬레이션 문제"
+tags: ["구현", "시뮬레이션"]
+platform: "boj"
+problem_number: "2578"
+problem_url: "https://www.acmicpc.net/problem/2578"
+difficulty: "실버 IV"
+language: "python"
+---
+
+## 문제
+
+[BOJ 2578 - 빙고](https://www.acmicpc.net/problem/2578)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```python
+def check(tmp):
+    for i in range(5):
+        if bingo[i] == [0] * 5:
+            tmp += 1
+    for i in range(5):
+        if all(bingo[j][i] == 0 for j in range(5)):
+            tmp += 1
+    if all(bingo[i][i] == 0 for i in range(5)):
+        tmp += 1
+    if all(bingo[i][4 - i] == 0 for i in range(5)):
+        tmp += 1
+    return tmp
+
+bingo = [list(map(int, input().split())) for _ in range(5)]
+speak = []
+for _ in range(5):
+    speak += list(map(int, input().split()))
+cnt = 0
+tmp = 0
+for i in range(25):
+    for x in range(5):
+        for y in range(5):
+            if speak[i] == bingo[x][y]:
+                bingo[x][y] = 0
+                cnt += 1
+    if cnt >= 12:
+        result = check(tmp)
+        if result >= 3:
+            print(i + 1)
+            break
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

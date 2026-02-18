@@ -1,0 +1,65 @@
+---
+title: "BOJ 5212 - 지구 온난화"
+date: "2025-07-15"
+description: "구현, 시뮬레이션 문제"
+tags: ["구현", "시뮬레이션"]
+platform: "boj"
+problem_number: "5212"
+problem_url: "https://www.acmicpc.net/problem/5212"
+difficulty: "실버 II"
+language: "python"
+---
+
+## 문제
+
+[BOJ 5212 - 지구 온난화](https://www.acmicpc.net/problem/5212)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```python
+import sys
+
+input = sys.stdin.readline
+
+R, C = map(int, input().split())
+
+current_map = [list(input().rstrip()) for _ in range(R)]
+
+future_map = [["."] * C for _ in range(R)]
+
+directions = [(1, 0), (-1, 0), (0, 1), (0, -1)]
+
+for x in range(R):
+    for y in range(C):
+        sea = 0
+        if current_map[x][y] == "X":
+            for dx, dy in directions:
+                nx, ny = x + dx, y + dy
+                if nx < 0 or nx >= R or ny < 0 or ny >= C or current_map[nx][ny] == ".":
+                    sea += 1
+            if sea < 3:
+                future_map[x][y] = "X"
+
+min_row, min_col = R, C
+max_row, max_col = 0, 0
+
+for x in range(R):
+    for y in range(C):
+        if future_map[x][y] == "X":
+            min_row = min(min_row, x)
+            max_row = max(max_row, x)
+            min_col = min(min_col, y)
+            max_col = max(max_col, y)
+
+for i in range(min_row, max_row + 1):
+    print("".join(future_map[i][min_col : max_col + 1]))
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

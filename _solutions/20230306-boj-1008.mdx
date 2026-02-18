@@ -1,0 +1,44 @@
+---
+title: "BOJ 1008 - A/B"
+date: "2023-03-06"
+description: "구현, 사칙연산, 수학 문제"
+tags: ["구현", "사칙연산", "수학"]
+platform: "boj"
+problem_number: "1008"
+problem_url: "https://www.acmicpc.net/problem/1008"
+difficulty: "브론즈 V"
+language: "java"
+---
+
+## 문제
+
+[BOJ 1008 - A/B](https://www.acmicpc.net/problem/1008)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```java
+package day399;
+
+import java.io.*;
+
+public class Day393BOJ1008AB {
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+    String[] str = br.readLine().split(" ");
+    double a = Double.parseDouble(str[0]);
+    double b = Double.parseDouble(str[1]);
+
+    System.out.println(a / b);
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

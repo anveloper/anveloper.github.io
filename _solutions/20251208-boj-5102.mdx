@@ -1,0 +1,51 @@
+---
+title: "BOJ 5102 - Sarah's Toys"
+date: "2025-12-08"
+description: "수학, 구현, 사칙연산 문제"
+tags: ["수학", "구현", "사칙연산"]
+platform: "boj"
+problem_number: "5102"
+problem_url: "https://www.acmicpc.net/problem/5102"
+difficulty: "브론즈 III"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 5102 - Sarah's Toys](https://www.acmicpc.net/problem/5102)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+  while (1)
+  {
+    int a, b, diff;
+    cin >> a >> b;
+    if (!a && !b)
+      break;
+    diff = a - b;
+    if (diff < 2)
+      cout << 0 << ' ' << 0;
+    else if (diff % 2)
+      cout << (diff - 3) / 2 << ' ' << 1;
+    else
+      cout << diff / 2 << ' ' << 0;
+    cout << '\n';
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

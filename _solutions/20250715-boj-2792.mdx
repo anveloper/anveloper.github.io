@@ -1,0 +1,55 @@
+---
+title: "BOJ 2792 - 보석 상자"
+date: "2025-07-15"
+description: "이분 탐색, 매개 변수 탐색 문제"
+tags: ["이분 탐색", "매개 변수 탐색"]
+platform: "boj"
+problem_number: "2792"
+problem_url: "https://www.acmicpc.net/problem/2792"
+difficulty: "실버 I"
+language: "python"
+---
+
+## 문제
+
+[BOJ 2792 - 보석 상자](https://www.acmicpc.net/problem/2792)
+
+## 풀이
+
+이분 탐색을 통해 최적의 값을 탐색한다.
+
+## 코드
+
+```python
+import sys
+import math
+
+input = sys.stdin.readline
+
+N, M = map(int, input().split())
+
+arr = [int(input()) for _ in range(M)]
+
+left = 1
+right = 1000000000
+
+while left <= right:
+    mid = (left + right) // 2
+
+    count = 0
+
+    for val in arr:
+        count += math.ceil(val / mid)
+
+    if count <= N:
+        right = mid - 1
+    else:
+        left = mid + 1
+
+print(left)
+```
+
+## 복잡도
+
+- 시간: O(N log N)
+- 공간: O(N)

@@ -1,0 +1,65 @@
+---
+title: "BOJ 9229 - 단어 사다리"
+date: "2026-01-05"
+description: "구현, 문자열, 브루트포스 알고리즘 문제"
+tags: ["구현", "문자열", "브루트포스 알고리즘"]
+platform: "boj"
+problem_number: "9229"
+problem_url: "https://www.acmicpc.net/problem/9229"
+difficulty: "브론즈 I"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 9229 - 단어 사다리](https://www.acmicpc.net/problem/9229)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int main()
+{
+  ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
+
+  string s, a;
+
+  while (cin >> s, s != "#")
+  {
+    bool isCorrect = 1;
+
+    while (cin >> a, a != "#")
+    {
+      if (isCorrect)
+      {
+        if (s.length() != a.length())
+          isCorrect = 0;
+        else
+        {
+          int cnt = 0;
+          for (int i = 0; i < a.size(); i++)
+            cnt += (a[i] != s[i]);
+          if (cnt != 1)
+            isCorrect = 0;
+        }
+      }
+      s = a;
+    }
+
+    cout << ((isCorrect) ? "Correct" : "Incorrect") << endl;
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N²)
+- 공간: O(N)

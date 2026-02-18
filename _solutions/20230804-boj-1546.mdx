@@ -1,0 +1,56 @@
+---
+title: "BOJ 1546 - 평균"
+date: "2023-08-04"
+description: "수학, 사칙연산 문제"
+tags: ["수학", "사칙연산"]
+platform: "boj"
+problem_number: "1546"
+problem_url: "https://www.acmicpc.net/problem/1546"
+difficulty: "브론즈 I"
+language: "java"
+---
+
+## 문제
+
+[BOJ 1546 - 평균](https://www.acmicpc.net/problem/1546)
+
+## 풀이
+
+수학적 성질을 이용하여 풀이한다.
+
+## 코드
+
+```java
+package day549;
+
+import java.io.*;
+import java.util.*;
+
+public class Day544BOJ1546평균 {
+  public static void main(String[] args) throws Exception {
+
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+    double arr[] = new double[Integer.parseInt(br.readLine())];
+
+    StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+
+    for (int i = 0; i < arr.length; i++) {
+      arr[i] = Double.parseDouble(st.nextToken());
+    }
+
+    double sum = 0;
+    Arrays.sort(arr);
+
+    for (int i = 0; i < arr.length; i++) {
+      sum += ((arr[i] / arr[arr.length - 1]) * 100);
+    }
+    System.out.print(sum / arr.length);
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N log N)
+- 공간: O(N)

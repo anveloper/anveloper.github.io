@@ -1,0 +1,61 @@
+---
+title: "BOJ 1913 - 달팽이"
+date: "2025-07-15"
+description: "구현 문제"
+tags: ["구현"]
+platform: "boj"
+problem_number: "1913"
+problem_url: "https://www.acmicpc.net/problem/1913"
+difficulty: "실버 III"
+language: "python"
+---
+
+## 문제
+
+[BOJ 1913 - 달팽이](https://www.acmicpc.net/problem/1913)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```python
+N = int(input())
+target = int(input())
+x = y = N // 2
+array = [[""] * N for _ in range(N)]
+direction = [(0, -1), (1, 0), (0, 1), (-1, 0)]
+move = 1
+index = 0
+num = 1
+
+while True:
+    for _ in range(move):
+        array[y][x] = num
+        num += 1
+        x += direction[index][0]
+        y += direction[index][1]
+    index = (index + 1) % 4
+    if index % 2 == 0:
+        move += 1
+
+    if num > N * N:
+        break
+
+for i in range(N):  
+    for j in range(N):
+        print(array[i][j], end = " ")
+    print()
+
+for i in range(N):
+    for j in range(N):
+        if array[i][j] == target:
+            print(i + 1, j + 1)
+            exit()
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

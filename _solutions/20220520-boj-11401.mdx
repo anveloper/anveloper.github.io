@@ -1,0 +1,67 @@
+---
+title: "BOJ 11401 - 이항 계수 3"
+date: "2022-05-20"
+description: "수학, 정수론, 조합론 문제"
+tags: ["수학", "정수론", "조합론", "분할 정복을 이용한 거듭제곱", "모듈로 곱셈 역원", "페르마의 소정리"]
+platform: "boj"
+problem_number: "11401"
+problem_url: "https://www.acmicpc.net/problem/11401"
+difficulty: "골드 I"
+language: "java"
+---
+
+## 문제
+
+[BOJ 11401 - 이항 계수 3](https://www.acmicpc.net/problem/11401)
+
+## 풀이
+
+수학적 성질을 이용하여 풀이한다.
+
+## 코드
+
+```java
+package com.ssafy.an.day149;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
+public class Day102BOJ11401이항계수구현 { // 11401 이항계수
+	static final long MOD = 1_000_000_007;
+	static int N, K; // nCk
+
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		String[] tmp = br.readLine().split(" ");
+		N = Integer.parseInt(tmp[0]);
+		K = Integer.parseInt(tmp[1]);
+
+		System.out.println(fac(N) * pow(fac(K) * fac(N - K) % MOD, MOD - 2) % MOD);
+		br.close();
+	}
+
+	public static long fac(long n) { // 팩토리얼
+		long res = 1L;
+		while (n > 1)
+			res = res * n-- % MOD;
+		return res;
+	}
+
+	public static long pow(long base, long expo) {
+		if (expo == 1)
+			return base % MOD;
+
+		long temp = pow(base, expo / 2);
+		if (expo % 2 == 1)
+			return (temp * temp % MOD) * base % MOD;
+
+		return temp * temp % MOD;
+
+	}
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

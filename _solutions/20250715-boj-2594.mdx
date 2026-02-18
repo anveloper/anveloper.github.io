@@ -1,0 +1,51 @@
+---
+title: "BOJ 2594 - 놀이공원"
+date: "2025-07-15"
+description: "구현 문제"
+tags: ["구현"]
+platform: "boj"
+problem_number: "2594"
+problem_url: "https://www.acmicpc.net/problem/2594"
+difficulty: "실버 III"
+language: "python"
+---
+
+## 문제
+
+[BOJ 2594 - 놀이공원](https://www.acmicpc.net/problem/2594)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```python
+import sys
+
+input = sys.stdin.readline
+
+N = int(input())
+timetable = [[600, 600], [1320, 1320]]
+
+for _ in range(N):
+    start, end = input().split()
+    s_time = (int(start[:2]) * 60) + int(start[2:]) - 10
+    e_time = (int(end[:2]) * 60) + int(end[2:]) + 10
+    timetable.append([s_time, e_time])
+
+timetable.sort()
+
+result = 0
+flag = 600
+for s, e in timetable:
+    result = max(result, s - flag)
+    flag = max(flag, e)
+
+print(result)
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

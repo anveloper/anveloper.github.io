@@ -1,0 +1,53 @@
+---
+title: "BOJ 3578 - Holes"
+date: "2025-10-03"
+description: "구현, 그리디 알고리즘, 문자열 문제"
+tags: ["구현", "그리디 알고리즘", "문자열"]
+platform: "boj"
+problem_number: "3578"
+problem_url: "https://www.acmicpc.net/problem/3578"
+difficulty: "브론즈 III"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 3578 - Holes](https://www.acmicpc.net/problem/3578)
+
+## 풀이
+
+그리디 알고리즘으로 매 단계 최선의 선택을 한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+
+using namespace std;
+
+int h;
+int main()
+{
+  cin >> h;
+  if (!h)
+  {
+    cout << 1;
+    return 0;
+  }
+  if (h == 1)
+  {
+    cout << 0;
+    return 0;
+  }
+
+  if (h % 2)
+    cout << 4;
+  for (int i = 0; i < h / 2; i++)
+    cout << 8;
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

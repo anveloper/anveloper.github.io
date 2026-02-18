@@ -1,0 +1,58 @@
+---
+title: "BOJ 2953 - 나는 요리사다"
+date: "2024-01-13"
+description: "수학, 구현, 사칙연산 문제"
+tags: ["수학", "구현", "사칙연산"]
+platform: "boj"
+problem_number: "2953"
+problem_url: "https://www.acmicpc.net/problem/2953"
+difficulty: "브론즈 III"
+language: "java"
+---
+
+## 문제
+
+[BOJ 2953 - 나는 요리사다](https://www.acmicpc.net/problem/2953)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```java
+package day749;
+
+import java.io.*;
+import java.util.*;
+
+public class Day711BOJ2953나는요리사다 {
+  static StringTokenizer st;
+
+  static int sum(String score) {
+    int result = 0;
+    st = new StringTokenizer(score);
+    while (st.hasMoreTokens())
+      result += Integer.parseInt(st.nextToken());
+    return result;
+  }
+
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    int idx = 0, ans = 0;
+    for (int i = 0; i < 5; i++) {
+      int sum = sum(br.readLine());
+      if (ans < sum) {
+        ans = sum;
+        idx = i + 1;
+      }
+    }
+    System.out.println(idx + " " + ans);
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

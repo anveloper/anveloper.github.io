@@ -1,0 +1,45 @@
+---
+title: "BOJ 11549 - Identifying tea"
+date: "2024-11-18"
+description: "5개의 입력 중 특정 값과 일치하는 개수를 세는 구현 문제"
+tags: ["구현"]
+platform: "boj"
+problem_number: "11549"
+problem_url: "https://www.acmicpc.net/problem/11549"
+difficulty: "브론즈 IV"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 11549 - Identifying tea](https://www.acmicpc.net/problem/11549)
+
+> 정답 번호 n과 5개의 추측이 주어질 때, 정답과 일치하는 추측의 개수를 출력한다.
+
+## 풀이
+
+정답 n을 입력받고 5개의 값을 순회하며 n과 같은 값의 개수를 세어 출력한다.
+
+## 코드
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+int n, cnt;
+int main()
+{
+  cin >> n;
+  for (int i = 0, x; i < 5; i++)
+  {
+    cin >> x;
+    if (x == n)
+      cnt++;
+  }
+  cout << cnt;
+}
+```
+
+## 복잡도
+
+- 시간: O(1) (고정 5회 반복)
+- 공간: O(1)

@@ -1,0 +1,51 @@
+---
+title: "BOJ 4796 - 캠핑"
+date: "2023-01-28"
+description: "수학, 그리디 알고리즘 문제"
+tags: ["수학", "그리디 알고리즘"]
+platform: "boj"
+problem_number: "4796"
+problem_url: "https://www.acmicpc.net/problem/4796"
+difficulty: "브론즈 I"
+language: "java"
+---
+
+## 문제
+
+[BOJ 4796 - 캠핑](https://www.acmicpc.net/problem/4796)
+
+## 풀이
+
+그리디 알고리즘으로 매 단계 최선의 선택을 한다.
+
+## 코드
+
+```java
+import java.io.*;
+import java.util.*;
+
+public class Day355BOJ4796캠핑 {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
+        int i = 1;
+        while (true) {
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            int l = Integer.parseInt(st.nextToken());
+            int p = Integer.parseInt(st.nextToken());
+            int v = Integer.parseInt(st.nextToken());
+            if (l == 0 && p == 0 && v == 0)
+                break;
+            int total = l * (v / p) + Math.min(l, v % p);
+            sb.append("Case " + i + ": " + total + "\n");
+            i++;
+        }
+        System.out.print(sb);
+    }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

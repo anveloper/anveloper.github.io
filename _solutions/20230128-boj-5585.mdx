@@ -1,0 +1,51 @@
+---
+title: "BOJ 5585 - 거스름돈"
+date: "2023-01-28"
+description: "그리디 알고리즘 문제"
+tags: ["그리디 알고리즘"]
+platform: "boj"
+problem_number: "5585"
+problem_url: "https://www.acmicpc.net/problem/5585"
+difficulty: "브론즈 II"
+language: "java"
+---
+
+## 문제
+
+[BOJ 5585 - 거스름돈](https://www.acmicpc.net/problem/5585)
+
+## 풀이
+
+그리디 알고리즘으로 매 단계 최선의 선택을 한다.
+
+## 코드
+
+```java
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class Day355BOJ5585거스름돈 {
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int cost = Integer.parseInt(br.readLine());
+        int[] coinArr = { 500, 100, 50, 10, 5, 1 };
+        cost = 1000 - cost;
+        int num = 0;
+        for (int i = 0; i < 6; i++) {
+            if (cost / coinArr[i] > 0) {
+                num += cost / coinArr[i];
+                cost = cost % coinArr[i];
+            }
+        }
+        System.out.println(num);
+    }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

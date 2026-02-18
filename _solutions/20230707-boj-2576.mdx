@@ -1,0 +1,57 @@
+---
+title: "BOJ 2576 - 홀수"
+date: "2023-07-07"
+description: "수학, 구현 문제"
+tags: ["수학", "구현"]
+platform: "boj"
+problem_number: "2576"
+problem_url: "https://www.acmicpc.net/problem/2576"
+difficulty: "브론즈 III"
+language: "java"
+---
+
+## 문제
+
+[BOJ 2576 - 홀수](https://www.acmicpc.net/problem/2576)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```java
+package day549;
+
+import java.io.*;
+
+public class Day516BOJ2576홀수 {
+
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    int sum = 0;
+    int min = 100;
+
+    for (int i = 0; i < 7; i++) {
+      int N = Integer.parseInt(br.readLine());
+
+      if (N % 2 == 1) {
+        sum += N;
+        min = Math.min(min, N);
+      }
+    }
+
+    if (sum == 0) {
+      System.out.println(-1);
+    } else {
+      System.out.println(sum);
+      System.out.println(min);
+    }
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

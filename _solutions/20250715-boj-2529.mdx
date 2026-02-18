@@ -1,0 +1,58 @@
+---
+title: "BOJ 2529 - 부등호"
+date: "2025-07-15"
+description: "브루트포스 알고리즘, 백트래킹 문제"
+tags: ["브루트포스 알고리즘", "백트래킹"]
+platform: "boj"
+problem_number: "2529"
+problem_url: "https://www.acmicpc.net/problem/2529"
+difficulty: "실버 I"
+language: "python"
+---
+
+## 문제
+
+[BOJ 2529 - 부등호](https://www.acmicpc.net/problem/2529)
+
+## 풀이
+
+백트래킹으로 가능한 경우를 탐색한다.
+
+## 코드
+
+```python
+K = int(input())
+signs = list(map(str,input().split(' ')))
+nums = [-1] * 10
+
+result = []
+def solution(depth, prev, value):
+
+  if depth == K+1:
+    result.append(value)
+  else:
+    for i in range(10):
+      if nums[i] == -1:
+        nums[i] = 1
+        if signs[depth-1] == '<' and ( prev < i ):
+          solution(depth+1, i, value+str(i))
+        elif signs[depth-1] == '>' and ( prev > i ):
+          solution(depth+1, i, value+str(i))
+        nums[i] = -1
+
+
+
+for i in range(10):
+  nums[i] = 1
+  solution(1, i, str(i))
+  nums[i] = -1
+
+result.sort()
+print(result[-1])
+print(result[0])
+```
+
+## 복잡도
+
+- 시간: O(N!)
+- 공간: O(N)

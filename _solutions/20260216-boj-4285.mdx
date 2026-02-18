@@ -1,0 +1,53 @@
+---
+title: "BOJ 4285 - Prerequisites?"
+date: "2026-02-16"
+description: "구현 문제"
+tags: ["구현"]
+platform: "boj"
+problem_number: "4285"
+problem_url: "https://www.acmicpc.net/problem/4285"
+difficulty: "브론즈 II"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 4285 - Prerequisites?](https://www.acmicpc.net/problem/4285)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+
+using namespace std;
+
+int main() {
+  int n, m, num, a, b, c;
+  while (cin >> n >> m) {
+    bool arr[10000] = { 0 };
+    while (n --) {
+      cin >> num;
+      arr[num] = 1;
+    }
+    string answer("yes\n");
+    while (m --) {
+      cin >> a >> b;
+      while (a --) {
+        cin >> c;
+        if (arr[c] == 1) b --;
+      }
+      if (0 < b) answer = "no\n";
+    }
+    cout << answer;
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

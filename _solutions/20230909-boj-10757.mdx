@@ -1,0 +1,50 @@
+---
+title: "BOJ 10757 - 큰 수 A+B"
+date: "2023-09-09"
+description: "구현, 임의 정밀도 / 큰 수 연산, 사칙연산 문제"
+tags: ["구현", "임의 정밀도 / 큰 수 연산", "사칙연산", "수학"]
+platform: "boj"
+problem_number: "10757"
+problem_url: "https://www.acmicpc.net/problem/10757"
+difficulty: "브론즈 V"
+language: "java"
+---
+
+## 문제
+
+[BOJ 10757 - 큰 수 A+B](https://www.acmicpc.net/problem/10757)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```java
+package day599;
+
+import java.io.*;
+import java.util.*;
+import java.math.*;
+
+public class Day582BOJ10757큰수 {
+  public static void main(String[] args) throws Exception {
+
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+    StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+
+    BigInteger A = new BigInteger(st.nextToken());
+    BigInteger B = new BigInteger(st.nextToken());
+
+    A = A.add(B);
+
+    System.out.println(A.toString());
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

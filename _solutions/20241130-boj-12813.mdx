@@ -1,0 +1,71 @@
+---
+title: "BOJ 12813 - 이진수 연산"
+date: "2024-11-30"
+description: "두 이진수 문자열에 대해 비트 연산 결과를 출력하는 문제"
+tags: ["문자열"]
+platform: "boj"
+problem_number: "12813"
+problem_url: "https://www.acmicpc.net/problem/12813"
+difficulty: "브론즈 II"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 12813 - 이진수 연산](https://www.acmicpc.net/problem/12813)
+
+> 길이가 같은 두 이진수 문자열에 대해 AND, OR, XOR, NOT A, NOT B 연산 결과를 각각 출력한다.
+
+## 풀이
+
+두 이진수 문자열을 정수 배열로 변환한 뒤, 각 자리에 대해 AND, OR, XOR 연산을 수행한다. NOT 연산은 각 비트를 반전(0이면 1, 1이면 0)하여 출력한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+#include <cstring>
+#include <stdlib.h>
+
+using namespace std;
+
+int main()
+{
+  int A[100001], B[100001];
+  string strA, strB;
+  cin >> strA >> strB;
+  int i = strA.length() - 1;
+  while (i != -1)
+  {
+    A[i] = strA[i] - '0';
+    B[i] = strB[i] - '0';
+    i--;
+  }
+
+  int len = strA.length();
+  for (i = 0; i < len; i++)
+    printf("%d", A[i] & B[i]);
+  printf("\n");
+
+  for (i = 0; i < len; i++)
+    printf("%d", A[i] | B[i]);
+  printf("\n");
+
+  for (i = 0; i < len; i++)
+    printf("%d", A[i] ^ B[i]);
+  printf("\n");
+
+  for (i = 0; i < len; i++)
+    printf("%d", !A[i]);
+  printf("\n");
+
+  for (i = 0; i < len; i++)
+    printf("%d", !B[i]);
+  printf("\n");
+}
+```
+
+## 복잡도
+
+- 시간: O(L) (L: 이진수 문자열 길이)
+- 공간: O(L)

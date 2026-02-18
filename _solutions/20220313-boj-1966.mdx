@@ -1,0 +1,87 @@
+---
+title: "BOJ 1966 - 프린터 큐"
+date: "2022-03-13"
+description: "구현, 자료 구조, 시뮬레이션 문제"
+tags: ["구현", "자료 구조", "시뮬레이션", "큐"]
+platform: "boj"
+problem_number: "1966"
+problem_url: "https://www.acmicpc.net/problem/1966"
+difficulty: "실버 III"
+language: "java"
+---
+
+## 문제
+
+[BOJ 1966 - 프린터 큐](https://www.acmicpc.net/problem/1966)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```java
+package com.ssafy.an.day049;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.LinkedList;
+import java.util.StringTokenizer;
+
+public class Day17BOJ1966프린트큐 { // 1966
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringBuilder sb = new StringBuilder();
+		StringTokenizer st = null;
+		LinkedList<int[]> q = null;
+		int T = Integer.parseInt(br.readLine());
+		for (int tc = 1; tc <= T; tc++) {
+
+			q = new LinkedList<>();
+
+			st = new StringTokenizer(br.readLine());
+
+			int N = Integer.parseInt(st.nextToken());
+			int M = Integer.parseInt(st.nextToken());
+
+			st = new StringTokenizer(br.readLine());
+
+			for (int i = 0; i < N; i++) {
+				q.offer(new int[] { i, Integer.parseInt(st.nextToken()) });
+			}
+
+			int ans = 0;
+			while (!q.isEmpty()) {
+				int[] front = q.poll();
+				boolean isMax = true;
+				for (int i = 0; i < q.size(); i++) {
+					if (front[1] < q.get(i)[1]) {
+						q.offer(front);
+						for (int j = 0; j < i; j++) {
+							q.offer(q.poll());
+						}
+						isMax = false;
+						break;
+					}
+				}
+				if (isMax == false) {
+					continue;
+				}
+				ans++;
+				if (front[0] == M) {
+					break;
+				}
+			}
+			sb.append(ans).append('\n');
+		}
+
+		System.out.println(sb);
+		br.close();
+	}
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

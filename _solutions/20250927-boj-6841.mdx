@@ -1,0 +1,65 @@
+---
+title: "BOJ 6841 - I Speak TXTMSG"
+date: "2025-09-27"
+description: "구현, 문자열 문제"
+tags: ["구현", "문자열"]
+platform: "boj"
+problem_number: "6841"
+problem_url: "https://www.acmicpc.net/problem/6841"
+difficulty: "브론즈 IV"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 6841 - I Speak TXTMSG](https://www.acmicpc.net/problem/6841)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+#include <map>
+#include <string>
+
+using namespace std;
+
+int main(void)
+{
+  ios::sync_with_stdio(0);
+  cin.tie(0);
+  map<string, string> dict;
+  dict["CU"] = "see you";
+  dict[":-)"] = "I’m happy";
+  dict[":-("] = "I’m unhappy";
+  dict[";-)"] = "wink";
+  dict[":-P"] = "stick out my tongue";
+  dict["(~.~)"] = "sleepy";
+  dict["TA"] = "totally awesome";
+  dict["CCC"] = "Canadian Computing Competition";
+  dict["CUZ"] = "because";
+  dict["TY"] = "thank-you";
+  dict["YW"] = "you’re welcome";
+  dict["TTYL"] = "talk to you later";
+  while (true)
+  {
+    string str;
+    cin >> str;
+    if (dict.find(str) != dict.end())
+      cout << dict[str] << '\n';
+    else
+      cout << str << '\n';
+    if (str == "TTYL")
+      break;
+  }
+  return 0;
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

@@ -1,0 +1,47 @@
+---
+title: "BOJ 2992 - 크면서 작은 수"
+date: "2025-07-15"
+description: "브루트포스 알고리즘, 백트래킹 문제"
+tags: ["브루트포스 알고리즘", "백트래킹"]
+platform: "boj"
+problem_number: "2992"
+problem_url: "https://www.acmicpc.net/problem/2992"
+difficulty: "실버 III"
+language: "python"
+---
+
+## 문제
+
+[BOJ 2992 - 크면서 작은 수](https://www.acmicpc.net/problem/2992)
+
+## 풀이
+
+백트래킹으로 가능한 경우를 탐색한다.
+
+## 코드
+
+```python
+from itertools import permutations
+
+
+def combinations(string):
+    number_str = string
+    perm = permutations(number_str)
+    result = list(set([("".join(p)) for p in perm]))
+
+    return sorted(result)
+
+
+string = input()
+comb = combinations(string)
+index = comb.index(string) + 1
+if index < len(comb):
+    print(comb[index])
+else:
+    print(0)
+```
+
+## 복잡도
+
+- 시간: O(N!)
+- 공간: O(N)

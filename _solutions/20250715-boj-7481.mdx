@@ -1,0 +1,52 @@
+---
+title: "BOJ 7481 - ATM놀이"
+date: "2025-07-15"
+description: "수학, 정수론, 비둘기집 문제"
+tags: ["수학", "정수론", "비둘기집"]
+platform: "boj"
+problem_number: "7481"
+problem_url: "https://www.acmicpc.net/problem/7481"
+difficulty: "실버 I"
+language: "python"
+---
+
+## 문제
+
+[BOJ 7481 - ATM놀이](https://www.acmicpc.net/problem/7481)
+
+## 풀이
+
+수학적 성질을 이용하여 풀이한다.
+
+## 코드
+
+```python
+T = int(input())
+for i in range(T):
+    a, b, S = map(int, input().split())
+    sw = 0
+    if b < a:
+        sw = 1
+        b, a = a, b
+
+    ans = 0
+    t = S // b * b
+    for j in range(a + 2):
+        if (S - t) % a == 0:
+            ans = [(S - t) // a, t // b]
+            break
+        else:
+            t -= b
+
+    if ans == 0 or ans[0] < 0 or ans[1] < 0:
+        print("Impossible")
+    else:
+        if sw == 1:
+            ans.reverse()
+        print(*ans)
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

@@ -1,0 +1,58 @@
+---
+title: "BOJ 2204 - 도비의 난독증 테스트"
+date: "2024-02-02"
+description: "문자열, 정렬 문제"
+tags: ["문자열", "정렬"]
+platform: "boj"
+problem_number: "2204"
+problem_url: "https://www.acmicpc.net/problem/2204"
+difficulty: "브론즈 I"
+language: "java"
+---
+
+## 문제
+
+[BOJ 2204 - 도비의 난독증 테스트](https://www.acmicpc.net/problem/2204)
+
+## 풀이
+
+정렬을 활용하여 문제를 해결한다.
+
+## 코드
+
+```java
+package day749;
+
+import java.util.*;
+
+public class Day731BOJ2204난독증 {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    StringBuilder sb = new StringBuilder();
+    HashMap<String, String> hashMap = new HashMap<>();
+    while (true) {
+      int n = sc.nextInt();
+      if (n == 0)
+        break;
+      String[] str = new String[n];
+      for (int i = 0; i < n; i++) {
+        str[i] = sc.next();
+      }
+      for (int i = 0; i < n; i++) {
+        String temp = str[i].toLowerCase();
+        hashMap.put(temp, str[i]);
+        str[i] = str[i].toLowerCase();
+      }
+      Arrays.sort(str);
+      sb.append(hashMap.get(str[0])).append("\n");
+    }
+    System.out.println(sb);
+    sc.close();
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N log N)
+- 공간: O(N)

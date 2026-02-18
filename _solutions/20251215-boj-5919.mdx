@@ -1,0 +1,59 @@
+---
+title: "BOJ 5919 - Hay Bales"
+date: "2025-12-15"
+description: "수학, 구현, 사칙연산 문제"
+tags: ["수학", "구현", "사칙연산"]
+platform: "boj"
+problem_number: "5919"
+problem_url: "https://www.acmicpc.net/problem/5919"
+difficulty: "브론즈 II"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 5919 - Hay Bales](https://www.acmicpc.net/problem/5919)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+
+using namespace std;
+
+const int MAX = 10000;
+int N;
+int hay[MAX];
+
+int main(void)
+{
+  ios_base::sync_with_stdio(0);
+  cin.tie(0);
+  cin >> N;
+  int sum = 0;
+  for (int i = 0; i < N;
+       i++)
+  {
+    cin >> hay[i];
+    sum += hay[i];
+  }
+  int average = sum / N;
+  int result = 0;
+  for (int i = 0; i < N;
+       i++)
+    if (hay[i] >
+        average)
+      result += hay[i] - average;
+  cout << result << "\n";
+  return 0;
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

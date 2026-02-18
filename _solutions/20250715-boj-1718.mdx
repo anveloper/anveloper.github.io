@@ -1,0 +1,38 @@
+---
+title: "BOJ 1718 - 암호"
+date: "2025-07-15"
+description: "구현, 문자열 문제"
+tags: ["구현", "문자열"]
+platform: "boj"
+problem_number: "1718"
+problem_url: "https://www.acmicpc.net/problem/1718"
+difficulty: "브론즈 II"
+language: "python"
+---
+
+## 문제
+
+[BOJ 1718 - 암호](https://www.acmicpc.net/problem/1718)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```python
+text, key = input(), input()
+
+answer = ''
+
+for i in range(len(text)):
+    if text[i] == ' ': answer += ' '
+    else: answer += chr((ord(text[i]) - ord(key[i%len(key)]) - 1) % 26 + ord('a'))
+
+print(answer)
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

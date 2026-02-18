@@ -1,0 +1,78 @@
+---
+title: "BOJ 4447 - 좋은놈 나쁜놈"
+date: "2024-12-18"
+description: "이름에서 G와 B의 개수를 비교하여 성향을 판별하는 문제"
+tags: ["구현", "문자열"]
+platform: "boj"
+problem_number: "4447"
+problem_url: "https://www.acmicpc.net/problem/4447"
+difficulty: "브론즈 II"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 4447 - 좋은놈 나쁜놈](https://www.acmicpc.net/problem/4447)
+
+> 이름 문자열에서 대소문자 구분 없이 G와 B의 개수를 세어 GOOD, A BADDY, NEUTRAL을 판별한다.
+
+## 풀이
+
+각 이름 문자열에서 G/g의 개수와 B/b의 개수를 센 후, G가 더 많으면 GOOD, B가 더 많으면 A BADDY, 같으면 NEUTRAL을 출력한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int main()
+{
+
+  int test;
+  cin >> test;
+  cin.ignore();
+
+  string str;
+
+  for (int i = 0; i < test; i++)
+  {
+    getline(cin, str);
+
+    int cntg = 0;
+    int cntb = 0;
+
+    for (int i = 0; i < str.length(); i++)
+    {
+      if (str[i] == 'G' || str[i] == 'g')
+      {
+        cntg++;
+      }
+      else if (str[i] == 'B' || str[i] == 'b')
+      {
+        cntb++;
+      }
+    }
+
+    if (cntg == cntb)
+    {
+      cout << str << " is " << "NEUTRAL\n";
+    }
+    else if (cntg > cntb)
+    {
+      cout << str << " is " << "GOOD\n";
+    }
+    else
+    {
+      cout << str << " is " << "A BADDY\n";
+    }
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(T × L) (L: 이름 길이)
+- 공간: O(L)

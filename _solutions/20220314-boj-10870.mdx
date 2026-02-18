@@ -1,0 +1,46 @@
+---
+title: "BOJ 10870 - 피보나치 수 5"
+date: "2022-03-14"
+description: "수학, 구현 문제"
+tags: ["수학", "구현"]
+platform: "boj"
+problem_number: "10870"
+problem_url: "https://www.acmicpc.net/problem/10870"
+difficulty: "브론즈 II"
+language: "java"
+---
+
+## 문제
+
+[BOJ 10870 - 피보나치 수 5](https://www.acmicpc.net/problem/10870)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```java
+package com.ssafy.an.day049;
+
+import java.util.Scanner;
+
+public class Day35BOJ10870재귀피보 { // 10870 재귀피보
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int N = sc.nextInt();
+
+		System.out.println(recur(N));
+		sc.close();
+	}
+
+	private static int recur(int n) {
+		return (n > 1) ? recur(n - 1) + recur(n - 2) : n;
+	}
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

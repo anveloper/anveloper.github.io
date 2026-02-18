@@ -1,0 +1,73 @@
+---
+title: "BOJ 2716 - 원숭이 매달기"
+date: "2025-10-12"
+description: "자료 구조, 트리, 스택 문제"
+tags: ["자료 구조", "트리", "스택"]
+platform: "boj"
+problem_number: "2716"
+problem_url: "https://www.acmicpc.net/problem/2716"
+difficulty: "실버 II"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 2716 - 원숭이 매달기](https://www.acmicpc.net/problem/2716)
+
+## 풀이
+
+스택을 활용하여 문제를 해결한다.
+
+## 코드
+
+```cpp
+#include <algorithm>
+#include <iostream>
+#include <queue>
+#include <string>
+#include <vector>
+
+using namespace std;
+
+int main()
+{
+  ios_base::sync_with_stdio(false);
+  cin.tie(NULL);
+  cout.tie(NULL);
+
+  int T;
+  cin >> T;
+  cin.ignore();
+
+  while (T--)
+  {
+    string s;
+    getline(cin, s);
+
+    int res = 0;
+    int temp = 0;
+    for (auto c : s)
+    {
+      if (c == '[')
+        temp++;
+      else
+        temp--;
+
+      res = max(res, temp);
+    }
+
+    int ans = 1;
+    for (int i = 0; i < res; i++)
+    {
+      ans *= 2;
+    }
+
+    cout << ans << '\n';
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

@@ -1,0 +1,44 @@
+---
+title: "BOJ 1817 - 짐 챙기는 숌"
+date: "2025-07-15"
+description: "구현, 그리디 알고리즘, 시뮬레이션 문제"
+tags: ["구현", "그리디 알고리즘", "시뮬레이션"]
+platform: "boj"
+problem_number: "1817"
+problem_url: "https://www.acmicpc.net/problem/1817"
+difficulty: "실버 V"
+language: "python"
+---
+
+## 문제
+
+[BOJ 1817 - 짐 챙기는 숌](https://www.acmicpc.net/problem/1817)
+
+## 풀이
+
+그리디 알고리즘으로 매 단계 최선의 선택을 한다.
+
+## 코드
+
+```python
+n, m = map(int, input().split())
+
+w = 0
+cnt = 1
+if n != 0:
+    arr = list(map(int, input().split()))
+    for i in arr:
+        if w + i <= m:
+            w += i
+        else:
+            cnt += 1
+            w = i
+    print(cnt)
+else:
+    print(0)
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

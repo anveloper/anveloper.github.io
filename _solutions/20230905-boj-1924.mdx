@@ -1,0 +1,50 @@
+---
+title: "BOJ 1924 - 2007년"
+date: "2023-09-05"
+description: "수학, 구현 문제"
+tags: ["수학", "구현"]
+platform: "boj"
+problem_number: "1924"
+problem_url: "https://www.acmicpc.net/problem/1924"
+difficulty: "브론즈 I"
+language: "java"
+---
+
+## 문제
+
+[BOJ 1924 - 2007년](https://www.acmicpc.net/problem/1924)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```java
+package day599;
+
+import java.io.*;
+import java.util.*;
+
+public class Day578BOJ1924A2007 {
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    StringTokenizer st = new StringTokenizer(br.readLine());
+    int m = Integer.parseInt(st.nextToken());
+    int d = Integer.parseInt(st.nextToken());
+    String[] days = { "MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN" };
+    int[] months = { 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+    int n = 0;
+    for (int i = 0; i < m; i++) {
+      n += months[i];
+    }
+    n += d - 1;
+    System.out.print(days[n % 7]);
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

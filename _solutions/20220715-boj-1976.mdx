@@ -1,0 +1,93 @@
+---
+title: "BOJ 1976 - 여행 가자"
+date: "2022-07-15"
+description: "자료 구조, 그래프 이론, 그래프 탐색 문제"
+tags: ["자료 구조", "그래프 이론", "그래프 탐색", "분리 집합"]
+platform: "boj"
+problem_number: "1976"
+problem_url: "https://www.acmicpc.net/problem/1976"
+difficulty: "골드 IV"
+language: "java"
+---
+
+## 문제
+
+[BOJ 1976 - 여행 가자](https://www.acmicpc.net/problem/1976)
+
+## 풀이
+
+그래프 탐색(BFS/DFS)을 활용하여 탐색한다. 분리 집합(Union-Find)을 사용하여 집합 관계를 관리한다.
+
+## 코드
+
+```java
+package com.ssafy.an.day199;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
+
+public class Day158BOJ1976서로소집합확인 {
+	static int N, M, from, to;
+	static int[] p = new int[201];
+
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st = null;
+		N = Integer.parseInt(br.readLine());
+		M = Integer.parseInt(br.readLine());
+
+		for (int i = 1; i <= N; i++)
+			p[i] = i;
+
+		for (int i = 1; i <= N; i++) {
+			String str = br.readLine();
+			for (int j = 1; j <= N; j++) {
+				if (str.charAt(2 * (j - 1)) == '1')
+					union(i, j);
+			}
+		}
+
+		st = new StringTokenizer(br.readLine());
+		boolean isPossible = true;
+
+		if (st.hasMoreTokens())
+			to = Integer.parseInt(st.nextToken());
+
+		while (--M > 0) {
+			from = to;
+			to = Integer.parseInt(st.nextToken());
+
+			if (find(from) != find(to)) {
+				isPossible = false;
+				break;
+			}
+		}
+
+		System.out.println(isPossible ? "YES" : "NO");
+	}
+
+	static int find(int x) {
+		if (x == p[x])
+			return x;
+
+		return p[x] = find(p[x]);
+	}
+
+	static void union(int a, int b) {
+		a = find(a);
+		b = find(b);
+
+		if (a == b)
+			return;
+
+		p[a] = p[b] = Math.min(a, b);
+	}
+
+}
+```
+
+## 복잡도
+
+- 시간: O(V + E)
+- 공간: O(V + E)

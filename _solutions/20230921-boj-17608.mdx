@@ -1,0 +1,57 @@
+---
+title: "BOJ 17608 - 막대기"
+date: "2023-09-21"
+description: "구현, 자료 구조, 스택 문제"
+tags: ["구현", "자료 구조", "스택"]
+platform: "boj"
+problem_number: "17608"
+problem_url: "https://www.acmicpc.net/problem/17608"
+difficulty: "브론즈 II"
+language: "java"
+---
+
+## 문제
+
+[BOJ 17608 - 막대기](https://www.acmicpc.net/problem/17608)
+
+## 풀이
+
+스택을 활용하여 문제를 해결한다.
+
+## 코드
+
+```java
+package day599;
+
+import java.util.Scanner;
+
+public class Day594BOJ17608막대기 {
+
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+
+    int N = sc.nextInt();
+    int[] arr = new int[N];
+    for (int i = 0; i < arr.length; i++)
+      arr[i] = sc.nextInt();
+
+    int cnt = 1;
+    int max = arr[arr.length - 1];
+
+    for (int i = arr.length - 2; i >= 0; i--) {
+      if (arr[i] > max) {
+        cnt++;
+        max = arr[i];
+      }
+    }
+
+    System.out.println(cnt);
+    sc.close();
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

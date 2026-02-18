@@ -1,0 +1,80 @@
+---
+title: "BOJ 3234 - LUKA"
+date: "2026-01-14"
+description: "구현, 문자열, 시뮬레이션 문제"
+tags: ["구현", "문자열", "시뮬레이션"]
+platform: "boj"
+problem_number: "3234"
+problem_url: "https://www.acmicpc.net/problem/3234"
+difficulty: "브론즈 II"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 3234 - LUKA](https://www.acmicpc.net/problem/3234)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int X, Y, x, y;
+int K;
+bool printed;
+
+int dx[9] = {0, 1, 1, 1, 0, -1, -1, -1, 0};
+int dy[9] = {0, 1, 0, -1, -1, -1, 0, 1, 1};
+
+int main()
+{
+  ios::sync_with_stdio(0);
+  cin.tie(0);
+
+  cin >> X >> Y >> K;
+  for (int i = 0; i < 9; i++)
+  {
+    if (x + dx[i] == X && y + dy[i] == Y)
+    {
+      cout << 0 << '\n';
+      printed = 1;
+    }
+  }
+
+  for (int k = 1; k <= K; k++)
+  {
+    char c;
+    cin >> c;
+    if (c == 'I')
+      x++;
+    else if (c == 'S')
+      y++;
+    else if (c == 'Z')
+      x--;
+    else
+      y--;
+
+    for (int i = 0; i < 9; i++)
+    {
+      if (x + dx[i] == X && y + dy[i] == Y)
+      {
+        cout << k << '\n';
+        printed = 1;
+      }
+    }
+  }
+
+  if (!printed)
+    cout << -1;
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

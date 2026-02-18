@@ -1,0 +1,40 @@
+---
+title: "BOJ 1835 - 카드"
+date: "2025-07-15"
+description: "구현, 자료 구조, 시뮬레이션 문제"
+tags: ["구현", "자료 구조", "시뮬레이션", "덱"]
+platform: "boj"
+problem_number: "1835"
+problem_url: "https://www.acmicpc.net/problem/1835"
+difficulty: "실버 IV"
+language: "python"
+---
+
+## 문제
+
+[BOJ 1835 - 카드](https://www.acmicpc.net/problem/1835)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```python
+n = int(input())
+from collections import deque
+
+dq = deque([n])
+n -= 1
+while n:
+    dq.appendleft(n)
+    for _ in range(n):
+        dq.appendleft(dq.pop())
+    n -= 1
+print(" ".join(map(str, dq)))
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

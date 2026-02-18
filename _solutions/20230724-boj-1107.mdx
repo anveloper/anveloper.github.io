@@ -1,0 +1,68 @@
+---
+title: "BOJ 1107 - 리모컨"
+date: "2023-07-24"
+description: "브루트포스 알고리즘 문제"
+tags: ["브루트포스 알고리즘"]
+platform: "boj"
+problem_number: "1107"
+problem_url: "https://www.acmicpc.net/problem/1107"
+difficulty: "골드 IV"
+language: "java"
+---
+
+## 문제
+
+[BOJ 1107 - 리모컨](https://www.acmicpc.net/problem/1107)
+
+## 풀이
+
+가능한 모든 경우를 탐색하여 답을 구한다.
+
+## 코드
+
+```java
+package day549;
+
+import java.util.*;
+
+public class Day533BOJ1107리모컨 {
+
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+
+    int target = sc.nextInt();
+    int m = sc.nextInt();
+
+    boolean[] broken = new boolean[10];
+    for (int i = 0; i < m; i++) {
+      int n = sc.nextInt();
+      broken[n] = true;
+    }
+
+    int result = Math.abs(target - 100);
+    for (int i = 0; i <= 999999; i++) {
+      String str = String.valueOf(i);
+      int len = str.length();
+
+      boolean isBreak = false;
+      for (int j = 0; j < len; j++) {
+        if (broken[str.charAt(j) - '0']) {
+          isBreak = true;
+          break;
+        }
+      }
+      if (!isBreak) {
+        int min = Math.abs(target - i) + len;
+        result = Math.min(min, result);
+      }
+    }
+    System.out.println(result);
+    sc.close();
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N²)
+- 공간: O(N)

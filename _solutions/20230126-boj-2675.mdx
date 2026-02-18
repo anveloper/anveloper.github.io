@@ -1,0 +1,52 @@
+---
+title: "BOJ 2675 - 문자열 반복"
+date: "2023-01-26"
+description: "구현, 문자열 문제"
+tags: ["구현", "문자열"]
+platform: "boj"
+problem_number: "2675"
+problem_url: "https://www.acmicpc.net/problem/2675"
+difficulty: "브론즈 II"
+language: "java"
+---
+
+## 문제
+
+[BOJ 2675 - 문자열 반복](https://www.acmicpc.net/problem/2675)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```java
+
+import java.io.*;
+
+public class Day353BOJ2675문자열반복 {
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int T = Integer.parseInt(br.readLine());
+
+        for (int i = 0; i < T; i++) {
+            String[] str = br.readLine().split(" ");
+
+            int R = Integer.parseInt(str[0]);
+            String S = str[1];
+
+            for (int j = 0; j < S.length(); j++) {
+                for (int k = 0; k < R; k++) {
+                    System.out.print(S.charAt(j));
+                }
+            }
+            System.out.println();
+        }
+    }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

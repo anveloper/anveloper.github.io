@@ -1,0 +1,67 @@
+---
+title: "BOJ 1316 - 그룹 단어 체커"
+date: "2022-10-30"
+description: "구현, 문자열 문제"
+tags: ["구현", "문자열"]
+platform: "boj"
+problem_number: "1316"
+problem_url: "https://www.acmicpc.net/problem/1316"
+difficulty: "실버 V"
+language: "java"
+---
+
+## 문제
+
+[BOJ 1316 - 그룹 단어 체커](https://www.acmicpc.net/problem/1316)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```java
+package ASP_study.day299;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
+public class Day265BOJ1316그룹단어체크 {
+	static int N, cnt;
+	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+	public static void main(String[] args) throws Exception {
+		N = Integer.parseInt(br.readLine());
+		cnt = 0;
+
+		for (int i = 0; i < N; i++)
+			if (check())
+				cnt++;
+
+		System.out.println(cnt);
+		br.close();
+	}
+
+	private static boolean check() throws Exception {
+		String str = br.readLine();
+		boolean[] check = new boolean[26];
+		int prev = 0;
+		for (int i = 0; i < str.length(); i++) {
+			int current = str.charAt(i);
+			if (prev != current)
+				if (!check[current - 'a']) {
+					check[current - 'a'] = true;
+					prev = current;
+				} else
+					return false;
+		}
+
+		return true;
+	}
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

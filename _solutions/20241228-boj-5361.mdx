@@ -1,0 +1,50 @@
+---
+title: "BOJ 5361 - 전투 드로이드 가격"
+date: "2024-12-28"
+description: "5종류 부품의 개수와 단가로 총 가격을 계산하는 문제"
+tags: ["수학", "사칙연산"]
+platform: "boj"
+problem_number: "5361"
+problem_url: "https://www.acmicpc.net/problem/5361"
+difficulty: "브론즈 III"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 5361 - 전투 드로이드 가격](https://www.acmicpc.net/problem/5361)
+
+> 5종류 부품의 개수가 주어지고, 각 부품의 단가가 고정되어 있을 때 총 가격을 계산한다.
+
+## 풀이
+
+5종류 부품의 고정 단가 배열(350.34, 230.90, 190.55, 125.30, 180.90)과 입력된 각 부품 개수를 곱하여 합산한 뒤, 달러 형식으로 소수점 둘째 자리까지 출력한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+using namespace std;
+int main()
+{
+  double a[5] = {350.34, 230.9, 190.55, 125.3, 180.9}, sum;
+  int n;
+  cin >> n;
+  while (n--)
+  {
+    sum = 0;
+    for (int i = 0; i < 5; i++)
+    {
+      double x;
+      cin >> x;
+      sum += a[i] * x;
+    }
+    printf("$%.2f\n", sum);
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(T)
+- 공간: O(1)

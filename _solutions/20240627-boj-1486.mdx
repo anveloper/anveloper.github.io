@@ -1,0 +1,97 @@
+---
+title: "BOJ 1486 - 등산"
+date: "2024-06-27"
+description: "높이 차이 제한과 시간 제한 내에서 도달 가능한 가장 높은 지점을 데이크스트라로 탐색하는 문제"
+tags: ["그래프", "최단 경로", "데이크스트라"]
+platform: "boj"
+problem_number: "1486"
+problem_url: "https://www.acmicpc.net/problem/1486"
+difficulty: "골드 II"
+language: "python"
+---
+
+## 문제
+
+[BOJ 1486 - 등산](https://www.acmicpc.net/problem/1486)
+
+> N×M 격자의 산에서 출발점 (0,0)으로부터 제한 시간 D 내에 왕복할 수 있는 가장 높은 지점의 높이를 구한다.
+
+## 풀이
+
+올라갈 때와 내려올 때의 비용이 다르므로 데이크스트라를 두 번 수행한다. 올라갈 때는 높이 차이의 제곱, 내려올 때는 1의 비용이 든다. 돌아올 때는 반대로 적용된다. 각 지점까지의 왕복 비용(dist + dist2)이 D 이하인 지점 중 가장 높은 곳을 찾는다.
+
+## 코드
+
+```python
+import sys
+
+input = sys.stdin.readline
+
+# input = open('input.txt', 'r').readline
+
+from heapq import heappush, heappop
+
+INF = int(1e9)
+
+N, M, T, D = map(int, input().split())
+B = [[0] * M for _ in range(N)]
+for i in range(N):
+    for j, c in enumerate(input().rstrip()):
+        c = ord(c)
+        if c <= ord("Z"):
+            B[i][j] = c - ord("A")
+        else:
+            B[i][j] = c - ord("a") + 26
+
+dist = [[INF] * M for _ in range(N)]
+dist[0][0] = 0
+pq = [(0, 0, 0)]
+while pq:
+    cd, x, y = heappop(pq)
+
+    if dist[x][y] < cd:
+        continue
+
+    for dx, dy in [[-1, 0], [0, 1], [1, 0], [0, -1]]:
+        nx, ny = x + dx, y + dy
+        if 0 <= nx < N and 0 <= ny < M and abs(B[x][y] - B[nx][ny]) <= T:
+            if B[x][y] < B[nx][ny]:
+                dt = (B[nx][ny] - B[x][y]) ** 2
+            else:
+                dt = 1
+            if cd + dt <= D and dist[nx][ny] > cd + dt:
+                dist[nx][ny] = cd + dt
+                heappush(pq, (cd + dt, nx, ny))
+
+dist2 = [[INF] * M for _ in range(N)]
+dist2[0][0] = 0
+pq = [(0, 0, 0)]
+while pq:
+    cd, x, y = heappop(pq)
+
+    if dist2[x][y] < cd:
+        continue
+
+    for dx, dy in [[-1, 0], [0, 1], [1, 0], [0, -1]]:
+        nx, ny = x + dx, y + dy
+        if 0 <= nx < N and 0 <= ny < M and abs(B[x][y] - B[nx][ny]) <= T:
+            if B[x][y] > B[nx][ny]:
+                dt = (B[nx][ny] - B[x][y]) ** 2
+            else:
+                dt = 1
+            if cd + dt <= D and dist2[nx][ny] > cd + dt:
+                dist2[nx][ny] = cd + dt
+                heappush(pq, (cd + dt, nx, ny))
+
+ans = 0
+for i in range(N):
+    for j in range(M):
+        if dist[i][j] + dist2[i][j] <= D:
+            ans = max(ans, B[i][j])
+print(ans)
+```
+
+## 복잡도
+
+- 시간: O(NM * log(NM))
+- 공간: O(NM)

@@ -1,0 +1,65 @@
+---
+title: "BOJ 9243 - 파일 완전 삭제"
+date: "2026-01-01"
+description: "문자열, 홀짝성 문제"
+tags: ["문자열", "홀짝성"]
+platform: "boj"
+problem_number: "9243"
+problem_url: "https://www.acmicpc.net/problem/9243"
+difficulty: "브론즈 II"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 9243 - 파일 완전 삭제](https://www.acmicpc.net/problem/9243)
+
+## 풀이
+
+문자열 처리를 통해 문제를 해결한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int main()
+{
+  string a, b;
+  int n;
+  cin >> n;
+  cin >> a >> b;
+  if (n % 2 == 0)
+  {
+    for (int i = 0; i < a.size(); i++)
+    {
+      if (a[i] != b[i])
+      {
+        cout << "Deletion failed" << '\n';
+        return 0;
+      }
+    }
+    cout << "Deletion succeeded" << '\n';
+  }
+  else
+  {
+    for (int i = 0; i < a.size(); i++)
+    {
+      if (a[i] == b[i])
+      {
+        cout << "Deletion failed" << '\n';
+        return 0;
+      }
+    }
+    cout << "Deletion succeeded" << '\n';
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

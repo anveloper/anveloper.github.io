@@ -1,0 +1,46 @@
+---
+title: "BOJ 2438 - 별 찍기 - 1"
+date: "2022-03-13"
+description: "구현 문제"
+tags: ["구현"]
+platform: "boj"
+problem_number: "2438"
+problem_url: "https://www.acmicpc.net/problem/2438"
+difficulty: "브론즈 V"
+language: "java"
+---
+
+## 문제
+
+[BOJ 2438 - 별 찍기 - 1](https://www.acmicpc.net/problem/2438)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```java
+
+package com.ssafy.an.day049;
+
+import java.util.Scanner;
+
+public class Day01BOJ2438별찍기1 { // 2438 날먹
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();
+		String s = "*";
+		for(int i = 0 ;i < n; i++) {
+			System.out.println(s);
+			s += '*';
+		}
+		sc.close();
+	}
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

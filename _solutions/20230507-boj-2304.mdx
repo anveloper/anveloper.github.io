@@ -1,0 +1,71 @@
+---
+title: "BOJ 2304 - 창고 다각형"
+date: "2023-05-07"
+description: "구현, 자료 구조, 브루트포스 알고리즘 문제"
+tags: ["구현", "자료 구조", "브루트포스 알고리즘", "스택"]
+platform: "boj"
+problem_number: "2304"
+problem_url: "https://www.acmicpc.net/problem/2304"
+difficulty: "실버 II"
+language: "java"
+---
+
+## 문제
+
+[BOJ 2304 - 창고 다각형](https://www.acmicpc.net/problem/2304)
+
+## 풀이
+
+스택을 활용하여 문제를 해결한다.
+
+## 코드
+
+```java
+package day499;
+
+import java.io.*;
+import java.util.*;
+
+public class Day455BOJ2304창고다각형 {
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    StringTokenizer st;
+
+    int[] roof = new int[1001];
+    int N = Integer.parseInt(br.readLine());
+    int idx = 0;
+    int max = 0;
+    for (int i = 0; i < N; i++) {
+      st = new StringTokenizer(br.readLine());
+      int l = Integer.parseInt(st.nextToken());
+      int h = Integer.parseInt(st.nextToken());
+      if (max < h) {
+        max = h;
+        idx = l;
+      }
+      roof[l] = h;
+    }
+
+    int ans = max;
+    int cur = 0;
+    for (int i = 0; i < idx; i++) {
+      if (cur < roof[i])
+        cur = roof[i];
+      ans += cur;
+    }
+
+    cur = 0;
+    for (int i = 1000; i > idx; i--) {
+      if (cur < roof[i])
+        cur = roof[i];
+      ans += cur;
+    }
+    System.out.println(ans);
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

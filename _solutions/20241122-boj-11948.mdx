@@ -1,0 +1,53 @@
+---
+title: "BOJ 11948 - 과목선택"
+date: "2024-11-22"
+description: "6과목 중 규칙에 따라 5과목을 선택하여 최대 점수를 구하는 문제"
+tags: ["수학", "구현"]
+platform: "boj"
+problem_number: "11948"
+problem_url: "https://www.acmicpc.net/problem/11948"
+difficulty: "브론즈 IV"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 11948 - 과목선택](https://www.acmicpc.net/problem/11948)
+
+> 자연 4과목 중 3과목, 사회 2과목 중 1과목을 선택하여 총점이 최대가 되도록 한다.
+
+## 풀이
+
+자연 4과목을 정렬하여 상위 3과목의 합을 구하고, 사회 2과목 중 큰 값을 더한다. 배열 정렬 후 상위 원소를 선택하여 합산한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+#include <algorithm>
+
+using namespace std;
+
+int arr_1[4];
+int arr_2[2];
+
+int main()
+{
+  ios_base::sync_with_stdio(0);
+  cin.tie(0);
+  cout.tie(0);
+
+  for (int i = 0; i < 4; i++)
+    cin >> arr_1[i];
+  for (int i = 0; i < 2; i++)
+    cin >> arr_2[i];
+  sort(arr_1, arr_1 + 4);
+  sort(arr_2, arr_2 + 2);
+  cout << arr_1[3] + arr_1[2] + arr_1[1] + arr_2[1] << endl;
+}
+```
+
+## 복잡도
+
+- 시간: O(1) (고정 크기 배열 정렬)
+- 공간: O(1)

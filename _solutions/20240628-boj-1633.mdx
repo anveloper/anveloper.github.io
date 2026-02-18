@@ -1,0 +1,88 @@
+---
+title: "BOJ 1633 - 최고의 팀 만들기"
+date: "2024-06-28"
+description: "흑백 각 15명씩 선택하여 능력치 합을 최대화하는 DP 문제"
+tags: ["DP"]
+platform: "boj"
+problem_number: "1633"
+problem_url: "https://www.acmicpc.net/problem/1633"
+difficulty: "골드 IV"
+language: "python"
+---
+
+## 문제
+
+[BOJ 1633 - 최고의 팀 만들기](https://www.acmicpc.net/problem/1633)
+
+> 체스 선수들의 흑/백 능력치가 주어질 때, 흑 15명 백 15명을 선택하여 총 능력치 합을 최대화한다.
+
+## 풀이
+
+각 선수를 흑/백 능력치 중 더 유리한 쪽으로 우선 배정하되, 힙을 사용하여 15명 제한을 관리한다. 흑/백 어느 쪽이든 동일한 능력치인 선수는 별도로 모아두고, 양쪽 팀이 15명씩 채워진 뒤 남은 동일 능력치 선수들을 더 이득인 쪽에 배정한다.
+
+## 코드
+
+```python
+import sys
+import heapq
+
+white = []
+black = []
+same = []
+
+
+def change():
+    while True:
+        if len(black) > 15:
+            y, x = heapq.heappop(black)
+            if not white:
+                heapq.heappush(white, (-x, -y))
+            elif -x > white[0][0]:
+                heapq.heappush(white, (-x, -y))
+            continue
+        if len(white) > 15:
+            x, y = heapq.heappop(white)
+            if not black:
+                heapq.heappush(black, (-y, -x))
+            elif -y > black[0][1]:
+                heapq.heappush(black, (-y, -x))
+            continue
+
+        break
+
+
+while True:
+    try:
+        x, y = map(int, sys.stdin.readline().split())
+        if y > x:
+            heapq.heappush(black, (y, -x))
+        elif x > y:
+            heapq.heappush(white, (x, -y))
+        else:
+            heapq.heappush(same, (x, y))
+    except:
+        break
+change()
+while same:
+    x, y = heapq.heappop(same)
+    if len(black) < 15:
+        heapq.heappush(black, (y, -x))
+    elif len(white) < 15:
+        heapq.heappush(white, (x, -y))
+    else:
+        if black[0][0] < white[0][0]:
+            heapq.heappush(black, (y, -x))
+        else:
+            heapq.heappush(white, (x, -y))
+    change()
+ans = 0
+for i in range(15):
+    ans += black[i][0]
+    ans += white[i][0]
+print(ans)
+```
+
+## 복잡도
+
+- 시간: O(P * log P) (P: 선수 수)
+- 공간: O(P)

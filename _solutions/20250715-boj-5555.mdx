@@ -1,0 +1,44 @@
+---
+title: "BOJ 5555 - 반지"
+date: "2025-07-15"
+description: "문자열, 브루트포스 알고리즘 문제"
+tags: ["문자열", "브루트포스 알고리즘"]
+platform: "boj"
+problem_number: "5555"
+problem_url: "https://www.acmicpc.net/problem/5555"
+difficulty: "실버 V"
+language: "python"
+---
+
+## 문제
+
+[BOJ 5555 - 반지](https://www.acmicpc.net/problem/5555)
+
+## 풀이
+
+가능한 모든 경우를 탐색하여 답을 구한다.
+
+## 코드
+
+```python
+import sys
+
+input = sys.stdin.readline
+
+pattern = input().strip()
+N = int(input())
+count = 0
+
+for _ in range(N):
+    ring = input().strip()
+    doubled = ring + ring
+    if pattern in doubled:
+        count += 1
+
+print(count)
+```
+
+## 복잡도
+
+- 시간: O(N²)
+- 공간: O(N)

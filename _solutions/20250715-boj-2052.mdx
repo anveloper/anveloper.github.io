@@ -1,0 +1,45 @@
+---
+title: "BOJ 2052 - 지수연산"
+date: "2025-07-15"
+description: "수학, 임의 정밀도 / 큰 수 연산 문제"
+tags: ["수학", "임의 정밀도 / 큰 수 연산"]
+platform: "boj"
+problem_number: "2052"
+problem_url: "https://www.acmicpc.net/problem/2052"
+difficulty: "브론즈 I"
+language: "python"
+---
+
+## 문제
+
+[BOJ 2052 - 지수연산](https://www.acmicpc.net/problem/2052)
+
+## 풀이
+
+수학적 성질을 이용하여 풀이한다.
+
+## 코드
+
+```python
+def exponentiation(N):
+    answer = "%.300f" % (1 / pow(2, N))
+
+    slice_idx = len(answer)
+
+    for idx in range(len(answer) - 1, 1, -1):
+        if answer[idx] != "0":
+            slice_idx = idx + 1
+            break
+
+    return answer[:slice_idx]
+
+
+if __name__ == "__main__":
+    N = int(input())
+    print(exponentiation(N))
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

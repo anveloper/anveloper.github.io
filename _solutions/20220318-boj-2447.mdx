@@ -1,0 +1,76 @@
+---
+title: "BOJ 2447 - 별 찍기 - 10"
+date: "2022-03-18"
+description: "분할 정복, 재귀 문제"
+tags: ["분할 정복", "재귀"]
+platform: "boj"
+problem_number: "2447"
+problem_url: "https://www.acmicpc.net/problem/2447"
+difficulty: "골드 V"
+language: "java"
+---
+
+## 문제
+
+[BOJ 2447 - 별 찍기 - 10](https://www.acmicpc.net/problem/2447)
+
+## 풀이
+
+분할 정복을 사용하여 문제를 나누어 해결한다.
+
+## 코드
+
+```java
+package com.ssafy.an.day049;
+
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Day38BOJ2447별찍기재귀 { // 2447 별 찍기 재귀
+	static char[][] star;
+	static int N;
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		N = sc.nextInt();
+		star = new char[N][N];
+		star(0, 0, N, false);
+		for (int i = 0; i < N; i++) {
+			System.out.println(Arrays.toString(star[i]).replaceAll("[\\[\\]]", "").replaceAll(", ", ""));
+		}
+		sc.close();
+	}
+
+	static void star(int idx, int jdx, int n, boolean b) {
+		if (b) {
+			for (int i = idx; i < idx + n; i++) {
+				for (int j = jdx; j < jdx + n; j++) {
+					star[i][j] = ' ';
+				}
+			}
+			return;
+		}
+		if (n == 1) {
+			star[idx][jdx] = '*';
+			return;
+		}
+
+		int size = n / 3;
+		int count = 0;
+		for (int i = idx; i < idx + n; i += size) {
+			for (int j = jdx; j < jdx + n; j += size) {
+				count++;
+				if (count == 5)
+					star(i, j, size, true);
+				else
+					star(i, j, size, false);
+			}
+		}
+	}
+}
+```
+
+## 복잡도
+
+- 시간: O(N log N)
+- 공간: O(N)

@@ -1,0 +1,71 @@
+---
+title: "BOJ 2005 - 사발"
+date: "2022-12-03"
+description: "브루트포스 알고리즘, 많은 조건 분기, 다이나믹 프로그래밍 문제"
+tags: ["브루트포스 알고리즘", "많은 조건 분기", "다이나믹 프로그래밍", "기하학", "수학", "재귀"]
+platform: "boj"
+problem_number: "2005"
+problem_url: "https://www.acmicpc.net/problem/2005"
+difficulty: "플래티넘 III"
+language: "java"
+---
+
+## 문제
+
+[BOJ 2005 - 사발](https://www.acmicpc.net/problem/2005)
+
+## 풀이
+
+다이나믹 프로그래밍을 사용하여 부분 문제의 해를 메모이제이션하며 풀이한다.
+
+## 코드
+
+```java
+package ASP_study.day299;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.IOException;
+import java.util.StringTokenizer;
+
+public class Day299BOJ2005조합0갯수 {
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+		StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+
+		long N = Long.parseLong(st.nextToken());
+		long M = Long.parseLong(st.nextToken());
+
+		long count5 = five_power_n(N) - five_power_n(N - M) - five_power_n(M);
+		long count2 = two_power_n(N) - two_power_n(N - M) - two_power_n(M);
+		System.out.println(Math.min(count5, count2));
+	}
+
+	static long five_power_n(long num) {
+		int count = 0;
+
+		while (num >= 5) {
+			count += (num / 5);
+			num /= 5;
+		}
+		return count;
+	}
+
+	static long two_power_n(long num) {
+		int count = 0;
+
+		while (num >= 2) {
+			count += (num / 2);
+			num /= 2;
+		}
+		return count;
+	}
+
+}
+```
+
+## 복잡도
+
+- 시간: O(N²)
+- 공간: O(N)

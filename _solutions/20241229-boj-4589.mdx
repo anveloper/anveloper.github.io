@@ -1,0 +1,49 @@
+---
+title: "BOJ 4589 - Gnome Sequencing"
+date: "2024-12-29"
+description: "세 난쟁이의 수염 길이가 정렬되어 있는지 판별하는 문제"
+tags: ["구현"]
+platform: "boj"
+problem_number: "4589"
+problem_url: "https://www.acmicpc.net/problem/4589"
+difficulty: "브론즈 IV"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 4589 - Gnome Sequencing](https://www.acmicpc.net/problem/4589)
+
+> 세 난쟁이의 수염 길이가 오름차순 또는 내림차순으로 정렬되어 있으면 Ordered, 아니면 Unordered를 출력한다.
+
+## 풀이
+
+세 값의 차이 방향이 일관되는지 확인한다. (beard[1] - beard[0])과 (beard[2] - beard[1])의 곱이 양수이면 단조 증가 또는 단조 감소이므로 Ordered, 아니면 Unordered를 출력한다.
+
+## 코드
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+int t;
+int main()
+{
+  cin >> t;
+  cout << "Gnomes:\n";
+  while (t--)
+  {
+    vector<int> beard(3);
+    for (int i = 0; i < 3; i++)
+      cin >> beard[i];
+    if ((beard[1] - beard[0]) * (beard[2] - beard[1]) > 0)
+      cout << "Ordered\n";
+    else
+      cout << "Unordered\n";
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(T)
+- 공간: O(1)

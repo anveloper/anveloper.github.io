@@ -1,0 +1,57 @@
+---
+title: "BOJ 2083 - 럭비 클럽"
+date: "2024-07-24"
+description: "나이와 몸무게로 Senior/Junior를 판별하는 구현 문제"
+tags: ["구현"]
+platform: "boj"
+problem_number: "2083"
+problem_url: "https://www.acmicpc.net/problem/2083"
+difficulty: "브론즈 IV"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 2083 - 럭비 클럽](https://www.acmicpc.net/problem/2083)
+
+> 이름, 나이, 몸무게가 주어질 때 나이가 17 초과이거나 몸무게가 80 이상이면 Senior, 아니면 Junior를 출력한다.
+
+## 풀이
+
+입력이 "#"이 될 때까지 반복하면서 나이가 17 초과이거나 몸무게가 80 이상이면 Senior, 그 외에는 Junior를 출력한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+#include <algorithm>
+#include <string>
+
+using namespace std;
+
+string name;
+int age, weight;
+
+int main()
+{
+  ios::sync_with_stdio(0);
+  cin.tie(0);
+  cout.tie(0);
+
+  while (true)
+  {
+    cin >> name >> age >> weight;
+    if (name == "#" && age == 0 && weight == 0)
+      break;
+    if (age > 17 || weight >= 80)
+      cout << name << " Senior" << '\n';
+    else
+      cout << name << " Junior" << '\n';
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N) (N: 입력 수)
+- 공간: O(1)

@@ -1,0 +1,47 @@
+---
+title: "BOJ 5339 - 콜센터"
+date: "2024-09-13"
+description: "주어진 아스키 아트를 그대로 출력하는 문제"
+tags: ["구현"]
+platform: "boj"
+problem_number: "5339"
+problem_url: "https://www.acmicpc.net/problem/5339"
+difficulty: "브론즈 V"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 5339 - 콜센터](https://www.acmicpc.net/problem/5339)
+
+> 콜센터 직원의 아스키 아트를 출력한다.
+
+## 풀이
+
+정해진 아스키 아트를 문자열 리터럴로 그대로 출력한다. 이스케이프 문자를 사용하여 백슬래시 등의 특수문자를 처리한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+using namespace std;
+int main()
+{
+  cout << "     /~\\\n"
+          "    ( oo|\n"
+          "    _\\=/_\n"
+          "   /  _  \\\n"
+          "  //|/.\\|\\\\\n"
+          " ||  \\ /  ||\n"
+          "============\n"
+          "|          |\n"
+          "|          |\n"
+          "|          |";
+  return 0;
+}
+```
+
+## 복잡도
+
+- 시간: O(1)
+- 공간: O(1)

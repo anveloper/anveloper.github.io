@@ -1,0 +1,59 @@
+---
+title: "BOJ 8949 - 대충 더해"
+date: "2025-09-13"
+description: "수학, 구현, 문자열 문제"
+tags: ["수학", "구현", "문자열", "사칙연산"]
+platform: "boj"
+problem_number: "8949"
+problem_url: "https://www.acmicpc.net/problem/8949"
+difficulty: "브론즈 II"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 8949 - 대충 더해](https://www.acmicpc.net/problem/8949)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+#include <string>
+#include <algorithm>
+#include <vector>
+
+using namespace std;
+vector<int> res;
+
+int main()
+{
+  string A, B;
+  cin >> A >> B;
+  int i = A.length(), j = B.length();
+  for (; i >= 0 && j >= 0; i--, j--)
+  {
+    int a = A[i] - '0';
+    int b = B[j] - '0';
+    res.push_back(a + b);
+  }
+
+  while (i >= 0)
+    res.push_back(A[i--] - '0');
+  while (j >= 0)
+    res.push_back(B[j--] - '0');
+
+  for (int i = res.size() - 1; i > 0; i--)
+  {
+    cout << res[i];
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

@@ -1,0 +1,42 @@
+---
+title: "BOJ 4690 - 완전 세제곱"
+date: "2024-08-23"
+description: "a^3 = b^3 + c^3 + d^3을 만족하는 조합을 찾는 브루트포스 문제"
+tags: ["수학", "브루트포스 알고리즘"]
+platform: "boj"
+problem_number: "4690"
+problem_url: "https://www.acmicpc.net/problem/4690"
+difficulty: "브론즈 III"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 4690 - 완전 세제곱](https://www.acmicpc.net/problem/4690)
+
+> a^3 = b^3 + c^3 + d^3을 만족하는 모든 (a, b, c, d) 조합을 구한다 (b가 c보다 작고, c가 d보다 작음).
+
+## 풀이
+
+a를 6부터 100까지, b를 2부터 a-1까지, c를 b+1부터 a-1까지, d를 c+1부터 a-1까지 4중 반복문으로 전수탐색한다. `a^3 == b^3 + c^3 + d^3` 조건을 만족하면 출력한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+using namespace std;
+int main()
+{
+  for (int a = 6; a <= 100; a++)
+    for (int b = 2; b < a; b++)
+      for (int c = b + 1; c < a; c++)
+        for (int d = c + 1; d < a; d++)
+          if (a * a * a == b * b * b + c * c * c + d * d * d)
+            cout << "Cube = " << a << ", Triple = (" << b << ',' << c << ',' << d << ")\n";
+}
+```
+
+## 복잡도
+
+- 시간: O(N^4) (N = 100)
+- 공간: O(1)

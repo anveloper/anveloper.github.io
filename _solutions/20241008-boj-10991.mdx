@@ -1,0 +1,53 @@
+---
+title: "BOJ 10991 - 별 찍기 - 16"
+date: "2024-10-08"
+description: "N줄에 걸쳐 좌측 정렬된 별 삼각형을 출력하는 구현 문제"
+tags: ["구현"]
+platform: "boj"
+problem_number: "10991"
+problem_url: "https://www.acmicpc.net/problem/10991"
+difficulty: "브론즈 III"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 10991 - 별 찍기 - 16](https://www.acmicpc.net/problem/10991)
+
+> 첫째 줄부터 N번째 줄까지 차례대로 별을 출력하는 문제이다. i번째 줄에는 별을 공백과 함께 2*i-1개 출력한다.
+
+## 풀이
+
+이중 반복문을 사용하여 각 줄마다 앞쪽 공백을 (N-i)개 출력한 뒤, 별과 공백을 번갈아 i개 출력한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int main()
+{
+  int n;
+  cin >> n;
+
+  for (int i = 1; i <= n; i++)
+  {
+    for (int j = n - i; j > 0; j--)
+    {
+      cout << " ";
+    }
+    for (int k = 1; k <= i; k++)
+    {
+      cout << "*" << " ";
+    }
+    cout << endl;
+  }
+  return 0;
+}
+```
+
+## 복잡도
+
+- 시간: O(N^2)
+- 공간: O(1)

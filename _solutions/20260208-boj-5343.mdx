@@ -1,0 +1,60 @@
+---
+title: "BOJ 5343 - Parity Bit"
+date: "2026-02-08"
+description: "구현 문제"
+tags: ["구현"]
+platform: "boj"
+problem_number: "5343"
+problem_url: "https://www.acmicpc.net/problem/5343"
+difficulty: "브론즈 III"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 5343 - Parity Bit](https://www.acmicpc.net/problem/5343)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main() {
+  ios_base::sync_with_stdio(false); 
+  cin.tie(NULL);
+
+  int T;
+  if (!(cin >> T)) return 0;
+  
+  while (T--) {
+    string s;
+    cin >> s;
+    int err = 0;
+    
+    for (size_t i = 0; i < s.size(); i += 8) {
+      int cnt = 0;
+      for (size_t j = i; j < i + 7; j++) {
+        if (s[j] == '1') cnt++;
+      }
+      
+      int p = cnt % 2;
+      if (p != (s[i + 7] - '0')) {
+        err++;
+      }
+    }
+    cout << err << "\n";
+  }
+  return 0;
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

@@ -1,0 +1,84 @@
+---
+title: "BOJ 4493 - 가위 바위 보?"
+date: "2024-08-27"
+description: "가위바위보 게임 결과를 집계하여 승자를 판별하는 문제"
+tags: ["구현"]
+platform: "boj"
+problem_number: "4493"
+problem_url: "https://www.acmicpc.net/problem/4493"
+difficulty: "브론즈 III"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 4493 - 가위 바위 보?](https://www.acmicpc.net/problem/4493)
+
+> 두 플레이어의 가위바위보 N라운드 결과를 집계하여 승리 횟수가 많은 플레이어를 출력한다.
+
+## 풀이
+
+각 라운드에서 두 플레이어의 선택(R, P, S)을 비교하여 승패를 판정한다. R은 S를 이기고, P는 R을 이기고, S는 P를 이긴다. 모든 라운드 후 승리 횟수를 비교하여 Player 1, Player 2, 또는 TIE를 출력한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int main()
+{
+  ios::sync_with_stdio(0);
+  cin.tie(0);
+  int t;
+  cin >> t;
+
+  while (t--)
+  {
+    int n;
+    cin >> n;
+    int a = 0, b = 0;
+    while (n--)
+    {
+      char A, B;
+      cin >> A >> B;
+      if (A == B)
+        ;
+      else if (A == 'R')
+      {
+        if (B == 'P')
+          b++;
+        else if (B == 'S')
+          a++;
+      }
+      else if (A == 'P')
+      {
+        if (B == 'R')
+          a++;
+        else if (B == 'S')
+          b++;
+      }
+      else if (A == 'S')
+      {
+        if (B == 'P')
+          a++;
+        else if (B == 'R')
+          b++;
+      }
+    }
+    if (a == b)
+      cout << "TIE\n";
+    else if (a > b)
+      cout << "Player 1\n";
+    else
+      cout << "Player 2\n";
+  }
+
+  return 0;
+}
+```
+
+## 복잡도
+
+- 시간: O(T * N) (T: 게임 수, N: 라운드 수)
+- 공간: O(1)

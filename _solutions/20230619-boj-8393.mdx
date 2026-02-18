@@ -1,0 +1,42 @@
+---
+title: "BOJ 8393 - 합"
+date: "2023-06-19"
+description: "구현, 수학 문제"
+tags: ["구현", "수학"]
+platform: "boj"
+problem_number: "8393"
+problem_url: "https://www.acmicpc.net/problem/8393"
+difficulty: "브론즈 V"
+language: "java"
+---
+
+## 문제
+
+[BOJ 8393 - 합](https://www.acmicpc.net/problem/8393)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```java
+package day499;
+
+import java.io.*;
+
+public class Day498BOJ8393합 {
+  public static void main(String[] args) throws Exception {
+    int N = Integer.parseInt(new BufferedReader(new InputStreamReader(System.in)).readLine());
+    int s = 0;
+    for (int i = 1; i <= N; i++)
+      s += i;
+    System.out.println(s);
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

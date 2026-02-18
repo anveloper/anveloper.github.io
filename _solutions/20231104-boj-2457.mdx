@@ -1,0 +1,85 @@
+---
+title: "BOJ 2457 - 공주님의 정원"
+date: "2023-11-04"
+description: "그리디 알고리즘, 정렬 문제"
+tags: ["그리디 알고리즘", "정렬"]
+platform: "boj"
+problem_number: "2457"
+problem_url: "https://www.acmicpc.net/problem/2457"
+difficulty: "골드 III"
+language: "java"
+---
+
+## 문제
+
+[BOJ 2457 - 공주님의 정원](https://www.acmicpc.net/problem/2457)
+
+## 풀이
+
+그리디 알고리즘으로 매 단계 최선의 선택을 한다.
+
+## 코드
+
+```java
+package day649;
+
+import java.io.*;
+import java.util.*;
+
+public class Day638BOJ2457공주님의정원 {
+  static final int[] days = { 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    int N = Integer.parseInt(br.readLine());
+    int[] endDays = new int[366];
+    for (int i = 0; i < N; i++) {
+      int[] arr = Arrays.stream(br.readLine().split(" "))
+          .mapToInt(Integer::parseInt)
+          .toArray();
+      int start = getDay(arr[0], arr[1]);
+      int end = getDay(arr[2], arr[3]);
+
+      endDays[start] = Math.max(end, endDays[start]);
+    }
+
+    int lastDay = 1;
+    int day = 60;
+    int ct = 0;
+    while (day < 335) {
+      int maxDay = 0;
+      for (int i = lastDay; i <= day; i++) {
+        maxDay = Math.max(endDays[i], maxDay);
+      }
+
+      if (maxDay == 0) {
+        break;
+      }
+
+      lastDay = day;
+      day = maxDay;
+      ct++;
+    }
+
+    if (day >= 335) {
+      System.out.println(ct);
+    } else {
+      System.out.println(0);
+    }
+  }
+
+  static int getDay(int month, int day) {
+    int ret = 0;
+    for (int i = 1; i < month; i++) {
+      ret += days[i];
+    }
+
+    return ret + day;
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N log N)
+- 공간: O(N)

@@ -1,0 +1,86 @@
+---
+title: "BOJ 14492 - 부울행렬의 부울곱"
+date: "2023-03-28"
+description: "수학, 구현, 선형대수학 문제"
+tags: ["수학", "구현", "선형대수학"]
+platform: "boj"
+problem_number: "14492"
+problem_url: "https://www.acmicpc.net/problem/14492"
+difficulty: "실버 V"
+language: "java"
+---
+
+## 문제
+
+[BOJ 14492 - 부울행렬의 부울곱](https://www.acmicpc.net/problem/14492)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```java
+package day449;
+
+import java.io.*;
+import java.util.*;
+
+public class Day415BOJ14492부울행렬곱 {
+  static int N, cnt = 0;
+  static boolean[][] arr1, arr2;
+
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    StringTokenizer st = null;
+
+    N = Integer.parseInt(br.readLine());
+    arr1 = new boolean[N][N];
+    arr2 = new boolean[N][N];
+
+    for (int i = 0; i < N; i++) {
+      st = new StringTokenizer(br.readLine());
+      int j = 0;
+      while (st.hasMoreTokens()) {
+        if (st.nextToken().equals("0")) {
+          arr1[i][j] = false;
+        } else {
+          arr1[i][j] = true;
+        }
+        j++;
+      }
+    }
+
+    for (int i = 0; i < N; i++) {
+      st = new StringTokenizer(br.readLine());
+      int j = 0;
+      while (st.hasMoreTokens()) {
+        if (st.nextToken().equals("0")) {
+          arr2[i][j] = false;
+        } else {
+          arr2[i][j] = true;
+        }
+        j++;
+      }
+    }
+
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < N; j++) {
+        for (int k = 0; k < N; k++) {
+          if (arr1[i][k] == true && arr2[k][j] == true) {
+            cnt++;
+            k = N;
+          }
+        }
+      }
+    }
+    System.out.println(cnt);
+    br.close();
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

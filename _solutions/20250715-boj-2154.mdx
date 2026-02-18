@@ -1,0 +1,36 @@
+---
+title: "BOJ 2154 - 수 이어 쓰기 3"
+date: "2025-07-15"
+description: "구현, 문자열, 브루트포스 알고리즘 문제"
+tags: ["구현", "문자열", "브루트포스 알고리즘"]
+platform: "boj"
+problem_number: "2154"
+problem_url: "https://www.acmicpc.net/problem/2154"
+difficulty: "브론즈 II"
+language: "python"
+---
+
+## 문제
+
+[BOJ 2154 - 수 이어 쓰기 3](https://www.acmicpc.net/problem/2154)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```python
+sn = input()
+n = int(sn)
+
+snum = "".join(map(str, range(1, n + 1)))
+pos = snum.find(sn) + 1
+
+print(pos)
+```
+
+## 복잡도
+
+- 시간: O(N²)
+- 공간: O(N)

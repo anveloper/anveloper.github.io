@@ -1,0 +1,126 @@
+---
+title: "BOJ 4836 - 춤"
+date: "2025-10-18"
+description: "구현, 문자열, 파싱 문제"
+tags: ["구현", "문자열", "파싱"]
+platform: "boj"
+problem_number: "4836"
+problem_url: "https://www.acmicpc.net/problem/4836"
+difficulty: "실버 IV"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 4836 - 춤](https://www.acmicpc.net/problem/4836)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```cpp
+#include <string>
+#include <vector>
+#include <iostream>
+#include <set>
+using namespace std;
+
+using ll = long long;
+using vi = vector<int>;
+using vll = vector<ll>;
+using ull = unsigned long long;
+using pii = pair<int, int>;
+using pll = pair<ll, ll>;
+using t3 = tuple<int, int, int>;
+using i128 = __int128;
+
+string s;
+int main()
+{
+  ios::sync_with_stdio(false);
+  cin.tie(NULL);
+  cout.tie(NULL);
+  while (getline(cin, s))
+  {
+    s += ' ';
+    vector<string> v;
+    string temp = "";
+    int flag = 1, flag2 = 0, flag3 = 0;
+    for (auto &i : s)
+    {
+      if (i == ' ')
+      {
+        if (temp == "dip")
+          flag = 0;
+        if (temp == "twirl")
+          flag2 = 1;
+        if (temp == "hop")
+          flag3 = 1;
+        v.push_back(temp);
+        temp = "";
+      }
+      else
+        temp += i;
+    }
+    set<int> e;
+    int N = v.size();
+    for (int i = 0; i < N; ++i)
+    {
+      if (v[i] != "dip")
+        continue;
+      if (i && v[i - 1] == "jiggle")
+        continue;
+      if (i > 1 && v[i - 2] == "jiggle")
+        continue;
+      if (i < N - 1 && v[i + 1] == "twirl")
+        continue;
+      v[i] = "DIP";
+      e.insert(1);
+    }
+    if (N < 3 || v[N - 3] != "clap" || v[N - 2] != "stomp" || v[N - 1] != "clap")
+      e.insert(2);
+    if (flag2)
+    {
+      if (!flag3)
+        e.insert(3);
+    }
+    if (v[0] == "jiggle")
+      e.insert(4);
+    if (flag)
+      e.insert(5);
+    cout << "form ";
+    if (e.empty())
+      cout << "ok";
+    else if (e.size() > 1)
+    {
+      cout << "errors ";
+      vi w;
+      for (auto &i : e)
+        w.push_back(i);
+      int M = w.size();
+      for (int i = 0; i < M; ++i)
+      {
+        cout << w[i];
+        if (i < M - 2)
+          cout << ", ";
+        else if (i == M - 2)
+          cout << " and ";
+      }
+    }
+    else
+      cout << "error " << *e.begin();
+    cout << ": ";
+    for (auto &i : v)
+      cout << i << ' ';
+    cout << '\n';
+  }
+  return 0;
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

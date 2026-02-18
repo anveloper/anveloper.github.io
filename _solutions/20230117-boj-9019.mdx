@@ -1,0 +1,104 @@
+---
+title: "BOJ 9019 - DSLR"
+date: "2023-01-17"
+description: "그래프 이론, 그래프 탐색, 너비 우선 탐색 문제"
+tags: ["그래프 이론", "그래프 탐색", "너비 우선 탐색", "역추적"]
+platform: "boj"
+problem_number: "9019"
+problem_url: "https://www.acmicpc.net/problem/9019"
+difficulty: "골드 IV"
+language: "java"
+---
+
+## 문제
+
+[BOJ 9019 - DSLR](https://www.acmicpc.net/problem/9019)
+
+## 풀이
+
+그래프 탐색(BFS/DFS)을 활용하여 탐색한다.
+
+## 코드
+
+```java
+package day349;
+
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Scanner;
+
+public class Day344BOJ9019DSLR {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int T = sc.nextInt();
+
+        for (int tc = 1; tc <= T; tc++) {
+            int A = sc.nextInt(), B = sc.nextInt();
+            boolean[] visit = new boolean[10000];
+            visit[A] = true;
+
+            Queue<Register> que = new LinkedList<>();
+            que.add(new Register(A, ""));
+
+            while (!que.isEmpty()) {
+                Register cur = que.poll();
+
+                if (cur.num == B) {
+                    System.out.println(cur.command);
+                    break;
+                }
+
+                if (!visit[cur.D()]) {
+                    que.add(new Register(cur.D(), cur.command + "D"));
+                    visit[cur.D()] = true;
+                }
+                if (!visit[cur.S()]) {
+                    que.add(new Register(cur.S(), cur.command + "S"));
+                    visit[cur.S()] = true;
+                }
+                if (!visit[cur.L()]) {
+                    que.add(new Register(cur.L(), cur.command + "L"));
+                    visit[cur.L()] = true;
+                }
+                if (!visit[cur.R()]) {
+                    que.add(new Register(cur.R(), cur.command + "R"));
+                    visit[cur.R()] = true;
+                }
+
+            }
+        }
+        sc.close();
+    }
+
+    static class Register {
+        int num;
+        String command;
+
+        Register(int num, String command) {
+            this.num = num;
+            this.command = command;
+        }
+
+        int D() {
+            return (num * 2) % 10000;
+        }
+
+        int S() {
+            return num == 0 ? 9999 : num - 1;
+        }
+
+        int L() {
+            return num % 1000 * 10 + num / 1000;
+        }
+
+        int R() {
+            return num % 10 * 1000 + num / 10;
+        }
+    }
+}
+```
+
+## 복잡도
+
+- 시간: O(V + E)
+- 공간: O(V + E)

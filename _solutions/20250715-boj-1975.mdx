@@ -1,0 +1,48 @@
+---
+title: "BOJ 1975 - Number Game"
+date: "2025-07-15"
+description: "수학, 정수론 문제"
+tags: ["수학", "정수론"]
+platform: "boj"
+problem_number: "1975"
+problem_url: "https://www.acmicpc.net/problem/1975"
+difficulty: "브론즈 I"
+language: "python"
+---
+
+## 문제
+
+[BOJ 1975 - Number Game](https://www.acmicpc.net/problem/1975)
+
+## 풀이
+
+수학적 성질을 이용하여 풀이한다.
+
+## 코드
+
+```python
+import sys
+
+input = sys.stdin.readline
+
+
+def func(x, b):
+    if x != 0 and x % b == 0:
+        return 1 + func(x // b, b)
+    else:
+        return 0
+
+
+c = [0] * 1001
+for x in range(2, 1001):
+    c[x] = sum(func(x, b) for b in range(2, x + 1))
+
+for _ in range(int(input())):
+    x = int(input())
+    print(c[x])
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

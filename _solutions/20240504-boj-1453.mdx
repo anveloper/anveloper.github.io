@@ -1,0 +1,39 @@
+---
+title: "BOJ 1453 - 피시방 알바"
+date: "2024-05-04"
+description: "이미 사용 중인 자리에 앉으려는 손님 수"
+tags: ["구현", "자료구조"]
+platform: "boj"
+problem_number: "1453"
+problem_url: "https://www.acmicpc.net/problem/1453"
+difficulty: "브론즈 II"
+language: "javascript"
+---
+
+## 문제
+
+[BOJ 1453 - 피시방 알바](https://www.acmicpc.net/problem/1453)
+
+> 손님들이 원하는 자리가 이미 사용 중이면 거절당한다. 거절당하는 손님 수를 구한다.
+
+## 풀이
+
+Set으로 사용 중인 자리를 추적하여 중복 요청 수를 계산한다.
+
+## 코드
+
+```javascript
+const solution = (input) => {
+  input.shift();
+  const arr = input[0].split(" ");
+  return arr.length - new Set(arr).size;
+};
+const fs = require("fs");
+const input = fs.readFileSync("/dev/stdin").toString().trim().split("\n");
+console.log(solution(input));
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

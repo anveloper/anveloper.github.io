@@ -1,0 +1,61 @@
+---
+title: "BOJ 11966 - 2의 제곱인가?"
+date: "2024-11-24"
+description: "주어진 수가 2의 거듭제곱인지 판별하는 문제"
+tags: ["수학"]
+platform: "boj"
+problem_number: "11966"
+problem_url: "https://www.acmicpc.net/problem/11966"
+difficulty: "브론즈 III"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 11966 - 2의 제곱인가?](https://www.acmicpc.net/problem/11966)
+
+> 정수 N이 2의 거듭제곱이면 1, 아니면 0을 출력한다.
+
+## 풀이
+
+1부터 시작하여 2를 반복적으로 곱하면서 N과 같아지는지 확인한다. 30번 반복하면 2^30까지 검사할 수 있으므로 입력 범위를 충분히 커버한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int main()
+{
+  int N;
+  cin >> N;
+
+  if (N == 1)
+  {
+    cout << 1 << endl;
+    return 0;
+  }
+
+  int squareNum = 1;
+  for (int i = 0; i < 30; i++)
+  {
+    squareNum *= 2;
+
+    if (N == squareNum)
+    {
+      cout << 1 << endl;
+      return 0;
+    }
+  }
+
+  cout << 0 << endl;
+
+  return 0;
+}
+```
+
+## 복잡도
+
+- 시간: O(1)
+- 공간: O(1)

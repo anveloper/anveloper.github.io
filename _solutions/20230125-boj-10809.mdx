@@ -1,0 +1,58 @@
+---
+title: "BOJ 10809 - 알파벳 찾기"
+date: "2023-01-25"
+description: "구현, 문자열 문제"
+tags: ["구현", "문자열"]
+platform: "boj"
+problem_number: "10809"
+problem_url: "https://www.acmicpc.net/problem/10809"
+difficulty: "브론즈 II"
+language: "java"
+---
+
+## 문제
+
+[BOJ 10809 - 알파벳 찾기](https://www.acmicpc.net/problem/10809)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```java
+package day399;
+
+import java.io.*;
+
+public class Day352BOJ10809알파벳찾기 {
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        int[] arr = new int[26];
+
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = -1;
+        }
+
+        String S = br.readLine();
+
+        for (int i = 0; i < S.length(); i++) {
+            char ch = S.charAt(i);
+
+            if (arr[ch - 'a'] == -1) {
+                arr[ch - 'a'] = i;
+            }
+        }
+
+        for (int val : arr) {
+            System.out.print(val + " ");
+        }
+    }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

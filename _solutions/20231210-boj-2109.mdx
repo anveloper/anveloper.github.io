@@ -1,0 +1,71 @@
+---
+title: "BOJ 2109 - 순회강연"
+date: "2023-12-10"
+description: "자료 구조, 그리디 알고리즘, 정렬 문제"
+tags: ["자료 구조", "그리디 알고리즘", "정렬", "우선순위 큐"]
+platform: "boj"
+problem_number: "2109"
+problem_url: "https://www.acmicpc.net/problem/2109"
+difficulty: "골드 III"
+language: "java"
+---
+
+## 문제
+
+[BOJ 2109 - 순회강연](https://www.acmicpc.net/problem/2109)
+
+## 풀이
+
+그리디 알고리즘으로 매 단계 최선의 선택을 한다.
+
+## 코드
+
+```java
+package day699;
+
+import java.io.*;
+import java.util.*;
+
+public class Day673BOJ2109순회강연 {
+  static int N;
+  static ArrayList<Integer>[] al;
+
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    StringTokenizer st;
+
+    N = Integer.parseInt(br.readLine());
+
+    al = new ArrayList[10001];
+
+    for (int i = 1; i < 10001; i++) {
+      al[i] = new ArrayList<>();
+    }
+    PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
+    for (int i = 0; i < N; i++) {
+      st = new StringTokenizer(br.readLine());
+
+      int pay = Integer.parseInt(st.nextToken());
+      int days = Integer.parseInt(st.nextToken());
+
+      al[days].add(pay);
+    }
+
+    int result = 0;
+    for (int i = 10000; i > 0; i--) {
+      for (int j = 0; j < al[i].size(); j++) {
+        pq.add(al[i].get(j));
+      }
+      if (!pq.isEmpty())
+        result += pq.poll();
+    }
+
+    System.out.println(result);
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N log N)
+- 공간: O(N)

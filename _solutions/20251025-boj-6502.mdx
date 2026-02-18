@@ -1,0 +1,56 @@
+---
+title: "BOJ 6502 - 동혁 피자"
+date: "2025-10-25"
+description: "수학, 구현, 기하학 문제"
+tags: ["수학", "구현", "기하학", "피타고라스 정리"]
+platform: "boj"
+problem_number: "6502"
+problem_url: "https://www.acmicpc.net/problem/6502"
+difficulty: "브론즈 II"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 6502 - 동혁 피자](https://www.acmicpc.net/problem/6502)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+
+int main()
+{
+  int cnt = 1;
+  while (1)
+  {
+    double x;
+    cin >> x;
+    if (x == 0)
+      break;
+    double y, z;
+    cin >> y >> z;
+    if (x >= sqrt(z / 2 * z / 2 + y / 2 * y / 2))
+    {
+      cout << "Pizza " << cnt << " fits on the table.\n";
+    }
+    else
+    {
+      cout << "Pizza " << cnt << " does not fit on the table.\n";
+    }
+    cnt++;
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

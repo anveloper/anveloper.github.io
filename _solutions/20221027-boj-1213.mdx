@@ -1,0 +1,76 @@
+---
+title: "BOJ 1213 - 팰린드롬 만들기"
+date: "2022-10-27"
+description: "구현, 그리디 알고리즘, 문자열 문제"
+tags: ["구현", "그리디 알고리즘", "문자열", "홀짝성"]
+platform: "boj"
+problem_number: "1213"
+problem_url: "https://www.acmicpc.net/problem/1213"
+difficulty: "실버 III"
+language: "java"
+---
+
+## 문제
+
+[BOJ 1213 - 팰린드롬 만들기](https://www.acmicpc.net/problem/1213)
+
+## 풀이
+
+그리디 알고리즘으로 매 단계 최선의 선택을 한다.
+
+## 코드
+
+```java
+package ASP_study.day299;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
+public class Day262BOJ1213팰린드롬만들기 {
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		String line = br.readLine();
+
+		int[] arr = new int[26];
+
+		for (int i = 0; i < line.length(); i++) {
+			arr[line.charAt(i) - 'A']++;
+		}
+
+		int isOne = 0;
+		for (int i = 0; i < arr.length; i++) {
+			if (arr[i] % 2 != 0)
+				isOne++;
+		}
+
+		String answer = "";
+		StringBuilder sb = new StringBuilder();
+		if (isOne > 1)
+			answer += "I'm Sorry Hansoo";
+		else {
+			for (int i = 0; i < arr.length; i++) {
+
+				for (int r = 0; r < arr[i] / 2; r++) {
+					sb.append((char) (i + 65));
+				}
+			}
+			answer += sb.toString();
+			String end = sb.reverse().toString();
+
+			sb = new StringBuilder();
+			for (int i = 0; i < arr.length; i++) {
+				if (arr[i] % 2 == 1) {
+					sb.append((char) (i + 65));
+				}
+			}
+			answer += sb.toString() + end;
+		}
+		System.out.println(answer);
+	}
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

@@ -1,0 +1,42 @@
+---
+title: "BOJ 2865 - 나는 위대한 슈퍼스타K"
+date: "2025-07-15"
+description: "그리디 알고리즘, 정렬 문제"
+tags: ["그리디 알고리즘", "정렬"]
+platform: "boj"
+problem_number: "2865"
+problem_url: "https://www.acmicpc.net/problem/2865"
+difficulty: "실버 IV"
+language: "python"
+---
+
+## 문제
+
+[BOJ 2865 - 나는 위대한 슈퍼스타K](https://www.acmicpc.net/problem/2865)
+
+## 풀이
+
+그리디 알고리즘으로 매 단계 최선의 선택을 한다.
+
+## 코드
+
+```python
+n, m, k = map(int, input().split())
+singer = [0 for _ in range(n)]
+
+for _ in range(m):
+    score = list(input().split())
+    for i in range(0, len(score), 2):
+        if singer[int(score[i]) - 1] < float(score[i + 1]):
+            singer[int(score[i]) - 1] = float(score[i + 1])
+
+singer.sort(reverse=True)
+singer = singer[:k]
+
+print(round(sum(singer), 1))
+```
+
+## 복잡도
+
+- 시간: O(N log N)
+- 공간: O(N)

@@ -1,0 +1,43 @@
+---
+title: "BOJ 1547 - 공"
+date: "2024-05-11"
+description: "컵을 M번 교환한 후 공이 있는 컵 번호"
+tags: ["구현", "시뮬레이션"]
+platform: "boj"
+problem_number: "1547"
+problem_url: "https://www.acmicpc.net/problem/1547"
+difficulty: "브론즈 III"
+language: "javascript"
+---
+
+## 문제
+
+[BOJ 1547 - 공](https://www.acmicpc.net/problem/1547)
+
+> 1번 컵에 공이 있을 때, M번의 컵 교환 후 공이 있는 컵 번호를 구한다.
+
+## 풀이
+
+공의 위치를 추적하며 교환 연산을 시뮬레이션한다.
+
+## 코드
+
+```javascript
+const solution = (input) => {
+  const M = input[0];
+  let cup = 1;
+  for (let i = 1; i <= M; i++) {
+    let x = input[i].split(" ")[0], y = input[i].split(" ")[1];
+    if (cup == x) cup = y; else if (cup == y) cup = x;
+  }
+  return cup;
+};
+const fs = require("fs");
+const input = fs.readFileSync("/dev/stdin").toString().trim().split("\n");
+console.log(solution(input));
+```
+
+## 복잡도
+
+- 시간: O(M)
+- 공간: O(1)

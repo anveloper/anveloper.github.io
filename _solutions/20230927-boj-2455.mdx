@@ -1,0 +1,50 @@
+---
+title: "BOJ 2455 - 지능형 기차"
+date: "2023-09-27"
+description: "수학, 구현, 사칙연산 문제"
+tags: ["수학", "구현", "사칙연산"]
+platform: "boj"
+problem_number: "2455"
+problem_url: "https://www.acmicpc.net/problem/2455"
+difficulty: "브론즈 III"
+language: "java"
+---
+
+## 문제
+
+[BOJ 2455 - 지능형 기차](https://www.acmicpc.net/problem/2455)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```java
+package day649;
+
+import java.io.*;
+import java.util.*;
+
+public class Day600BOJ2455지능형기차 {
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    int max = 0;
+    int now = 0;
+    for (int i = 0; i < 4; i++) {
+      StringTokenizer st = new StringTokenizer(br.readLine());
+      int out = Integer.parseInt(st.nextToken());
+      int in = Integer.parseInt(st.nextToken());
+      now -= out;
+      now += in;
+      max = Math.max(max, now);
+    }
+    System.out.print(max);
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

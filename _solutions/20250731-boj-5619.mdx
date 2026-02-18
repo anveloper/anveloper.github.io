@@ -1,0 +1,90 @@
+---
+title: "BOJ 5619 - 세 번째"
+date: "2025-07-31"
+description: "수학, 그리디 알고리즘, 브루트포스 알고리즘 문제"
+tags: ["수학", "그리디 알고리즘", "브루트포스 알고리즘", "정렬", "비둘기집"]
+platform: "boj"
+problem_number: "5619"
+problem_url: "https://www.acmicpc.net/problem/5619"
+difficulty: "실버 II"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 5619 - 세 번째](https://www.acmicpc.net/problem/5619)
+
+## 풀이
+
+그리디 알고리즘으로 매 단계 최선의 선택을 한다.
+
+## 코드
+
+```cpp
+#include <algorithm>
+#include <iostream>
+#include <vector>
+
+#define fastio ios::sync_with_stdio(0), cin.tie(0)
+
+using namespace std;
+vector<int> result;
+
+int n, r = 0;
+
+void dfs(vector<int> sa, vector<int> a, vector<bool> v)
+{
+  if (sa.size() == 2)
+  {
+    string res = "";
+    for (auto s : sa)
+      res += to_string(s);
+    result.push_back(stoi(res));
+    r++;
+    return;
+  }
+
+  for (int i = 0; i < a.size(); i++)
+  {
+    if (v[i])
+      continue;
+    v[i] = true;
+    sa.push_back(a[i]);
+    dfs(sa, a, v);
+    sa.pop_back();
+    v[i] = false;
+  }
+}
+
+int main()
+{
+  fastio;
+  cin >> n;
+  vector<int> a(n);
+  vector<int> p(3);
+  vector<int> sa;
+  for (int i = 0; i < n; i++)
+  {
+    cin >> a[i];
+  }
+
+  sort(a.begin(), a.end());
+  p[0] = a[0];
+  p[1] = a[1];
+  p[2] = a[2];
+  if (n > 3)
+    p.push_back(a[3]);
+
+  vector<bool> v(p.size(), false);
+  dfs(sa, p, v);
+  sort(result.begin(), result.end());
+
+  cout << result[2];
+  return 0;
+}
+```
+
+## 복잡도
+
+- 시간: O(N²)
+- 공간: O(N)

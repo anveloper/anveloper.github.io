@@ -1,0 +1,31 @@
+---
+title: "BOJ 7572 - 간지(干支)"
+date: "2025-07-15"
+description: "수학, 구현, 사칙연산 문제"
+tags: ["수학", "구현", "사칙연산"]
+platform: "boj"
+problem_number: "7572"
+problem_url: "https://www.acmicpc.net/problem/7572"
+difficulty: "브론즈 II"
+language: "python"
+---
+
+## 문제
+
+[BOJ 7572 - 간지(干支)](https://www.acmicpc.net/problem/7572)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```python
+N = int(input())
+print("ABCDEFGHIJKL"[(N - 4) % 12] + str((N + 6) % 10))
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

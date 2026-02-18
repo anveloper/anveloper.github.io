@@ -1,0 +1,63 @@
+---
+title: "BOJ 1166 - 선물"
+date: "2024-02-21"
+description: "이분 탐색 문제"
+tags: ["이분 탐색"]
+platform: "boj"
+problem_number: "1166"
+problem_url: "https://www.acmicpc.net/problem/1166"
+difficulty: "실버 III"
+language: "java"
+---
+
+## 문제
+
+[BOJ 1166 - 선물](https://www.acmicpc.net/problem/1166)
+
+## 풀이
+
+이분 탐색을 통해 최적의 값을 탐색한다.
+
+## 코드
+
+```java
+package day799;
+
+import java.io.*;
+import java.util.*;
+
+public class Day750BOJ1166선물 {
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    StringTokenizer st = new StringTokenizer(br.readLine());
+
+    int N = Integer.parseInt(st.nextToken());
+    long L = Long.parseLong(st.nextToken());
+    long W = Long.parseLong(st.nextToken());
+    long H = Long.parseLong(st.nextToken());
+    double min = L;
+    min = Math.min(min, W);
+    min = Math.min(min, H);
+
+    double l = 0;
+    double h = min;
+    double mid;
+    for (int i = 0; i < 5000; ++i) {
+      mid = (l + h) / 2;
+
+      if ((long) (L / mid) * (long) (W / mid) * (long) (H / mid) < N) {
+        h = mid;
+      } else {
+        l = mid;
+      }
+    }
+
+    System.out.print(l);
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N log X)
+- 공간: O(N)

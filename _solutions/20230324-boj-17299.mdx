@@ -1,0 +1,70 @@
+---
+title: "BOJ 17299 - 오등큰수"
+date: "2023-03-24"
+description: "자료 구조, 스택 문제"
+tags: ["자료 구조", "스택"]
+platform: "boj"
+problem_number: "17299"
+problem_url: "https://www.acmicpc.net/problem/17299"
+difficulty: "골드 III"
+language: "java"
+---
+
+## 문제
+
+[BOJ 17299 - 오등큰수](https://www.acmicpc.net/problem/17299)
+
+## 풀이
+
+스택을 활용하여 문제를 해결한다.
+
+## 코드
+
+```java
+package day449;
+
+import java.io.*;
+import java.util.*;
+
+public class Day411BOJ17299오등큰수 {
+  static int N;
+  static int[] arr, cnt, stack;
+
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    StringBuilder sb = new StringBuilder();
+
+    N = Integer.parseInt(br.readLine());
+    arr = new int[N];
+    cnt = new int[1000001];
+
+    StringTokenizer st = new StringTokenizer(br.readLine());
+    for (int i = 0; i < N; i++) {
+      arr[i] = Integer.parseInt(st.nextToken());
+      cnt[arr[i]]++;
+    }
+
+    stack = new int[N];
+    int top = 0;
+    for (int i = 0; i < N; i++) {
+      while (top > 0 && cnt[arr[stack[top - 1]]] < cnt[arr[i]]) {
+        arr[stack[--top]] = arr[i];
+      }
+      stack[top++] = i;
+    }
+    while (top > 0) {
+      arr[stack[--top]] = -1;
+    }
+
+    for (int i = 0; i < N; i++) {
+      sb.append(arr[i]).append(' ');
+    }
+    System.out.println(sb);
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

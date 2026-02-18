@@ -1,0 +1,59 @@
+---
+title: "BOJ 3005 - 크로스워드 퍼즐 쳐다보기"
+date: "2025-07-15"
+description: "구현, 문자열, 정렬 문제"
+tags: ["구현", "문자열", "정렬", "파싱"]
+platform: "boj"
+problem_number: "3005"
+problem_url: "https://www.acmicpc.net/problem/3005"
+difficulty: "실버 II"
+language: "python"
+---
+
+## 문제
+
+[BOJ 3005 - 크로스워드 퍼즐 쳐다보기](https://www.acmicpc.net/problem/3005)
+
+## 풀이
+
+정렬을 활용하여 문제를 해결한다.
+
+## 코드
+
+```python
+r, c = map(int, input().split())
+data = [list(input()) for _ in range(r)]
+words = []
+
+for i in range(r):
+    tmp = ""
+    for j in range(c):
+        if data[i][j] == "#":
+            if len(tmp) > 1:
+                words.append(tmp)
+            tmp = ""
+            continue
+        tmp += data[i][j]
+    if len(tmp) > 1:
+        words.append(tmp)
+
+for j in range(c):
+    tmp = ""
+    for i in range(r):
+        if data[i][j] == "#":
+            if len(tmp) > 1:
+                words.append(tmp)
+            tmp = ""
+            continue
+        tmp += data[i][j]
+
+    if len(tmp) > 1:
+        words.append(tmp)
+
+print(sorted(words)[0])
+```
+
+## 복잡도
+
+- 시간: O(N log N)
+- 공간: O(N)

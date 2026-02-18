@@ -1,0 +1,89 @@
+---
+title: "BOJ 5014 - 스타트링크"
+date: "2023-02-04"
+description: "그래프 이론, 그래프 탐색, 너비 우선 탐색 문제"
+tags: ["그래프 이론", "그래프 탐색", "너비 우선 탐색"]
+platform: "boj"
+problem_number: "5014"
+problem_url: "https://www.acmicpc.net/problem/5014"
+difficulty: "실버 I"
+language: "java"
+---
+
+## 문제
+
+[BOJ 5014 - 스타트링크](https://www.acmicpc.net/problem/5014)
+
+## 풀이
+
+그래프 탐색(BFS/DFS)을 활용하여 탐색한다.
+
+## 코드
+
+```java
+package day399;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.StringTokenizer;
+
+public class Day362BOJ5014스타트링크 {
+    static int F, S, G, U, D, ans = -1;
+    static int[] visited;
+
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        F = Integer.parseInt(st.nextToken());
+        S = Integer.parseInt(st.nextToken());
+        G = Integer.parseInt(st.nextToken());
+        U = Integer.parseInt(st.nextToken());
+        D = Integer.parseInt(st.nextToken());
+
+        visited = new int[F + 1];
+
+        bfs();
+
+        if (ans >= 0)
+            System.out.println(ans);
+        else
+            System.out.println("use the stairs");
+        br.close();
+    }
+
+    private static void bfs() {
+        Queue<Integer> q = new LinkedList<>();
+        q.add(S);
+        visited[S] = 1;
+
+        while (!q.isEmpty()) {
+            int cur = q.poll();
+
+            if (cur == G) {
+                ans = visited[cur] - 1;
+                break;
+            }
+
+            if (cur + U <= F) {
+                if (visited[cur + U] == 0) {
+                    visited[cur + U] += visited[cur] + 1;
+                    q.add(cur + U);
+                }
+            }
+            if (cur - D > 0) {
+                if (visited[cur - D] == 0) {
+                    visited[cur - D] += visited[cur] + 1;
+                    q.add(cur - D);
+                }
+            }
+        }
+    }
+}
+```
+
+## 복잡도
+
+- 시간: O(V + E)
+- 공간: O(V + E)

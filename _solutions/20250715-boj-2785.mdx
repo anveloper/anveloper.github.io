@@ -1,0 +1,54 @@
+---
+title: "BOJ 2785 - 체인"
+date: "2025-07-15"
+description: "그리디 알고리즘, 정렬 문제"
+tags: ["그리디 알고리즘", "정렬"]
+platform: "boj"
+problem_number: "2785"
+problem_url: "https://www.acmicpc.net/problem/2785"
+difficulty: "실버 I"
+language: "python"
+---
+
+## 문제
+
+[BOJ 2785 - 체인](https://www.acmicpc.net/problem/2785)
+
+## 풀이
+
+그리디 알고리즘으로 매 단계 최선의 선택을 한다.
+
+## 코드
+
+```python
+import sys
+
+input = sys.stdin.readline
+
+
+def getChainCount(chains, N):
+    chains.sort()
+
+    count = N
+    tied = 1
+
+    for chain in chains:
+        if tied + chain >= count:
+            break
+        else:
+            tied += chain
+            count -= 1
+
+    return count - 1
+
+
+if __name__ == "__main__":
+    N = int(input())
+    chains = list(map(int, input().split()))
+    print(getChainCount(chains, N))
+```
+
+## 복잡도
+
+- 시간: O(N log N)
+- 공간: O(N)

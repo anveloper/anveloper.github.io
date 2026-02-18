@@ -1,0 +1,65 @@
+---
+title: "BOJ 2014 - 소수의 곱"
+date: "2023-01-16"
+description: "수학, 자료 구조, 정수론 문제"
+tags: ["수학", "자료 구조", "정수론", "집합과 맵", "우선순위 큐"]
+platform: "boj"
+problem_number: "2014"
+problem_url: "https://www.acmicpc.net/problem/2014"
+difficulty: "골드 I"
+language: "java"
+---
+
+## 문제
+
+[BOJ 2014 - 소수의 곱](https://www.acmicpc.net/problem/2014)
+
+## 풀이
+
+우선순위 큐를 활용하여 효율적으로 처리한다.
+
+## 코드
+
+```java
+package day349;
+
+import java.io.*;
+import java.util.*;
+
+public class Day343BOJ2014소수의곱 {
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        int K = Integer.parseInt(st.nextToken());
+        int N = Integer.parseInt(st.nextToken());
+
+        long prime[] = new long[K];
+        PriorityQueue<Long> pq = new PriorityQueue<>();
+        st = new StringTokenizer(br.readLine());
+        for (int i = 0; i < K; i++) {
+            prime[i] = Long.parseLong(st.nextToken());
+            pq.offer(prime[i]);
+        }
+
+        for (int i = 0; i < N - 1; i++) {
+            long n = pq.poll();
+            for (int j = 0; j < K; j++) {
+                long temp = n * prime[j];
+                if (temp >= (long) 2 << 30) {
+                    break;
+                }
+                pq.offer(temp);
+                if (n % prime[j] == 0) {
+                    break;
+                }
+            }
+        }
+        System.out.println(pq.poll());
+    }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

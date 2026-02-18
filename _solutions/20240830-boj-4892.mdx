@@ -1,0 +1,67 @@
+---
+title: "BOJ 4892 - 숫자 맞추기 게임"
+date: "2024-08-30"
+description: "수학적 트릭을 이용한 숫자 맞추기 게임을 시뮬레이션하는 문제"
+tags: ["수학", "구현"]
+platform: "boj"
+problem_number: "4892"
+problem_url: "https://www.acmicpc.net/problem/4892"
+difficulty: "브론즈 III"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 4892 - 숫자 맞추기 게임](https://www.acmicpc.net/problem/4892)
+
+> 입력된 수에 3을 곱한 후 홀짝에 따라 다른 연산을 수행하여 최종 결과를 출력한다.
+
+## 풀이
+
+N에 3을 곱한 뒤, 홀수이면 `(3N+1)/2`를 다시 3배하고 9로 나누며, 짝수이면 `3N/2`를 3배하고 9로 나눈다. 홀짝 여부와 최종 결과를 순서 번호와 함께 출력한다. 0이 입력되면 종료한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+  int n, i = 1;
+
+  while (i)
+  {
+    cin >> n;
+    if (n == 0)
+      break;
+    cout << i << ". ";
+    n *= 3;
+    if (n % 2)
+    {
+      cout << "odd ";
+      n = (n + 1) / 2;
+      n = 3 * n;
+      n = n / 9;
+      cout << n << "\n";
+    }
+    else
+    {
+      cout << "even ";
+      n = n / 2;
+      n = 3 * n;
+      n = n / 9;
+      cout << n << "\n";
+    }
+    i++;
+  }
+
+  return 0;
+}
+```
+
+## 복잡도
+
+- 시간: O(T) (T: 테스트 케이스 수)
+- 공간: O(1)

@@ -1,0 +1,49 @@
+---
+title: "BOJ 3226 - 전화 요금"
+date: "2025-07-15"
+description: "수학, 구현, 사칙연산 문제"
+tags: ["수학", "구현", "사칙연산"]
+platform: "boj"
+problem_number: "3226"
+problem_url: "https://www.acmicpc.net/problem/3226"
+difficulty: "브론즈 I"
+language: "python"
+---
+
+## 문제
+
+[BOJ 3226 - 전화 요금](https://www.acmicpc.net/problem/3226)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```python
+N = int(input())
+result = 0
+
+for _ in range(N):
+    now, time = input().split()
+    h, m = map(int, now.split(":"))
+    current_time = h * 60 + m
+
+    for i in range(int(time)):
+        if current_time >= 420 and current_time < 1140:
+            result += 10
+            current_time += 1
+        else:
+            result += 5
+            current_time += 1
+
+        if current_time == 1440:
+            current_time = 0
+
+print(result)
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

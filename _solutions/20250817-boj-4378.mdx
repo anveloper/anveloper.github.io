@@ -1,0 +1,78 @@
+---
+title: "BOJ 4378 - 트ㅏㅊ;"
+date: "2025-08-17"
+description: "구현, 문자열, 애드 혹 문제"
+tags: ["구현", "문자열", "애드 혹"]
+platform: "boj"
+problem_number: "4378"
+problem_url: "https://www.acmicpc.net/problem/4378"
+difficulty: "실버 V"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 4378 - 트ㅏㅊ;](https://www.acmicpc.net/problem/4378)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+#include <string>
+using namespace std;
+
+string str[4] = {
+    "`1234567890-=",
+    "QWERTYUIOP[]\\",
+    "ASDFGHJKL;'",
+    "ZXCVBNM,./"};
+
+int main()
+{
+  ios::sync_with_stdio(false);
+  cin.tie(NULL);
+
+  string s;
+
+  while (getline(cin, s))
+  {
+    for (int t = 0; t < s.size(); t++)
+    {
+      if (s[t] == ' ')
+      {
+
+        cout << s[t];
+        continue;
+      }
+
+      bool found = false;
+      for (int i = 0; i < 4; i++)
+      {
+        for (int j = 0; j < str[i].size(); j++)
+        {
+          if (s[t] == str[i][j])
+          {
+            cout << str[i][j - 1];
+            found = true;
+            break;
+          }
+        }
+        if (found)
+          break;
+      }
+    }
+    cout << '\n';
+  }
+
+  return 0;
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

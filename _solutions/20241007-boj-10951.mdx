@@ -1,0 +1,44 @@
+---
+title: "BOJ 10951 - A+B - 4"
+date: "2024-10-07"
+description: "EOF까지 두 수의 합을 출력하는 문제"
+tags: ["수학", "구현"]
+platform: "boj"
+problem_number: "10951"
+problem_url: "https://www.acmicpc.net/problem/10951"
+difficulty: "브론즈 V"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 10951 - A+B - 4](https://www.acmicpc.net/problem/10951)
+
+> 입력이 끝날 때(EOF)까지 두 정수 A, B를 입력받아 A+B를 출력한다.
+
+## 풀이
+
+EOF 판별을 위해 `cin >> a >> b`의 반환값이 eof인지 확인하는 while 루프를 사용하여 입력이 없을 때까지 반복한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int main(int argc, char const *argv[])
+{
+  int a, b;
+  while (!(cin >> a >> b).eof())
+  {
+    cout << a + b << "\n";
+  }
+
+  return 0;
+}
+```
+
+## 복잡도
+
+- 시간: O(T) (T: 입력 횟수)
+- 공간: O(1)

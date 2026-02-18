@@ -1,0 +1,57 @@
+---
+title: "BOJ 1740 - 거듭제곱"
+date: "2025-07-24"
+description: "수학, 비트마스킹 문제"
+tags: ["수학", "비트마스킹"]
+platform: "boj"
+problem_number: "1740"
+problem_url: "https://www.acmicpc.net/problem/1740"
+difficulty: "실버 III"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 1740 - 거듭제곱](https://www.acmicpc.net/problem/1740)
+
+## 풀이
+
+비트마스킹을 활용하여 상태를 관리한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+#include <bitset>
+#include <string>
+
+using namespace std;
+
+int main()
+{
+  long long n;
+  cin >> n;
+
+  string temp = bitset<64>(n).to_string();
+
+  long long result = 0;
+  long long seq = 1;
+  for (int i = temp.length() - 1; i > -1; i--)
+  {
+    if (temp[i] == '1')
+    {
+      result += seq;
+    }
+    seq *= 3;
+  }
+
+  cout << result;
+
+  return 0;
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

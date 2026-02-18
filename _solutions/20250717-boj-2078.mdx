@@ -1,0 +1,62 @@
+---
+title: "BOJ 2078 - 무한이진트리"
+date: "2025-07-17"
+description: "수학 문제"
+tags: ["수학"]
+platform: "boj"
+problem_number: "2078"
+problem_url: "https://www.acmicpc.net/problem/2078"
+difficulty: "실버 II"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 2078 - 무한이진트리](https://www.acmicpc.net/problem/2078)
+
+## 풀이
+
+수학적 성질을 이용하여 풀이한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+#include <vector>
+using namespace std;
+
+pair<int, int> func(int A, int B)
+{
+  if (A == 0)
+    return make_pair(-1, 0);
+  if (B == 0)
+    return make_pair(0, -1);
+
+  if (A > B)
+  {
+    auto p = func(A % B, B);
+    return make_pair(p.first + A / B, p.second);
+  }
+  else
+  {
+    auto p = func(A, B % A);
+    return make_pair(p.first, p.second + B / A);
+  }
+}
+
+int main()
+{
+  ios::sync_with_stdio(0);
+  cin.tie(0);
+
+  int A, B;
+  cin >> A >> B;
+  auto p = func(A, B);
+  cout << p.first << ' ' << p.second;
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

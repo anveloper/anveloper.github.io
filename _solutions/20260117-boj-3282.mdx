@@ -1,0 +1,74 @@
+---
+title: "BOJ 3282 - ROOMS"
+date: "2026-01-17"
+description: "구현, 시뮬레이션 문제"
+tags: ["구현", "시뮬레이션"]
+platform: "boj"
+problem_number: "3282"
+problem_url: "https://www.acmicpc.net/problem/3282"
+difficulty: "브론즈 I"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 3282 - ROOMS](https://www.acmicpc.net/problem/3282)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int N, G;
+int arr[100];
+int idx;
+bool chk;
+
+int main()
+{
+  ios::sync_with_stdio(0);
+  cin.tie(0);
+
+  cin >> N >> G;
+  while (G--)
+  {
+    int M;
+    cin >> M;
+    while (M)
+    {
+      if (chk)
+      {
+        if (arr[idx] == 2)
+          idx++;
+        else
+          arr[idx++]++, M--;
+      }
+      else
+      {
+        if (M == 1)
+          arr[idx++] = 1, M--;
+        else
+          arr[idx++] = 2, M -= 2;
+
+        if (idx == N)
+          chk = 1, idx = 0;
+      }
+    }
+  }
+
+  for (int i = 0; i < N; i++)
+  {
+    cout << arr[i] << '\n';
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

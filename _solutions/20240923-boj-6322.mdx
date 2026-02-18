@@ -1,0 +1,72 @@
+---
+title: "BOJ 6322 - 직각 삼각형의 두 변"
+date: "2024-09-23"
+description: "피타고라스 정리로 직각 삼각형의 나머지 한 변을 구하는 문제"
+tags: ["수학", "기하학"]
+platform: "boj"
+problem_number: "6322"
+problem_url: "https://www.acmicpc.net/problem/6322"
+difficulty: "브론즈 III"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 6322 - 직각 삼각형의 두 변](https://www.acmicpc.net/problem/6322)
+
+> 직각 삼각형의 세 변 a, b, c 중 하나가 -1로 주어질 때, 피타고라스 정리를 이용해 미지의 변 길이를 구한다.
+
+## 풀이
+
+-1인 변이 어느 것인지 판별하여 피타고라스 정리(a^2 + b^2 = c^2)를 적용한다. 빗변이 아닌 변을 구할 때는 c^2 - (다른 변)^2이 음수이면 "Impossible"을 출력한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+int main()
+{
+  int a, b, c, t = 0;
+  while (cin >> a >> b >> c && (a || b || c))
+  {
+    cout << "Triangle " << '#' << ++t << '\n';
+
+    float t;
+    char i;
+    if (a == -1)
+    {
+      i = 'a';
+      t = (c * c) - (b * b);
+    }
+    else if (b == -1)
+    {
+      i = 'b';
+      t = (c * c) - (a * a);
+    }
+    else
+    {
+      i = 'c';
+      t = (a * a) + (b * b);
+    }
+
+    t = sqrt(t);
+    cout << fixed;
+    cout.precision(3);
+    if (t > 0)
+      cout << i << " = " << t << '\n';
+    else
+    {
+      cout << "Impossible." << '\n';
+    }
+    cout << '\n';
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(T) (T: 테스트 케이스 수)
+- 공간: O(1)

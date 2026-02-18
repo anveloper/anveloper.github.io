@@ -1,0 +1,65 @@
+---
+title: "BOJ 5026 - 박사 과정"
+date: "2024-09-03"
+description: "덧셈 수식 또는 특수 문자열을 처리하는 파싱 문제"
+tags: ["수학", "문자열", "파싱"]
+platform: "boj"
+problem_number: "5026"
+problem_url: "https://www.acmicpc.net/problem/5026"
+difficulty: "브론즈 II"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 5026 - 박사 과정](https://www.acmicpc.net/problem/5026)
+
+> `a+b` 형태의 수식이면 합을 출력하고, `P=NP`가 입력되면 `skipped`를 출력한다.
+
+## 풀이
+
+문자열을 입력받아 `P=NP`이면 `skipped`를 출력한다. 그 외에는 `+` 기호의 위치를 찾아 앞뒤를 분리한 뒤 정수로 변환하여 합을 계산한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+#include <string>
+#include <stdlib.h>
+
+using namespace std;
+
+int main()
+{
+
+  int test;
+  cin >> test;
+
+  for (int i = 0; i < test; i++)
+  {
+
+    string str;
+    cin >> str;
+
+    int a, b;
+
+    if (str == "P=NP")
+    {
+      cout << "skipped" << "\n";
+    }
+
+    else
+    {
+      int sever = str.find('+');
+      a = stoi(str.substr(0, sever));
+      b = stoi(str.substr(sever + 1));
+      cout << a + b << "\n";
+    }
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(T * N) (T: 테스트 케이스 수, N: 문자열 길이)
+- 공간: O(N)

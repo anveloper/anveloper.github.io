@@ -1,0 +1,70 @@
+---
+title: "BOJ 1174 - 줄어드는 수"
+date: "2024-03-21"
+description: "브루트포스 알고리즘, 백트래킹 문제"
+tags: ["브루트포스 알고리즘", "백트래킹"]
+platform: "boj"
+problem_number: "1174"
+problem_url: "https://www.acmicpc.net/problem/1174"
+difficulty: "골드 V"
+language: "java"
+---
+
+## 문제
+
+[BOJ 1174 - 줄어드는 수](https://www.acmicpc.net/problem/1174)
+
+## 풀이
+
+백트래킹으로 가능한 경우를 탐색한다.
+
+## 코드
+
+```java
+package day799;
+
+import java.io.*;
+import java.util.*;
+
+public class Day779BOJ1174줄어드는수 {
+
+  static int n;
+  static int[] arr = { 9, 8, 7, 6, 5, 4, 3, 2, 1, 0 };
+  static List<Long> list = new ArrayList<>();
+
+  public static void main(String[] args) throws IOException {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+    n = Integer.parseInt(br.readLine());
+
+    dfs(0, 0);
+    list.sort(null);
+
+    try {
+      System.out.println(list.get(n - 1));
+    } catch (Exception e) {
+      System.out.println(-1);
+    }
+
+  }
+
+  private static void dfs(long num, int index) {
+    if (!list.contains(num)) {
+      list.add(num);
+    }
+
+    if (index >= 10) {
+      return;
+    }
+
+    dfs((num * 10) + arr[index], index + 1);
+    dfs(num, index + 1);
+
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N!)
+- 공간: O(N)

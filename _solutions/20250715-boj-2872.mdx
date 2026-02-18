@@ -1,0 +1,33 @@
+---
+title: "BOJ 2872 - 우리집엔 도서관이 있어"
+date: "2025-07-15"
+description: "그리디 알고리즘 문제"
+tags: ["그리디 알고리즘"]
+platform: "boj"
+problem_number: "2872"
+problem_url: "https://www.acmicpc.net/problem/2872"
+difficulty: "실버 I"
+language: "python"
+---
+
+## 문제
+
+[BOJ 2872 - 우리집엔 도서관이 있어](https://www.acmicpc.net/problem/2872)
+
+## 풀이
+
+그리디 알고리즘으로 매 단계 최선의 선택을 한다.
+
+## 코드
+
+```python
+n, *r = map(int, open(0).read().split())
+while r:
+    n -= r.pop() == n
+print(n)
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

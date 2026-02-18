@@ -1,0 +1,56 @@
+---
+title: "BOJ 15904 - UCPC는 무엇의 약자일까?"
+date: "2022-11-03"
+description: "그리디 알고리즘, 문자열 문제"
+tags: ["그리디 알고리즘", "문자열"]
+platform: "boj"
+problem_number: "15904"
+problem_url: "https://www.acmicpc.net/problem/15904"
+difficulty: "브론즈 I"
+language: "java"
+---
+
+## 문제
+
+[BOJ 15904 - UCPC는 무엇의 약자일까?](https://www.acmicpc.net/problem/15904)
+
+## 풀이
+
+그리디 알고리즘으로 매 단계 최선의 선택을 한다.
+
+## 코드
+
+```java
+package ASP_study.day299;
+
+import java.io.*;
+
+public class Day269BOJ15904UCPC {
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		System.out.println(solution(br.readLine()));
+	}
+
+	static String solution(String s) {
+		char[] ucpc = { 'U', 'C', 'P', 'C' };
+		int index = 0;
+
+		for (int i = 0; i < s.length(); i++) {
+			if (s.charAt(i) == ucpc[index]) {
+				index++;
+			}
+
+			if (index == 4) {
+				return "I love UCPC";
+			}
+		}
+
+		return "I hate UCPC";
+	}
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

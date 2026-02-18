@@ -1,0 +1,50 @@
+---
+title: "BOJ 5911 - 선물"
+date: "2025-07-15"
+description: "그리디 알고리즘, 브루트포스 알고리즘, 정렬 문제"
+tags: ["그리디 알고리즘", "브루트포스 알고리즘", "정렬"]
+platform: "boj"
+problem_number: "5911"
+problem_url: "https://www.acmicpc.net/problem/5911"
+difficulty: "실버 III"
+language: "python"
+---
+
+## 문제
+
+[BOJ 5911 - 선물](https://www.acmicpc.net/problem/5911)
+
+## 풀이
+
+그리디 알고리즘으로 매 단계 최선의 선택을 한다.
+
+## 코드
+
+```python
+N, B = map(int, input().split())
+arr = [list(map(int, input().split())) for _ in range(N)]
+
+arr.sort(key=lambda x: (sum(x), x[0]))
+
+max_count = 0
+for i in range(N):
+    coupon_cost = arr[i][0] // 2 + arr[i][1]
+    others = sorted(arr[j][0] + arr[j][1] for j in range(N) if j != i)
+
+    total, count = coupon_cost, 1
+    for cost in others:
+        if total + cost > B:
+            break
+        total += cost
+        count += 1
+
+    if total <= B:
+        max_count = max(max_count, count)
+
+print(max_count)
+```
+
+## 복잡도
+
+- 시간: O(N²)
+- 공간: O(N)

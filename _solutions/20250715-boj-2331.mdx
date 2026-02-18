@@ -1,0 +1,52 @@
+---
+title: "BOJ 2331 - 반복수열"
+date: "2025-07-15"
+description: "수학, 구현 문제"
+tags: ["수학", "구현"]
+platform: "boj"
+problem_number: "2331"
+problem_url: "https://www.acmicpc.net/problem/2331"
+difficulty: "실버 IV"
+language: "python"
+---
+
+## 문제
+
+[BOJ 2331 - 반복수열](https://www.acmicpc.net/problem/2331)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```python
+n, m = map(int, input().split())
+check = [0] * 236197
+iteration = 1
+
+
+def cal(a, b):
+    result = 0
+    for i in str(a):
+        result += pow(int(i), b)
+    return result
+
+
+def dfs(n, m, iteration, check):
+    if check[n] != 0:
+        return check[n] - 1
+
+    check[n] = iteration
+    iteration += 1
+    result = cal(n, m)
+    return dfs(result, m, iteration, check)
+
+
+print(dfs(n, m, iteration, check))
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

@@ -1,0 +1,48 @@
+---
+title: "BOJ 5789 - 한다 안한다"
+date: "2024-09-19"
+description: "문자열의 가운데 두 문자가 같은지 판별하는 문제"
+tags: ["구현", "문자열"]
+platform: "boj"
+problem_number: "5789"
+problem_url: "https://www.acmicpc.net/problem/5789"
+difficulty: "브론즈 III"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 5789 - 한다 안한다](https://www.acmicpc.net/problem/5789)
+
+> 짝수 길이의 0과 1로 이루어진 문자열이 주어질 때, 가운데 두 문자가 같으면 "Do-it", 다르면 "Do-it-Not"을 출력한다.
+
+## 풀이
+
+문자열 길이의 절반 인덱스를 기준으로 가운데 두 문자(s/2-1과 s/2)를 비교한다. 같으면 "Do-it", 다르면 "Do-it-Not"을 출력한다.
+
+## 코드
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+  int n;
+  cin >> n;
+  string s1;
+  for (int i = 0; i < n; i++)
+  {
+    cin >> s1;
+    int s = s1.size() / 2;
+    cout << "Do-it";
+    if (s1[s - 1] != s1[s])
+      cout << "-Not";
+    cout << '\n';
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(L) (L: 문자열 길이)

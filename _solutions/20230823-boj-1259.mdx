@@ -1,0 +1,56 @@
+---
+title: "BOJ 1259 - 팰린드롬수"
+date: "2023-08-23"
+description: "구현, 문자열 문제"
+tags: ["구현", "문자열"]
+platform: "boj"
+problem_number: "1259"
+problem_url: "https://www.acmicpc.net/problem/1259"
+difficulty: "브론즈 I"
+language: "java"
+---
+
+## 문제
+
+[BOJ 1259 - 팰린드롬수](https://www.acmicpc.net/problem/1259)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```java
+package day599;
+
+import java.io.*;
+
+public class Day563BOJ1259펠린드롬수 {
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+    while (true) {
+      String str = br.readLine();
+      boolean chk = true;
+
+      if (str.equals("0"))
+        break;
+
+      for (int i = 0; i < str.length() / 2; i++) {
+        if (str.charAt(i) != str.charAt(str.length() - 1 - i))
+          chk = false;
+      }
+
+      if (chk)
+        System.out.println("yes");
+      else
+        System.out.println("no");
+    }
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

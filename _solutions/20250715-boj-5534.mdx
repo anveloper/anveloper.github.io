@@ -1,0 +1,52 @@
+---
+title: "BOJ 5534 - 간판"
+date: "2025-07-15"
+description: "문자열, 브루트포스 알고리즘 문제"
+tags: ["문자열", "브루트포스 알고리즘"]
+platform: "boj"
+problem_number: "5534"
+problem_url: "https://www.acmicpc.net/problem/5534"
+difficulty: "실버 III"
+language: "python"
+---
+
+## 문제
+
+[BOJ 5534 - 간판](https://www.acmicpc.net/problem/5534)
+
+## 풀이
+
+가능한 모든 경우를 탐색하여 답을 구한다.
+
+## 코드
+
+```python
+def check(key, word):
+    length = len(key)
+    gap = 1
+    while length <= len(word):
+        tmp = word[:length:gap]
+        if tmp == key:
+            return True
+        length += len(key) - 1
+        gap += 1
+    return False
+
+
+n = int(input())
+key = input()
+ans = 0
+for _ in range(n):
+    val = input()
+    for i in range(len(val)):
+        ch = val[i]
+        if ch == key[0] and check(key, val[i:]):
+            ans += 1
+            break
+print(ans)
+```
+
+## 복잡도
+
+- 시간: O(N²)
+- 공간: O(N)

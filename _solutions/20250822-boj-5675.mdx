@@ -1,0 +1,48 @@
+---
+title: "BOJ 5675 - 시침과 분침"
+date: "2025-08-22"
+description: "수학, 구현, 애드 혹 문제"
+tags: ["수학", "구현", "애드 혹", "시뮬레이션"]
+platform: "boj"
+problem_number: "5675"
+problem_url: "https://www.acmicpc.net/problem/5675"
+difficulty: "브론즈 I"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 5675 - 시침과 분침](https://www.acmicpc.net/problem/5675)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+int main()
+{
+  cin.tie(0);
+  ios::sync_with_stdio(false);
+  int n;
+  while (cin >> n)
+  {
+    if (n % 6)
+      cout << "N" << "\n";
+    else
+      cout << "Y" << "\n";
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

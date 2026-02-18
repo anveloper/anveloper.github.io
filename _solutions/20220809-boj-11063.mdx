@@ -1,0 +1,83 @@
+---
+title: "BOJ 11063 - Consecutive Ordering"
+date: "2022-08-09"
+description: "자료 구조, 세그먼트 트리 문제"
+tags: ["자료 구조", "세그먼트 트리"]
+platform: "boj"
+problem_number: "11063"
+problem_url: "https://www.acmicpc.net/problem/11063"
+difficulty: "플래티넘 IV"
+language: "java"
+---
+
+## 문제
+
+[BOJ 11063 - Consecutive Ordering](https://www.acmicpc.net/problem/11063)
+
+## 풀이
+
+세그먼트 트리를 사용하여 구간 쿼리를 처리한다.
+
+## 코드
+
+```java
+package com.ssafy.an.day199;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Day183BOJ11063킹구현 {
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		String[] rawData = br.readLine().split(" ");
+		int kx = rawData[0].charAt(0) - 'A';
+		int ky = rawData[0].charAt(1) - '1';
+		int sx = rawData[1].charAt(0) - 'A';
+		int sy = rawData[1].charAt(1) - '1';
+		int movenum = Integer.parseInt(rawData[2]);
+		Map<Character, int[]> moveDic = new HashMap<>();
+		int[] moveB = { -1, 0 };
+		moveDic.put('B', moveB);
+		int[] moveL = { 0, -1 };
+		moveDic.put('L', moveL);
+		int[] moveR = { 0, 1 };
+		moveDic.put('R', moveR);
+		int[] moveT = { 1, 0 };
+		moveDic.put('T', moveT);
+		for (int i = 0; i < movenum; i++) {
+			String rawMove = br.readLine();
+			int moveX = 0;
+			int moveY = 0;
+			for (int j = 0; j < rawMove.length(); j++) {
+				int[] moveTemp = moveDic.get(rawMove.charAt(j));
+				moveX += moveTemp[1];
+				moveY += moveTemp[0];
+			}
+			if (kx + moveX >= 0 && kx + moveX < 8 && ky + moveY >= 0 && ky + moveY < 8) {
+				if (sx == kx + moveX && sy == ky + moveY) {
+					if (sx + moveX >= 0 && sx + moveX < 8 && sy + moveY >= 0 && sy + moveY < 8) {
+						sx += moveX;
+						sy += moveY;
+						kx += moveX;
+						ky += moveY;
+					}
+				} else {
+					kx += moveX;
+					ky += moveY;
+				}
+			}
+		}
+		System.out.print((char) (kx + 'A'));
+		System.out.println((int) (ky + 1));
+		System.out.print((char) (sx + 'A'));
+		System.out.println((int) (sy + 1));
+	}
+}
+```
+
+## 복잡도
+
+- 시간: O(N log N)
+- 공간: O(N)

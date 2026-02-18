@@ -1,0 +1,49 @@
+---
+title: "BOJ 5691 - 평균 중앙값 문제"
+date: "2025-08-13"
+description: "수학, 사칙연산 문제"
+tags: ["수학", "사칙연산"]
+platform: "boj"
+problem_number: "5691"
+problem_url: "https://www.acmicpc.net/problem/5691"
+difficulty: "브론즈 III"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 5691 - 평균 중앙값 문제](https://www.acmicpc.net/problem/5691)
+
+## 풀이
+
+수학적 성질을 이용하여 풀이한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+  int a, b;
+  while (1)
+  {
+    cin >> a >> b;
+    if (a == 0 && b == 0)
+    {
+      break;
+    }
+
+    cout << 2 * a - b << "\n";
+  }
+
+  return 0;
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

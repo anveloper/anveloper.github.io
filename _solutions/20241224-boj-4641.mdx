@@ -1,0 +1,58 @@
+---
+title: "BOJ 4641 - Doubles"
+date: "2024-12-24"
+description: "집합에서 어떤 수의 두 배가 되는 쌍의 개수를 구하는 문제"
+tags: ["구현", "브루트포스 알고리즘"]
+platform: "boj"
+problem_number: "4641"
+problem_url: "https://www.acmicpc.net/problem/4641"
+difficulty: "브론즈 I"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 4641 - Doubles](https://www.acmicpc.net/problem/4641)
+
+> 양의 정수 집합에서 어떤 원소의 정확히 두 배인 원소가 존재하는 쌍의 개수를 구한다.
+
+## 풀이
+
+0이 입력될 때까지 수를 배열에 저장한 후, 이중 반복으로 모든 쌍을 확인하여 한 수가 다른 수의 정확히 두 배인 경우를 센다. -1이 입력되면 전체 프로그램을 종료한다.
+
+## 코드
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+vector<int> num;
+int ans;
+
+int main()
+{
+  while (1)
+  {
+    int x;
+    cin >> x;
+    if (x == -1)
+      break;
+    if (x)
+    {
+      num.push_back(x);
+      continue;
+    }
+    for (int i = 0; i < num.size(); i++)
+      for (int j = 0; j < num.size(); j++)
+        if (num[i] == num[j] * 2)
+          ans++;
+    cout << ans << '\n';
+    num.clear();
+    ans = 0;
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N^2) (N: 집합 크기)
+- 공간: O(N)

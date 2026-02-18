@@ -1,0 +1,56 @@
+---
+title: "BOJ 5939 - Race Results"
+date: "2025-11-06"
+description: "구현, 정렬 문제"
+tags: ["구현", "정렬"]
+platform: "boj"
+problem_number: "5939"
+problem_url: "https://www.acmicpc.net/problem/5939"
+difficulty: "실버 V"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 5939 - Race Results](https://www.acmicpc.net/problem/5939)
+
+## 풀이
+
+정렬을 활용하여 문제를 해결한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+int N;
+int arr[5000];
+
+int main()
+{
+  ios::sync_with_stdio(0);
+  cin.tie(0);
+
+  cin >> N;
+  for (int i = 0; i < N; i++)
+  {
+    int a, b, c;
+    cin >> a >> b >> c;
+    arr[i] = a * 10000 + b * 100 + c;
+  }
+
+  sort(arr, arr + N);
+
+  for (int i = 0; i < N; i++)
+  {
+    cout << arr[i] / 10000 << ' ' << (arr[i] % 10000) / 100 << ' ' << arr[i] % 100 << '\n';
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N log N)
+- 공간: O(N)

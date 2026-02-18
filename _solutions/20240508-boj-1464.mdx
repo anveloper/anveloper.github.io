@@ -1,0 +1,43 @@
+---
+title: "BOJ 1464 - 뒤집기 3"
+date: "2024-05-08"
+description: "문자열의 접두사를 뒤집어 사전순 최소 문자열 만들기"
+tags: ["그리디", "문자열"]
+platform: "boj"
+problem_number: "1464"
+problem_url: "https://www.acmicpc.net/problem/1464"
+difficulty: "골드 IV"
+language: "javascript"
+---
+
+## 문제
+
+[BOJ 1464 - 뒤집기 3](https://www.acmicpc.net/problem/1464)
+
+> 문자열의 접두사를 뒤집는 연산을 반복하여 사전순으로 가장 작은 문자열을 만든다.
+
+## 풀이
+
+그리디하게 각 문자를 추가하면서, 현재 문자열의 마지막 문자보다 크면 앞에 붙이고 아니면 뒤에 붙인 뒤 전체를 뒤집는다.
+
+## 코드
+
+```javascript
+const solution = (input) => {
+  let s = input[0].split("");
+  let s1 = s[0];
+  for (i = 1; i < s.length; i++) {
+    if (s1[i - 1] < s[i]) { s1 = s[i] + s1; continue; }
+    s1 = s1 + s[i];
+  }
+  return s1.split("").reverse().join("");
+};
+const fs = require("fs");
+const input = fs.readFileSync("/dev/stdin").toString().trim().split("\n");
+console.log(solution(input));
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

@@ -1,0 +1,44 @@
+---
+title: "BOJ 11382 - 꼬마 정민"
+date: "2023-06-08"
+description: "구현, 사칙연산, 수학 문제"
+tags: ["구현", "사칙연산", "수학"]
+platform: "boj"
+problem_number: "11382"
+problem_url: "https://www.acmicpc.net/problem/11382"
+difficulty: "브론즈 V"
+language: "java"
+---
+
+## 문제
+
+[BOJ 11382 - 꼬마 정민](https://www.acmicpc.net/problem/11382)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```java
+package day599;
+
+import java.io.*;
+import java.util.*;
+
+public class Day580BOJ11382꼬마정민 {
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    StringTokenizer st = new StringTokenizer(br.readLine());
+    long A = Long.parseLong(st.nextToken());
+    long B = Long.parseLong(st.nextToken());
+    long C = Long.parseLong(st.nextToken());
+    System.out.print(A + B + C);
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

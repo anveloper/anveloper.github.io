@@ -1,0 +1,75 @@
+---
+title: "BOJ 13420 - 사칙연산"
+date: "2024-12-04"
+description: "사칙연산 수식의 결과가 맞는지 검증하는 문제"
+tags: ["수학", "문자열", "사칙연산"]
+platform: "boj"
+problem_number: "13420"
+problem_url: "https://www.acmicpc.net/problem/13420"
+difficulty: "브론즈 II"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 13420 - 사칙연산](https://www.acmicpc.net/problem/13420)
+
+> 주어진 사칙연산 수식이 올바른지 판별하여 correct 또는 wrong answer를 출력한다.
+
+## 풀이
+
+테스트케이스마다 두 수와 연산자, 결과값을 입력받아 실제 연산 결과와 비교한다. 연산자에 따라 덧셈, 뺄셈, 곱셈, 나눗셈을 수행하고 결과가 일치하면 correct, 아니면 wrong answer를 출력한다.
+
+## 코드
+
+```cpp
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+
+int main()
+{
+  long long int T;
+  scanf("%lld", &T);
+
+  for (int i = 0; i < T; i++)
+  {
+    long long int num1, num2, result;
+    char cacul, equal;
+    scanf("%lld %c %lld %c %lld", &num1, &cacul, &num2, &equal, &result);
+
+    if (cacul == '+')
+    {
+      if (num1 + num2 == result)
+        printf("correct\n");
+      else
+        printf("wrong answer\n");
+    }
+    else if (cacul == '-')
+    {
+      if (num1 - num2 == result)
+        printf("correct\n");
+      else
+        printf("wrong answer\n");
+    }
+    else if (cacul == '*')
+    {
+      if (num1 * num2 == result)
+        printf("correct\n");
+      else
+        printf("wrong answer\n");
+    }
+    else if (cacul == '/')
+    {
+      if (num1 / num2 == result)
+        printf("correct\n");
+      else
+        printf("wrong answer\n");
+    }
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(T)
+- 공간: O(1)

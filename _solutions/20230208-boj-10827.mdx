@@ -1,0 +1,53 @@
+---
+title: "BOJ 10827 - a^b"
+date: "2023-02-08"
+description: "임의 정밀도 / 큰 수 연산 문제"
+tags: ["임의 정밀도 / 큰 수 연산"]
+platform: "boj"
+problem_number: "10827"
+problem_url: "https://www.acmicpc.net/problem/10827"
+difficulty: "골드 V"
+language: "java"
+---
+
+## 문제
+
+[BOJ 10827 - a^b](https://www.acmicpc.net/problem/10827)
+
+## 풀이
+
+문제의 조건에 맞게 풀이한다.
+
+## 코드
+
+```java
+import java.io.*;
+import java.math.*;
+import java.util.*;
+
+public class Day366BOJ10827a의b승 {
+    public static void main(String[] args) throws Exception {
+        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(in.readLine());
+
+        BigDecimal a = new BigDecimal(st.nextToken());
+        int b = Integer.parseInt(st.nextToken());
+
+        BigDecimal res = pow(a, b);
+
+        System.out.print(res.toPlainString());
+    }
+
+    public static BigDecimal pow(BigDecimal a, int b) {
+        if (b == 1)
+            return a;
+        BigDecimal half = pow(a, b / 2);
+        return (b % 2 == 0) ? half.multiply(half) : a.multiply(half.multiply(half));
+    }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

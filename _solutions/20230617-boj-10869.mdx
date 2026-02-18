@@ -1,0 +1,54 @@
+---
+title: "BOJ 10869 - 사칙연산"
+date: "2023-06-17"
+description: "구현, 사칙연산, 수학 문제"
+tags: ["구현", "사칙연산", "수학"]
+platform: "boj"
+problem_number: "10869"
+problem_url: "https://www.acmicpc.net/problem/10869"
+difficulty: "브론즈 V"
+language: "java"
+---
+
+## 문제
+
+[BOJ 10869 - 사칙연산](https://www.acmicpc.net/problem/10869)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```java
+package day499;
+
+import java.util.*;
+import java.io.*;
+
+public class Day496BOJ10869사칙연산 {
+  public static void main(String[] args) throws Exception {
+    Scanner in = new Scanner(System.in);
+    int A = in.nextInt();
+    int B = in.nextInt();
+
+    in.close();
+
+    BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+
+    bw.write((A + B) + "\n");
+    bw.write((A - B) + "\n");
+    bw.write((A * B) + "\n");
+    bw.write((A / B) + "\n");
+    bw.write((A % B) + "\n");
+
+    bw.flush();
+    bw.close();
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

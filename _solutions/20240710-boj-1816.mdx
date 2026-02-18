@@ -1,0 +1,52 @@
+---
+title: "BOJ 1816 - 암호 키"
+date: "2024-07-10"
+description: "100만 이하의 소인수가 없는지 판별하여 암호 키 유효성을 검사하는 문제"
+tags: ["수학", "브루트포스", "정수론"]
+platform: "boj"
+problem_number: "1816"
+problem_url: "https://www.acmicpc.net/problem/1816"
+difficulty: "브론즈 I"
+language: "python"
+---
+
+## 문제
+
+[BOJ 1816 - 암호 키](https://www.acmicpc.net/problem/1816)
+
+> 주어진 수 S의 모든 소인수가 100만보다 큰지 판별한다. 그렇다면 YES, 아니면 NO를 출력한다.
+
+## 풀이
+
+에라토스테네스의 체로 100만 이하의 소수 목록을 미리 구한다. 각 테스트 케이스에서 S가 소수 목록의 어떤 소수로도 나누어지지 않으면 YES, 하나라도 나누어지면 NO를 출력한다.
+
+## 코드
+
+```python
+n = 1000000
+a = [False, False] + [True] * (n - 1)
+primes = []
+
+for i in range(2, n + 1):
+    if a[i]:
+        primes.append(i)
+        for j in range(2 * i, n + 1, i):
+            a[j] = False
+
+N = int(input())
+for i in range(N):
+    b = True
+    S = int(input())
+    for j in primes:
+        if S % j == 0:
+            b = False
+    if b == True:
+        print("YES")
+    else:
+        print("NO")
+```
+
+## 복잡도
+
+- 시간: O(N * pi(10^6)) (pi: 소수 개수, 약 78498개)
+- 공간: O(10^6)

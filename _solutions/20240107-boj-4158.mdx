@@ -1,0 +1,78 @@
+---
+title: "BOJ 4158 - CD"
+date: "2024-01-07"
+description: "자료 구조, 이분 탐색, 집합과 맵 문제"
+tags: ["자료 구조", "이분 탐색", "집합과 맵", "해시를 사용한 집합과 맵", "두 포인터"]
+platform: "boj"
+problem_number: "4158"
+problem_url: "https://www.acmicpc.net/problem/4158"
+difficulty: "실버 V"
+language: "java"
+---
+
+## 문제
+
+[BOJ 4158 - CD](https://www.acmicpc.net/problem/4158)
+
+## 풀이
+
+이분 탐색을 통해 최적의 값을 탐색한다. 투 포인터 기법을 활용한다.
+
+## 코드
+
+```java
+package day749;
+
+import java.io.*;
+import java.util.*;
+
+public class Day705BOJ4158CD {
+  static int N, M, ans;
+  static int[] arrN, arrM;
+
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    StringBuilder sb = new StringBuilder();
+    StringTokenizer st;
+    while (true) {
+      st = new StringTokenizer(br.readLine(), " ");
+
+      N = Integer.parseInt(st.nextToken());
+      M = Integer.parseInt(st.nextToken());
+      if (N == 0 && M == 0) {
+        break;
+      }
+      arrN = new int[N];
+      for (int i = 0; i < N; i++) {
+        arrN[i] = Integer.parseInt(br.readLine());
+      }
+
+      arrM = new int[M];
+      for (int i = 0; i < N; i++) {
+        arrM[i] = Integer.parseInt(br.readLine());
+      }
+
+      ans = 0;
+      int i = 0, j = 0;
+      while (i < N && j < M) {
+        if (arrN[i] == arrM[j]) {
+          ans++;
+          i++;
+          j++;
+        } else if (arrN[i] > arrM[j]) {
+          j++;
+        } else {
+          i++;
+        }
+      }
+      sb.append(ans + "\n");
+    }
+    System.out.println(sb);
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N log X)
+- 공간: O(N)

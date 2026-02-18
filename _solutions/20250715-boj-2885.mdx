@@ -1,0 +1,48 @@
+---
+title: "BOJ 2885 - 초콜릿 식사"
+date: "2025-07-15"
+description: "수학, 그리디 알고리즘, 정수론 문제"
+tags: ["수학", "그리디 알고리즘", "정수론", "비트마스킹"]
+platform: "boj"
+problem_number: "2885"
+problem_url: "https://www.acmicpc.net/problem/2885"
+difficulty: "실버 II"
+language: "python"
+---
+
+## 문제
+
+[BOJ 2885 - 초콜릿 식사](https://www.acmicpc.net/problem/2885)
+
+## 풀이
+
+그리디 알고리즘으로 매 단계 최선의 선택을 한다. 비트마스킹을 활용하여 상태를 관리한다.
+
+## 코드
+
+```python
+import sys
+
+K = int(sys.stdin.readline())
+x = [2**i for i in range(21)]
+for i in x:
+    if K <= i:
+        choco = i
+        break
+cnt = 0
+temp = choco
+if K != choco:
+    while K:
+        temp //= 2
+        if K >= temp:
+            K = K - temp
+            cnt += 1
+        else:
+            cnt += 1
+print(choco, cnt)
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

@@ -1,0 +1,47 @@
+---
+title: "BOJ 1748 - 수 이어 쓰기 1"
+date: "2023-04-30"
+description: "수학, 구현 문제"
+tags: ["수학", "구현"]
+platform: "boj"
+problem_number: "1748"
+problem_url: "https://www.acmicpc.net/problem/1748"
+difficulty: "실버 IV"
+language: "java"
+---
+
+## 문제
+
+[BOJ 1748 - 수 이어 쓰기 1](https://www.acmicpc.net/problem/1748)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```java
+package day449;
+
+import java.io.*;
+
+public class Day448BOJ1748수이어쓰기 {
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    int N = Integer.parseInt(br.readLine());
+    int ans = 0;
+    int d = (int) (Math.log10(N) + 1);
+    for (int i = d - 1; i > 0; i--) {
+      ans += i * (int) ((Math.pow(10, i) - Math.pow(10, i - 1)));
+    }
+    ans += d * (N - (int) Math.pow(10, d - 1) + 1);
+    System.out.println(ans);
+    br.close();
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

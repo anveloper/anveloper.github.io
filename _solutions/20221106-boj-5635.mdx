@@ -1,0 +1,65 @@
+---
+title: "BOJ 5635 - 생일"
+date: "2022-11-06"
+description: "구현, 문자열, 정렬 문제"
+tags: ["구현", "문자열", "정렬"]
+platform: "boj"
+problem_number: "5635"
+problem_url: "https://www.acmicpc.net/problem/5635"
+difficulty: "실버 V"
+language: "java"
+---
+
+## 문제
+
+[BOJ 5635 - 생일](https://www.acmicpc.net/problem/5635)
+
+## 풀이
+
+정렬을 활용하여 문제를 해결한다.
+
+## 코드
+
+```java
+package ASP_study.day299;
+
+import java.util.*;
+
+public class Day272BOJ5635생일 {
+	public static void main(String args[]) {
+		Scanner sc = new Scanner(System.in);
+		int N = sc.nextInt();
+		String arr[][] = new String[N][4];
+
+		for (int i = 0; i < N; i++) {
+			arr[i][0] = sc.next();
+			arr[i][1] = sc.next();
+			arr[i][2] = sc.next();
+			arr[i][3] = sc.next();
+		}
+
+		Arrays.sort(arr, new Comparator<String[]>() {
+
+			@Override
+			public int compare(String[] o1, String[] o2) {
+				if (Integer.parseInt(o1[3]) == Integer.parseInt(o2[3])) {
+					if (Integer.parseInt(o1[2]) == Integer.parseInt(o2[2])) {
+						return Integer.compare(Integer.parseInt(o1[1]), Integer.parseInt(o2[1]));
+					} else
+						return Integer.compare(Integer.parseInt(o1[2]), Integer.parseInt(o2[2]));
+				}
+				return Integer.compare(Integer.parseInt(o1[3]), Integer.parseInt(o2[3]));
+			}
+		});
+
+		System.out.println(arr[N - 1][0] + "\n" + arr[0][0]);
+
+		sc.close();
+	}
+}
+```
+
+## 복잡도
+
+- 시간: O(N log N)
+- 공간: O(N)

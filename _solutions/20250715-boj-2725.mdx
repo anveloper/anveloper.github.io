@@ -1,0 +1,52 @@
+---
+title: "BOJ 2725 - 보이는 점의 개수"
+date: "2025-07-15"
+description: "수학, 정수론, 누적 합 문제"
+tags: ["수학", "정수론", "누적 합", "유클리드 호제법"]
+platform: "boj"
+problem_number: "2725"
+problem_url: "https://www.acmicpc.net/problem/2725"
+difficulty: "실버 II"
+language: "python"
+---
+
+## 문제
+
+[BOJ 2725 - 보이는 점의 개수](https://www.acmicpc.net/problem/2725)
+
+## 풀이
+
+누적 합을 활용하여 구간 합을 효율적으로 계산한다.
+
+## 코드
+
+```python
+def gcd(i, j):
+    if j == 0:
+        return i
+    return gcd(j, i % j)
+
+dp = [0 for _ in range(1001)]
+dp[1] = 3
+for i in range(2, 1001):
+    cnt = 0
+    for j in range(1, i+1):
+        if i == j:
+            continue
+
+        if gcd(i, j) == 1:
+            cnt += 2
+    dp[i] = dp[i-1] + cnt
+
+
+T = int(input())
+for _ in range(T):
+    N = int(input())
+
+    print(dp[N])
+```
+
+## 복잡도
+
+- 시간: O(log N)
+- 공간: O(1)

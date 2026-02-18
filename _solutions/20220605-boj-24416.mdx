@@ -1,0 +1,53 @@
+---
+title: "BOJ 24416 - 알고리즘 수업 - 피보나치 수 1"
+date: "2022-06-05"
+description: "수학, 다이나믹 프로그래밍 문제"
+tags: ["수학", "다이나믹 프로그래밍"]
+platform: "boj"
+problem_number: "24416"
+problem_url: "https://www.acmicpc.net/problem/24416"
+difficulty: "브론즈 I"
+language: "java"
+---
+
+## 문제
+
+[BOJ 24416 - 알고리즘 수업 - 피보나치 수 1](https://www.acmicpc.net/problem/24416)
+
+## 풀이
+
+다이나믹 프로그래밍을 사용하여 부분 문제의 해를 메모이제이션하며 풀이한다.
+
+## 코드
+
+```java
+package com.ssafy.an.day149;
+
+import java.util.Scanner;
+
+public class Day118BOJ24416피보나치 {
+	static int N;
+	static int[] d;
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		N = sc.nextInt();
+
+		d = new int[41];
+		d[0] = 0;
+		d[1] = 1;
+		d[2] = 1;
+		d[3] = 2;
+		for (int i = 3; i < 41; i++) {
+			d[i] = d[i - 2] + d[i - 1];
+		}
+		System.out.println(d[N] + " " + (N - 2));
+		sc.close();
+	}
+}
+```
+
+## 복잡도
+
+- 시간: O(N²)
+- 공간: O(N)

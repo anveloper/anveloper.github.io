@@ -1,0 +1,52 @@
+---
+title: "BOJ 11050 - 이항 계수 1"
+date: "2023-01-22"
+description: "수학, 구현, 조합론 문제"
+tags: ["수학", "구현", "조합론"]
+platform: "boj"
+problem_number: "11050"
+problem_url: "https://www.acmicpc.net/problem/11050"
+difficulty: "브론즈 I"
+language: "java"
+---
+
+## 문제
+
+[BOJ 11050 - 이항 계수 1](https://www.acmicpc.net/problem/11050)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```java
+package day349;
+
+import java.io.*;
+import java.util.*;
+
+public class Day349BOJ11050이항계수 {
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+
+        int N = Integer.parseInt(st.nextToken());
+        int K = Integer.parseInt(st.nextToken());
+
+        System.out.println(BC(N, K));
+    }
+
+    static int BC(int n, int k) {
+        if (n == k || k == 0)
+            return 1;
+
+        return BC(n - 1, k - 1) + BC(n - 1, k);
+    }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

@@ -1,0 +1,58 @@
+---
+title: "BOJ 2817 - ALPS식 투표"
+date: "2025-07-15"
+description: "구현, 정렬 문제"
+tags: ["구현", "정렬"]
+platform: "boj"
+problem_number: "2817"
+problem_url: "https://www.acmicpc.net/problem/2817"
+difficulty: "실버 III"
+language: "python"
+---
+
+## 문제
+
+[BOJ 2817 - ALPS식 투표](https://www.acmicpc.net/problem/2817)
+
+## 풀이
+
+정렬을 활용하여 문제를 해결한다.
+
+## 코드
+
+```python
+import sys
+
+input = sys.stdin.readline
+
+x = int(input())
+n = int(input())
+staff = dict()
+chip = dict()
+if n != 0:
+    for _ in range(n):
+        a, b = input().split()
+        staff[a] = int(b)
+
+    staff = dict(filter(lambda e: e[1] >= x * 0.05, staff.items()))
+    tmp = dict()
+    for i in range(1, 15):
+        for k, v in staff.items():
+            tmp[v / i] = k
+    tmp = sorted(tmp.items(), reverse=True)
+    for i in range(14):
+        best = tmp[i][1]
+        chip[best] = chip.get(best, 0) + 1
+    for i in staff:
+        if i[0] not in chip.keys():
+            chip[i[0]] = 0
+
+    chip = dict(sorted(chip.items()))
+    for k, v in chip.items():
+        print(k, v)
+```
+
+## 복잡도
+
+- 시간: O(N log N)
+- 공간: O(N)

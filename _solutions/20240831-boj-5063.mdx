@@ -1,0 +1,52 @@
+---
+title: "BOJ 5063 - TGN"
+date: "2024-08-31"
+description: "광고 수익과 비용을 비교하여 광고 여부를 결정하는 문제"
+tags: ["수학", "사칙연산"]
+platform: "boj"
+problem_number: "5063"
+problem_url: "https://www.acmicpc.net/problem/5063"
+difficulty: "브론즈 III"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 5063 - TGN](https://www.acmicpc.net/problem/5063)
+
+> 광고 없을 때 수익 R, 광고 시 수익 E, 광고 비용 C가 주어지면 광고 여부를 결정한다.
+
+## 풀이
+
+`R - E + C`가 음수이면 광고하는 것이 이득(advertise), 0이면 차이 없음(does not matter), 양수이면 광고하지 않는 것이 이득(do not advertise)이다.
+
+## 코드
+
+```cpp
+#include <stdio.h>
+
+int main()
+{
+  int n, r, e, c, i;
+  scanf("%d", &n);
+  for (i = 1; i <= n; i++)
+  {
+    scanf("%d %d %d", &r, &e, &c);
+    if (r - e + c < 0)
+    {
+      printf("advertise\n");
+    }
+    else if (r - e + c == 0)
+    {
+      printf("does not matter\n");
+    }
+    else
+      printf("do not advertise\n");
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(1)

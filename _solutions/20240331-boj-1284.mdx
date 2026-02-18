@@ -1,0 +1,51 @@
+---
+title: "BOJ 1284 - 집 주소"
+date: "2024-03-31"
+description: "집 번호판의 가로 길이를 계산하는 문제"
+tags: ["수학", "구현"]
+platform: "boj"
+problem_number: "1284"
+problem_url: "https://www.acmicpc.net/problem/1284"
+difficulty: "브론즈 III"
+language: "javascript"
+---
+
+## 문제
+
+[BOJ 1284 - 집 주소](https://www.acmicpc.net/problem/1284)
+
+> 집 번호가 주어질 때, 번호판의 가로 길이를 계산한다. 숫자마다 다른 너비를 가지며, 숫자 사이와 양 끝에 여백이 있다.
+
+## 풀이
+
+숫자별 너비를 계산한다. 1은 3, 0은 5, 나머지는 4의 너비를 가지며, 양 끝 테두리 1씩과 숫자 사이 간격 1을 더한다.
+
+## 코드
+
+```javascript
+const solution = (input) => {
+  const result = [];
+  for (const line of input) {
+    const n = line.trim();
+    if (n === "0") break;
+    let width = 1;
+    for (const ch of n) {
+      width += 1;
+      if (ch === "1") width += 2;
+      else if (ch === "0") width += 4;
+      else width += 3;
+    }
+    result.push(width);
+  }
+  return result.join("\n");
+};
+
+const fs = require("fs");
+const input = fs.readFileSync("/dev/stdin").toString().trim().split("\n");
+console.log(solution(input));
+```
+
+## 복잡도
+
+- 시간: O(N × D) (D: 자릿수)
+- 공간: O(1)

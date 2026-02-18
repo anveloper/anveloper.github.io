@@ -1,0 +1,55 @@
+---
+title: "BOJ 2232 - 지뢰"
+date: "2025-07-21"
+description: "그리디 알고리즘, 정렬 문제"
+tags: ["그리디 알고리즘", "정렬"]
+platform: "boj"
+problem_number: "2232"
+problem_url: "https://www.acmicpc.net/problem/2232"
+difficulty: "실버 II"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 2232 - 지뢰](https://www.acmicpc.net/problem/2232)
+
+## 풀이
+
+그리디 알고리즘으로 매 단계 최선의 선택을 한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int N;
+int P[50005];
+
+int main()
+{
+  cin.tie(0)->ios::sync_with_stdio(0);
+
+  cin >> N;
+  for (int i = 1; i <= N; i++)
+  {
+    cin >> P[i];
+  }
+
+  for (int i = 1; i <= N; i++)
+  {
+    if (P[i - 1] <= P[i] && P[i] >= P[i + 1])
+      cout << i << '\n';
+  }
+
+  return 0;
+}
+```
+
+## 복잡도
+
+- 시간: O(N log N)
+- 공간: O(N)

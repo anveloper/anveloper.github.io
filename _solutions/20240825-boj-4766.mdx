@@ -1,0 +1,47 @@
+---
+title: "BOJ 4766 - 일반 화학 실험"
+date: "2024-08-25"
+description: "누적 눈금 값의 차이를 계산하여 각 실험 값을 구하는 문제"
+tags: ["수학", "사칙연산"]
+platform: "boj"
+problem_number: "4766"
+problem_url: "https://www.acmicpc.net/problem/4766"
+difficulty: "브론즈 III"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 4766 - 일반 화학 실험](https://www.acmicpc.net/problem/4766)
+
+> 초기 눈금 값과 이후 눈금 값들이 주어지면, 연속 두 값의 차이를 소수점 둘째 자리까지 출력한다.
+
+## 풀이
+
+초기 눈금 값을 저장한 뒤, 이후 입력되는 눈금 값마다 이전 값과의 차이를 계산하여 출력한다. 999가 입력되면 종료한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+using namespace std;
+int main()
+{
+  double a, b, n, cnt;
+  cin >> n;
+  cnt = n;
+  while (1)
+  {
+    cin >> a;
+    if (a == 999)
+      break;
+    printf("%.2f\n", a - cnt);
+    cnt = a;
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N) (N: 입력 횟수)
+- 공간: O(1)

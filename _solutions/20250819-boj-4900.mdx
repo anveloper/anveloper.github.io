@@ -1,0 +1,81 @@
+---
+title: "BOJ 4900 - 7 더하기"
+date: "2025-08-19"
+description: "구현, 문자열, 런타임 전의 전처리 문제"
+tags: ["구현", "문자열", "런타임 전의 전처리"]
+platform: "boj"
+problem_number: "4900"
+problem_url: "https://www.acmicpc.net/problem/4900"
+difficulty: "실버 III"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 4900 - 7 더하기](https://www.acmicpc.net/problem/4900)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+#include <unordered_map>
+
+using namespace std;
+
+int code[10] = {63, 10, 93, 79, 106, 103, 119, 11, 127, 107};
+unordered_map<int, int> decode;
+
+int main()
+{
+  ios::sync_with_stdio(0);
+  cin.tie(0);
+
+  for (int i = 0; i < 10; i++)
+    decode[code[i]] = i;
+
+  string str;
+  while (cin >> str && str != "BYE")
+  {
+    int a = 0, b = 0;
+    bool isFirst = true;
+
+    for (int i = 0; i < str.size() - 1; i++)
+    {
+      if (str[i] == '+')
+      {
+        isFirst = false;
+        continue;
+      }
+
+      int tmp = decode[stoi(str.substr(i, 3))];
+      if (isFirst)
+        a = a * 10 + tmp;
+      else
+        b = b * 10 + tmp;
+      i += 2;
+    }
+
+    cout << str;
+
+    for (auto ch : to_string(a + b))
+    {
+      int tmp = code[ch - '0'];
+      if (tmp < 100)
+        cout << "0";
+      cout << tmp;
+    }
+    cout << "\n";
+  }
+
+  return 0;
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

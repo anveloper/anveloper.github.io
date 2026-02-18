@@ -1,0 +1,76 @@
+---
+title: "BOJ 7600 - 문자가 몇갤까"
+date: "2024-09-25"
+description: "문장에서 사용된 서로 다른 알파벳 개수를 세는 문제"
+tags: ["구현", "문자열"]
+platform: "boj"
+problem_number: "7600"
+problem_url: "https://www.acmicpc.net/problem/7600"
+difficulty: "브론즈 II"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 7600 - 문자가 몇갤까](https://www.acmicpc.net/problem/7600)
+
+> 문장이 주어질 때, 대소문자 구분 없이 사용된 서로 다른 알파벳의 개수를 출력한다.
+
+## 풀이
+
+문자열을 소문자로 변환한 뒤 26칸의 알파벳 빈도 배열에 등장 여부를 체크한다. 빈도가 1 이상인 알파벳의 개수를 세어 출력한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+#include <string>
+#include <algorithm>
+#include <numeric>
+
+using namespace std;
+
+int main()
+{
+  string sentence;
+
+  while (1)
+  {
+    getline(cin, sentence);
+    if (sentence == "#")
+    {
+      break;
+    }
+    int alpha[26]{0};
+    transform(sentence.begin(), sentence.end(), sentence.begin(), ::tolower);
+    int len = sentence.length();
+    for (int i = 0; i < len; i++)
+    {
+      int number = sentence[i] - 'a';
+
+      if (number >= 0 && number <= 26)
+      {
+        alpha[sentence[i] - 'a']++;
+      }
+    }
+
+    int answer = 0;
+    for (auto &ele : alpha)
+    {
+      if (ele > 0)
+      {
+        answer++;
+      }
+    }
+
+    cout << answer << "\n";
+  }
+
+  return 0;
+}
+```
+
+## 복잡도
+
+- 시간: O(T * L) (T: 문장 수, L: 문장 길이)
+- 공간: O(1)

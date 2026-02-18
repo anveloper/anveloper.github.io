@@ -1,0 +1,71 @@
+---
+title: "BOJ 2596 - 비밀편지"
+date: "2024-10-24"
+description: "6비트 코드를 문자로 변환하되 오류를 감지하는 구현 문제"
+tags: ["구현", "문자열"]
+platform: "boj"
+problem_number: "2596"
+problem_url: "https://www.acmicpc.net/problem/2596"
+difficulty: "브론즈 I"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 2596 - 비밀편지](https://www.acmicpc.net/problem/2596)
+
+> 6비트 단위로 인코딩된 문자열을 복호화한다. 각 6비트가 미리 정의된 8개 문자(A~H) 중 하나와 최대 1비트 차이일 때만 복호화 가능하고, 2비트 이상 차이나면 오류 위치를 출력한다.
+
+## 풀이
+
+8개의 6비트 패턴(A~H)을 미리 정의하고, 입력 문자열을 6비트씩 잘라 각 패턴과 비교한다. 비트 차이가 1 이하이면 해당 문자로 변환하고, 어떤 패턴과도 2비트 이상 차이나면 해당 위치를 출력한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+#include <string>
+using namespace std;
+int N;
+string s, sen[] = {"000000", "001111", "010011", "011100", "100110", "101001", "110101", "111010"};
+int cmp(string v, int i)
+{
+  int ret = 0;
+  for (int j = 0; j < 6; j++)
+  {
+    if (sen[i][j] != v[j])
+      ret++;
+  }
+  return ret;
+}
+int main()
+{
+  cin >> N >> s;
+  string ans;
+  for (int i = 0; i < N; i++)
+  {
+    string t = s.substr(i * 6, 6);
+    bool ok = 0;
+    for (int j = 0; j < 8; j++)
+    {
+      if (cmp(t, j) <= 1)
+      {
+        ok = 1;
+        ans += ('A' + j);
+        break;
+      }
+    }
+    if (!ok)
+    {
+      cout << i + 1;
+      return 0;
+    }
+  }
+  cout << ans;
+}
+```
+
+## 복잡도
+
+- 시간: O(N * 8 * 6) = O(N)
+- 공간: O(N)

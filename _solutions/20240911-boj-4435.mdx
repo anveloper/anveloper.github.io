@@ -1,0 +1,60 @@
+---
+title: "BOJ 4435 - 중간계 전쟁"
+date: "2024-09-11"
+description: "두 진영의 전투력을 계산하여 승자를 판별하는 문제"
+tags: ["수학", "구현"]
+platform: "boj"
+problem_number: "4435"
+problem_url: "https://www.acmicpc.net/problem/4435"
+difficulty: "브론즈 III"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 4435 - 중간계 전쟁](https://www.acmicpc.net/problem/4435)
+
+> 선의 진영과 악의 진영 각각의 병력 수와 전투력 가중치가 주어질 때, 총 전투력을 비교하여 승자를 출력한다.
+
+## 풀이
+
+선의 진영은 6종류, 악의 진영은 7종류의 유닛이 있으며 각각 고유한 전투력 가중치를 가진다. 유닛 수에 가중치를 곱해 합산한 뒤 두 진영의 점수를 비교하여 결과를 출력한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+using namespace std;
+int main(void)
+{
+  int t, g, s, gan[6] = {1, 2, 3, 3, 4, 10}, sa[7] = {1, 2, 2, 2, 3, 5, 10}, ganScore, saScore;
+  cin >> t;
+  for (int i = 1; i <= t; i++)
+  {
+    ganScore = saScore = 0;
+    for (int i = 0; i < 6; i++)
+    {
+      cin >> g;
+      ganScore += gan[i] * g;
+    }
+    for (int i = 0; i < 7; i++)
+    {
+      cin >> s;
+      saScore += sa[i] * s;
+    }
+
+    cout << "Battle " << i << ": ";
+    if (ganScore > saScore)
+      cout << "Good triumphs over Evil\n";
+    else if (ganScore == saScore)
+      cout << "No victor on this battle field\n";
+    else
+      cout << "Evil eradicates all trace of Good\n";
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(T)
+- 공간: O(1)

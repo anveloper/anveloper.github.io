@@ -1,0 +1,51 @@
+---
+title: "BOJ 4673 - 셀프 넘버"
+date: "2022-03-15"
+description: "수학, 구현, 브루트포스 알고리즘 문제"
+tags: ["수학", "구현", "브루트포스 알고리즘"]
+platform: "boj"
+problem_number: "4673"
+problem_url: "https://www.acmicpc.net/problem/4673"
+difficulty: "실버 V"
+language: "java"
+---
+
+## 문제
+
+[BOJ 4673 - 셀프 넘버](https://www.acmicpc.net/problem/4673)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```java
+package com.ssafy.an.day049;
+
+public class Day36BOJ4673셀프넘버함수만들기 { // 4673 셀프 넘버
+	public static void main(String[] args) {
+		boolean[] d = new boolean[10001];
+		for (int i = 1; i <= 10000; i++)
+			if (d(i) < 10001)
+				d[d(i)] = true;
+		for (int i = 1; i <= 10000; i++) 
+			if (!d[i])
+				System.out.println(i);
+	}
+
+	private static int d(int n) {
+		int sum = n;
+		while (n != 0) {
+			sum += (n % 10);
+			n /= 10;
+		}
+		return sum;
+	}
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

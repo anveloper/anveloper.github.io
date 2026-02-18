@@ -1,0 +1,60 @@
+---
+title: "BOJ 4921 - 나무 블록"
+date: "2025-07-15"
+description: "구현, 많은 조건 분기 문제"
+tags: ["구현", "많은 조건 분기"]
+platform: "boj"
+problem_number: "4921"
+problem_url: "https://www.acmicpc.net/problem/4921"
+difficulty: "실버 IV"
+language: "python"
+---
+
+## 문제
+
+[BOJ 4921 - 나무 블록](https://www.acmicpc.net/problem/4921)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```python
+import sys
+
+input = sys.stdin.readline
+d = {
+    "1": {"4", "5"},
+    "2": {},
+    "3": {"4", "5"},
+    "4": {"2", "3"},
+    "5": {"8"},
+    "6": {"2", "3"},
+    "7": {"8"},
+    "8": {"6", "7"},
+}
+
+
+def f(s):
+    if s[0] != "1" or s[-1] != "2":
+        return "NOT"
+    for i in range(0, len(s) - 1):
+        if s[i + 1] not in d[s[i]]:
+            return "NOT"
+    return "VALID"
+
+
+i = 0
+while True:
+    s = list(input().rstrip())
+    if s == ["0"]:
+        break
+    i += 1
+    print(f"{i}.", f(s))
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

@@ -1,0 +1,48 @@
+---
+title: "BOJ 2908 - 상수"
+date: "2023-08-05"
+description: "수학, 구현 문제"
+tags: ["수학", "구현"]
+platform: "boj"
+problem_number: "2908"
+problem_url: "https://www.acmicpc.net/problem/2908"
+difficulty: "브론즈 II"
+language: "java"
+---
+
+## 문제
+
+[BOJ 2908 - 상수](https://www.acmicpc.net/problem/2908)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```java
+package day549;
+
+import java.io.*;
+import java.util.*;
+
+public class Day545BOJ2908상수 {
+  public static void main(String[] args) throws Exception {
+
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+    StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+
+    int A = Integer.parseInt(new StringBuilder(st.nextToken()).reverse().toString());
+    int B = Integer.parseInt(new StringBuilder(st.nextToken()).reverse().toString());
+
+    System.out.print(A > B ? A : B);
+
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

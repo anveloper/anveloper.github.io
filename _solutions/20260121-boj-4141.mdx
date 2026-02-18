@@ -1,0 +1,55 @@
+---
+title: "BOJ 4141 - Numbersrebmun"
+date: "2026-01-21"
+description: "구현, 문자열 문제"
+tags: ["구현", "문자열"]
+platform: "boj"
+problem_number: "4141"
+problem_url: "https://www.acmicpc.net/problem/4141"
+difficulty: "브론즈 II"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 4141 - Numbersrebmun](https://www.acmicpc.net/problem/4141)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+#include <string>
+#include <vector>
+using namespace std;
+
+int main()
+{
+  ios::sync_with_stdio(0);
+  cin.tie(0);
+  cout.tie(0);
+  int t;
+  cin >> t;
+  while (t--)
+  {
+    string s, pn;
+    cin >> s;
+    int asc[26] = {2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 5, 6, 6, 6, 7, 7, 7, 7, 8, 8, 8, 9, 9, 9, 9};
+    for (char &c : s)
+    {
+      if (c >= 'a')
+        c -= ('a' - 'A');
+      pn += to_string(asc[c - 'A']);
+    }
+    cout << (pn == string(pn.rbegin(), pn.rend()) ? "YES" : "NO") << '\n';
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

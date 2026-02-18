@@ -1,0 +1,61 @@
+---
+title: "BOJ 4291 - Brownie Points I"
+date: "2026-02-18"
+description: "구현, 시뮬레이션 문제"
+tags: ["구현", "시뮬레이션"]
+platform: "boj"
+problem_number: "4291"
+problem_url: "https://www.acmicpc.net/problem/4291"
+difficulty: "브론즈 I"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 4291 - Brownie Points I](https://www.acmicpc.net/problem/4291)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```cpp
+#include<iostream>
+
+using namespace std;
+
+int x[300000], y[300000];
+
+int main() {
+  while (1) {
+    int n, i, cx, cy, cntx = 0, cnty = 0;
+
+    scanf("%d", &n);
+
+    if (n == 0) break;
+
+    for (i = 1; i <= n; i++) {
+      scanf("%d %d", &x[i], &y[i]);
+    }
+
+    cx = x[n / 2 + 1];
+    cy = y[n / 2 + 1];
+
+    for (i = 1; i <= n; i++) {
+      if (x[i] > cx && y[i] > cy) cntx++;
+      if (x[i] < cx && y[i] < cy) cntx++;
+      if (x[i] < cx && y[i] > cy) cnty++;
+      if (x[i] > cx && y[i] < cy) cnty++;
+    }
+
+    printf("%d %d\n", cntx, cnty);
+  }
+  return 0;
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

@@ -1,0 +1,74 @@
+---
+title: "BOJ 2805 - 나무 자르기"
+date: "2023-10-15"
+description: "이분 탐색, 매개 변수 탐색 문제"
+tags: ["이분 탐색", "매개 변수 탐색"]
+platform: "boj"
+problem_number: "2805"
+problem_url: "https://www.acmicpc.net/problem/2805"
+difficulty: "실버 II"
+language: "java"
+---
+
+## 문제
+
+[BOJ 2805 - 나무 자르기](https://www.acmicpc.net/problem/2805)
+
+## 풀이
+
+이분 탐색을 통해 최적의 값을 탐색한다.
+
+## 코드
+
+```java
+package day649;
+
+import java.io.*;
+import java.util.*;
+
+public class Day618BOJ2805나무자르기 {
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+
+    int N = Integer.parseInt(st.nextToken());
+    int M = Integer.parseInt(st.nextToken());
+
+    int[] tree = new int[N];
+
+    int min = 0;
+    int max = 0;
+
+    st = new StringTokenizer(br.readLine(), " ");
+    for (int i = 0; i < N; i++) {
+      tree[i] = Integer.parseInt(st.nextToken());
+      if (max < tree[i])
+        max = tree[i];
+    }
+
+    while (min < max) {
+      int mid = (min + max) / 2;
+      long sum = 0;
+      for (int treeHeight : tree) {
+        if (treeHeight - mid > 0) {
+          sum += (treeHeight - mid);
+        }
+      }
+
+      if (sum < M) {
+        max = mid;
+      }
+
+      else {
+        min = mid + 1;
+      }
+    }
+    System.out.println(min - 1);
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N log X)
+- 공간: O(N)

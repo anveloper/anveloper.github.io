@@ -1,0 +1,49 @@
+---
+title: "BOJ 1357 - 뒤집힌 덧셈"
+date: "2023-11-12"
+description: "구현, 문자열 문제"
+tags: ["구현", "문자열"]
+platform: "boj"
+problem_number: "1357"
+problem_url: "https://www.acmicpc.net/problem/1357"
+difficulty: "브론즈 II"
+language: "java"
+---
+
+## 문제
+
+[BOJ 1357 - 뒤집힌 덧셈](https://www.acmicpc.net/problem/1357)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```java
+package day649;
+
+import java.util.*;
+
+public class Day645BOJ1357뒤집힌덧셈 {
+  public static void main(String args[]) {
+    Scanner sc = new Scanner(System.in);
+    System.out.println(Rev(Rev(sc.nextInt()) + Rev(sc.nextInt())));
+    sc.close();
+  }
+
+  private static int Rev(int n) {
+    String s = "";
+    while (n > 0) {
+      s += n % 10;
+      n /= 10;
+    }
+    return Integer.parseInt(s);
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

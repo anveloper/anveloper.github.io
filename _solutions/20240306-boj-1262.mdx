@@ -1,0 +1,61 @@
+---
+title: "BOJ 1262 - 알파벳 다이아몬드"
+date: "2024-03-06"
+description: "구현 문제"
+tags: ["구현"]
+platform: "boj"
+problem_number: "1262"
+problem_url: "https://www.acmicpc.net/problem/1262"
+difficulty: "실버 I"
+language: "java"
+---
+
+## 문제
+
+[BOJ 1262 - 알파벳 다이아몬드](https://www.acmicpc.net/problem/1262)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```java
+package day799;
+
+import java.util.*;
+
+public class Day764BOJ1262알파벳다이아몬드 {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    String[] input = sc.nextLine().split(" ");
+    int N = Integer.parseInt(input[0]);
+    int R1 = Integer.parseInt(input[1]);
+    int C1 = Integer.parseInt(input[2]);
+    int R2 = Integer.parseInt(input[3]);
+    int C2 = Integer.parseInt(input[4]);
+    int length = 2 * N - 1;
+    StringBuilder sb = new StringBuilder();
+    for (int i = 0, s = R1; i < R2 - R1 + 1; i++, s++) {
+      for (int j = 0, e = C1; j < C2 - C1 + 1; j++, e++) {
+        int x = s % (length);
+        int y = e % (length);
+        int dis = Math.abs((N - 1) - x) + Math.abs((N - 1) - y);
+
+        if (dis >= N)
+          sb.append(".");
+        else
+          sb.append((char) (((dis % 26)) + 'a'));
+      }
+      sb.append("\n");
+    }
+    System.out.println(sb);
+    sc.close();
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

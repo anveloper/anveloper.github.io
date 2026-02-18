@@ -1,0 +1,54 @@
+---
+title: "BOJ 3058 - 짝수를 찾아라"
+date: "2024-08-09"
+description: "7개의 자연수에서 짝수의 합과 최솟값을 구하는 문제"
+tags: ["수학", "구현"]
+platform: "boj"
+problem_number: "3058"
+problem_url: "https://www.acmicpc.net/problem/3058"
+difficulty: "브론즈 III"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 3058 - 짝수를 찾아라](https://www.acmicpc.net/problem/3058)
+
+> 7개의 자연수 중 짝수만 골라 합과 최솟값을 구한다.
+
+## 풀이
+
+7개의 수를 입력받으며 짝수인 경우 합에 더하고, 최솟값을 갱신한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+using namespace std;
+int main()
+{
+  int n, a[7], sum, min;
+  cin >> n;
+  while (n--)
+  {
+    sum = 0;
+    min = 101;
+    for (int i = 0; i < 7; i++)
+    {
+      cin >> a[i];
+      if (a[i] % 2 == 0)
+      {
+        sum += a[i];
+        if (a[i] < min)
+          min = a[i];
+      }
+    }
+    cout << sum << ' ' << min << '\n';
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(T) (T: 테스트 케이스 수, 각 7개 고정)
+- 공간: O(1)

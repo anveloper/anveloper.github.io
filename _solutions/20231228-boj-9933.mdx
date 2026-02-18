@@ -1,0 +1,62 @@
+---
+title: "BOJ 9933 - 민균이의 비밀번호"
+date: "2023-12-28"
+description: "구현, 자료 구조, 문자열 문제"
+tags: ["구현", "자료 구조", "문자열", "집합과 맵", "해시를 사용한 집합과 맵"]
+platform: "boj"
+problem_number: "9933"
+problem_url: "https://www.acmicpc.net/problem/9933"
+difficulty: "브론즈 I"
+language: "java"
+---
+
+## 문제
+
+[BOJ 9933 - 민균이의 비밀번호](https://www.acmicpc.net/problem/9933)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```java
+package day699;
+
+import java.io.*;
+
+public class Day695BOJ9933민균비밀 {
+
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    StringBuffer sb = new StringBuffer();
+
+    int N = Integer.parseInt(br.readLine());
+    String[] arr = new String[N];
+    String password = "";
+    boolean isFind = false;
+    String tmp;
+
+    for (int i = 0; i < N && !isFind; i++) {
+      arr[i] = br.readLine();
+      sb.append(arr[i]);
+      tmp = sb.reverse().toString();
+      for (int j = 0; j <= i; j++) {
+        if (arr[i].equals(tmp) || (j != i && arr[i].equals(arr[j]))) {
+          password = arr[i];
+          isFind = true;
+          break;
+        }
+      }
+      arr[i] = tmp;
+      sb.setLength(0);
+    }
+    System.out.println(password.length() + " " + password.charAt(password.length() / 2));
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

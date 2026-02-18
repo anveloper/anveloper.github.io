@@ -1,0 +1,65 @@
+---
+title: "BOJ 1415 - 사탕"
+date: "2024-05-22"
+description: "사탕 가격의 부분합 중 소수인 경우의 수를 구하는 DP + 에라토스테네스의 체 문제"
+tags: ["수학", "DP", "정수론"]
+platform: "boj"
+problem_number: "1415"
+problem_url: "https://www.acmicpc.net/problem/1415"
+difficulty: "골드 I"
+language: "python"
+---
+
+## 문제
+
+[BOJ 1415 - 사탕](https://www.acmicpc.net/problem/1415)
+
+> N개의 사탕 중 일부를 선택하여 구매할 때, 총 가격이 소수가 되는 경우의 수를 구한다.
+
+## 풀이
+
+같은 가격의 사탕 개수를 세고, DP로 가능한 모든 부분합의 경우의 수를 구한다. 이후 에라토스테네스의 체로 소수를 판별하여, 합이 소수인 경우의 DP 값을 모두 더한다. 가격이 0인 사탕은 선택 여부가 독립적이므로 마지막에 곱해준다.
+
+## 코드
+
+```python
+N = int(input())
+candies = dict()
+total = 0
+zero = 1
+for _ in range(N):
+    price = int(input())
+    if price:
+        candies[price] = candies.get(price, 0) + 1
+        total += price
+    else:
+        zero += 1
+dp = [0] * (total + 1)
+dp[0] = 1
+M = 0
+for price, cnt in candies.items():
+    for i in range(M, -1, -1):
+        for j in range(1, cnt + 1):
+            _price = i + price * j
+            if _price > total:
+                break
+            if _price > M:
+                M = _price
+            dp[_price] += dp[i]
+P = [1] * (total + 2)
+P[0] = P[1] = 0
+for i in range(2, int(total**0.5) + 1):
+    if P[i]:
+        for j in range(i * 2, total + 1, i):
+            P[j] = 0
+res = 0
+for i in range(total + 1):
+    if P[i]:
+        res += dp[i]
+print(res * zero)
+```
+
+## 복잡도
+
+- 시간: O(N * total + total * sqrt(total))
+- 공간: O(total)

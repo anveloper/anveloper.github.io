@@ -1,0 +1,92 @@
+---
+title: "BOJ 1119 - 그래프"
+date: "2024-03-16"
+description: "자료 구조, 그래프 이론, 그래프 탐색 문제"
+tags: ["자료 구조", "그래프 이론", "그래프 탐색", "깊이 우선 탐색", "분리 집합"]
+platform: "boj"
+problem_number: "1119"
+problem_url: "https://www.acmicpc.net/problem/1119"
+difficulty: "골드 I"
+language: "java"
+---
+
+## 문제
+
+[BOJ 1119 - 그래프](https://www.acmicpc.net/problem/1119)
+
+## 풀이
+
+그래프 탐색(BFS/DFS)을 활용하여 탐색한다. 깊이 우선 탐색(DFS)을 활용하여 탐색한다.
+
+## 코드
+
+```java
+package day799;
+
+import java.io.*;
+import java.util.*;
+
+public class Day774BOJ1119그래프 {
+  static int count = 0;
+
+  public static void main(String[] args) throws Exception {
+    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+
+    int N = Integer.parseInt(bufferedReader.readLine());
+    if (N == 1) {
+      System.out.println(0);
+      System.exit(0);
+    }
+    boolean[][] visited = new boolean[N][N];
+    for (int i = 0; i < N; i++) {
+      String temp = bufferedReader.readLine();
+      int tempCount = 0;
+      for (int j = 0; j < N; j++) {
+        visited[i][j] = temp.charAt(j) == 'Y' ? false : true;
+        if (!visited[i][j]) {
+          tempCount++;
+        }
+      }
+      if (tempCount == 0) {
+        System.out.println(-1);
+        System.exit(0);
+      }
+    }
+    boolean[] nodeVisited = new boolean[N];
+    int road = 0;
+    for (int i = 0; i < N; i++) {
+      if (nodeVisited[i])
+        continue;
+      road++;
+      dfs(i, new HashSet<>(), nodeVisited, visited);
+    }
+    if (count + 1 < road) {
+      System.out.println(-1);
+    } else {
+      System.out.println(road - 1);
+    }
+  }
+
+  static void dfs(int cur, HashSet<Integer> hashSet, boolean[] nodeVisited, boolean[][] visited) {
+    nodeVisited[cur] = true;
+    if (hashSet.contains(cur)) {
+      count++;
+    } else {
+      hashSet.add(cur);
+    }
+    for (int i = 0; i < visited.length; i++) {
+      if (!visited[cur][i]) {
+
+        visited[cur][i] = true;
+        visited[i][cur] = true;
+        dfs(i, hashSet, nodeVisited, visited);
+      }
+    }
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(V + E)
+- 공간: O(V + E)

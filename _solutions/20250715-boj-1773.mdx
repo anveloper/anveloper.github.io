@@ -1,0 +1,45 @@
+---
+title: "BOJ 1773 - 폭죽쇼"
+date: "2025-07-15"
+description: "수학, 구현, 브루트포스 알고리즘 문제"
+tags: ["수학", "구현", "브루트포스 알고리즘"]
+platform: "boj"
+problem_number: "1773"
+problem_url: "https://www.acmicpc.net/problem/1773"
+difficulty: "브론즈 II"
+language: "python"
+---
+
+## 문제
+
+[BOJ 1773 - 폭죽쇼](https://www.acmicpc.net/problem/1773)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```python
+import sys
+input = sys.stdin.readline
+
+N, C = map(int, input().split())
+firework = [0] * (C + 1)
+
+for _ in range(N):
+    time = int(input())
+    if time == 1:
+        print(C)
+        exit() 
+    else:
+        for i in range(time, C + 1, time):
+            firework[i] = 1
+
+print(sum(firework))
+```
+
+## 복잡도
+
+- 시간: O(N²)
+- 공간: O(N)

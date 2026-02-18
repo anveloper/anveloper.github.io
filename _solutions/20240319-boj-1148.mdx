@@ -1,0 +1,100 @@
+---
+title: "BOJ 1148 - 단어 만들기"
+date: "2024-03-19"
+description: "구현, 문자열 문제"
+tags: ["구현", "문자열"]
+platform: "boj"
+problem_number: "1148"
+problem_url: "https://www.acmicpc.net/problem/1148"
+difficulty: "골드 V"
+language: "java"
+---
+
+## 문제
+
+[BOJ 1148 - 단어 만들기](https://www.acmicpc.net/problem/1148)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```java
+package day799;
+
+import java.io.*;
+
+public class Day777BOJ1148단어만들기 {
+
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+    int[][] TotChar = new int[200000][26];
+    int idx = 0;
+    while (true) {
+      String s = br.readLine();
+      if (s.equals("-"))
+        break;
+      for (int z = 0; z < s.length(); z++) {
+        TotChar[idx][s.charAt(z) - 'A']++;
+      }
+      idx++;
+    }
+
+    while (true) {
+      String s = br.readLine();
+      int[] ans = new int[26];
+      if (s.equals("#"))
+        break;
+
+      int[] map = new int[26];
+      for (int z = 0; z < 9; z++)
+        map[s.charAt(z) - 'A']++;
+
+      case1: for (int k = 0; k < idx; k++) {
+        for (int z = 0; z < 26; z++) {
+          if (map[z] < TotChar[k][z])
+            continue case1;
+        }
+        for (int z = 0; z < 26; z++) {
+          if (TotChar[k][z] > 0)
+            ans[z]++;
+        }
+
+      }
+
+      int min = Integer.MAX_VALUE;
+      int max = Integer.MIN_VALUE;
+      for (int i = 0; i < 26; i++) {
+        if (ans[i] != 0)
+          min = Math.min(min, ans[i]);
+        if (ans[i] == 0 && map[i] > 0)
+          min = 0;
+        max = Math.max(max, ans[i]);
+      }
+
+      StringBuffer minsb = new StringBuffer();
+      StringBuffer maxsb = new StringBuffer();
+
+      for (int i = 0; i < 26; i++) {
+        if (min != 0 && min == ans[i]) {
+          minsb.append((char) ('A' + i));
+        } else if (min == 0 && map[i] > 0 && ans[i] == 0)
+          minsb.append((char) (i + 'A'));
+
+        if (max == ans[i] && map[i] > 0) {
+          maxsb.append((char) ('A' + i));
+        }
+      }
+
+      System.out.println(minsb + " " + min + " " + maxsb + " " + max);
+    }
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

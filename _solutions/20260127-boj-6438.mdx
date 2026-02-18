@@ -1,0 +1,47 @@
+---
+title: "BOJ 6438 - Reverse Text"
+date: "2026-01-27"
+description: "구현, 문자열 문제"
+tags: ["구현", "문자열"]
+platform: "boj"
+problem_number: "6438"
+problem_url: "https://www.acmicpc.net/problem/6438"
+difficulty: "브론즈 III"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 6438 - Reverse Text](https://www.acmicpc.net/problem/6438)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+#include <algorithm>
+#include <string>
+using namespace std;
+
+int main()
+{
+  int N;
+  cin >> N;
+  cin.ignore();
+  for (int i = 0; i < N; i++)
+  {
+    string temp;
+    getline(cin, temp);
+    reverse(temp.begin(), temp.end());
+    cout << temp << "\n";
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

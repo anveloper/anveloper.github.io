@@ -1,0 +1,58 @@
+---
+title: "BOJ 1793 - 타일링"
+date: "2023-10-31"
+description: "다이나믹 프로그래밍, 임의 정밀도 / 큰 수 연산 문제"
+tags: ["다이나믹 프로그래밍", "임의 정밀도 / 큰 수 연산"]
+platform: "boj"
+problem_number: "1793"
+problem_url: "https://www.acmicpc.net/problem/1793"
+difficulty: "실버 II"
+language: "java"
+---
+
+## 문제
+
+[BOJ 1793 - 타일링](https://www.acmicpc.net/problem/1793)
+
+## 풀이
+
+다이나믹 프로그래밍을 사용하여 부분 문제의 해를 메모이제이션하며 풀이한다.
+
+## 코드
+
+```java
+package day649;
+
+import java.io.*;
+import java.math.BigInteger;
+
+public class Day634BOJ1793타일링 {
+
+  static BigInteger[] dp;
+
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    dp = new BigInteger[251];
+
+    dp[0] = new BigInteger("1");
+    dp[1] = new BigInteger("1");
+    dp[2] = new BigInteger("3");
+
+    for (int i = 3; i < 251; i++) {
+      dp[i] = dp[i - 1].add(dp[i - 2].multiply(new BigInteger("2")));
+    }
+
+    String line = null;
+    while ((line = br.readLine()) != null) {
+      int n = Integer.parseInt(line);
+      System.out.println(dp[n]);
+    }
+    br.close();
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N²)
+- 공간: O(N)

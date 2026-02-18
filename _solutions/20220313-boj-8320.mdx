@@ -1,0 +1,48 @@
+---
+title: "BOJ 8320 - 직사각형을 만드는 방법"
+date: "2022-03-13"
+description: "수학, 구현 문제"
+tags: ["수학", "구현"]
+platform: "boj"
+problem_number: "8320"
+problem_url: "https://www.acmicpc.net/problem/8320"
+difficulty: "브론즈 II"
+language: "java"
+---
+
+## 문제
+
+[BOJ 8320 - 직사각형을 만드는 방법](https://www.acmicpc.net/problem/8320)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```java
+package com.ssafy.an.day049;
+
+import java.util.Scanner;
+
+public class Day09BOJ8320직사각형 { // 8320
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int N = sc.nextInt();
+		int cnt = 0;
+		for (int i = 1; i <= N; i++) {// 입력값이 6이라면 1~6까지 가능
+			for (int j = i; j <= N; j++) {
+				if (i * j <= N)
+					cnt++;
+			}
+		}
+		System.out.println(cnt);
+		sc.close();
+	}
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

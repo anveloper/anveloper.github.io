@@ -1,0 +1,49 @@
+---
+title: "BOJ 1474 - 밑 줄"
+date: "2024-07-14"
+description: "밑줄로 단어를 연결하여 길이 M의 사전순 가장 앞선 문자열을 만드는 그리디 문제"
+tags: ["그리디", "문자열"]
+platform: "boj"
+problem_number: "1474"
+problem_url: "https://www.acmicpc.net/problem/1474"
+difficulty: "실버 I"
+language: "python"
+---
+
+## 문제
+
+[BOJ 1474 - 밑 줄](https://www.acmicpc.net/problem/1474)
+
+> N개의 단어를 밑줄(_)로 연결하여 총 길이가 M이 되도록 할 때, 사전순으로 가장 앞서는 문자열을 구한다.
+
+## 풀이
+
+총 밑줄 수를 (N-1)로 나누어 기본 밑줄 길이와 나머지를 구한다. 나머지 밑줄을 배분할 때, 다음 단어가 소문자로 시작하면 밑줄을 더 넣어야 사전순으로 앞서고(\_가 소문자보다 앞), 대문자로 시작하면 뒤로 밀어야 한다. 남은 나머지가 뒤쪽 슬롯 수와 같아지면 강제로 배분한다.
+
+## 코드
+
+```python
+import sys
+
+input = sys.stdin.readline
+n, m = map(int, input().split())
+data = [input().rstrip() for _ in range(n)]
+default_len, r = divmod(m - sum(map(len, data)), n - 1)
+result = data[0]
+
+for idx in range(1, n):
+    if data[idx][0].islower() and r != 0:
+        r -= 1
+        result += "_" * (default_len + 1) + data[idx]
+    elif idx + r == n:
+        r -= 1
+        result += "_" * (default_len + 1) + data[idx]
+    else:
+        result += "_" * default_len + data[idx]
+print(result)
+```
+
+## 복잡도
+
+- 시간: O(M)
+- 공간: O(M)

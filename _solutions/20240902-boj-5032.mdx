@@ -1,0 +1,45 @@
+---
+title: "BOJ 5032 - 탄산 음료"
+date: "2024-09-02"
+description: "빈 병을 교환하여 마실 수 있는 총 음료 수를 구하는 문제"
+tags: ["수학", "구현"]
+platform: "boj"
+problem_number: "5032"
+problem_url: "https://www.acmicpc.net/problem/5032"
+difficulty: "브론즈 II"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 5032 - 탄산 음료](https://www.acmicpc.net/problem/5032)
+
+> 발견한 빈 병 E개, 친구에게 받은 빈 병 F개, 빈 병 C개로 새 음료 1개 교환 가능할 때 총 마시는 음료 수를 구한다.
+
+## 풀이
+
+초기 빈 병 수 `E + F`에서 시작하여 빈 병이 C개 이상인 동안 반복한다. 매 반복에서 `빈 병 / C`만큼 새 음료를 마시고, 남은 빈 병은 `빈 병 / C + 빈 병 % C`로 갱신한다. 새로 마신 음료도 빈 병이 되기 때문이다.
+
+## 코드
+
+```cpp
+#include <iostream>
+using namespace std;
+int main()
+{
+  int e, f, c, total = 0;
+  cin >> e >> f >> c;
+  int empty_cola = e + f;
+  while (empty_cola >= c)
+  {
+    total += empty_cola / c;
+    empty_cola = empty_cola / c + empty_cola % c;
+  }
+  cout << total << '\n';
+}
+```
+
+## 복잡도
+
+- 시간: O(log_C(E + F))
+- 공간: O(1)

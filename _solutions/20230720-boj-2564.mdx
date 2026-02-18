@@ -1,0 +1,70 @@
+---
+title: "BOJ 2564 - 경비원"
+date: "2023-07-20"
+description: "구현, 많은 조건 분기 문제"
+tags: ["구현", "많은 조건 분기"]
+platform: "boj"
+problem_number: "2564"
+problem_url: "https://www.acmicpc.net/problem/2564"
+difficulty: "실버 I"
+language: "java"
+---
+
+## 문제
+
+[BOJ 2564 - 경비원](https://www.acmicpc.net/problem/2564)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```java
+package day549;
+
+import java.io.*;
+import java.util.*;
+
+public class Day529BOJ2564경비원 {
+
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    StringTokenizer st = new StringTokenizer(br.readLine());
+    int X = Integer.parseInt(st.nextToken());
+    int Y = Integer.parseInt(st.nextToken());
+    int N = Integer.parseInt(br.readLine());
+    int[] arr = new int[N + 1];
+    for (int i = 0; i < N + 1; i++) {
+      st = new StringTokenizer(br.readLine());
+      int tmp = Integer.parseInt(st.nextToken());
+      int d = Integer.parseInt(st.nextToken());
+      switch (tmp) {
+        case 1:
+          arr[i] = d;
+          break;
+        case 4:
+          arr[i] = X + d;
+          break;
+        case 2:
+          arr[i] = 2 * X + Y - d;
+          break;
+        case 3:
+          arr[i] = 2 * X + 2 * Y - d;
+          break;
+      }
+    }
+
+    int answer = 0;
+    for (int i = 0; i < N; i++) {
+      answer += Math.min(Math.abs(arr[N] - arr[i]), (2 * X + 2 * Y) - (Math.abs(arr[N] - arr[i])));
+    }
+    System.out.print(answer);
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

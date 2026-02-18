@@ -1,0 +1,63 @@
+---
+title: "BOJ 6359 - 만취한 상범"
+date: "2024-02-14"
+description: "수학, 구현, 정수론 문제"
+tags: ["수학", "구현", "정수론", "시뮬레이션"]
+platform: "boj"
+problem_number: "6359"
+problem_url: "https://www.acmicpc.net/problem/6359"
+difficulty: "브론즈 II"
+language: "java"
+---
+
+## 문제
+
+[BOJ 6359 - 만취한 상범](https://www.acmicpc.net/problem/6359)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```java
+package day749;
+
+import java.util.*;
+
+public class Day743BOJ6359만취상범 {
+
+  static int N;
+  static int[] d;
+
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    StringBuilder sb = new StringBuilder();
+    int t = sc.nextInt();
+    for (int tc = 1; tc <= t; tc++) {
+      N = sc.nextInt();
+      d = new int[N + 1];
+      for (int i = 1; i <= N; i++) {
+        for (int j = 1; i * j <= N; j++) {
+          if (d[i * j] != 0)
+            d[i * j] = 0;
+          else
+            d[i * j] = 1;
+        }
+      }
+      int ans = 0;
+      for (int i = 1; i <= N; i++) {
+        ans += d[i];
+      }
+      sb.append(ans + "\n");
+    }
+    System.out.println(sb);
+    sc.close();
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

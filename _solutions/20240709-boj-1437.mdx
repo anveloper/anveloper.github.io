@@ -1,0 +1,41 @@
+---
+title: "BOJ 1437 - 수 분해"
+date: "2024-07-09"
+description: "자연수를 합이 N인 양의 정수들로 분해할 때 곱의 최댓값을 구하는 그리디 문제"
+tags: ["수학", "그리디"]
+platform: "boj"
+problem_number: "1437"
+problem_url: "https://www.acmicpc.net/problem/1437"
+difficulty: "골드 IV"
+language: "python"
+---
+
+## 문제
+
+[BOJ 1437 - 수 분해](https://www.acmicpc.net/problem/1437)
+
+> 자연수 N을 여러 양의 정수의 합으로 나타낼 때, 그 수들의 곱이 최대가 되는 값을 10007로 나눈 나머지를 구한다.
+
+## 풀이
+
+수학적으로 곱을 최대화하려면 가능한 한 3으로 나누는 것이 최적이다. N을 3으로 나눈 나머지에 따라 분기한다: 나머지가 0이면 3만 사용, 나머지가 1이면 3 하나를 빼고 4를 사용, 나머지가 2이면 2 하나를 추가한다. 모듈러 거듭제곱으로 계산한다.
+
+## 코드
+
+```python
+N = int(input())
+M = 10007
+if N < 5:
+    print(N)
+elif N % 3 == 0:
+    print(pow(3, N // 3, M))
+elif N % 3 == 1:
+    print((pow(3, (N - 4) // 3, M) * 4) % M)
+else:
+    print((pow(3, (N - 2) // 3, M) * 2) % M)
+```
+
+## 복잡도
+
+- 시간: O(log N)
+- 공간: O(1)

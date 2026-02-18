@@ -1,0 +1,45 @@
+---
+title: "BOJ 1561 - 놀이 공원"
+date: "2024-05-07"
+description: "N명이 M개의 놀이기구를 탈 때 마지막 아이가 타는 놀이기구 번호"
+tags: ["이분 탐색"]
+platform: "boj"
+problem_number: "1561"
+problem_url: "https://www.acmicpc.net/problem/1561"
+difficulty: "골드 I"
+language: "javascript"
+---
+
+## 문제
+
+[BOJ 1561 - 놀이 공원](https://www.acmicpc.net/problem/1561)
+
+> N명의 아이들이 M개의 놀이기구를 탈 때, 마지막 N번째 아이가 타게 되는 놀이기구 번호를 구한다.
+
+## 풀이
+
+이분 탐색으로 N명이 모두 탑승하는 최소 시간을 구한 뒤, 해당 시간에 비어있는 놀이기구 중 마지막 아이가 타는 번호를 찾는다.
+
+## 코드
+
+```javascript
+const solution = (input) => {
+  const [N, M] = input[0].split(" ").map(Number);
+  const nums = input[1].split(" ").map(Number);
+  const check = (mid) => { let cnt = 0; for (let i = 0; i < M; i++) cnt += Math.ceil(mid / nums[i]); return cnt >= N; };
+  let left = 0, right = Math.max(...nums) * N;
+  while (left <= right) { let mid = Math.floor((left + right) / 2); if (check(mid)) right = mid - 1; else left = mid + 1; }
+  let rest = N;
+  const empty = [];
+  for (let i = 0; i < M; i++) { rest -= Math.ceil((left - 1) / nums[i]); if ((left - 1) % nums[i] === 0) empty.push(i + 1); }
+  return empty[rest - 1];
+};
+const fs = require("fs");
+const input = fs.readFileSync("/dev/stdin").toString().trim().split("\n");
+console.log(solution(input));
+```
+
+## 복잡도
+
+- 시간: O(M log(max_time x N))
+- 공간: O(M)
