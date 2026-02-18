@@ -1,0 +1,52 @@
+---
+title: "BOJ 1414 - 불우이웃돕기"
+date: "2024-05-10"
+description: "컴퓨터를 모두 연결하면서 기부할 수 있는 최대 랜선 길이"
+tags: ["그래프", "MST", "크루스칼"]
+platform: "boj"
+problem_number: "1414"
+problem_url: "https://www.acmicpc.net/problem/1414"
+difficulty: "골드 III"
+language: "javascript"
+---
+
+## 문제
+
+[BOJ 1414 - 불우이웃돕기](https://www.acmicpc.net/problem/1414)
+
+> N개의 컴퓨터를 모두 연결하는 데 필요한 최소 랜선만 남기고, 나머지를 기부할 수 있는 최대 길이를 구한다.
+
+## 풀이
+
+크루스칼 알고리즘으로 MST를 구한 뒤, 전체 랜선 합에서 MST 가중치를 뺀다.
+
+## 코드
+
+```javascript
+const solution = (input) => {
+  const N = +input[0];
+  const map = input.slice(1).map((elem) => elem.split("").map((ee) => {
+    if (ee == "0") return 0;
+    if (ee.charCodeAt(0) >= 97) return ee.charCodeAt(0) - "A".charCodeAt(0) - 31;
+    return ee.charCodeAt(0) - "A".charCodeAt(0) + 27;
+  }));
+  const nodes = [];
+  for (let i = 0; i < N; i++) for (let j = 0; j < N; j++) { if (map[i][j] === 0) continue; nodes.push([i, j, map[i][j]]); }
+  nodes.sort((a, b) => a[2] - b[2]);
+  const parents = Array.from(Array(N), (_, k) => k);
+  const find = (a) => { if (a === parents[a]) return a; return (parents[a] = find(parents[a])); };
+  const union = (a, b) => { a = find(a); b = find(b); if (a === b) return; parents[Math.max(a, b)] = Math.min(a, b); };
+  let ans = 0, cnt = 0;
+  for (const [s, e, w] of nodes) { if (find(s) === find(e)) continue; union(s, e); cnt++; ans += w; }
+  for (const parent of parents) find(parent);
+  return cnt !== N - 1 ? -1 : map.flat().reduce((pv, cv) => pv + cv, 0) - ans;
+};
+const fs = require("fs");
+const input = fs.readFileSync("/dev/stdin").toString().trim().split("\n");
+console.log(solution(input));
+```
+
+## 복잡도
+
+- 시간: O(N² log N²)
+- 공간: O(N²)

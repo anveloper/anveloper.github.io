@@ -1,0 +1,52 @@
+---
+title: "BOJ 1405 - 미친 로봇"
+date: "2024-04-29"
+description: "로봇이 N번 이동할 때 경로가 단순할 확률"
+tags: ["DFS", "백트래킹", "확률"]
+platform: "boj"
+problem_number: "1405"
+problem_url: "https://www.acmicpc.net/problem/1405"
+difficulty: "골드 IV"
+language: "javascript"
+---
+
+## 문제
+
+[BOJ 1405 - 미친 로봇](https://www.acmicpc.net/problem/1405)
+
+> 로봇이 N번 이동할 때 같은 칸을 두 번 방문하지 않는 단순 경로의 확률을 구한다.
+
+## 풀이
+
+DFS로 4방향 이동을 탐색하며, 방문한 칸을 재방문하지 않는 경로의 확률을 누적한다.
+
+## 코드
+
+```javascript
+const solution = (input) => {
+  const [N, ...rest] = input[0].split(" ").map(Number);
+  const dirPercentage = rest.map((dir) => Number(dir) * 0.01);
+  const visited = [];
+  for (let i = 0; i < 30; i++) visited.push(new Array(30).fill(false));
+  const dx = [0, 0, 1, -1], dy = [1, -1, 0, 0];
+  let res = 0, num = N;
+  const dfs = (x, y, chance) => {
+    if (num === 0) { res += chance; return; }
+    visited[x][y] = true;
+    for (let i = 0; i < 4; i++) {
+      const nx = dx[i] + x, ny = dy[i] + y;
+      if (!visited[nx][ny]) { num -= 1; dfs(nx, ny, chance * dirPercentage[i]); num += 1; visited[nx][ny] = false; }
+    }
+  };
+  dfs(15, 15, 1.0);
+  return res.toPrecision(10);
+};
+const fs = require("fs");
+const input = fs.readFileSync("/dev/stdin").toString().trim().split("\n");
+console.log(solution(input));
+```
+
+## 복잡도
+
+- 시간: O(4^N)
+- 공간: O(N²)

@@ -1,0 +1,44 @@
+---
+title: "BOJ 1614 - 영식이의 손가락"
+date: "2024-05-09"
+description: "손가락 번호와 접은 횟수로 총 카운트를 계산"
+tags: ["수학", "구현"]
+platform: "boj"
+problem_number: "1614"
+problem_url: "https://www.acmicpc.net/problem/1614"
+difficulty: "실버 III"
+language: "javascript"
+---
+
+## 문제
+
+[BOJ 1614 - 영식이의 손가락](https://www.acmicpc.net/problem/1614)
+
+> 손가락 번호와 해당 손가락을 접은 횟수가 주어질 때, 몇까지 세었는지 구한다.
+
+## 풀이
+
+각 손가락별로 접히는 주기(엄지/새끼=8, 중지=4, 검지/약지는 홀짝에 따라 다름)를 이용하여 계산한다.
+
+## 코드
+
+```javascript
+const solution = (input) => {
+  let [a, b] = input.map(Number);
+  let res = a - 1;
+  if (a == 1) res += b * 8;
+  else if (a == 2) { if (b % 2 == 0) res += parseInt(b / 2) * 8; else res += parseInt(b / 2) * 8 + 6; }
+  else if (a == 3) res += parseInt(b * 4);
+  else if (a == 4) { if (b % 2 == 0) res += parseInt((b / 2) * 8); else res += parseInt(b / 2) * 8 + 2; }
+  else if (a == 5) res += b * 8;
+  return res;
+};
+const fs = require("fs");
+const input = fs.readFileSync("/dev/stdin").toString().trim().split("\n");
+console.log(solution(input));
+```
+
+## 복잡도
+
+- 시간: O(1)
+- 공간: O(1)

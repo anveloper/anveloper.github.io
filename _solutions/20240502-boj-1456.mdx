@@ -1,0 +1,44 @@
+---
+title: "BOJ 1456 - 거의 소수"
+date: "2024-05-02"
+description: "[A, B] 범위에서 소수의 거듭제곱인 수의 개수"
+tags: ["수학", "소수", "에라토스테네스"]
+platform: "boj"
+problem_number: "1456"
+problem_url: "https://www.acmicpc.net/problem/1456"
+difficulty: "골드 V"
+language: "javascript"
+---
+
+## 문제
+
+[BOJ 1456 - 거의 소수](https://www.acmicpc.net/problem/1456)
+
+> [A, B] 범위에서 소수의 N제곱(N >= 2) 꼴인 수의 개수를 구한다.
+
+## 풀이
+
+에라토스테네스의 체로 소수를 구한 뒤, 각 소수의 거듭제곱이 범위 내에 있는지 확인한다.
+
+## 코드
+
+```javascript
+const solution = (input) => {
+  const [l, r] = input[0].split(" ").map(Number);
+  const max = parseInt(Math.sqrt(r));
+  const arr = Array(max + 1).fill(0);
+  const primes = [];
+  let ans = 0;
+  for (let i = 2; i <= max; i++) { if (arr[i]) continue; primes.push(i); for (let j = 0; j + i <= max; j += i) arr[i + j] = 1; }
+  for (let i = 0; i < primes.length; i++) { let m = primes[i] * primes[i]; while (m <= r) { if (m >= l) ans++; m *= primes[i]; } }
+  return ans;
+};
+const fs = require("fs");
+const input = fs.readFileSync("/dev/stdin").toString().trim().split("\n");
+console.log(solution(input));
+```
+
+## 복잡도
+
+- 시간: O(sqrt(R) log log sqrt(R) + pi(sqrt(R)) log R)
+- 공간: O(sqrt(R))

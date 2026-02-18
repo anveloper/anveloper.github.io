@@ -1,0 +1,61 @@
+---
+title: "BOJ 1230 - 문자열 거리"
+date: "2024-04-03"
+description: "문자열 A를 B의 부분 수열로 만들기 위해 B에서 제거할 최소 부분 문자열 수"
+tags: ["DP", "문자열"]
+platform: "boj"
+problem_number: "1230"
+problem_url: "https://www.acmicpc.net/problem/1230"
+difficulty: "골드 I"
+language: "javascript"
+---
+
+## 문제
+
+[BOJ 1230 - 문자열 거리](https://www.acmicpc.net/problem/1230)
+
+> 문자열 B에서 연속 부분 문자열을 최소 횟수로 제거하여 A와 같은 부분 수열을 만드는 문제.
+
+## 풀이
+
+2차원 DP를 사용한다. dp[i][j]는 A의 i번째까지 매칭하면서 B의 j번째까지 처리했을 때의 상태로, [매칭 중, 삭제 중] 두 가지 상태를 관리한다. 문자가 일치하면 매칭을 이어가고, 불일치 시 삭제 카운트를 증가시킨다.
+
+## 코드
+
+```javascript
+const solution = ([a, b]) => {
+  const na = a.replace(" ", "").length;
+  const nb = b.replace(" ", "").length;
+  const INF = 1_000;
+
+  if (na > nb) return -1;
+
+  const dp = Array.from(Array(na + 1), () =>
+    Array.from(Array(nb + 1), () => [0, 0])
+  );
+
+  dp[0][0] = [0, INF];
+  for (let i = 1; i <= nb; i++) dp[0][i] = [INF, 1];
+
+  for (let i = 0; i < na; i++) {
+    for (let j = 0; j <= i; j++) dp[i + 1][j] = [INF, INF];
+    for (let j = i; j < nb; j++)
+      dp[i + 1][j + 1] = [
+        a[i] === b[j] ? Math.min(dp[i][j][0], dp[i][j][1]) : INF,
+        Math.min(dp[i + 1][j][0] + 1, dp[i + 1][j][1]),
+      ];
+  }
+
+  const result = Math.min(dp[na][nb][0], dp[na][nb][1]);
+  return result >= INF ? -1 : result;
+};
+
+const fs = require("fs");
+const input = fs.readFileSync("/dev/stdin").toString().trim().split("\n");
+console.log(solution(input));
+```
+
+## 복잡도
+
+- 시간: O(N × M) — N, M은 각 문자열 길이
+- 공간: O(N × M)

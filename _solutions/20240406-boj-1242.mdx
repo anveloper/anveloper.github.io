@@ -1,0 +1,47 @@
+---
+title: "BOJ 1242 - 소풍"
+date: "2024-04-06"
+description: "요세푸스 문제에서 특정 사람이 제거되는 순서를 구하는 문제"
+tags: ["수학"]
+platform: "boj"
+problem_number: "1242"
+problem_url: "https://www.acmicpc.net/problem/1242"
+difficulty: "골드 II"
+language: "javascript"
+---
+
+## 문제
+
+[BOJ 1242 - 소풍](https://www.acmicpc.net/problem/1242)
+
+> N명이 원형으로 앉아 K번째 사람을 제거하는 요세푸스 문제에서, M번 사람이 몇 번째로 제거되는지 구한다.
+
+## 풀이
+
+매 라운드마다 K번째 사람을 직접 시뮬레이션하되, M의 상대적 위치를 추적한다. 남은 인원이 K보다 크면 K번째를, 아니면 모듈러 연산으로 제거 대상을 결정한다. M과 일치하면 종료한다.
+
+## 코드
+
+```javascript
+const solution = ([input]) => {
+  let [N, K, M, ans = 0, cnt = N] = input.split(" ").map(Number);
+
+  while (++ans <= N) {
+    const idx = cnt > K ? K : ((K - 1) % cnt) + 1;
+    if (cnt == 1 || M === idx) break;
+    else if (M > idx) M -= idx;
+    else M += cnt - idx;
+    cnt--;
+  }
+  return ans;
+};
+
+const fs = require("fs");
+const input = fs.readFileSync("/dev/stdin").toString().trim().split("\n");
+console.log(solution(input));
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(1)

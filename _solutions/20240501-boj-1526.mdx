@@ -1,0 +1,42 @@
+---
+title: "BOJ 1526 - 가장 큰 금민수"
+date: "2024-05-01"
+description: "N 이하에서 4와 7로만 이루어진 가장 큰 수"
+tags: ["브루트포스", "재귀"]
+platform: "boj"
+problem_number: "1526"
+problem_url: "https://www.acmicpc.net/problem/1526"
+difficulty: "브론즈 I"
+language: "javascript"
+---
+
+## 문제
+
+[BOJ 1526 - 가장 큰 금민수](https://www.acmicpc.net/problem/1526)
+
+> N 이하의 수 중에서 4와 7로만 이루어진 가장 큰 수를 찾는다.
+
+## 풀이
+
+4와 7만 사용하여 가능한 모든 수를 재귀적으로 생성한 뒤 N 이하인 최대값을 찾는다.
+
+## 코드
+
+```javascript
+const solution = (input) => {
+  const N = input[0];
+  const arr = [];
+  const recur = (n) => { arr.push(n); if (n.length > N.length) return; recur(n + "4"); recur(n + "7"); };
+  recur("4"); recur("7");
+  const sorted = arr.map(Number).sort((a, b) => b - a);
+  for (let i = 0; i < sorted.length; i++) { if (+N >= sorted[i]) return sorted[i]; }
+};
+const fs = require("fs");
+const input = fs.readFileSync("/dev/stdin").toString().trim().split("\n");
+console.log(solution(input));
+```
+
+## 복잡도
+
+- 시간: O(2^D) where D is digit count
+- 공간: O(2^D)

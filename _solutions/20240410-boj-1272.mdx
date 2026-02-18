@@ -1,0 +1,62 @@
+---
+title: "BOJ 1272 - 특별 노드"
+date: "2024-04-10"
+description: "트리에서 특정 노드를 특별 노드로 지정하여 가중치 합을 최소화하는 문제"
+tags: ["DP", "트리"]
+platform: "boj"
+problem_number: "1272"
+problem_url: "https://www.acmicpc.net/problem/1272"
+difficulty: "골드 II"
+language: "javascript"
+---
+
+## 문제
+
+[BOJ 1272 - 특별 노드](https://www.acmicpc.net/problem/1272)
+
+> N개의 노드로 이루어진 트리에서 일부 노드를 특별 노드로 지정할 때, 특별 노드 간 거리 합을 최소화하는 문제이다.
+
+## 풀이
+
+트리 DP로 각 노드에서 특별 노드를 선택/비선택하는 두 상태를 관리하며, DFS로 최적값을 계산한다.
+
+## 코드
+
+```javascript
+const solution = (input) => {
+  const N = +input[0];
+  if (N <= 1) return 0;
+
+  const adj = Array.from({ length: N + 1 }, () => []);
+  for (let i = 1; i < N; i++) {
+    const [u, v, w] = input[i].trim().split(" ").map(Number);
+    adj[u].push([v, w]);
+    adj[v].push([u, w]);
+  }
+
+  const dp = Array.from({ length: N + 1 }, () => [0, 0]);
+  const visited = Array(N + 1).fill(false);
+
+  const dfs = (cur) => {
+    visited[cur] = true;
+    for (const [next, weight] of adj[cur]) {
+      if (visited[next]) continue;
+      dfs(next);
+      dp[cur][0] += Math.min(dp[next][0], dp[next][1] + weight);
+      dp[cur][1] += Math.min(dp[next][1] + weight, dp[next][0]);
+    }
+  };
+
+  dfs(1);
+  return Math.min(dp[1][0], dp[1][1]);
+};
+
+const fs = require("fs");
+const input = fs.readFileSync("/dev/stdin").toString().trim().split("\n");
+console.log(solution(input));
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

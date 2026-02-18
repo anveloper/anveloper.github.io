@@ -1,0 +1,64 @@
+---
+title: "BOJ 1276 - PLATFORME"
+date: "2024-04-11"
+description: "플랫폼 양쪽 끝에서 아래 플랫폼까지의 기둥 높이 합을 구하는 문제"
+tags: ["구현", "정렬"]
+platform: "boj"
+problem_number: "1276"
+problem_url: "https://www.acmicpc.net/problem/1276"
+difficulty: "실버 I"
+language: "javascript"
+---
+
+## 문제
+
+[BOJ 1276 - PLATFORME](https://www.acmicpc.net/problem/1276)
+
+> 여러 플랫폼이 주어질 때, 각 플랫폼 양쪽 끝에서 바닥 또는 아래 플랫폼까지 필요한 기둥 높이의 총합을 구한다.
+
+## 풀이
+
+높이 순으로 정렬 후, 각 플랫폼의 양쪽 끝에서 아래로 가장 가까운 플랫폼을 찾아 높이 차를 누적한다. 아래에 플랫폼이 없으면 바닥(높이 0)까지의 거리를 더한다.
+
+## 코드
+
+```javascript
+const solution = (input) => {
+  const N = +input[0];
+  const platforms = [];
+  for (let i = 1; i <= N; i++) {
+    const [y, x1, x2] = input[i].trim().split(" ").map(Number);
+    platforms.push([y, x1, x2]);
+  }
+
+  platforms.sort((a, b) => a[0] - b[0]);
+
+  let result = 0;
+
+  for (let i = 0; i < N; i++) {
+    const [h, left, right] = platforms[i];
+
+    let leftSupport = 0;
+    let rightSupport = 0;
+
+    for (let j = i - 1; j >= 0; j--) {
+      const [h2, l2, r2] = platforms[j];
+      if (l2 < left && left < r2 && h2 > leftSupport) leftSupport = h2;
+      if (l2 < right && right < r2 && h2 > rightSupport) rightSupport = h2;
+    }
+
+    result += (h - leftSupport) + (h - rightSupport);
+  }
+
+  return result;
+};
+
+const fs = require("fs");
+const input = fs.readFileSync("/dev/stdin").toString().trim().split("\n");
+console.log(solution(input));
+```
+
+## 복잡도
+
+- 시간: O(N²)
+- 공간: O(N)

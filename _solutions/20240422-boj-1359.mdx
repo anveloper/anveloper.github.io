@@ -1,0 +1,42 @@
+---
+title: "BOJ 1359 - 복권"
+date: "2024-04-22"
+description: "N개 중 M개를 선택할 때 K개 이상 일치할 확률"
+tags: ["수학", "조합론", "확률"]
+platform: "boj"
+problem_number: "1359"
+problem_url: "https://www.acmicpc.net/problem/1359"
+difficulty: "실버 IV"
+language: "javascript"
+---
+
+## 문제
+
+[BOJ 1359 - 복권](https://www.acmicpc.net/problem/1359)
+
+> N개의 숫자 중 M개를 선택할 때, 당첨 번호와 K개 이상 일치할 확률을 구한다.
+
+## 풀이
+
+조합론으로 당첨 번호 M개 중 i개 일치하는 경우의 수를 K부터 M까지 합산하여 전체 경우의 수로 나눈다.
+
+## 코드
+
+```javascript
+const solution = (input) => {
+  const [N, M, K] = input[0].split(" ").map(Number);
+  const factorial = (n) => { if (n === 0) return 1; return n * factorial(n - 1); };
+  const comb = (n, m) => { if (n < m) return 0; return factorial(n) / (factorial(m) * factorial(n - m)); };
+  let tmp = 0;
+  for (let i = K; i <= M; i++) { tmp += comb(M, i) * comb(N - M, M - i); }
+  return tmp / comb(N, M);
+};
+const fs = require("fs");
+const input = fs.readFileSync("/dev/stdin").toString().trim().split("\n");
+console.log(solution(input));
+```
+
+## 복잡도
+
+- 시간: O(M)
+- 공간: O(1)

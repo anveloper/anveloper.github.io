@@ -1,0 +1,65 @@
+---
+title: "BOJ 1291 - 이면수와 임현수"
+date: "2024-04-15"
+description: "주어진 수가 이면수, 임현수 조건을 만족하는지 판별하는 문제"
+tags: ["수학", "구현", "정수론"]
+platform: "boj"
+problem_number: "1291"
+problem_url: "https://www.acmicpc.net/problem/1291"
+difficulty: "실버 III"
+language: "javascript"
+---
+
+## 문제
+
+[BOJ 1291 - 이면수와 임현수](https://www.acmicpc.net/problem/1291)
+
+> 주어진 수가 이면수(자릿수 합 관련 조건)와 임현수(소인수 개수 관련 조건)를 만족하는지 판별하여 4가지 경우로 분류한다.
+
+## 풀이
+
+이면수(자릿수 합이 홀수이고 특정 조건)와 임현수(소인수 개수가 짝수) 조건을 각각 판별하여 4가지 경우로 분류한다.
+
+## 코드
+
+```javascript
+const solution = (input) => {
+  const N = +input[0];
+
+  const isImyeon = (n) => {
+    const digits = String(n).split("").map(Number);
+    const sum = digits.reduce((a, b) => a + b, 0);
+    return sum % 2 === 1;
+  };
+
+  const isImhyeon = (n) => {
+    let cnt = 0;
+    let temp = n;
+    for (let i = 2; i * i <= temp; i++) {
+      while (temp % i === 0) {
+        cnt++;
+        temp = Math.floor(temp / i);
+      }
+    }
+    if (temp > 1) cnt++;
+    return cnt % 2 === 0 && cnt > 0;
+  };
+
+  const a = isImyeon(N);
+  const b = isImhyeon(N);
+
+  if (a && b) return 3;
+  if (a) return 1;
+  if (b) return 2;
+  return 4;
+};
+
+const fs = require("fs");
+const input = fs.readFileSync("/dev/stdin").toString().trim().split("\n");
+console.log(solution(input));
+```
+
+## 복잡도
+
+- 시간: O(sqrt(N))
+- 공간: O(1)
