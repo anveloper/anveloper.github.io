@@ -1,0 +1,55 @@
+---
+title: "BOJ 6778 - Which Alien?"
+date: "2025-11-13"
+description: "구현 문제"
+tags: ["구현"]
+platform: "boj"
+problem_number: "6778"
+problem_url: "https://www.acmicpc.net/problem/6778"
+difficulty: "브론즈 IV"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 6778 - Which Alien?](https://www.acmicpc.net/problem/6778)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+  ios::sync_with_stdio(false);
+  cin.tie(NULL);
+  cout.tie(NULL);
+
+  int a, e;
+  cin >> a >> e;
+
+  if (a >= 3 && e <= 4)
+  {
+    cout << "TroyMartian" << endl;
+  }
+  if (a <= 6 && e >= 2)
+  {
+    cout << "VladSaturnian" << endl;
+  }
+  if (a <= 2 && e <= 3)
+  {
+    cout << "GraemeMercurian" << endl;
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

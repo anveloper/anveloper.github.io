@@ -1,0 +1,51 @@
+---
+title: "BOJ 3061 - 사다리"
+date: "2025-10-11"
+description: "그리디 알고리즘, 정렬 문제"
+tags: ["그리디 알고리즘", "정렬"]
+platform: "boj"
+problem_number: "3061"
+problem_url: "https://www.acmicpc.net/problem/3061"
+difficulty: "실버 II"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 3061 - 사다리](https://www.acmicpc.net/problem/3061)
+
+## 풀이
+
+그리디 알고리즘으로 매 단계 최선의 선택을 한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+  int a, b, c[1010], s, i, j;
+  scanf("%d", &a);
+  for (; a--;)
+  {
+    scanf("%d", &b);
+    s = 0;
+    for (i = 0; i < b; i++)
+      scanf("%d", &c[i]);
+    for (i = 0; i < b; i++)
+      for (j = 0; j < i; j++)
+        if (c[i] < c[j])
+          s++;
+    printf("%d\n", s);
+  }
+  return 0;
+}
+```
+
+## 복잡도
+
+- 시간: O(N log N)
+- 공간: O(N)

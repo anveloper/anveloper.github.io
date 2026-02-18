@@ -1,0 +1,53 @@
+---
+title: "BOJ 5163 - Isn’t It Funny How a Bear Likes Honey?"
+date: "2025-12-04"
+description: "수학, 구현, 사칙연산 문제"
+tags: ["수학", "구현", "사칙연산"]
+platform: "boj"
+problem_number: "5163"
+problem_url: "https://www.acmicpc.net/problem/5163"
+difficulty: "브론즈 III"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 5163 - Isn’t It Funny How a Bear Likes Honey?](https://www.acmicpc.net/problem/5163)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+
+const double PI = 3.1415926535897932384;
+
+using namespace std;
+
+int main()
+{
+  int r, bols;
+  cin >> r;
+  double weight, t;
+  for (int i = 1; i <= r; i++)
+  {
+    cin >> bols >> weight;
+    while (bols-- > 0)
+    {
+      cin >> t;
+      weight -= ((t * t * t * 4) / 3 * PI) / 1000;
+    }
+
+    cout << "Data Set " << i << ":\n"
+         << (weight >= 0.0 ? "No" : "Yes") << "\n\n";
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

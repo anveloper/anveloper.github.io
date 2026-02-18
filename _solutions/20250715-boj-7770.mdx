@@ -1,0 +1,52 @@
+---
+title: "BOJ 7770 - 아즈텍 피라미드"
+date: "2025-07-15"
+description: "수학 문제"
+tags: ["수학"]
+platform: "boj"
+problem_number: "7770"
+problem_url: "https://www.acmicpc.net/problem/7770"
+difficulty: "브론즈 II"
+language: "python"
+---
+
+## 문제
+
+[BOJ 7770 - 아즈텍 피라미드](https://www.acmicpc.net/problem/7770)
+
+## 풀이
+
+수학적 성질을 이용하여 풀이한다.
+
+## 코드
+
+```python
+import sys
+
+
+def max_height(n: int) -> int:
+    lo, hi = 0, int((1.5 * n) ** (1 / 3)) + 3
+    while 2 * hi**3 + hi <= 3 * n:
+        hi *= 2
+    while lo + 1 < hi:
+        mid = (lo + hi) // 2
+        if 2 * mid**3 + mid <= 3 * n:
+            lo = mid
+        else:
+            hi = mid
+    return lo
+
+
+def main():
+    n = int(sys.stdin.readline().strip())
+    print(max_height(n))
+
+
+if __name__ == "__main__":
+    main()
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

@@ -1,0 +1,81 @@
+---
+title: "BOJ 5600 - 품질검사"
+date: "2025-09-18"
+description: "구현, 애드 혹 문제"
+tags: ["구현", "애드 혹"]
+platform: "boj"
+problem_number: "5600"
+problem_url: "https://www.acmicpc.net/problem/5600"
+difficulty: "실버 II"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 5600 - 품질검사](https://www.acmicpc.net/problem/5600)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <tuple>
+
+using namespace std;
+
+int main()
+{
+  ios::sync_with_stdio(0);
+  cin.tie(0);
+
+  int n, dt[301] = {
+             0,
+         },
+         q, w, e;
+  cin >> q >> w >> e >> n;
+  vector<tuple<int, int, int>> v;
+  vector<int> result(q + w + e + 1, 2);
+  for (int i = 0; i < n; i++)
+  {
+    int a, b, c, res;
+    cin >> a >> b >> c >> res;
+    if (res == 1)
+    {
+      dt[a] = 1, dt[b] = 1, dt[c] = 1;
+      result[a] = 1, result[b] = 1, result[c] = 1;
+    }
+    else
+    {
+      v.emplace_back(a, b, c);
+    }
+  }
+  for (int i = 0; i < v.size(); i++)
+  {
+    int a = get<0>(v[i]), b = get<1>(v[i]), c = get<2>(v[i]);
+    if (dt[a] == 1 && dt[c] == 1 && dt[b] != 1)
+    {
+      result[b] = 0;
+    }
+    else if (dt[a] != 1 && dt[c] == 1 && dt[b] == 1)
+    {
+      result[a] = 0;
+    }
+    else if (dt[a] == 1 && dt[c] != 1 && dt[b] == 1)
+    {
+      result[c] = 0;
+    }
+  }
+  for (int i = 1; i < result.size(); i++)
+    cout << result[i] << '\n';
+  return 0;
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

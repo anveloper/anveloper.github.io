@@ -1,0 +1,70 @@
+---
+title: "BOJ 4454 - 상근이의 여자친구"
+date: "2025-10-16"
+description: "이분 탐색, 매개 변수 탐색 문제"
+tags: ["이분 탐색", "매개 변수 탐색"]
+platform: "boj"
+problem_number: "4454"
+problem_url: "https://www.acmicpc.net/problem/4454"
+difficulty: "실버 I"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 4454 - 상근이의 여자친구](https://www.acmicpc.net/problem/4454)
+
+## 풀이
+
+이분 탐색을 통해 최적의 값을 탐색한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+#include <cmath>
+typedef long double lld;
+using namespace std;
+
+lld calc(lld a, lld b, lld c, lld d, lld m, lld v)
+{
+  return m * (a * v * v * v + b * v * v + c * v + d);
+}
+
+int main()
+{
+  ios::sync_with_stdio(0);
+  cin.tie(0);
+  cout << fixed;
+  cout.precision(2);
+
+  lld a, b, c, d, m, t;
+  while (cin >> a >> b >> c >> d >> m >> t)
+  {
+    lld start = 0;
+    lld end = 1e8;
+    lld mid = 0;
+    while (end > start + 0.00001)
+    {
+      mid = (start + end) / 2;
+      if (t >= calc(a, b, c, d, m, mid))
+      {
+        start = mid;
+      }
+      else
+      {
+        end = mid;
+      }
+    }
+    lld answer = trunc(start * 100) / 100;
+    cout << answer << '\n';
+  }
+
+  return 0;
+}
+```
+
+## 복잡도
+
+- 시간: O(N log N)
+- 공간: O(N)

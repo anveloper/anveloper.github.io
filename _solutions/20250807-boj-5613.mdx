@@ -1,0 +1,74 @@
+---
+title: "BOJ 5613 - 계산기 프로그램"
+date: "2025-08-07"
+description: "수학, 구현, 사칙연산 문제"
+tags: ["수학", "구현", "사칙연산"]
+platform: "boj"
+problem_number: "5613"
+problem_url: "https://www.acmicpc.net/problem/5613"
+difficulty: "브론즈 III"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 5613 - 계산기 프로그램](https://www.acmicpc.net/problem/5613)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int main()
+{
+  ios::sync_with_stdio(false);
+  cin.tie(NULL);
+
+  int a;
+  cin >> a;
+
+  while (true)
+  {
+    char op;
+    cin >> op;
+
+    if (op == '=')
+    {
+      break;
+    }
+
+    int b;
+    cin >> b;
+
+    if (op == '+')
+    {
+      a = a + b;
+    }
+    else if (op == '-')
+    {
+      a = a - b;
+    }
+    else if (op == '*')
+    {
+      a = a * b;
+    }
+    else if (op == '/')
+    {
+      a = a / b;
+    }
+  }
+
+  cout << a;
+  return 0;
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

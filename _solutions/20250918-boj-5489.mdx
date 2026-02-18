@@ -1,0 +1,71 @@
+---
+title: "BOJ 5489 - Numbers"
+date: "2025-09-18"
+description: "구현 문제"
+tags: ["구현"]
+platform: "boj"
+problem_number: "5489"
+problem_url: "https://www.acmicpc.net/problem/5489"
+difficulty: "브론즈 II"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 5489 - Numbers](https://www.acmicpc.net/problem/5489)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+#include <map>
+using namespace std;
+
+int main()
+{
+  ios::sync_with_stdio(false);
+  cin.tie(nullptr);
+
+  int N;
+  cin >> N;
+
+  map<int, int> freq;
+  for (int i = 0; i < N; i++)
+  {
+    int x;
+    cin >> x;
+    freq[x]++;
+  }
+
+  int maxCount = 0;
+  int answer = 10001;
+
+  for (auto &p : freq)
+  {
+    int number = p.first;
+    int count = p.second;
+
+    if (count > maxCount)
+    {
+      maxCount = count;
+      answer = number;
+    }
+    else if (count == maxCount && number < answer)
+    {
+      answer = number;
+    }
+  }
+
+  cout << answer << "\n";
+  return 0;
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

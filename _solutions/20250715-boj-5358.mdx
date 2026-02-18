@@ -1,0 +1,43 @@
+---
+title: "BOJ 5358 - Football Team"
+date: "2025-07-15"
+description: "구현, 문자열 문제"
+tags: ["구현", "문자열"]
+platform: "boj"
+problem_number: "5358"
+problem_url: "https://www.acmicpc.net/problem/5358"
+difficulty: "브론즈 IV"
+language: "python"
+---
+
+## 문제
+
+[BOJ 5358 - Football Team](https://www.acmicpc.net/problem/5358)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```python
+import sys
+
+for line in sys.stdin:
+    line = line.rstrip()
+
+    line = line.replace("i", "#")
+    line = line.replace("e", "i")
+    line = line.replace("#", "e")
+
+    line = line.replace("I", "#")
+    line = line.replace("E", "I")
+    line = line.replace("#", "E")
+
+    print(line)
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

@@ -1,0 +1,52 @@
+---
+title: "BOJ 4287 - Word Ratios"
+date: "2026-02-17"
+description: "수학, 구현, 문자열 문제"
+tags: ["수학", "구현", "문자열", "사칙연산"]
+platform: "boj"
+problem_number: "4287"
+problem_url: "https://www.acmicpc.net/problem/4287"
+difficulty: "브론즈 II"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 4287 - Word Ratios](https://www.acmicpc.net/problem/4287)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int main(void) {
+  cin.tie(0);
+  ios::sync_with_stdio(0);
+
+  while (1) {
+    string a, b, c; cin >> a; if (a == "#") break; cin >> b >> c;
+    int n = a.size();
+
+    cout << a << ' ' << b << ' ' << c << ' ';
+    for (int i = 0; i < n; i++) {
+      int x = (c[i] - 'a');
+      x = (x + (b[i] - 'a') - (a[i] - 'a') + 26) % 26;
+      cout << (char)(x + 'a');
+    }
+    cout << '\n';
+  }
+  return 0;
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

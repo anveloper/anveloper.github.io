@@ -1,0 +1,76 @@
+---
+title: "BOJ 2139 - 나는 너가 살아온 날을 알고 있다"
+date: "2025-09-07"
+description: "수학, 구현, 사칙연산 문제"
+tags: ["수학", "구현", "사칙연산"]
+platform: "boj"
+problem_number: "2139"
+problem_url: "https://www.acmicpc.net/problem/2139"
+difficulty: "브론즈 II"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 2139 - 나는 너가 살아온 날을 알고 있다](https://www.acmicpc.net/problem/2139)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+#include <algorithm>
+#include <cstring>
+#include <string>
+using namespace std;
+
+int main(int argc, char *argv[])
+{
+  int day, month, year;
+  int specialYear;
+  int totalDay;
+  int mArr[12] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30};
+
+  while (1)
+  {
+    cin >> day;
+    cin >> month;
+    cin >> year;
+
+    if (day == 0 && month == 0 && year == 0)
+    {
+      break;
+    }
+
+    specialYear = 0;
+    if (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0))
+    {
+      specialYear = 1;
+    }
+
+    totalDay = 0;
+    if (specialYear == 1 && month > 2)
+    {
+      ++totalDay;
+    }
+
+    for (int i = 0; i < month; ++i)
+    {
+      totalDay += mArr[i];
+    }
+
+    totalDay += day;
+
+    cout << totalDay << endl;
+  }
+  return 0;
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

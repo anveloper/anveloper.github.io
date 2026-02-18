@@ -1,0 +1,58 @@
+---
+title: "BOJ 4821 - 페이지 세기"
+date: "2025-07-15"
+description: "구현, 문자열, 파싱 문제"
+tags: ["구현", "문자열", "파싱"]
+platform: "boj"
+problem_number: "4821"
+problem_url: "https://www.acmicpc.net/problem/4821"
+difficulty: "실버 IV"
+language: "python"
+---
+
+## 문제
+
+[BOJ 4821 - 페이지 세기](https://www.acmicpc.net/problem/4821)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```python
+import sys
+
+while True:
+    total_page = int(sys.stdin.readline())
+
+    if total_page == 0:
+        break
+
+    print_page_count = [0] * (total_page + 1)
+    print_range_list = sys.stdin.readline().rstrip().split(",")
+
+    for print_range in print_range_list:
+
+        if "-" in print_range:
+            low, high = map(int, print_range.split("-"))
+
+            for i in range(low, high + 1):
+
+                if i <= total_page:
+                    print_page_count[i] += 1
+
+            continue
+
+        page = int(print_range)
+
+        if page <= total_page:
+            print_page_count[page] += 1
+
+    print(sum([1 if 1 <= i else 0 for i in print_page_count]))
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

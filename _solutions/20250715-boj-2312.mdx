@@ -1,0 +1,52 @@
+---
+title: "BOJ 2312 - 수 복원하기"
+date: "2025-07-15"
+description: "수학, 정수론, 소수 판정 문제"
+tags: ["수학", "정수론", "소수 판정", "에라토스테네스의 체", "소인수분해"]
+platform: "boj"
+problem_number: "2312"
+problem_url: "https://www.acmicpc.net/problem/2312"
+difficulty: "실버 III"
+language: "python"
+---
+
+## 문제
+
+[BOJ 2312 - 수 복원하기](https://www.acmicpc.net/problem/2312)
+
+## 풀이
+
+수학적 성질을 이용하여 풀이한다.
+
+## 코드
+
+```python
+import sys
+input = sys.stdin.readline
+
+sieve = [True]*100001
+primes = [2]
+for i in range(3, 317, 2):
+    if sieve[i]:
+        sieve[i*i::2*i] = [False]*((100000-i*i)//(2*i)+1)
+        primes.append(i)
+
+for tc in range(int(input())):
+    n = int(input())
+    
+    for p in primes:
+        if n == 1: break
+        if n%p == 0:
+            cnt = 0
+            while n%p == 0:
+                n //= p
+                cnt += 1
+            print(p, cnt)
+
+    if n > 1: print(n, 1)
+```
+
+## 복잡도
+
+- 시간: O(N log log N)
+- 공간: O(N)

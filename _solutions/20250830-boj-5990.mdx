@@ -1,0 +1,50 @@
+---
+title: "BOJ 5990 - Barn Echoes"
+date: "2025-08-30"
+description: "문자열, 브루트포스 알고리즘 문제"
+tags: ["문자열", "브루트포스 알고리즘"]
+platform: "boj"
+problem_number: "5990"
+problem_url: "https://www.acmicpc.net/problem/5990"
+difficulty: "브론즈 I"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 5990 - Barn Echoes](https://www.acmicpc.net/problem/5990)
+
+## 풀이
+
+가능한 모든 경우를 탐색하여 답을 구한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+#include <string>
+using namespace std;
+
+int ov(const string &a, const string &b)
+{
+  int m = min(a.size(), b.size());
+  for (int k = m; k > 0; --k)
+    if (a.substr(a.size() - k) == b.substr(0, k))
+      return k;
+  return 0;
+}
+
+int main()
+{
+  ios::sync_with_stdio(false);
+  cin.tie(nullptr);
+  string a, b;
+  cin >> a >> b;
+  cout << max(ov(a, b), ov(b, a)) << '\n';
+}
+```
+
+## 복잡도
+
+- 시간: O(N²)
+- 공간: O(N)

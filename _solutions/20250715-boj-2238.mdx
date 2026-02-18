@@ -1,0 +1,49 @@
+---
+title: "BOJ 2238 - 경매"
+date: "2025-07-15"
+description: "구현 문제"
+tags: ["구현"]
+platform: "boj"
+problem_number: "2238"
+problem_url: "https://www.acmicpc.net/problem/2238"
+difficulty: "실버 V"
+language: "python"
+---
+
+## 문제
+
+[BOJ 2238 - 경매](https://www.acmicpc.net/problem/2238)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```python
+import sys
+
+input = sys.stdin.readline
+
+U, N = map(int, input().split())
+p = [[] for _ in range(10001)]
+num = [0 for _ in range(10001)]
+m = 10001
+for _ in range(N):
+    name, price = input().split()
+    price = int(price)
+    p[price].append(name)
+    num[price] += 1
+for i in range(10001):
+    if num[i] != 0:
+        m = min(num[i], m)
+for i in range(10001):
+    if m == num[i]:
+        print(p[i][0], i)
+        break
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

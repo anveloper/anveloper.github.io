@@ -1,0 +1,75 @@
+---
+title: "BOJ 8932 - 7종 경기"
+date: "2025-12-28"
+description: "수학, 구현, 사칙연산 문제"
+tags: ["수학", "구현", "사칙연산"]
+platform: "boj"
+problem_number: "8932"
+problem_url: "https://www.acmicpc.net/problem/8932"
+difficulty: "브론즈 III"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 8932 - 7종 경기](https://www.acmicpc.net/problem/8932)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+#include <math.h>
+
+using namespace std;
+
+int trackCal(double A, double B, double C, int P)
+{
+  return floor(A * pow(B - P, C));
+}
+
+int fieldCal(double A, double B, double C, int P)
+{
+  return floor(A * pow(P - B, C));
+}
+
+double a[] = {9.23076, 1.84523, 56.0211, 4.99087, 0.188807, 15.9803, 0.11193};
+double b[] = {26.7, 75, 1.5, 42.5, 210, 3.8, 254};
+double c[] = {1.835, 1.348, 1.05, 1.81, 1.41, 1.04, 1.88};
+
+int main()
+{
+  int t;
+  cin >> t;
+
+  for (int i = 0; i < t; i++)
+  {
+    int track = 0, field = 0;
+    int p;
+    for (int j = 0; j < 7; j++)
+    {
+      cin >> p;
+      if (j == 0 || j == 3 || j == 6)
+      {
+        track += trackCal(a[j], b[j], c[j], p);
+      }
+      else
+      {
+        field += fieldCal(a[j], b[j], c[j], p);
+      }
+    }
+
+    cout << track + field << "\n";
+  }
+
+  return 0;
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

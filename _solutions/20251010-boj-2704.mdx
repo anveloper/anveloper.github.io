@@ -1,0 +1,90 @@
+---
+title: "BOJ 2704 - 이진법 시계"
+date: "2025-10-10"
+description: "구현 문제"
+tags: ["구현"]
+platform: "boj"
+problem_number: "2704"
+problem_url: "https://www.acmicpc.net/problem/2704"
+difficulty: "브론즈 II"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 2704 - 이진법 시계](https://www.acmicpc.net/problem/2704)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+#include <string>
+using namespace std;
+
+int T;
+string s;
+
+int main()
+{
+  ios::sync_with_stdio(0);
+  cin.tie(0);
+
+  cin >> T;
+  while (T--)
+  {
+    cin >> s;
+    int H = stoi(s.substr(0, 2)), M = stoi(s.substr(3, 2)), S = stoi(s.substr(6, 2));
+
+    for (int k = 5; k > -1; k--)
+    {
+      if (H & (1 << k))
+        cout << 1;
+      else
+        cout << 0;
+      if (M & (1 << k))
+        cout << 1;
+      else
+        cout << 0;
+      if (S & (1 << k))
+        cout << 1;
+      else
+        cout << 0;
+    }
+
+    cout << ' ';
+
+    for (int k = 5; k > -1; k--)
+    {
+      if (H & (1 << k))
+        cout << 1;
+      else
+        cout << 0;
+    }
+    for (int k = 5; k > -1; k--)
+    {
+      if (M & (1 << k))
+        cout << 1;
+      else
+        cout << 0;
+    }
+    for (int k = 5; k > -1; k--)
+    {
+      if (S & (1 << k))
+        cout << 1;
+      else
+        cout << 0;
+    }
+
+    cout << '\n';
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

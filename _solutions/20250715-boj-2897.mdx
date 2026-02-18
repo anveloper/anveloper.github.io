@@ -1,0 +1,54 @@
+---
+title: "BOJ 2897 - 몬스터 트럭"
+date: "2025-07-15"
+description: "구현, 브루트포스 알고리즘 문제"
+tags: ["구현", "브루트포스 알고리즘"]
+platform: "boj"
+problem_number: "2897"
+problem_url: "https://www.acmicpc.net/problem/2897"
+difficulty: "브론즈 I"
+language: "python"
+---
+
+## 문제
+
+[BOJ 2897 - 몬스터 트럭](https://www.acmicpc.net/problem/2897)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```python
+dxy = [(0, 0), (0, 1), (1, 0), (1, 1)]
+
+
+def search(x, y):
+    cnt = 0
+    for i, j in dxy:
+        dx = i + x
+        dy = j + y
+        if 0 <= dx < r and 0 <= dy < c:
+            if matrix[dx][dy] == "#":
+                return 0
+            elif matrix[dx][dy] == "X":
+                cnt += 1
+    return 1 if not cnt else cnt + 1
+
+
+r, c = list(map(int, input().split()))
+matrix = [list(input()) for _ in range(r)]
+rst = [0] * 6
+
+for i in range(r - 1):
+    for j in range(c - 1):
+        rst[search(i, j)] += 1
+for i in range(1, len(rst)):
+    print(rst[i])
+```
+
+## 복잡도
+
+- 시간: O(N²)
+- 공간: O(N)

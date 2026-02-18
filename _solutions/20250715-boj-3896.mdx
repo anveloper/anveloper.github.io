@@ -1,0 +1,53 @@
+---
+title: "BOJ 3896 - 소수 사이 수열"
+date: "2025-07-15"
+description: "수학, 정수론, 이분 탐색 문제"
+tags: ["수학", "정수론", "이분 탐색", "소수 판정", "에라토스테네스의 체"]
+platform: "boj"
+problem_number: "3896"
+problem_url: "https://www.acmicpc.net/problem/3896"
+difficulty: "실버 I"
+language: "python"
+---
+
+## 문제
+
+[BOJ 3896 - 소수 사이 수열](https://www.acmicpc.net/problem/3896)
+
+## 풀이
+
+이분 탐색을 통해 최적의 값을 탐색한다.
+
+## 코드
+
+```python
+import sys, bisect
+
+input = sys.stdin.readline
+
+
+def findPrimes(n):
+    primes = [0, 0] + [1] * (n - 1)
+    i = 2
+    while i**2 <= n:
+        primes[i**2 :: i] = [0] * ((n - i**2) // i + 1)
+        i += 1
+    return primes
+
+
+isPrime = findPrimes(1299710)
+primes = [i for i in range(1299710 + 1) if isPrime[i]]
+
+for _ in range(int(input())):
+    k = int(input())
+    if isPrime[k]:
+        print(0)
+        continue
+    loc = bisect.bisect(primes, k)
+    print(primes[loc] - primes[loc - 1])
+```
+
+## 복잡도
+
+- 시간: O(N log N)
+- 공간: O(N)

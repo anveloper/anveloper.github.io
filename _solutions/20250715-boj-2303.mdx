@@ -1,0 +1,46 @@
+---
+title: "BOJ 2303 - 숫자 게임"
+date: "2025-07-15"
+description: "구현, 브루트포스 알고리즘 문제"
+tags: ["구현", "브루트포스 알고리즘"]
+platform: "boj"
+problem_number: "2303"
+problem_url: "https://www.acmicpc.net/problem/2303"
+difficulty: "실버 V"
+language: "python"
+---
+
+## 문제
+
+[BOJ 2303 - 숫자 게임](https://www.acmicpc.net/problem/2303)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```python
+n = int(input())  
+score = []        
+for _ in range(n):
+  card = list(map(int, input().split())) 
+  max_digit = 0 
+  for i in range(5):
+    for j in range(i + 1, 5):
+      for k in range(j + 1, 5):
+        digit = (card[i] + card[j] + card[k]) % 10 
+        if digit >= max_digit: 
+          max_digit = digit
+  score.append(max_digit)
+
+for i in range(n - 1, -1, -1): 
+  if score[i] == max(score):  
+    print(i + 1)
+    break
+```
+
+## 복잡도
+
+- 시간: O(N²)
+- 공간: O(N)

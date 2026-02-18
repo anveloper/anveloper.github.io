@@ -1,0 +1,38 @@
+---
+title: "BOJ 3181 - 줄임말 만들기"
+date: "2025-07-15"
+description: "구현, 문자열 문제"
+tags: ["구현", "문자열"]
+platform: "boj"
+problem_number: "3181"
+problem_url: "https://www.acmicpc.net/problem/3181"
+difficulty: "브론즈 II"
+language: "python"
+---
+
+## 문제
+
+[BOJ 3181 - 줄임말 만들기](https://www.acmicpc.net/problem/3181)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```python
+a = ["i", "pa", "te", "ni", "niti", "a", "ali", "nego", "no", "ili"]
+b = input().split()
+r = b[0][0]
+
+for i in range(1, len(b)):
+    if b[i] in a:
+        continue
+    r += b[i][0]
+print(r.upper())
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

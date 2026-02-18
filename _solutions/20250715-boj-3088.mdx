@@ -1,0 +1,41 @@
+---
+title: "BOJ 3088 - 화분 부수기"
+date: "2025-07-15"
+description: "그리디 알고리즘 문제"
+tags: ["그리디 알고리즘"]
+platform: "boj"
+problem_number: "3088"
+problem_url: "https://www.acmicpc.net/problem/3088"
+difficulty: "실버 II"
+language: "python"
+---
+
+## 문제
+
+[BOJ 3088 - 화분 부수기](https://www.acmicpc.net/problem/3088)
+
+## 풀이
+
+그리디 알고리즘으로 매 단계 최선의 선택을 한다.
+
+## 코드
+
+```python
+import sys
+
+input = sys.stdin.readline
+
+d = [False] * 1000001
+answer = 0
+for _ in range(int(input())):
+    a, b, c = map(int, input().split())
+    if not (d[a] or d[b] or d[c]):
+        answer += 1
+    d[a] = d[b] = d[c] = True
+print(answer)
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

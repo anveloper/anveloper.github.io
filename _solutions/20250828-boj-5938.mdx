@@ -1,0 +1,73 @@
+---
+title: "BOJ 5938 - Daisy Chains in the Field"
+date: "2025-08-28"
+description: "그래프 이론, 그래프 탐색, 너비 우선 탐색 문제"
+tags: ["그래프 이론", "그래프 탐색", "너비 우선 탐색", "깊이 우선 탐색"]
+platform: "boj"
+problem_number: "5938"
+problem_url: "https://www.acmicpc.net/problem/5938"
+difficulty: "실버 III"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 5938 - Daisy Chains in the Field](https://www.acmicpc.net/problem/5938)
+
+## 풀이
+
+그래프 탐색(BFS/DFS)을 활용하여 탐색한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int n, m, v[251], cnt;
+vector<int> adj[251];
+
+void dfs(int cur)
+{
+  v[cur] = 1;
+  cnt++;
+  for (int i = 0; i < adj[cur].size(); i++)
+  {
+    int nxt = adj[cur][i];
+    if (!v[nxt])
+      dfs(nxt);
+  }
+}
+
+int main()
+{
+  ios_base::sync_with_stdio(0);
+  cin.tie(0);
+
+  cin >> n >> m;
+  while (m--)
+  {
+    int u, v;
+    cin >> u >> v;
+    adj[u].push_back(v);
+    adj[v].push_back(u);
+  }
+
+  dfs(1);
+
+  if (cnt == n)
+    cout << 0 << '\n';
+  for (int i = 1; i <= n; i++)
+  {
+    if (!v[i])
+      cout << i << '\n';
+  }
+  return 0;
+}
+```
+
+## 복잡도
+
+- 시간: O(V + E)
+- 공간: O(V + E)

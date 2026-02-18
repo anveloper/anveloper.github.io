@@ -1,0 +1,52 @@
+---
+title: "BOJ 5612 - 터널의 입구와 출구"
+date: "2025-08-02"
+description: "구현, 시뮬레이션 문제"
+tags: ["구현", "시뮬레이션"]
+platform: "boj"
+problem_number: "5612"
+problem_url: "https://www.acmicpc.net/problem/5612"
+difficulty: "브론즈 III"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 5612 - 터널의 입구와 출구](https://www.acmicpc.net/problem/5612)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+using namespace std;
+int main()
+{
+  int n, m;
+
+  cin >> n >> m;
+  int a, b;
+  int tmp = m;
+  for (int i = 0; i < n; i++)
+  {
+    cin >> a >> b;
+    m = m + a - b;
+    if (m < 0)
+    {
+      tmp = 0;
+      break;
+    }
+    if (m >= tmp)
+      tmp = m;
+  }
+  cout << tmp;
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

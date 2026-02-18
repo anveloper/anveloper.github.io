@@ -1,0 +1,61 @@
+---
+title: "BOJ 2799 - 블라인드"
+date: "2025-07-15"
+description: "구현 문제"
+tags: ["구현"]
+platform: "boj"
+problem_number: "2799"
+problem_url: "https://www.acmicpc.net/problem/2799"
+difficulty: "실버 IV"
+language: "python"
+---
+
+## 문제
+
+[BOJ 2799 - 블라인드](https://www.acmicpc.net/problem/2799)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```python
+import sys
+
+M, N = map(int, sys.stdin.readline().split())
+
+is_first = True
+floor_list = [0] * N
+
+blind_list = [0] * 5
+
+for _ in range((5 * M) + 1):
+    line = sys.stdin.readline().rstrip()
+
+    if line == "#" * ((5 * N) + 1):
+        if is_first:
+            is_first = False
+            continue
+
+        for floor in floor_list:
+            blind_list[int(floor / 4)] += 1
+
+        floor_list = [0] * N
+        continue
+
+    index = 0
+
+    for element in line.split("#"):
+        if element != "":
+            floor_list[index] += element.count("*")
+
+            index += 1
+
+print(*blind_list)
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

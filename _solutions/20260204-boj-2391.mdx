@@ -1,0 +1,100 @@
+---
+title: "BOJ 2391 - Sascha"
+date: "2026-02-04"
+description: "구현, 문자열 문제"
+tags: ["구현", "문자열"]
+platform: "boj"
+problem_number: "2391"
+problem_url: "https://www.acmicpc.net/problem/2391"
+difficulty: "브론즈 II"
+language: "rust"
+---
+
+## 문제
+
+[BOJ 2391 - Sascha](https://www.acmicpc.net/problem/2391)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```rust
+#![allow(
+  unused_macros,
+  clippy::needless_collect,
+  clippy::unnecessary_lazy_evaluations
+)]
+use std::io::{self, *};
+use std::str::FromStr;
+
+struct Reader {
+  stdin: Stdin,
+}
+
+#[allow(dead_code)]
+impl Reader {
+  fn new() -> Self {
+    Self { stdin: io::stdin() }
+  }
+
+  fn lines(&self) -> impl Iterator<Item = String> + '_ {
+    BufReader::new(self.stdin.lock())
+      .lines()
+      .map(Result::unwrap)
+  }
+
+  fn string(self) -> String {
+    let mut s = String::new();
+    self.stdin.lock().read_to_string(&mut s).unwrap();
+    s
+  }
+
+  fn words(self) -> impl Iterator<Item = &'static str> {
+    let s = Box::leak(self.string().into_boxed_str());
+    s.split_ascii_whitespace()
+  }
+
+  fn numbers<T>(self) -> impl Iterator<Item = T>
+  where
+    T: FromStr,
+    <T as std::str::FromStr>::Err: std::fmt::Debug,
+  {
+    self.words().map(|x| x.parse::<T>().unwrap())
+  }
+}
+
+fn main() {
+  let mut writer = BufWriter::new(stdout());
+  macro_rules! p { ($($e:expr),*  $(,)? ) => { write!(writer, $($e),* ).unwrap() } }
+  macro_rules! puts { ( $($e:expr),* $(,)? ) => { writeln!(writer, $($e),* ).unwrap() } }
+  let reader = Reader::new();
+
+  let mut it = reader.words();
+  let n = it.next().unwrap().parse::<usize>().unwrap();
+  for _ in 0..n {
+    let pronounced = it.next().unwrap();
+    let w = it.next().unwrap().parse::<usize>().unwrap();
+    let ans = it
+      .by_ref()
+      .take(w)
+      .enumerate()
+      .min_by_key(|(i, word)| {
+        let delta = word
+          .chars()
+          .zip(pronounced.chars())
+          .filter(|(a, b)| a == b)
+          .count();
+        (-(delta as isize), *i)
+      })
+      .unwrap();
+    puts!("{}", ans.1);
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

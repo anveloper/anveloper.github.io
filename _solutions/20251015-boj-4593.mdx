@@ -1,0 +1,66 @@
+---
+title: "BOJ 4593 - Rock, Paper, Scissors"
+date: "2025-10-15"
+description: "구현, 문자열 문제"
+tags: ["구현", "문자열"]
+platform: "boj"
+problem_number: "4593"
+problem_url: "https://www.acmicpc.net/problem/4593"
+difficulty: "브론즈 II"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 4593 - Rock, Paper, Scissors](https://www.acmicpc.net/problem/4593)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+#include <string>
+using namespace std;
+
+int slen;
+string s1, s2;
+
+int main()
+{
+  ios::sync_with_stdio(0);
+  cin.tie(0);
+
+  cin >> s1 >> s2;
+  while (s1 != "E")
+  {
+    slen = s1.length();
+    int ans1 = 0, ans2 = 0;
+    for (int i = 0; i < slen; i++)
+    {
+      if (s1[i] == s2[i])
+        continue;
+      if (s1[i] == 'R' && s2[i] == 'S')
+        ans1++;
+      else if (s1[i] == 'S' && s2[i] == 'P')
+        ans1++;
+      else if (s1[i] == 'P' && s2[i] == 'R')
+        ans1++;
+      else
+        ans2++;
+    }
+
+    cout << "P1: " << ans1 << '\n'
+         << "P2: " << ans2 << '\n';
+
+    cin >> s1 >> s2;
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

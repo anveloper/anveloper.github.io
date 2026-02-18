@@ -1,0 +1,54 @@
+---
+title: "BOJ 1895 - 필터"
+date: "2025-07-15"
+description: "구현, 브루트포스 알고리즘, 정렬 문제"
+tags: ["구현", "브루트포스 알고리즘", "정렬"]
+platform: "boj"
+problem_number: "1895"
+problem_url: "https://www.acmicpc.net/problem/1895"
+difficulty: "실버 IV"
+language: "python"
+---
+
+## 문제
+
+[BOJ 1895 - 필터](https://www.acmicpc.net/problem/1895)
+
+## 풀이
+
+정렬을 활용하여 문제를 해결한다.
+
+## 코드
+
+```python
+R, C = map(int, input().split())
+
+Filter = []
+for r in range(R):
+    Filter.append(list(map(int, input().split())))
+
+T = int(input())
+J = []
+
+for r in range(R - 3 + 1):
+    for c in range(C - 3 + 1):
+        median = []
+        for i in range(r, r + 3):
+            for j in range(c, c + 3):
+                median.append(Filter[i][j])
+
+        median.sort()
+        J.append(median[4])
+
+cnt = 0
+for k in J:
+    if k > T or k == T:
+        cnt += 1
+
+print(cnt)
+```
+
+## 복잡도
+
+- 시간: O(N²)
+- 공간: O(N)

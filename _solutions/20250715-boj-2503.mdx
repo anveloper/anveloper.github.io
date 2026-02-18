@@ -1,0 +1,54 @@
+---
+title: "BOJ 2503 - 숫자 야구"
+date: "2025-07-15"
+description: "구현, 브루트포스 알고리즘 문제"
+tags: ["구현", "브루트포스 알고리즘"]
+platform: "boj"
+problem_number: "2503"
+problem_url: "https://www.acmicpc.net/problem/2503"
+difficulty: "실버 III"
+language: "python"
+---
+
+## 문제
+
+[BOJ 2503 - 숫자 야구](https://www.acmicpc.net/problem/2503)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```python
+import sys
+from itertools import permutations
+input = sys.stdin.readline
+
+n = int(input())
+nums = list(permutations(list(range(1, 10)), 3))	
+
+for _ in range(n):
+    num, s, b = map(int, input().split())
+    tmp = []	
+
+    for check in nums:		
+        cnt_s, cnt_b = 0, 0	
+
+        for i, str_num in enumerate(str(num)):	
+            if int(str_num) == check[i]:		
+                cnt_s += 1						
+            if int(str_num) != check[i] and int(str_num) in check:	
+                cnt_b += 1						
+
+        if s == cnt_s and b == cnt_b:			
+            tmp.append(check)					
+    nums = tmp									
+
+print(len(nums))
+```
+
+## 복잡도
+
+- 시간: O(N²)
+- 공간: O(N)

@@ -1,0 +1,35 @@
+---
+title: "BOJ 2028 - 자기복제수"
+date: "2025-07-15"
+description: "수학 문제"
+tags: ["수학"]
+platform: "boj"
+problem_number: "2028"
+problem_url: "https://www.acmicpc.net/problem/2028"
+difficulty: "브론즈 II"
+language: "python"
+---
+
+## 문제
+
+[BOJ 2028 - 자기복제수](https://www.acmicpc.net/problem/2028)
+
+## 풀이
+
+수학적 성질을 이용하여 풀이한다.
+
+## 코드
+
+```python
+def fn(num):
+    if str(num**2)[-len(str(num)):] == str(num):
+        return "YES"
+    return "NO"
+for i in range(int(input())):
+    print(fn(int(input())))
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

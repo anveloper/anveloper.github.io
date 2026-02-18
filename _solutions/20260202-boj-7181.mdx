@@ -1,0 +1,66 @@
+---
+title: "BOJ 7181 - Mõttemeister"
+date: "2026-02-02"
+description: "구현 문제"
+tags: ["구현"]
+platform: "boj"
+problem_number: "7181"
+problem_url: "https://www.acmicpc.net/problem/7181"
+difficulty: "브론즈 III"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 7181 - Mõttemeister](https://www.acmicpc.net/problem/7181)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```cpp
+#include <cstdio>
+
+int N;
+char A[5], B[5];
+int main(void)
+{
+  scanf("%s\n%d\n", A, &N);
+  for (int i = 0; i < N; ++i)
+  {
+    scanf("%s", B);
+
+    int c[10];
+    for (int j = 0; j < 10; ++j)
+      c[j] = 0;
+    for (int j = 0; j < 4; ++j)
+      c[B[j] - '0']++;
+    int cc = 0;
+    for (int j = 0; j < 4; ++j)
+    {
+      if (c[A[j] - '0'] <= 0)
+        continue;
+      c[A[j] - '0']--;
+      cc++;
+    }
+
+    int ccc = 0;
+    for (int j = 0; j < 4; ++j)
+    {
+      if (A[j] == B[j])
+        ccc++;
+    }
+
+    printf("%d %d\n", cc, ccc);
+  }
+
+  return 0;
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

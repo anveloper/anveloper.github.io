@@ -1,0 +1,46 @@
+---
+title: "BOJ 3000 - 직각 삼각형"
+date: "2025-07-15"
+description: "수학, 기하학, 집합과 맵 문제"
+tags: ["수학", "기하학", "집합과 맵", "조합론"]
+platform: "boj"
+problem_number: "3000"
+problem_url: "https://www.acmicpc.net/problem/3000"
+difficulty: "실버 I"
+language: "python"
+---
+
+## 문제
+
+[BOJ 3000 - 직각 삼각형](https://www.acmicpc.net/problem/3000)
+
+## 풀이
+
+수학적 성질을 이용하여 풀이한다.
+
+## 코드
+
+```python
+import sys
+
+input = sys.stdin.readline
+
+n = int(input())
+x_dic, y_dic = {}, {}
+points = []
+for _ in range(n):
+    x, y = map(int, input().split())
+    x_dic[x] = x_dic.get(x, 0) + 1
+    y_dic[y] = y_dic.get(y, 0) + 1
+    points.append((x, y))
+
+ans = 0
+for x, y in points:
+    ans += (x_dic[x] - 1) * (y_dic[y] - 1)
+print(ans)
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

@@ -1,0 +1,43 @@
+---
+title: "BOJ 2721 - 삼각수의 합"
+date: "2025-07-15"
+description: "수학, 구현 문제"
+tags: ["수학", "구현"]
+platform: "boj"
+problem_number: "2721"
+problem_url: "https://www.acmicpc.net/problem/2721"
+difficulty: "브론즈 III"
+language: "python"
+---
+
+## 문제
+
+[BOJ 2721 - 삼각수의 합](https://www.acmicpc.net/problem/2721)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```python
+import sys
+
+input = sys.stdin.readline
+
+t = int(input())
+sums = [i for i in range(302)]
+dp = [0 for i in range(302)]
+
+for i in range(2, 302):
+    sums[i] += sums[i - 1]
+    dp[i - 1] = (i - 1) * sums[i] + dp[i - 2]
+
+for i in range(t):
+    print(dp[int(input())])
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

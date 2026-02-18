@@ -1,0 +1,49 @@
+---
+title: "BOJ 4758 - Filling Out the Team"
+date: "2025-11-26"
+description: "구현 문제"
+tags: ["구현"]
+platform: "boj"
+problem_number: "4758"
+problem_url: "https://www.acmicpc.net/problem/4758"
+difficulty: "브론즈 III"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 4758 - Filling Out the Team](https://www.acmicpc.net/problem/4758)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int main()
+{
+  double s, w, t;
+  while (cin >> s >> w >> t && (s || w || t))
+  {
+    bool found = false;
+    if (s <= 4.5 && w >= 150 && t >= 200)
+      found = true, cout << "Wide Receiver ";
+    if (s <= 6.0 && w >= 300 && t >= 500)
+      found = true, cout << "Lineman ";
+    if (s <= 5.0 && w >= 200 && t >= 300)
+      found = true, cout << "Quarterback ";
+    if (!found)
+      cout << "No positions";
+    cout << '\n';
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

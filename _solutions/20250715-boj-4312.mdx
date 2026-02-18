@@ -1,0 +1,42 @@
+---
+title: "BOJ 4312 - 3의 제곱"
+date: "2025-07-15"
+description: "수학, 비트마스킹, 임의 정밀도 / 큰 수 연산 문제"
+tags: ["수학", "비트마스킹", "임의 정밀도 / 큰 수 연산"]
+platform: "boj"
+problem_number: "4312"
+problem_url: "https://www.acmicpc.net/problem/4312"
+difficulty: "실버 III"
+language: "python"
+---
+
+## 문제
+
+[BOJ 4312 - 3의 제곱](https://www.acmicpc.net/problem/4312)
+
+## 풀이
+
+비트마스킹을 활용하여 상태를 관리한다.
+
+## 코드
+
+```python
+while True:
+    n = int(input())
+    if n == 0:
+        break
+    n -= 1
+    print("{", end=" ")
+    i = 0
+    while n != 0:
+        if n % 2:
+            print(3**i, end=", " if n // 2 else " ")
+        n //= 2
+        i += 1
+    print("}")
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

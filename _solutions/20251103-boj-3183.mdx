@@ -1,0 +1,74 @@
+---
+title: "BOJ 3183 - Dates"
+date: "2025-11-03"
+description: "구현 문제"
+tags: ["구현"]
+platform: "boj"
+problem_number: "3183"
+problem_url: "https://www.acmicpc.net/problem/3183"
+difficulty: "브론즈 II"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 3183 - Dates](https://www.acmicpc.net/problem/3183)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+
+using namespace std;
+
+int Y, M, D;
+int days[13] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+
+int main()
+{
+  ios::sync_with_stdio(0);
+  cin.tie(0);
+
+  cin >> D >> M >> Y;
+  while (D + M + Y)
+  {
+    bool chk = 1;
+    if (M < 1 || M > 12)
+      chk = 0;
+    else if (M == 2)
+    {
+      if (Y % 4 == 0 && (Y % 100 || Y % 400 == 0))
+      {
+        if (D < 1 || D > 29)
+          chk = 0;
+      }
+      else
+      {
+        if (D < 1 || D > 28)
+          chk = 0;
+      }
+    }
+    else
+    {
+      if (D < 1 || D > days[M])
+        chk = 0;
+    }
+
+    if (chk)
+      cout << "Valid\n";
+    else
+      cout << "Invalid\n";
+
+    cin >> D >> M >> Y;
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

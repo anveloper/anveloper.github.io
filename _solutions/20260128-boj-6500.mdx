@@ -1,0 +1,60 @@
+---
+title: "BOJ 6500 - 랜덤 숫자 만들기"
+date: "2026-01-28"
+description: "수학, 구현, 사칙연산 문제"
+tags: ["수학", "구현", "사칙연산"]
+platform: "boj"
+problem_number: "6500"
+problem_url: "https://www.acmicpc.net/problem/6500"
+difficulty: "브론즈 II"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 6500 - 랜덤 숫자 만들기](https://www.acmicpc.net/problem/6500)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <cmath>
+#include <string>
+#include <map>
+
+using namespace std;
+
+int main()
+{
+  while (1)
+  {
+    int n, ans = 0;
+    cin >> n;
+    if (!n)
+      break;
+    vector<int> check(10000);
+    while (!check[n])
+    {
+      check[n] = 1;
+      ans++;
+      string s = to_string(n * n);
+      while (s.length() < 8)
+      {
+        s = "0" + s;
+      }
+      n = stoi(s.substr(2, 4));
+    }
+    cout << ans << '\n';
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

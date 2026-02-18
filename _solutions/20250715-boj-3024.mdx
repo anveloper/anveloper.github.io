@@ -1,0 +1,70 @@
+---
+title: "BOJ 3024 - 마라톤 틱택토"
+date: "2025-07-15"
+description: "구현, 브루트포스 알고리즘 문제"
+tags: ["구현", "브루트포스 알고리즘"]
+platform: "boj"
+problem_number: "3024"
+problem_url: "https://www.acmicpc.net/problem/3024"
+difficulty: "실버 III"
+language: "python"
+---
+
+## 문제
+
+[BOJ 3024 - 마라톤 틱택토](https://www.acmicpc.net/problem/3024)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```python
+def check(a, n):
+    for i in range(n):
+        for j in range(n):
+            if a[i][j] == ".":
+                continue
+
+            if j <= n - 3 and a[i][j] == a[i][j + 1] == a[i][j + 2]:
+                return a[i][j]
+
+            if i <= n - 3 and a[i][j] == a[i + 1][j] == a[i + 2][j]:
+                return a[i][j]
+
+            if (
+                i <= n - 3
+                and j <= n - 3
+                and a[i][j] == a[i + 1][j + 1] == a[i + 2][j + 2]
+            ):
+                return a[i][j]
+
+            if i <= n - 3 and j >= 2 and a[i][j] == a[i + 1][j - 1] == a[i + 2][j - 2]:
+                return a[i][j]
+
+    return None
+
+
+def ong(a, n):
+    for i in range(n):
+        for j in range(n):
+            if a[i][j] == ".":
+                return True
+    return False
+
+
+n = int(input())
+a = [input().strip() for _ in range(n)]
+
+ans = check(a, n)
+if ans:
+    print(ans)
+else:
+    print("ongoing")
+```
+
+## 복잡도
+
+- 시간: O(N²)
+- 공간: O(N)

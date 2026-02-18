@@ -1,0 +1,60 @@
+---
+title: "BOJ 2072 - 오목"
+date: "2025-07-15"
+description: "구현, 시뮬레이션 문제"
+tags: ["구현", "시뮬레이션"]
+platform: "boj"
+problem_number: "2072"
+problem_url: "https://www.acmicpc.net/problem/2072"
+difficulty: "실버 I"
+language: "python"
+---
+
+## 문제
+
+[BOJ 2072 - 오목](https://www.acmicpc.net/problem/2072)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```python
+import sys
+
+n = int(sys.stdin.readline())
+l = [()] + [tuple(map(int, sys.stdin.readline().split())) for i in range(n)]
+answer = -1
+board = [[-1] * 19 for i in range(19)]
+direction = [(-1, 0), (-1, 1), (0, 1), (1, 1), (1, 0), (1, -1), (0, -1), (-1, -1)]
+found = False
+for i in range(1, n + 1):
+    x, y = l[i][0] - 1, l[i][1] - 1
+    board[x][y] = i % 2
+    count = [0] * 8
+    for j in range(8):
+        dx, dy = direction[j]
+        tc = 0
+        nx, ny = x, y
+        while 0 <= nx < 19 and 0 <= ny < 19:
+            if board[nx][ny] != i % 2:
+                break
+            tc += 1
+            nx, ny = nx + dx, ny + dy
+        count[j] = tc
+    for j in range(4):
+        c = count[j] + count[j + 4] - 1
+        if c == 5:
+            answer = i
+            found = True
+            break
+    if found:
+        break
+print(answer)
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

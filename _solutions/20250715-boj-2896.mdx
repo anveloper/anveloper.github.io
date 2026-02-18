@@ -1,0 +1,33 @@
+---
+title: "BOJ 2896 - 무알콜 칵테일"
+date: "2025-07-15"
+description: "수학, 사칙연산 문제"
+tags: ["수학", "사칙연산"]
+platform: "boj"
+problem_number: "2896"
+problem_url: "https://www.acmicpc.net/problem/2896"
+difficulty: "브론즈 I"
+language: "python"
+---
+
+## 문제
+
+[BOJ 2896 - 무알콜 칵테일](https://www.acmicpc.net/problem/2896)
+
+## 풀이
+
+수학적 성질을 이용하여 풀이한다.
+
+## 코드
+
+```python
+a, b, c = map(int, input().split())
+i, j, k = map(int, input().split())
+t = min(a / i, b / j, c / k)
+print(a - i * t, b - j * t, c - k * t)
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

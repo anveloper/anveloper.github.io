@@ -1,0 +1,42 @@
+---
+title: "BOJ 2804 - 크로스워드 만들기"
+date: "2025-07-15"
+description: "구현, 문자열 문제"
+tags: ["구현", "문자열"]
+platform: "boj"
+problem_number: "2804"
+problem_url: "https://www.acmicpc.net/problem/2804"
+difficulty: "브론즈 I"
+language: "python"
+---
+
+## 문제
+
+[BOJ 2804 - 크로스워드 만들기](https://www.acmicpc.net/problem/2804)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```python
+s1, s2 = map(str, input().split())
+
+for i in range(len(s1)):
+    if s1[i] in s2:
+        col = i
+        row = s2.index(s1[i])
+        break
+
+for i in range(len(s2)):
+    if i == row:
+        print(s1)
+    else:
+        print("." * col + s2[i] + "." * (len(s1) - col - 1))
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

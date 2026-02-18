@@ -1,0 +1,48 @@
+---
+title: "BOJ 3048 - 개미"
+date: "2025-07-15"
+description: "구현, 문자열, 시뮬레이션 문제"
+tags: ["구현", "문자열", "시뮬레이션"]
+platform: "boj"
+problem_number: "3048"
+problem_url: "https://www.acmicpc.net/problem/3048"
+difficulty: "실버 IV"
+language: "python"
+---
+
+## 문제
+
+[BOJ 3048 - 개미](https://www.acmicpc.net/problem/3048)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```python
+import sys
+
+n1, n2 = map(int, sys.stdin.readline().split())
+
+ant1 = list(map(str, sys.stdin.readline().rstrip("\n")))
+ant2 = list(map(str, sys.stdin.readline().rstrip("\n")))
+t = int(sys.stdin.readline())
+
+ant1.reverse()
+totalAnt = ant1 + ant2
+
+for _ in range(t):
+    for i in range(len(totalAnt) - 1):
+        if totalAnt[i] in ant1 and totalAnt[i + 1] in ant2:
+            totalAnt[i], totalAnt[i + 1] = totalAnt[i + 1], totalAnt[i]
+            if totalAnt[i + 1] == ant1[-1]:
+                break
+
+print("".join(totalAnt))
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

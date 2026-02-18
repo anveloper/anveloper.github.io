@@ -1,0 +1,73 @@
+---
+title: "BOJ 3495 - 아스키 도형"
+date: "2025-08-23"
+description: "구현, 기하학, 홀짝성 문제"
+tags: ["구현", "기하학", "홀짝성"]
+platform: "boj"
+problem_number: "3495"
+problem_url: "https://www.acmicpc.net/problem/3495"
+difficulty: "실버 I"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 3495 - 아스키 도형](https://www.acmicpc.net/problem/3495)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+
+using namespace std;
+#define ll long long
+#define MAX 987654321
+#define pii pair<int, int>
+
+char arr[101][101];
+
+int main()
+{
+  ios_base::sync_with_stdio(false);
+  cin.tie(0);
+
+  int H, W;
+  int result = 0;
+  cin >> H >> W;
+  for (int i = 0; i < H; i++)
+  {
+    for (int j = 0; j < W; j++)
+    {
+      cin >> arr[i][j];
+    }
+  }
+
+  for (int i = 0; i < H; i++)
+  {
+    int cnt = 0;
+    for (int j = 0; j < W; j++)
+    {
+      if (arr[i][j] == '/' || arr[i][j] == '\\') // 괄호당 넓이 0.5
+      {
+        cnt++; // 슬래쉬 갯수
+        result += 1;
+      }
+
+      if (cnt % 2 && arr[i][j] == '.')
+        result += 2; // 열려있으면 점 갯수 세기
+    }
+  }
+
+  cout << result / 2;
+  return 0;
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

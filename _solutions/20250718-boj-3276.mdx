@@ -1,0 +1,52 @@
+---
+title: "BOJ 3276 - ICONS"
+date: "2025-07-18"
+description: "수학, 구현, 브루트포스 알고리즘 문제"
+tags: ["수학", "구현", "브루트포스 알고리즘", "사칙연산"]
+platform: "boj"
+problem_number: "3276"
+problem_url: "https://www.acmicpc.net/problem/3276"
+difficulty: "브론즈 III"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 3276 - ICONS](https://www.acmicpc.net/problem/3276)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <string>
+#include <algorithm>
+
+#define MAX 0x3f3f3f3f
+using namespace std;
+int pebbles, minCol = MAX, minRow = MAX, minSum = MAX;
+int main()
+{
+  cin >> pebbles;
+  for (int i = 1; i <= pebbles; i++)
+  {
+    int j = pebbles % i == 0 ? pebbles / i : pebbles / i + 1;
+    if (i + j < minSum)
+    {
+      minSum = i + j;
+      minRow = i;
+      minCol = j;
+    }
+  }
+  cout << minRow << ' ' << minCol;
+}
+```
+
+## 복잡도
+
+- 시간: O(N²)
+- 공간: O(N)

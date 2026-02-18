@@ -1,0 +1,57 @@
+---
+title: "BOJ 5220 - Error Detection"
+date: "2025-09-28"
+description: "수학, 구현 문제"
+tags: ["수학", "구현"]
+platform: "boj"
+problem_number: "5220"
+problem_url: "https://www.acmicpc.net/problem/5220"
+difficulty: "브론즈 III"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 5220 - Error Detection](https://www.acmicpc.net/problem/5220)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+#include <algorithm>
+#define ll long long
+using namespace std;
+
+ll cal(ll x)
+{
+  if (x <= 1)
+    return x;
+  return (x + cal(x / 2)) % 2;
+}
+
+int main()
+{
+  ios_base::sync_with_stdio(false);
+  cin.tie(NULL);
+  ll T, N, x;
+
+  cin >> T;
+  while (T--)
+  {
+    cin >> N >> x;
+    if (x == cal(N))
+      cout << "Valid\n";
+    else
+      cout << "Corrupt\n";
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

@@ -1,0 +1,60 @@
+---
+title: "BOJ 6812 - Good times"
+date: "2025-11-20"
+description: "수학, 구현, 사칙연산 문제"
+tags: ["수학", "구현", "사칙연산"]
+platform: "boj"
+problem_number: "6812"
+problem_url: "https://www.acmicpc.net/problem/6812"
+difficulty: "브론즈 III"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 6812 - Good times](https://www.acmicpc.net/problem/6812)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+
+using namespace std;
+
+int t;
+
+int convert(int ti)
+{
+  int tmp = ti;
+  if (ti < 0)
+    tmp = ti + 2400;
+  if (ti >= 2400)
+    tmp = ti - 2400;
+  if (tmp % 100 >= 60)
+    tmp = 100 * (tmp / 100 + 1) + tmp % 100 - 60;
+  if (tmp >= 2400)
+    tmp -= 2400;
+  return tmp;
+}
+
+int main()
+{
+  cin >> t;
+  cout << t << " in Ottawa\n";
+  cout << convert(t - 300) << " in Victoria\n";
+  cout << convert(t - 200) << " in Edmonton\n";
+  cout << convert(t - 100) << " in Winnipeg\n";
+  cout << t << " in Toronto\n";
+  cout << convert(t + 100) << " in Halifax\n";
+  cout << convert(t + 130) << " in St. John's";
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

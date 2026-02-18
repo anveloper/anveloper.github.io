@@ -1,0 +1,73 @@
+---
+title: "BOJ 2597 - 줄자접기"
+date: "2025-07-23"
+description: "구현 문제"
+tags: ["구현"]
+platform: "boj"
+problem_number: "2597"
+problem_url: "https://www.acmicpc.net/problem/2597"
+difficulty: "실버 III"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 2597 - 줄자접기](https://www.acmicpc.net/problem/2597)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+#include <string>
+#include <cmath>
+using namespace std;
+
+int main()
+{
+  ios::sync_with_stdio(false);
+  cin.tie(nullptr);
+
+  double Z;
+  cin >> Z;
+
+  double R1, R2;
+  cin >> R1 >> R2;
+  double B1, B2;
+  cin >> B1 >> B2;
+  double Y1, Y2;
+  cin >> Y1 >> Y2;
+
+  double line;
+  if (R1 != R2)
+  {
+    line = 0.5 * (R1 + R2);
+    Z = max(line, Z - line);
+    B1 = abs(B1 - line), B2 = abs(B2 - line);
+    Y1 = abs(Y1 - line), Y2 = abs(Y2 - line);
+  }
+  if (B1 != B2)
+  {
+    line = 0.5 * (B1 + B2);
+    Z = max(line, Z - line);
+    Y1 = abs(Y1 - line), Y2 = abs(Y2 - line);
+  }
+  if (Y1 != Y2)
+  {
+    line = 0.5 * (Y1 + Y2);
+    Z = max(line, Z - line);
+  }
+
+  string Ans = to_string((int)Z);
+  Ans += "." + to_string(((int)(Z * 10)) % 10);
+  cout << Ans << '\n';
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

@@ -1,0 +1,80 @@
+---
+title: "BOJ 4096 - 팰린드로미터"
+date: "2025-09-04"
+description: "문자열, 브루트포스 알고리즘 문제"
+tags: ["문자열", "브루트포스 알고리즘"]
+platform: "boj"
+problem_number: "4096"
+problem_url: "https://www.acmicpc.net/problem/4096"
+difficulty: "실버 III"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 4096 - 팰린드로미터](https://www.acmicpc.net/problem/4096)
+
+## 풀이
+
+가능한 모든 경우를 탐색하여 답을 구한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+  ios::sync_with_stdio(0), cin.tie(0);
+  string str;
+  while (true)
+  {
+    cin >> str;
+    if (str == "0")
+    {
+      break;
+    }
+
+    int count = 0;
+    int size = str.size();
+    while (true)
+    {
+      bool isFind = true;
+
+      for (int i = 0; i < size / 2; ++i)
+      {
+        if (str[i] != str[size - 1 - i])
+        {
+          isFind = false;
+          break;
+        }
+      }
+
+      if (isFind)
+      {
+        cout << count << "\n";
+        break;
+      }
+
+      ++count;
+      int num = stoi(str);
+
+      string next = to_string(num + 1);
+      str = "";
+      for (int i = 0; i < size - next.size(); ++i)
+      {
+        str.push_back('0');
+      }
+      str += next;
+    }
+  }
+  return 0;
+}
+```
+
+## 복잡도
+
+- 시간: O(N²)
+- 공간: O(N)

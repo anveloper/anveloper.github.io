@@ -1,0 +1,75 @@
+---
+title: "BOJ 3258 - 컴포트"
+date: "2025-09-02"
+description: "구현, 브루트포스 알고리즘, 시뮬레이션 문제"
+tags: ["구현", "브루트포스 알고리즘", "시뮬레이션"]
+platform: "boj"
+problem_number: "3258"
+problem_url: "https://www.acmicpc.net/problem/3258"
+difficulty: "실버 III"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 3258 - 컴포트](https://www.acmicpc.net/problem/3258)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+  int n, z, m;
+  cin >> n >> z >> m;
+  int d[1000] = {};
+  int g;
+  for (int i = 0; i < m; i++)
+  {
+    cin >> g;
+    d[g] = 1;
+  }
+  if (m == 0)
+  {
+    cout << "1";
+    return 0;
+  }
+  int v[1000] = {};
+  int t;
+  for (int i = 1; i < 999; i++)
+  { // k
+    t = 1;
+    for (int j = 0; j < 999; j++)
+    {
+      v[j] = 0;
+    }
+    while (v[t] == 0)
+    {
+      if (d[t] == 1)
+      {
+        break;
+      }
+      v[t] = 1;
+      t += i;
+      t = t % n;
+    }
+    if (v[z % n] == 1)
+    {
+      cout << i;
+      return 0;
+    }
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N²)
+- 공간: O(N)

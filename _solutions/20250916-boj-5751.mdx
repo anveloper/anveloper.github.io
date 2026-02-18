@@ -1,0 +1,53 @@
+---
+title: "BOJ 5751 - Head or Tail"
+date: "2025-09-16"
+description: "구현 문제"
+tags: ["구현"]
+platform: "boj"
+problem_number: "5751"
+problem_url: "https://www.acmicpc.net/problem/5751"
+difficulty: "브론즈 III"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 5751 - Head or Tail](https://www.acmicpc.net/problem/5751)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+
+using namespace std;
+
+int n;
+int main()
+{
+  while (1)
+  {
+    int johnWin = 0, maryWin = 0;
+    cin >> n;
+    if (!n)
+      break;
+    for (int i = 0, x; i < n; i++)
+    {
+      cin >> x;
+      if (!x)
+        maryWin++;
+      else
+        johnWin++;
+    }
+    printf("Mary won %d times and John won %d times\n", maryWin, johnWin);
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

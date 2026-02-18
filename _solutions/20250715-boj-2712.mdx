@@ -1,0 +1,39 @@
+---
+title: "BOJ 2712 - 미국 스타일"
+date: "2025-07-15"
+description: "수학, 구현, 사칙연산 문제"
+tags: ["수학", "구현", "사칙연산"]
+platform: "boj"
+problem_number: "2712"
+problem_url: "https://www.acmicpc.net/problem/2712"
+difficulty: "브론즈 III"
+language: "python"
+---
+
+## 문제
+
+[BOJ 2712 - 미국 스타일](https://www.acmicpc.net/problem/2712)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```python
+for _ in range(int(input())):
+    n, s = input().split()
+    if s == "kg":
+        print("%.4f %s" % (float(n)*2.2046, "lb"))
+    elif s == "lb":
+        print("%.4f %s" % (float(n)*0.4536, "kg"))
+    elif s == "l":
+        print("%.4f %s" % (float(n)*0.2642, "g"))
+    elif s == "g":
+        print("%.4f %s" % (float(n)*3.7854, "l"))
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

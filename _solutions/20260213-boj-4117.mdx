@@ -1,0 +1,43 @@
+---
+title: "BOJ 4117 - Combination Lock"
+date: "2026-02-13"
+description: "수학, 구현, 사칙연산 문제"
+tags: ["수학", "구현", "사칙연산"]
+platform: "boj"
+problem_number: "4117"
+problem_url: "https://www.acmicpc.net/problem/4117"
+difficulty: "브론즈 II"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 4117 - Combination Lock](https://www.acmicpc.net/problem/4117)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+#include <string>
+#include <vector>
+using namespace std;
+
+int main() {
+	ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+	while (1) {
+		int n, t[3];
+		cin >> n >> t[0] >> t[1] >> t[2];
+		if (n == 0)break;
+		cout << 4 * n - 1 + (t[1] - t[0] + n) % n + (t[1] - t[2] + n) % n << '\n';
+	}
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

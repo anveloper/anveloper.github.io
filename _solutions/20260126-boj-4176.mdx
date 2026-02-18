@@ -1,0 +1,55 @@
+---
+title: "BOJ 4176 - Digits"
+date: "2026-01-26"
+description: "구현, 문자열, 시뮬레이션 문제"
+tags: ["구현", "문자열", "시뮬레이션"]
+platform: "boj"
+problem_number: "4176"
+problem_url: "https://www.acmicpc.net/problem/4176"
+difficulty: "브론즈 II"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 4176 - Digits](https://www.acmicpc.net/problem/4176)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+#include <string>
+#include <vector>
+using namespace std;
+
+int main()
+{
+  ios::sync_with_stdio(0);
+  cin.tie(0);
+  cout.tie(0);
+  while (1)
+  {
+    string x;
+    cin >> x;
+    if (x == "END")
+      break;
+    int cnt = 1, len;
+    while (x != "1")
+    {
+      len = x.length();
+      cnt++;
+      x = to_string(len);
+    }
+    cout << cnt << '\n';
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

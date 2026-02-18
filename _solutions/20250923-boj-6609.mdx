@@ -1,0 +1,49 @@
+---
+title: "BOJ 6609 - 모기곱셈"
+date: "2025-09-23"
+description: "수학, 구현, 사칙연산 문제"
+tags: ["수학", "구현", "사칙연산", "시뮬레이션"]
+platform: "boj"
+problem_number: "6609"
+problem_url: "https://www.acmicpc.net/problem/6609"
+difficulty: "브론즈 II"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 6609 - 모기곱셈](https://www.acmicpc.net/problem/6609)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int main()
+{
+  int m, p, l, e, r, s, n;
+
+  while (scanf("%d %d %d %d %d %d %d", &m, &p, &l, &e, &r, &s, &n) == 7)
+  {
+    int i;
+    for (i = 0; i < n; i++)
+    {
+      int new_m = p / s, new_p = l / r, new_l = m * e;
+      m = new_m;
+      p = new_p;
+      l = new_l;
+    }
+    printf("%d\n", m);
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

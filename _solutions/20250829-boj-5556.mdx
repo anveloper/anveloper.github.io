@@ -1,0 +1,55 @@
+---
+title: "BOJ 5556 - 타일"
+date: "2025-08-29"
+description: "수학, 구현, 사칙연산 문제"
+tags: ["수학", "구현", "사칙연산"]
+platform: "boj"
+problem_number: "5556"
+problem_url: "https://www.acmicpc.net/problem/5556"
+difficulty: "브론즈 I"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 5556 - 타일](https://www.acmicpc.net/problem/5556)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```cpp
+#include <cstdio>
+int main(void)
+{
+  int N, K, x, y, temp;
+  scanf("%d %d", &N, &K);
+  for (int i = 0; i < K; i++)
+  {
+    scanf("%d %d", &x, &y);
+    if (x > (N + 1) / 2)
+      x = N + 1 - x;
+    if (y > (N + 1) / 2)
+      y = N + 1 - y;
+    if (x < y)
+    {
+      temp = x;
+      x = y;
+      y = temp;
+    }
+    if (y % 3 == 1)
+      printf("1\n");
+    if (y % 3 == 2)
+      printf("2\n");
+    if (y % 3 == 0)
+      printf("3\n");
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

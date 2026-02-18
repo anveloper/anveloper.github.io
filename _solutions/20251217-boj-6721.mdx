@@ -1,0 +1,62 @@
+---
+title: "BOJ 6721 - Backward numbers"
+date: "2025-12-17"
+description: "수학, 구현, 문자열 문제"
+tags: ["수학", "구현", "문자열", "사칙연산"]
+platform: "boj"
+problem_number: "6721"
+problem_url: "https://www.acmicpc.net/problem/6721"
+difficulty: "브론즈 III"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 6721 - Backward numbers](https://www.acmicpc.net/problem/6721)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int reverse(int x)
+{
+  int ret = 0;
+  while (x)
+  {
+    ret = ret * 10 + x % 10;
+    x /= 10;
+  }
+  return ret;
+}
+
+void solve(void)
+{
+  int a, b;
+  cin >> a >> b;
+
+  cout << reverse(reverse(a) + reverse(b)) << "\n";
+}
+
+int main(void)
+{
+  ios::sync_with_stdio(false);
+  cin.tie(nullptr);
+
+  int n;
+  cin >> n;
+  while (n--)
+    solve();
+  return 0;
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

@@ -1,0 +1,98 @@
+---
+title: "BOJ 3546 - Headshot"
+date: "2026-01-20"
+description: "수학, 확률론 문제"
+tags: ["수학", "확률론"]
+platform: "boj"
+problem_number: "3546"
+problem_url: "https://www.acmicpc.net/problem/3546"
+difficulty: "브론즈 I"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 3546 - Headshot](https://www.acmicpc.net/problem/3546)
+
+## 풀이
+
+수학적 성질을 이용하여 풀이한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <string>
+
+using namespace std;
+
+int main()
+{
+  ios_base::sync_with_stdio(false);
+  cin.tie(NULL);
+  cout.tie(NULL);
+
+  string strWord;
+  cin >> strWord;
+
+  int iA = 0;
+  int iB = 0;
+  int iC = 0;
+  int iD = 0;
+
+  int iN = strWord.length();
+
+  for (int i = 0; i < iN; ++i)
+  {
+    if (strWord[i] == '0')
+    {
+      ++iB;
+      if (i == iN - 1)
+      {
+        if (strWord[0] == '1')
+        {
+          ++iA;
+        }
+      }
+      else
+      {
+        if (strWord[i + 1] == '1')
+        {
+          ++iA;
+        }
+      }
+    }
+  }
+
+  for (int i = 0; i < iN; ++i)
+  {
+    if (strWord[i] == '1')
+    {
+      ++iC;
+    }
+  }
+
+  iD = iN;
+
+  if (iA * iD == iC * iB)
+  {
+    cout << "EQUAL" << "\n";
+  }
+  else if (iA * iD > iC * iB)
+  {
+    cout << "ROTATE" << "\n";
+  }
+  else
+  {
+    cout << "SHOOT" << "\n";
+  }
+  return 0;
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

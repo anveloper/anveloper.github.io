@@ -1,0 +1,86 @@
+---
+title: "BOJ 5107 - 마니또"
+date: "2025-08-20"
+description: "자료 구조, 그래프 이론, 그래프 탐색 문제"
+tags: ["자료 구조", "그래프 이론", "그래프 탐색", "집합과 맵", "해시를 사용한 집합과 맵", "순열 사이클 분할"]
+platform: "boj"
+problem_number: "5107"
+problem_url: "https://www.acmicpc.net/problem/5107"
+difficulty: "실버 I"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 5107 - 마니또](https://www.acmicpc.net/problem/5107)
+
+## 풀이
+
+그래프 탐색(BFS/DFS)을 활용하여 탐색한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+#include <map>
+using namespace std;
+int N, answer, i;
+map<string, string> m;
+map<string, bool> isVisited;
+
+void dfs(string name)
+{
+  if (isVisited[m[name]])
+  {
+    ++answer;
+  }
+  else
+  {
+    isVisited[m[name]] = true;
+    dfs(m[name]);
+  }
+}
+
+int main()
+{
+  ios::sync_with_stdio(0), cin.tie(0);
+  while (cin >> N)
+  {
+    if (N == 0)
+    {
+      break;
+    }
+
+    answer = 0;
+
+    isVisited.clear();
+    m.clear();
+
+    while (N--)
+    {
+      string name1, name2;
+      cin >> name1 >> name2;
+      m[name1] = name2;
+    }
+
+    for (auto p : m)
+    {
+      if (isVisited[p.first])
+      {
+        continue;
+      }
+
+      dfs(p.first);
+    }
+
+    cout << ++i << " " << answer << "\n";
+  }
+
+  return 0;
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

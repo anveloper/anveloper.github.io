@@ -1,0 +1,64 @@
+---
+title: "BOJ 6437 - Golf"
+date: "2025-12-19"
+description: "구현 문제"
+tags: ["구현"]
+platform: "boj"
+problem_number: "6437"
+problem_url: "https://www.acmicpc.net/problem/6437"
+difficulty: "브론즈 III"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 6437 - Golf](https://www.acmicpc.net/problem/6437)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+
+using namespace std;
+int p, s, cnt;
+
+string getName()
+{
+  int diff = p - s;
+  if (diff == 1)
+    return "Birdie.\n";
+  if (diff == -1)
+    return "Bogey.\n";
+  if (diff == 2 && s == 1)
+    return "Hole-in-one.\n";
+  if (diff == 2)
+    return "Eagle.\n";
+  if (diff == 3)
+    return "Double eagle.\n";
+  if (diff == 0)
+    return "Par.\n";
+  return "Double Bogey.\n";
+}
+
+int main()
+{
+  while (1)
+  {
+    cnt++;
+    cin >> p >> s;
+    if (!p && !s)
+      break;
+    printf("Hole #%d\n", cnt);
+    cout << getName() << '\n';
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

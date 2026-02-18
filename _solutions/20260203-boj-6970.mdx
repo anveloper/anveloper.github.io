@@ -1,0 +1,67 @@
+---
+title: "BOJ 6970 - Sentences"
+date: "2026-02-03"
+description: "구현, 문자열 문제"
+tags: ["구현", "문자열"]
+platform: "boj"
+problem_number: "6970"
+problem_url: "https://www.acmicpc.net/problem/6970"
+difficulty: "브론즈 I"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 6970 - Sentences](https://www.acmicpc.net/problem/6970)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+#include <array>
+#include <vector>
+using namespace std;
+
+int main()
+{
+  ios::sync_with_stdio(false);
+  cin.tie(NULL);
+  cout.tie(NULL);
+
+  int t;
+  array<vector<string>, 3> arr;
+  array<int, 3> a;
+  string s;
+  cin >> t;
+  while (t--)
+  {
+    for (int i = 0; i < 3; ++i)
+    {
+      arr[i].clear();
+      cin >> a[i];
+    }
+    getline(cin, s);
+
+    for (int i = 0; i < 3; ++i)
+      for (int j = 0; j < a[i]; ++j)
+      {
+        getline(cin, s);
+        arr[i].push_back(s);
+      }
+    for (int i = 0; i < a[0]; ++i)
+      for (int j = 0; j < a[1]; ++j)
+        for (int k = 0; k < a[2]; ++k)
+          cout << arr[0][i] + " " + arr[1][j] + " " + arr[2][k] + ".\n";
+    cout << '\n';
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

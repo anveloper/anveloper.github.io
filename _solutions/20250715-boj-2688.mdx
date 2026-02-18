@@ -1,0 +1,37 @@
+---
+title: "BOJ 2688 - 줄어들지 않아"
+date: "2025-07-15"
+description: "다이나믹 프로그래밍 문제"
+tags: ["다이나믹 프로그래밍"]
+platform: "boj"
+problem_number: "2688"
+problem_url: "https://www.acmicpc.net/problem/2688"
+difficulty: "실버 I"
+language: "python"
+---
+
+## 문제
+
+[BOJ 2688 - 줄어들지 않아](https://www.acmicpc.net/problem/2688)
+
+## 풀이
+
+다이나믹 프로그래밍을 사용하여 부분 문제의 해를 메모이제이션하며 풀이한다.
+
+## 코드
+
+```python
+for i in range(int(input())):
+    n = int(input())
+    dp = [1 for i in range(10)]
+
+    for i in range(n-1):
+        for j in range(10):
+            dp[j] = sum(dp[j:])
+    print(sum(dp))
+```
+
+## 복잡도
+
+- 시간: O(N²)
+- 공간: O(N)

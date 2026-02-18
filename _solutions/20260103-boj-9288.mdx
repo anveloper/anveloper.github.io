@@ -1,0 +1,48 @@
+---
+title: "BOJ 9288 - More Dice"
+date: "2026-01-03"
+description: "수학, 구현, 브루트포스 알고리즘 문제"
+tags: ["수학", "구현", "브루트포스 알고리즘", "시뮬레이션"]
+platform: "boj"
+problem_number: "9288"
+problem_url: "https://www.acmicpc.net/problem/9288"
+difficulty: "브론즈 III"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 9288 - More Dice](https://www.acmicpc.net/problem/9288)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+
+using namespace std;
+int t, sum;
+int main()
+{
+  cin >> t;
+  for (int i = 1; i <= t; i++)
+  {
+    cin >> sum;
+    printf("Case %d:\n", i);
+    for (int j = 1; j <= sum / 2; j++)
+    {
+      if (sum - j > 6)
+        continue;
+      printf("(%d,%d)\n", j, sum - j);
+    }
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N²)
+- 공간: O(N)

@@ -1,0 +1,39 @@
+---
+title: "BOJ 3060 - 욕심쟁이 돼지"
+date: "2025-07-15"
+description: "수학, 구현, 시뮬레이션 문제"
+tags: ["수학", "구현", "시뮬레이션"]
+platform: "boj"
+problem_number: "3060"
+problem_url: "https://www.acmicpc.net/problem/3060"
+difficulty: "실버 V"
+language: "python"
+---
+
+## 문제
+
+[BOJ 3060 - 욕심쟁이 돼지](https://www.acmicpc.net/problem/3060)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```python
+t = int(input())
+for _ in range(t):
+    n = int(input())
+    line = list(map(int, input().split()))
+    total = sum(line)
+    count = 0
+    while n >= total:
+        count += 1
+        total *= 4
+    print(count + 1)
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

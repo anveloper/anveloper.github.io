@@ -1,0 +1,59 @@
+---
+title: "BOJ 6230 - Buy One Get One Free"
+date: "2025-10-23"
+description: "그리디 알고리즘, 정렬, 두 포인터 문제"
+tags: ["그리디 알고리즘", "정렬", "두 포인터"]
+platform: "boj"
+problem_number: "6230"
+problem_url: "https://www.acmicpc.net/problem/6230"
+difficulty: "실버 IV"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 6230 - Buy One Get One Free](https://www.acmicpc.net/problem/6230)
+
+## 풀이
+
+그리디 알고리즘으로 매 단계 최선의 선택을 한다. 투 포인터 기법을 활용한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+int main(void)
+{
+  ios::sync_with_stdio(0);
+  cin.tie(0);
+  int a[10'005], b[10'005];
+  int n, m;
+  cin >> n >> m;
+  for (int i = 0; i < n; i++)
+    cin >> a[i];
+  for (int i = 0; i < m; i++)
+    cin >> b[i];
+  sort(a, a + n, greater<int>());
+  sort(b, b + m, greater<int>());
+  int ai = 0, bi = 0;
+  int ans = n;
+  while (ai < n && bi < m)
+  {
+    if (b[bi] < a[ai])
+    {
+      ans++;
+      ai++;
+    }
+    bi++;
+  }
+  cout << ans << "\n";
+}
+```
+
+## 복잡도
+
+- 시간: O(N log N)
+- 공간: O(N)

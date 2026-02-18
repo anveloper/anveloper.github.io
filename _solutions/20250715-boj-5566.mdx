@@ -1,0 +1,54 @@
+---
+title: "BOJ 5566 - 주사위 게임"
+date: "2025-07-15"
+description: "구현, 시뮬레이션 문제"
+tags: ["구현", "시뮬레이션"]
+platform: "boj"
+problem_number: "5566"
+problem_url: "https://www.acmicpc.net/problem/5566"
+difficulty: "브론즈 II"
+language: "python"
+---
+
+## 문제
+
+[BOJ 5566 - 주사위 게임](https://www.acmicpc.net/problem/5566)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```python
+def main():
+    import sys
+
+    input = sys.stdin.read
+    data = input().split()
+
+    N = int(data[0])
+    M = int(data[1])
+    board = list(map(int, data[2 : 2 + N]))
+    dice = list(map(int, data[2 + N :]))
+
+    pos = 1
+    for i in range(M):
+        pos += dice[i]
+        if pos >= N:
+            print(i + 1)
+            return
+        pos += board[pos - 1]
+        if pos >= N:
+            print(i + 1)
+            return
+
+
+if __name__ == "__main__":
+    main()
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

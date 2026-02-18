@@ -1,0 +1,50 @@
+---
+title: "BOJ 4635 - Speed Limit"
+date: "2025-08-24"
+description: "수학, 구현, 사칙연산 문제"
+tags: ["수학", "구현", "사칙연산"]
+platform: "boj"
+problem_number: "4635"
+problem_url: "https://www.acmicpc.net/problem/4635"
+difficulty: "브론즈 III"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 4635 - Speed Limit](https://www.acmicpc.net/problem/4635)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+using namespace std;
+int main()
+{
+  int n;
+  while (cin >> n && n != -1)
+  {
+    int total = 0;
+    int prev = 0;
+    for (int i = 0; i < n; i++)
+    {
+      int s, t;
+      cin >> s >> t;
+      int interval = t - prev;
+      total += s * interval;
+      prev = t;
+    }
+    cout << total << " miles\n";
+  }
+  return 0;
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

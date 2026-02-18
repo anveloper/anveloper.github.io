@@ -1,0 +1,82 @@
+---
+title: "BOJ 1972 - 놀라운 문자열"
+date: "2025-07-15"
+description: "구현, 자료 구조, 문자열 문제"
+tags: ["구현", "자료 구조", "문자열", "집합과 맵", "해시를 사용한 집합과 맵"]
+platform: "boj"
+problem_number: "1972"
+problem_url: "https://www.acmicpc.net/problem/1972"
+difficulty: "실버 III"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 1972 - 놀라운 문자열](https://www.acmicpc.net/problem/1972)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+#include <string>
+#include <unordered_set>
+
+using namespace std;
+
+bool isSurprising(const string &s)
+{
+  int n = s.length();
+
+  for (int d = 0; d < n - 1; ++d)
+  {
+    unordered_set<string> seen;
+
+    for (int i = 0; i + d + 1 < n; ++i)
+    {
+      string pair;
+      pair += s[i];
+      pair += s[i + d + 1];
+
+      if (seen.count(pair))
+      {
+        return false; // 중복된 D-쌍 발견 → surprising 아님
+      }
+
+      seen.insert(pair);
+    }
+  }
+
+  return true;
+}
+
+int main()
+{
+  string s;
+
+  while (getline(cin, s))
+  {
+    if (s == "*")
+      break;
+
+    if (isSurprising(s))
+    {
+      cout << s << " is surprising." << endl;
+    }
+    else
+    {
+      cout << s << " is NOT surprising." << endl;
+    }
+  }
+
+  return 0;
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

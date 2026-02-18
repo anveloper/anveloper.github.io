@@ -1,0 +1,43 @@
+---
+title: "BOJ 3417 - Vigenère Cipher Encryption"
+date: "2026-02-07"
+description: "구현, 문자열 문제"
+tags: ["구현", "문자열"]
+platform: "boj"
+problem_number: "3417"
+problem_url: "https://www.acmicpc.net/problem/3417"
+difficulty: "브론즈 II"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 3417 - Vigenère Cipher Encryption](https://www.acmicpc.net/problem/3417)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+  string s1, s2;
+  while (cin >> s1 >> s2) {
+    int i(0);
+    for (char c : s2) {
+      cout << char((c - 65 + (s1[i] - 64)) % 26 + 65);
+      i = (i + 1) % s1.length();
+    }
+    cout << "\n";
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

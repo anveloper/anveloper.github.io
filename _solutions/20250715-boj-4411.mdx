@@ -1,0 +1,38 @@
+---
+title: "BOJ 4411 - The Trip"
+date: "2025-07-15"
+description: "수학, 그리디 알고리즘, 정렬 문제"
+tags: ["수학", "그리디 알고리즘", "정렬", "사칙연산"]
+platform: "boj"
+problem_number: "4411"
+problem_url: "https://www.acmicpc.net/problem/4411"
+difficulty: "실버 III"
+language: "python"
+---
+
+## 문제
+
+[BOJ 4411 - The Trip](https://www.acmicpc.net/problem/4411)
+
+## 풀이
+
+그리디 알고리즘으로 매 단계 최선의 선택을 한다.
+
+## 코드
+
+```python
+while True:
+    n = int(input())
+    if n == 0:
+        break
+    expenses = [float(input()) for _ in range(n)]
+    avg = sum(expenses) / n
+    value_1 = sum(filter(lambda x: x > 0, [round(avg - i, 2) for i in expenses]))
+    value_2 = sum(filter(lambda x: x > 0, [round(i - avg, 2) for i in expenses]))
+    print(f"${min(value_1, value_2):.2f}")
+```
+
+## 복잡도
+
+- 시간: O(N log N)
+- 공간: O(N)

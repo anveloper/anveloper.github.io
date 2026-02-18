@@ -1,0 +1,61 @@
+---
+title: "BOJ 5087 - Card Cutting"
+date: "2025-09-29"
+description: "구현 문제"
+tags: ["구현"]
+platform: "boj"
+problem_number: "5087"
+problem_url: "https://www.acmicpc.net/problem/5087"
+difficulty: "브론즈 II"
+language: "cpp"
+---
+
+## 문제
+
+[BOJ 5087 - Card Cutting](https://www.acmicpc.net/problem/5087)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```cpp
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main()
+{
+  string s;
+  int C = 0, T = 0;
+  while (1)
+  {
+    cin >> s;
+    if (s == "#")
+      break;
+    else if (s == "*")
+    {
+      cout << (C == T ? "Draw" : (C > T ? "Cheryl" : "Tania")) << "\n";
+      C = 0, T = 0;
+    }
+    else
+    {
+      int num;
+      if (s == "A")
+        num = 1;
+      else
+        num = stoi(s);
+      if (num % 2 == 0)
+        T++;
+      else
+        C++;
+    }
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)
