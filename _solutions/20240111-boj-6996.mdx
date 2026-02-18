@@ -1,0 +1,70 @@
+---
+title: "BOJ 6996 - 애너그램"
+date: "2024-01-11"
+description: "구현, 문자열, 정렬 문제"
+tags: ["구현", "문자열", "정렬"]
+platform: "boj"
+problem_number: "6996"
+problem_url: "https://www.acmicpc.net/problem/6996"
+difficulty: "브론즈 I"
+language: "java"
+---
+
+## 문제
+
+[BOJ 6996 - 애너그램](https://www.acmicpc.net/problem/6996)
+
+## 풀이
+
+정렬을 활용하여 문제를 해결한다.
+
+## 코드
+
+```java
+package day749;
+
+import java.io.*;
+import java.util.*;
+
+public class Day709BOJ6996애너그램 {
+
+  public static void main(String[] args) throws Exception {
+    BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+    BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+
+    int inNum = Integer.parseInt(bf.readLine());
+
+    StringTokenizer st;
+    StringBuilder sb = new StringBuilder();
+
+    if (inNum < 100) {
+      for (int i = 1; i <= inNum; i++) {
+        st = new StringTokenizer(bf.readLine(), " ");
+        String a1 = st.nextToken();
+        String a2 = st.nextToken();
+
+        String[] a1Arr = a1.split("");
+        Arrays.sort(a1Arr);
+        String[] a2Arr = a2.split("");
+        Arrays.sort(a2Arr);
+
+        sb.append(a1 + " & " + a2);
+        sb.append(
+            (Arrays.toString(a1Arr).equals(Arrays.toString(a2Arr)))
+                ? " are anagrams.\n"
+                : " are NOT anagrams.\n");
+      }
+      bw.write(String.valueOf(sb));
+    }
+
+    bw.flush();
+    bf.close();
+    bw.close();
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N log N)
+- 공간: O(N)

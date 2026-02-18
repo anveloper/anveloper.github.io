@@ -1,0 +1,79 @@
+---
+title: "BOJ 1083 - 소트"
+date: "2023-12-22"
+description: "그리디 알고리즘, 정렬 문제"
+tags: ["그리디 알고리즘", "정렬"]
+platform: "boj"
+problem_number: "1083"
+problem_url: "https://www.acmicpc.net/problem/1083"
+difficulty: "골드 IV"
+language: "java"
+---
+
+## 문제
+
+[BOJ 1083 - 소트](https://www.acmicpc.net/problem/1083)
+
+## 풀이
+
+그리디 알고리즘으로 매 단계 최선의 선택을 한다.
+
+## 코드
+
+```java
+package day699;
+
+import java.io.*;
+import java.util.*;
+
+public class Day689BOJ1083소트 {
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    StringBuilder sb = new StringBuilder();
+    StringTokenizer st;
+
+    int N;
+    int[] arr;
+    int S;
+
+    N = Integer.parseInt(br.readLine());
+    arr = new int[N];
+
+    st = new StringTokenizer(br.readLine());
+    for (int i = 0; i < N; i++)
+      arr[i] = Integer.parseInt(st.nextToken());
+
+    S = Integer.parseInt(br.readLine());
+
+    ArrayList<Integer> arrayList = new ArrayList<>();
+    for (Integer value : arr)
+      arrayList.add(value);
+
+    for (int i = 0; i < arrayList.size(); i++) {
+
+      int maxIndex = i;
+      for (int j = i + 1; j < arrayList.size(); j++) {
+        if (S >= (j - i)) {
+          if (arrayList.get(maxIndex) < arrayList.get(j))
+            maxIndex = j;
+        } else {
+          break;
+        }
+      }
+
+      S -= (maxIndex - i);
+
+      arrayList.add(i, arrayList.remove(maxIndex));
+    }
+
+    for (Integer value : arrayList)
+      sb.append(value + " ");
+    System.out.println(sb);
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N log N)
+- 공간: O(N)

@@ -1,0 +1,60 @@
+---
+title: "BOJ 2754 - 학점계산"
+date: "2023-08-02"
+description: "구현, 문자열 문제"
+tags: ["구현", "문자열"]
+platform: "boj"
+problem_number: "2754"
+problem_url: "https://www.acmicpc.net/problem/2754"
+difficulty: "브론즈 III"
+language: "java"
+---
+
+## 문제
+
+[BOJ 2754 - 학점계산](https://www.acmicpc.net/problem/2754)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```java
+package day549;
+
+import java.io.*;
+
+public class Day542BOJ2754학점계산 {
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    String s = br.readLine();
+    double grade = 0;
+    char c = s.charAt(0);
+    if (c == 'A') {
+      grade = 4;
+    } else if (c == 'B') {
+      grade = 3;
+    } else if (c == 'C') {
+      grade = 2;
+    } else if (c == 'D') {
+      grade = 1;
+    } else {
+      System.out.print("0.0");
+      return;
+    }
+    c = s.charAt(1);
+    if (c == '+') {
+      grade += 0.3;
+    } else if (c == '-') {
+      grade -= 0.3;
+    }
+    System.out.print(grade);
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

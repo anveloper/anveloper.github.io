@@ -1,0 +1,51 @@
+---
+title: "BOJ 2587 - 대표값2"
+date: "2023-03-16"
+description: "수학, 구현, 정렬 문제"
+tags: ["수학", "구현", "정렬", "사칙연산"]
+platform: "boj"
+problem_number: "2587"
+problem_url: "https://www.acmicpc.net/problem/2587"
+difficulty: "브론즈 II"
+language: "java"
+---
+
+## 문제
+
+[BOJ 2587 - 대표값2](https://www.acmicpc.net/problem/2587)
+
+## 풀이
+
+정렬을 활용하여 문제를 해결한다.
+
+## 코드
+
+```java
+package day449;
+
+import java.io.*;
+import java.util.*;
+
+public class Day403BOJ2587대표값2 {
+  static int sum = 0, mid = 0;
+
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    int[] arr = new int[5];
+    for (int i = 0; i < 5; i++) {
+      arr[i] = Integer.parseInt(br.readLine());
+      sum += arr[i];
+    }
+    Arrays.sort(arr);
+    int avg = sum / 5;
+    mid = arr[2];
+    System.out.print(avg + "\n" + mid);
+    br.close();
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N log N)
+- 공간: O(N)

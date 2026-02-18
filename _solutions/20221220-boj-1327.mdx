@@ -1,0 +1,118 @@
+---
+title: "BOJ 1327 - 소트 게임"
+date: "2022-12-20"
+description: "자료 구조, 그래프 이론, 그래프 탐색 문제"
+tags: ["자료 구조", "그래프 이론", "그래프 탐색", "집합과 맵", "너비 우선 탐색", "해시를 사용한 집합과 맵", "트리를 사용한 집합과 맵"]
+platform: "boj"
+problem_number: "1327"
+problem_url: "https://www.acmicpc.net/problem/1327"
+difficulty: "골드 IV"
+language: "java"
+---
+
+## 문제
+
+[BOJ 1327 - 소트 게임](https://www.acmicpc.net/problem/1327)
+
+## 풀이
+
+그래프 탐색(BFS/DFS)을 활용하여 탐색한다.
+
+## 코드
+
+```java
+package day349;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Set;
+import java.util.StringTokenizer;
+
+public class Day316BOJ1327소트게임 {
+    static int N, K, ans;
+    static String A = "", B = ""; // A: 원본, B: 목표
+    static int[] arr;
+
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        N = Integer.parseInt(st.nextToken());
+        K = Integer.parseInt(st.nextToken());
+        arr = new int[N];
+        st = new StringTokenizer(br.readLine());
+        for (int i = 0; i < N; i++) {
+            arr[i] = Integer.parseInt(st.nextToken());
+            A += arr[i] + "";
+        }
+        Arrays.sort(arr);
+        for (int i = 0; i < N; i++) {
+            B += arr[i] + "";
+        }
+
+        System.out.println(bfs() ? ans : -1);
+
+        br.close();
+    }
+
+    static Queue<String> q;
+    static Set<String> visited; // List로 하면 시간초과
+
+    private static boolean bfs() {
+        ans = 0;
+        q = new LinkedList<>();
+        visited = new HashSet<>();
+
+        q.add(A);
+        visited.add(A);
+
+        while (!q.isEmpty()) {
+            int r = q.size();
+            if (find(r))
+                return true;
+            else
+                ans++;
+        }
+        return false;
+    }
+
+    private static boolean find(int r) {
+        while (r-- > 0) {
+            String a = q.poll();
+            if (a.equals(B)) {
+                return true;
+            }
+            for (int i = 0; i <= N - K; i++) {
+                String tmp = swap(a, i);
+                if (!visited.contains(tmp)) {
+                    q.add(tmp);
+                    visited.add(tmp);
+                }
+            }
+        }
+        return false;
+    }
+
+    private static String swap(String s, int i) {
+        StringBuilder sb = new StringBuilder(s);
+        int st = i;
+        int ed = i + K - 1;
+        while (st < ed) {
+            char c = sb.charAt(st);
+            sb.setCharAt(st, sb.charAt(ed));
+            sb.setCharAt(ed, c);
+            st++;
+            ed--;
+        }
+        return sb.toString();
+    }
+}
+```
+
+## 복잡도
+
+- 시간: O(V + E)
+- 공간: O(V + E)

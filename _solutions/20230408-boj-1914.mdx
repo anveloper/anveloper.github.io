@@ -1,0 +1,63 @@
+---
+title: "BOJ 1914 - 하노이 탑"
+date: "2023-04-08"
+description: "재귀, 임의 정밀도 / 큰 수 연산 문제"
+tags: ["재귀", "임의 정밀도 / 큰 수 연산"]
+platform: "boj"
+problem_number: "1914"
+problem_url: "https://www.acmicpc.net/problem/1914"
+difficulty: "골드 V"
+language: "java"
+---
+
+## 문제
+
+[BOJ 1914 - 하노이 탑](https://www.acmicpc.net/problem/1914)
+
+## 풀이
+
+문제의 조건에 맞게 풀이한다.
+
+## 코드
+
+```java
+package day449;
+
+import java.io.*;
+import java.math.*;
+
+public class Day426BOJ1914하노이의탑 {
+  public static StringBuilder sb = new StringBuilder();
+
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+    int N = Integer.parseInt(br.readLine());
+
+    BigInteger bi = new BigInteger("2");
+
+    sb.append(bi.pow(N).subtract(new BigInteger("1")) + "\n");
+
+    if (N < 21)
+      recur(N, 1, 3, 2);
+
+    System.out.println(sb);
+    br.close();
+  }
+
+  public static void recur(int d, int st, int ed, int pr) {
+    if (d == 1) {
+      sb.append(st + " " + ed + "\n");
+      return;
+    }
+    recur(d - 1, st, pr, ed);
+    sb.append(st + " " + ed + "\n");
+    recur(d - 1, pr, ed, st);
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

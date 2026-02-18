@@ -1,0 +1,45 @@
+---
+title: "BOJ 10953 - A+B - 6"
+date: "2023-01-27"
+description: "수학, 문자열, 사칙연산 문제"
+tags: ["수학", "문자열", "사칙연산", "파싱"]
+platform: "boj"
+problem_number: "10953"
+problem_url: "https://www.acmicpc.net/problem/10953"
+difficulty: "브론즈 III"
+language: "java"
+---
+
+## 문제
+
+[BOJ 10953 - A+B - 6](https://www.acmicpc.net/problem/10953)
+
+## 풀이
+
+수학적 성질을 이용하여 풀이한다.
+
+## 코드
+
+```java
+
+import java.io.*;
+import java.util.StringTokenizer;
+
+public class Day354BOJ10953A더하기B {
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		int test_case = Integer.parseInt(br.readLine());
+		for (int i = 0; i < test_case; i++) {
+			StringTokenizer st = new StringTokenizer(br.readLine(), ",");
+			int a = Integer.parseInt(st.nextToken());
+			int b = Integer.parseInt(st.nextToken());
+			System.out.println(a + b);
+		}
+	}
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

@@ -1,0 +1,45 @@
+---
+title: "BOJ 5524 - 입실 관리"
+date: "2023-09-08"
+description: "문자열 문제"
+tags: ["문자열"]
+platform: "boj"
+problem_number: "5524"
+problem_url: "https://www.acmicpc.net/problem/5524"
+difficulty: "브론즈 IV"
+language: "java"
+---
+
+## 문제
+
+[BOJ 5524 - 입실 관리](https://www.acmicpc.net/problem/5524)
+
+## 풀이
+
+문자열 처리를 통해 문제를 해결한다.
+
+## 코드
+
+```java
+package day749;
+
+import java.io.*;
+
+public class Day706BOJ5524입실관리 {
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    int n = Integer.parseInt(br.readLine());
+    StringBuilder sb = new StringBuilder();
+    while (n-- > 0) {
+      String cur = br.readLine();
+      sb.append(cur.toLowerCase()).append('\n');
+    }
+    System.out.print(sb);
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

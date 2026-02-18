@@ -1,0 +1,70 @@
+---
+title: "BOJ 4779 - 칸토어 집합"
+date: "2023-04-03"
+description: "분할 정복, 재귀 문제"
+tags: ["분할 정복", "재귀"]
+platform: "boj"
+problem_number: "4779"
+problem_url: "https://www.acmicpc.net/problem/4779"
+difficulty: "실버 III"
+language: "java"
+---
+
+## 문제
+
+[BOJ 4779 - 칸토어 집합](https://www.acmicpc.net/problem/4779)
+
+## 풀이
+
+분할 정복을 사용하여 문제를 나누어 해결한다.
+
+## 코드
+
+```java
+package day449;
+
+import java.io.*;
+
+public class Day421BOJ4779칸토어집합 {
+  static int N;
+  static char c[];
+
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+    String str;
+    while ((str = br.readLine()) != null) {
+      N = Integer.parseInt(str); // N
+
+      int cnt = (int) Math.pow(3, N);
+      c = new char[cnt];
+
+      for (int i = 0; i < cnt; i++)
+        c[i] = '-';
+
+      dfs(0, cnt);
+
+      for (int i = 0; i < cnt; i++)
+        bw.write(c[i]);
+      bw.write("\n");
+      bw.flush();
+    }
+  }
+
+  static void dfs(int start, int length) {
+    if (length < 3) {
+      return;
+    }
+    for (int i = start + length / 3; i < start + length / 3 * 2; i++)
+      c[i] = ' ';
+
+    dfs(start, length / 3);
+    dfs(start + length / 3 * 2, length / 3);
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N log N)
+- 공간: O(N)

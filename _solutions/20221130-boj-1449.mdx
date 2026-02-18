@@ -1,0 +1,60 @@
+---
+title: "BOJ 1449 - 수리공 항승"
+date: "2022-11-30"
+description: "그리디 알고리즘, 정렬 문제"
+tags: ["그리디 알고리즘", "정렬"]
+platform: "boj"
+problem_number: "1449"
+problem_url: "https://www.acmicpc.net/problem/1449"
+difficulty: "실버 III"
+language: "java"
+---
+
+## 문제
+
+[BOJ 1449 - 수리공 항승](https://www.acmicpc.net/problem/1449)
+
+## 풀이
+
+그리디 알고리즘으로 매 단계 최선의 선택을 한다.
+
+## 코드
+
+```java
+package ASP_study.day299;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.Arrays;
+import java.util.StringTokenizer;
+
+public class Day296BOJ1449수리공정렬 {
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		int N = Integer.parseInt(st.nextToken());
+		int L = Integer.parseInt(st.nextToken());
+		int water[] = new int[N];
+		st = new StringTokenizer(br.readLine());
+		for (int i = 0; i < N; i++) {
+			water[i] = Integer.parseInt(st.nextToken());
+		}
+
+		Arrays.sort(water);
+		double left = water[0] - 0.5;
+		int cnt = 1;
+		for (int i = 0; i < N; i++) {
+			if (left + L < water[i]) {
+				cnt++;
+				left = water[i] - 0.5;
+			}
+		}
+		System.out.println(cnt);
+	}
+}
+```
+
+## 복잡도
+
+- 시간: O(N log N)
+- 공간: O(N)

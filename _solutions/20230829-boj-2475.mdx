@@ -1,0 +1,47 @@
+---
+title: "BOJ 2475 - 검증수"
+date: "2023-08-29"
+description: "구현, 사칙연산, 수학 문제"
+tags: ["구현", "사칙연산", "수학"]
+platform: "boj"
+problem_number: "2475"
+problem_url: "https://www.acmicpc.net/problem/2475"
+difficulty: "브론즈 V"
+language: "java"
+---
+
+## 문제
+
+[BOJ 2475 - 검증수](https://www.acmicpc.net/problem/2475)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```java
+package day599;
+
+import java.util.*;
+
+public class Day571BOJ2475검증수 {
+  public static void main(String[] args) throws Exception {
+    Scanner sc = new Scanner(System.in);
+
+    int sum = 0;
+    for (int i = 0; i < 5; i++) {
+      int tmp = sc.nextInt();
+      sum += tmp * tmp;
+    }
+    int ans = sum % 10;
+    System.out.println(ans);
+    sc.close();
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

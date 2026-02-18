@@ -1,0 +1,59 @@
+---
+title: "BOJ 1300 - K번째 수"
+date: "2022-11-08"
+description: "이분 탐색, 매개 변수 탐색 문제"
+tags: ["이분 탐색", "매개 변수 탐색"]
+platform: "boj"
+problem_number: "1300"
+problem_url: "https://www.acmicpc.net/problem/1300"
+difficulty: "골드 I"
+language: "java"
+---
+
+## 문제
+
+[BOJ 1300 - K번째 수](https://www.acmicpc.net/problem/1300)
+
+## 풀이
+
+이분 탐색을 통해 최적의 값을 탐색한다.
+
+## 코드
+
+```java
+package ASP_study.day299;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
+public class Day274BOJ1300K번째수이진탐색 {
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		int N = Integer.parseInt(br.readLine());
+		int K = Integer.parseInt(br.readLine());
+		binary_search(N, K);
+	}
+
+	public static void binary_search(int n, int k) {
+		int l = 1;
+		int r = k;
+		while (l <= r) {
+			int m = (l + r) / 2;
+			int count = 0;
+			for (int i = 1; i <= n; i++) {
+				count += Math.min(m / i, n);
+			}
+			if (count < k)
+				l = m + 1;
+			else
+				r = m - 1;
+		}
+		System.out.println(l);
+	}
+}
+```
+
+## 복잡도
+
+- 시간: O(N log X)
+- 공간: O(N)

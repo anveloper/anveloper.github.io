@@ -1,0 +1,75 @@
+---
+title: "BOJ 2263 - 트리의 순회"
+date: "2023-02-07"
+description: "트리, 분할 정복, 재귀 문제"
+tags: ["트리", "분할 정복", "재귀"]
+platform: "boj"
+problem_number: "2263"
+problem_url: "https://www.acmicpc.net/problem/2263"
+difficulty: "골드 I"
+language: "java"
+---
+
+## 문제
+
+[BOJ 2263 - 트리의 순회](https://www.acmicpc.net/problem/2263)
+
+## 풀이
+
+분할 정복을 사용하여 문제를 나누어 해결한다.
+
+## 코드
+
+```java
+import java.io.*;
+import java.util.*;
+
+class Day365BOJ2263트리의순회 {
+    static int N;
+    static int[] inOrder, postOrder;
+    static int[] getRootIdx;
+    static StringBuilder sb = new StringBuilder();
+
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        N = Integer.parseInt(st.nextToken());
+        inOrder = new int[N];
+        postOrder = new int[N];
+
+        getRootIdx = new int[N + 1];
+
+        st = new StringTokenizer(br.readLine());
+        for (int i = 0; i < N; i++)
+            inOrder[i] = Integer.parseInt(st.nextToken());
+
+        st = new StringTokenizer(br.readLine());
+        for (int i = 0; i < N; i++)
+            postOrder[i] = Integer.parseInt(st.nextToken());
+
+        for (int i = 0; i < N; i++)
+            getRootIdx[inOrder[i]] = i;
+
+        recur(0, N - 1, 0, N - 1);
+        System.out.println(sb);
+        br.close();
+    }
+
+    private static void recur(int inSt, int inEd, int poSt, int poEd) {
+        if (inSt > inEd || poSt > poEd)
+            return;
+        int r = postOrder[poEd];
+        sb.append(r + " ");
+
+        int inRoot = getRootIdx[r];
+        int l = inRoot - inSt;
+        recur(inSt, inRoot - 1, poSt, poSt + l - 1);
+        recur(inRoot + 1, inEd, poSt + l, poEd - 1);
+    }
+}
+```
+
+## 복잡도
+
+- 시간: O(N log N)
+- 공간: O(N)

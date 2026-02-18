@@ -1,0 +1,84 @@
+---
+title: "BOJ 1406 - 에디터"
+date: "2023-02-06"
+description: "자료 구조, 스택, 연결 리스트 문제"
+tags: ["자료 구조", "스택", "연결 리스트"]
+platform: "boj"
+problem_number: "1406"
+problem_url: "https://www.acmicpc.net/problem/1406"
+difficulty: "실버 II"
+language: "java"
+---
+
+## 문제
+
+[BOJ 1406 - 에디터](https://www.acmicpc.net/problem/1406)
+
+## 풀이
+
+스택을 활용하여 문제를 해결한다.
+
+## 코드
+
+```java
+
+import java.io.*;
+import java.util.*;
+
+public class Day364BOJ1406에디터 {
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+
+        String s = br.readLine();
+        int m = Integer.parseInt(br.readLine());
+
+        Stack<Character> stackL = new Stack<>();
+        Stack<Character> stackR = new Stack<>();
+
+        for (int i = 0; i < s.length(); i++) {
+            stackL.push(s.charAt(i));
+        }
+
+        for (int i = 0; i < m; i++) {
+            String command = br.readLine();
+            char c = command.charAt(0);
+
+            if (c == 'L') {
+                if (stackL.size() != 0) {
+                    stackR.push(stackL.pop());
+                }
+            }
+
+            else if (c == 'D') {
+                if (stackR.size() != 0) {
+                    stackL.push(stackR.pop());
+                }
+            } else if (c == 'B') {
+                if (stackL.size() != 0) {
+                    stackL.pop();
+                }
+            } else if ((c == 'P')) {
+                char t = command.charAt(2);
+                stackL.push(t);
+            }
+        }
+
+        while (stackL.size() != 0) {
+            stackR.push(stackL.pop());
+        }
+
+        while (stackR.size() != 0) {
+            bw.write(stackR.pop());
+        }
+
+        bw.flush();
+        bw.close();
+    }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

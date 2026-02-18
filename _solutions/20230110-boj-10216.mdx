@@ -1,0 +1,81 @@
+---
+title: "BOJ 10216 - Count Circle Groups"
+date: "2023-01-10"
+description: "그래프 이론, 자료 구조, 그래프 탐색 문제"
+tags: ["그래프 이론", "자료 구조", "그래프 탐색", "기하학", "분리 집합"]
+platform: "boj"
+problem_number: "10216"
+problem_url: "https://www.acmicpc.net/problem/10216"
+difficulty: "골드 IV"
+language: "java"
+---
+
+## 문제
+
+[BOJ 10216 - Count Circle Groups](https://www.acmicpc.net/problem/10216)
+
+## 풀이
+
+그래프 탐색(BFS/DFS)을 활용하여 탐색한다. 분리 집합(Union-Find)을 사용하여 집합 관계를 관리한다.
+
+## 코드
+
+```java
+package day349;
+
+import java.io.*;
+import java.util.*;
+
+public class Day337BOJ10216CountCircleGoup {
+    static int n, a[][], i, j, R, x, y, p[], X, Y, re;
+
+    static int P(int x) {
+        if (x == p[x])
+            return x;
+        return p[x] = P(p[x]);
+    }
+
+    static void u(int x, int y) {
+        x = P(x);
+        y = P(y);
+        p[x] = x < y ? x : y;
+        p[y] = x < y ? x : y;
+    }
+
+    public static void main(String[] args) throws Exception {
+        BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter w = new BufferedWriter(new OutputStreamWriter(System.out));
+        n = Integer.parseInt(r.readLine());
+        for (; n-- > 0;) {
+            re = i = j = Integer.parseInt(r.readLine());
+            p = new int[j];
+            a = new int[j][3];
+            for (; j-- > 0;) {
+                StringTokenizer t = new StringTokenizer(r.readLine());
+                a[j][0] = Integer.parseInt(t.nextToken());
+                a[j][1] = Integer.parseInt(t.nextToken());
+                a[j][2] = Integer.parseInt(t.nextToken());
+                p[j] = j;
+            }
+            for (x = 0; x < i; x++)
+                for (y = x + 1; y < i; y++) {
+                    X = a[x][0] - a[y][0];
+                    Y = a[x][1] - a[y][1];
+                    R = a[x][2] + a[y][2];
+                    if (X * X + Y * Y <= R * R)
+                        if (P(x) != P(y)) {
+                            re--;
+                            u(x, y);
+                        }
+                }
+            w.write(re + "\n");
+        }
+        w.flush();
+    }
+}
+```
+
+## 복잡도
+
+- 시간: O(V + E)
+- 공간: O(V + E)

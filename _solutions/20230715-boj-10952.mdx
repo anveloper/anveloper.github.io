@@ -1,0 +1,55 @@
+---
+title: "BOJ 10952 - A+B - 5"
+date: "2023-07-15"
+description: "구현, 사칙연산, 수학 문제"
+tags: ["구현", "사칙연산", "수학"]
+platform: "boj"
+problem_number: "10952"
+problem_url: "https://www.acmicpc.net/problem/10952"
+difficulty: "브론즈 V"
+language: "java"
+---
+
+## 문제
+
+[BOJ 10952 - A+B - 5](https://www.acmicpc.net/problem/10952)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```java
+package day549;
+
+import java.io.*;
+import java.util.*;
+
+public class Day524BOJ10952ab5 {
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+    StringTokenizer st;
+    StringBuilder sb = new StringBuilder();
+
+    while (true) {
+
+      st = new StringTokenizer(br.readLine(), " ");
+      int A = Integer.parseInt(st.nextToken());
+      int B = Integer.parseInt(st.nextToken());
+
+      if (A == 0 && B == 0) {
+        break;
+      }
+      sb.append((A + B)).append('\n');
+    }
+    System.out.println(sb);
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

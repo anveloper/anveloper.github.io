@@ -1,0 +1,55 @@
+---
+title: "BOJ 2920 - 음계"
+date: "2023-09-12"
+description: "구현 문제"
+tags: ["구현"]
+platform: "boj"
+problem_number: "2920"
+problem_url: "https://www.acmicpc.net/problem/2920"
+difficulty: "브론즈 II"
+language: "java"
+---
+
+## 문제
+
+[BOJ 2920 - 음계](https://www.acmicpc.net/problem/2920)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```java
+package day599;
+
+import java.util.Scanner;
+
+public class Day585BOJ2920음계 {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int[] inputs = new int[8];
+    for (int i = 0; i < inputs.length; i++)
+      inputs[i] = sc.nextInt();
+    sc.close();
+
+    String output = "";
+    for (int i = 0; i < inputs.length - 1; i++) {
+      if (inputs[i] == inputs[i + 1] - 1)
+        output = "ascending";
+      else if (inputs[i] == inputs[i + 1] + 1)
+        output = "descending";
+      else {
+        output = "mixed";
+        break;
+      }
+    }
+    System.out.println(output);
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

@@ -1,0 +1,78 @@
+---
+title: "BOJ 6416 - 트리인가?"
+date: "2024-02-13"
+description: "트리, 그래프 이론, 자료 구조 문제"
+tags: ["트리", "그래프 이론", "자료 구조"]
+platform: "boj"
+problem_number: "6416"
+problem_url: "https://www.acmicpc.net/problem/6416"
+difficulty: "Unrated"
+language: "java"
+---
+
+## 문제
+
+[BOJ 6416 - 트리인가?](https://www.acmicpc.net/problem/6416)
+
+## 풀이
+
+문제의 조건에 맞게 풀이한다.
+
+## 코드
+
+```java
+package day749;
+
+import java.io.*;
+import java.util.*;
+
+public class Day742BOJ6416트리인가 {
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    Map<Integer, Integer> map = new HashMap<>();
+    Set<Integer> vertex = new HashSet<>();
+    StringBuilder sb = new StringBuilder();
+    StringTokenizer st;
+    outer: for (int tc = 1;; tc++) {
+      map = new HashMap<>();
+      vertex = new HashSet<>();
+      boolean flag = false;
+
+      st = new StringTokenizer(br.readLine());
+      while (true) {
+        if (!st.hasMoreTokens()) {
+          st = new StringTokenizer(br.readLine());
+        }
+        int a = Integer.parseInt(st.nextToken());
+        int b = Integer.parseInt(st.nextToken());
+        if (a == 0)
+          break;
+        if (a == -1)
+          break outer;
+
+        if (!vertex.add(b)) {
+          flag = true;
+        }
+        map.put(a, map.getOrDefault(a, 0) + 1);
+      }
+
+      if (vertex.size() != 0) {
+        int rootNum = 0;
+        for (int num : map.keySet()) {
+          if (!vertex.contains(num))
+            rootNum++;
+        }
+        if (rootNum != 1)
+          flag = true;
+      }
+      sb.append("Case " + (tc) + ((flag) ? " is not a tree.\n" : " is a tree.\n"));
+    }
+    System.out.println(sb.toString());
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

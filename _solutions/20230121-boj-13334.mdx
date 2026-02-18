@@ -1,0 +1,75 @@
+---
+title: "BOJ 13334 - 철로"
+date: "2023-01-21"
+description: "자료 구조, 정렬, 스위핑 문제"
+tags: ["자료 구조", "정렬", "스위핑", "우선순위 큐"]
+platform: "boj"
+problem_number: "13334"
+problem_url: "https://www.acmicpc.net/problem/13334"
+difficulty: "골드 II"
+language: "java"
+---
+
+## 문제
+
+[BOJ 13334 - 철로](https://www.acmicpc.net/problem/13334)
+
+## 풀이
+
+정렬을 활용하여 문제를 해결한다.
+
+## 코드
+
+```java
+package day349;
+
+import java.io.*;
+import java.util.*;
+
+public class Day348BOJ13334철로 {
+    static int N, d, ans = -1;
+    static List<int[]> list;
+    static PriorityQueue<Integer> pq;
+
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        N = Integer.parseInt(st.nextToken());
+        list = new ArrayList<>();
+        pq = new PriorityQueue<>();
+
+        for (int i = 0; i < N; i++) {
+            st = new StringTokenizer(br.readLine());
+            int h = Integer.parseInt(st.nextToken());
+            int o = Integer.parseInt(st.nextToken());
+            list.add(h < o ? new int[] { h, o } : new int[] { o, h });
+        }
+        d = Integer.parseInt(br.readLine());
+
+        list.sort((o1, o2) -> {
+            if (o1[1] == o2[1])
+                return o1[0] - o2[0];
+            else
+                return o1[1] - o2[1];
+        });
+
+        for (int i = 0; i < N; i++) {
+            int[] cur = list.get(i);
+            pq.add(cur[0]);
+            while (!pq.isEmpty()) {
+                if (pq.peek() >= cur[1] - d)
+                    break;
+                pq.poll();
+            }
+            ans = Math.max(ans, pq.size());
+        }
+        System.out.println(ans);
+        br.close();
+    }
+}
+```
+
+## 복잡도
+
+- 시간: O(N log N)
+- 공간: O(N)

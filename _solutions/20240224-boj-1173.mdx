@@ -1,0 +1,71 @@
+---
+title: "BOJ 1173 - 운동"
+date: "2024-02-24"
+description: "구현, 시뮬레이션 문제"
+tags: ["구현", "시뮬레이션"]
+platform: "boj"
+problem_number: "1173"
+problem_url: "https://www.acmicpc.net/problem/1173"
+difficulty: "브론즈 II"
+language: "java"
+---
+
+## 문제
+
+[BOJ 1173 - 운동](https://www.acmicpc.net/problem/1173)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```java
+package day799;
+
+import java.io.*;
+import java.util.*;
+
+public class Day753BOJ1173운동 {
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    StringTokenizer st = new StringTokenizer(br.readLine());
+    int N = Integer.parseInt(st.nextToken());
+    int m = Integer.parseInt(st.nextToken());
+    int M = Integer.parseInt(st.nextToken());
+    int T = Integer.parseInt(st.nextToken());
+    int R = Integer.parseInt(st.nextToken());
+
+    int mix = m;
+    int count = 0;
+
+    if ((M - m) < T) {
+      System.out.println(-1);
+    } else {
+      while (true) {
+
+        if ((m + T) <= M) {
+          m += T;
+          N--;
+        } else {
+          m -= R;
+        }
+        if (m < mix) {
+          m = mix;
+        }
+
+        count++;
+
+        if (N == 0)
+          break;
+      }
+      System.out.println(count);
+    }
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

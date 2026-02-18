@@ -1,0 +1,59 @@
+---
+title: "BOJ 14425 - 문자열 집합"
+date: "2022-06-23"
+description: "자료 구조, 문자열, 집합과 맵 문제"
+tags: ["자료 구조", "문자열", "집합과 맵", "해시를 사용한 집합과 맵", "트리를 사용한 집합과 맵"]
+platform: "boj"
+problem_number: "14425"
+problem_url: "https://www.acmicpc.net/problem/14425"
+difficulty: "실버 IV"
+language: "java"
+---
+
+## 문제
+
+[BOJ 14425 - 문자열 집합](https://www.acmicpc.net/problem/14425)
+
+## 풀이
+
+문자열 처리를 통해 문제를 해결한다.
+
+## 코드
+
+```java
+package com.ssafy.an.day149;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.HashSet;
+import java.util.StringTokenizer;
+
+public class Day145BOJ14425문자열해쉬맵 {
+	static int N, M, cnt;
+	static HashSet<String> set;
+
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		N = Integer.parseInt(st.nextToken());
+		M = Integer.parseInt(st.nextToken());
+		cnt = 0;
+
+		set = new HashSet<>();
+		for (int i = 0; i < N; i++)
+			set.add(br.readLine());
+
+		for (int i = 0; i < M; i++)
+			if (set.contains(br.readLine()))
+				cnt++;
+
+		System.out.println(cnt);
+		br.close();
+	}
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

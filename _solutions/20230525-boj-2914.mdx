@@ -1,0 +1,45 @@
+---
+title: "BOJ 2914 - 저작권"
+date: "2023-05-25"
+description: "구현, 사칙연산, 수학 문제"
+tags: ["구현", "사칙연산", "수학"]
+platform: "boj"
+problem_number: "2914"
+problem_url: "https://www.acmicpc.net/problem/2914"
+difficulty: "브론즈 III"
+language: "java"
+---
+
+## 문제
+
+[BOJ 2914 - 저작권](https://www.acmicpc.net/problem/2914)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```java
+package day649;
+
+import java.io.*;
+import java.util.*;
+
+public class Day642BOJ2914저작권 {
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+    StringTokenizer st = new StringTokenizer(br.readLine());
+
+    bw.write(String.valueOf(Integer.parseInt(st.nextToken()) * (Integer.parseInt(st.nextToken()) - 1) + 1));
+    bw.flush();
+    bw.close();
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

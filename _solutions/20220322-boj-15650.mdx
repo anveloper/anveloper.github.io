@@ -1,0 +1,66 @@
+---
+title: "BOJ 15650 - N과 M (2)"
+date: "2022-03-22"
+description: "백트래킹 문제"
+tags: ["백트래킹"]
+platform: "boj"
+problem_number: "15650"
+problem_url: "https://www.acmicpc.net/problem/15650"
+difficulty: "실버 III"
+language: "java"
+---
+
+## 문제
+
+[BOJ 15650 - N과 M (2)](https://www.acmicpc.net/problem/15650)
+
+## 풀이
+
+백트래킹으로 가능한 경우를 탐색한다.
+
+## 코드
+
+```java
+package com.ssafy.an.day049;
+
+import java.util.Scanner;
+
+public class Day43BOJ15650N과M2DFS연습 { // 15650 N과 M DFS
+	static int[] arr;
+	static int N, M;
+	static StringBuilder sb;
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		sb = new StringBuilder();
+		N = sc.nextInt();
+		M = sc.nextInt();
+
+		arr = new int[M];
+		// 1 포함
+		dfs(1, 0);
+
+		System.out.println(sb);
+		sc.close();
+	}
+
+	static void dfs(int at, int depth) {
+		if (depth == M) {
+			for (int n : arr) {
+				sb.append(n).append(" ");
+			}
+			sb.append("\n");
+			return;
+		} // 1 ~ N포함 까지
+		for (int i = at; i <= N; i++) {
+			arr[depth] = i;
+			dfs(i + 1, depth + 1);
+		}
+	} // 구선생님.. 왜 제껀 틀리나요..
+}
+```
+
+## 복잡도
+
+- 시간: O(N!)
+- 공간: O(N)

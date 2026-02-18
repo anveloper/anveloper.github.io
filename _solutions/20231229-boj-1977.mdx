@@ -1,0 +1,49 @@
+---
+title: "BOJ 1977 - 완전제곱수"
+date: "2023-12-29"
+description: "수학, 구현, 브루트포스 알고리즘 문제"
+tags: ["수학", "구현", "브루트포스 알고리즘"]
+platform: "boj"
+problem_number: "1977"
+problem_url: "https://www.acmicpc.net/problem/1977"
+difficulty: "브론즈 II"
+language: "java"
+---
+
+## 문제
+
+[BOJ 1977 - 완전제곱수](https://www.acmicpc.net/problem/1977)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```java
+package day699;
+
+import java.io.*;
+
+public class Day696BOJ1977완전제곱수 {
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    int m = Integer.parseInt(br.readLine());
+    int n = Integer.parseInt(br.readLine());
+    int min = Integer.MAX_VALUE;
+    int sum = 0;
+    for (int i = 1; i * i <= n; i++) {
+      if (i * i >= m && i * i <= n) {
+        min = Math.min(i * i, min);
+        sum += i * i;
+      }
+    }
+    System.out.print(sum == 0 ? -1 : sum + "\n" + min);
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

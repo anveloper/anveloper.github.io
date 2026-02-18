@@ -1,0 +1,74 @@
+---
+title: "BOJ 2346 - 풍선 터뜨리기"
+date: "2023-05-20"
+description: "자료 구조, 덱 문제"
+tags: ["자료 구조", "덱"]
+platform: "boj"
+problem_number: "2346"
+problem_url: "https://www.acmicpc.net/problem/2346"
+difficulty: "실버 III"
+language: "java"
+---
+
+## 문제
+
+[BOJ 2346 - 풍선 터뜨리기](https://www.acmicpc.net/problem/2346)
+
+## 풀이
+
+문제의 조건에 맞게 풀이한다.
+
+## 코드
+
+```java
+package day499;
+
+import java.io.*;
+import java.util.*;
+
+public class Day468BOJ2346풍선터뜨리기 {
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    int n = Integer.parseInt(br.readLine());
+
+    Deque<int[]> q = new ArrayDeque<>();
+    StringTokenizer st = new StringTokenizer(br.readLine());
+
+    int[] arr = new int[n];
+    for (int i = 0; i < n; i++)
+      arr[i] = Integer.parseInt(st.nextToken());
+
+    StringBuilder sb = new StringBuilder();
+    sb.append("1 ");
+    int in = arr[0];
+
+    for (int i = 1; i < n; i++)
+      q.add(new int[] { (i + 1), arr[i] });
+
+    while (!q.isEmpty()) {
+      if (in > 0) {
+        for (int i = 1; i < in; i++)
+          q.add(q.poll());
+
+        int[] nxt = q.poll();
+        in = nxt[1];
+        sb.append(nxt[0] + " ");
+      } else {
+        for (int i = 1; i < -in; i++)
+          q.addFirst(q.pollLast());
+
+        int[] nxt = q.pollLast();
+        in = nxt[1];
+        sb.append(nxt[0] + " ");
+      }
+    }
+    System.out.println(sb);
+    br.close();
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

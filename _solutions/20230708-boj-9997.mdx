@@ -1,0 +1,67 @@
+---
+title: "BOJ 9997 - 폰트"
+date: "2023-07-08"
+description: "브루트포스 알고리즘, 비트마스킹, 재귀 문제"
+tags: ["브루트포스 알고리즘", "비트마스킹", "재귀"]
+platform: "boj"
+problem_number: "9997"
+problem_url: "https://www.acmicpc.net/problem/9997"
+difficulty: "골드 III"
+language: "java"
+---
+
+## 문제
+
+[BOJ 9997 - 폰트](https://www.acmicpc.net/problem/9997)
+
+## 풀이
+
+비트마스킹을 활용하여 상태를 관리한다.
+
+## 코드
+
+```java
+package day549;
+
+import java.io.*;
+
+public class Day517BOJ9997폰트 {
+  static final int ALPHA = (1 << 26) - 1;
+  static int N, ans;
+  static int[] words;
+
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+    N = Integer.parseInt(br.readLine());
+    words = new int[N];
+
+    for (int i = 0; i < N; i++) {
+      String[] input = br.readLine().split("");
+
+      for (int j = 0; j < input.length; j++) {
+        words[i] |= 1 << input[j].charAt(0) - 'a';
+      }
+    }
+
+    dfs(-1, 0);
+    System.out.println(ans);
+  }
+
+  static void dfs(int count, int mask) {
+    if (count == N - 1) {
+      if (mask == ALPHA) {
+        ans++;
+      }
+    } else {
+      dfs(count + 1, mask | words[count + 1]);
+      dfs(count + 1, mask);
+    }
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N²)
+- 공간: O(N)

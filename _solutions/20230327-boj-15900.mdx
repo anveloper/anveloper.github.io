@@ -1,0 +1,77 @@
+---
+title: "BOJ 15900 - 나무 탈출"
+date: "2023-03-27"
+description: "그래프 이론, 그래프 탐색, 트리 문제"
+tags: ["그래프 이론", "그래프 탐색", "트리", "깊이 우선 탐색"]
+platform: "boj"
+problem_number: "15900"
+problem_url: "https://www.acmicpc.net/problem/15900"
+difficulty: "실버 I"
+language: "java"
+---
+
+## 문제
+
+[BOJ 15900 - 나무 탈출](https://www.acmicpc.net/problem/15900)
+
+## 풀이
+
+그래프 탐색(BFS/DFS)을 활용하여 탐색한다. 깊이 우선 탐색(DFS)을 활용하여 탐색한다.
+
+## 코드
+
+```java
+package day449;
+
+import java.io.*;
+import java.util.*;
+
+public class Day414BOJ15900나무탈출 {
+  static int ans = 0;
+  static List<Integer>[] list;
+
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    int N = Integer.parseInt(br.readLine());
+    StringTokenizer st;
+
+    list = new LinkedList[N + 1];
+
+    for (int i = 1; i <= N; i++) {
+      list[i] = new LinkedList<Integer>();
+    }
+
+    for (int i = 0; i < N - 1; i++) {
+      st = new StringTokenizer(br.readLine());
+
+      int a = Integer.parseInt(st.nextToken());
+      int b = Integer.parseInt(st.nextToken());
+
+      list[a].add(b);
+      list[b].add(a);
+    }
+
+    dfs(1, 0, 0);
+
+    System.out.println((ans % 2) == 0 ? "No" : "Yes");
+    br.close();
+  }
+
+  public static void dfs(int cur, int p, int cnt) {
+    for (int next : list[cur]) {
+      if (next != p) {
+        dfs(next, cur, cnt + 1);
+      }
+    }
+
+    if (list[cur].size() == 1) {
+      ans += cnt;
+    }
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(V + E)
+- 공간: O(V + E)

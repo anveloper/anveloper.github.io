@@ -1,0 +1,52 @@
+---
+title: "BOJ 10101 - 삼각형 외우기"
+date: "2024-01-15"
+description: "구현, 기하학 문제"
+tags: ["구현", "기하학"]
+platform: "boj"
+problem_number: "10101"
+problem_url: "https://www.acmicpc.net/problem/10101"
+difficulty: "브론즈 IV"
+language: "java"
+---
+
+## 문제
+
+[BOJ 10101 - 삼각형 외우기](https://www.acmicpc.net/problem/10101)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```java
+package day749;
+
+import java.io.*;
+
+public class Day713BOJ10101삼각형외우기 {
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    int a = Integer.parseInt(br.readLine());
+    int b = Integer.parseInt(br.readLine());
+    int c = Integer.parseInt(br.readLine());
+    if (a + b + c != 180) {
+      System.out.print("Error");
+    } else {
+      if (a == 60 && b == 60 && c == 60) {
+        System.out.print("Equilateral");
+      } else if (a == b || b == c || c == a) {
+        System.out.print("Isosceles");
+      } else {
+        System.out.print("Scalene");
+      }
+    }
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

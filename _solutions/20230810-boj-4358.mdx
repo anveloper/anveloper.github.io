@@ -1,0 +1,68 @@
+---
+title: "BOJ 4358 - 생태학"
+date: "2023-08-10"
+description: "자료 구조, 문자열, 집합과 맵 문제"
+tags: ["자료 구조", "문자열", "집합과 맵", "해시를 사용한 집합과 맵", "트리를 사용한 집합과 맵"]
+platform: "boj"
+problem_number: "4358"
+problem_url: "https://www.acmicpc.net/problem/4358"
+difficulty: "실버 II"
+language: "java"
+---
+
+## 문제
+
+[BOJ 4358 - 생태학](https://www.acmicpc.net/problem/4358)
+
+## 풀이
+
+문자열 처리를 통해 문제를 해결한다.
+
+## 코드
+
+```java
+package day599;
+
+import java.io.*;
+import java.util.*;
+
+public class Day550BOJ4358생태학 {
+  static HashMap<String, Integer> trees;
+  static int allCount;
+
+  public static void main(String args[]) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+    trees = new HashMap<String, Integer>();
+    String str = br.readLine();
+    while (true) {
+      trees.put(str, trees.getOrDefault(str, 0) + 1);
+      allCount++;
+
+      str = br.readLine();
+      if (str == null || str.length() == 0) {
+        break;
+      }
+    }
+
+    Object[] keys = trees.keySet().toArray();
+    Arrays.sort(keys);
+
+    StringBuilder sb = new StringBuilder();
+    for (Object key : keys) {
+      String keyStr = (String) key;
+      int count = trees.get(keyStr);
+      double per = (double) (count * 100.0) / allCount;
+
+      sb.append(keyStr + " " + String.format("%.4f", per) + "\n"); // 소수점 4번 째 자리까지 출력
+    }
+
+    System.out.println(sb.toString());
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N log N)
+- 공간: O(N)

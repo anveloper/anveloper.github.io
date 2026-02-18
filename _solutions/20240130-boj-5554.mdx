@@ -1,0 +1,48 @@
+---
+title: "BOJ 5554 - 심부름 가는 길"
+date: "2024-01-30"
+description: "구현, 사칙연산, 수학 문제"
+tags: ["구현", "사칙연산", "수학"]
+platform: "boj"
+problem_number: "5554"
+problem_url: "https://www.acmicpc.net/problem/5554"
+difficulty: "브론즈 IV"
+language: "java"
+---
+
+## 문제
+
+[BOJ 5554 - 심부름 가는 길](https://www.acmicpc.net/problem/5554)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```java
+package day749;
+
+import java.io.*;
+
+public class Day728BOJ5554심부름가는길 {
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    StringBuilder ans = new StringBuilder();
+    int N = 4;
+    int time = 0;
+    for (int n = 0; n < N; n++) {
+      time += Integer.parseInt(br.readLine());
+    }
+    ans.append(time / 60).append("\n");
+    ans.append(time % 60);
+    System.out.print(ans);
+    br.close();
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

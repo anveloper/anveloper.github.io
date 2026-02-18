@@ -1,0 +1,56 @@
+---
+title: "BOJ 16435 - 스네이크버드"
+date: "2023-05-13"
+description: "그리디 알고리즘, 정렬 문제"
+tags: ["그리디 알고리즘", "정렬"]
+platform: "boj"
+problem_number: "16435"
+problem_url: "https://www.acmicpc.net/problem/16435"
+difficulty: "실버 V"
+language: "java"
+---
+
+## 문제
+
+[BOJ 16435 - 스네이크버드](https://www.acmicpc.net/problem/16435)
+
+## 풀이
+
+그리디 알고리즘으로 매 단계 최선의 선택을 한다.
+
+## 코드
+
+```java
+package day499;
+
+import java.util.*;
+import java.io.*;
+
+public class Day461BOJ16435스네이크버드 {
+
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    StringTokenizer st = new StringTokenizer(br.readLine());
+    int N = Integer.parseInt(st.nextToken());
+    int L = Integer.parseInt(st.nextToken());
+
+    int[] arr = new int[N];
+    st = new StringTokenizer(br.readLine());
+    for (int i = 0; i < arr.length; i++)
+      arr[i] = Integer.parseInt(st.nextToken());
+
+    Arrays.sort(arr);
+    for (int i = 0; i < arr.length; i++) {
+      if (L >= arr[i])
+        ++L;
+    }
+    System.out.println(L);
+    br.close();
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N log N)
+- 공간: O(N)

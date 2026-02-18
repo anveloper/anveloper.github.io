@@ -1,0 +1,51 @@
+---
+title: "BOJ 7567 - 그릇"
+date: "2023-11-06"
+description: "구현, 문자열 문제"
+tags: ["구현", "문자열"]
+platform: "boj"
+problem_number: "7567"
+problem_url: "https://www.acmicpc.net/problem/7567"
+difficulty: "브론즈 II"
+language: "java"
+---
+
+## 문제
+
+[BOJ 7567 - 그릇](https://www.acmicpc.net/problem/7567)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```java
+package day649;
+
+import java.io.*;
+
+public class Day640BOJ7567그릇 {
+  public static void main(String[] args) throws IOException {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    String str = br.readLine();
+    int ans = 10;
+
+    for (int i = 1; i < str.length(); i++) {
+      if (str.charAt(i) == str.charAt(i - 1)) {
+        ans += 5;
+      } else {
+        ans += 10;
+      }
+    }
+
+    System.out.println(ans);
+    br.close();
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

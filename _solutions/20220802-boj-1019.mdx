@@ -1,0 +1,82 @@
+---
+title: "BOJ 1019 - 책 페이지"
+date: "2022-08-02"
+description: "수학, 구현 문제"
+tags: ["수학", "구현"]
+platform: "boj"
+problem_number: "1019"
+problem_url: "https://www.acmicpc.net/problem/1019"
+difficulty: "플래티넘 V"
+language: "java"
+---
+
+## 문제
+
+[BOJ 1019 - 책 페이지](https://www.acmicpc.net/problem/1019)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```java
+package com.ssafy.an.day199;
+
+import java.util.Scanner;
+
+public class Day176BOJ1019t수 {
+	static int st, ed, digit;
+	static int[] cnt;
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+
+		digit = 1;
+		st = 1;
+		ed = sc.nextInt();
+
+		cnt = new int[10];
+
+		while (st <= ed) {
+			while (st % 10 != 0 && st <= ed) {
+				counting(st, digit);
+				st++;
+			}
+
+			while (ed % 10 != 9 && st <= ed) {
+				counting(ed, digit);
+				ed--;
+			}
+
+			if (st > ed)
+				break;
+
+			st /= 10;
+			ed /= 10;
+
+			for (int i = 0; i < 10; ++i) {
+				cnt[i] += (ed - st + 1) * digit;
+			}
+
+			digit *= 10;
+		}
+
+		for (long i : cnt) {
+			System.out.print(i + " ");
+		}
+	}
+
+	private static void counting(int num, int digit) {
+		while (num > 0) {
+			cnt[num % 10] += digit;
+			num /= 10;
+		}
+	}
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

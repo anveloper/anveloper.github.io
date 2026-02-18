@@ -1,0 +1,82 @@
+---
+title: "BOJ 2233 - 사과나무"
+date: "2023-12-02"
+description: "자료 구조, 그래프 이론, 트리 문제"
+tags: ["자료 구조", "그래프 이론", "트리", "스택", "최소 공통 조상"]
+platform: "boj"
+problem_number: "2233"
+problem_url: "https://www.acmicpc.net/problem/2233"
+difficulty: "골드 II"
+language: "java"
+---
+
+## 문제
+
+[BOJ 2233 - 사과나무](https://www.acmicpc.net/problem/2233)
+
+## 풀이
+
+스택을 활용하여 문제를 해결한다.
+
+## 코드
+
+```java
+package day699;
+
+import java.io.*;
+import java.util.*;
+
+public class Day665BOJ2233사과나무 {
+  static int N, X, Y;
+  static String bin;
+  static int[] vs;
+
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    StringBuilder sb = new StringBuilder();
+    N = Integer.parseInt(br.readLine());
+
+    bin = br.readLine();
+
+    StringTokenizer st = new StringTokenizer(br.readLine());
+
+    X = Integer.parseInt(st.nextToken());
+    Y = Integer.parseInt(st.nextToken());
+
+    if (X > Y) {
+      int temp = X;
+      X = Y;
+      Y = temp;
+    }
+
+    vs = new int[2 * N + 1];
+
+    recur();
+
+    for (int i = X; i > 0; i--) {
+      if (vs[i] == 0)
+        continue;
+      if (vs[i] < Y)
+        continue;
+
+      sb.append(i + " " + vs[i] + "\n");
+      break;
+    }
+    System.out.println(sb);
+  }
+
+  static int cur = 0;
+
+  private static void recur() {
+    int s = cur++ + 1;
+    while (bin.charAt(cur) - '0' == 0)
+      recur();
+    vs[s] = cur++ + 1;
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

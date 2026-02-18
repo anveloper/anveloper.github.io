@@ -1,0 +1,57 @@
+---
+title: "BOJ 16120 - PPAP"
+date: "2023-02-13"
+description: "자료 구조, 문자열, 스택 문제"
+tags: ["자료 구조", "문자열", "스택"]
+platform: "boj"
+problem_number: "16120"
+problem_url: "https://www.acmicpc.net/problem/16120"
+difficulty: "골드 IV"
+language: "java"
+---
+
+## 문제
+
+[BOJ 16120 - PPAP](https://www.acmicpc.net/problem/16120)
+
+## 풀이
+
+스택을 활용하여 문제를 해결한다.
+
+## 코드
+
+```java
+import java.io.*;
+
+public class Day371BOJ16120PPAP {
+    static int cnt;
+    static char[] crr;
+    static boolean ans;
+
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        crr = br.readLine().toCharArray();
+        ans = true;
+        for (int i = 0; i < crr.length; i++) {
+            if (crr[i] == 'P') {
+                cnt++;
+            } else {
+                if (i + 1 < crr.length && crr[i + 1] == 'P' && cnt > 1) {
+                    i++;
+                    cnt--;
+                } else {
+                    ans = false;
+                    break;
+                }
+            }
+        }
+        System.out.println(ans && cnt == 1 ? "PPAP" : "NP");
+        br.close();
+    }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

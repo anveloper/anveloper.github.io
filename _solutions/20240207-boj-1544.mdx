@@ -1,0 +1,65 @@
+---
+title: "BOJ 1544 - 사이클 단어"
+date: "2024-02-07"
+description: "구현, 자료 구조, 문자열 문제"
+tags: ["구현", "자료 구조", "문자열", "브루트포스 알고리즘", "집합과 맵", "해시를 사용한 집합과 맵"]
+platform: "boj"
+problem_number: "1544"
+problem_url: "https://www.acmicpc.net/problem/1544"
+difficulty: "실버 IV"
+language: "java"
+---
+
+## 문제
+
+[BOJ 1544 - 사이클 단어](https://www.acmicpc.net/problem/1544)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```java
+package day749;
+
+import java.io.*;
+import java.util.*;
+
+public class Day736BOJ1544사이클단어 {
+  static int N;
+  static ArrayList<String>[] arr;
+
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    N = Integer.parseInt(br.readLine());
+    arr = new ArrayList[N];
+    int ans = 0;
+
+    for (int i = 0; i < N; i++) {
+      arr[i] = new ArrayList<>();
+      String str = br.readLine();
+      for (int j = 0; j < str.length(); j++) {
+        arr[i].add(str.substring(j) + str.substring(0, j));
+      }
+
+      boolean chk = true;
+      for (int j = 0; chk && j <= i - 1; j++) {
+        for (int k = 0; chk && k < arr[j].size(); k++) {
+          if (str.equals(arr[j].get(k)))
+            chk = false;
+        }
+      }
+      if (chk)
+        ans++;
+    }
+
+    System.out.println(ans);
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N²)
+- 공간: O(N)

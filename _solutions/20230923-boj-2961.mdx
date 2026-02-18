@@ -1,0 +1,79 @@
+---
+title: "BOJ 2961 - 도영이가 만든 맛있는 음식"
+date: "2023-09-23"
+description: "브루트포스 알고리즘, 비트마스킹, 백트래킹 문제"
+tags: ["브루트포스 알고리즘", "비트마스킹", "백트래킹"]
+platform: "boj"
+problem_number: "2961"
+problem_url: "https://www.acmicpc.net/problem/2961"
+difficulty: "실버 II"
+language: "java"
+---
+
+## 문제
+
+[BOJ 2961 - 도영이가 만든 맛있는 음식](https://www.acmicpc.net/problem/2961)
+
+## 풀이
+
+백트래킹으로 가능한 경우를 탐색한다. 비트마스킹을 활용하여 상태를 관리한다.
+
+## 코드
+
+```java
+package day599;
+
+import java.io.*;
+import java.util.*;
+
+public class Day596BOJ2961도영이음식 {
+  static int ans;
+  static boolean[] sel;
+  static int[][] arr;
+  static int N;
+
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+    N = Integer.parseInt(br.readLine());
+    sel = new boolean[N];
+    ans = Integer.MAX_VALUE;
+    arr = new int[N][2];
+
+    for (int i = 0; i < N; i++) {
+      StringTokenizer st = new StringTokenizer(br.readLine());
+      arr[i][0] = Integer.parseInt(st.nextToken());
+      arr[i][1] = Integer.parseInt(st.nextToken());
+    }
+
+    subSet(0, 1, 0);
+
+    System.out.println(ans);
+  }
+
+  public static void subSet(int cnt, int mul, int sum) {
+    if (cnt == N) {
+      int c = 0;
+      for (int i = 0; i < N; i++) {
+        if (sel[i])
+          continue;
+        c++;
+      }
+      if (c == N)
+        return;
+      ans = Math.min(ans, Math.abs(mul - sum));
+      return;
+    }
+
+    sel[cnt] = true;
+    subSet(cnt + 1, mul * arr[cnt][0], sum + arr[cnt][1]);
+    sel[cnt] = false;
+    subSet(cnt + 1, mul, sum);
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N!)
+- 공간: O(N)

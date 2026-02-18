@@ -1,0 +1,44 @@
+---
+title: "BOJ 18108 - 1998년생인 내가 태국에서는 2541년생?!"
+date: "2022-03-13"
+description: "수학, 사칙연산 문제"
+tags: ["수학", "사칙연산"]
+platform: "boj"
+problem_number: "18108"
+problem_url: "https://www.acmicpc.net/problem/18108"
+difficulty: "브론즈 V"
+language: "java"
+---
+
+## 문제
+
+[BOJ 18108 - 1998년생인 내가 태국에서는 2541년생?!](https://www.acmicpc.net/problem/18108)
+
+## 풀이
+
+수학적 성질을 이용하여 풀이한다.
+
+## 코드
+
+```java
+package ASP_study.day049;
+
+import java.util.Scanner;
+
+public class Day01BOJ18108태국년생 { // 18108 날먹...
+	public static void main(String[] args) throws Exception {
+		Scanner sc = new Scanner(System.in);
+		int y = Integer.parseInt(sc.nextLine());
+		int gap = 2541 - 1998;
+		System.out.println(y - gap);
+		sc.close();
+	}
+	// 백준 시스템 확인중..
+	// class는 무조건 Main, package명 제거, 확인..
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

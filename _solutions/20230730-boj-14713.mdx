@@ -1,0 +1,74 @@
+---
+title: "BOJ 14713 - 앵무새"
+date: "2023-07-30"
+description: "구현, 자료 구조, 문자열 문제"
+tags: ["구현", "자료 구조", "문자열", "집합과 맵", "큐"]
+platform: "boj"
+problem_number: "14713"
+problem_url: "https://www.acmicpc.net/problem/14713"
+difficulty: "실버 II"
+language: "java"
+---
+
+## 문제
+
+[BOJ 14713 - 앵무새](https://www.acmicpc.net/problem/14713)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```java
+package day549;
+
+import java.io.*;
+
+public class Day539BOJ14713앵무새 {
+  static int N, cnt = 0;
+  static String[] L;
+  static String[][] arr;
+
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    N = Integer.parseInt(br.readLine());
+
+    arr = new String[N][];
+    for (int i = 0; i < N; i++) {
+      arr[i] = br.readLine().split(" ");
+      cnt += arr[i].length;
+    }
+    L = br.readLine().split(" ");
+
+    if (L.length != cnt)
+      System.out.print("Impossible");
+    else
+      System.out.print(isPossible());
+  }
+
+  static String isPossible() {
+    int[] idx = new int[N];
+    for (String w : L) {
+      boolean flag = false;
+      for (int j = 0; j < N; j++) {
+        if (idx[j] == arr[j].length)
+          continue;
+        if (w.equals(arr[j][idx[j]])) {
+          idx[j]++;
+          flag = true;
+          break;
+        }
+      }
+      if (!flag)
+        return "Impossible";
+    }
+    return "Possible";
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

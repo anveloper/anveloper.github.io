@@ -1,0 +1,70 @@
+---
+title: "BOJ 2482 - 색상환"
+date: "2023-03-14"
+description: "다이나믹 프로그래밍 문제"
+tags: ["다이나믹 프로그래밍"]
+platform: "boj"
+problem_number: "2482"
+problem_url: "https://www.acmicpc.net/problem/2482"
+difficulty: "골드 III"
+language: "java"
+---
+
+## 문제
+
+[BOJ 2482 - 색상환](https://www.acmicpc.net/problem/2482)
+
+## 풀이
+
+다이나믹 프로그래밍을 사용하여 부분 문제의 해를 메모이제이션하며 풀이한다.
+
+## 코드
+
+```java
+package day449;
+
+import java.io.*;
+
+public class Day401BOJ2482색상환 {
+  static final int MOD = 1000000003;
+  static int N, K;
+  static int[][] dp;
+
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+    N = Integer.parseInt(br.readLine());
+    K = Integer.parseInt(br.readLine());
+
+    dp = new int[N + 1][K + 1];
+
+    if (N / K < 2) {
+      System.out.println(0);
+      return;
+    }
+
+    System.out.println(recur(N, K));
+    br.close();
+  }
+
+  public static int recur(int N, int K) {
+    if (K == 1) {
+      return N;
+    }
+
+    if (K == (N / 2 + N % 2)) {
+      return 2;
+    }
+
+    if (dp[N][K] == 0)
+      dp[N][K] = (recur(N - 2, K - 1) + recur(N - 1, K)) % MOD;
+
+    return dp[N][K];
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N²)
+- 공간: O(N)

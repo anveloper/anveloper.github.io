@@ -1,0 +1,61 @@
+---
+title: "BOJ 1806 - 부분합"
+date: "2023-06-30"
+description: "누적 합, 두 포인터 문제"
+tags: ["누적 합", "두 포인터"]
+platform: "boj"
+problem_number: "1806"
+problem_url: "https://www.acmicpc.net/problem/1806"
+difficulty: "골드 IV"
+language: "java"
+---
+
+## 문제
+
+[BOJ 1806 - 부분합](https://www.acmicpc.net/problem/1806)
+
+## 풀이
+
+투 포인터 기법을 활용한다.
+
+## 코드
+
+```java
+package day649;
+
+import java.util.*;
+import java.io.*;
+
+public class Day617BOJ1806부분합 {
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    StringTokenizer st = new StringTokenizer(br.readLine());
+    int ans = 987654321;
+    int N = Integer.parseInt(st.nextToken());
+    int M = Integer.parseInt(st.nextToken());
+    int[] arr = new int[N];
+    st = new StringTokenizer(br.readLine());
+    for (int i = 0; i < N; i++)
+      arr[i] = Integer.parseInt(st.nextToken());
+    int L = 0;
+    int R = 0;
+    int slide = 0;
+    while (true) {
+      if (slide < M) {
+        if (R == N)
+          break;
+        slide += arr[R++];
+      } else {
+        ans = Math.min(ans, R - L);
+        slide -= arr[L++];
+      }
+    }
+    System.out.println(ans == 987654321 ? 0 : ans);
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

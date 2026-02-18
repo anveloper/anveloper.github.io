@@ -1,0 +1,39 @@
+---
+title: "BOJ 13706 - 제곱근"
+date: "2023-04-14"
+description: "수학, 이분 탐색, 임의 정밀도 / 큰 수 연산 문제"
+tags: ["수학", "이분 탐색", "임의 정밀도 / 큰 수 연산"]
+platform: "boj"
+problem_number: "13706"
+problem_url: "https://www.acmicpc.net/problem/13706"
+difficulty: "실버 IV"
+language: "java"
+---
+
+## 문제
+
+[BOJ 13706 - 제곱근](https://www.acmicpc.net/problem/13706)
+
+## 풀이
+
+이분 탐색을 통해 최적의 값을 탐색한다.
+
+## 코드
+
+```java
+package day449;
+
+import java.io.*;
+import java.math.*;
+
+public class Day432BOJ13706제곱근 {
+  public static void main(String[] args) throws Exception {
+    System.out.println(new BigInteger(new BufferedReader(new InputStreamReader(System.in)).readLine()).sqrt());
+  }
+} // BigInteger.sqrt() 함수 Java8버전은 불가능
+```
+
+## 복잡도
+
+- 시간: O(N log X)
+- 공간: O(N)

@@ -1,0 +1,97 @@
+---
+title: "BOJ 17609 - 회문"
+date: "2022-12-07"
+description: "문자열, 두 포인터 문제"
+tags: ["문자열", "두 포인터"]
+platform: "boj"
+problem_number: "17609"
+problem_url: "https://www.acmicpc.net/problem/17609"
+difficulty: "골드 V"
+language: "java"
+---
+
+## 문제
+
+[BOJ 17609 - 회문](https://www.acmicpc.net/problem/17609)
+
+## 풀이
+
+투 포인터 기법을 활용한다.
+
+## 코드
+
+```java
+package day349;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class Day303BOJ17609회문 {
+    static int T;
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        T = Integer.parseInt(br.readLine());
+
+        for (int i = 0; i < T; i++) {
+            String s = br.readLine();
+
+            checkP(s);
+            System.out.println(checkP(s));
+        }
+    }
+
+    private static int checkP(String s) {
+        int result = 0;
+        int left = 0;
+        int right = s.length() - 1;
+
+        while (left <= right) {
+
+            if (s.charAt(left) == s.charAt(right)) {
+                left++;
+                right--;
+            } else {
+                result = 1;
+
+                int l = left + 1;
+                int r = right;
+
+                while (l <= r) {
+                    if (l > r)
+                        break;
+                    if (s.charAt(l) == s.charAt(r)) {
+                        l++;
+                        r--;
+                    } else {
+                        result++;
+                        break;
+                    }
+                }
+
+                l = left;
+                r = right - 1;
+                while (l <= r) {
+                    if (s.charAt(l) == s.charAt(r)) {
+                        l++;
+                        r--;
+                    } else {
+                        result++;
+                        break;
+                    }
+                }
+                if (result >= 2)
+                    result -= 1;
+                return result;
+            }
+        }
+        return result;
+    }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

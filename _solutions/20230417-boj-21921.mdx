@@ -1,0 +1,71 @@
+---
+title: "BOJ 21921 - 블로그"
+date: "2023-04-17"
+description: "누적 합, 슬라이딩 윈도우 문제"
+tags: ["누적 합", "슬라이딩 윈도우"]
+platform: "boj"
+problem_number: "21921"
+problem_url: "https://www.acmicpc.net/problem/21921"
+difficulty: "실버 III"
+language: "java"
+---
+
+## 문제
+
+[BOJ 21921 - 블로그](https://www.acmicpc.net/problem/21921)
+
+## 풀이
+
+누적 합을 활용하여 구간 합을 효율적으로 계산한다.
+
+## 코드
+
+```java
+package day449;
+
+import java.io.*;
+import java.util.*;
+
+public class Day435BOJ21921블로그 {
+  static int N, X, sum, ans, cnt;
+  static int[] arr;
+
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    StringTokenizer st = new StringTokenizer(br.readLine());
+    N = Integer.parseInt(st.nextToken());
+    X = Integer.parseInt(st.nextToken());
+
+    arr = new int[N];
+    st = new StringTokenizer(br.readLine());
+    for (int i = 0; i < N; i++)
+      arr[i] = Integer.parseInt(st.nextToken());
+
+    sum = 0;
+    for (int i = 0; i < X; i++)
+      sum += arr[i];
+
+    ans = sum;
+    cnt = 1;
+    for (int i = X; i < N; i++) {
+      sum += arr[i] - arr[i - X];
+      if (ans == sum)
+        cnt++;
+      else if (ans < sum) {
+        ans = sum;
+        cnt = 1;
+      }
+    }
+    if (ans == 0) {
+      System.out.println("SAD");
+      return;
+    }
+    System.out.println(ans + "\n" + cnt);
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

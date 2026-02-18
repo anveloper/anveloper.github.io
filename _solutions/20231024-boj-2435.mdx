@@ -1,0 +1,57 @@
+---
+title: "BOJ 2435 - 기상청 인턴 신현수"
+date: "2023-10-24"
+description: "구현, 브루트포스 알고리즘, 누적 합 문제"
+tags: ["구현", "브루트포스 알고리즘", "누적 합"]
+platform: "boj"
+problem_number: "2435"
+problem_url: "https://www.acmicpc.net/problem/2435"
+difficulty: "브론즈 I"
+language: "java"
+---
+
+## 문제
+
+[BOJ 2435 - 기상청 인턴 신현수](https://www.acmicpc.net/problem/2435)
+
+## 풀이
+
+누적 합을 활용하여 구간 합을 효율적으로 계산한다.
+
+## 코드
+
+```java
+package day649;
+
+import java.util.*;
+
+public class Day627BOJ2435기상청인턴신현수 {
+  static int N, K, max = Integer.MIN_VALUE;
+  static int[] tmp = new int[103];
+
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+
+    N = sc.nextInt();
+    K = sc.nextInt();
+
+    for (int i = 0; i < N; i++)
+      tmp[i] = sc.nextInt();
+
+    for (int i = 0; i <= N - K; i++) {
+      int sum = 0;
+      for (int j = 0; j < K; j++)
+        sum += tmp[i + j];
+      if (sum > max)
+        max = sum;
+    }
+    System.out.println(max);
+    sc.close();
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N²)
+- 공간: O(N)

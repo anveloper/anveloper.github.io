@@ -1,0 +1,67 @@
+---
+title: "BOJ 9012 - 괄호"
+date: "2022-03-13"
+description: "자료 구조, 문자열, 스택 문제"
+tags: ["자료 구조", "문자열", "스택"]
+platform: "boj"
+problem_number: "9012"
+problem_url: "https://www.acmicpc.net/problem/9012"
+difficulty: "실버 IV"
+language: "java"
+---
+
+## 문제
+
+[BOJ 9012 - 괄호](https://www.acmicpc.net/problem/9012)
+
+## 풀이
+
+스택을 활용하여 문제를 해결한다.
+
+## 코드
+
+```java
+package com.ssafy.an.day049;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.Stack;
+
+public class Day15BOJ9012괄호 { // 9012
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringBuilder sb = new StringBuilder();
+		int N = Integer.parseInt(br.readLine());
+		Stack<Character> stack = new Stack<>();
+		for (int n = 0; n < N; n++) {
+			String ans = "YES";
+			String str = br.readLine();
+			stack = new Stack<>();
+			for (int i = 0; i < str.length(); i++) {
+				char c = str.charAt(i);
+				if (c == '(')
+					stack.add(c);
+				else if (c == ')') {
+					if (stack.isEmpty() || stack.pop() != '(') {
+						ans = "NO";
+						break;
+					}
+				}
+			}
+
+			if (!stack.isEmpty())
+				ans = "NO";
+
+			sb.append(ans).append("\n");
+		}
+
+		System.out.println(sb);
+		br.close();
+	}
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

@@ -1,0 +1,66 @@
+---
+title: "BOJ 25194 - 결전의 금요일"
+date: "2022-05-16"
+description: "다이나믹 프로그래밍, 브루트포스 알고리즘 문제"
+tags: ["다이나믹 프로그래밍", "브루트포스 알고리즘"]
+platform: "boj"
+problem_number: "25194"
+problem_url: "https://www.acmicpc.net/problem/25194"
+difficulty: "골드 V"
+language: "java"
+---
+
+## 문제
+
+[BOJ 25194 - 결전의 금요일](https://www.acmicpc.net/problem/25194)
+
+## 풀이
+
+다이나믹 프로그래밍을 사용하여 부분 문제의 해를 메모이제이션하며 풀이한다.
+
+## 코드
+
+```java
+package com.ssafy.an.day099;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
+
+public class Day98BOJ25194결전의금요일배열 { // 25194 결전의 금요일 배열복제
+	static int N;
+	static int[] arr;
+	static boolean[] ans;
+
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		N = Integer.parseInt(br.readLine());
+		arr = new int[N];
+		ans = new boolean[7];
+
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		for (int i = 0; i < N; i++)
+			arr[i] = Integer.parseInt(st.nextToken()) % 7;
+
+		ans[arr[0]] = true;
+		for (int i = 1; i < N; i++) {
+			if (ans[4]) break;
+			boolean[] tmp = ans.clone();
+			for (int n = 0; n < 7; n++) {
+				if (!ans[n]) continue;
+				tmp[(n + arr[i]) % 7] = true;
+			}
+			ans = tmp.clone();
+			ans[arr[i]] = true;
+		}
+
+		System.out.println(ans[4] ? "YES" : "NO");
+		br.close();
+	}
+}
+```
+
+## 복잡도
+
+- 시간: O(N²)
+- 공간: O(N)

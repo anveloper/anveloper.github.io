@@ -1,0 +1,54 @@
+---
+title: "BOJ 2407 - 조합"
+date: "2023-05-30"
+description: "수학, 조합론, 임의 정밀도 / 큰 수 연산 문제"
+tags: ["수학", "조합론", "임의 정밀도 / 큰 수 연산"]
+platform: "boj"
+problem_number: "2407"
+problem_url: "https://www.acmicpc.net/problem/2407"
+difficulty: "실버 III"
+language: "java"
+---
+
+## 문제
+
+[BOJ 2407 - 조합](https://www.acmicpc.net/problem/2407)
+
+## 풀이
+
+수학적 성질을 이용하여 풀이한다.
+
+## 코드
+
+```java
+package day499;
+
+import java.io.*;
+import java.math.*;
+
+public class Day478BOJ2407조합 {
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+    String[] input = br.readLine().split(" ");
+
+    int n = Integer.parseInt(input[0]);
+    int m = Integer.parseInt(input[1]);
+
+    BigInteger sum = BigInteger.ONE;
+    BigInteger div = BigInteger.ONE;
+
+    for (int i = 0; i < m; i++) {
+      sum = sum.multiply(new BigInteger(String.valueOf(n - i)));
+      div = div.multiply(new BigInteger(String.valueOf(i + 1)));
+    }
+
+    System.out.println(sum.divide(div));
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

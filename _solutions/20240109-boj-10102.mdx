@@ -1,0 +1,47 @@
+---
+title: "BOJ 10102 - 개표"
+date: "2024-01-09"
+description: "문자열 문제"
+tags: ["문자열"]
+platform: "boj"
+problem_number: "10102"
+problem_url: "https://www.acmicpc.net/problem/10102"
+difficulty: "브론즈 III"
+language: "java"
+---
+
+## 문제
+
+[BOJ 10102 - 개표](https://www.acmicpc.net/problem/10102)
+
+## 풀이
+
+문자열 처리를 통해 문제를 해결한다.
+
+## 코드
+
+```java
+package day749;
+
+import java.io.*;
+
+public class Day707BOJ10102개표 {
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    br.readLine();
+    int a = 0, b = 0;
+    for (char c : br.readLine().toLowerCase().toCharArray()) {
+      if (c == 'a')
+        a++;
+      else
+        b++;
+    }
+    System.out.println((a > b) ? "A" : (a < b) ? "B" : "Tie");
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

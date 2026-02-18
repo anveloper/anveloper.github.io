@@ -1,0 +1,87 @@
+---
+title: "BOJ 24479 - 알고리즘 수업 - 깊이 우선 탐색 1"
+date: "2023-04-22"
+description: "그래프 이론, 그래프 탐색, 정렬 문제"
+tags: ["그래프 이론", "그래프 탐색", "정렬", "깊이 우선 탐색"]
+platform: "boj"
+problem_number: "24479"
+problem_url: "https://www.acmicpc.net/problem/24479"
+difficulty: "실버 II"
+language: "java"
+---
+
+## 문제
+
+[BOJ 24479 - 알고리즘 수업 - 깊이 우선 탐색 1](https://www.acmicpc.net/problem/24479)
+
+## 풀이
+
+그래프 탐색(BFS/DFS)을 활용하여 탐색한다. 깊이 우선 탐색(DFS)을 활용하여 탐색한다.
+
+## 코드
+
+```java
+package day449;
+
+import java.io.*;
+import java.util.*;
+
+public class Day440BOJ24479알고리즘수업 {
+  static int N, M, R, cnt;
+  static int[] arr;
+  static boolean[] visited;
+  static ArrayList<ArrayList<Integer>> graph;
+
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    StringTokenizer st = new StringTokenizer(br.readLine());
+
+    N = Integer.parseInt(st.nextToken());
+    M = Integer.parseInt(st.nextToken());
+    R = Integer.parseInt(st.nextToken());
+
+    graph = new ArrayList<>();
+    arr = new int[N + 1];
+    visited = new boolean[N + 1];
+
+    for (int i = 0; i <= N; i++)
+      graph.add(new ArrayList<>());
+
+    for (int i = 0; i < M; i++) {
+      st = new StringTokenizer(br.readLine());
+      int u = Integer.parseInt(st.nextToken());
+      int v = Integer.parseInt(st.nextToken());
+      graph.get(u).add(v);
+      graph.get(v).add(u);
+    }
+
+    for (int i = 1; i <= N; i++)
+      Collections.sort(graph.get(i));
+
+    arr[R] = 1;
+    visited[R] = true;
+    cnt = 2;
+    dfs(R);
+
+    StringBuilder sb = new StringBuilder();
+    for (int i = 1; i <= N; i++)
+      sb.append(arr[i] + "\n");
+    System.out.println(sb);
+  }
+
+  public static void dfs(int st) {
+    for (int n : graph.get(st)) {
+      if (!visited[n]) {
+        arr[n] = cnt++;
+        visited[n] = true;
+        dfs(n);
+      }
+    }
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(V + E)
+- 공간: O(V + E)

@@ -1,0 +1,58 @@
+---
+title: "BOJ 2870 - 수학숙제"
+date: "2023-05-27"
+description: "문자열, 정렬, 파싱 문제"
+tags: ["문자열", "정렬", "파싱"]
+platform: "boj"
+problem_number: "2870"
+problem_url: "https://www.acmicpc.net/problem/2870"
+difficulty: "실버 IV"
+language: "java"
+---
+
+## 문제
+
+[BOJ 2870 - 수학숙제](https://www.acmicpc.net/problem/2870)
+
+## 풀이
+
+정렬을 활용하여 문제를 해결한다.
+
+## 코드
+
+```java
+package day499;
+
+import java.io.*;
+import java.util.*;
+import java.math.*;
+
+public class Day475BOJ2870수학숙제 {
+  public static void main(String[] args) throws Exception {
+    BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+    BufferedWriter out = new BufferedWriter(new OutputStreamWriter(System.out));
+    int i, j, n = Integer.parseInt(in.readLine());
+    StringBuilder res = new StringBuilder();
+    ArrayList<BigInteger> paper = new ArrayList<>();
+    String line[];
+    for (i = 0; i < n; i++) {
+      line = in.readLine().split("\\D");
+      for (j = 0; j < line.length; j++)
+        if (!line[j].equals(""))
+          paper.add(new BigInteger(line[j]));
+    }
+    paper.sort(null);
+    n = paper.size();
+    for (i = 0; i < n; i++)
+      res.append(paper.get(i) + "\n");
+    out.write(res.toString());
+    out.close();
+    in.close();
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N log N)
+- 공간: O(N)

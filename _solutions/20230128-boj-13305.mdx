@@ -1,0 +1,68 @@
+---
+title: "BOJ 13305 - 주유소"
+date: "2023-01-28"
+description: "그리디 알고리즘 문제"
+tags: ["그리디 알고리즘"]
+platform: "boj"
+problem_number: "13305"
+problem_url: "https://www.acmicpc.net/problem/13305"
+difficulty: "실버 III"
+language: "java"
+---
+
+## 문제
+
+[BOJ 13305 - 주유소](https://www.acmicpc.net/problem/13305)
+
+## 풀이
+
+그리디 알고리즘으로 매 단계 최선의 선택을 한다.
+
+## 코드
+
+```java
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
+
+public class Day355BOJ13305주유소 {
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        int N = Integer.parseInt(br.readLine());
+
+        long[] dist = new long[N - 1];
+        long[] cost = new long[N];
+
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+        for (int i = 0; i < N - 1; i++) {
+            dist[i] = Long.parseLong(st.nextToken());
+        }
+
+        st = new StringTokenizer(br.readLine(), " ");
+        for (int i = 0; i < N; i++) {
+            cost[i] = Long.parseLong(st.nextToken());
+        }
+
+        long sum = 0;
+        long minCost = cost[0];
+
+        for (int i = 0; i < N - 1; i++) {
+            if (cost[i] < minCost) {
+                minCost = cost[i];
+            }
+
+            sum += (minCost * dist[i]);
+        }
+
+        System.out.println(sum);
+
+    }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

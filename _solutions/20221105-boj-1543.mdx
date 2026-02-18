@@ -1,0 +1,52 @@
+---
+title: "BOJ 1543 - 문서 검색"
+date: "2022-11-05"
+description: "문자열, 브루트포스 알고리즘 문제"
+tags: ["문자열", "브루트포스 알고리즘"]
+platform: "boj"
+problem_number: "1543"
+problem_url: "https://www.acmicpc.net/problem/1543"
+difficulty: "실버 V"
+language: "java"
+---
+
+## 문제
+
+[BOJ 1543 - 문서 검색](https://www.acmicpc.net/problem/1543)
+
+## 풀이
+
+가능한 모든 경우를 탐색하여 답을 구한다.
+
+## 코드
+
+```java
+package ASP_study.day299;
+
+import java.util.*;
+
+public class Day271BOJ1543문서검색 {
+	public static void main(String args[]) {
+		Scanner sc = new Scanner(System.in);
+		String text = sc.nextLine();
+		String fT = sc.nextLine();
+		sc.close();
+		int cnt = 0;
+
+		text = text.replaceAll(fT, "1");
+
+		for (int i = 0; i < text.length(); i++) {
+			if (text.charAt(i) == '1') {
+				cnt++;
+			}
+		}
+
+		System.out.println(cnt);
+	}
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

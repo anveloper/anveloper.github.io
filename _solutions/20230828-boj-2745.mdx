@@ -1,0 +1,60 @@
+---
+title: "BOJ 2745 - 진법 변환"
+date: "2023-08-28"
+description: "구현, 문자열, 수학 문제"
+tags: ["구현", "문자열", "수학"]
+platform: "boj"
+problem_number: "2745"
+problem_url: "https://www.acmicpc.net/problem/2745"
+difficulty: "브론즈 II"
+language: "java"
+---
+
+## 문제
+
+[BOJ 2745 - 진법 변환](https://www.acmicpc.net/problem/2745)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```java
+package day599;
+
+import java.io.*;
+import java.util.StringTokenizer;
+
+public class Day570BOJ2745진법변환 {
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    StringTokenizer st = new StringTokenizer(br.readLine());
+
+    String N = st.nextToken();
+    int B = Integer.parseInt(st.nextToken());
+    br.close();
+
+    int tmp = 1;
+    int sum = 0;
+
+    for (int i = N.length() - 1; i >= 0; i--) {
+      char C = N.charAt(i);
+
+      if ('A' <= C && C <= 'Z') {
+        sum += (C - 'A' + 10) * tmp;
+      } else {
+        sum += (C - '0') * tmp;
+      }
+      tmp *= B;
+    }
+
+    System.out.println(sum);
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

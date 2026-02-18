@@ -1,0 +1,61 @@
+---
+title: "BOJ 3986 - 좋은 단어"
+date: "2023-01-23"
+description: "자료 구조, 스택 문제"
+tags: ["자료 구조", "스택"]
+platform: "boj"
+problem_number: "3986"
+problem_url: "https://www.acmicpc.net/problem/3986"
+difficulty: "실버 IV"
+language: "java"
+---
+
+## 문제
+
+[BOJ 3986 - 좋은 단어](https://www.acmicpc.net/problem/3986)
+
+## 풀이
+
+스택을 활용하여 문제를 해결한다.
+
+## 코드
+
+```java
+package day399;
+
+import java.util.*;
+import java.io.*;
+
+public class Day350BOJ3986좋은단어 {
+    static int N, ans = 0;
+    static Stack<Character> stack;
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        N = Integer.parseInt(br.readLine());
+
+        for (int i = 0; i < N; i++) {
+            String s = br.readLine();
+            if (s.length() % 2 == 1)
+                continue;
+            stack = new Stack<>();
+            stack.push(s.charAt(0));
+            for (int j = 1; j < s.length(); j++) {
+                if (stack.size() > 0 && stack.peek() == s.charAt(j)) {
+                    stack.pop();
+                } else {
+                    stack.push(s.charAt(j));
+                }
+            }
+            if (stack.isEmpty())
+                ans++;
+        }
+        System.out.print(ans);
+    }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

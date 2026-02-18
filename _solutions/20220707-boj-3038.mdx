@@ -1,0 +1,64 @@
+---
+title: "BOJ 3038 - 완전 이진 트리"
+date: "2022-07-07"
+description: "애드 혹, 트리, 해 구성하기 문제"
+tags: ["애드 혹", "트리", "해 구성하기"]
+platform: "boj"
+problem_number: "3038"
+problem_url: "https://www.acmicpc.net/problem/3038"
+difficulty: "플래티넘 III"
+language: "java"
+---
+
+## 문제
+
+[BOJ 3038 - 완전 이진 트리](https://www.acmicpc.net/problem/3038)
+
+## 풀이
+
+문제의 조건에 맞게 풀이한다.
+
+## 코드
+
+```java
+package com.ssafy.an.day199;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.List;
+
+public class Day150BOJ3038완전이진트리 { // 3038 완전이진트리 구
+	static int N;
+	static StringBuilder sb;
+	static List<Integer>[] list;
+
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		sb = new StringBuilder();
+		N = Integer.parseInt(br.readLine());
+		dfs(1, 1, N);
+		System.out.println(sb);
+		br.close();
+	}
+
+	static void dfs(int c, int h, int n) {
+		if (h == n) {
+			sb.append(c).append(" ");
+			return;
+		}
+
+		int s = (1 << n) - (1 << h) + 1;
+		int l = (1 << (h - 1));
+		sb.append(l - c + s).append(" ");
+
+		dfs(c, h + 1, n);
+		dfs(c + (1 << h - 1), h + 1, n);
+	}
+
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

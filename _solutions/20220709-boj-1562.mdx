@@ -1,0 +1,70 @@
+---
+title: "BOJ 1562 - 계단 수"
+date: "2022-07-09"
+description: "다이나믹 프로그래밍, 비트마스킹, 비트필드를 이용한 다이나믹 프로그래밍 문제"
+tags: ["다이나믹 프로그래밍", "비트마스킹", "비트필드를 이용한 다이나믹 프로그래밍"]
+platform: "boj"
+problem_number: "1562"
+problem_url: "https://www.acmicpc.net/problem/1562"
+difficulty: "골드 I"
+language: "java"
+---
+
+## 문제
+
+[BOJ 1562 - 계단 수](https://www.acmicpc.net/problem/1562)
+
+## 풀이
+
+다이나믹 프로그래밍을 사용하여 부분 문제의 해를 메모이제이션하며 풀이한다.
+
+## 코드
+
+```java
+package com.ssafy.an.day199;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
+public class Day152BOJ1562비트마스킹DP { // 1562
+	static final int MOD = 1_000_000_000;
+	static int N;
+	static long[][][] dp;
+
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		N = Integer.parseInt(br.readLine());
+
+		dp = new long[N + 1][10][1 << 10];
+
+		for (int i = 1; i <= 9; i++)
+			dp[1][i][1 << i] = 1;
+
+		for (int i = 2; i <= N; i++) {
+			for (int j = 0; j <= 9; j++) {
+				for (int k = 0; k < 1 << 10; k++) {
+					if (j == 0) {
+						dp[i][j][k | (1 << j)] = (dp[i][j][k | (1 << j)] + dp[i - 1][j + 1][k]) % MOD;
+					} else if (j == 9) {
+						dp[i][j][k | (1 << j)] = (dp[i][j][k | (1 << j)] + dp[i - 1][j - 1][k]) % MOD;
+					} else {
+						dp[i][j][k | (1 << j)] = (dp[i][j][k | (1 << j)] + dp[i - 1][j + 1][k] + dp[i - 1][j - 1][k])
+								% MOD;
+					}
+				}
+			}
+		}
+		long answer = 0;
+		for (int i = 0; i <= 9; i++)
+			answer += dp[N][i][(1 << 10) - 1];
+
+		System.out.println(answer % MOD);
+		br.close();
+	}
+}
+```
+
+## 복잡도
+
+- 시간: O(N × 2^N)
+- 공간: O(N × 2^N)

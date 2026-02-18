@@ -1,0 +1,88 @@
+---
+title: "BOJ 2504 - 괄호의 값"
+date: "2022-11-23"
+description: "구현, 자료 구조, 스택 문제"
+tags: ["구현", "자료 구조", "스택"]
+platform: "boj"
+problem_number: "2504"
+problem_url: "https://www.acmicpc.net/problem/2504"
+difficulty: "골드 V"
+language: "java"
+---
+
+## 문제
+
+[BOJ 2504 - 괄호의 값](https://www.acmicpc.net/problem/2504)
+
+## 풀이
+
+스택을 활용하여 문제를 해결한다.
+
+## 코드
+
+```java
+package ASP_study.day299;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Stack;
+
+public class Day289BOJ2504괄호 {
+
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		String line = br.readLine();
+
+		Stack<Character> st = new Stack<>();
+		boolean flag = true;
+		int answer = 0;
+		int cnt = 1;
+		for (int i = 0; i < line.length(); i++) {
+			char cur = line.charAt(i);
+			if (cur == '(') {
+				st.push(cur);
+				cnt *= 2;
+			} else if (cur == '[') {
+				st.push(cur);
+				cnt *= 3;
+			} else {
+				if (cur == ')') {
+					if (st.isEmpty() || st.peek() != '(') {
+						flag = false;
+						break;
+					}
+					if (line.charAt(i - 1) == '(') {
+						answer += cnt;
+					}
+					st.pop();
+					cnt /= 2;
+				} else if (cur == ']') {
+					if (st.isEmpty() || st.peek() != '[') {
+						flag = false;
+						break;
+					}
+					if (line.charAt(i - 1) == '[') {
+						answer += cnt;
+					}
+					st.pop();
+					cnt /= 3;
+				} else {
+					flag = false;
+					break;
+				}
+			}
+		}
+		if (!flag || !st.isEmpty()) {
+			System.out.println(0);
+		} else {
+			System.out.println(answer);
+		}
+	}
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

@@ -1,0 +1,50 @@
+---
+title: "BOJ 11945 - 뜨거운 붕어빵"
+date: "2024-01-05"
+description: "구현, 문자열 문제"
+tags: ["구현", "문자열"]
+platform: "boj"
+problem_number: "11945"
+problem_url: "https://www.acmicpc.net/problem/11945"
+difficulty: "브론즈 IV"
+language: "java"
+---
+
+## 문제
+
+[BOJ 11945 - 뜨거운 붕어빵](https://www.acmicpc.net/problem/11945)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```java
+package day749;
+
+import java.io.*;
+
+public class Day703BOJ11945뜨거운붕어빵 {
+  public static void main(String args[]) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+    String str1[] = br.readLine().split(" ");
+    int N = Integer.parseInt(str1[0]);
+    int M = Integer.parseInt(str1[1]);
+    for (int i = 0; i < N; i++) {
+      String str = br.readLine();
+      for (int j = 0; j < M; j++) {
+        bw.write(str.charAt(M - j - 1));
+      }
+      bw.write("\n");
+    }
+    bw.flush();
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

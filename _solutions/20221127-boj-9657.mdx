@@ -1,0 +1,48 @@
+---
+title: "BOJ 9657 - 돌 게임 3"
+date: "2022-11-27"
+description: "다이나믹 프로그래밍, 게임 이론 문제"
+tags: ["다이나믹 프로그래밍", "게임 이론"]
+platform: "boj"
+problem_number: "9657"
+problem_url: "https://www.acmicpc.net/problem/9657"
+difficulty: "실버 III"
+language: "java"
+---
+
+## 문제
+
+[BOJ 9657 - 돌 게임 3](https://www.acmicpc.net/problem/9657)
+
+## 풀이
+
+다이나믹 프로그래밍을 사용하여 부분 문제의 해를 메모이제이션하며 풀이한다.
+
+## 코드
+
+```java
+package ASP_study.day299;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+
+public class Day293BOJ9657돌게임수학 {
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		int N = Integer.parseInt(br.readLine());
+
+		bw.write((N % 7 == 0 || N % 7 == 2) ? "CY" : "SK");
+		bw.flush();
+		bw.close();
+		br.close();
+	}
+}
+```
+
+## 복잡도
+
+- 시간: O(N²)
+- 공간: O(N)

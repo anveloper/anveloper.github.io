@@ -1,0 +1,59 @@
+---
+title: "BOJ 1919 - 애너그램 만들기"
+date: "2023-11-07"
+description: "구현, 문자열, 집합과 맵 문제"
+tags: ["구현", "문자열", "집합과 맵"]
+platform: "boj"
+problem_number: "1919"
+problem_url: "https://www.acmicpc.net/problem/1919"
+difficulty: "브론즈 II"
+language: "java"
+---
+
+## 문제
+
+[BOJ 1919 - 애너그램 만들기](https://www.acmicpc.net/problem/1919)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```java
+package day649;
+
+import java.io.*;
+
+public class Day641BOJ1919애너그램만들기 {
+  public static void main(String[] agrs) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    String str1 = br.readLine();
+    String str2 = br.readLine();
+    int cnt = 0;
+    int[] countStr1 = new int[26];
+    int[] countStr2 = new int[26];
+
+    for (int i = 0; i < str1.length(); i++) {
+      countStr1[str1.charAt(i) - 'a']++;
+    }
+
+    for (int i = 0; i < str2.length(); i++) {
+      countStr2[str2.charAt(i) - 'a']++;
+    }
+
+    for (int i = 0; i < 26; i++) {
+      int compare = countStr1[i] - countStr2[i];
+      if (compare != 0)
+        cnt += Math.abs(compare);
+    }
+
+    System.out.println(cnt);
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

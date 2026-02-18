@@ -1,0 +1,63 @@
+---
+title: "BOJ 10610 - 30"
+date: "2022-03-13"
+description: "수학, 그리디 알고리즘, 문자열 문제"
+tags: ["수학", "그리디 알고리즘", "문자열", "정렬", "정수론"]
+platform: "boj"
+problem_number: "10610"
+problem_url: "https://www.acmicpc.net/problem/10610"
+difficulty: "실버 IV"
+language: "java"
+---
+
+## 문제
+
+[BOJ 10610 - 30](https://www.acmicpc.net/problem/10610)
+
+## 풀이
+
+그리디 알고리즘으로 매 단계 최선의 선택을 한다.
+
+## 코드
+
+```java
+package com.ssafy.an.day049;
+
+import java.util.Scanner;
+
+public class Day07BOJ10610삼십 { // 10610 30
+	public static void main(String[] args) {
+		StringBuilder sb = new StringBuilder();
+		Scanner sc = new Scanner(System.in);
+		String str = sc.nextLine();
+		String[] strArr = str.split("");
+		long total = 0;
+		int[] cnt = new int[10];
+		int[] arr = new int[strArr.length];
+		for (int i = 0; i < strArr.length; i++) {
+			arr[i] = Integer.parseInt(strArr[i]);
+			cnt[arr[i]]++;
+			total += arr[i];
+		}
+
+		if (!str.contains("0") || total % 3 != 0) {
+			System.out.println("-1");
+//			return; // 노란줄
+		} else {
+			for (int i = 9; i >= 0; i--) {
+				while (cnt[i] > 0) {
+					sb.append(i);
+					cnt[i]--;
+				}
+			}
+			System.out.println(sb);			
+		}
+		sc.close();
+	}
+}
+```
+
+## 복잡도
+
+- 시간: O(N log N)
+- 공간: O(N)

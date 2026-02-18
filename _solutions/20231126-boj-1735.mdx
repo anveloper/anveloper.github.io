@@ -1,0 +1,58 @@
+---
+title: "BOJ 1735 - 분수 합"
+date: "2023-11-26"
+description: "수학, 정수론, 유클리드 호제법 문제"
+tags: ["수학", "정수론", "유클리드 호제법"]
+platform: "boj"
+problem_number: "1735"
+problem_url: "https://www.acmicpc.net/problem/1735"
+difficulty: "실버 III"
+language: "java"
+---
+
+## 문제
+
+[BOJ 1735 - 분수 합](https://www.acmicpc.net/problem/1735)
+
+## 풀이
+
+수학적 성질을 이용하여 풀이한다.
+
+## 코드
+
+```java
+package day699;
+
+import java.util.*;
+
+public class Day659BOJ1735분수합 {
+
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int c1, c2, p1, p2;
+
+    c1 = sc.nextInt();
+    p1 = sc.nextInt();
+    c2 = sc.nextInt();
+    p2 = sc.nextInt();
+
+    c1 = c1 * p2 + c2 * p1;
+    p1 = p1 * p2;
+    int gcd = getGcd(c1, p1);
+
+    System.out.println(c1 / gcd + " " + p1 / gcd);
+    sc.close();
+  }
+
+  public static int getGcd(int a, int b) {
+    if (a % b == 0)
+      return b;
+    return getGcd(b, a % b);
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(log N)
+- 공간: O(1)

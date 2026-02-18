@@ -1,0 +1,102 @@
+---
+title: "BOJ 1062 - 가르침"
+date: "2022-11-07"
+description: "브루트포스 알고리즘, 비트마스킹, 백트래킹 문제"
+tags: ["브루트포스 알고리즘", "비트마스킹", "백트래킹"]
+platform: "boj"
+problem_number: "1062"
+problem_url: "https://www.acmicpc.net/problem/1062"
+difficulty: "골드 IV"
+language: "java"
+---
+
+## 문제
+
+[BOJ 1062 - 가르침](https://www.acmicpc.net/problem/1062)
+
+## 풀이
+
+백트래킹으로 가능한 경우를 탐색한다. 비트마스킹을 활용하여 상태를 관리한다.
+
+## 코드
+
+```java
+package ASP_study.day299;
+
+import java.util.*;
+
+public class Day273BOJ1062가르침BitMasking {
+
+	static int n, k;
+	static int max = Integer.MIN_VALUE;
+	static boolean[] visited;
+	static String[] word;
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+
+		n = sc.nextInt();
+		k = sc.nextInt();
+
+		sc.nextLine();
+		word = new String[n];
+		for (int i = 0; i < n; i++) {
+			String str = sc.nextLine();
+			str = str.replace("anta", "");
+			str = str.replace("tica", "");
+			word[i] = str;
+		}
+
+		if (k < 5) {
+			System.out.println("0");
+			return;
+		} else if (k == 26) {
+			System.out.println(n);
+			return;
+		}
+
+		visited = new boolean[26];
+		visited['a' - 'a'] = true;
+		visited['c' - 'a'] = true;
+		visited['i' - 'a'] = true;
+		visited['n' - 'a'] = true;
+		visited['t' - 'a'] = true;
+
+		backtracking(0, 0);
+		System.out.println(max);
+		sc.close();
+	}
+
+	public static void backtracking(int alpha, int len) {
+		if (len == k - 5) {
+			int count = 0;
+			for (int i = 0; i < n; i++) {
+				boolean read = true;
+				for (int j = 0; j < word[i].length(); j++) {
+					if (!visited[word[i].charAt(j) - 'a']) {
+						read = false;
+						break;
+					}
+				}
+				if (read)
+					count++;
+			}
+			max = Math.max(max, count);
+			return;
+		}
+
+		for (int i = alpha; i < 26; i++) {
+			if (visited[i] == false) {
+				visited[i] = true;
+				backtracking(i, len + 1);
+				visited[i] = false;
+			}
+		}
+	}
+}
+```
+
+## 복잡도
+
+- 시간: O(N!)
+- 공간: O(N)

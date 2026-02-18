@@ -1,0 +1,58 @@
+---
+title: "BOJ 2738 - 행렬 덧셈"
+date: "2023-09-20"
+description: "수학, 구현, 사칙연산 문제"
+tags: ["수학", "구현", "사칙연산"]
+platform: "boj"
+problem_number: "2738"
+problem_url: "https://www.acmicpc.net/problem/2738"
+difficulty: "브론즈 III"
+language: "java"
+---
+
+## 문제
+
+[BOJ 2738 - 행렬 덧셈](https://www.acmicpc.net/problem/2738)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```java
+package day599;
+
+import java.io.*;
+import java.util.*;
+
+public class Day593BOJ2738행렬덧셈 {
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    StringTokenizer st = new StringTokenizer(br.readLine());
+    int n = Integer.parseInt(st.nextToken());
+    int m = Integer.parseInt(st.nextToken());
+    int[][] arr = new int[n][m];
+    for (int i = 0; i < n; i++) {
+      st = new StringTokenizer(br.readLine());
+      for (int j = 0; j < m; j++) {
+        arr[i][j] = Integer.parseInt(st.nextToken());
+      }
+    }
+    StringBuilder sb = new StringBuilder();
+    for (int i = 0; i < n; i++) {
+      st = new StringTokenizer(br.readLine());
+      for (int j = 0; j < m; j++) {
+        sb.append(arr[i][j] + Integer.parseInt(st.nextToken()) + " ");
+      }
+      sb.append("\n");
+    }
+    System.out.println(sb);
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

@@ -1,0 +1,72 @@
+---
+title: "BOJ 1268 - 임시 반장 정하기"
+date: "2024-03-08"
+description: "구현 문제"
+tags: ["구현"]
+platform: "boj"
+problem_number: "1268"
+problem_url: "https://www.acmicpc.net/problem/1268"
+difficulty: "실버 V"
+language: "java"
+---
+
+## 문제
+
+[BOJ 1268 - 임시 반장 정하기](https://www.acmicpc.net/problem/1268)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```java
+package day799;
+
+import java.io.*;
+import java.util.*;
+
+public class Day766BOJ1268임시반장정하기 {
+
+  public static void main(String[] args) throws Exception {
+    BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+    StringTokenizer st;
+
+    int n = Integer.parseInt(bf.readLine());
+    int[][] arr = new int[n][5];
+    int max = 0;
+    int ans = 0;
+
+    for (int i = 0; i < n; i++) {
+      st = new StringTokenizer(bf.readLine());
+      for (int j = 0; j < 5; j++) {
+        arr[i][j] = Integer.parseInt(st.nextToken());
+      }
+    }
+
+    for (int i = 0; i < n; i++) {
+      Set<Integer> sameClass = new HashSet<>();
+
+      for (int j = 0; j < 5; j++) {
+        for (int k = 0; k < n; k++) {
+          if (arr[i][j] == arr[k][j] && k != i) {
+            sameClass.add(k);
+          }
+        }
+      }
+
+      if (max < sameClass.size()) {
+        max = sameClass.size();
+        ans = i;
+      }
+    }
+    System.out.println(ans + 1);
+    bf.close();
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

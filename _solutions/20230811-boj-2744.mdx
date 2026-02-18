@@ -1,0 +1,49 @@
+---
+title: "BOJ 2744 - 대소문자 바꾸기"
+date: "2023-08-11"
+description: "구현, 문자열 문제"
+tags: ["구현", "문자열"]
+platform: "boj"
+problem_number: "2744"
+problem_url: "https://www.acmicpc.net/problem/2744"
+difficulty: "브론즈 V"
+language: "java"
+---
+
+## 문제
+
+[BOJ 2744 - 대소문자 바꾸기](https://www.acmicpc.net/problem/2744)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```java
+package day599;
+
+import java.io.*;
+
+public class Day551BOJ2744대소문자 {
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    String s = br.readLine();
+    StringBuilder sb = new StringBuilder();
+    for (int i = 0; i < s.length(); i++) {
+      char c = s.charAt(i);
+      if (Character.isUpperCase(c)) {
+        sb.append(Character.toLowerCase(c));
+      } else {
+        sb.append(Character.toUpperCase(c));
+      }
+    }
+    System.out.print(sb);
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

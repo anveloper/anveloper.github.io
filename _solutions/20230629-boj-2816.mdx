@@ -1,0 +1,90 @@
+---
+title: "BOJ 2816 - 디지털 티비"
+date: "2023-06-29"
+description: "구현, 해 구성하기 문제"
+tags: ["구현", "해 구성하기"]
+platform: "boj"
+problem_number: "2816"
+problem_url: "https://www.acmicpc.net/problem/2816"
+difficulty: "브론즈 I"
+language: "java"
+---
+
+## 문제
+
+[BOJ 2816 - 디지털 티비](https://www.acmicpc.net/problem/2816)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```java
+package day549;
+
+import java.io.*;
+
+public class Day508BOJ2816디지털티비 {
+  static int N, arrow;
+  static String[] channels;
+
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+
+    N = Integer.parseInt(br.readLine());
+
+    channels = new String[N];
+
+    for (int i = 0; i < N; i++) {
+      channels[i] = br.readLine();
+    }
+
+    arrow = 0;
+    for (int i = 0; i < N; i++) {
+      if (channels[i].equals("KBS1")) {
+        break;
+      } else {
+        arrow++;
+        bw.append("1");
+      }
+    }
+
+    while (!channels[0].equals("KBS1")) {
+      swap(arrow, arrow - 1);
+      bw.append("4");
+    }
+
+    for (int i = 0; i < N; i++) {
+      if (channels[i].equals("KBS2")) {
+        break;
+      } else {
+        arrow++;
+        bw.append("1");
+      }
+    }
+
+    while (!channels[1].equals("KBS2")) {
+      swap(arrow, arrow - 1);
+      bw.append("4");
+    }
+
+    bw.toString();
+    bw.flush();
+    bw.close();
+  }
+
+  private static void swap(int a, int b) {
+    String tmp = channels[a];
+    channels[a] = channels[b];
+    channels[b] = tmp;
+    arrow = b;
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

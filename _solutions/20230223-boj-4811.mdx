@@ -1,0 +1,63 @@
+---
+title: "BOJ 4811 - 알약"
+date: "2023-02-23"
+description: "수학, 다이나믹 프로그래밍 문제"
+tags: ["수학", "다이나믹 프로그래밍"]
+platform: "boj"
+problem_number: "4811"
+problem_url: "https://www.acmicpc.net/problem/4811"
+difficulty: "골드 V"
+language: "java"
+---
+
+## 문제
+
+[BOJ 4811 - 알약](https://www.acmicpc.net/problem/4811)
+
+## 풀이
+
+다이나믹 프로그래밍을 사용하여 부분 문제의 해를 메모이제이션하며 풀이한다.
+
+## 코드
+
+```java
+package day399;
+
+import java.io.*;
+
+public class Day381BOJ4811알약 {
+  public static long cnt = 0;
+  public static long dp[];
+  public static int n;
+
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    StringBuilder sb = new StringBuilder();
+    dp = new long[31];
+    dp[0] = 1;
+    dp[1] = 1;
+    dp[2] = 2;
+
+    while (true) {
+      n = Integer.parseInt(br.readLine());
+      if (n == 0)
+        break;
+      for (int i = 3; i <= 30; i++) {
+        cnt = 0;// 초기화
+        for (int j = 0; j < i; j++) {
+          cnt += dp[j] * dp[i - 1 - j];
+        }
+        dp[i] = cnt;
+      }
+      sb.append(dp[n] + "\n");
+    }
+    System.out.println(sb);
+    br.close();
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N²)
+- 공간: O(N)

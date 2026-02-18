@@ -1,0 +1,70 @@
+---
+title: "BOJ 1644 - 소수의 연속합"
+date: "2022-12-21"
+description: "수학, 정수론, 두 포인터 문제"
+tags: ["수학", "정수론", "두 포인터", "소수 판정", "에라토스테네스의 체"]
+platform: "boj"
+problem_number: "1644"
+problem_url: "https://www.acmicpc.net/problem/1644"
+difficulty: "골드 III"
+language: "java"
+---
+
+## 문제
+
+[BOJ 1644 - 소수의 연속합](https://www.acmicpc.net/problem/1644)
+
+## 풀이
+
+투 포인터 기법을 활용한다.
+
+## 코드
+
+```java
+package day349;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+
+public class Day317BOJ1644소수의연속합 {
+    static boolean prime[];
+    static ArrayList<Integer> primes = new ArrayList<>();
+
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int N = Integer.parseInt(br.readLine());
+
+        prime = new boolean[N + 1];
+        prime[0] = prime[1] = true;
+        for (int i = 2; i * i <= N; i++) {
+            if (!prime[i])
+                for (int j = i * i; j <= N; j += i)
+                    prime[j] = true;
+        }
+        for (int i = 1; i <= N; i++) {
+            if (!prime[i])
+                primes.add(i);
+        }
+
+        int l = 0, r = 0, sum = 0, cnt = 0;
+        while (true) {
+            if (sum >= N)
+                sum -= primes.get(l++);
+            else if (r == primes.size())
+                break;
+            else
+                sum += primes.get(r++);
+            if (N == sum)
+                cnt++;
+        }
+        System.out.println(cnt);
+        br.close();
+    }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

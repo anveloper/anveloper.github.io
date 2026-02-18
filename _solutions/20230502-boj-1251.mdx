@@ -1,0 +1,62 @@
+---
+title: "BOJ 1251 - 단어 나누기"
+date: "2023-05-02"
+description: "구현, 문자열, 브루트포스 알고리즘 문제"
+tags: ["구현", "문자열", "브루트포스 알고리즘", "정렬"]
+platform: "boj"
+problem_number: "1251"
+problem_url: "https://www.acmicpc.net/problem/1251"
+difficulty: "실버 V"
+language: "java"
+---
+
+## 문제
+
+[BOJ 1251 - 단어 나누기](https://www.acmicpc.net/problem/1251)
+
+## 풀이
+
+정렬을 활용하여 문제를 해결한다.
+
+## 코드
+
+```java
+package day499;
+
+import java.io.*;
+import java.util.*;
+
+public class Day450BOJ1251단어나누기 {
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    StringTokenizer st = new StringTokenizer(br.readLine());
+    String str = st.nextToken();
+    int N = str.length();
+    ArrayList<String> list = new ArrayList<>();
+    for (int i = 1; i < N - 1; i++) {
+      for (int j = i + 1; j < N; j++) {
+        String res = new String();
+        res += reverse(0, i, str);
+        res += reverse(i, j, str);
+        res += reverse(j, N, str);
+        list.add(res);
+      }
+    }
+    Collections.sort(list);
+    System.out.println(list.get(0));
+  }
+
+  static String reverse(int st, int end, String ss) {
+    String s = new String();
+    for (int i = end - 1; i >= st; i--) {
+      s += ss.charAt(i);
+    }
+    return s;
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N²)
+- 공간: O(N)

@@ -1,0 +1,84 @@
+---
+title: "BOJ 2502 - 떡 먹는 호랑이"
+date: "2023-05-29"
+description: "수학, 다이나믹 프로그래밍, 브루트포스 알고리즘 문제"
+tags: ["수학", "다이나믹 프로그래밍", "브루트포스 알고리즘"]
+platform: "boj"
+problem_number: "2502"
+problem_url: "https://www.acmicpc.net/problem/2502"
+difficulty: "실버 I"
+language: "java"
+---
+
+## 문제
+
+[BOJ 2502 - 떡 먹는 호랑이](https://www.acmicpc.net/problem/2502)
+
+## 풀이
+
+다이나믹 프로그래밍을 사용하여 부분 문제의 해를 메모이제이션하며 풀이한다.
+
+## 코드
+
+```java
+package day499;
+
+import java.io.*;
+import java.util.*;
+
+public class Day477BOJ2502떡먹는호랑이 {
+
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+    StringTokenizer st = new StringTokenizer(br.readLine());
+
+    int D = Integer.parseInt(st.nextToken());
+    int K = Integer.parseInt(st.nextToken());
+
+    if (D == 3) {
+      bw.write("1\n" + (K - 1) + "\n");
+      bw.flush();
+      br.close();
+      bw.close();
+      return;
+    }
+
+    int[] A1 = new int[D + 1];
+    int[] A2 = new int[D + 1];
+
+    A1[3] = A2[3] = 1;
+    A1[4] = 1;
+    A2[4] = 2;
+
+    for (int i = 5; i <= D; i++) {
+      A1[i] = A1[i - 1] + A1[i - 2];
+      A2[i] = A2[i - 1] + A2[i - 2];
+    }
+
+    int first = 0;
+    int second = 0;
+
+    for (int i = 1;; i++) {
+      int res = K - A1[D] * i;
+
+      if (res % A2[D] == 0) {
+        first = i;
+        second = res / A2[D];
+        break;
+      }
+
+    }
+
+    bw.write(first + "\n" + second + "\n");
+    bw.flush();
+    bw.close();
+    br.close();
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N²)
+- 공간: O(N)

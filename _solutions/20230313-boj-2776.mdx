@@ -1,0 +1,60 @@
+---
+title: "BOJ 2776 - 암기왕"
+date: "2023-03-13"
+description: "자료 구조, 정렬, 이분 탐색 문제"
+tags: ["자료 구조", "정렬", "이분 탐색", "집합과 맵", "해시를 사용한 집합과 맵"]
+platform: "boj"
+problem_number: "2776"
+problem_url: "https://www.acmicpc.net/problem/2776"
+difficulty: "실버 IV"
+language: "java"
+---
+
+## 문제
+
+[BOJ 2776 - 암기왕](https://www.acmicpc.net/problem/2776)
+
+## 풀이
+
+이분 탐색을 통해 최적의 값을 탐색한다.
+
+## 코드
+
+```java
+package day449;
+
+import java.io.*;
+import java.util.*;
+
+public class Day400BOJ2776암기왕 {
+
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+    int t = Integer.parseInt(br.readLine());
+
+    for (int a = 0; a < t; a++) {
+      Set<Integer> set = new HashSet<>();
+      StringBuilder sb = new StringBuilder();
+      int n = Integer.parseInt(br.readLine());
+
+      StringTokenizer st = new StringTokenizer(br.readLine());
+      for (int i = 0; i < n; i++)
+        set.add(Integer.parseInt(st.nextToken()));
+
+      int m = Integer.parseInt(br.readLine());
+
+      st = new StringTokenizer(br.readLine());
+      for (int i = 0; i < m; i++)
+        sb.append(set.contains(Integer.parseInt(st.nextToken())) ? 1 : 0).append("\n");
+
+      System.out.print(sb);
+    }
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N log X)
+- 공간: O(N)

@@ -1,0 +1,49 @@
+---
+title: "BOJ 1183 - 약속"
+date: "2024-02-25"
+description: "수학, 정렬 문제"
+tags: ["수학", "정렬"]
+platform: "boj"
+problem_number: "1183"
+problem_url: "https://www.acmicpc.net/problem/1183"
+difficulty: "실버 II"
+language: "java"
+---
+
+## 문제
+
+[BOJ 1183 - 약속](https://www.acmicpc.net/problem/1183)
+
+## 풀이
+
+정렬을 활용하여 문제를 해결한다.
+
+## 코드
+
+```java
+package day799;
+
+import java.io.*;
+import java.util.*;
+
+public class Day754BOJ1183약속 {
+  public static void main(String[] args) throws Exception {
+    BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+    int N = Integer.parseInt(in.readLine());
+    int[] input = new int[N];
+    StringTokenizer st;
+    for (int i = 0; i < N; i++) {
+      st = new StringTokenizer(in.readLine());
+      input[i] = Integer.parseInt(st.nextToken()) - Integer.parseInt(st.nextToken());
+    }
+    Arrays.sort(input);
+
+    System.out.println((N % 2 == 1) ? 1 : Math.abs(input[N / 2] - input[N / 2 - 1]) + 1);
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N log N)
+- 공간: O(N)

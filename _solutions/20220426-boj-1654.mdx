@@ -1,0 +1,64 @@
+---
+title: "BOJ 1654 - 랜선 자르기"
+date: "2022-04-26"
+description: "이분 탐색, 매개 변수 탐색 문제"
+tags: ["이분 탐색", "매개 변수 탐색"]
+platform: "boj"
+problem_number: "1654"
+problem_url: "https://www.acmicpc.net/problem/1654"
+difficulty: "실버 II"
+language: "java"
+---
+
+## 문제
+
+[BOJ 1654 - 랜선 자르기](https://www.acmicpc.net/problem/1654)
+
+## 풀이
+
+이분 탐색을 통해 최적의 값을 탐색한다.
+
+## 코드
+
+```java
+package com.ssafy.an.day099;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
+public class Day78BOJ1654랜선자르기 { // 랜선 자르기
+	static int N, K;
+	static int[] arr;
+	static long min = 0, mid = 0, max = 0;
+
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		String[] st = br.readLine().split(" ");
+		K = Integer.parseInt(st[0]);
+		N = Integer.parseInt(st[1]);
+
+		arr = new int[K];
+		for (int i = 0; i < K; i++) {
+			arr[i] = Integer.parseInt(br.readLine());
+			max = Math.max(arr[i], max);
+		}
+		max++;
+
+		while (min < max) {
+			mid = min + (max - min) / 2;
+			long cnt = 0;
+			for (int i = 0; i < K; i++)
+				cnt += (arr[i] / mid);
+			max = cnt < N ? mid : max;
+			min = cnt < N ? min : mid + 1;
+		}
+		System.out.println(min - 1);
+		br.close();
+	}
+}
+```
+
+## 복잡도
+
+- 시간: O(N log X)
+- 공간: O(N)

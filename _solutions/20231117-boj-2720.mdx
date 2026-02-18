@@ -1,0 +1,55 @@
+---
+title: "BOJ 2720 - 세탁소 사장 동혁"
+date: "2023-11-17"
+description: "수학, 그리디 알고리즘, 사칙연산 문제"
+tags: ["수학", "그리디 알고리즘", "사칙연산"]
+platform: "boj"
+problem_number: "2720"
+problem_url: "https://www.acmicpc.net/problem/2720"
+difficulty: "브론즈 III"
+language: "java"
+---
+
+## 문제
+
+[BOJ 2720 - 세탁소 사장 동혁](https://www.acmicpc.net/problem/2720)
+
+## 풀이
+
+그리디 알고리즘으로 매 단계 최선의 선택을 한다.
+
+## 코드
+
+```java
+package day699;
+
+import java.io.*;
+
+public class Day650BOJ2720세탁소 {
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    int t = Integer.parseInt(br.readLine());
+    int quarter = 25;
+    int dime = 10;
+    int nickel = 5;
+    int penny = 1;
+    StringBuilder sb = new StringBuilder();
+    for (int i = 0; i < t; i++) {
+      int c = Integer.parseInt(br.readLine());
+      sb.append(c / quarter + " ");
+      c %= quarter;
+      sb.append(c / dime + " ");
+      c %= dime;
+      sb.append(c / nickel + " ");
+      c %= nickel;
+      sb.append(c / penny + "\n");
+    }
+    System.out.print(sb);
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

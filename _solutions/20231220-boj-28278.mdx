@@ -1,0 +1,84 @@
+---
+title: "BOJ 28278 - 스택 2"
+date: "2023-12-20"
+description: "자료 구조, 스택 문제"
+tags: ["자료 구조", "스택"]
+platform: "boj"
+problem_number: "28278"
+problem_url: "https://www.acmicpc.net/problem/28278"
+difficulty: "실버 IV"
+language: "java"
+---
+
+## 문제
+
+[BOJ 28278 - 스택 2](https://www.acmicpc.net/problem/28278)
+
+## 풀이
+
+스택을 활용하여 문제를 해결한다.
+
+## 코드
+
+```java
+package day699;
+
+import java.io.*;
+import java.util.*;
+
+public class Day683BOJ28278스택2 {
+  public static void main(String[] args) throws Exception {
+
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    int time = Integer.parseInt(br.readLine());
+
+    Stack<Integer> stack = new Stack<>();
+    StringBuilder sb = new StringBuilder();
+
+    for (int i = 0; i < time; i++) {
+      String order = br.readLine();
+      StringTokenizer st = new StringTokenizer(order);
+      int A = Integer.parseInt(st.nextToken());
+
+      if (A == 1) {
+        int X = Integer.parseInt(st.nextToken());
+        stack.push(X);
+      }
+
+      if (A == 2) {
+        if (stack.isEmpty()) {
+          sb.append(-1).append("\n");
+          continue;
+        }
+        sb.append(stack.pop()).append("\n");
+      }
+
+      if (A == 3) {
+        sb.append(stack.size()).append("\n");
+      }
+
+      if (A == 4) {
+        if (stack.isEmpty()) {
+          sb.append(1).append("\n");
+          continue;
+        }
+        sb.append(0).append("\n");
+      }
+
+      if (A == 5) {
+        if (stack.isEmpty()) {
+          sb.append(-1).append("\n");
+          continue;
+        }
+        sb.append(stack.peek()).append("\n");
+      }
+    }
+    System.out.println(sb);
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

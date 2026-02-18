@@ -1,0 +1,47 @@
+---
+title: "BOJ 1100 - 하얀 칸"
+date: "2023-08-01"
+description: "구현, 문자열 문제"
+tags: ["구현", "문자열"]
+platform: "boj"
+problem_number: "1100"
+problem_url: "https://www.acmicpc.net/problem/1100"
+difficulty: "브론즈 II"
+language: "java"
+---
+
+## 문제
+
+[BOJ 1100 - 하얀 칸](https://www.acmicpc.net/problem/1100)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```java
+package day549;
+
+import java.io.*;
+
+public class Day541BOJ1100하얀칸 {
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    int count = 0;
+    for (int i = 0; i < 8; i++) {
+      String s = br.readLine();
+      for (int j = 0; j < 8; j++) {
+        if (s.charAt(j) == 'F' && (i + j) % 2 == 0)
+          count++;
+      }
+    }
+    System.out.print(count);
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

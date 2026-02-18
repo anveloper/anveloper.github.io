@@ -1,0 +1,73 @@
+---
+title: "BOJ 2841 - 외계인의 기타 연주"
+date: "2023-11-02"
+description: "자료 구조, 스택 문제"
+tags: ["자료 구조", "스택"]
+platform: "boj"
+problem_number: "2841"
+problem_url: "https://www.acmicpc.net/problem/2841"
+difficulty: "실버 I"
+language: "java"
+---
+
+## 문제
+
+[BOJ 2841 - 외계인의 기타 연주](https://www.acmicpc.net/problem/2841)
+
+## 풀이
+
+스택을 활용하여 문제를 해결한다.
+
+## 코드
+
+```java
+package day649;
+
+import java.io.*;
+import java.util.*;
+
+public class Day636BOJ2841외계인의기타연주 {
+  static int N, P, ans;
+
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    String[] input;
+    input = br.readLine().split(" ");
+    N = Integer.parseInt(input[0]);
+    P = Integer.parseInt(input[1]);
+
+    Stack<Integer>[] stack = new Stack[7];
+    for (int i = 1; i < 7; i++) {
+      stack[i] = new Stack<Integer>();
+    }
+
+    for (int i = 0; i < N; i++) {
+      input = br.readLine().split(" ");
+      int line = Integer.parseInt(input[0]);
+      int fret = Integer.parseInt(input[1]);
+
+      while (!stack[line].isEmpty()) {
+        if (stack[line].peek() < fret) {
+          stack[line].push(fret);
+        } else if (stack[line].peek() > fret) {
+          stack[line].pop();
+        } else {
+          break;
+        }
+        ans += 1;
+      }
+
+      if (stack[line].isEmpty()) {
+        stack[line].push(fret);
+        ans += 1;
+      }
+    }
+    System.out.println(ans);
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

@@ -1,0 +1,75 @@
+---
+title: "BOJ 2343 - 기타 레슨"
+date: "2023-02-05"
+description: "이분 탐색, 매개 변수 탐색 문제"
+tags: ["이분 탐색", "매개 변수 탐색"]
+platform: "boj"
+problem_number: "2343"
+problem_url: "https://www.acmicpc.net/problem/2343"
+difficulty: "골드 V"
+language: "java"
+---
+
+## 문제
+
+[BOJ 2343 - 기타 레슨](https://www.acmicpc.net/problem/2343)
+
+## 풀이
+
+이분 탐색을 통해 최적의 값을 탐색한다.
+
+## 코드
+
+```java
+import java.io.*;
+import java.util.*;
+
+public class Day363BOJ2343기타레슨 {
+    static int N, M;
+    static int[] A;
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        N = Integer.parseInt(st.nextToken());
+        M = Integer.parseInt(st.nextToken());
+        A = new int[N];
+        st = new StringTokenizer(br.readLine());
+        for (int i = 0; i < N; i++) {
+            A[i] = Integer.parseInt(st.nextToken());
+        }
+        int L = -1, R = 1000000000, ans = 0;
+        for (int i = 0; i < N; i++)
+            L = Math.max(L, A[i]);
+        while (L <= R) {
+            int mid = (L + R) / 2;
+            if (determination(mid)) {
+                R = mid - 1;
+                ans = mid;
+            } else {
+                L = mid + 1;
+            }
+        }
+        System.out.println(ans);
+    }
+
+    static boolean determination(int value) {
+        int cnt = 1, sum = 0;
+
+        for (int i = 0; i < N; i++) {
+            if (sum + A[i] > value) {
+                sum = A[i];
+                cnt++;
+            } else {
+                sum += A[i];
+            }
+        }
+        return cnt <= M;
+    }
+}
+```
+
+## 복잡도
+
+- 시간: O(N log X)
+- 공간: O(N)

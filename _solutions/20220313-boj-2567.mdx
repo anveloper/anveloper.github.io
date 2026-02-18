@@ -1,0 +1,67 @@
+---
+title: "BOJ 2567 - 색종이 - 2"
+date: "2022-03-13"
+description: "구현 문제"
+tags: ["구현"]
+platform: "boj"
+problem_number: "2567"
+problem_url: "https://www.acmicpc.net/problem/2567"
+difficulty: "실버 III"
+language: "java"
+---
+
+## 문제
+
+[BOJ 2567 - 색종이 - 2](https://www.acmicpc.net/problem/2567)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```java
+package com.ssafy.an.day049;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
+
+public class Day12BOJ2567색종이2 { // 2567
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st = null;
+		int[][] map = new int[101][101];
+
+		int N = Integer.parseInt(br.readLine());
+
+		for (int n = 0; n < N; n++) {
+			st = new StringTokenizer(br.readLine());
+			int r = Integer.parseInt(st.nextToken());
+			int c = Integer.parseInt(st.nextToken());
+			for (int i = r; i < r + 10; i++) {
+				for (int j = c; j < c + 10; j++) {
+					map[i][j] = 1;
+				}
+			}
+		}
+
+		int cnt = 0; // 한 칸, 한 변의 길이 1
+		for (int i = 0; i < 100; i++) { // i+1값 탐색 고려
+			for (int j = 0; j < 101; j++) { // 고정값
+				if (map[i][j] != map[i + 1][j])
+					cnt++;
+				if (map[j][i] != map[j][i + 1])
+					cnt++;
+			}
+		}
+
+		System.out.println(cnt);
+	}
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

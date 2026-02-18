@@ -1,0 +1,51 @@
+---
+title: "BOJ 1448 - 삼각형 만들기"
+date: "2023-07-14"
+description: "수학, 그리디 알고리즘, 정렬 문제"
+tags: ["수학", "그리디 알고리즘", "정렬"]
+platform: "boj"
+problem_number: "1448"
+problem_url: "https://www.acmicpc.net/problem/1448"
+difficulty: "실버 III"
+language: "java"
+---
+
+## 문제
+
+[BOJ 1448 - 삼각형 만들기](https://www.acmicpc.net/problem/1448)
+
+## 풀이
+
+그리디 알고리즘으로 매 단계 최선의 선택을 한다.
+
+## 코드
+
+```java
+package day549;
+
+import java.io.*;
+import java.util.*;
+
+public class Day523BOJ1448삼각형만들기 {
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    int n = Integer.parseInt(br.readLine());
+    int[] arr = new int[n];
+    while (n-- > 0)
+      arr[n] = Integer.parseInt(br.readLine());
+    Arrays.sort(arr);
+    for (int i = arr.length - 3; i >= 0; i--) {
+      if (arr[i] + arr[i + 1] > arr[i + 2]) {
+        System.out.println(arr[i] + arr[i + 1] + arr[i + 2]);
+        return;
+      }
+    }
+    System.out.println(-1);
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N log N)
+- 공간: O(N)

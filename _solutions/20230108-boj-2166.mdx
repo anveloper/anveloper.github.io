@@ -1,0 +1,69 @@
+---
+title: "BOJ 2166 - 다각형의 면적"
+date: "2023-01-08"
+description: "기하학, 다각형의 넓이 문제"
+tags: ["기하학", "다각형의 넓이"]
+platform: "boj"
+problem_number: "2166"
+problem_url: "https://www.acmicpc.net/problem/2166"
+difficulty: "골드 V"
+language: "java"
+---
+
+## 문제
+
+[BOJ 2166 - 다각형의 면적](https://www.acmicpc.net/problem/2166)
+
+## 풀이
+
+문제의 조건에 맞게 풀이한다.
+
+## 코드
+
+```java
+package day349;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.util.StringTokenizer;
+
+public class Day335BOJ2166다각형의면적 {
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+
+        int N = Integer.parseInt(br.readLine());
+        long[] x = new long[N + 1];
+        long[] y = new long[N + 1];
+        long sum_a = 0, sum_b = 0;
+
+        for (int i = 0; i < N; i++) {
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            x[i] = Integer.parseInt(st.nextToken());
+            y[i] = Integer.parseInt(st.nextToken());
+        }
+
+        x[N] = x[0];
+        y[N] = y[0];
+
+        for (int i = 0; i < N; i++) {
+            sum_a += x[i] * y[i + 1];
+            sum_b += x[i + 1] * y[i];
+        }
+
+        String area = String.format("%.1f", (Math.abs(sum_a - sum_b) / 2.0));
+        bw.write(area);
+
+        br.close();
+        bw.flush();
+        bw.close();
+    }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

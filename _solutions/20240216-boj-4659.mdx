@@ -1,0 +1,49 @@
+---
+title: "BOJ 4659 - 비밀번호 발음하기"
+date: "2024-02-16"
+description: "구현, 문자열 문제"
+tags: ["구현", "문자열"]
+platform: "boj"
+problem_number: "4659"
+problem_url: "https://www.acmicpc.net/problem/4659"
+difficulty: "실버 V"
+language: "java"
+---
+
+## 문제
+
+[BOJ 4659 - 비밀번호 발음하기](https://www.acmicpc.net/problem/4659)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```java
+package day749;
+
+import java.io.*;
+import java.util.regex.Pattern;
+
+public class Day745BOJ4659비밀번호발음하기 {
+  static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+  static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+  static StringBuilder sb = new StringBuilder();
+
+  public static void main(String[] args) throws Exception {
+    String input;
+    Pattern p = Pattern.compile("^[^aeiou]+$|[aeiou]{3,}|[^aeiou]{3,}|([^eo])\\1+");
+    while (!"end".equals(input = br.readLine())) {
+      sb.append(String.format("<%s> is%s acceptable.\n", input, p.matcher(input).find() ? " not" : ""));
+    }
+    bw.write(sb.toString());
+    bw.flush();
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

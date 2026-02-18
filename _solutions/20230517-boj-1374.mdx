@@ -1,0 +1,60 @@
+---
+title: "BOJ 1374 - 강의실"
+date: "2023-05-17"
+description: "자료 구조, 그리디 알고리즘, 정렬 문제"
+tags: ["자료 구조", "그리디 알고리즘", "정렬", "우선순위 큐"]
+platform: "boj"
+problem_number: "1374"
+problem_url: "https://www.acmicpc.net/problem/1374"
+difficulty: "골드 V"
+language: "java"
+---
+
+## 문제
+
+[BOJ 1374 - 강의실](https://www.acmicpc.net/problem/1374)
+
+## 풀이
+
+그리디 알고리즘으로 매 단계 최선의 선택을 한다.
+
+## 코드
+
+```java
+package day499;
+
+import java.io.*;
+import java.util.*;
+
+public class Day465BOJ1374강의실 {
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    int N = Integer.parseInt(br.readLine());
+
+    PriorityQueue<int[]> pq = new PriorityQueue<>((o1, o2) -> o1[1] - o2[1]);
+    PriorityQueue<Integer> rooms = new PriorityQueue<>();
+    for (int i = 0; i < N; i++) {
+      StringTokenizer st = new StringTokenizer(br.readLine());
+      int[] lecture = new int[] { Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken()),
+          Integer.parseInt(st.nextToken()) };
+      pq.offer(lecture);
+    }
+
+    int ans = 0;
+    while (!pq.isEmpty()) {
+      int[] cur = pq.poll();
+      while (!rooms.isEmpty() && rooms.peek() <= cur[1]) {
+        rooms.poll();
+      }
+      rooms.offer(cur[2]);
+      ans = Math.max(ans, rooms.size());
+    }
+    System.out.print(ans);
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N log N)
+- 공간: O(N)

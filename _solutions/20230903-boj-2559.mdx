@@ -1,0 +1,59 @@
+---
+title: "BOJ 2559 - 수열"
+date: "2023-09-03"
+description: "누적 합, 두 포인터, 슬라이딩 윈도우 문제"
+tags: ["누적 합", "두 포인터", "슬라이딩 윈도우"]
+platform: "boj"
+problem_number: "2559"
+problem_url: "https://www.acmicpc.net/problem/2559"
+difficulty: "실버 III"
+language: "java"
+---
+
+## 문제
+
+[BOJ 2559 - 수열](https://www.acmicpc.net/problem/2559)
+
+## 풀이
+
+투 포인터 기법을 활용한다.
+
+## 코드
+
+```java
+package day599;
+
+import java.io.*;
+import java.util.*;
+
+public class Day576BOJ2559수열 {
+
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    StringTokenizer st = new StringTokenizer(br.readLine());
+    int n = Integer.parseInt(st.nextToken());
+    int k = Integer.parseInt(st.nextToken());
+    int[] arr = new int[n + 1];
+    st = new StringTokenizer(br.readLine());
+    for (int i = 1; i <= n; i++)
+      arr[i] = Integer.parseInt(st.nextToken());
+    int i = 1;
+    int sum = 0;
+    while (i <= k)
+      sum += arr[i++];
+    int max = sum;
+    while (i <= n) {
+      sum += arr[i] - arr[i - k];
+      if (max < sum)
+        max = sum;
+      i++;
+    }
+    System.out.println(max);
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

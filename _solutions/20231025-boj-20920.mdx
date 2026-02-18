@@ -1,0 +1,74 @@
+---
+title: "BOJ 20920 - 영단어 암기는 괴로워"
+date: "2023-10-25"
+description: "자료 구조, 문자열, 정렬 문제"
+tags: ["자료 구조", "문자열", "정렬", "집합과 맵", "해시를 사용한 집합과 맵", "트리를 사용한 집합과 맵"]
+platform: "boj"
+problem_number: "20920"
+problem_url: "https://www.acmicpc.net/problem/20920"
+difficulty: "실버 III"
+language: "java"
+---
+
+## 문제
+
+[BOJ 20920 - 영단어 암기는 괴로워](https://www.acmicpc.net/problem/20920)
+
+## 풀이
+
+정렬을 활용하여 문제를 해결한다.
+
+## 코드
+
+```java
+package day649;
+
+import java.io.*;
+import java.util.*;
+import java.util.stream.Collectors;
+
+public class Day628BOJ20920영단어암기 {
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    StringTokenizer st = new StringTokenizer(br.readLine());
+
+    int n = Integer.parseInt(st.nextToken());
+    int m = Integer.parseInt(st.nextToken());
+
+    Map<String, Integer> wordMap = new HashMap<String, Integer>();
+
+    for (int i = 0; i < n; i++) {
+      String word = br.readLine();
+      if (word.length() < m)
+        continue;
+
+      Integer count = wordMap.getOrDefault(word, 0);
+      wordMap.put(word, count + 1);
+    }
+    List<String> words = wordMap.keySet().stream().collect(Collectors.toList());
+
+    words.sort((o1, o2) -> {
+      int c1 = wordMap.get(o1);
+      int c2 = wordMap.get(o2);
+
+      if (c1 == c2) {
+        if (o1.length() == o2.length())
+          return o1.compareTo(o2);
+        return o2.length() - o1.length();
+      }
+      return c2 - c1;
+    });
+
+    StringBuilder sb = new StringBuilder();
+    for (int i = 0; i < words.size(); i++) {
+      sb.append(words.get(i)).append("\n");
+    }
+    System.out.println(sb);
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N log N)
+- 공간: O(N)

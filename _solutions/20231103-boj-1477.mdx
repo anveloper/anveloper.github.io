@@ -1,0 +1,79 @@
+---
+title: "BOJ 1477 - 휴게소 세우기"
+date: "2023-11-03"
+description: "이분 탐색, 매개 변수 탐색 문제"
+tags: ["이분 탐색", "매개 변수 탐색"]
+platform: "boj"
+problem_number: "1477"
+problem_url: "https://www.acmicpc.net/problem/1477"
+difficulty: "골드 IV"
+language: "java"
+---
+
+## 문제
+
+[BOJ 1477 - 휴게소 세우기](https://www.acmicpc.net/problem/1477)
+
+## 풀이
+
+이분 탐색을 통해 최적의 값을 탐색한다.
+
+## 코드
+
+```java
+package day649;
+
+import java.io.*;
+import java.util.*;
+
+public class Day637BOJ1477휴게소세우기 {
+  static int N, M, L;
+  static int[] arr;
+
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    String[] s = br.readLine().split(" ");
+    N = Integer.parseInt(s[0]);
+    M = Integer.parseInt(s[1]);
+    L = Integer.parseInt(s[2]);
+    arr = new int[N + 2];
+    arr[0] = 0;
+    arr[N + 1] = L;
+
+    String[] s1 = br.readLine().split(" ");
+    for (int i = 0; i < N; i++) {
+      arr[i + 1] = Integer.parseInt(s1[i]);
+    }
+
+    System.out.println(solve());
+  }
+
+  private static int solve() {
+    Arrays.sort(arr);
+    int l = 1;
+    int r = L - 1;
+    while (l <= r) {
+      int m = (l + r) / 2;
+      if (check(m)) {
+        l = m + 1;
+      } else {
+        r = m - 1;
+      }
+    }
+    return l;
+  }
+
+  private static boolean check(int dis) {
+    int cnt = 0;
+    for (int i = 1; i <= N + 1; i++) {
+      cnt += (arr[i] - arr[i - 1] - 1) / dis;
+    }
+    return cnt > M;
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N log N)
+- 공간: O(N)

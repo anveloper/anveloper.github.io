@@ -1,0 +1,72 @@
+---
+title: "BOJ 2352 - 반도체 설계"
+date: "2023-02-21"
+description: "이분 탐색, 가장 긴 증가하는 부분 수열 문제"
+tags: ["이분 탐색", "가장 긴 증가하는 부분 수열"]
+platform: "boj"
+problem_number: "2352"
+problem_url: "https://www.acmicpc.net/problem/2352"
+difficulty: "골드 II"
+language: "java"
+---
+
+## 문제
+
+[BOJ 2352 - 반도체 설계](https://www.acmicpc.net/problem/2352)
+
+## 풀이
+
+이분 탐색을 통해 최적의 값을 탐색한다.
+
+## 코드
+
+```java
+package day399;
+
+import java.io.*;
+import java.util.*;
+
+public class Day379BOJ2352반도체설계 {
+  static int N, ans = 0;
+  static int[] arr, lis;
+
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    StringTokenizer st = null;
+
+    N = Integer.parseInt(br.readLine());
+    arr = new int[N + 1];
+    lis = new int[N + 1];
+
+    st = new StringTokenizer(br.readLine());
+    for (int i = 1; i < N + 1; i++)
+      arr[i] = Integer.parseInt(st.nextToken());
+
+    lis[1] = arr[1];
+    for (int i = 1; i < N + 1; i++) {
+      if (i == 1 || arr[i] > lis[ans - 1])
+        lis[ans++] = arr[i];
+      else {
+        int l = 0, r = ans, idx = ans;
+        while (l < r) {
+          int mid = (l + r) / 2;
+          if (lis[mid] < arr[i])
+            l = mid + 1;
+          else {
+            idx = Math.min(idx, mid);
+            r = mid;
+          }
+        }
+        lis[idx] = arr[i];
+      }
+    }
+    System.out.println(ans);
+    br.close();
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N log X)
+- 공간: O(N)

@@ -1,0 +1,56 @@
+---
+title: "BOJ 9093 - 단어 뒤집기"
+date: "2023-09-13"
+description: "구현, 문자열 문제"
+tags: ["구현", "문자열"]
+platform: "boj"
+problem_number: "9093"
+problem_url: "https://www.acmicpc.net/problem/9093"
+difficulty: "브론즈 I"
+language: "java"
+---
+
+## 문제
+
+[BOJ 9093 - 단어 뒤집기](https://www.acmicpc.net/problem/9093)
+
+## 풀이
+
+문제의 조건을 그대로 구현한다.
+
+## 코드
+
+```java
+package day599;
+
+import java.io.*;
+import java.util.Stack;
+
+public class Day586BOJ9093단어뒤집기 {
+  public static void main(String[] args) throws IOException {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+    int t = Integer.parseInt(br.readLine());
+
+    while (t-- > 0) {
+      Stack<Character> stack = new Stack<>();
+      String str = br.readLine() + "\n";
+      for (char ch : str.toCharArray()) {
+        if (ch == ' ' || ch == '\n') {
+          while (!stack.isEmpty()) {
+            bw.write(stack.pop());
+          }
+          bw.write(ch);
+        } else
+          stack.push(ch);
+      }
+    }
+    bw.flush();
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

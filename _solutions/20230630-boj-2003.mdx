@@ -1,0 +1,67 @@
+---
+title: "BOJ 2003 - 수들의 합 2"
+date: "2023-06-30"
+description: "브루트포스 알고리즘, 누적 합, 두 포인터 문제"
+tags: ["브루트포스 알고리즘", "누적 합", "두 포인터"]
+platform: "boj"
+problem_number: "2003"
+problem_url: "https://www.acmicpc.net/problem/2003"
+difficulty: "실버 IV"
+language: "java"
+---
+
+## 문제
+
+[BOJ 2003 - 수들의 합 2](https://www.acmicpc.net/problem/2003)
+
+## 풀이
+
+투 포인터 기법을 활용한다.
+
+## 코드
+
+```java
+package day549;
+
+import java.io.*;
+import java.util.*;
+
+public class Day509BOJ2003수들의합2 {
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    StringTokenizer st = new StringTokenizer(br.readLine());
+    int N = Integer.parseInt(st.nextToken());
+    int M = Integer.parseInt(st.nextToken());
+    st = new StringTokenizer(br.readLine());
+    int[] arr = new int[N];
+    for (int i = 0; i < N; i++) {
+      arr[i] = Integer.parseInt(st.nextToken());
+    }
+    int i = 0;
+    int j = 0;
+    int sum = 0;
+    int ans = 0;
+    while (j < N) {
+      if (sum < M) {
+        sum += arr[j++];
+      } else if (sum == M) {
+        ans++;
+        sum -= arr[i++];
+        sum += arr[j++];
+      } else {
+        sum -= arr[i++];
+      }
+    }
+    while (i < N && M < sum)
+      sum -= arr[i++];
+    if (sum == M)
+      ans++;
+    System.out.println(ans);
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

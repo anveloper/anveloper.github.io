@@ -1,0 +1,78 @@
+---
+title: "BOJ 1064 - 평행사변형"
+date: "2023-01-10"
+description: "수학, 기하학, 피타고라스 정리 문제"
+tags: ["수학", "기하학", "피타고라스 정리"]
+platform: "boj"
+problem_number: "1064"
+problem_url: "https://www.acmicpc.net/problem/1064"
+difficulty: "실버 IV"
+language: "java"
+---
+
+## 문제
+
+[BOJ 1064 - 평행사변형](https://www.acmicpc.net/problem/1064)
+
+## 풀이
+
+수학적 성질을 이용하여 풀이한다.
+
+## 코드
+
+```java
+package day349;
+
+import java.util.Scanner;
+
+public class Day337BOJ1064평행사변형 {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Pair[] arr = new Pair[3];
+        double min = Double.MAX_VALUE;
+        double max = Double.MIN_VALUE;
+        double[] leng = new double[3];
+        for (int i = 0; i < 3; i++) {
+            arr[i] = new Pair(sc.nextInt(), sc.nextInt());
+        }
+
+        if ((arr[1].y - arr[0].y) * (arr[2].x - arr[1].x) == (arr[1].x - arr[0].x) * (arr[2].y - arr[1].y))
+            System.out.println("-1");
+
+        else {
+            double one = Math.sqrt(Math.pow(arr[1].y - arr[0].y, 2) + Math.pow(arr[1].x - arr[0].x, 2));
+            double two = Math.sqrt(Math.pow(arr[2].y - arr[0].y, 2) + Math.pow(arr[2].x - arr[0].x, 2));
+            double three = Math.sqrt(Math.pow(arr[2].y - arr[1].y, 2) + Math.pow(arr[2].x - arr[1].x, 2));
+            leng[0] = one + two;
+            leng[1] = two + three;
+            leng[2] = one + three;
+
+            for (int i = 0; i < 3; i++) {
+                if (min > leng[i])
+                    min = leng[i];
+                if (max < leng[i])
+                    max = leng[i];
+            }
+
+            System.out.println(2 * max - 2 * min);
+        }
+        sc.close();
+    }
+
+    static class Pair {
+        int x;
+        int y;
+
+        public Pair(int x, int y) {
+            this.x = x;
+            this.y = y;
+        }
+    }
+}
+```
+
+## 복잡도
+
+- 시간: O(N)
+- 공간: O(N)

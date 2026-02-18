@@ -1,0 +1,103 @@
+---
+title: "BOJ 1099 - 알 수 없는 문장"
+date: "2022-08-13"
+description: "다이나믹 프로그래밍 문제"
+tags: ["다이나믹 프로그래밍"]
+platform: "boj"
+problem_number: "1099"
+problem_url: "https://www.acmicpc.net/problem/1099"
+difficulty: "골드 III"
+language: "java"
+---
+
+## 문제
+
+[BOJ 1099 - 알 수 없는 문장](https://www.acmicpc.net/problem/1099)
+
+## 풀이
+
+다이나믹 프로그래밍을 사용하여 부분 문제의 해를 메모이제이션하며 풀이한다.
+
+## 코드
+
+```java
+package com.ssafy.an.day199;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.Arrays;
+
+public class Day187BOJ1099알수없는문장 { // 구
+	static String[] word;
+	static String text;
+	static int result = -1;
+	static int N;
+	static int[][] wordCost;
+	static int[][] wordAlphabet;
+	static int[] minCost;
+
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		text = br.readLine();
+		N = Integer.parseInt(br.readLine());
+		word = new String[N];
+		wordCost = new int[N][50];
+		wordAlphabet = new int[N]['z' - 'a' + 1];
+		minCost = new int[text.length() + 1];
+		Arrays.fill(minCost, Integer.MAX_VALUE);
+		for (int i = 0; i < N; i++) {
+			word[i] = br.readLine();
+			Arrays.fill(wordCost[i], -1);
+			for (int j = 0; j < word[i].length(); j++) {
+				wordAlphabet[i][word[i].charAt(j) - 'a']++;
+			}
+		}
+		search(0, 0);
+
+		System.out.println(result);
+	}
+
+	private static void search(int start, int c) {
+		if (start == text.length()) {
+			if (result == -1 || result > c) {
+				result = c;
+			}
+		}
+		L: for (int i = 0; i < N; i++) {
+			if (start + word[i].length() > text.length()) {
+				continue;
+			}
+
+			int cost = 0;
+			if (wordCost[i][start] != -1) {
+				cost = wordCost[i][start];
+			} else {
+				int[] tmp = wordAlphabet[i].clone();
+				for (int j = start; j < start + word[i].length(); j++) {
+					if (--tmp[text.charAt(j) - 'a'] < 0) {
+						continue L;
+					}
+					if (text.charAt(j) != word[i].charAt(j - start)) {
+						cost++;
+					}
+				}
+				wordCost[i][start] = cost;
+			}
+			if (minCost[start + word[i].length()] > c + cost) {
+				minCost[start + word[i].length()] = c + cost;
+			} else {
+				continue;
+			}
+
+			search(start + word[i].length(), c + cost);
+		}
+
+	}
+
+}
+```
+
+## 복잡도
+
+- 시간: O(N²)
+- 공간: O(N)

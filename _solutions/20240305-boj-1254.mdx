@@ -1,0 +1,59 @@
+---
+title: "BOJ 1254 - 팰린드롬 만들기"
+date: "2024-03-05"
+description: "문자열, 브루트포스 알고리즘 문제"
+tags: ["문자열", "브루트포스 알고리즘"]
+platform: "boj"
+problem_number: "1254"
+problem_url: "https://www.acmicpc.net/problem/1254"
+difficulty: "실버 II"
+language: "java"
+---
+
+## 문제
+
+[BOJ 1254 - 팰린드롬 만들기](https://www.acmicpc.net/problem/1254)
+
+## 풀이
+
+가능한 모든 경우를 탐색하여 답을 구한다.
+
+## 코드
+
+```java
+package day799;
+
+import java.io.*;
+
+public class Day763BOJ1254펠린드롬만들기 {
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+    String str = br.readLine();
+    int cnt = str.length();
+
+    for (int i = 0; i < str.length(); i++) {
+      if (isPalindrome(str.substring(i))) {
+        break;
+      }
+      cnt++;
+    }
+    System.out.println(cnt);
+  }
+
+  private static boolean isPalindrome(String str) {
+    char[] list = str.toCharArray();
+    for (int i = 0; i < Math.floor(str.length() / 2); i++) {
+      if (list[i] != list[str.length() - i - 1]) {
+        return false;
+      }
+    }
+    return true;
+  }
+}
+```
+
+## 복잡도
+
+- 시간: O(N²)
+- 공간: O(N)

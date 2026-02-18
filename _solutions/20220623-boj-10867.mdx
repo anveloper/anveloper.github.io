@@ -1,0 +1,56 @@
+---
+title: "BOJ 10867 - 중복 빼고 정렬하기"
+date: "2022-06-23"
+description: "정렬 문제"
+tags: ["정렬"]
+platform: "boj"
+problem_number: "10867"
+problem_url: "https://www.acmicpc.net/problem/10867"
+difficulty: "실버 V"
+language: "java"
+---
+
+## 문제
+
+[BOJ 10867 - 중복 빼고 정렬하기](https://www.acmicpc.net/problem/10867)
+
+## 풀이
+
+정렬을 활용하여 문제를 해결한다.
+
+## 코드
+
+```java
+package com.ssafy.an.day149;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.StringTokenizer;
+
+public class Day136BOJ10867중복빼고정렬하기SET {
+	static int N;
+	static HashSet<Integer> set;
+	static ArrayList<Integer> arr;
+
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		N = Integer.parseInt(br.readLine());
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		set = new HashSet<>();
+		for (int i = 0; i < N; i++)
+			set.add(Integer.parseInt(st.nextToken()));
+		arr = new ArrayList<>(set);
+		Collections.sort(arr);
+		System.out.println(arr.toString().replaceAll("[\\[\\],]", ""));
+		br.close();
+	}
+}
+```
+
+## 복잡도
+
+- 시간: O(N log N)
+- 공간: O(N)
