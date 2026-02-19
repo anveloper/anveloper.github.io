@@ -8,15 +8,45 @@ problem_number: "10825"
 problem_url: "https://www.acmicpc.net/problem/10825"
 difficulty: "실버 IV"
 language: "java"
+enhanced: true
 ---
 
 ## 문제
 
 [BOJ 10825 - 국영수](https://www.acmicpc.net/problem/10825)
 
+도현이네 반 학생 N명의 이름과 국어, 영어, 수학 점수가 주어졌을 때, 아래의 기준으로 성적순 정렬하는 문제이다.
+
+1. 국어 점수가 감소하는 순서로
+2. 국어 점수가 같으면 영어 점수가 증가하는 순서로
+3. 국어와 영어 점수가 같으면 수학 점수가 감소하는 순서로
+4. 모든 점수가 같으면 이름이 사전 순으로 증가하는 순서로
+
+### 입력
+
+첫째 줄에 학생 수 N(1 ≤ N ≤ 100,000)이 주어진다.
+다음 N줄에는 학생의 이름, 국어, 영어, 수학 점수가 공백으로 구분되어 주어진다.
+점수는 1 이상 100 이하의 자연수이다.
+
+### 출력
+
+성적 순서대로 학생의 이름을 한 줄에 하나씩 출력한다.
+
+### 예제
+
+| 입력 | 출력 |
+|------|------|
+| `5` `Junkyu 50 60 100` `Sangkeun 80 60 50` `Sunyoung 80 70 100` `Soong 50 60 90` `Taewhan 50 60 95` | `Sunyoung` `Sangkeun` `Junkyu` `Taewhan` `Soong` |
+
 ## 풀이
 
-정렬을 활용하여 문제를 해결한다.
+4가지 우선순위를 갖는 다중 키 정렬 문제이다. `PriorityQueue`에 `Comparable`을 구현한 `student` 객체를 삽입하여 우선순위에 따라 자동 정렬한다.
+
+1. 학생 정보(이름, 국어, 영어, 수학)를 `student` 객체로 파싱하여 `PriorityQueue`에 삽입한다.
+2. `compareTo` 메서드에서 국어(내림차순) → 영어(오름차순) → 수학(내림차순) → 이름(사전순) 순으로 비교 규칙을 정의한다.
+3. `PriorityQueue`에서 순서대로 poll하여 이름을 출력한다.
+
+**핵심 아이디어**: `PriorityQueue` + `Comparable` 구현으로 다중 정렬 기준을 표현한다. 국어는 `o.kor - this.kor`(내림차순), 영어는 `this.eng - o.eng`(오름차순), 수학은 `o.mat - this.mat`(내림차순)으로 부호를 구분해야 한다.
 
 ## 코드
 
