@@ -46,7 +46,8 @@ app/                 # Next.js App Router 페이지
 └── projects/[slug]/ # 프로젝트
 
 components/          # 재사용 컴포넌트
-├── ui/              # 기본 UI (Tooltip, Card, Badge 등)
+├── ui/              # 기본 UI (Badge 등)
+├── giscus-comments.tsx # giscus 댓글 위젯
 ├── header-logo.tsx  # 로고 텍스트 애니메이션
 ├── nav-bar.tsx      # 네비게이션 헤더
 ├── footer.tsx       # 푸터
@@ -54,8 +55,7 @@ components/          # 재사용 컴포넌트
 ├── table-of-contents.tsx # 플로팅 목차 (xl 이상)
 ├── mermaid.tsx      # Mermaid 다이어그램 렌더러
 ├── skill-badge.tsx  # shields.io 기술 뱃지
-├── favicon-switcher.tsx # 다크/라이트 파비콘 전환
-└── providers.tsx    # 전역 Provider 래퍼
+└── favicon-switcher.tsx # 다크/라이트 파비콘 전환
 
 hooks/               # 커스텀 React Hooks
 ├── use-mounted.ts   # SSR 마운트 상태 감지
