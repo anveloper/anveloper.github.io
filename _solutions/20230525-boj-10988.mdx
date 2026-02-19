@@ -8,15 +8,38 @@ problem_number: "10988"
 problem_url: "https://www.acmicpc.net/problem/10988"
 difficulty: "브론즈 III"
 language: "java"
+enhanced: true
 ---
 
 ## 문제
 
 [BOJ 10988 - 팰린드롬인지 확인하기](https://www.acmicpc.net/problem/10988)
 
+알파벳 소문자로만 이루어진 단어가 팰린드롬인지 판별하라.
+
+### 입력
+
+첫째 줄에 단어가 주어진다 (길이 1 이상 100 이하).
+
+### 출력
+
+팰린드롬이면 1, 아니면 0을 출력한다.
+
+### 예제
+
+| 입력 | 출력 |
+|------|------|
+| `level` | `1` |
+
 ## 풀이
 
-문제의 조건을 그대로 구현한다.
+StringBuilder의 reverse()로 뒤집은 문자열과 원본을 비교한다.
+
+1. 입력 문자열로 StringBuilder를 생성한다
+2. `reverse()`로 뒤집은 문자열과 원본을 `equals()`로 비교한다
+3. 같으면 1, 다르면 0을 출력한다
+
+**핵심 아이디어**: Java의 StringBuilder.reverse()를 활용하면 한 줄로 팰린드롬 판별이 가능하다.
 
 ## 코드
 
@@ -40,5 +63,5 @@ public class Day490BOJ10988팰린드롬인지 {
 
 ## 복잡도
 
-- 시간: O(N)
-- 공간: O(N)
+- 시간: O(L) (L: 문자열 길이)
+- 공간: O(L)

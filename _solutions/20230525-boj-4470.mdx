@@ -8,15 +8,38 @@ problem_number: "4470"
 problem_url: "https://www.acmicpc.net/problem/4470"
 difficulty: "브론즈 IV"
 language: "java"
+enhanced: true
 ---
 
 ## 문제
 
 [BOJ 4470 - 줄번호](https://www.acmicpc.net/problem/4470)
 
+N개의 줄이 주어졌을 때, 각 줄 앞에 줄번호를 붙여 출력하라.
+
+### 입력
+
+첫째 줄에 N, 이후 N줄에 문자열이 주어진다.
+
+### 출력
+
+각 줄 앞에 `i. ` 형태로 줄번호를 붙여 출력한다.
+
+### 예제
+
+| 입력 | 출력 |
+|------|------|
+| `5` `Roses are red,` `Violets are blue,` `Sugar is sweet,` `And so are you.` | `1. Roses are red,` `2. Violets are blue,` `...` |
+
 ## 풀이
 
-문제의 조건을 그대로 구현한다.
+각 줄을 읽으며 1부터 시작하는 줄번호를 앞에 붙인다.
+
+1. N개의 줄을 반복문으로 읽는다
+2. 각 줄에 `i. ` 형식의 번호를 앞에 붙여 StringBuilder에 추가한다
+3. 한 번에 출력한다
+
+**핵심 아이디어**: 단순 문자열 포맷팅 문제로, 줄번호와 마침표, 공백의 형식만 맞추면 된다.
 
 ## 코드
 
