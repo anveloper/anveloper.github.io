@@ -8,15 +8,41 @@ problem_number: "2178"
 problem_url: "https://www.acmicpc.net/problem/2178"
 difficulty: "실버 I"
 language: "java"
+enhanced: true
 ---
 
 ## 문제
 
 [BOJ 2178 - 미로 탐색](https://www.acmicpc.net/problem/2178)
 
+N × M 크기의 미로가 0과 1로 주어진다. 1은 이동 가능한 칸, 0은 벽이다. 좌상단 `(1, 1)`에서 우하단 `(N, M)`까지 이동할 때 지나야 하는 **최소 칸 수**를 구하는 문제이다. 칸을 이동할 때 상하좌우로만 이동할 수 있으며, 시작 칸과 끝 칸 모두 포함하여 센다.
+
+### 입력
+
+첫째 줄에 N과 M이 주어진다. (2 ≤ N, M ≤ 100)
+이후 N개의 줄에 M자리 이진 문자열이 주어진다.
+
+### 출력
+
+`(1, 1)`에서 `(N, M)`까지의 최소 칸 수를 출력한다.
+
+### 예제
+
+| 입력 | 출력 |
+|------|------|
+| `4 6` `101111` `101010` `101011` `111011` | `15` |
+
 ## 풀이
 
-그래프 탐색(BFS/DFS)을 활용하여 탐색한다.
+BFS를 사용하여 시작점에서 목표 지점까지의 최단 경로(최소 칸 수)를 탐색한다. BFS는 같은 거리의 노드를 먼저 탐색하므로 최초로 목표 지점에 도달했을 때의 거리가 최솟값이 된다.
+
+1. `(0, 0)`에서 거리 1로 BFS를 시작한다. 방문 배열 `visited`로 재방문을 방지한다.
+2. 큐에서 좌표 `(r, c, d)`를 꺼낸다. `d`는 현재까지 이동한 칸 수이다.
+3. `(N-1, M-1)`에 도달하면 `d`를 결과로 저장하고 탐색을 종료한다.
+4. 상하좌우 4방향으로 이동 가능한(값이 1이고 미방문인) 칸을 큐에 추가한다.
+5. 새로 추가하는 칸의 거리는 `d + 1`이다.
+
+**핵심 아이디어**: 최단 경로 문제에는 BFS가 DFS보다 적합하다. BFS는 레벨 단위로 탐색하므로 목표 지점에 처음 도달하는 순간이 항상 최소 거리를 보장한다. `Pos` 클래스에 거리를 함께 저장하여 별도의 거리 배열 없이 처리한다.
 
 ## 코드
 
@@ -50,7 +76,7 @@ public class Day63BOJ2178미로탐색BFS {
 		String[] str = br.readLine().split(" ");
 
 		N = Integer.parseInt(str[0]);
-		M = Integer.parseInt(str[1]);		
+		M = Integer.parseInt(str[1]);
 
 		map = new int[N][M];
 		visited = new boolean[N][M];
@@ -87,7 +113,7 @@ public class Day63BOJ2178미로탐색BFS {
 					continue;
 				if (!visited[nr][nc] && map[nr][nc] == 1) {
 					visited[nr][nc] = true;
-					q.offer(new Pos(nr, nc, p.d + 1));					
+					q.offer(new Pos(nr, nc, p.d + 1));
 				}
 			}
 		}
@@ -102,5 +128,5 @@ public class Day63BOJ2178미로탐색BFS {
 
 ## 복잡도
 
-- 시간: O(NM)
-- 공간: O(NM)
+- 시간: O(N * M) — 각 칸을 최대 한 번 방문
+- 공간: O(N * M) — 방문 배열 및 BFS 큐
