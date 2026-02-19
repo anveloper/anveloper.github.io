@@ -1,4 +1,4 @@
-:HL["/_next/static/chunks/b6a9722124bbb2e6.css","style"]
+:HL["/_next/static/chunks/0774bd5de21bb8cd.css","style"]
 :HL["/fonts/PretendardVariable-subset.woff2","font",{"crossOrigin":"anonymous","type":"font/woff2"}]
 :HL["/images/projects/information-security-engineer/icon.svg","image"]
 :HL["/images/projects/dps-store/icon.svg","image"]
@@ -8,4 +8,4 @@
 :HL["/images/projects/readme-nft/icon.svg","image"]
 :HL["/images/projects/your-seasons/icon.webp","image"]
 :HL["/images/projects/ssafit/icon.svg","image"]
-0:{"buildId":"evky7WWfAZ37LbjX-b37N","tree":{"name":"","paramType":null,"paramKey":"","hasRuntimePrefetch":false,"slots":{"children":{"name":"projects","paramType":null,"paramKey":"projects","hasRuntimePrefetch":false,"slots":{"children":{"name":"__PAGE__","paramType":null,"paramKey":"__PAGE__","hasRuntimePrefetch":false,"slots":null,"isRootLayout":false}},"isRootLayout":false}},"isRootLayout":true},"staleTime":300}
+0:{"buildId":"x1Jwpvvf8-JTmhy5NWsQX","tree":{"name":"","paramType":null,"paramKey":"","hasRuntimePrefetch":false,"slots":{"children":{"name":"projects","paramType":null,"paramKey":"projects","hasRuntimePrefetch":false,"slots":{"children":{"name":"__PAGE__","paramType":null,"paramKey":"__PAGE__","hasRuntimePrefetch":false,"slots":null,"isRootLayout":false}},"isRootLayout":false}},"isRootLayout":true},"staleTime":300}
