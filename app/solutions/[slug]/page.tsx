@@ -1,4 +1,5 @@
 import { getAllSolutions, getSolutionBySlug } from "@/_solutions";
+import { GiscusComments } from "@/components/giscus-comments";
 import { PageContainer } from "@/components/page-container";
 import { TableOfContents } from "@/components/table-of-contents";
 import { Badge } from "@/components/ui/badge";
@@ -114,6 +115,8 @@ export default async function SolutionPage({ params }: { params: Promise<{ slug:
       <article className="prose prose-neutral dark:prose-invert max-w-none">
         <MDXRemote source={solution.content} components={mdxComponents} options={mdxOptions} />
       </article>
+
+      <GiscusComments />
     </PageContainer>
   );
 }

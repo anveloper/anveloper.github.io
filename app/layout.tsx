@@ -1,7 +1,7 @@
 import FaviconSwitcher from "@/components/favicon-switcher";
 import { Footer } from "@/components/footer";
 import { NavBar } from "@/components/nav-bar";
-import { Providers } from "@/components/providers";
+
 import type { Metadata } from "next";
 import "./globals.css";
 
@@ -61,12 +61,10 @@ const RootLayout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
         <link rel="apple-touch-icon" href="/favicon-light.svg" />
       </head>
       <body className="min-h-screen flex flex-col bg-background text-foreground antialiased">
-        <Providers>
           <NavBar />
 
           <main className="flex-1 flex flex-col">{children}</main>
           <Footer />
-        </Providers>
         <FaviconSwitcher />
       </body>
     </html>

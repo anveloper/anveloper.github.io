@@ -195,7 +195,7 @@ const SectionHeader = ({ children, href }: { children: React.ReactNode; href?: s
     return (
       <Link href={href} className="group flex items-center gap-1.5 mb-8 w-fit">
         {heading}
-        <ArrowUpRight className="w-4 h-4 text-muted-foreground opacity-0 -translate-y-0.5 translate-x-[-2px] transition-all group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0" />
+        <ArrowUpRight className="w-4 h-4 text-muted-foreground opacity-0 -translate-y-0.5 -translate-x-0.5 transition-all group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0" />
       </Link>
     );
   }
@@ -208,12 +208,7 @@ const HomePage = () => {
   return (
     <PageContainer>
       {/* Hero Section */}
-      <motion.section
-        variants={sectionReveal}
-        initial="hidden"
-        animate="visible"
-        className="mb-20"
-      >
+      <motion.section variants={sectionReveal} initial="hidden" animate="visible" className="mb-20">
         <div className="flex items-center gap-4 mb-4">
           <div className="relative w-14 h-14 rounded-full overflow-hidden border-2 border-border shrink-0">
             <Image src="/profile.webp" alt="안성진 프로필" fill className="object-cover" priority />
@@ -241,24 +236,20 @@ const HomePage = () => {
         <div className="space-y-4">
           <div className="space-y-2 text-muted-foreground leading-relaxed">
             <p>
-              기술을 학습하는데 있어 빠른 습득 속도를 자부합니다.
-              개발의 시작은 Java로 시작하였지만,
-              현재는 Next.js, Typescript, Prisma를 가장 잘 사용합니다.
+              기술을 학습하는데 있어 빠른 습득 속도를 자부합니다. 개발의 시작은 Java로 시작하였지만, 현재는 Next.js,
+              Typescript, Prisma를 가장 잘 사용합니다.
             </p>
             <p>
-              판매사·공급사·어드민 다중 플랫폼 설계·개발 경험과
-              멀티테넌트 기반 다중 도메인 플랫폼 개발 경험이 있습니다.
-              안드로이드 Kotlin(Jetpack Compose) 개발과
-              Vanilla JS 웹 개발, PHP에서 React/Remix.js 마이그레이션 경험이 있습니다.
+              판매사·공급사·어드민 다중 플랫폼 설계·개발 경험과 멀티테넌트 기반 다중 도메인 플랫폼 개발 경험이 있습니다.
+              안드로이드 Kotlin(Jetpack Compose) 개발과 Vanilla JS 웹 개발, PHP에서 React/Remix.js 마이그레이션 경험이
+              있습니다.
             </p>
           </div>
           <p className="text-sm text-muted-foreground">
-            <span className="text-primary-sky font-medium">(주) TILS AI</span> UX개발팀장 2023.03 ~
-            {" · "}정보처리기사{" · "}SQLD
+            <span className="text-primary-sky font-medium">(주) TILS AI</span> UX개발팀장 2023.03 ~{" · "}정보처리기사
+            {" · "}SQLD
           </p>
-          <p className="text-sm text-muted-foreground">
-            {interests.join(" / ")}
-          </p>
+          <p className="text-sm text-muted-foreground">{interests.join(" / ")}</p>
         </div>
       </motion.section>
 
@@ -315,9 +306,7 @@ const HomePage = () => {
                 index < timeline.length - 1 && "border-b border-border/60"
               )}
             >
-              <span className="text-sm text-muted-foreground tabular-nums w-36 shrink-0">
-                {item.period}
-              </span>
+              <span className="text-sm text-muted-foreground tabular-nums w-36 shrink-0">{item.period}</span>
               <div className="flex-1 min-w-0">
                 <div className="flex flex-col sm:flex-row sm:items-center gap-1">
                   <h3 className="font-semibold text-foreground">{item.title}</h3>
@@ -381,12 +370,7 @@ const HomePage = () => {
       </motion.section>
 
       {/* Contact Section */}
-      <motion.section
-        variants={sectionReveal}
-        initial="hidden"
-        whileInView="visible"
-        viewport={viewportConfig}
-      >
+      <motion.section variants={sectionReveal} initial="hidden" whileInView="visible" viewport={viewportConfig}>
         <SectionHeader>Contact</SectionHeader>
         <div className="space-y-3">
           {contactLinks.map((link) => (
