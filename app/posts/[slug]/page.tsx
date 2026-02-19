@@ -1,4 +1,5 @@
 import { getAllPosts, getPostBySlug } from "@/_posts";
+import { GiscusComments } from "@/components/giscus-comments";
 import { PageContainer } from "@/components/page-container";
 import { TableOfContents } from "@/components/table-of-contents";
 import { Badge } from "@/components/ui/badge";
@@ -85,6 +86,8 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
       <article className="prose prose-neutral dark:prose-invert max-w-none">
         <MDXRemote source={post.content} components={mdxComponents} options={mdxOptions} />
       </article>
+
+      <GiscusComments />
     </PageContainer>
   );
 }
