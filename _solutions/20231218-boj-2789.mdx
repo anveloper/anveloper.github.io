@@ -8,15 +8,38 @@ problem_number: "2789"
 problem_url: "https://www.acmicpc.net/problem/2789"
 difficulty: "브론즈 II"
 language: "java"
+enhanced: true
 ---
 
 ## 문제
 
 [BOJ 2789 - 유학 금지](https://www.acmicpc.net/problem/2789)
 
+영어 대문자로 이루어진 문자열에서 "CAMBRIDGE"에 포함된 글자를 모두 제거하고 남은 문자열을 출력하라.
+
+### 입력
+
+영어 대문자로 이루어진 문자열이 주어진다.
+
+### 출력
+
+"CAMBRIDGE"에 포함된 문자를 제거한 결과를 출력한다.
+
+### 예제
+
+| 입력 | 출력 |
+|------|------|
+| `CONTEST` | `ONST` |
+
 ## 풀이
 
-문제의 조건을 그대로 구현한다.
+"CAMBRIDGE"의 각 문자를 순회하며 입력 문자열에서 해당 문자를 제거한다.
+
+1. "CAMBRIDGE" 문자열을 문자 배열로 변환한다
+2. 각 문자에 대해 `String.replace()`로 입력 문자열에서 해당 문자를 제거한다
+3. 모든 제거가 끝난 결과를 출력한다
+
+**핵심 아이디어**: 제거 대상 문자 집합이 고정되어 있으므로 반복적인 문자열 치환으로 해결한다.
 
 ## 코드
 
