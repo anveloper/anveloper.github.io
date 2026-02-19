@@ -1,5 +1,6 @@
 import { getAllPosts } from "@/_posts";
 import { getAllProjects } from "@/_projects";
+import { getAllSolutions } from "@/_solutions";
 import type { MetadataRoute } from "next";
 
 export const dynamic = "force-static";
@@ -9,6 +10,7 @@ const BASE_URL = "https://anveloper.dev";
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const posts = await getAllPosts();
   const projects = await getAllProjects();
+  const solutions = await getAllSolutions();
 
   const staticPages: MetadataRoute.Sitemap = [
     { url: BASE_URL, lastModified: new Date(), changeFrequency: "weekly", priority: 1 },
@@ -35,5 +37,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }));
 
-  return [...staticPages, ...postPages, ...projectPages];
+  const solutionPages: MetadataRoute.Sitemap = solutions.map((solution) => ({
+    url: `${BASE_URL}/solutions/${solution.slug}`,
+    lastModified: new Date(solution.frontmatter.date),
+    changeFrequency: "monthly",
+    priority: 0.5,
+  }));
+
+  return [...staticPages, ...postPages, ...projectPages, ...solutionPages];
 }
