@@ -37,8 +37,8 @@ enhanced: true
 각 위치 i를 바이토닉 수열의 꼭대기(최댓값 위치)로 보고, i를 기준으로 왼쪽 LIS(Longest Increasing Subsequence)와 오른쪽 LDS(Longest Decreasing Subsequence) 길이를 합산한다. 모든 위치에 대해 계산하여 최댓값을 구한다.
 
 1. `dp[n][0]`은 n을 끝점으로 하는 LIS 길이, `dp[n][1]`은 n을 시작점으로 하는 LDS 길이를 저장한다.
-2. `LIS(n)`: arr[n]보다 작은 arr[i] (i < n)에 대해 `max(LIS(i) + 1)`을 재귀적으로 계산한다.
-3. `LDS(n)`: arr[n]보다 작은 arr[i] (i > n)에 대해 `max(LDS(i) + 1)`을 재귀적으로 계산한다.
+2. `LIS(n)`: arr[n]보다 작은 arr[i] (`i < n`)에 대해 `max(LIS(i) + 1)`을 재귀적으로 계산한다.
+3. `LDS(n)`: arr[n]보다 작은 arr[i] (`i > n`)에 대해 `max(LDS(i) + 1)`을 재귀적으로 계산한다.
 4. 모든 n에 대해 `LIS(n) + LDS(n)`을 계산하고 최댓값을 구한다.
 5. i 위치를 꼭대기로 공유하므로 1이 중복 카운트되어, 최종 답은 `max - 1`이다.
 
