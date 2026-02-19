@@ -8,15 +8,41 @@ problem_number: "18258"
 problem_url: "https://www.acmicpc.net/problem/18258"
 difficulty: "실버 IV"
 language: "java"
+enhanced: true
 ---
 
 ## 문제
 
 [BOJ 18258 - 큐 2](https://www.acmicpc.net/problem/18258)
 
+정수를 저장하는 큐를 구현하고 push, pop, size, empty, front, back 6가지 명령을 처리하는 프로그램을 작성하라. 명령 수가 최대 2,000,000개이므로 빠른 입출력이 필요하다.
+
+### 입력
+
+첫째 줄에 명령의 수 N (1 이상 2,000,000 이하)이 주어진다. 둘째 줄부터 N개의 명령이 하나씩 주어진다.
+
+### 출력
+
+출력이 필요한 명령마다 한 줄에 하나씩 결과를 출력한다.
+
+### 예제
+
+| 입력 | 출력 |
+|------|------|
+| `15` `push 1` `push 2` `push 3` `pop` `pop` `pop` `pop` `push 4` `push 5` `front` `back` `size` `empty` `empty` `pop` | `1` `2` `3` `-1` `4` `5` `2` `0` `1` `-1` |
+
 ## 풀이
 
-문제의 조건에 맞게 풀이한다.
+Deque를 사용하여 큐의 6가지 연산을 구현하고, BufferedReader/StringBuilder로 빠른 입출력을 처리한다.
+
+1. push X: Deque의 뒤에 X를 추가한다
+2. pop: 비어있으면 -1, 아니면 앞 원소를 제거하고 출력한다
+3. size: 현재 원소 개수를 출력한다
+4. empty: 비어있으면 1, 아니면 0을 출력한다
+5. front/back: 비어있으면 -1, 아니면 앞/뒤 원소를 출력한다
+6. 모든 출력을 StringBuilder에 모아 한 번에 출력한다
+
+**핵심 아이디어**: BOJ 10845(큐)와 동일한 문제이나 N이 최대 200만으로 크므로, Scanner 대신 BufferedReader + StringBuilder를 사용해야 시간 초과를 피할 수 있다.
 
 ## 코드
 

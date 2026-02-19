@@ -30,6 +30,13 @@
 - CLAUDE.md 응답 규칙 보완 (영어 질문 시 한국어 답변 + 영어 교정)
 - Solutions 섹션 설계 문서 추가 (`docs/design/20260218-solutions-section.md`)
 
+### enhance-solutions 스킬
+
+- `.claude/skills/enhance-solutions/SKILL.md` 추가
+- C-grade 풀이(보일러플레이트 설명) → 코드 분석 기반 상세 풀이로 보강
+- 배치 처리 (10개 단위), frontmatter `enhanced: true` 마킹
+- 130개 파일 보강 완료 (13배치), 약 355개 잔여
+
 ## 빌드 현황
 
 - `pnpm build`: 약 21초, 출력 316MB

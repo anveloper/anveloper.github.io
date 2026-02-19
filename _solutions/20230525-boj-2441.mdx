@@ -8,15 +8,38 @@ problem_number: "2441"
 problem_url: "https://www.acmicpc.net/problem/2441"
 difficulty: "브론즈 III"
 language: "java"
+enhanced: true
 ---
 
 ## 문제
 
 [BOJ 2441 - 별 찍기 - 4](https://www.acmicpc.net/problem/2441)
 
+N이 주어졌을 때, 왼쪽 정렬로 별을 N개부터 1개까지 줄여가며 찍되, 줄어든 만큼 앞에 공백을 추가하여 오른쪽 정렬된 역삼각형을 출력하라.
+
+### 입력
+
+첫째 줄에 N (1 <= N <= 100)이 주어진다.
+
+### 출력
+
+N줄에 걸쳐 역삼각형 별을 출력한다.
+
+### 예제
+
+| 입력 | 출력 |
+|------|------|
+| `5` | `*****` ` ****` `  ***` `   **` `    *` |
+
 ## 풀이
 
-문제의 조건을 그대로 구현한다.
+Java의 String.repeat()으로 공백과 별을 간결하게 생성한다.
+
+1. i번째 줄(0-indexed)에 공백 i개와 별 (N-i)개를 이어 붙인다
+2. `" ".repeat(i)`와 `"*".repeat(N-i)`로 각 줄을 구성한다
+3. StringBuilder에 모아서 한 번에 출력한다
+
+**핵심 아이디어**: Java 11의 String.repeat() 메서드를 활용하면 반복문 없이 한 줄로 패턴을 생성할 수 있다.
 
 ## 코드
 
@@ -40,5 +63,5 @@ public class Day549BOJ2441별찍기4 {
 
 ## 복잡도
 
-- 시간: O(N)
-- 공간: O(N)
+- 시간: O(N²)
+- 공간: O(N²)
