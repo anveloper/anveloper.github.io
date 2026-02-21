@@ -8,17 +8,38 @@ problem_number: "3035"
 problem_url: "https://www.acmicpc.net/problem/3035"
 difficulty: "브론즈 I"
 language: "cpp"
+enhanced: true
 ---
 
 ## 문제
 
 [BOJ 3035 - 스캐너](https://www.acmicpc.net/problem/3035)
 
-> R x C 크기의 문자 패턴을 행 방향 ZR배, 열 방향 ZC배로 확대하여 출력한다.
+R×C 크기의 문자 패턴을 행 방향 ZR배, 열 방향 ZC배로 확대하여 출력하라.
+
+### 입력
+
+R, C, ZR, ZC와 R×C 문자 패턴이 주어진다.
+
+### 출력
+
+확대된 패턴을 출력한다.
+
+### 예제
+
+| 입력 | 출력 |
+| --- | --- |
+| `2 3 2 3` `abc` `def` | `aaabbbccc` `aaabbbccc` `dddeeefff` `dddeeefff` |
 
 ## 풀이
 
-각 행의 문자를 읽으면서 각 문자를 ZC번 반복하여 확대된 행 문자열을 만든다. 그리고 해당 행을 ZR번 반복 출력한다.
+각 행의 문자를 열 방향으로 ZC배 확대하고, 확대된 행을 ZR번 반복 출력한다.
+
+1. 각 행의 문자를 읽으며 각 문자를 ZC번 반복하여 확대 행을 만든다
+2. 확대된 행을 ZR번 출력한다
+3. 모든 행에 대해 반복한다
+
+**핵심 아이디어**: 행과 열을 독립적으로 확대하면 되므로, 열 확대 후 행 반복으로 간단히 구현된다.
 
 ## 코드
 
