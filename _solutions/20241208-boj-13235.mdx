@@ -8,17 +8,37 @@ problem_number: "13235"
 problem_url: "https://www.acmicpc.net/problem/13235"
 difficulty: "브론즈 II"
 language: "cpp"
+enhanced: true
 ---
 
 ## 문제
 
 [BOJ 13235 - 팰린드롬](https://www.acmicpc.net/problem/13235)
 
-> 주어진 문자열이 앞뒤로 뒤집어도 같은 팰린드롬인지 판별한다.
+주어진 문자열이 팰린드롬인지 판별하라.
+
+### 입력
+
+소문자로 이루어진 문자열이 주어진다.
+
+### 출력
+
+팰린드롬이면 "true", 아니면 "false"를 출력한다.
+
+### 예제
+
+| 입력 | 출력 |
+| --- | --- |
+| `level` | `true` |
 
 ## 풀이
 
-입력 문자열을 뒤집은 문자열과 비교하여 같으면 true, 다르면 false를 출력한다.
+문자열을 뒤집어 원본과 비교한다.
+
+1. 입력 문자열을 복사한 뒤 `reverse`로 뒤집는다
+2. 원본과 뒤집은 문자열이 같으면 "true", 다르면 "false"를 출력한다
+
+**핵심 아이디어**: STL의 `reverse` 함수로 간단히 팰린드롬을 판별할 수 있다.
 
 ## 코드
 
