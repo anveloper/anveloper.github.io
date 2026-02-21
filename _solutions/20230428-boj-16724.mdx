@@ -8,15 +8,39 @@ problem_number: "16724"
 problem_url: "https://www.acmicpc.net/problem/16724"
 difficulty: "골드 III"
 language: "java"
+enhanced: true
 ---
 
 ## 문제
 
 [BOJ 16724 - 피리 부는 사나이](https://www.acmicpc.net/problem/16724)
 
+N×M 격자에 각 칸마다 이동 방향(U/D/L/R)이 주어질 때, 어디에서 출발하든 안전 지대(SAFE ZONE)에 도달할 수 있도록 하는 최소 SAFE ZONE 수를 구하라.
+
+### 입력
+
+첫째 줄에 N, M, 이후 N줄에 방향 문자열이 주어진다.
+
+### 출력
+
+필요한 최소 SAFE ZONE 수를 출력한다.
+
+### 예제
+
+| 입력 | 출력 |
+| --- | --- |
+| `3 4` `DLLL` `DRLU` `RRRU` | `2` |
+
 ## 풀이
 
-그래프 탐색(BFS/DFS)을 활용하여 탐색한다. 깊이 우선 탐색(DFS)을 활용하여 탐색한다.
+DFS로 사이클을 탐지하여 사이클의 수를 세면 그것이 필요한 SAFE ZONE 수이다.
+
+1. 각 미방문 칸에서 DFS를 시작한다
+2. 방향을 따라 이동하며 방문 표시를 한다
+3. 이미 방문했지만 아직 finish 처리되지 않은 칸을 만나면 새 사이클 발견 → ans 증가
+4. DFS 종료 시 finish 표시를 한다
+
+**핵심 아이디어**: 모든 칸이 정확히 하나의 방향으로 나가므로 함수형 그래프가 되며, 사이클의 개수가 필요한 SAFE ZONE 수와 같다.
 
 ## 코드
 

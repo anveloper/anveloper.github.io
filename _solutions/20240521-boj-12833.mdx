@@ -8,17 +8,37 @@ problem_number: "12833"
 problem_url: "https://www.acmicpc.net/problem/12833"
 difficulty: "브론즈 I"
 language: "python"
+enhanced: true
 ---
 
 ## 문제
 
 [BOJ 12833 - XORXORXOR](https://www.acmicpc.net/problem/12833)
 
-> A에 B를 C번 XOR한 결과를 구한다.
+A에 B를 C번 XOR 연산한 결과를 구하라.
+
+### 입력
+
+A, B, C가 공백으로 구분되어 주어진다.
+
+### 출력
+
+A에 B를 C번 XOR한 결과를 출력한다.
+
+### 예제
+
+| 입력 | 출력 |
+| --- | --- |
+| `4 3 2` | `4` |
 
 ## 풀이
 
-XOR은 두 번 적용하면 원래 값으로 돌아오므로, C가 홀수일 때만 A XOR B를 적용하면 된다.
+XOR은 자기 자신을 두 번 적용하면 원래 값으로 돌아오는 성질을 이용한다.
+
+1. C를 2로 나눈 나머지를 구한다 (C % 2)
+2. 나머지가 1이면 A XOR B를 적용하고, 0이면 A 그대로 출력한다
+
+**핵심 아이디어**: `A ^ B ^ B = A`이므로, 짝수 번 XOR하면 원래 값, 홀수 번이면 한 번만 적용한 값이다.
 
 ## 코드
 
