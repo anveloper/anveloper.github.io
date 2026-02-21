@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>https://anveloper.dev</loc>
-<lastmod>2026-02-21T09:58:56.075Z</lastmod>
+<lastmod>2026-02-21T11:00:38.373Z</lastmod>
 <changefreq>weekly</changefreq>
 <priority>1</priority>
 </url>
@@ -148,6 +148,24 @@
 <lastmod>2022-06-22T00:00:00.000Z</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
+</url>
+<url>
+<loc>https://anveloper.dev/solutions/boj-4365</loc>
+<lastmod>2026-02-21T00:00:00.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.5</priority>
+</url>
+<url>
+<loc>https://anveloper.dev/solutions/boj-4349</loc>
+<lastmod>2026-02-21T00:00:00.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.5</priority>
+</url>
+<url>
+<loc>https://anveloper.dev/solutions/boj-4327</loc>
+<lastmod>2026-02-21T00:00:00.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.5</priority>
 </url>
 <url>
 <loc>https://anveloper.dev/solutions/boj-4291</loc>
