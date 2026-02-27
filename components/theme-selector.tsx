@@ -2,7 +2,7 @@
 
 import { type Theme, useThemeClass } from "@/hooks/use-theme-class";
 import { cn } from "@/lib/utils";
-import { Check, Moon, Palette, Sun, SquareTerminal } from "lucide-react";
+import { Moon, Palette, Sun, SquareTerminal } from "lucide-react";
 import type React from "react";
 import { useEffect, useRef, useState } from "react";
 
@@ -19,30 +19,26 @@ const themeOptions: ThemeOption[] = [
     value: "light",
     label: "라이트",
     icon: Sun,
-    className: "bg-[#f5f5f7] text-[#1a1a2e] hover:bg-[#eaeaee]",
+    className: "bg-[#f5f5f7] text-[#1a1a2e] border border-[#1a1a2e]/15 hover:bg-[#eaeaee]",
   },
   {
     value: "dark",
     label: "다크",
     icon: Moon,
-    className: "bg-[#1e1e2e] text-[#e0e0f0] hover:bg-[#2a2a3e]",
+    className: "bg-[#1e1e2e] text-[#e0e0f0] border border-[#e0e0f0]/15 hover:bg-[#2a2a3e]",
   },
   {
     value: "korean",
     label: "묵향",
     icon: Palette,
-    className: "bg-[#e8dcc8] text-[#3d2b1f] hover:bg-[#d4c4a8]",
-    style: { fontFamily: '"East Sea Dokdo", cursive' },
+    className: "bg-[#e8dcc8] text-[#3d2b1f] border border-[#3d2b1f]/15 hover:bg-[#d4c4a8]",
   },
   {
     value: "terminal",
     label: "터미널",
     icon: SquareTerminal,
-    className: "bg-[#0d0d0d] text-[#00ff41] hover:bg-[#1a1a1a]",
-    style: {
-      fontFamily: '"D2Coding Ligature", monospace',
-      textShadow: "0 0 5px rgba(0,255,65,0.4)",
-    },
+    className: "bg-[#0d0d0d] text-[#00ff41] border border-[#00ff41]/15 hover:bg-[#1a1a1a]",
+    style: { textShadow: "0 0 5px rgba(0,255,65,0.4)" },
   },
 ];
 
@@ -93,10 +89,8 @@ export const ThemeSelector = () => {
           role="listbox"
           aria-label="테마 목록"
           className={cn(
-            "absolute right-0 top-full mt-2 z-50",
-            "p-1 space-y-0.5",
-            "bg-popover/80 backdrop-blur-sm",
-            "border border-border shadow-md rounded-md",
+            "absolute right-1/2 translate-x-1/2 top-full mt-1 z-50",
+            "flex flex-col items-center gap-1.5 p-2",
             "animate-in fade-in-0 zoom-in-95"
           )}
         >
@@ -108,21 +102,21 @@ export const ThemeSelector = () => {
                 key={option.value}
                 role="option"
                 aria-selected={isActive}
+                aria-label={option.label}
+                title={option.label}
                 onClick={() => {
                   setTheme(option.value);
                   setOpen(false);
                 }}
                 className={cn(
-                  "w-full flex items-center gap-1.5 px-2 py-1 text-xs rounded whitespace-nowrap",
-                  "transition-all duration-200",
+                  "flex items-center justify-center p-2 !rounded-full shadow-md",
+                  "transition-all duration-200 hover:scale-110",
                   option.className,
-                  isActive && "ring-1.5 ring-current/50 font-medium"
+                  isActive && "ring-1.5 ring-current/50"
                 )}
                 style={option.style}
               >
                 <OptionIcon className="w-3.5 h-3.5" />
-                <span className="flex-1 text-left">{option.label}</span>
-                {isActive && <Check className="w-3 h-3" />}
               </button>
             );
           })}
