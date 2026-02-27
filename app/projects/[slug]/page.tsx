@@ -6,11 +6,11 @@ import { mdxComponents } from "@/lib/mdx-components";
 import { mdxOptions } from "@/lib/mdx-options";
 import { extractToc } from "@/lib/toc";
 import type { Metadata } from "next";
-import { ArrowLeft, ExternalLink, Github } from "lucide-react";
+import { NotFoundView } from "@/components/not-found-view";
+import { ArrowLeft, ExternalLink, FolderKanban, Github } from "lucide-react";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import Image from "next/image";
 import Link from "next/link";
-import { notFound } from "next/navigation";
 
 export async function generateStaticParams() {
   const projects = await getAllProjects();
@@ -50,7 +50,15 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
   const project = await getProjectBySlug(slug);
 
   if (!project) {
-    notFound();
+    return (
+      <NotFoundView
+        icon={FolderKanban}
+        title="프로젝트를 찾을 수 없습니다"
+        description="요청하신 프로젝트가 존재하지 않거나 삭제되었습니다."
+        href="/projects"
+        linkLabel="프로젝트 목록으로 돌아가기"
+      />
+    );
   }
 
   const tocItems = extractToc(project.content);

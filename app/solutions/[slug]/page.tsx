@@ -1,29 +1,42 @@
 import { getAllSolutions, getSolutionBySlug } from "@/_solutions";
+import { SolutionItems } from "@/app/solutions/solution-items";
 import { GiscusComments } from "@/components/giscus-comments";
 import { PageContainer } from "@/components/page-container";
+import { Pagination } from "@/components/pagination";
 import { TableOfContents } from "@/components/table-of-contents";
 import { Badge } from "@/components/ui/badge";
 import { mdxComponents } from "@/lib/mdx-components";
 import { mdxOptions } from "@/lib/mdx-options";
 import { extractToc } from "@/lib/toc";
+import { NotFoundView } from "@/components/not-found-view";
+import { ArrowLeft, Code, ExternalLink } from "lucide-react";
 import type { Metadata } from "next";
-import { ArrowLeft, ExternalLink } from "lucide-react";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import Link from "next/link";
-import { notFound } from "next/navigation";
 
 const platformLabel: Record<string, string> = {
   boj: "BOJ",
   programmers: "Programmers",
 };
 
+const PAGE_SIZE = 30;
+
 export async function generateStaticParams() {
   const solutions = await getAllSolutions();
-  return solutions.map((solution) => ({ slug: solution.slug }));
+  const totalPages = Math.ceil(solutions.length / PAGE_SIZE);
+  return [
+    ...solutions.map((s) => ({ slug: s.slug })),
+    ...Array.from({ length: totalPages - 1 }, (_, i) => ({ slug: String(i + 2) })),
+  ];
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
+
+  if (/^\d+$/.test(slug)) {
+    return { title: `Solutions - ${slug}페이지` };
+  }
+
   const solution = await getSolutionBySlug(slug);
   if (!solution) return {};
 
@@ -49,10 +62,51 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function SolutionPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
+
+  if (/^\d+$/.test(slug)) {
+    const page = Number(slug);
+    const solutions = await getAllSolutions();
+    const totalPages = Math.ceil(solutions.length / PAGE_SIZE);
+
+    if (page < 2 || page > totalPages) {
+      return (
+        <NotFoundView
+          icon={Code}
+          title="풀이를 찾을 수 없습니다"
+          description="요청하신 페이지가 존재하지 않습니다."
+          href="/solutions"
+          linkLabel="풀이 목록으로 돌아가기"
+        />
+      );
+    }
+
+    const paged = solutions.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
+
+    return (
+      <PageContainer>
+        <header className="mb-10">
+          <h1 className="text-xl font-semibold text-foreground tracking-tight">Solutions</h1>
+          <p className="text-sm text-muted-foreground mt-1">알고리즘 문제 풀이</p>
+        </header>
+
+        <SolutionItems solutions={paged} />
+        <Pagination currentPage={page} totalPages={totalPages} basePath="/solutions" />
+      </PageContainer>
+    );
+  }
+
   const solution = await getSolutionBySlug(slug);
 
   if (!solution) {
-    notFound();
+    return (
+      <NotFoundView
+        icon={Code}
+        title="풀이를 찾을 수 없습니다"
+        description="요청하신 풀이가 존재하지 않거나 삭제되었습니다."
+        href="/solutions"
+        linkLabel="풀이 목록으로 돌아가기"
+      />
+    );
   }
 
   const tocItems = extractToc(solution.content);
@@ -70,23 +124,15 @@ export default async function SolutionPage({ params }: { params: Promise<{ slug:
       </Link>
 
       <header className="border-b border-border pb-6 mb-8">
-        <h1 className="text-2xl sm:text-3xl font-bold text-foreground mb-4">
-          {frontmatter.title}
-        </h1>
+        <h1 className="text-2xl sm:text-3xl font-bold text-foreground mb-4">{frontmatter.title}</h1>
 
         <div className="flex flex-wrap items-center gap-4 mb-4">
           <span className="text-sm text-muted-foreground">{frontmatter.date}</span>
           {frontmatter.platform && (
-            <Badge variant="outline">
-              {platformLabel[frontmatter.platform as string] ?? frontmatter.platform}
-            </Badge>
+            <Badge variant="outline">{platformLabel[frontmatter.platform as string] ?? frontmatter.platform}</Badge>
           )}
-          {frontmatter.difficulty && (
-            <Badge variant="outline">{frontmatter.difficulty}</Badge>
-          )}
-          {frontmatter.language && (
-            <Badge variant="secondary">{frontmatter.language}</Badge>
-          )}
+          {frontmatter.difficulty && <Badge variant="outline">{frontmatter.difficulty}</Badge>}
+          {frontmatter.language && <Badge variant="secondary">{frontmatter.language}</Badge>}
         </div>
 
         {frontmatter.problem_url && (
