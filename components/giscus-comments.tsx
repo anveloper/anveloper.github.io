@@ -10,7 +10,7 @@ export const GiscusComments = () => {
     const root = document.documentElement;
 
     const resolveGiscusTheme = (): "light" | "dark" => {
-      if (root.classList.contains("dark")) return "dark";
+      if (root.classList.contains("dark") || root.classList.contains("terminal")) return "dark";
       return "light";
     };
 

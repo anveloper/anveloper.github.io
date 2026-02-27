@@ -41,6 +41,7 @@
 
 @custom-variant dark (&:is(.dark *));
 @custom-variant korean (&:is(.korean *));
+@custom-variant terminal (&:is(.terminal *));
 
 @theme inline {
   --color-background: var(--background);
@@ -268,6 +269,136 @@
 /* Korean theme: scrollbar */
 .korean ::-webkit-scrollbar-thumb {
   border-radius: 0;
+}
+
+/* ── Terminal CRT Theme ── */
+.terminal {
+  --radius: 0px;
+  --background: oklch(0.08 0.005 145);
+  --foreground: oklch(0.85 0.18 145);
+  --card: oklch(0.12 0.008 145);
+  --card-foreground: oklch(0.85 0.18 145);
+  --popover: oklch(0.12 0.008 145);
+  --popover-foreground: oklch(0.85 0.18 145);
+  --primary: oklch(0.80 0.22 145);
+  --primary-foreground: oklch(0.08 0.005 145);
+  --primary-sky: oklch(0.70 0.18 165);
+  --secondary: oklch(0.15 0.01 145);
+  --secondary-foreground: oklch(0.80 0.18 145);
+  --muted: oklch(0.15 0.01 145);
+  --muted-foreground: oklch(0.55 0.10 145);
+  --accent: oklch(0.18 0.02 145);
+  --accent-foreground: oklch(0.85 0.18 145);
+  --destructive: oklch(0.60 0.22 25);
+  --border: oklch(0.25 0.06 145);
+  --input: oklch(0.20 0.03 145);
+  --ring: oklch(0.70 0.18 145);
+  --chart-1: oklch(0.80 0.22 145);
+  --chart-2: oklch(0.70 0.18 165);
+  --chart-3: oklch(0.60 0.15 180);
+  --chart-4: oklch(0.75 0.20 130);
+  --chart-5: oklch(0.65 0.12 200);
+  --sidebar: oklch(0.10 0.006 145);
+  --sidebar-foreground: oklch(0.85 0.18 145);
+  --sidebar-primary: oklch(0.80 0.22 145);
+  --sidebar-primary-foreground: oklch(0.08 0.005 145);
+  --sidebar-accent: oklch(0.18 0.02 145);
+  --sidebar-accent-foreground: oklch(0.85 0.18 145);
+  --sidebar-border: oklch(0.25 0.06 145);
+  --sidebar-ring: oklch(0.70 0.18 145);
+}
+
+/* Terminal theme: monospace font override */
+.terminal {
+  font-family: var(--font-mono);
+}
+
+.terminal h1,
+.terminal h2,
+.terminal h3,
+.terminal h4,
+.terminal h5,
+.terminal h6 {
+  font-family: var(--font-mono);
+}
+
+/* Terminal theme: text glow effect */
+.terminal {
+  text-shadow: 0 0 5px rgba(0, 255, 65, 0.3);
+}
+
+.terminal h1,
+.terminal h2,
+.terminal h3,
+.terminal h4,
+.terminal h5,
+.terminal h6 {
+  text-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+}
+
+/* Terminal theme: CRT scanline overlay */
+.terminal body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.1) 2px,
+    rgba(0, 0, 0, 0.1) 4px
+  );
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* Terminal theme: square corners everywhere */
+.terminal [class*="rounded"] {
+  border-radius: 0 !important;
+}
+
+/* Terminal theme: header style */
+.terminal header {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  background-color: var(--background);
+  border-bottom: 1px solid var(--border);
+}
+
+/* Terminal theme: footer style */
+.terminal footer {
+  border-top: 1px solid var(--border);
+}
+
+/* Terminal theme: code blocks use dark shiki theme */
+.terminal [data-rehype-pretty-code-figure] pre {
+  background-color: var(--muted);
+  color: var(--shiki-dark);
+}
+
+.terminal [data-rehype-pretty-code-figure] code span {
+  color: var(--shiki-dark);
+}
+
+/* Terminal theme: selection color */
+.terminal ::selection {
+  background-color: rgba(0, 255, 65, 0.3);
+  color: var(--foreground);
+}
+
+/* Terminal theme: scrollbar */
+.terminal ::-webkit-scrollbar-thumb {
+  border-radius: 0;
+  background: oklch(0.25 0.06 145);
+}
+
+.terminal ::-webkit-scrollbar-thumb:hover {
+  background: oklch(0.40 0.10 145);
+}
+
+/* Terminal theme: cursor blink for active links */
+.terminal a:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
 }
 
 @layer base {

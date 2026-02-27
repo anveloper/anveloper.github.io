@@ -2,12 +2,12 @@
 
 import { useEffect } from "react";
 
-type Theme = "light" | "dark" | "korean";
+type Theme = "light" | "dark" | "korean" | "terminal";
 
 const FaviconSwitcher = () => {
   useEffect(() => {
     const setFavicon = (theme: Theme) => {
-      const faviconHref = theme === "dark" ? "/favicon-dark.svg" : "/favicon-light.svg";
+      const faviconHref = theme === "dark" || theme === "terminal" ? "/favicon-dark.svg" : "/favicon-light.svg";
 
       const rels = ["icon", "shortcut icon", "apple-touch-icon"];
 
@@ -27,7 +27,7 @@ const FaviconSwitcher = () => {
 
     const getActiveTheme = (): Theme => {
       const saved = localStorage.getItem("theme") as Theme | null;
-      if (saved === "dark" || saved === "light" || saved === "korean") return saved;
+      if (saved === "dark" || saved === "light" || saved === "korean" || saved === "terminal") return saved;
       const media = window.matchMedia("(prefers-color-scheme: dark)");
       return media.matches ? "dark" : "light";
     };

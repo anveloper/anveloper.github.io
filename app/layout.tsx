@@ -40,9 +40,9 @@ const themeInitScript = `
   (function() {
     try {
       var theme = localStorage.getItem('theme');
-      var valid = ['light', 'dark', 'korean'];
+      var valid = ['light', 'dark', 'korean', 'terminal'];
       var root = document.documentElement;
-      root.classList.remove('light', 'dark', 'korean');
+      root.classList.remove('light', 'dark', 'korean', 'terminal');
       if (valid.indexOf(theme) !== -1) {
         root.classList.add(theme);
       } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {

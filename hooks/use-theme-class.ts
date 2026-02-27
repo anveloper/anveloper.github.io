@@ -2,10 +2,10 @@
 
 import { useEffect, useState } from "react";
 
-export type Theme = "light" | "dark" | "korean";
+export type Theme = "light" | "dark" | "korean" | "terminal";
 
-const VALID_THEMES: Theme[] = ["light", "dark", "korean"];
-const THEME_CLASSES: Theme[] = ["light", "dark", "korean"];
+const VALID_THEMES: Theme[] = ["light", "dark", "korean", "terminal"];
+const THEME_CLASSES: Theme[] = ["light", "dark", "korean", "terminal"];
 
 const isValidTheme = (value: string | null): value is Theme =>
   VALID_THEMES.includes(value as Theme);
