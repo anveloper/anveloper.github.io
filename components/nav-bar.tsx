@@ -1,13 +1,13 @@
 "use client";
 
 import { useMounted } from "@/hooks/use-mounted";
-import { useThemeClass } from "@/hooks/use-theme-class";
 import { cn } from "@/lib/utils";
-import { FolderGit2, HomeIcon, LayoutGrid, MailIcon, Moon, Sun } from "lucide-react";
+import { FolderGit2, HomeIcon, LayoutGrid, MailIcon } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
 import HeaderLogo from "./header-logo";
+import { ThemeSelector } from "./theme-selector";
 
 export type IconProps = React.HTMLAttributes<SVGElement>;
 
@@ -45,7 +45,6 @@ const socialLinks = [
 
 export const NavBar = () => {
   const pathname = usePathname();
-  const { theme, setTheme } = useThemeClass();
   const mounted = useMounted();
 
   if (!mounted) return null;
@@ -103,13 +102,7 @@ export const NavBar = () => {
 
           <div className="w-px h-4 bg-border mx-2" />
 
-          <button
-            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-            className="p-2 text-muted-foreground hover:text-foreground transition-colors"
-            aria-label={theme === "dark" ? "라이트 모드로 전환" : "다크 모드로 전환"}
-          >
-            {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
-          </button>
+          <ThemeSelector />
         </div>
       </nav>
     </header>
