@@ -8,10 +8,16 @@ export const GiscusComments = () => {
 
   useEffect(() => {
     const root = document.documentElement;
-    setTheme(root.classList.contains("dark") ? "dark" : "light");
+
+    const resolveGiscusTheme = (): "light" | "dark" => {
+      if (root.classList.contains("dark")) return "dark";
+      return "light";
+    };
+
+    setTheme(resolveGiscusTheme());
 
     const observer = new MutationObserver(() => {
-      setTheme(root.classList.contains("dark") ? "dark" : "light");
+      setTheme(resolveGiscusTheme());
     });
     observer.observe(root, { attributes: true, attributeFilter: ["class"] });
 

@@ -40,10 +40,13 @@ const themeInitScript = `
   (function() {
     try {
       var theme = localStorage.getItem('theme');
-      if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-        document.documentElement.classList.add('dark');
-      } else {
-        document.documentElement.classList.remove('dark');
+      var valid = ['light', 'dark', 'korean'];
+      var root = document.documentElement;
+      root.classList.remove('light', 'dark', 'korean');
+      if (valid.indexOf(theme) !== -1) {
+        root.classList.add(theme);
+      } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        root.classList.add('dark');
       }
     } catch (e) {}
   })();

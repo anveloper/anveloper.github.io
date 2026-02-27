@@ -2,9 +2,11 @@
 
 import { useEffect } from "react";
 
+type Theme = "light" | "dark" | "korean";
+
 const FaviconSwitcher = () => {
   useEffect(() => {
-    const setFavicon = (theme: "light" | "dark") => {
+    const setFavicon = (theme: Theme) => {
       const faviconHref = theme === "dark" ? "/favicon-dark.svg" : "/favicon-light.svg";
 
       const rels = ["icon", "shortcut icon", "apple-touch-icon"];
@@ -21,21 +23,18 @@ const FaviconSwitcher = () => {
 
         link.href = faviconHref;
       });
-
-      document.documentElement.classList.remove("light", "dark");
-      document.documentElement.classList.add(theme);
     };
+
+    const getActiveTheme = (): Theme => {
+      const saved = localStorage.getItem("theme") as Theme | null;
+      if (saved === "dark" || saved === "light" || saved === "korean") return saved;
+      const media = window.matchMedia("(prefers-color-scheme: dark)");
+      return media.matches ? "dark" : "light";
+    };
+
+    setFavicon(getActiveTheme());
 
     const media = window.matchMedia("(prefers-color-scheme: dark)");
-    setFavicon(media.matches ? "dark" : "light");
-
-    const getPreferredTheme = (): "light" | "dark" => {
-      const saved = localStorage.getItem("theme") as "light" | "dark" | null;
-      return saved ?? (media.matches ? "dark" : "light");
-    };
-
-    setFavicon(getPreferredTheme());
-
     const handler = () => {
       const saved = localStorage.getItem("theme");
       if (!saved) {

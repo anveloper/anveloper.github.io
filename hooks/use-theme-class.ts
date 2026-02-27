@@ -2,13 +2,19 @@
 
 import { useEffect, useState } from "react";
 
-type Theme = "light" | "dark";
+export type Theme = "light" | "dark" | "korean";
+
+const VALID_THEMES: Theme[] = ["light", "dark", "korean"];
+const THEME_CLASSES: Theme[] = ["light", "dark", "korean"];
+
+const isValidTheme = (value: string | null): value is Theme =>
+  VALID_THEMES.includes(value as Theme);
 
 export const useThemeClass = () => {
   const [theme, setThemeState] = useState<Theme>(() => {
     if (typeof window !== "undefined") {
-      const saved = localStorage.getItem("theme") as Theme | null;
-      if (saved === "dark" || saved === "light") return saved;
+      const saved = localStorage.getItem("theme");
+      if (isValidTheme(saved)) return saved;
       const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
       return systemPrefersDark ? "dark" : "light";
     }
@@ -17,7 +23,7 @@ export const useThemeClass = () => {
 
   useEffect(() => {
     const root = document.documentElement;
-    root.classList.remove("dark", "light");
+    THEME_CLASSES.forEach((cls) => root.classList.remove(cls));
     root.classList.add(theme);
     localStorage.setItem("theme", theme);
   }, [theme]);
