@@ -42,8 +42,10 @@ app/                 # Next.js App Router 페이지
 ├── education/       # 학력 페이지
 ├── overview/        # 경력 개요 페이지
 ├── contact/         # 연락처 페이지
-├── posts/[slug]/    # 블로그 포스트
-└── projects/[slug]/ # 프로젝트
+├── not-found.tsx    # 글로벌 404 페이지
+├── posts/[slug]/    # 블로그 포스트 (숫자 slug → 페이지네이션)
+├── projects/[slug]/ # 프로젝트
+└── solutions/[slug]/ # 알고리즘 풀이 (숫자 slug → 페이지네이션)
 
 components/          # 재사용 컴포넌트
 ├── ui/              # 기본 UI (Badge 등)
@@ -52,6 +54,9 @@ components/          # 재사용 컴포넌트
 ├── nav-bar.tsx      # 네비게이션 헤더
 ├── footer.tsx       # 푸터
 ├── page-container.tsx # 페이지 컨테이너
+├── pagination.tsx   # 공용 페이지네이션 (Server Component)
+├── not-found-view.tsx # 콘텐츠 미존재 뷰
+├── theme-selector.tsx # 테마 선택 드롭다운
 ├── table-of-contents.tsx # 플로팅 목차 (xl 이상)
 ├── mermaid.tsx      # Mermaid 다이어그램 렌더러
 ├── skill-badge.tsx  # shields.io 기술 뱃지
@@ -59,7 +64,7 @@ components/          # 재사용 컴포넌트
 
 hooks/               # 커스텀 React Hooks
 ├── use-mounted.ts   # SSR 마운트 상태 감지
-├── use-theme-class.ts # 다크/라이트 테마 감지
+├── use-theme-class.ts # 테마 감지 (light/dark/korean/terminal)
 └── use-active-heading.ts # 스크롤 스파이 (TOC용)
 
 lib/                 # 유틸리티 함수
@@ -71,6 +76,7 @@ lib/                 # 유틸리티 함수
 └── skill-data.ts    # shields.io 뱃지 데이터
 _posts/              # 블로그 MDX 파일
 _projects/           # 프로젝트 MDX 파일
+_solutions/          # 알고리즘 풀이 MDX 파일
 public/              # 정적 파일 (폰트, 이미지, 파비콘)
 docs/                # 프로젝트 문서
 .claude/skills/      # Claude Code 스킬
@@ -97,7 +103,7 @@ docs/                # 프로젝트 문서
 - Tailwind CSS 유틸리티 클래스 우선
 - 복잡한 스타일: CVA 패턴 사용
 - 클래스 병합: `cn()` 유틸리티 함수 사용 (`lib/utils.ts`)
-- 다크 모드: `dark:` 접두사 또는 CSS 변수
+- 테마: CSS 변수 기반 (light/dark/korean/terminal)
 
 ### 파일/폴더 명명
 
@@ -111,6 +117,7 @@ docs/                # 프로젝트 문서
 Conventional Commits 명세를 따릅니다.
 Claude 협력 문구는 반드시 제외합니다.
 파일은 한번에 커밋하지 않고, 기능별로 묶어서 커밋합니다.
+Next.js 특성 상 경로에 (), [] 가 들어가기 때문에 파일 경로로 stage 시 "" 로 문자열 처리를 해서 불필요한 토큰 소모를 방지합니다.
 
 ### 형식
 
@@ -175,20 +182,26 @@ refactor: 컴포넌트 구조 개선 (ui)
 
 ```markdown
 ## Summary
+
 - 변경 사항 1-3줄 요약
 
 ## Changes
+
 ### 기능
+
 ### 스타일
+
 ### 기타
 
 ## Test plan
+
 - [ ] `pnpm build` 성공
 - [ ] `pnpm lint` 성공
 - [ ] 개발 서버 정상 동작 확인
 - [ ] 주요 페이지 렌더링 확인
 
 ## Screenshots
+
 ## Notes
 ```
 
