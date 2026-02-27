@@ -39,7 +39,7 @@ git diff
 
 ## 3단계: 커밋
 
-### 커밋 규칙 (gemini.md 기준)
+### 커밋 규칙
 
 **Conventional Commits 형식:**
 
