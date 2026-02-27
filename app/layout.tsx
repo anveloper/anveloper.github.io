@@ -1,5 +1,6 @@
 import FaviconSwitcher from "@/components/favicon-switcher";
 import { Footer } from "@/components/footer";
+import GoogleAnalytics from "@/components/google-analytics";
 import { NavBar } from "@/components/nav-bar";
 
 import type { Metadata } from "next";
@@ -56,6 +57,7 @@ const RootLayout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
   return (
     <html lang="ko" suppressHydrationWarning>
       <head>
+        <GoogleAnalytics />
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
         <link rel="preload" href="/fonts/PretendardVariable-subset.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://img.shields.io" />
