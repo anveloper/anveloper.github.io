@@ -60,7 +60,8 @@ components/          # 재사용 컴포넌트
 ├── table-of-contents.tsx # 플로팅 목차 (xl 이상)
 ├── mermaid.tsx      # Mermaid 다이어그램 렌더러
 ├── skill-badge.tsx  # shields.io 기술 뱃지
-└── favicon-switcher.tsx # 다크/라이트 파비콘 전환
+├── favicon-switcher.tsx # 다크/라이트 파비콘 전환
+└── google-analytics.tsx # GA4 스크립트 로더
 
 hooks/               # 커스텀 React Hooks
 ├── use-mounted.ts   # SSR 마운트 상태 감지

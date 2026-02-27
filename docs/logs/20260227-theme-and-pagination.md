@@ -24,3 +24,4 @@
 - 묵향 테마용 폰트 및 텍스처 에셋 추가
 - 스킬 문서 정리 및 개선
 - cSpell에 giscus 단어 추가
+- Google Analytics 4 연동 (측정 ID: G-GMZ6W7F2WX)
