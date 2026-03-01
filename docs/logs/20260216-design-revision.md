@@ -3,6 +3,7 @@
 ## feat
 
 ### 홈페이지 텍스트 중심 미니멀 리디자인
+
 - Hero: 프로필 아바타 축소 (w-14), 인사말 제거, 텍스트 간결화
 - SectionHeader: `h-1 w-8 bg-primary-sky` 장식 바 제거, 제목 자체를 링크로 처리 (ArrowUpRight 호버)
 - About: Card 제거 → 텍스트 블록, 관심사 `join(" / ")`, 자격증 인라인
@@ -12,6 +13,7 @@
 - Projects: Card 유지, `hover:border-foreground/20` 개선
 
 ### 하위 페이지 텍스트 중심 리디자인
+
 - About: Card 5개 → `border-b` 구분 텍스트 섹션, Server Component 전환
 - Skills: Card 그리드 → 카테고리 + SkillBadge 플랫 레이아웃, Server Component 전환
 - Education: 타임라인 선/아이콘 노드 제거 → 플랫 리스트, Server Component 전환
@@ -19,19 +21,23 @@
 - Overview: 홈페이지 스타일로 완전 재작성, Server Component 전환
 
 ### 상세/목록 페이지 헤더 리디자인
+
 - Posts/Projects 상세: Card/CardContent 제거 → `<header>` + `border-b`
 - 제목 `text-2xl sm:text-3xl`, Calendar 아이콘 제거
 - 목록 페이지 헤더 패턴 통일 (`tracking-tight`, `mt-1`)
 
 ### 푸터 컴포넌트 추가
+
 - `components/footer.tsx` 생성, `layout.tsx`에 적용
 
 ### Google Search Console 소유권 인증
+
 - `layout.tsx` metadata에 verification.google 메타태그 추가
 
 ## style
 
 ### 공통 스타일 개선
+
 - Badge `sky` variant 제거 → `secondary`로 통일
 - PageContainer 도트 패턴 배경 제거
 - `::selection` 색상 `--accent` 변수로 변경
@@ -39,6 +45,7 @@
 ## refactor
 
 ### 미사용 컴포넌트 정리
+
 - 삭제: `framer-wrapper.tsx`, `dock.tsx`, `button.tsx`
 - `card.tsx`: CardHeader/Title/Description/Footer 제거 (Card, CardContent만 유지)
 - `animation.ts`: `pageFadeIn` 제거
@@ -47,23 +54,27 @@
 ## perf
 
 ### 이미지 WebP 변환
+
 - profile.png (898KB) → profile.webp (2.2KB)
 - DPS icon.png (11KB) → icon.webp (1.2KB)
 - 당신의계절 icon.png (8KB) → icon.webp (0.7KB)
 - `_projects/index.ts` findImage 탐색 순서에 webp 추가
 
 ### 폰트 서브셋 적용
+
 - PretendardVariable: 2.0MB → 215KB (한글 상용 946자 + 라틴)
 - D2CodingLigature: 1.4MB → 138KB (코드 블록용 서브셋)
 - 원본 유지, CSS에서 서브셋 파일 참조
 
 ### 리소스 로딩 최적화
+
 - 폰트 preload 추가 (CSS→폰트 체인 제거)
 - shields.io preconnect 추가 (LCP -80ms)
 
 ## fix
 
 ### Lighthouse 접근성 개선
+
 - shields.io `<img>`에 width/height 속성 추가 (CLS 개선)
 - 라이트 모드 색상 대비 WCAG AA 충족 (muted-foreground 3.61→5.18:1, primary-sky 2.86→4.81:1)
 - 테마 토글 버튼 aria-label 추가
@@ -71,4 +82,5 @@
 ## docs
 
 ### 디자인 수정 계획 문서 갱신
+
 - `docs/design/20260216-design-revision-plan.md` Phase 1-4 완료 상태 반영

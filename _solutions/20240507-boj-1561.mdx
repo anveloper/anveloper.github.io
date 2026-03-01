@@ -27,9 +27,9 @@ N명의 아이들이 M개의 놀이기구를 타려고 줄을 서 있다. 각 �
 
 ### 예제
 
-| 입력 | 출력 |
-| --- | --- |
-| `22 5` `1 2 3 4 5` | `2` |
+| 입력               | 출력 |
+| ------------------ | ---- |
+| `22 5` `1 2 3 4 5` | `2`  |
 
 ## 풀이
 
@@ -40,7 +40,7 @@ N명의 아이들이 M개의 놀이기구를 타려고 줄을 서 있다. 각 �
 3. 시간 left-1까지 탑승한 인원 rest를 계산하고, 시간 left에 정확히 비어있는 놀이기구 목록(empty)을 구한다
 4. empty 배열에서 rest번째가 마지막 아이가 타는 놀이기구이다
 
-**핵심 아이디어**: N이 최대 20억이므로 시뮬레이션은 불가하고, 시간에 대한 이분 탐색으로 O(M log(max_time * N))에 해결한다.
+**핵심 아이디어**: N이 최대 20억이므로 시뮬레이션은 불가하고, 시간에 대한 이분 탐색으로 O(M log(max_time \* N))에 해결한다.
 
 ## 코드
 
@@ -48,12 +48,24 @@ N명의 아이들이 M개의 놀이기구를 타려고 줄을 서 있다. 각 �
 const solution = (input) => {
   const [N, M] = input[0].split(" ").map(Number);
   const nums = input[1].split(" ").map(Number);
-  const check = (mid) => { let cnt = 0; for (let i = 0; i < M; i++) cnt += Math.ceil(mid / nums[i]); return cnt >= N; };
-  let left = 0, right = Math.max(...nums) * N;
-  while (left <= right) { let mid = Math.floor((left + right) / 2); if (check(mid)) right = mid - 1; else left = mid + 1; }
+  const check = (mid) => {
+    let cnt = 0;
+    for (let i = 0; i < M; i++) cnt += Math.ceil(mid / nums[i]);
+    return cnt >= N;
+  };
+  let left = 0,
+    right = Math.max(...nums) * N;
+  while (left <= right) {
+    let mid = Math.floor((left + right) / 2);
+    if (check(mid)) right = mid - 1;
+    else left = mid + 1;
+  }
   let rest = N;
   const empty = [];
-  for (let i = 0; i < M; i++) { rest -= Math.ceil((left - 1) / nums[i]); if ((left - 1) % nums[i] === 0) empty.push(i + 1); }
+  for (let i = 0; i < M; i++) {
+    rest -= Math.ceil((left - 1) / nums[i]);
+    if ((left - 1) % nums[i] === 0) empty.push(i + 1);
+  }
   return empty[rest - 1];
 };
 const fs = require("fs");

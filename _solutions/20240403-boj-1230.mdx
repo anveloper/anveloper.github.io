@@ -27,9 +27,9 @@ enhanced: true
 
 ### 예제
 
-| 입력 | 출력 |
-| --- | --- |
-| `abc` `aXbYc` | `2` |
+| 입력          | 출력 |
+| ------------- | ---- |
+| `abc` `aXbYc` | `2`  |
 
 ## 풀이
 
@@ -52,9 +52,7 @@ const solution = ([a, b]) => {
 
   if (na > nb) return -1;
 
-  const dp = Array.from(Array(na + 1), () =>
-    Array.from(Array(nb + 1), () => [0, 0])
-  );
+  const dp = Array.from(Array(na + 1), () => Array.from(Array(nb + 1), () => [0, 0]));
 
   dp[0][0] = [0, INF];
   for (let i = 1; i <= nb; i++) dp[0][i] = [INF, 1];

@@ -27,8 +27,8 @@ enhanced: true
 
 ### 예제
 
-| 입력 | 출력 |
-| --- | --- |
+| 입력  | 출력  |
+| ----- | ----- |
 | `abc` | `abc` |
 
 ## 풀이
@@ -45,12 +45,21 @@ enhanced: true
 
 ```javascript
 const solution = (input) => {
-  const cnt = input.join("").split(" ").join("").split("").reduce((acc, cur) => {
-    if (acc[cur]) acc[cur]++; else acc[cur] = 1; return acc;
-  }, {});
+  const cnt = input
+    .join("")
+    .split(" ")
+    .join("")
+    .split("")
+    .reduce((acc, cur) => {
+      if (acc[cur]) acc[cur]++;
+      else acc[cur] = 1;
+      return acc;
+    }, {});
   const maxValue = Object.keys(cnt).reduce((a, b) => (cnt[a] > cnt[b] ? a : b));
   const arr = [];
-  for (let V in cnt) { if (cnt[V] === cnt[maxValue]) arr.push(V); }
+  for (let V in cnt) {
+    if (cnt[V] === cnt[maxValue]) arr.push(V);
+  }
   return arr.sort().join("");
 };
 const fs = require("fs");

@@ -29,24 +29,24 @@ app/solutions/
 
 ```yaml
 ---
-title: "BOJ 1000 - A+B"          # 필수: 플랫폼 + 번호 + 제목
-date: "2026-02-18"                # 필수: 작성/풀이 날짜
-description: "문제 한줄 설명"     # 필수: 요약
-tags: ["구현", "수학"]            # 필수: 알고리즘 분류
-platform: "boj"                   # 필수: boj | programmers
-problem_number: "1000"            # 필수: 문제 번호/ID
-problem_url: "https://..."        # 필수: 원본 문제 URL
-difficulty: "브론즈 V"            # 선택: 난이도
-language: "python"                # 필수: 풀이 언어
+title: "BOJ 1000 - A+B" # 필수: 플랫폼 + 번호 + 제목
+date: "2026-02-18" # 필수: 작성/풀이 날짜
+description: "문제 한줄 설명" # 필수: 요약
+tags: ["구현", "수학"] # 필수: 알고리즘 분류
+platform: "boj" # 필수: boj | programmers
+problem_number: "1000" # 필수: 문제 번호/ID
+problem_url: "https://..." # 필수: 원본 문제 URL
+difficulty: "브론즈 V" # 선택: 난이도
+language: "python" # 필수: 풀이 언어
 ---
 ```
 
 ### 플랫폼 값
 
-| 값 | 설명 | URL 패턴 |
-|----|------|----------|
-| `boj` | 백준 온라인 저지 | `https://www.acmicpc.net/problem/{number}` |
-| `programmers` | 프로그래머스 | 검색으로 확보 |
+| 값            | 설명             | URL 패턴                                   |
+| ------------- | ---------------- | ------------------------------------------ |
+| `boj`         | 백준 온라인 저지 | `https://www.acmicpc.net/problem/{number}` |
+| `programmers` | 프로그래머스     | 검색으로 확보                              |
 
 ## 페이지 접근
 
@@ -81,7 +81,7 @@ language: "python"                # 필수: 풀이 언어
 
 ## 본문 템플릿
 
-```markdown
+````markdown
 ## 문제
 
 [BOJ 1000 - A+B](https://www.acmicpc.net/problem/1000)
@@ -95,11 +95,13 @@ language: "python"                # 필수: 풀이 언어
 ## 코드
 
 \```python
+
 # 솔루션 코드
+
 \```
 
 ## 복잡도
 
 - 시간: O(...)
 - 공간: O(...)
-```
+````

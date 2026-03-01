@@ -27,8 +27,8 @@ enhanced: true
 
 ### 예제
 
-| 입력 | 출력 |
-| --- | --- |
+| 입력                             | 출력    |
+| -------------------------------- | ------- |
 | `LOVE` `3` `HATE` `PASTE` `LATE` | `PASTE` |
 
 ## 풀이
@@ -68,8 +68,7 @@ const solution = (input) => {
     const V = count(combined, "V");
     const E = count(combined, "E");
 
-    const score =
-      ((L + O) * (L + V) * (L + E) * (O + V) * (O + E) * (V + E)) % 100;
+    const score = ((L + O) * (L + V) * (L + E) * (O + V) * (O + E) * (V + E)) % 100;
 
     if (score > maxScore) {
       maxScore = score;

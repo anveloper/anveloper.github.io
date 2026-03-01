@@ -27,9 +27,9 @@ enhanced: true
 
 ### 예제
 
-| 입력 | 출력 |
-|------|------|
-| `4 2 10` `7 4 5 6` | `8` |
+| 입력               | 출력 |
+| ------------------ | ---- |
+| `4 2 10` `7 4 5 6` | `8`  |
 
 ## 풀이
 
@@ -61,20 +61,20 @@ public class Day24BOJ13335트럭 { // 13335 트럭
 		int W = Integer.parseInt(st.nextToken());
 		int L = Integer.parseInt(st.nextToken());
 		st = new StringTokenizer(br.readLine());
-		
+
 		Queue<Integer> trucks = new LinkedList<>();
 		for (int n = 0; n < N; n++) {
 			trucks.offer(Integer.parseInt(st.nextToken()));
 		}
-		
+
 		Queue<Integer> bridge = new LinkedList<>();
 		for (int w = 0; w < W; w++) {
 			bridge.add(0);
 		}
-		
+
 		int cnt = 0;
 		int tmp = 0;
-		
+
 		while (!bridge.isEmpty()) {
 			tmp -= bridge.poll();
 			if (!trucks.isEmpty()) {

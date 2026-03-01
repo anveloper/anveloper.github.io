@@ -28,9 +28,9 @@ N개의 수가 주어졌을 때 오름차순으로 정렬한 결과에서 K번�
 
 ### 예제
 
-| 입력 | 출력 |
-|------|------|
-| `5 2` `4 1 2 3 5` | `2` |
+| 입력              | 출력 |
+| ----------------- | ---- |
+| `5 2` `4 1 2 3 5` | `2`  |
 
 ## 풀이
 
@@ -79,7 +79,7 @@ public class Day07BOJ11004Fail1K번째수 { // 11004 pivot sort
 			return;
 		else if (pi + 1 < length)
 			quickSort(arr, pi + 1, right, length);
-		else 
+		else
 			quickSort(arr, left, pi - 1, length);
 	}
 

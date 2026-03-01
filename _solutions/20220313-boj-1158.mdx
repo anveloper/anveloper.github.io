@@ -27,8 +27,8 @@ enhanced: true
 
 ### 예제
 
-| 입력 | 출력 |
-|------|------|
+| 입력  | 출력                    |
+| ----- | ----------------------- |
 | `7 3` | `<3, 6, 2, 7, 5, 1, 4>` |
 
 ## 풀이
@@ -51,7 +51,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
 
-public class Day16BOJ1158요세푸스문제 { 
+public class Day16BOJ1158요세푸스문제 {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		StringBuilder sb = new StringBuilder();
@@ -63,7 +63,7 @@ public class Day16BOJ1158요세푸스문제 {
 		for (int i = 1; i <= N; i++) {
 			q.add(i);
 		}
-		
+
 		int k = K;
 		while (!q.isEmpty()) {
 			k--;
@@ -85,5 +85,5 @@ public class Day16BOJ1158요세푸스문제 {
 
 ## 복잡도
 
-- 시간: O(N * K) — N명을 제거하며 각각 최대 K번 회전
+- 시간: O(N \* K) — N명을 제거하며 각각 최대 K번 회전
 - 공간: O(N) — 큐

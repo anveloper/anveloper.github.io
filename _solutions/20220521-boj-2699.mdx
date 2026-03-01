@@ -27,8 +27,8 @@ enhanced: true
 
 ### 예제
 
-| 입력 | 출력 |
-|------|------|
+| 입력                      | 출력                        |
+| ------------------------- | --------------------------- |
 | `1` `4` `0 0 1 0 0 1 1 1` | `4` `0 1` `1 1` `1 0` `0 0` |
 
 ## 풀이
@@ -88,9 +88,9 @@ public class Day103BOJ2699 { // 2699 격자점 컨벡스헐.. 하루를 공으�
 			int idx = 0;
 			for (int i = 0; i < (N - 1) / 5 + 1; i++) {
 				st = new StringTokenizer(br.readLine());
-				while (st.hasMoreTokens()) 
+				while (st.hasMoreTokens())
 					list[idx++] = new Pos(Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken()));
-				
+
 			}
 
 			Arrays.sort(list);
@@ -107,7 +107,7 @@ public class Day103BOJ2699 { // 2699 격자점 컨벡스헐.. 하루를 공으�
 						return Long.compare(dist(list[0], o1), dist(list[0], o2));
 				}
 			});
-			
+
 			stack.push(list[0]);
 			stack.push(list[1]);
 

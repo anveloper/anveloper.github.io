@@ -16,13 +16,13 @@
 
 웹 조사 기반으로 각 포스트 앞부분에 기술적 배경/컨텍스트 섹션 추가
 
-| 포스트 | 추가 내용 |
-|--------|----------|
-| `20260202-prisma-7-upgrade-guide.mdx` | Prisma 7 개요 (Rust Engine 제거, 90% 번들 감소, ESM 전용, 5→6→7 변경 흐름) |
-| `20260112-multi-tenant-saas-architecture.mdx` | AWS SaaS Lens의 Silo/Pool/Bridge 모델, Shopify 사례 |
-| `20260114-caddy-multi-tenant-ssl.mdx` | Caddy 자동 HTTPS, On-Demand TLS, ACME 프로토콜, Nginx 비교 |
-| `20260129-node-based-page-builder.mdx` | 페이지 빌더 3가지 패턴 (블록/컴포넌트/노드트리), Gutenberg·Builder.io·Notion 사례 |
-| `20260209-langgraph-multi-agent-workflow.mdx` | LangGraph StateGraph, MoA 패턴, 멀티에이전트 트렌드 |
-| `20260210-pgvector-two-stage-search-optimization.mdx` | pgvector 소개, HNSW vs IVFFlat, halfvec, v0.8.0 반복 스캐닝 |
-| `20260211-xml-data-pipeline-for-ai-search.mdx` | RAG 파이프라인 = 비정형 ETL, 전통 ETL vs RAG ETL |
-| `20260212-fastapi-sse-streaming-ai-generation.mdx` | SSE vs WebSocket, AI 스트리밍 사실상 표준 |
+| 포스트                                                | 추가 내용                                                                         |
+| ----------------------------------------------------- | --------------------------------------------------------------------------------- |
+| `20260202-prisma-7-upgrade-guide.mdx`                 | Prisma 7 개요 (Rust Engine 제거, 90% 번들 감소, ESM 전용, 5→6→7 변경 흐름)        |
+| `20260112-multi-tenant-saas-architecture.mdx`         | AWS SaaS Lens의 Silo/Pool/Bridge 모델, Shopify 사례                               |
+| `20260114-caddy-multi-tenant-ssl.mdx`                 | Caddy 자동 HTTPS, On-Demand TLS, ACME 프로토콜, Nginx 비교                        |
+| `20260129-node-based-page-builder.mdx`                | 페이지 빌더 3가지 패턴 (블록/컴포넌트/노드트리), Gutenberg·Builder.io·Notion 사례 |
+| `20260209-langgraph-multi-agent-workflow.mdx`         | LangGraph StateGraph, MoA 패턴, 멀티에이전트 트렌드                               |
+| `20260210-pgvector-two-stage-search-optimization.mdx` | pgvector 소개, HNSW vs IVFFlat, halfvec, v0.8.0 반복 스캐닝                       |
+| `20260211-xml-data-pipeline-for-ai-search.mdx`        | RAG 파이프라인 = 비정형 ETL, 전통 ETL vs RAG ETL                                  |
+| `20260212-fastapi-sse-streaming-ai-generation.mdx`    | SSE vs WebSocket, AI 스트리밍 사실상 표준                                         |

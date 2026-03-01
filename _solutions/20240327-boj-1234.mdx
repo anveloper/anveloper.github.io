@@ -27,9 +27,9 @@ N층 트리에서 i번째 층에 i개의 장식을 배치한다. 각 층은 1색
 
 ### 예제
 
-| 입력 | 출력 |
-| --- | --- |
-| `2 2 1 0` | `1` |
+| 입력      | 출력 |
+| --------- | ---- |
+| `2 2 1 0` | `1`  |
 
 ## 풀이
 
@@ -60,7 +60,10 @@ const solution = () => {
       for (let g = 0; g < G + 1; g++) {
         dp[i][r][g] = [];
         for (let b = 0; b < B + 1; b++) {
-          if (i == 0) { dp[i][r][g][b] = 1; continue; }
+          if (i == 0) {
+            dp[i][r][g][b] = 1;
+            continue;
+          }
           dp[i][r][g][b] = 0;
           if (r - i >= 0) dp[i][r][g][b] += dp[i - 1][r - i][g][b];
           if (g - i >= 0) dp[i][r][g][b] += dp[i - 1][r][g - i][b];
@@ -79,8 +82,8 @@ const solution = () => {
           if (i % 3 == 0) {
             let divNum = i / 3;
             if (r - divNum >= 0 && g - divNum >= 0 && b - divNum >= 0)
-              dp[i][r][g][b] += dp[i - 1][r - divNum][g - divNum][b - divNum]
-                * comb(i, divNum) * comb(i - divNum, divNum);
+              dp[i][r][g][b] +=
+                dp[i - 1][r - divNum][g - divNum][b - divNum] * comb(i, divNum) * comb(i - divNum, divNum);
           }
         }
       }

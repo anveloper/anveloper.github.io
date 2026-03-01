@@ -27,9 +27,9 @@ N x N 격자에서 꼭짓점을 공유하는 두 직사각형의 수익 합이 �
 
 ### 예제
 
-| 입력 | 출력 |
-| --- | --- |
-| `2` `1 2` `3 4` | `1` |
+| 입력            | 출력 |
+| --------------- | ---- |
+| `2` `1 2` `3 4` | `1`  |
 
 ## 풀이
 
@@ -49,7 +49,12 @@ const solution = (input) => {
   const N = +input[0];
   const data = [];
   for (let i = 1; i <= N; i++) {
-    data.push(input[i].trim().split(" ").map((el) => +el));
+    data.push(
+      input[i]
+        .trim()
+        .split(" ")
+        .map((el) => +el)
+    );
   }
 
   let sum = new Array(N + 1);

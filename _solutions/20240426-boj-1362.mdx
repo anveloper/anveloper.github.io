@@ -27,8 +27,8 @@ enhanced: true
 
 ### 예제
 
-| 입력 | 출력 |
-| --- | --- |
+| 입력                        | 출력    |
+| --------------------------- | ------- |
 | `1 3` `E 1` `F 2` `#` `0 0` | `1 :-)` |
 
 ## 풀이
@@ -56,8 +56,12 @@ const solution = (input) => {
     while (true) {
       const [cmd, n] = input.shift();
       if (cmd === "#") break;
-      else if (cmd === "E") { w -= +n; if (w <= 0) isRip = true; }
-      else { w += +n; }
+      else if (cmd === "E") {
+        w -= +n;
+        if (w <= 0) isRip = true;
+      } else {
+        w += +n;
+      }
     }
     if (isRip) sb.push(`${SN} RIP`);
     else if (o / 2 < w && w < o * 2) sb.push(`${SN} :-)`);
