@@ -27,8 +27,8 @@ enhanced: true
 
 ### 예제
 
-| 입력 | 출력 |
-| --- | --- |
+| 입력  | 출력  |
+| ----- | ----- |
 | `bab` | `aab` |
 
 ## 풀이
@@ -48,7 +48,10 @@ const solution = (input) => {
   let s = input[0].split("");
   let s1 = s[0];
   for (i = 1; i < s.length; i++) {
-    if (s1[i - 1] < s[i]) { s1 = s[i] + s1; continue; }
+    if (s1[i - 1] < s[i]) {
+      s1 = s[i] + s1;
+      continue;
+    }
     s1 = s1 + s[i];
   }
   return s1.split("").reverse().join("");

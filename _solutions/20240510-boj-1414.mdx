@@ -27,8 +27,8 @@ N개의 컴퓨터가 랜선으로 연결되어 있다. 모든 컴퓨터가 연�
 
 ### 예제
 
-| 입력 | 출력 |
-| --- | --- |
+| 입력                  | 출력 |
+| --------------------- | ---- |
 | `3` `abc` `def` `ghi` | `40` |
 
 ## 풀이
@@ -47,19 +47,39 @@ N개의 컴퓨터가 랜선으로 연결되어 있다. 모든 컴퓨터가 연�
 ```javascript
 const solution = (input) => {
   const N = +input[0];
-  const map = input.slice(1).map((elem) => elem.split("").map((ee) => {
-    if (ee == "0") return 0;
-    if (ee.charCodeAt(0) >= 97) return ee.charCodeAt(0) - "A".charCodeAt(0) - 31;
-    return ee.charCodeAt(0) - "A".charCodeAt(0) + 27;
-  }));
+  const map = input.slice(1).map((elem) =>
+    elem.split("").map((ee) => {
+      if (ee == "0") return 0;
+      if (ee.charCodeAt(0) >= 97) return ee.charCodeAt(0) - "A".charCodeAt(0) - 31;
+      return ee.charCodeAt(0) - "A".charCodeAt(0) + 27;
+    })
+  );
   const nodes = [];
-  for (let i = 0; i < N; i++) for (let j = 0; j < N; j++) { if (map[i][j] === 0) continue; nodes.push([i, j, map[i][j]]); }
+  for (let i = 0; i < N; i++)
+    for (let j = 0; j < N; j++) {
+      if (map[i][j] === 0) continue;
+      nodes.push([i, j, map[i][j]]);
+    }
   nodes.sort((a, b) => a[2] - b[2]);
   const parents = Array.from(Array(N), (_, k) => k);
-  const find = (a) => { if (a === parents[a]) return a; return (parents[a] = find(parents[a])); };
-  const union = (a, b) => { a = find(a); b = find(b); if (a === b) return; parents[Math.max(a, b)] = Math.min(a, b); };
-  let ans = 0, cnt = 0;
-  for (const [s, e, w] of nodes) { if (find(s) === find(e)) continue; union(s, e); cnt++; ans += w; }
+  const find = (a) => {
+    if (a === parents[a]) return a;
+    return (parents[a] = find(parents[a]));
+  };
+  const union = (a, b) => {
+    a = find(a);
+    b = find(b);
+    if (a === b) return;
+    parents[Math.max(a, b)] = Math.min(a, b);
+  };
+  let ans = 0,
+    cnt = 0;
+  for (const [s, e, w] of nodes) {
+    if (find(s) === find(e)) continue;
+    union(s, e);
+    cnt++;
+    ans += w;
+  }
   for (const parent of parents) find(parent);
   return cnt !== N - 1 ? -1 : map.flat().reduce((pv, cv) => pv + cv, 0) - ans;
 };

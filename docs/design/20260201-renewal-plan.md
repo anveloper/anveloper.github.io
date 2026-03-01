@@ -63,6 +63,7 @@ anveloper.github.io 포트폴리오 사이트의 전면 리뉴얼을 진행합�
 1. **ESLint 설정 변경**
    - `next lint` 명령어 제거됨 → `eslint .` 직접 사용
    - `eslint.config.mjs`: FlatCompat 방식 → 직접 import 방식
+
    ```javascript
    // Before (Next.js 15)
    import { FlatCompat } from "@eslint/eslintrc";
@@ -78,6 +79,7 @@ anveloper.github.io 포트폴리오 사이트의 전면 리뉴얼을 진행합�
 2. **React 19 lint 규칙 대응**
    - `react-hooks/set-state-in-effect` 규칙 추가됨
    - `use-mounted.ts`: useState + useEffect → useSyncExternalStore 패턴 적용
+
    ```typescript
    // Before
    const [mounted, setMounted] = useState(false);

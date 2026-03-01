@@ -27,8 +27,8 @@ enhanced: true
 
 ### 예제
 
-| 입력 | 출력 |
-|------|------|
+| 입력                          | 출력  |
+| ----------------------------- | ----- |
 | `Y 3` `B 1` `B 4` `Y 5` `Y 2` | `503` |
 
 ## 풀이
@@ -57,7 +57,7 @@ for i in range(5):
     color, number = card[i][0], int(card[i][1])
     cnt_color[color] += 1
     cnt_num[number] += 1
-    
+
 sort_nums = numbers.copy()
 sort_nums.sort()
 if 5 in cnt_color.values() and sort_nums[0]+1 == sort_nums[1] and sort_nums[1]+1 == sort_nums[2] and sort_nums[2]+1 == sort_nums[3] and sort_nums[3]+1 == sort_nums[4]:

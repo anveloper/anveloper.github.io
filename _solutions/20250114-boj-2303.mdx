@@ -27,9 +27,9 @@ N명이 각각 5장의 카드를 가지고 있다. 3장을 골라 합의 일의 
 
 ### 예제
 
-| 입력 | 출력 |
-|------|------|
-| `5` `7 5 7 4 9` `1 2 3 6 9` `8 1 6 3 2` `3 7 2 6 5` `1 2 3 4 5` | `3` |
+| 입력                                                            | 출력 |
+| --------------------------------------------------------------- | ---- |
+| `5` `7 5 7 4 9` `1 2 3 6 9` `8 1 6 3 2` `3 7 2 6 5` `1 2 3 4 5` | `3`  |
 
 ## 풀이
 
@@ -44,21 +44,21 @@ N명이 각각 5장의 카드를 가지고 있다. 3장을 골라 합의 일의 
 ## 코드
 
 ```python
-n = int(input())  
-score = []        
+n = int(input())
+score = []
 for _ in range(n):
-  card = list(map(int, input().split())) 
-  max_digit = 0 
+  card = list(map(int, input().split()))
+  max_digit = 0
   for i in range(5):
     for j in range(i + 1, 5):
       for k in range(j + 1, 5):
-        digit = (card[i] + card[j] + card[k]) % 10 
-        if digit >= max_digit: 
+        digit = (card[i] + card[j] + card[k]) % 10
+        if digit >= max_digit:
           max_digit = digit
   score.append(max_digit)
 
-for i in range(n - 1, -1, -1): 
-  if score[i] == max(score):  
+for i in range(n - 1, -1, -1):
+  if score[i] == max(score):
     print(i + 1)
     break
 ```

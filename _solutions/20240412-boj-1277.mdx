@@ -27,8 +27,8 @@ N개의 발전소 좌표와 기존 연결 정보, 최대 케이블 길이 W가 �
 
 ### 예제
 
-| 입력 | 출력 |
-| --- | --- |
+| 입력                               | 출력    |
+| ---------------------------------- | ------- |
 | `4 10` `0` `0 0` `0 5` `5 5` `5 0` | `15000` |
 
 ## 풀이
@@ -57,9 +57,7 @@ const solution = (input) => {
 
   for (let i = 0; i < N; i++) {
     for (let j = i + 1; j < N; j++) {
-      const dist = Math.sqrt(
-        (coords[i][0] - coords[j][0]) ** 2 + (coords[i][1] - coords[j][1]) ** 2
-      );
+      const dist = Math.sqrt((coords[i][0] - coords[j][0]) ** 2 + (coords[i][1] - coords[j][1]) ** 2);
       if (dist <= W) {
         adj[i].push([j, dist]);
         adj[j].push([i, dist]);

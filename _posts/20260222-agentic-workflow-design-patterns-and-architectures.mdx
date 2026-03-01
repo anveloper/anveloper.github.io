@@ -13,13 +13,13 @@ tags: ["AI", "Agentic Workflow", "Design Pattern", "Agent Architecture"]
 
 Agentic Workflow는 이와 다르다. LLM이 **자율적으로 판단하고, 도구를 사용하며, 반복적으로 문제를 해결**하는 워크플로우다.
 
-| 구분 | 기존 방식 (Single-turn) | Agentic Workflow |
-| --- | --- | --- |
-| 흐름 | 질문 → 답변 (1회) | 질문 → 계획 → 실행 → 관찰 → 반복 |
-| 도구 사용 | 없음 | 외부 도구/API 호출 |
-| 자율성 | 수동적 응답 | 능동적 판단과 행동 |
-| 복잡도 | 단순 질의응답 | 다단계 복합 작업 |
-| 결과물 | 텍스트 응답 | 실제 작업 수행 결과 |
+| 구분      | 기존 방식 (Single-turn) | Agentic Workflow                 |
+| --------- | ----------------------- | -------------------------------- |
+| 흐름      | 질문 → 답변 (1회)       | 질문 → 계획 → 실행 → 관찰 → 반복 |
+| 도구 사용 | 없음                    | 외부 도구/API 호출               |
+| 자율성    | 수동적 응답             | 능동적 판단과 행동               |
+| 복잡도    | 단순 질의응답           | 다단계 복합 작업                 |
+| 결과물    | 텍스트 응답             | 실제 작업 수행 결과              |
 
 ### 왜 Agentic Workflow인가
 
@@ -27,7 +27,7 @@ LLM에는 근본적인 한계가 있다. 학습 데이터 이후의 정보를 �
 
 Andrew Ng은 2024년 이렇게 말했다.
 
-> *"AI agentic workflows will drive massive AI progress this year"*
+> _"AI agentic workflows will drive massive AI progress this year"_
 
 핵심 메시지는 세 가지다. GPT-3.5를 Agentic으로 쓰면 GPT-4 Zero-shot보다 성능이 좋을 수 있고, 한 번에 완벽한 답을 기대하지 말고 반복적으로 개선해야 하며, 이는 사람이 초안 → 검토 → 수정 → 완성하는 과정과 동일하다.
 
@@ -49,12 +49,12 @@ graph TB
     Memory <--> Orch
 ```
 
-| 구성 요소 | 역할 | 예시 |
-| --- | --- | --- |
-| **LLM (Brain)** | 자연어 이해, 추론, 계획 수립 | Claude, GPT |
-| **Tools (Hands)** | 외부 도구/API 호출 | 웹 검색, 코드 실행, 파일 조작 |
-| **Memory (Context)** | 단기/장기/작업 기억 | 대화 컨텍스트, 벡터 DB |
-| **Orchestrator (Control)** | 전체 흐름 관리, 에러 핸들링 | 루프, 분기, 종료 조건 |
+| 구성 요소                  | 역할                         | 예시                          |
+| -------------------------- | ---------------------------- | ----------------------------- |
+| **LLM (Brain)**            | 자연어 이해, 추론, 계획 수립 | Claude, GPT                   |
+| **Tools (Hands)**          | 외부 도구/API 호출           | 웹 검색, 코드 실행, 파일 조작 |
+| **Memory (Context)**       | 단기/장기/작업 기억          | 대화 컨텍스트, 벡터 DB        |
+| **Orchestrator (Control)** | 전체 흐름 관리, 에러 핸들링  | 루프, 분기, 종료 조건         |
 
 기본 루프는 **Plan → Act → Observe**다. 사용자 입력을 받으면 계획을 세우고, 도구를 호출하거나 코드를 실행하고, 결과를 관찰한다. 완료될 때까지 이 루프를 반복한다.
 
@@ -93,13 +93,13 @@ flowchart LR
 
 LLM이 **외부 도구를 호출하여 능력을 확장**하는 패턴이다.
 
-| 도구 유형 | 예시 | 역할 |
-| --- | --- | --- |
-| 정보 검색 | Web Search, RAG | 최신 정보 획득 |
-| 코드 실행 | Python REPL, Sandbox | 계산, 데이터 처리 |
-| 파일 조작 | Read/Write/Edit | 파일 생성 및 수정 |
-| 외부 API | REST API, GraphQL | 서비스 연동 |
-| 데이터베이스 | SQL, Vector DB | 데이터 조회/저장 |
+| 도구 유형    | 예시                 | 역할              |
+| ------------ | -------------------- | ----------------- |
+| 정보 검색    | Web Search, RAG      | 최신 정보 획득    |
+| 코드 실행    | Python REPL, Sandbox | 계산, 데이터 처리 |
+| 파일 조작    | Read/Write/Edit      | 파일 생성 및 수정 |
+| 외부 API     | REST API, GraphQL    | 서비스 연동       |
+| 데이터베이스 | SQL, Vector DB       | 데이터 조회/저장  |
 
 Anthropic이 제안한 **MCP(Model Context Protocol)**는 다양한 도구를 통일된 인터페이스로 LLM에 연결하는 표준 프로토콜이다.
 
@@ -232,11 +232,11 @@ flowchart TD
 
 Prompt Chaining과의 핵심 차이는 단계가 사전에 고정되지 않고 **입력에 따라 동적으로 결정**된다는 점이다.
 
-| 구분 | Prompt Chaining | Orchestrator-Workers |
-| --- | --- | --- |
-| 단계 | 사전 고정 | 동적으로 결정 |
-| 병렬 | 불가 | 가능 |
-| 유연성 | 낮음 | 높음 |
+| 구분   | Prompt Chaining | Orchestrator-Workers |
+| ------ | --------------- | -------------------- |
+| 단계   | 사전 고정       | 동적으로 결정        |
+| 병렬   | 불가            | 가능                 |
+| 유연성 | 낮음            | 높음                 |
 
 ### Level 5: Evaluator-Optimizer
 
@@ -267,13 +267,13 @@ flowchart TD
     Q5 -->|No| AA["Autonomous Agent"]
 ```
 
-| 아키텍처 | 핵심 | 적합한 경우 |
-| --- | --- | --- |
-| Prompt Chaining | 순차 연결 | 단계가 명확한 작업 |
-| Routing | 분류 후 분기 | 입력 유형이 다양 |
-| Parallelization | 동시 실행 | 독립적 하위 작업 |
-| Orchestrator-Workers | 동적 분배 | 복잡하고 유동적인 작업 |
-| Evaluator-Optimizer | 반복 개선 | 높은 품질 요구 |
+| 아키텍처             | 핵심         | 적합한 경우            |
+| -------------------- | ------------ | ---------------------- |
+| Prompt Chaining      | 순차 연결    | 단계가 명확한 작업     |
+| Routing              | 분류 후 분기 | 입력 유형이 다양       |
+| Parallelization      | 동시 실행    | 독립적 하위 작업       |
+| Orchestrator-Workers | 동적 분배    | 복잡하고 유동적인 작업 |
+| Evaluator-Optimizer  | 반복 개선    | 높은 품질 요구         |
 
 ## 실사례: Genspark AI
 
@@ -299,12 +299,12 @@ flowchart TD
     Plan -->|모든 subtask 완료| Result["최종 결과"]
 ```
 
-| 패턴 | 적용 방식 |
-| --- | --- |
-| Planning | 사용자 입력을 자동으로 subtask로 분해 |
-| Tool Use | 80개 이상 도구 통합 (전화, 슬라이드, 영상, 검색 등) |
-| Multi-Agent (Routing) | 9개의 특화 LLM 중 작업에 최적인 모델로 자동 라우팅 |
-| Reflection | Backtrack 단계에서 실패 시 대안 접근법을 탐색하여 재시도 |
+| 패턴                  | 적용 방식                                                |
+| --------------------- | -------------------------------------------------------- |
+| Planning              | 사용자 입력을 자동으로 subtask로 분해                    |
+| Tool Use              | 80개 이상 도구 통합 (전화, 슬라이드, 영상, 검색 등)      |
+| Multi-Agent (Routing) | 9개의 특화 LLM 중 작업에 최적인 모델로 자동 라우팅       |
+| Reflection            | Backtrack 단계에서 실패 시 대안 접근법을 탐색하여 재시도 |
 
 핵심 철학은 **"Less Control, More Tools"**다. 사전 정의된 워크플로우 대신 Agent가 자율적으로 경로를 결정하고, 실패해도 Backtrack으로 복구한다. 이 접근법으로 출시 45일 만에 ARR $36M을 달성하고 Series B $275M 투자를 유치했다.
 

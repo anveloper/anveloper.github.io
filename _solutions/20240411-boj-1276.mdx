@@ -27,8 +27,8 @@ enhanced: true
 
 ### 예제
 
-| 입력 | 출력 |
-| --- | --- |
+| 입력                      | 출력  |
+| ------------------------- | ----- |
 | `2` `50 10 30` `40 20 50` | `160` |
 
 ## 풀이
@@ -69,7 +69,7 @@ const solution = (input) => {
       if (l2 < right && right < r2 && h2 > rightSupport) rightSupport = h2;
     }
 
-    result += (h - leftSupport) + (h - rightSupport);
+    result += h - leftSupport + (h - rightSupport);
   }
 
   return result;

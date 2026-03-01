@@ -27,8 +27,8 @@ enhanced: true
 
 ### 예제
 
-| 입력 | 출력 |
-|------|------|
+| 입력           | 출력      |
+| -------------- | --------- |
 | (19×19 바둑판) | `1` `3 2` |
 
 ## 풀이
@@ -57,15 +57,15 @@ for x in range(19):
   for y in range(19):
     if board[x][y] == 0:
       continue
-    
+
     for i in range(4):
       nx = x
       ny = y
       cnt = 1
-      
+
       px = x - dx[i]
       py = y - dy[i]
-      
+
       while True:
         nx += dx[i]
         ny += dy[i]
@@ -80,7 +80,7 @@ for x in range(19):
           continue
         if 0 <= nx < 19 and 0 <= ny < 19 and board[nx][ny] == board[x][y]:
           continue
-          
+
         winner = board[x][y]
         win_x = x + 1
         win_y = y + 1

@@ -27,8 +27,8 @@ A 이상 B 이하인 거의 소수의 개수를 출력한다.
 
 ### 예제
 
-| 입력 | 출력 |
-| --- | --- |
+| 입력     | 출력 |
+| -------- | ---- |
 | `1 1000` | `25` |
 
 ## 풀이
@@ -51,8 +51,18 @@ const solution = (input) => {
   const arr = Array(max + 1).fill(0);
   const primes = [];
   let ans = 0;
-  for (let i = 2; i <= max; i++) { if (arr[i]) continue; primes.push(i); for (let j = 0; j + i <= max; j += i) arr[i + j] = 1; }
-  for (let i = 0; i < primes.length; i++) { let m = primes[i] * primes[i]; while (m <= r) { if (m >= l) ans++; m *= primes[i]; } }
+  for (let i = 2; i <= max; i++) {
+    if (arr[i]) continue;
+    primes.push(i);
+    for (let j = 0; j + i <= max; j += i) arr[i + j] = 1;
+  }
+  for (let i = 0; i < primes.length; i++) {
+    let m = primes[i] * primes[i];
+    while (m <= r) {
+      if (m >= l) ans++;
+      m *= primes[i];
+    }
+  }
   return ans;
 };
 const fs = require("fs");

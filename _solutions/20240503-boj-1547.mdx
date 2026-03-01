@@ -27,9 +27,9 @@ enhanced: true
 
 ### 예제
 
-| 입력 | 출력 |
-| --- | --- |
-| `4` `1 2` `3 2` `3 1` `3 2` | `1` |
+| 입력                        | 출력 |
+| --------------------------- | ---- |
+| `4` `1 2` `3 2` `3 1` `3 2` | `1`  |
 
 ## 풀이
 
@@ -49,8 +49,10 @@ const solution = (input) => {
   const M = input[0];
   let cup = 1;
   for (let i = 1; i <= M; i++) {
-    let x = input[i].split(" ")[0], y = input[i].split(" ")[1];
-    if (cup == x) cup = y; else if (cup == y) cup = x;
+    let x = input[i].split(" ")[0],
+      y = input[i].split(" ")[1];
+    if (cup == x) cup = y;
+    else if (cup == y) cup = x;
   }
   return cup;
 };

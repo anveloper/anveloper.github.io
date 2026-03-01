@@ -21,6 +21,7 @@ argument-hint: "<레포지토리 경로 또는 GitHub URL> [--after=YYYY-MM-DD] 
 ### GitHub URL 판별 규칙
 
 다음 패턴 중 하나에 해당하면 GitHub URL로 간주:
+
 - `https://github.com/<owner>/<repo>`
 - `github.com/<owner>/<repo>`
 - `<owner>/<repo>` (슬래시 1개, 로컬 경로에 해당하는 파일/디렉토리가 없는 경우)
@@ -106,43 +107,43 @@ day001/001_BOJ1296.js
 
 ### 언어 매핑
 
-| 확장자 / 디렉토리 | language 값 |
-|-------------------|-------------|
-| `.py`, `algorithm-py` | python |
-| `.cpp`, `algorithm-cpp` | cpp |
-| `.rs`, `algorithm-rust` | rust |
-| `.java`, `algorithm-java` | java |
-| `.js`, `algorithm-js` | javascript |
+| 확장자 / 디렉토리         | language 값 |
+| ------------------------- | ----------- |
+| `.py`, `algorithm-py`     | python      |
+| `.cpp`, `algorithm-cpp`   | cpp         |
+| `.rs`, `algorithm-rust`   | rust        |
+| `.java`, `algorithm-java` | java        |
+| `.js`, `algorithm-js`     | javascript  |
 
 ### 카테고리 → 태그 매핑
 
 디렉토리명 또는 파일명 키워드를 한국어 태그로 변환합니다:
 
-| 키워드 | 태그 |
-|--------|------|
-| `implementation` | 구현 |
-| `mathematics` | 수학 |
-| `string` | 문자열 |
-| `brute-force` | 브루트포스 |
-| `greedy` | 그리디 |
-| `dynamic-programming`, `DP` | DP |
-| `binary-search` | 이분 탐색 |
-| `bfs`, `breath-first-search` | BFS |
-| `dfs`, `depth-first-search` | DFS |
-| `sort` | 정렬 |
-| `stack` | 스택 |
-| `hash` | 해시 |
-| `graph` | 그래프 |
-| `two-pointer` | 투 포인터 |
-| `sliding-window` | 슬라이딩 윈도우 |
-| `prefix-sum` | 누적 합 |
-| `euclidean` | 유클리드 호제법 |
-| `eratosthenes`, `sieve-of-eratosthenes` | 에라토스테네스의 체 |
-| `data-structure` | 자료구조 |
-| `priority-queue` | 우선순위 큐 |
-| `bitmasking` | 비트마스킹 |
-| `ad-hoc` | 애드혹 |
-| 기타 | solved.ac API 태그 사용 |
+| 키워드                                  | 태그                    |
+| --------------------------------------- | ----------------------- |
+| `implementation`                        | 구현                    |
+| `mathematics`                           | 수학                    |
+| `string`                                | 문자열                  |
+| `brute-force`                           | 브루트포스              |
+| `greedy`                                | 그리디                  |
+| `dynamic-programming`, `DP`             | DP                      |
+| `binary-search`                         | 이분 탐색               |
+| `bfs`, `breath-first-search`            | BFS                     |
+| `dfs`, `depth-first-search`             | DFS                     |
+| `sort`                                  | 정렬                    |
+| `stack`                                 | 스택                    |
+| `hash`                                  | 해시                    |
+| `graph`                                 | 그래프                  |
+| `two-pointer`                           | 투 포인터               |
+| `sliding-window`                        | 슬라이딩 윈도우         |
+| `prefix-sum`                            | 누적 합                 |
+| `euclidean`                             | 유클리드 호제법         |
+| `eratosthenes`, `sieve-of-eratosthenes` | 에라토스테네스의 체     |
+| `data-structure`                        | 자료구조                |
+| `priority-queue`                        | 우선순위 큐             |
+| `bitmasking`                            | 비트마스킹              |
+| `ad-hoc`                                | 애드혹                  |
+| 기타                                    | solved.ac API 태그 사용 |
 
 ## 2단계: 풀이 파일 수집
 
@@ -201,9 +202,9 @@ ls _solutions/*.mdx 2>/dev/null
 
 ### 5.2 문제 URL 결정
 
-| 플랫폼 | URL 패턴 |
-|--------|----------|
-| BOJ | `https://www.acmicpc.net/problem/{number}` |
+| 플랫폼      | URL 패턴                                             |
+| ----------- | ---------------------------------------------------- |
+| BOJ         | `https://www.acmicpc.net/problem/{number}`           |
 | Programmers | WebSearch로 `programmers {문제명}` 검색하여 URL 확보 |
 
 ### 5.3 문제 정보 추출
@@ -215,21 +216,22 @@ curl -s "https://solved.ac/api/v3/problem/show?problemId={number}"
 ```
 
 응답에서 추출:
+
 - `titleKo`: 문제 제목 (한국어)
 - `level`: 난이도 (숫자 → 티어 변환)
 - `tags[].displayNames[].name` (ko): 알고리즘 분류 → 태그 보충
 
 #### solved.ac 난이도 매핑
 
-| level | 티어 |
-|-------|------|
-| 0 | Unrated |
-| 1-5 | 브론즈 V ~ I |
-| 6-10 | 실버 V ~ I |
-| 11-15 | 골드 V ~ I |
-| 16-20 | 플래티넘 V ~ I |
+| level | 티어             |
+| ----- | ---------------- |
+| 0     | Unrated          |
+| 1-5   | 브론즈 V ~ I     |
+| 6-10  | 실버 V ~ I       |
+| 11-15 | 골드 V ~ I       |
+| 16-20 | 플래티넘 V ~ I   |
 | 21-25 | 다이아몬드 V ~ I |
-| 26-30 | 루비 V ~ I |
+| 26-30 | 루비 V ~ I       |
 
 API 실패 시 WebFetch로 문제 페이지에서 제목만 추출합니다.
 
@@ -255,7 +257,7 @@ language: "python"
 
 #### 본문 템플릿
 
-```markdown
+````markdown
 ## 문제
 
 [BOJ 1000 - A+B](https://www.acmicpc.net/problem/1000)
@@ -269,18 +271,21 @@ language: "python"
 ## 코드
 
 \```python
+
 # 솔루션 코드
+
 \```
 
 ## 복잡도
 
 - 시간: O(...)
 - 공간: O(...)
-```
+````
 
 ### 5.5 배치 완료 확인
 
 10개 처리 완료 후 사용자에게:
+
 - 생성된 파일 목록 보고
 - 남은 문제 수 안내
 - 계속 진행할지 확인

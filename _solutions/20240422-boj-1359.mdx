@@ -27,8 +27,8 @@ K개 이상 일치할 확률을 출력한다.
 
 ### 예제
 
-| 입력 | 출력 |
-| --- | --- |
+| 입력    | 출력  |
+| ------- | ----- |
 | `5 3 2` | `0.3` |
 
 ## 풀이
@@ -47,10 +47,18 @@ K개 이상 일치할 확률을 출력한다.
 ```javascript
 const solution = (input) => {
   const [N, M, K] = input[0].split(" ").map(Number);
-  const factorial = (n) => { if (n === 0) return 1; return n * factorial(n - 1); };
-  const comb = (n, m) => { if (n < m) return 0; return factorial(n) / (factorial(m) * factorial(n - m)); };
+  const factorial = (n) => {
+    if (n === 0) return 1;
+    return n * factorial(n - 1);
+  };
+  const comb = (n, m) => {
+    if (n < m) return 0;
+    return factorial(n) / (factorial(m) * factorial(n - m));
+  };
   let tmp = 0;
-  for (let i = K; i <= M; i++) { tmp += comb(M, i) * comb(N - M, M - i); }
+  for (let i = K; i <= M; i++) {
+    tmp += comb(M, i) * comb(N - M, M - i);
+  }
   return tmp / comb(N, M);
 };
 const fs = require("fs");

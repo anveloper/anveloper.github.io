@@ -17,6 +17,7 @@ argument-hint: "<프로젝트 경로 또는 GitHub URL>"
 ### GitHub URL 판별 규칙
 
 다음 패턴 중 하나에 해당하면 GitHub URL로 간주:
+
 - `https://github.com/<owner>/<repo>`
 - `github.com/<owner>/<repo>`
 - `<owner>/<repo>` (슬래시 1개, 로컬 경로에 해당하는 파일/디렉토리가 없는 경우)
@@ -55,16 +56,16 @@ find $PROJECT_PATH -maxdepth 2 -type f | head -50
 
 우선순위대로 읽기:
 
-| 파일 | 확인 내용 |
-|------|----------|
-| `package.json` | 프로젝트명, 설명, 기술 스택, 스크립트 |
-| `README.md` | 프로젝트 소개, 기능 설명 |
-| `tsconfig.json` / `jsconfig.json` | 언어 설정 |
-| `Dockerfile`, `docker-compose.yml` | 배포 환경 |
-| `.env.example` | 환경 변수 구성 |
-| `build.gradle`, `pom.xml` | Java/Kotlin 프로젝트 |
-| `requirements.txt`, `pyproject.toml` | Python 프로젝트 |
-| `go.mod` | Go 프로젝트 |
+| 파일                                 | 확인 내용                             |
+| ------------------------------------ | ------------------------------------- |
+| `package.json`                       | 프로젝트명, 설명, 기술 스택, 스크립트 |
+| `README.md`                          | 프로젝트 소개, 기능 설명              |
+| `tsconfig.json` / `jsconfig.json`    | 언어 설정                             |
+| `Dockerfile`, `docker-compose.yml`   | 배포 환경                             |
+| `.env.example`                       | 환경 변수 구성                        |
+| `build.gradle`, `pom.xml`            | Java/Kotlin 프로젝트                  |
+| `requirements.txt`, `pyproject.toml` | Python 프로젝트                       |
+| `go.mod`                             | Go 프로젝트                           |
 
 ### 1.3 소스코드 구조 분석
 
@@ -76,6 +77,7 @@ ls -la $PROJECT_PATH/lib/ 2>/dev/null
 ```
 
 핵심 파일 탐색:
+
 - 진입점 파일 (index, main, app)
 - 라우팅/API 구조
 - 주요 컴포넌트/모듈 구조
@@ -95,25 +97,25 @@ find $PROJECT_PATH/docs -type f 2>/dev/null | head -20
 
 ### 필수 항목
 
-| 항목 | 설명 |
-|------|------|
-| 프로젝트명 | 공식 이름 |
-| 한줄 소개 | 프로젝트 핵심 설명 (1문장) |
-| 기술 스택 | 언어, 프레임워크, 라이브러리, DB 등 |
-| 주요 기능 | 핵심 기능 3-5개 |
-| 프로젝트 구조 | 디렉토리/모듈 구조 요약 |
-| 기간 | 개발 기간 (커밋 이력 또는 문서 기반) |
+| 항목          | 설명                                 |
+| ------------- | ------------------------------------ |
+| 프로젝트명    | 공식 이름                            |
+| 한줄 소개     | 프로젝트 핵심 설명 (1문장)           |
+| 기술 스택     | 언어, 프레임워크, 라이브러리, DB 등  |
+| 주요 기능     | 핵심 기능 3-5개                      |
+| 프로젝트 구조 | 디렉토리/모듈 구조 요약              |
+| 기간          | 개발 기간 (커밋 이력 또는 문서 기반) |
 
 ### 선택 항목
 
-| 항목 | 설명 |
-|------|------|
-| 아키텍처 | 전체 시스템 구조 |
-| 담당 역할 | 본인 기여 부분 |
-| 성과/결과 | 정량적 성과 |
+| 항목       | 설명             |
+| ---------- | ---------------- |
+| 아키텍처   | 전체 시스템 구조 |
+| 담당 역할  | 본인 기여 부분   |
+| 성과/결과  | 정량적 성과      |
 | 트러블슈팅 | 해결한 주요 문제 |
-| GitHub URL | 저장소 링크 |
-| Demo URL | 배포 URL |
+| GitHub URL | 저장소 링크      |
+| Demo URL   | 배포 URL         |
 
 ## 3단계: 사용자 확인
 
@@ -132,12 +134,12 @@ find $PROJECT_PATH/docs -type f 2>/dev/null | head -20
 
 ```yaml
 ---
-title: '<프로젝트명>'
-date: '<YYYY-MM-DD>'
-description: '<한줄 소개>'
-tags: ['<기술1>', '<기술2>', ...]
-github: '<GitHub URL>'  # 선택
-demo: '<Demo URL>'      # 선택
+title: "<프로젝트명>"
+date: "<YYYY-MM-DD>"
+description: "<한줄 소개>"
+tags: ["<기술1>", "<기술2>", ...]
+github: "<GitHub URL>" # 선택
+demo: "<Demo URL>" # 선택
 ---
 ```
 
@@ -158,12 +160,12 @@ demo: '<Demo URL>'      # 선택
 
 ## 기술 스택
 
-| 분류 | 기술 |
-|------|------|
-| Frontend | ... |
-| Backend | ... |
-| Database | ... |
-| Infra | ... |
+| 분류     | 기술 |
+| -------- | ---- |
+| Frontend | ...  |
+| Backend  | ...  |
+| Database | ...  |
+| Infra    | ...  |
 
 ## 프로젝트 구조
 

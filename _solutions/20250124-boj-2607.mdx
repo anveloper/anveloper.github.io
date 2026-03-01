@@ -27,9 +27,9 @@ enhanced: true
 
 ### 예제
 
-| 입력 | 출력 |
-|------|------|
-| `4` `DOG` `GOD` `GOOD` `DDOG` | `2` |
+| 입력                          | 출력 |
+| ----------------------------- | ---- |
+| `4` `DOG` `GOD` `GOOD` `DDOG` | `2`  |
 
 ## 풀이
 
@@ -49,7 +49,7 @@ target = list(input()) # 비교 대상 단어(첫 단어)
 answer = 0
 
 for _ in range(N-1):
-    compare = target[:] 
+    compare = target[:]
     word = input() # 새로운 단어
     cnt = 0
 

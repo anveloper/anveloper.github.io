@@ -10,12 +10,12 @@
 
 ### 변경 파일
 
-| 파일 | 내용 |
-|------|------|
-| `lib/mdx-options.ts` | rehype-pretty-code 플러그인 추가 |
+| 파일                    | 내용                                            |
+| ----------------------- | ----------------------------------------------- |
+| `lib/mdx-options.ts`    | rehype-pretty-code 플러그인 추가                |
 | `lib/mdx-components.ts` | figure/pre/code 컴포넌트 수정 (하이라이트 감지) |
-| `app/globals.css` | 다크/라이트 테마 전환 CSS |
-| `package.json` | rehype-pretty-code, shiki 의존성 추가 |
+| `app/globals.css`       | 다크/라이트 테마 전환 CSS                       |
+| `package.json`          | rehype-pretty-code, shiki 의존성 추가           |
 
 ### 설계 포인트
 

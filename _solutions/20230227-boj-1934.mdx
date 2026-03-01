@@ -27,8 +27,8 @@ enhanced: true
 
 ### 예제
 
-| 입력              | 출력        |
-| ----------------- | ----------- |
+| 입력                         | 출력               |
+| ---------------------------- | ------------------ |
 | `3` `1 45000` `6 10` `13 17` | `45000` `30` `221` |
 
 ## 풀이
@@ -47,26 +47,26 @@ package day399;
 
 import java.io.*;
 import java.util.*;
- 
+
 public class Day385BOJ1934최소공배수 {
-	public static void main(String[] args) throws Exception {		
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));		
-		int N = Integer.parseInt(br.readLine());		
-		StringBuilder sb = new StringBuilder();		
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		int N = Integer.parseInt(br.readLine());
+		StringBuilder sb = new StringBuilder();
 		StringTokenizer st;
-		
-		for(int i = 0; i < N; i++) {			
-			st = new StringTokenizer(br.readLine());			
+
+		for(int i = 0; i < N; i++) {
+			st = new StringTokenizer(br.readLine());
 			int a = Integer.parseInt(st.nextToken());
-			int b = Integer.parseInt(st.nextToken());			
-			int d = gcd(a, b);			
+			int b = Integer.parseInt(st.nextToken());
+			int d = gcd(a, b);
 			sb.append(a * b / d).append('\n');
 		}
 		System.out.println(sb);
- 
+
 	}
-    
-	public static int gcd(int a, int b) { 
+
+	public static int gcd(int a, int b) {
 		while (b != 0) {
 			int r = a % b;
 			a = b;
@@ -79,5 +79,5 @@ public class Day385BOJ1934최소공배수 {
 
 ## 복잡도
 
-- 시간: O(T * log(min(A, B))) - 각 쌍마다 유클리드 호제법
+- 시간: O(T \* log(min(A, B))) - 각 쌍마다 유클리드 호제법
 - 공간: O(1)

@@ -28,8 +28,8 @@ N마리의 새가 전깃줄에 앉아 있다. 매 초마다 1, 2, 3, ... 마리�
 ### 예제
 
 | 입력 | 출력 |
-| --- | --- |
-| `14` | `5` |
+| ---- | ---- |
+| `14` | `5`  |
 
 ## 풀이
 
@@ -46,8 +46,14 @@ N마리의 새가 전깃줄에 앉아 있다. 매 초마다 1, 2, 3, ... 마리�
 
 ```javascript
 const solution = (input) => {
-  let N = Number(input[0]), sec = 1, cnt = 0;
-  while (N) { N -= sec++; cnt++; if (sec > N) sec = 1; }
+  let N = Number(input[0]),
+    sec = 1,
+    cnt = 0;
+  while (N) {
+    N -= sec++;
+    cnt++;
+    if (sec > N) sec = 1;
+  }
   return cnt;
 };
 const fs = require("fs");
