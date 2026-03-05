@@ -11,8 +11,9 @@ tags: ["Architecture", "E-commerce", "UX", "Payment"]
 
 커스텀 상품(티셔츠, 폰케이스 등) 플랫폼의 주문 흐름은 일반 이커머스와 다르다. 상품 선택 후 **옵션 선택 → 디자인 편집 → 장바구니 → 주문서**라는 고유한 단계가 있다.
 
-```
-상품 목록 → 옵션 선택 → 디자인(에디터) → 장바구니 → 주문서 → 주문 완료
+```mermaid
+flowchart LR
+    A[상품 목록] --> B[옵션 선택] --> C[디자인\n에디터] --> D[장바구니] --> E[주문서] --> F[주문 완료]
 ```
 
 각 단계는 페이지 타입으로 정의되어 있고, 활성화/비활성화가 가능하다. 비활성화된 페이지는 자동으로 건너뛴다.
@@ -47,13 +48,19 @@ interface TenantPolicyConfig {
 
 별도의 직원 기기(cashier)로 고객의 QR 코드를 스캔하여 주문을 처리한다.
 
-```
-[고객 키오스크]                        [직원 모바일]
-HERO → SIGNUP → 상품선택               /cashier (스캐너 대기)
-  → 옵션 → CART                         │
-  → ORDER (QR 코드 표시) ─── 스캔 ────→ 카트 확인 → "주문 생성"
-  ← 폴링으로 주문 감지 ←─── 주문 ────   결제 상태 관리
-  → ORDER_RESULT (자동 전환)
+```mermaid
+sequenceDiagram
+    participant K as 고객 키오스크
+    participant C as 직원 모바일
+    Note over K: HERO → SIGNUP → 상품선택<br/>→ 옵션 → CART
+    K->>K: ORDER (QR 코드 표시)
+    Note over C: /cashier (스캐너 대기)
+    K-->>C: QR 스캔
+    C->>C: 카트 확인 → 주문 생성
+    C-->>K: 주문 생성 완료
+    Note over K: 폴링으로 주문 감지
+    K->>K: ORDER_RESULT (자동 전환)
+    Note over C: 결제 상태 관리
 ```
 
 QR 데이터는 JSON을 직접 인코딩한다.
@@ -68,12 +75,14 @@ QR 데이터는 JSON을 직접 인코딩한다.
 
 별도 기기 없이, 고객 화면에서 직원이 직접 주문 내역과 디자인을 확인하고 접수한다.
 
-```
-고객 화면
-→ ORDER ("직원에게 이 화면을 보여주세요")
-→ "주문 확인" 버튼 → 모달 (디자인 이미지 크게 + 상품 정보)
-→ 썸네일 터치 확인 → "주문 접수" 버튼
-→ ORDER_RESULT
+```mermaid
+flowchart TD
+    A[고객 화면] --> B["ORDER\n(직원에게 이 화면을 보여주세요)"]
+    B --> C["주문 확인 버튼"]
+    C --> D["모달\n(디자인 이미지 + 상품 정보)"]
+    D --> E[썸네일 터치 확인]
+    E --> F["주문 접수 버튼"]
+    F --> G[ORDER_RESULT]
 ```
 
 디자인 확인은 **썸네일 터치 방식**을 도입했다. 직원이 각 아이템의 디자인 이미지를 직접 탭해야 하며, 모든 아이템을 확인해야 "주문 접수" 버튼이 활성화된다. 이미지 드래그/선택을 방지하여 실수로 확인되는 것을 막는다.
@@ -130,9 +139,11 @@ optionTree: { "S": { "화이트": { sku: "TS-S-W", price: 20000 } ... } }
 
 ## 주문 상태 관리
 
-```
-PENDING → PROCESSING → COMPLETED → READY → PICKED_UP → CONFIRMED
-                                         → SHIPPED → DELIVERED → CONFIRMED
+```mermaid
+flowchart LR
+    A[PENDING] --> B[PROCESSING] --> C[COMPLETED] --> D[READY]
+    D --> E[PICKED_UP] --> F[CONFIRMED]
+    D --> G[SHIPPED] --> H[DELIVERED] --> F
 ```
 
 현장결제 활성화 시 `SHIPPED`, `DELIVERED` 상태를 숨긴다 (배송이 없으므로). 상태 전이 규칙은 양방향이 가능하되, 논리적으로 맞는 전이만 허용한다.

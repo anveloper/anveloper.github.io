@@ -11,9 +11,10 @@ tags: ["DevOps", "Deployment", "PM2", "Caddy", "Blue-Green"]
 
 기존 배포 방식은 단순했다.
 
-```
-GitHub (release push) → Self-hosted Runner
-  → git pull → pnpm install → pnpm build → pm2 reload
+```mermaid
+flowchart LR
+    A[GitHub\nrelease push] --> B[Self-hosted Runner]
+    B --> C[git pull] --> D[pnpm install] --> E[pnpm build] --> F[pm2 reload]
 ```
 
 단일 인스턴스(`my-store`, 포트 4033)에서 `pm2 reload`로 graceful restart하지만, 두 가지 문제가 있었다.
@@ -30,18 +31,14 @@ GitHub (release push) → Self-hosted Runner
 
 ## 아키텍처
 
-```
-[Caddy: 80/443]
-    │
-    ├── reverse_proxy localhost:{ACTIVE_PORT}
-    │
-    ▼
-┌──────────┐    ┌──────────┐
-│   blue   │    │  green   │
-│  :4033   │    │  :4034   │
-│.next-blue│    │.next-grn │
-└──────────┘    └──────────┘
-  (활성)          (대기)
+```mermaid
+flowchart TD
+    A["Caddy :80/443\nreverse_proxy localhost:{ACTIVE_PORT}"] --> B
+    A --> C
+    B["blue :4033\n.next-blue\n(활성)"]
+    C["green :4034\n.next-green\n(대기)"]
+    style B fill:#3b82f6,color:#fff
+    style C fill:#22c55e,color:#fff
 ```
 
 | 항목          | blue            | green            |
@@ -237,18 +234,18 @@ jobs:
 
 ## 배포 흐름 요약
 
-```
-1. release 브랜치 push
-2. GitHub Actions 트리거
-3. deploy.sh 실행
-   ├── 현재 활성 포트 확인 (예: blue:4033)
-   ├── git pull + pnpm install
-   ├── NEXT_DIST_DIR=.next-green pnpm build  ← 기존 서비스 영향 없음
-   ├── pm2 restart my-store-green
-   ├── 헬스체크 (localhost:4034)
-   ├── Caddy upstream 전환 → 4034
-   └── 완료 (green 활성, blue 대기)
-4. 다음 배포 시 반대로 (green → blue)
+```mermaid
+flowchart TD
+    A[release 브랜치 push] --> B[GitHub Actions 트리거]
+    B --> C[deploy.sh 실행]
+    C --> D["현재 활성 포트 확인\n(예: blue:4033)"]
+    D --> E[git pull + pnpm install]
+    E --> F["NEXT_DIST_DIR=.next-green pnpm build\n(기존 서비스 영향 없음)"]
+    F --> G[pm2 restart my-store-green]
+    G --> H["헬스체크 (localhost:4034)"]
+    H --> I["Caddy upstream 전환 → 4034"]
+    I --> J["완료 (green 활성, blue 대기)"]
+    J -.->|다음 배포 시 반대로| D
 ```
 
 ## 마무리
