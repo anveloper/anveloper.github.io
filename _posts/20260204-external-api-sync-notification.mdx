@@ -1,0 +1,183 @@
+---
+title: "외부 API 연동: 상품 동기화와 알림 발송"
+date: "2026-02-04"
+description: "본사 API와 양방향 상품/주문 동기화, 카카오 알림톡과 이메일 알림 시스템 구현기"
+tags: ["API", "Integration", "Sync", "Notification", "Kakao"]
+---
+
+# 외부 API 연동: 상품 동기화와 알림 발송
+
+## 아키텍처: 외부 API 의존
+
+이 플랫폼의 가장 큰 특징은 상품·주문 정보를 자체 DB에 저장하지 않는다는 점이다. 상품명, 가격, 이미지는 본사 API에서 실시간 조회하고, DB에는 테넌트 설정과 참조 정보만 저장한다.
+
+```
+[클라이언트] ↔ [스토어 앱] ↔ [본사 API]
+                   ↓
+             [MariaDB]
+         (설정/참조 정보만)
+```
+
+단, 주문 시점의 상품명과 가격은 `OrderItem`에 스냅샷으로 저장한다.
+
+## 상품 동기화: 본사 → Store
+
+### 동기화 흐름
+
+관리자가 "상품 동기화" 버튼을 클릭하면, 본사 API에서 상품 목록을 페이지 단위로 가져온다.
+
+```
+[스토어 앱]                          [본사 API]
+    │  GET /products?limit=20            │
+    │ ──────────────────────────────────>│
+    │  { products, hasMore, nextCursor } │
+    │ <──────────────────────────────────│
+    │                                    │
+    │  [Product 테이블에 저장]            │
+    │                                    │
+    │  POST /products/mappings           │
+    │  { mappings: [{ seqno, id }] }     │
+    │ ──────────────────────────────────>│
+    │  [본사에서 storeProductId 저장]      │
+    │                                    │
+    │  hasMore=true → 다음 페이지        │
+    └── (반복) ──────────────────────────┘
+```
+
+핵심은 **매핑(mapping)**이다. Store에서 생성한 Product ID(cuid)를 본사에 전달하여, 양쪽 시스템에서 상호 참조할 수 있게 한다.
+
+### 상품 상세: optionTree
+
+고객이 옵션을 선택할 때 사용하는 핵심 데이터 구조다. 옵션 조합에 따른 SKU와 가격을 중첩 트리로 표현한다.
+
+```json
+{
+  "optionOrder": ["사이즈", "색상"],
+  "optionTree": {
+    "S": {
+      "화이트": { "sku": "TS-S-W", "price": 20000 },
+      "블랙": { "sku": "TS-S-B", "price": 20000 }
+    },
+    "2XL": {
+      "화이트": { "sku": "TS-2XL-W", "price": 22000 }
+    }
+  }
+}
+```
+
+"S" 사이즈에 "네이비"가 없으면 트리에 포함되지 않으므로, 선택 불가능한 옵션 조합을 자연스럽게 제외할 수 있다.
+
+### 카테고리 자동 생성
+
+동기화 시 본사 상품의 `categoryName`이 Store에 없으면 Category가 자동 생성된다. 관리자는 생성된 카테고리의 다국어 이름과 순서만 관리하면 된다.
+
+## 주문 동기화: 양방향
+
+주문 데이터는 두 가지 방식으로 동기화된다.
+
+| 방식        | 방향         | 용도                               |
+| ----------- | ------------ | ---------------------------------- |
+| 이벤트 발송 | Store → 본사 | 주문 생성/상태 변경 시 실시간 알림 |
+| 동기화 API  | 본사 → Store | 본사가 주문 데이터를 폴링으로 조회 |
+
+### 이벤트 발송 (Store → 본사)
+
+주문 생성 시 본사에 전체 주문 정보를 전송하고, 본사에서 발급한 `extOrderSeqno`를 저장한다.
+
+```typescript
+// 주문 생성 API (app/api/orders/route.ts)
+const order = await prisma.order.create({ ... });
+
+// 본사에 이벤트 발송 (fire-and-forget)
+sendOrderCreatedEvent(order).catch(console.error);
+```
+
+이벤트 발송 실패 시에도 주문 생성은 성공으로 처리한다 (사용자 경험 우선). 실패한 주문은 `Order.syncedAt`이 null로 남아있고, 본사가 동기화 API로 나중에 가져간다.
+
+재시도 정책: 최대 3회, 지수 백오프 (1초, 2초, 4초).
+
+### 동기화 API (본사 → Store)
+
+본사가 Store의 주문 데이터를 조회하거나 상태를 변경할 수 있는 API를 제공한다.
+
+```
+GET  /api/sync/orders          # 주문 목록 (since 파라미터로 변경분만)
+GET  /api/sync/orders/detail   # 주문 상세
+PATCH /api/sync/orders/mapping # 매핑 정보 업데이트 (이벤트 실패 복구)
+PATCH /api/sync/orders/status  # 상태 역방향 변경
+```
+
+API Key 인증(`Authorization: Bearer {STORE_API_KEY}`)을 사용한다.
+
+### 데이터 매핑
+
+양쪽 시스템의 ID를 연결하는 매핑이 핵심이다.
+
+| Store                  | 본사             | 설명           |
+| ---------------------- | ---------------- | -------------- |
+| `Order.id` (cuid)      | -                | Store 내부용   |
+| `Order.orderNumber`    | `ORDER_NUM`      | 주문번호       |
+| `Order.extOrderSeqno`  | `orderSeqno`     | 본사 주문 번호 |
+| `OrderItem.itemNumber` | `SHOP_DETAIL_NO` | 아이템 번호    |
+
+## 알림 발송 시스템
+
+### 채널 분기
+
+수신자의 identifier 유형에 따라 자동 분기한다.
+
+- **전화번호** → 카카오톡 알림톡 (Lunasoft API)
+- **이메일** → 이메일 (SMTP)
+
+### 발송 시점
+
+| 이벤트                       | 고객 | 작업자 | 캐셔 |
+| ---------------------------- | :--: | :----: | :--: |
+| 주문 접수 (Payment PAID)     |  O   |   O    |  -   |
+| 상품 준비 완료 (Order READY) |  O   |   -    |  O   |
+
+### 발송 원칙
+
+- **비동기(fire-and-forget)**: 알림 실패가 주문 응답에 영향 없음
+- **`Promise.allSettled`**: 다수 수신자 중 일부 실패해도 나머지 처리
+- 발송 이력은 `NotificationLog`에 기록
+
+### 알림톡 템플릿
+
+카카오 비즈니스 채널에 등록한 템플릿 ID를 상수로 관리한다.
+
+| 상수                               | 용도                 |
+| ---------------------------------- | -------------------- |
+| `TEMPLATE_ORDER_CREATED`           | 주문 접수 - 고객용   |
+| `TEMPLATE_ORDER_CREATED_WORKER`    | 주문 접수 - 작업자용 |
+| `TEMPLATE_ORDER_COMPLETED`         | 제작 완료 - 고객용   |
+| `TEMPLATE_ORDER_COMPLETED_CASHIER` | 제작 완료 - 캐셔용   |
+
+알림 URL은 커스텀 도메인이 검증(`domainVerified`)된 경우 `https://{domain}/my/{orderNumber}`, 아니면 `https://store.example.com/{tenant}/my/{orderNumber}`를 사용한다.
+
+### 수신자 관리
+
+`NotificationRecipient` 모델로 작업자/캐셔 수신자를 관리한다.
+
+```prisma
+model NotificationRecipient {
+  id         String  @id @default(cuid())
+  tenantId   String
+  role       NotificationRecipientRole  // WORKER | CASHIER
+  identifier String  // 전화번호 또는 이메일
+  isActive   Boolean // 수신 ON/OFF
+  @@unique([tenantId, role, identifier])
+}
+```
+
+수신자 추가 시 인증번호 검증을 거친다 (전화번호 → 알림톡, 이메일 → 이메일로 인증번호 발송). 역할별 최대 10명.
+
+### 재발송
+
+READY 상태 주문에 한해 알림톡 재발송이 가능하다. 주문 목록에서 개별 또는 체크박스 일괄 재발송을 지원한다.
+
+## 마무리
+
+외부 API 의존 전략의 장단점은 명확하다. 상품 정보를 이중으로 관리할 필요가 없어 시스템이 간결해지지만, API 장애 시 상품 정보를 표시할 수 없다. 이를 보완하기 위해 주문 시점 스냅샷과 양방향 동기화를 구현했다.
+
+알림 시스템은 "실패해도 괜찮다"는 원칙이 중요하다. 알림 발송 실패가 주문 생성을 막아서는 안 되고, 수신자 중 일부가 실패해도 나머지는 정상 처리되어야 한다. `Promise.allSettled`와 fire-and-forget 패턴이 이를 가능하게 한다.

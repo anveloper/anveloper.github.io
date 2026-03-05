@@ -1,0 +1,182 @@
+---
+title: "Next.js 듀얼 인증과 매직 토큰 자동 로그인"
+date: "2026-01-23"
+description: "하나의 Next.js 앱에서 관리자와 고객 인증을 완전 분리하고, 알림톡 URL로 자동 로그인하는 매직 토큰 구현기"
+tags: ["Next.js", "NextAuth", "Authentication", "Security"]
+---
+
+# Next.js 듀얼 인증과 매직 토큰 자동 로그인
+
+## 왜 인증을 분리해야 했는가
+
+멀티테넌트 스토어 플랫폼에는 두 종류의 사용자가 있다.
+
+- **관리자**: 본사 API로 계정을 검증하는 업체 직원
+- **고객**: 전화번호 또는 이메일로 간편 가입하는 주문자
+
+같은 브라우저에서 관리자가 스토어를 설정하면서 고객 화면을 테스트해야 하는 상황이 빈번했다. NextAuth의 기본 설정은 하나의 세션만 유지하므로, 관리자 로그인과 고객 로그인이 충돌했다.
+
+## 듀얼 NextAuth 설정
+
+NextAuth 인스턴스를 두 개 생성하여 완전히 분리했다.
+
+| 구분      | Admin                    | Customer                    |
+| --------- | ------------------------ | --------------------------- |
+| 설정 파일 | `lib/auth/admin-auth.ts` | `lib/auth/customer-auth.ts` |
+| 쿠키 이름 | `admin-session-token`    | `customer-session-token`    |
+| API 경로  | `/api/auth/...`          | `/api/customer/auth/...`    |
+| 인증 방식 | 본사 API 검증            | DB 조회 (identifier)        |
+
+```typescript
+// lib/auth/admin-auth.ts
+export const { adminHandlers, adminAuth, adminSignIn, adminSignOut } = NextAuth(adminAuthConfig);
+
+// lib/auth/customer-auth.ts
+export const { customerHandlers, customerAuth, customerSignIn, customerSignOut } = NextAuth(customerAuthConfig);
+```
+
+쿠키 이름이 다르므로 같은 브라우저에서 두 세션이 독립적으로 유지된다.
+
+### 관리자 인증: 본사 API 검증
+
+관리자 로그인 시 Store 서버가 본사 API에 자격 증명을 전달하여 검증한다. Store에는 사용자 테이블이 없고, 본사 응답을 기반으로 세션만 유지한다.
+
+```
+[Store 로그인] → [Store 서버] → [본사 API /auth/verify] → [세션 생성]
+```
+
+```typescript
+interface AdminSession {
+  userSeqno: number;
+  userId: string;
+  name: string;
+  extShopSeqno: number;
+  jarvisMallSeqno: number;
+  permission: string; // OWNER, ADMIN 등
+  tenantId: string;
+}
+```
+
+작업자(Worker) 로그인도 같은 본사 API를 사용하되, 리다이렉트 경로만 다르다 (`/admin` vs `/work`).
+
+### 고객 인증: identifier 기반 간편 가입
+
+고객은 전화번호 또는 이메일 하나로 가입/로그인한다. 입력값을 자동으로 정규화하여 중복을 방지한다.
+
+| 입력 유형 | 정규화 규칙 | 예시                                    |
+| --------- | ----------- | --------------------------------------- |
+| 전화번호  | 숫자만 추출 | `010-1234-5678` → `01012345678`         |
+| 이메일    | 소문자 변환 | `User@Example.com` → `user@example.com` |
+
+```typescript
+const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+const isPhone = value.replace(/\D/g, "").length >= 10;
+```
+
+## 세션 타임아웃: 키오스크 환경 대응
+
+팝업 스토어의 키오스크에서 이전 고객의 세션이 남아있는 문제가 있었다. 설정 가능한 자동 로그아웃 기능을 구현했다.
+
+- `TenantPolicyConfig.sessionTimeout`: 분 단위 (0 = 비활성화)
+- 활동 감지 이벤트: `click`, `touchstart`, `keydown`, `scroll`, `mousemove`
+- 5초 간격 쓰로틀로 불필요한 타이머 리셋 방지
+
+타임아웃 흐름:
+
+1. 설정 시간 동안 활동 없음 → 경고 모달 (30초 카운트다운)
+2. 활동 감지 또는 "계속 이용하기" 클릭 → 타이머 리셋
+3. 카운트다운 종료 → 세션 파괴 + 언어 초기화 + HERO 리다이렉트
+
+### 비활성 탭 문제 해결
+
+`setInterval`은 브라우저 비활성 탭에서 정확하지 않다. 종료 시각(`endTime`)을 기준으로 남은 시간을 계산하고, `visibilitychange` 이벤트로 탭 활성화 시 즉시 동기화한다.
+
+### 에디터 열림 시 일시 중단
+
+디자인 에디터(Jarvis)가 열려있는 동안에는 타이머를 일시 중단한다. 커스텀 이벤트(`jarvis-editor-open`, `jarvis-editor-close`)로 에디터 상태를 감지한다.
+
+## 매직 토큰: 알림톡 → 자동 로그인
+
+### 문제
+
+주문 접수/제작 완료 알림톡에 "주문 확인" 버튼이 포함된다. 이 URL(`/my/{orderNumber}`)을 클릭하면 세션이 없어 로그인 페이지로 리다이렉트되고, 고객이 다시 전화번호를 입력해야 했다.
+
+### 해결: 일회성 매직 토큰
+
+알림 발송 시 일회성 토큰을 생성하여 URL에 포함한다.
+
+```prisma
+model MagicToken {
+  id         String    @id @default(cuid())
+  token      String    @unique
+  customerId String
+  orderId    String
+  usedAt     DateTime?
+  expiresAt  DateTime
+  createdAt  DateTime  @default(now())
+}
+```
+
+- `token`: `crypto.randomUUID()`로 생성
+- `usedAt`: 사용 시 현재 시각 기록 (일회성 보장)
+- `expiresAt`: 생성 후 7일
+
+### 토큰 생성/검증
+
+```typescript
+// 토큰 생성 (알림 발송 시)
+const token = await createMagicToken(customerId, orderId);
+const url = `https://store.example.com/tenant/my/${orderNumber}?token=${token}`;
+
+// 토큰 검증 (페이지 접근 시)
+const result = await verifyMagicToken(token);
+// usedAt이 null이고 expiresAt > now인 토큰 조회
+// 성공 시 usedAt을 현재 시각으로 업데이트
+```
+
+### 자동 로그인 흐름
+
+```
+세션 없음 → token 파라미터 확인
+  → 토큰 유효 → 자동 signIn → 주문 상세 표시
+  → 토큰 무효/없음 → /signup?returnUrl=... 리다이렉트
+```
+
+```typescript
+const session = await customerAuth();
+if (!session?.user?.customerId) {
+  if (token) {
+    const result = await verifyMagicToken(token);
+    if (result) {
+      await customerSignIn("customer-credentials", {
+        identifier: result.identifier,
+        extShopSeqno: String(tenantData.extShopSeqno),
+        redirect: false,
+      });
+      redirect(`/my/${orderNumber}`); // 토큰 파라미터 제거 (clean URL)
+    }
+  }
+  redirect(`/signup?returnUrl=/my/${orderNumber}`);
+}
+```
+
+### returnUrl 보안
+
+Open redirect 공격을 방지하기 위해 `returnUrl`은 상대 경로만 허용한다.
+
+```typescript
+// lib/utils/return-url.ts
+function getSafeReturnUrl(returnUrl: string, fallback: string): string {
+  // /로 시작하고, //를 포함하지 않는 경로만 허용
+  if (returnUrl.startsWith("/") && !returnUrl.includes("//")) {
+    return returnUrl;
+  }
+  return fallback;
+}
+```
+
+## 마무리
+
+듀얼 NextAuth 설정의 핵심은 **쿠키 이름 분리**다. 이것만으로 같은 브라우저에서 두 종류의 사용자가 독립적으로 인증된다.
+
+매직 토큰은 간단하지만 사용자 경험에 큰 차이를 만든다. 알림톡 → 1클릭으로 주문 확인이 가능해지면서, 고객 문의가 눈에 띄게 줄었다. 보안을 위해 일회성(`usedAt`)과 만료(`expiresAt`)를 반드시 적용해야 한다.
