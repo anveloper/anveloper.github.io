@@ -2,7 +2,7 @@
 
 import { useMounted } from "@/hooks/use-mounted";
 import { cn } from "@/lib/utils";
-import { FolderGit2, HomeIcon, LayoutGrid, MailIcon } from "lucide-react";
+import { Code, FolderGit2, HomeIcon, LayoutGrid, MailIcon } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
@@ -35,6 +35,7 @@ const navItems = [
   { href: "/", icon: HomeIcon, label: "About" },
   { href: "/projects", icon: LayoutGrid, label: "Projects" },
   { href: "/posts", icon: FolderGit2, label: "Posts" },
+  { href: "/solutions", icon: Code, label: "Algorithm" },
 ];
 
 const socialLinks = [
