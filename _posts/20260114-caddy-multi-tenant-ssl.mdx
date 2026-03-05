@@ -194,14 +194,14 @@ Environment="CF_API_TOKEN=your-cloudflare-api-token"
 sudo apt install caddy
 
 # Node.js 앱 시작
-pm2 start pnpm --name "dps-store" -- start
+pm2 start pnpm --name "my-store" -- start
 pm2 startup && pm2 save
 ```
 
 ```
 /etc/caddy/Caddyfile                  ← Caddy 설정
 /var/lib/caddy/.local/share/caddy/    ← SSL 인증서 (자동 관리)
-/home/ubuntu/dps-store/               ← Next.js 앱
+/home/ubuntu/my-store/               ← Next.js 앱
 ```
 
 ## 주의사항
