@@ -1,0 +1,265 @@
+---
+title: "JSON 기반 동적 UI 렌더링 시스템 — 로직은 고정, 배치는 자유"
+date: "2026-01-29"
+description: "UINode 트리 구조와 WYSIWYG 비주얼 빌더로 멀티테넌트 스토어의 페이지를 자유롭게 구성하는 동적 UI 시스템"
+tags: ["Architecture", "React", "UI", "WYSIWYG", "JSON"]
+---
+
+# JSON 기반 동적 UI 렌더링 시스템
+
+## 배경: 고정형의 한계
+
+멀티테넌트 스토어 플랫폼을 만들면서, 처음에는 페이지 타입별로 미리 정의된 레이아웃(고정형)을 사용했다. 관리자는 `layoutConfig` JSON에서 텍스트, 이미지, 색상 등을 설정할 수 있지만, 요소의 배치 순서나 섹션 구조는 코드에 고정되어 있었다.
+
+이 방식은 비개발자도 쉽게 스토어를 구성할 수 있다는 장점이 있지만, "로고 위치를 바꾸고 싶다", "섹션 순서를 변경하고 싶다"는 요구를 코드 수정 없이는 해결할 수 없었다.
+
+| 항목          | 고정형 (v1.0)                      | 노드 기반 (v2.0)           |
+| ------------- | ---------------------------------- | -------------------------- |
+| 컴포넌트 정의 | 타입별 사전 정의 (switch-case)     | 노드 구조로 동적 생성      |
+| 확장성        | 새 컴포넌트 추가 시 코드 수정 필요 | config만으로 UI 구성 가능  |
+| 에디터        | 컴포넌트별 설정 폼                 | 비주얼 빌더 (WYSIWYG)      |
+| 유연성        | 제한적 (정해진 옵션만)             | 완전 자유 (중첩 구조 가능) |
+
+## 핵심 설계: "로직은 고정, 배치는 자유"
+
+자유형 페이지의 설계 철학은 **비즈니스 로직과 레이아웃을 분리**하는 것이다.
+
+```
+자유형 페이지
+├── [div]          ← 자유 배치 (관리자가 구성)
+│   ├── [header]
+│   │   ├── <logo>              ← 기능 블록
+│   │   └── [h1] "내 브랜드"    ← 자유 텍스트
+│   ├── [img]                   ← 자유 이미지
+│   ├── <product-list>          ← 기능 블록
+│   │   (내부: API 호출, 상품 그리드)
+│   └── [footer]
+│       └── [p] "© 2026"
+```
+
+**자유 영역**은 `div`, `h1`, `p`, `img` 같은 일반 HTML 요소로, 관리자가 위치와 스타일을 자유롭게 배치한다. **기능 블록**은 `product-list`, `signup-form` 같은 특수 컴포넌트로, 내부에서 API 호출과 상태 관리를 자기완결적으로 처리한다.
+
+고정형과 자유형에서 상품 목록을 표시할 때의 차이를 보면:
+
+| 항목           | 고정형                       | 자유형                         |
+| -------------- | ---------------------------- | ------------------------------ |
+| 제목/설명      | `layoutConfig` 필드          | 노드 트리의 `h1`, `p`          |
+| 이미지 배치    | `layoutConfig.fileId`        | 노드 트리의 `img`              |
+| 배경/스타일    | `styleConfig`                | 노드 스타일 (inline/className) |
+| 요소 순서      | 코드로 고정                  | 드래그앤드롭으로 자유 변경     |
+| 상품 목록 로직 | `product-list-page` 컴포넌트 | `<product-list>` 기능 블록     |
+
+핵심은 **비즈니스 로직은 동일**하고, 레이아웃 자유도만 달라진다는 것이다.
+
+## UINode 데이터 구조
+
+모든 UI는 `UINode` 트리로 표현된다. `React.createElement`와 유사한 구조다.
+
+```typescript
+interface UINode {
+  id: string;
+  element: ElementType;
+  text?: NodeText;
+  props?: NodeProps;
+  style?: NodeStyle;
+  children?: UINode[];
+}
+
+interface NodeText {
+  text: string;
+  i18n?: { en?: string; jp?: string };
+}
+
+interface NodeStyle {
+  inline?: Record<string, string>;
+  className?: string;
+}
+```
+
+이 구조가 `Page.layoutConfig`에 JSON으로 저장된다.
+
+```json
+{
+  "rootNode": {
+    "id": "root",
+    "element": "div",
+    "style": { "className": "min-h-screen" },
+    "children": [
+      {
+        "id": "title",
+        "element": "h1",
+        "text": { "text": "환영합니다", "i18n": { "en": "Welcome" } },
+        "style": { "className": "text-4xl font-bold" }
+      },
+      {
+        "id": "products",
+        "element": "product-list",
+        "props": { "columns": 2, "showPrice": true }
+      }
+    ]
+  },
+  "metadata": { "version": "2.0" }
+}
+```
+
+## 허용 요소와 기능 블록
+
+### HTML 요소
+
+컨테이너(`div`, `section`, `header`, `footer`), 텍스트(`h1`~`h6`, `p`), 링크(`a`, `button`), 미디어(`img`) 등 안전한 HTML 요소만 허용한다.
+
+### 기능 블록 (특수 컴포넌트)
+
+| 블록                | 설명                         | 주요 props                          |
+| ------------------- | ---------------------------- | ----------------------------------- |
+| `product-list`      | 상품 그리드 (API 연동)       | `columns`, `displayId`, `showPrice` |
+| `signup-form`       | 회원가입 폼 (인증+약관)      | `requireVerification`               |
+| `option-selector`   | 옵션 순차 선택               | `showPrice`                         |
+| `cart-button`       | 장바구니 아이콘 (수량 badge) | `showBadge`                         |
+| `logo`              | 테넌트 로고                  | `size`, `fileId`                    |
+| `language-selector` | 언어 전환                    | `scale`, `variant`                  |
+| `page-header`       | 공통 헤더                    | `showLogo`, `showCart`              |
+
+기능 블록은 **자기완결적**이다. `product-list`를 예로 들면, 블록 내부에서 API 호출, 로딩 스켈레톤, 상품 카드 렌더링, 클릭 시 페이지 이동까지 모두 처리한다. 관리자는 이 블록을 원하는 위치에 배치하고 props만 설정하면 된다.
+
+```typescript
+function ProductListComponent({ props, className, style }) {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch(`/api/products?${buildQuery(props)}`)
+      .then(res => res.json())
+      .then(data => setProducts(data.products))
+      .finally(() => setLoading(false));
+  }, [props?.categoryId]);
+
+  if (loading) return <ProductListSkeleton />;
+
+  return (
+    <div className={className} style={style}>
+      {products.map(product => (
+        <ProductCard key={product.id} product={product} />
+      ))}
+    </div>
+  );
+}
+```
+
+## 렌더링: 버전 자동 감지
+
+`FlexiblePageRenderer`가 `layoutConfig`의 구조를 분석하여 적절한 렌더러를 자동 선택한다.
+
+```typescript
+if (isNodeLayoutConfig(layoutConfig)) {
+  // v2.0: rootNode + metadata.version === "2.0"
+  return <RootNodeRenderer config={layoutConfig} />;
+}
+if (layoutConfig.components) {
+  // v1.0: components 배열 (레거시)
+  return <LegacyRenderer components={layoutConfig.components} />;
+}
+```
+
+`RootNodeRenderer`는 노드 트리를 재귀적으로 순회하면서, HTML 요소는 `React.createElement`로, 특수 컴포넌트는 `SpecialComponentRenderer`로 렌더링한다.
+
+## 보안: XSS 방지
+
+사용자가 입력한 JSON을 그대로 렌더링하면 XSS 공격에 노출된다. 렌더링 전에 다단계 검증을 수행한다.
+
+| 항목            | 검증 방법                                       |
+| --------------- | ----------------------------------------------- |
+| 요소 타입       | 허용 목록 확인 (`ALLOWED_HTML_ELEMENTS`)        |
+| CSS 속성        | 허용 목록 확인 (`ALLOWED_CSS_PROPERTIES`)       |
+| CSS 값          | `javascript:`, `expression(`, `url(data:)` 차단 |
+| Tailwind 클래스 | 영문, 숫자, 하이픈만 허용                       |
+| href 속성       | `javascript:`, `data:` 프로토콜 차단            |
+| 깊이 제한       | 최대 10단계 (`MAX_DEPTH`)                       |
+
+```typescript
+// 요소 허용 여부
+isAllowedElement("div"); // true
+isAllowedElement("script"); // false
+
+// 스타일 정제
+sanitizeInlineStyle({
+  "background-color": "#fff",
+  expression: "alert(1)", // 제거됨
+});
+
+// URL 검증
+isSafeUrl("https://example.com"); // true
+isSafeUrl("javascript:alert(1)"); // false
+```
+
+## WYSIWYG 비주얼 빌더
+
+관리자가 코드 없이 페이지를 구성할 수 있는 비주얼 빌더를 구현했다.
+
+### 주요 기능
+
+- **캔버스**: 실시간 미리보기, 뷰 모드 전환 (데스크톱/태블릿/모바일)
+- **노드 트리**: 좌측 트리 뷰에서 구조 파악, 드래그앤드롭으로 순서 변경
+- **속성 패널**: 선택 노드의 텍스트, props, 스타일 편집
+- **요소 추가**: ElementPicker 모달에서 HTML 요소 또는 기능 블록 선택
+- **인라인 편집**: 캔버스에서 텍스트 더블클릭으로 직접 편집
+- **피그마 스타일 줌**: Ctrl+휠, CSS `zoom` 속성 사용
+
+### 트리 조작 유틸리티
+
+모든 트리 조작은 **불변성**을 유지한다. 원본 트리를 수정하지 않고 새 트리를 반환한다.
+
+```typescript
+// 노드 추가
+const newRoot = addChildNode(rootNode, "parent-id", newNode, index);
+
+// 노드 수정
+const newRoot = updateNode(rootNode, "node-id", {
+  text: { text: "새 텍스트" },
+});
+
+// 노드 이동
+const newRoot = moveNode(rootNode, "node-id", "new-parent-id", newIndex);
+```
+
+### 샘플 템플릿
+
+빈 페이지에서 시작하기 어려울 수 있으므로, 페이지 타입별 기본 템플릿을 제공한다.
+
+| 페이지 타입   | 포함 요소                             |
+| ------------- | ------------------------------------- |
+| HERO          | 로고, 브랜드명, 메인 이미지, CTA 버튼 |
+| SIGNUP        | 헤더, 로고, 제목, `signup-form`       |
+| PRODUCT_LIST  | 헤더, 타이틀, `product-list`          |
+| OPTION_SELECT | 헤더, 상품 정보, 옵션 선택 영역       |
+
+## 테넌트 타입 시스템
+
+이 UI 시스템은 테넌트 타입 분기와 연결된다.
+
+```prisma
+enum TenantType {
+  FIXED      // 고정형: 미리 정의된 레이아웃
+  FLEXIBLE   // 자유형: 노드 기반 비주얼 빌더
+  GENERATIVE // 생성형: AI 자동 생성 (준비 중)
+}
+```
+
+고객 페이지 렌더링 시 테넌트 타입에 따라 분기한다.
+
+```typescript
+if (tenant.type !== TenantType.FIXED) {
+  return <FlexiblePageRenderer pageType={pageType} layoutConfig={layoutConfig} />;
+}
+return <FixedHeroPage />;
+```
+
+신규 테넌트는 처음 관리자 페이지에 진입할 때 타입 선택 모달이 표시되며, 이후에도 설정에서 변경할 수 있다. 기존 고정형 `layoutConfig`는 그대로 동작하므로 마이그레이션 부담이 없다.
+
+## 마무리
+
+이 시스템의 핵심은 **비즈니스 로직의 재사용**이다. 상품 목록 조회, 회원가입 인증, 옵션 선택 같은 로직은 고정형과 자유형에서 동일한 API와 유틸리티를 공유한다. 달라지는 것은 이 로직이 어떤 레이아웃에 배치되느냐 뿐이다.
+
+JSON 기반 UINode 트리는 DB에 저장할 수 있고, API로 전송할 수 있고, AI가 생성할 수도 있다. 생성형(GENERATIVE) 타입은 이 구조 덕분에 가능해졌다. AI가 생성한 UINode JSON을 `FlexiblePageRenderer`에 전달하면 그대로 렌더링된다.
+
+보안 측면에서는 허용 목록 기반 검증이 핵심이다. "이것을 차단한다"가 아니라 "이것만 허용한다" 방식으로 접근해야 알려지지 않은 공격 벡터도 방어할 수 있다.
