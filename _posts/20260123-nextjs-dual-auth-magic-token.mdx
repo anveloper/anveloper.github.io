@@ -41,8 +41,9 @@ export const { customerHandlers, customerAuth, customerSignIn, customerSignOut }
 
 관리자 로그인 시 Store 서버가 본사 API에 자격 증명을 전달하여 검증한다. Store에는 사용자 테이블이 없고, 본사 응답을 기반으로 세션만 유지한다.
 
-```
-[Store 로그인] → [Store 서버] → [본사 API /auth/verify] → [세션 생성]
+```mermaid
+flowchart LR
+    A[Store 로그인] --> B[Store 서버] --> C[본사 API /auth/verify] --> D[세션 생성]
 ```
 
 ```typescript
@@ -136,10 +137,11 @@ const result = await verifyMagicToken(token);
 
 ### 자동 로그인 흐름
 
-```
-세션 없음 → token 파라미터 확인
-  → 토큰 유효 → 자동 signIn → 주문 상세 표시
-  → 토큰 무효/없음 → /signup?returnUrl=... 리다이렉트
+```mermaid
+flowchart TD
+    A[세션 없음] --> B{token 파라미터 확인}
+    B -->|토큰 유효| C[자동 signIn] --> D[주문 상세 표시]
+    B -->|토큰 무효/없음| E[/signup?returnUrl=... 리다이렉트]
 ```
 
 ```typescript

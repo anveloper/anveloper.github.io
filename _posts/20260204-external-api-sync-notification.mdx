@@ -11,11 +11,10 @@ tags: ["API", "Integration", "Sync", "Notification", "Kakao"]
 
 이 플랫폼의 가장 큰 특징은 상품·주문 정보를 자체 DB에 저장하지 않는다는 점이다. 상품명, 가격, 이미지는 본사 API에서 실시간 조회하고, DB에는 테넌트 설정과 참조 정보만 저장한다.
 
-```
-[클라이언트] ↔ [스토어 앱] ↔ [본사 API]
-                   ↓
-             [MariaDB]
-         (설정/참조 정보만)
+```mermaid
+flowchart LR
+    A[클라이언트] <--> B[스토어 앱] <--> C[본사 API]
+    B --> D[(MariaDB\n설정/참조 정보만)]
 ```
 
 단, 주문 시점의 상품명과 가격은 `OrderItem`에 스냅샷으로 저장한다.
@@ -26,22 +25,17 @@ tags: ["API", "Integration", "Sync", "Notification", "Kakao"]
 
 관리자가 "상품 동기화" 버튼을 클릭하면, 본사 API에서 상품 목록을 페이지 단위로 가져온다.
 
-```
-[스토어 앱]                          [본사 API]
-    │  GET /products?limit=20            │
-    │ ──────────────────────────────────>│
-    │  { products, hasMore, nextCursor } │
-    │ <──────────────────────────────────│
-    │                                    │
-    │  [Product 테이블에 저장]            │
-    │                                    │
-    │  POST /products/mappings           │
-    │  { mappings: [{ seqno, id }] }     │
-    │ ──────────────────────────────────>│
-    │  [본사에서 storeProductId 저장]      │
-    │                                    │
-    │  hasMore=true → 다음 페이지        │
-    └── (반복) ──────────────────────────┘
+```mermaid
+sequenceDiagram
+    participant S as 스토어 앱
+    participant H as 본사 API
+    loop hasMore=true
+        S->>H: GET /products?limit=20
+        H-->>S: { products, hasMore, nextCursor }
+        Note over S: Product 테이블에 저장
+        S->>H: POST /products/mappings<br/>{ mappings: [{ seqno, id }] }
+        Note over H: storeProductId 저장
+    end
 ```
 
 핵심은 **매핑(mapping)**이다. Store에서 생성한 Product ID(cuid)를 본사에 전달하여, 양쪽 시스템에서 상호 참조할 수 있게 한다.
