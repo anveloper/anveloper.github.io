@@ -61,12 +61,12 @@ GiscusComments (댓글)
 
 ## 변경 파일
 
-| 작업 | 파일 | 설명 |
-|------|------|------|
-| 신규 | `components/post-navigation.tsx` | 이전/다음 네비게이션 컴포넌트 |
-| 수정 | `app/posts/[slug]/page.tsx` | getAllPosts로 prev/next 계산 후 전달 |
-| 수정 | `app/projects/[slug]/page.tsx` | getAllProjects로 prev/next 계산 후 전달 |
-| 수정 | `app/solutions/[slug]/page.tsx` | getAllSolutions로 prev/next 계산 후 전달 |
+| 작업 | 파일                             | 설명                                     |
+| ---- | -------------------------------- | ---------------------------------------- |
+| 신규 | `components/post-navigation.tsx` | 이전/다음 네비게이션 컴포넌트            |
+| 수정 | `app/posts/[slug]/page.tsx`      | getAllPosts로 prev/next 계산 후 전달     |
+| 수정 | `app/projects/[slug]/page.tsx`   | getAllProjects로 prev/next 계산 후 전달  |
+| 수정 | `app/solutions/[slug]/page.tsx`  | getAllSolutions로 prev/next 계산 후 전달 |
 
 ## 스타일
 
