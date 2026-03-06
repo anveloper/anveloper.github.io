@@ -59,17 +59,23 @@ const RootLayout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
       <head>
         <GoogleAnalytics />
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
-        <link rel="preload" href="/fonts/PretendardVariable-subset.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+        <link
+          rel="preload"
+          href="/fonts/PretendardVariable-subset.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
         <link rel="preconnect" href="https://img.shields.io" />
         <link rel="shortcut icon" href="/favicon-light.svg" />
         <link rel="icon" href="/favicon-light.svg" />
         <link rel="apple-touch-icon" href="/favicon-light.svg" />
       </head>
       <body className="min-h-screen flex flex-col bg-background text-foreground antialiased">
-          <NavBar />
+        <NavBar />
 
-          <main className="flex-1 flex flex-col">{children}</main>
-          <Footer />
+        <main className="flex-1 flex flex-col">{children}</main>
+        <Footer />
         <FaviconSwitcher />
       </body>
     </html>

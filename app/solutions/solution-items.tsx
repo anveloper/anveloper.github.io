@@ -25,23 +25,15 @@ export const SolutionItems = ({ solutions }: { solutions: Solution[] }) => {
   return (
     <div className="divide-y divide-border">
       {solutions.map((solution) => (
-        <Link
-          key={solution.slug}
-          href={`/solutions/${solution.slug}`}
-          className="block py-5 group"
-        >
+        <Link key={solution.slug} href={`/solutions/${solution.slug}`} className="block py-5 group">
           <div className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4 mb-1">
-            <time className="text-sm text-muted-foreground shrink-0">
-              {solution.frontmatter.date as string}
-            </time>
+            <time className="text-sm text-muted-foreground shrink-0">{solution.frontmatter.date as string}</time>
             <h2 className="text-lg font-medium text-foreground group-hover:text-primary-sky transition-colors">
               {solution.frontmatter.title as string}
             </h2>
           </div>
           {typeof solution.frontmatter.description === "string" && (
-            <p className="text-sm text-muted-foreground line-clamp-1 sm:ml-24">
-              {solution.frontmatter.description}
-            </p>
+            <p className="text-sm text-muted-foreground line-clamp-1 sm:ml-24">{solution.frontmatter.description}</p>
           )}
           <div className="flex flex-wrap gap-1 mt-2 sm:ml-24">
             {typeof solution.frontmatter.platform === "string" && (

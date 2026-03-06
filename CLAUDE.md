@@ -55,6 +55,7 @@ components/          # 재사용 컴포넌트
 ├── footer.tsx       # 푸터
 ├── page-container.tsx # 페이지 컨테이너
 ├── pagination.tsx   # 공용 페이지네이션 (Server Component)
+├── post-navigation.tsx # 이전/다음 포스트 네비게이션
 ├── not-found-view.tsx # 콘텐츠 미존재 뷰
 ├── theme-selector.tsx # 테마 선택 드롭다운
 ├── table-of-contents.tsx # 플로팅 목차 (xl 이상)

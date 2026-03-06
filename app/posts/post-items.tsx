@@ -20,23 +20,15 @@ export const PostItems = ({ posts }: { posts: Post[] }) => {
   return (
     <div className="divide-y divide-border">
       {posts.map((post) => (
-        <Link
-          key={post.slug}
-          href={`/posts/${post.slug}`}
-          className="block py-5 group"
-        >
+        <Link key={post.slug} href={`/posts/${post.slug}`} className="block py-5 group">
           <div className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4 mb-1">
-            <time className="text-sm text-muted-foreground shrink-0">
-              {post.frontmatter.date as string}
-            </time>
+            <time className="text-sm text-muted-foreground shrink-0">{post.frontmatter.date as string}</time>
             <h2 className="text-lg font-medium text-foreground group-hover:text-primary-sky transition-colors">
               {post.frontmatter.title as string}
             </h2>
           </div>
           {typeof post.frontmatter.description === "string" && (
-            <p className="text-sm text-muted-foreground line-clamp-1 sm:ml-24">
-              {post.frontmatter.description}
-            </p>
+            <p className="text-sm text-muted-foreground line-clamp-1 sm:ml-24">{post.frontmatter.description}</p>
           )}
           {Array.isArray(post.frontmatter.tags) && (
             <div className="flex flex-wrap gap-1 mt-2 sm:ml-24">

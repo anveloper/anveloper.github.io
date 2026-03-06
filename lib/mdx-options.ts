@@ -15,9 +15,6 @@ const prettyCodeOptions: Options = {
 export const mdxOptions = {
   mdxOptions: {
     remarkPlugins: [remarkGfm, remarkMermaid],
-    rehypePlugins: [
-      rehypeSlug,
-      [rehypePrettyCode, prettyCodeOptions] as [typeof rehypePrettyCode, Options],
-    ],
+    rehypePlugins: [rehypeSlug, [rehypePrettyCode, prettyCodeOptions] as [typeof rehypePrettyCode, Options]],
   },
 };
