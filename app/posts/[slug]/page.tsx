@@ -10,6 +10,7 @@ import { mdxOptions } from "@/lib/mdx-options";
 import { extractToc } from "@/lib/toc";
 import { NotFoundView } from "@/components/not-found-view";
 import { PostNavigation } from "@/components/post-navigation";
+import { RecentPosts } from "@/components/recent-posts";
 import { ArrowLeft, FileText } from "lucide-react";
 import type { Metadata } from "next";
 import { MDXRemote } from "next-mdx-remote/rsc";
@@ -142,14 +143,21 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
 
       {(() => {
         const idx = posts.findIndex((p) => p.slug === slug);
+        const recent = posts
+          .filter((p) => p.slug !== slug)
+          .slice(0, 5)
+          .map((p) => ({ slug: p.slug, title: p.frontmatter.title as string, date: p.frontmatter.date as string }));
         const prev = posts[idx + 1] ?? null;
         const next = posts[idx - 1] ?? null;
         return (
-          <PostNavigation
-            prev={prev ? { slug: prev.slug, title: prev.frontmatter.title as string } : null}
-            next={next ? { slug: next.slug, title: next.frontmatter.title as string } : null}
-            basePath="/posts"
-          />
+          <>
+            <RecentPosts items={recent} basePath="/posts" />
+            <PostNavigation
+              prev={prev ? { slug: prev.slug, title: prev.frontmatter.title as string } : null}
+              next={next ? { slug: next.slug, title: next.frontmatter.title as string } : null}
+              basePath="/posts"
+            />
+          </>
         );
       })()}
 
