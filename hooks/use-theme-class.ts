@@ -7,8 +7,7 @@ export type Theme = "light" | "dark" | "korean" | "terminal";
 const VALID_THEMES: Theme[] = ["light", "dark", "korean", "terminal"];
 const THEME_CLASSES: Theme[] = ["light", "dark", "korean", "terminal"];
 
-const isValidTheme = (value: string | null): value is Theme =>
-  VALID_THEMES.includes(value as Theme);
+const isValidTheme = (value: string | null): value is Theme => VALID_THEMES.includes(value as Theme);
 
 export const useThemeClass = () => {
   const [theme, setThemeState] = useState<Theme>(() => {

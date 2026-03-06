@@ -10,11 +10,24 @@ type SkillCategory = { title: string; skills: SkillItem[] };
 const skillCategories: SkillCategory[] = [
   {
     title: "Frontend",
-    skills: [{ name: "Next.js" }, { name: "React" }, { name: "TypeScript" }, { name: "JavaScript (ES6)" }, { name: "CSS" }],
+    skills: [
+      { name: "Next.js" },
+      { name: "React" },
+      { name: "TypeScript" },
+      { name: "JavaScript (ES6)" },
+      { name: "CSS" },
+    ],
   },
   {
     title: "Backend",
-    skills: [{ name: "Java" }, { name: "JPA" }, { name: "Node.js" }, { name: "Nest.js" }, { name: "Prisma" }, { name: "PHP" }],
+    skills: [
+      { name: "Java" },
+      { name: "JPA" },
+      { name: "Node.js" },
+      { name: "Nest.js" },
+      { name: "Prisma" },
+      { name: "PHP" },
+    ],
   },
   {
     title: "Android",
@@ -75,7 +88,12 @@ const timeline: TimelineItem[] = [
 const contactLinks = [
   { title: "Email", href: "mailto:hello@anveloper.dev", value: "hello@anveloper.dev", external: false },
   { title: "GitHub", href: "https://github.com/anveloper", value: "anveloper", external: true },
-  { title: "Resume", href: "https://anveloper-dev.notion.site/ca13ffc984be4ce399d73659aebbe303", value: "Notion", external: true },
+  {
+    title: "Resume",
+    href: "https://anveloper-dev.notion.site/ca13ffc984be4ce399d73659aebbe303",
+    value: "Notion",
+    external: true,
+  },
 ];
 
 const SectionHeader = ({ children }: { children: React.ReactNode }) => (
@@ -91,18 +109,17 @@ const OverviewPage = () => {
         <div className="space-y-4">
           <div className="space-y-2 text-muted-foreground leading-relaxed">
             <p>
-              기술을 학습하는데 있어 빠른 습득 속도를 자부합니다.
-              개발의 시작은 Java로 시작하였지만,
-              현재는 Next.js, Typescript, Prisma를 가장 잘 사용합니다.
+              기술을 학습하는데 있어 빠른 습득 속도를 자부합니다. 개발의 시작은 Java로 시작하였지만, 현재는 Next.js,
+              Typescript, Prisma를 가장 잘 사용합니다.
             </p>
             <p>
-              안드로이드 Kotlin(Jetpack Compose) 개발과
-              Vanilla JS 웹 개발, PHP에서 React/Remix.js 마이그레이션 경험이 있습니다.
+              안드로이드 Kotlin(Jetpack Compose) 개발과 Vanilla JS 웹 개발, PHP에서 React/Remix.js 마이그레이션 경험이
+              있습니다.
             </p>
           </div>
           <p className="text-sm text-muted-foreground">
-            <span className="text-primary-sky font-medium">(주) TILS AI</span> UX개발팀장 2023.03 ~
-            {" · "}정보처리기사{" · "}SQLD
+            <span className="text-primary-sky font-medium">(주) TILS AI</span> UX개발팀장 2023.03 ~{" · "}정보처리기사
+            {" · "}SQLD
           </p>
           <p className="text-sm text-muted-foreground">{interests.join(" / ")}</p>
         </div>
@@ -141,9 +158,7 @@ const OverviewPage = () => {
                 index < timeline.length - 1 && "border-b border-border/60"
               )}
             >
-              <span className="text-sm text-muted-foreground tabular-nums w-36 shrink-0">
-                {item.period}
-              </span>
+              <span className="text-sm text-muted-foreground tabular-nums w-36 shrink-0">{item.period}</span>
               <div className="flex-1 min-w-0">
                 <div className="flex flex-col sm:flex-row sm:items-center gap-1">
                   <h3 className="font-semibold text-foreground">{item.title}</h3>

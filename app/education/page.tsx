@@ -66,9 +66,7 @@ const EducationPage = () => {
               index < timeline.length - 1 && "border-b border-border/60"
             )}
           >
-            <span className="text-sm text-muted-foreground tabular-nums w-36 shrink-0">
-              {item.period}
-            </span>
+            <span className="text-sm text-muted-foreground tabular-nums w-36 shrink-0">{item.period}</span>
             <div className="flex-1 min-w-0">
               <div className="flex flex-col sm:flex-row sm:items-center gap-1">
                 <h3 className="font-semibold text-foreground">{item.title}</h3>
