@@ -17,24 +17,16 @@ export const ProjectList = ({ projects }: { projects: Project[] }) => {
   const [showFilter, setShowFilter] = useState(false);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
 
-  const allTags = Array.from(
-    new Set(projects.flatMap((p) => (p.frontmatter.tags as string[]) ?? []))
-  ).sort();
+  const allTags = Array.from(new Set(projects.flatMap((p) => (p.frontmatter.tags as string[]) ?? []))).sort();
 
   const toggleTag = (tag: string) => {
-    setSelectedTags((prev) =>
-      prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag]
-    );
+    setSelectedTags((prev) => (prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag]));
   };
 
   const filtered =
     selectedTags.length === 0
       ? projects
-      : projects.filter((p) =>
-          ((p.frontmatter.tags as string[]) ?? []).some((t) =>
-            selectedTags.includes(t)
-          )
-        );
+      : projects.filter((p) => ((p.frontmatter.tags as string[]) ?? []).some((t) => selectedTags.includes(t)));
 
   return (
     <>
@@ -74,10 +66,7 @@ export const ProjectList = ({ projects }: { projects: Project[] }) => {
         <div className="flex flex-wrap gap-1.5 mb-8">
           {allTags.map((tag) => (
             <button key={tag} type="button" onClick={() => toggleTag(tag)}>
-              <Badge
-                variant={selectedTags.includes(tag) ? "default" : "outline"}
-                className="cursor-pointer text-xs"
-              >
+              <Badge variant={selectedTags.includes(tag) ? "default" : "outline"} className="cursor-pointer text-xs">
                 {tag}
               </Badge>
             </button>
@@ -97,41 +86,25 @@ export const ProjectList = ({ projects }: { projects: Project[] }) => {
       ) : (
         <div className="divide-y divide-border">
           {filtered.map((project) => (
-            <Link
-              key={project.slug}
-              href={`/projects/${project.slug}`}
-              className="block group"
-            >
+            <Link key={project.slug} href={`/projects/${project.slug}`} className="block group">
               <div className="py-6">
                 <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4 mb-2">
-                  <time className="text-sm text-muted-foreground shrink-0">
-                    {project.frontmatter.date as string}
-                  </time>
+                  <time className="text-sm text-muted-foreground shrink-0">{project.frontmatter.date as string}</time>
                   <div className="flex items-center gap-2">
-                    {project.icon && (
-                      <img
-                        src={project.icon}
-                        alt=""
-                        className="w-6 h-6 rounded"
-                      />
-                    )}
+                    {project.icon && <img src={project.icon} alt="" className="w-6 h-6 rounded" />}
                     <h2 className="text-lg font-medium text-foreground group-hover:text-primary-sky transition-colors">
                       {project.frontmatter.title as string}
                     </h2>
                   </div>
                 </div>
                 {typeof project.frontmatter.description === "string" && (
-                  <p className="text-muted-foreground mb-3 sm:ml-24">
-                    {project.frontmatter.description}
-                  </p>
+                  <p className="text-muted-foreground mb-3 sm:ml-24">{project.frontmatter.description}</p>
                 )}
                 {Array.isArray(project.frontmatter.tags) && (
                   <div className="flex flex-wrap gap-1 sm:ml-24">
-                    {(project.frontmatter.tags as string[])
-                      .slice(0, 5)
-                      .map((tag) => (
-                        <TechBadge key={tag} name={tag} />
-                      ))}
+                    {(project.frontmatter.tags as string[]).slice(0, 5).map((tag) => (
+                      <TechBadge key={tag} name={tag} />
+                    ))}
                   </div>
                 )}
               </div>

@@ -8,8 +8,7 @@ type PaginationProps = {
   basePath: string;
 };
 
-const getHref = (basePath: string, page: number) =>
-  page === 1 ? basePath : `${basePath}/${page}`;
+const getHref = (basePath: string, page: number) => (page === 1 ? basePath : `${basePath}/${page}`);
 
 const getPageNumbers = (current: number, total: number): (number | "...")[] => {
   if (total <= 7) return Array.from({ length: total }, (_, i) => i + 1);
@@ -50,7 +49,10 @@ export const Pagination = ({ currentPage, totalPages, basePath }: PaginationProp
 
       {pages.map((page, i) =>
         page === "..." ? (
-          <span key={`ellipsis-${i}`} className="w-9 h-9 flex items-center justify-center text-muted-foreground text-sm">
+          <span
+            key={`ellipsis-${i}`}
+            className="w-9 h-9 flex items-center justify-center text-muted-foreground text-sm"
+          >
             ...
           </span>
         ) : (

@@ -9,6 +9,8 @@ import { mdxComponents } from "@/lib/mdx-components";
 import { mdxOptions } from "@/lib/mdx-options";
 import { extractToc } from "@/lib/toc";
 import { NotFoundView } from "@/components/not-found-view";
+import { PostNavigation } from "@/components/post-navigation";
+import { RecentPosts } from "@/components/recent-posts";
 import { ArrowLeft, Code, ExternalLink } from "lucide-react";
 import type { Metadata } from "next";
 import { MDXRemote } from "next-mdx-remote/rsc";
@@ -95,7 +97,7 @@ export default async function SolutionPage({ params }: { params: Promise<{ slug:
     );
   }
 
-  const solution = await getSolutionBySlug(slug);
+  const [solution, solutions] = await Promise.all([getSolutionBySlug(slug), getAllSolutions()]);
 
   if (!solution) {
     return (
@@ -161,6 +163,26 @@ export default async function SolutionPage({ params }: { params: Promise<{ slug:
       <article className="prose prose-neutral dark:prose-invert max-w-none">
         <MDXRemote source={solution.content} components={mdxComponents} options={mdxOptions} />
       </article>
+
+      {(() => {
+        const idx = solutions.findIndex((s) => s.slug === slug);
+        const recent = solutions
+          .filter((s) => s.slug !== slug)
+          .slice(0, 5)
+          .map((s) => ({ slug: s.slug, title: s.frontmatter.title as string, date: s.frontmatter.date as string }));
+        const prev = solutions[idx + 1] ?? null;
+        const next = solutions[idx - 1] ?? null;
+        return (
+          <>
+            <RecentPosts items={recent} basePath="/solutions" />
+            <PostNavigation
+              prev={prev ? { slug: prev.slug, title: prev.frontmatter.title as string } : null}
+              next={next ? { slug: next.slug, title: next.frontmatter.title as string } : null}
+              basePath="/solutions"
+            />
+          </>
+        );
+      })()}
 
       <GiscusComments />
     </PageContainer>

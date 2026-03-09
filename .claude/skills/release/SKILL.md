@@ -7,6 +7,12 @@ allowed-tools: Bash, Read, Write, Edit, Glob, Grep
 
 # develop → main 릴리스 PR 생성
 
+## 필수 원칙
+
+- **세션에서 작업한 내역과 관계없이, git에 남아있는 모든 변경사항(unstaged, staged)을 빠짐없이 커밋하여 working tree를 clean 상태로 만든다.**
+- 세션 중 직접 변경하지 않은 파일이라도 변경이 감지되면 분석 후 적절히 분류하여 커밋한다.
+- 커밋 전, 세션에서 추가/수정한 코드 파일에 대해 `npx prettier --write <files>`를 실행하여 포맷팅을 적용한다. 포맷팅으로 인한 변경은 해당 기능 커밋에 포함한다.
+
 ## 1단계: 미커밋 변경사항 정리 (finish)
 
 ```bash

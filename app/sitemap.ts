@@ -27,23 +27,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${BASE_URL}/solutions`, changeFrequency: "weekly", priority: 0.9 },
   ];
 
-  const postPaginationPages: MetadataRoute.Sitemap = Array.from(
-    { length: postTotalPages - 1 },
-    (_, i) => ({
-      url: `${BASE_URL}/posts/${i + 2}`,
-      changeFrequency: "weekly" as const,
-      priority: 0.6,
-    })
-  );
+  const postPaginationPages: MetadataRoute.Sitemap = Array.from({ length: postTotalPages - 1 }, (_, i) => ({
+    url: `${BASE_URL}/posts/${i + 2}`,
+    changeFrequency: "weekly" as const,
+    priority: 0.6,
+  }));
 
-  const solutionPaginationPages: MetadataRoute.Sitemap = Array.from(
-    { length: solutionTotalPages - 1 },
-    (_, i) => ({
-      url: `${BASE_URL}/solutions/${i + 2}`,
-      changeFrequency: "weekly" as const,
-      priority: 0.4,
-    })
-  );
+  const solutionPaginationPages: MetadataRoute.Sitemap = Array.from({ length: solutionTotalPages - 1 }, (_, i) => ({
+    url: `${BASE_URL}/solutions/${i + 2}`,
+    changeFrequency: "weekly" as const,
+    priority: 0.4,
+  }));
 
   const postPages: MetadataRoute.Sitemap = posts.map((post) => ({
     url: `${BASE_URL}/posts/${post.slug}`,

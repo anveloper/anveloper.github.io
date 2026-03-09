@@ -1,13 +1,14 @@
 import { getAllProjects, getProjectBySlug } from "@/_projects";
+import { NotFoundView } from "@/components/not-found-view";
 import { PageContainer } from "@/components/page-container";
-import { TableOfContents } from "@/components/table-of-contents";
 import { TechBadge } from "@/components/skill-badge";
+import { TableOfContents } from "@/components/table-of-contents";
 import { mdxComponents } from "@/lib/mdx-components";
 import { mdxOptions } from "@/lib/mdx-options";
 import { extractToc } from "@/lib/toc";
-import type { Metadata } from "next";
-import { NotFoundView } from "@/components/not-found-view";
+import { PostNavigation } from "@/components/post-navigation";
 import { ArrowLeft, ExternalLink, FolderKanban, Github } from "lucide-react";
+import type { Metadata } from "next";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import Image from "next/image";
 import Link from "next/link";
@@ -47,7 +48,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function ProjectPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const project = await getProjectBySlug(slug);
+  const [project, projects] = await Promise.all([getProjectBySlug(slug), getAllProjects()]);
 
   if (!project) {
     return (
@@ -75,7 +76,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
       </Link>
 
       {project.thumbnail && (
-        <div className="relative w-full aspect-[1200/630] mb-8 rounded-lg overflow-hidden border border-border">
+        <div className="relative w-full aspect-1200/630 mb-8 rounded-lg overflow-hidden border border-border">
           <Image
             src={project.thumbnail}
             alt={project.frontmatter.title as string}
@@ -87,9 +88,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
       )}
 
       <header className="border-b border-border pb-6 mb-8">
-        <h1 className="text-2xl sm:text-3xl font-bold text-foreground mb-4">
-          {project.frontmatter.title}
-        </h1>
+        <h1 className="text-2xl sm:text-3xl font-bold text-foreground mb-4">{project.frontmatter.title}</h1>
 
         <div className="flex flex-wrap items-center gap-4 mb-4">
           <span className="text-sm text-muted-foreground">{project.frontmatter.date}</span>
@@ -131,6 +130,19 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
       <article className="prose prose-neutral dark:prose-invert max-w-none">
         <MDXRemote source={project.content} components={mdxComponents} options={mdxOptions} />
       </article>
+
+      {(() => {
+        const idx = projects.findIndex((p) => p.slug === slug);
+        const prev = projects[idx + 1] ?? null;
+        const next = projects[idx - 1] ?? null;
+        return (
+          <PostNavigation
+            prev={prev ? { slug: prev.slug, title: prev.frontmatter.title as string } : null}
+            next={next ? { slug: next.slug, title: next.frontmatter.title as string } : null}
+            basePath="/projects"
+          />
+        );
+      })()}
     </PageContainer>
   );
 }

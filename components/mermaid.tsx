@@ -25,21 +25,15 @@ export function Mermaid({ chart }: { chart: string }) {
 
     const observer = new MutationObserver((mutations) => {
       for (const mutation of mutations) {
-        if (
-          mutation.type === "attributes" &&
-          mutation.attributeName === "class"
-        ) {
-          const nowDark =
-            document.documentElement.classList.contains("dark");
+        if (mutation.type === "attributes" && mutation.attributeName === "class") {
+          const nowDark = document.documentElement.classList.contains("dark");
           mermaid.initialize({
             startOnLoad: false,
             theme: nowDark ? "dark" : "default",
             fontFamily: "inherit",
           });
           const rerenderId = `mermaid-${++mermaidIdCounter}`;
-          mermaid
-            .render(rerenderId, decoded)
-            .then(({ svg }) => setSvg(svg));
+          mermaid.render(rerenderId, decoded).then(({ svg }) => setSvg(svg));
         }
       }
     });
