@@ -13,12 +13,13 @@ const contactLinks = [
     value: "anveloper",
     external: true,
   },
-  {
-    title: "Resume",
-    href: "https://anveloper-dev.notion.site/ca13ffc984be4ce399d73659aebbe303",
-    value: "Notion",
-    external: true,
-  },
+  // TODO: 수정중
+  // {
+  //   title: "Resume",
+  //   href: "https://anveloper-dev.notion.site/ca13ffc984be4ce399d73659aebbe303",
+  //   value: "Notion",
+  //   external: true,
+  // },
 ];
 
 const ContactPage = () => {

@@ -182,11 +182,12 @@ const contactLinks = [
     href: "https://github.com/anveloper",
     value: "anveloper",
   },
-  {
-    title: "Resume",
-    href: "https://anveloper-dev.notion.site/ca13ffc984be4ce399d73659aebbe303",
-    value: "Notion",
-  },
+  // TODO: 수정중
+  // {
+  //   title: "Resume",
+  //   href: "https://anveloper-dev.notion.site/ca13ffc984be4ce399d73659aebbe303",
+  //   value: "Notion",
+  // },
 ];
 
 const SectionHeader = ({ children, href }: { children: React.ReactNode; href?: string }) => {
