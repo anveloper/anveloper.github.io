@@ -77,7 +77,7 @@ type TimelineItem = {
 const timeline: TimelineItem[] = [
   {
     type: "experience",
-    title: "UX개발팀장 / 기술연구원",
+    title: "UX개발팀 과장 / 기술연구원",
     organization: "(주) TILS AI",
     period: "2023.03 ~ 재직중",
     description:
@@ -111,9 +111,9 @@ const timeline: TimelineItem[] = [
   {
     type: "education",
     title: "충남대학교",
-    organization: "천문우주과학 전공 (ROTC 53기)",
+    organization: "천문우주과학 전공",
     period: "2011.03 ~ 2015.02",
-    description: "총 평점 3.91 / 4.5, 전공 평점 3.98 / 4.5",
+    description: "ROTC 53기",
   },
 ];
 
