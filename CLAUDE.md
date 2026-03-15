@@ -40,7 +40,6 @@ app/                 # Next.js App Router 페이지
 ├── about/           # 소개 페이지
 ├── skills/          # 기술 스택 페이지
 ├── education/       # 학력 페이지
-├── overview/        # 경력 개요 페이지
 ├── contact/         # 연락처 페이지
 ├── not-found.tsx    # 글로벌 404 페이지
 ├── posts/[slug]/    # 블로그 포스트 (숫자 slug → 페이지네이션)
@@ -257,7 +256,7 @@ pnpm lint     # ESLint 검사
 ### 현재 상태
 
 - 홈페이지, 포스트, 프로젝트 페이지 완성
-- About, Skills, Education, Overview, Contact 페이지 완성
+- About, Skills, Education, Contact 페이지 완성
 
 ### 리뉴얼 시 고려사항
 

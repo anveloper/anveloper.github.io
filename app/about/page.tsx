@@ -32,7 +32,7 @@ const AboutPage = () => {
         <section className="py-5 border-b border-border/60">
           <h2 className="text-sm font-medium text-foreground mb-3">현재</h2>
           <p className="text-muted-foreground">
-            <span className="text-primary-sky font-medium">(주) TILS AI</span> UX개발팀장 / 기술연구원 · 2023.03 ~
+            <span className="text-primary-sky font-medium">(주) TILS AI</span> UX개발팀 과장 / 기술연구원 · 2023.03 ~
             재직중
           </p>
         </section>

@@ -155,7 +155,7 @@ https://github.com/anveloper/SSAFIT
 
 2023.03.02 ~ 재직중
 
-- **UX개발팀장 / 기술연구원**
+- **UX개발팀 과장 / 기술연구원**
   - Next.js, Remix.js, Typescript 기반 플랫폼 PM, 개발 리드
   - Cafe24, Shopby, Shopify 플랫폼 사용자화, 유지보수
 

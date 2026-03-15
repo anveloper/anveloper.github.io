@@ -2,7 +2,7 @@
 
 import { type Theme, useThemeClass } from "@/hooks/use-theme-class";
 import { cn } from "@/lib/utils";
-import { Moon, Palette, Sun, SquareTerminal } from "lucide-react";
+import { Moon, Palette, SquareTerminal, Sun } from "lucide-react";
 import type React from "react";
 import { useEffect, useRef, useState } from "react";
 
@@ -70,7 +70,7 @@ export const ThemeSelector = () => {
     return () => document.removeEventListener("keydown", handler);
   }, []);
 
-  const Icon = currentIcon(theme);
+  const icon = currentIcon(theme);
 
   return (
     <div ref={ref} className="relative">
@@ -81,7 +81,7 @@ export const ThemeSelector = () => {
         aria-expanded={open}
         aria-haspopup="listbox"
       >
-        <Icon className="w-4 h-4" />
+        {icon({ className: "w-4 h-4" })}
       </button>
 
       {open && (
@@ -109,7 +109,7 @@ export const ThemeSelector = () => {
                   setOpen(false);
                 }}
                 className={cn(
-                  "flex items-center justify-center p-2 !rounded-full shadow-md",
+                  "flex items-center justify-center p-2 rounded-full! shadow-md",
                   "transition-all duration-200 hover:scale-110",
                   option.className,
                   isActive && "ring-1.5 ring-current/50"

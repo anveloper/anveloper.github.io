@@ -182,11 +182,12 @@ const contactLinks = [
     href: "https://github.com/anveloper",
     value: "anveloper",
   },
-  {
-    title: "Resume",
-    href: "https://anveloper-dev.notion.site/ca13ffc984be4ce399d73659aebbe303",
-    value: "Notion",
-  },
+  // TODO: 수정중
+  // {
+  //   title: "Resume",
+  //   href: "https://anveloper-dev.notion.site/ca13ffc984be4ce399d73659aebbe303",
+  //   value: "Notion",
+  // },
 ];
 
 const SectionHeader = ({ children, href }: { children: React.ReactNode; href?: string }) => {
@@ -246,7 +247,8 @@ const HomePage = () => {
             </p>
           </div>
           <p className="text-sm text-muted-foreground">
-            <span className="text-primary-sky font-medium">(주) TILS AI</span> UX개발팀장 2023.03 ~{" · "}정보처리기사
+            <span className="text-primary-sky font-medium">(주) TILS AI</span> UX개발팀 과장 2023.03 ~{" · "}
+            정보처리기사
             {" · "}SQLD
           </p>
           <p className="text-sm text-muted-foreground">{interests.join(" / ")}</p>
