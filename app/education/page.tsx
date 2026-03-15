@@ -12,7 +12,7 @@ type TimelineItem = {
 
 const timeline: TimelineItem[] = [
   {
-    title: "UX개발팀장 / 기술연구원",
+    title: "UX개발팀 과장 / 기술연구원",
     organization: "(주) TILS AI",
     period: "2023.03 ~ 재직중",
     description:
