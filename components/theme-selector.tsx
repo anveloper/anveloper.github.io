@@ -70,7 +70,7 @@ export const ThemeSelector = () => {
     return () => document.removeEventListener("keydown", handler);
   }, []);
 
-  const icon = currentIcon(theme);
+  const Icon = currentIcon(theme);
 
   return (
     <div ref={ref} className="relative">
@@ -81,7 +81,7 @@ export const ThemeSelector = () => {
         aria-expanded={open}
         aria-haspopup="listbox"
       >
-        {icon({ className: "w-4 h-4" })}
+        <Icon className="w-4 h-4" />
       </button>
 
       {open && (
