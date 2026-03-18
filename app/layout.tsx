@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     default: "안성진 | Full-Stack Developer",
     template: "%s | 안성진",
   },
-  description: "언어로 세상을 표현하는 개발자, 안성진입니다. Full-Stack Developer & UX Team Lead",
+  description: "언어로 세상을 표현하는 개발자, 안성진입니다. Full-Stack Developer & UX Team Lead (Manager)",
   metadataBase: new URL("https://anveloper.dev"),
   openGraph: {
     title: "안성진 | Full-Stack Developer",

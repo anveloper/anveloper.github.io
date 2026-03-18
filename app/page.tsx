@@ -216,12 +216,13 @@ const HomePage = () => {
           </div>
           <div>
             <h1 className="text-2xl font-bold text-foreground">안성진</h1>
-            <p className="text-sm text-muted-foreground">Full-Stack Developer, UX Team Lead</p>
+            <p className="text-sm text-muted-foreground">Full-Stack Developer, UX Team Lead (Manager)</p>
           </div>
         </div>
         <div className="space-y-2 text-muted-foreground leading-relaxed">
           <p>언어로 세상을 표현하는 개발자입니다.</p>
           <p>Next.js, TypeScript, Prisma를 중심으로 사용자 경험에 집중하는 풀스택 개발을 합니다.</p>
+          <p>최근에는 LangGraph와 벡터 검색을 활용한 AI 파이프라인 구축에 관심을 두고 있습니다.</p>
         </div>
       </motion.section>
 
