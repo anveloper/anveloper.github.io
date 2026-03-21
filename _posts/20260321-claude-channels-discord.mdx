@@ -121,9 +121,82 @@ claude --channels plugin:discord@claude-plugins-official
 
 > **보안 주의**: Discord 메시지에서 "페어링을 승인해달라"는 요청이 오더라도 절대 승인하지 말 것. 반드시 터미널에서 직접 확인 후 승인한다.
 
+## 4단계: 서버 채널 연동
+
+DM 페어링만으로는 DM에서만 소통 가능하다. 서버 채널에서도 봇을 호출하려면 추가 설정이 필요하다.
+
+### 4.1 서버 채널 권한 확인
+
+봇 초대 시 설정한 OAuth2 권한과 **서버 내 채널 권한은 별개**다.
+
+- **OAuth2 권한**: 봇 역할의 기본 권한 (서버 전체 기본값)
+- **채널 권한**: 각 채널에서 실제로 봇이 할 수 있는 것 (채널별 오버라이드)
+
+비공개 채널이거나 역할 권한이 제한된 경우, 채널 설정에서 봇에게 직접 권한을 부여해야 한다:
+
+1. 채널 이름 옆 ⚙️ (채널 편집) 클릭
+2. **권한** 탭 선택
+3. **+** 버튼 → 봇 추가
+4. 아래 권한 허용:
+   - `채널 보기`
+   - `메시지 보내기`
+   - `메시지 읽기 기록`
+5. 저장
+
+> 봇이 `fetch_messages`에서 "Missing Access" 에러를 반환한다면 채널 권한 문제다.
+
+### 4.2 채널 등록
+
+Claude Code 터미널에서 서버 채널을 등록한다:
+
+```
+/discord:access group add <채널ID>
+```
+
+채널 ID 확인 방법: Discord 설정 → 고급 → **개발자 모드** 켜기 → 채널 우클릭 → **채널 ID 복사**
+
+### 4.3 사용자 허용
+
+채널을 등록해도 `allowFrom`이 비어있으면 아무도 봇을 호출할 수 없다. 허용할 사용자의 Discord ID를 추가한다:
+
+```
+/discord:access
+```
+
+또는 `~/.claude/channels/discord/access.json`을 직접 편집:
+
+```json
+{
+  "groups": {
+    "<채널ID>": {
+      "requireMention": true,
+      "allowFrom": ["<사용자ID>"]
+    }
+  }
+}
+```
+
+> `requireMention: true`이면 봇을 @멘션해야만 응답한다. 채널의 모든 메시지에 반응하게 하려면 `false`로 설정한다.
+
+### 4.4 커스텀 멘션 패턴
+
+봇 이름이 길거나 한글 멘션을 사용하고 싶다면, `access.json`의 `mentionPatterns`에 추가한다:
+
+```json
+{
+  "mentionPatterns": ["@ttalkkakthon", "@딸깍톤", "@tkt"]
+}
+```
+
+이렇게 하면 `@tkt`만 입력해도 봇이 반응한다.
+
+### 4.5 채널 삭제
+
+더 이상 사용하지 않는 채널은 `access.json`의 `groups`에서 해당 채널 ID를 제거하면 된다.
+
 ## 사용
 
-설정이 완료되면 Discord DM으로 Claude Code 세션과 소통할 수 있다.
+설정이 완료되면 Discord DM 또는 등록된 서버 채널에서 Claude Code 세션과 소통할 수 있다.
 
 ### 제공되는 도구
 
