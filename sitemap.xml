@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>https://anveloper.dev</loc>
-<lastmod>2026-03-18T00:54:03.605Z</lastmod>
+<lastmod>2026-03-21T00:06:18.529Z</lastmod>
 <changefreq>weekly</changefreq>
 <priority>1</priority>
 </url>
@@ -305,6 +305,12 @@
 <loc>https://anveloper.dev/solutions/53</loc>
 <changefreq>weekly</changefreq>
 <priority>0.4</priority>
+</url>
+<url>
+<loc>https://anveloper.dev/posts/claude-channels-discord</loc>
+<lastmod>2026-03-21T00:00:00.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.7</priority>
 </url>
 <url>
 <loc>https://anveloper.dev/posts/pm2-caddy-blue-green-deployment</loc>
