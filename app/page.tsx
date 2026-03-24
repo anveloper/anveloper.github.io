@@ -349,8 +349,8 @@ const HomePage = () => {
                     {project.description}
                   </p>
                 </div>
-                <div className="flex gap-1">
-                  {project.tags.slice(0, 1).map((tag) => (
+                <div className="flex flex-wrap gap-1">
+                  {project.tags.slice(0, 3).map((tag) => (
                     <span
                       key={tag}
                       className="text-[8px] md:text-[10px] px-1 md:px-1.5 py-0.5 bg-background text-muted-foreground rounded"
