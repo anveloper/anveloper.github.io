@@ -317,40 +317,43 @@ const HomePage = () => {
           initial="hidden"
           whileInView="visible"
           viewport={viewportConfig}
-          className="grid gap-3 sm:grid-cols-2"
+          className="grid grid-cols-2 gap-2 md:gap-3"
         >
-          {projects.map((project) => (
-            <motion.div key={project.slug} variants={staggerItem}>
-              <Link href={`/projects/${project.slug}`} className="block group">
-                <Card className="hover:border-foreground/20 transition-colors h-full">
-                  <CardContent className="p-4">
-                    <div className="flex items-center gap-3 mb-2">
-                      {project.icon && <img src={project.icon} alt="" className="w-8 h-8 rounded-lg" />}
-                      <div>
-                        <h3 className="font-semibold group-hover:text-primary-sky transition-colors">
-                          {project.title}
-                        </h3>
-                        <div className="flex gap-1 mt-0.5">
-                          {project.tags.slice(0, 2).map((tag) => (
-                            <span
-                              key={tag}
-                              className="text-[10px] font-bold text-primary-sky/70 uppercase tracking-wider"
-                            >
-                              {tag}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                      <ArrowUpRight className="w-4 h-4 text-muted-foreground shrink-0 ml-auto opacity-0 group-hover:opacity-100 transition-opacity" />
-                    </div>
-                    <p className="text-sm text-muted-foreground">{project.description}</p>
-                    <div className="flex flex-wrap gap-1 mt-2">
-                      {project.tags.slice(2).map((tag) => (
-                        <TechBadge key={tag} name={tag} />
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
+          {projects.map((project, index) => (
+            <motion.div
+              key={project.slug}
+              variants={staggerItem}
+              className={index === projects.length - 1 && projects.length % 2 !== 0 ? "col-span-2" : ""}
+            >
+              <Link
+                href={`/projects/${project.slug}`}
+                className={cn(
+                  "block group p-3 md:p-4 bg-secondary/50 rounded-xl hover:bg-secondary transition-colors",
+                  "flex flex-col gap-2",
+                  index === projects.length - 1 && projects.length % 2 !== 0 && "flex-row items-center gap-4"
+                )}
+              >
+                {project.icon && (
+                  <img src={project.icon} alt="" className="w-8 h-8 md:w-9 md:h-9 rounded-lg shrink-0" />
+                )}
+                <div className="flex-1 min-w-0">
+                  <h3 className="text-[11px] md:text-sm font-bold text-foreground group-hover:text-primary-sky transition-colors truncate">
+                    {project.title}
+                  </h3>
+                  <p className="text-[9px] md:text-xs text-muted-foreground leading-tight mt-0.5 line-clamp-1">
+                    {project.description}
+                  </p>
+                </div>
+                <div className="flex gap-1">
+                  {project.tags.slice(0, 1).map((tag) => (
+                    <span
+                      key={tag}
+                      className="text-[8px] md:text-[10px] px-1 md:px-1.5 py-0.5 bg-background text-muted-foreground rounded"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
               </Link>
             </motion.div>
           ))}
