@@ -349,7 +349,7 @@ const HomePage = () => {
         </div>
       </motion.section>
 
-      {/* Projects Section — Editorial Cards */}
+      {/* Projects Section */}
       <motion.section
         variants={sectionReveal}
         initial="hidden"
@@ -363,44 +363,40 @@ const HomePage = () => {
           initial="hidden"
           whileInView="visible"
           viewport={viewportConfig}
-          className="grid gap-8 sm:grid-cols-2"
+          className="grid gap-3 sm:grid-cols-2"
         >
           {projects.map((project) => (
             <motion.div key={project.slug} variants={staggerItem}>
               <Link href={`/projects/${project.slug}`} className="block group">
-                <div className="aspect-[16/10] rounded-2xl overflow-hidden bg-secondary mb-4 relative flex items-center justify-center">
-                  {project.icon && (
-                    <img
-                      src={project.icon}
-                      alt=""
-                      className="w-20 h-20 group-hover:scale-110 transition-transform duration-500"
-                    />
-                  )}
-                  <div className="absolute inset-0 bg-foreground/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                    <span className="bg-card text-foreground px-5 py-2.5 rounded-full text-sm font-bold shadow-lg">
-                      View Project
-                    </span>
-                  </div>
-                </div>
-                <div className="flex justify-between items-start">
-                  <div>
-                    <div className="flex gap-1.5 mb-2">
-                      {project.tags.slice(0, 2).map((tag) => (
-                        <span
-                          key={tag}
-                          className="px-2 py-0.5 bg-primary-sky/10 text-primary-sky text-[10px] font-bold rounded uppercase tracking-wider"
-                        >
-                          {tag}
-                        </span>
+                <Card className="hover:border-foreground/20 transition-colors h-full">
+                  <CardContent className="p-4">
+                    <div className="flex items-center gap-3 mb-2">
+                      {project.icon && <img src={project.icon} alt="" className="w-8 h-8 rounded-lg" />}
+                      <div>
+                        <h3 className="font-semibold group-hover:text-primary-sky transition-colors">
+                          {project.title}
+                        </h3>
+                        <div className="flex gap-1 mt-0.5">
+                          {project.tags.slice(0, 2).map((tag) => (
+                            <span
+                              key={tag}
+                              className="text-[10px] font-bold text-primary-sky/70 uppercase tracking-wider"
+                            >
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                      <ArrowUpRight className="w-4 h-4 text-muted-foreground shrink-0 ml-auto opacity-0 group-hover:opacity-100 transition-opacity" />
+                    </div>
+                    <p className="text-sm text-muted-foreground">{project.description}</p>
+                    <div className="flex flex-wrap gap-1 mt-2">
+                      {project.tags.slice(2).map((tag) => (
+                        <TechBadge key={tag} name={tag} />
                       ))}
                     </div>
-                    <h3 className="text-lg font-bold text-foreground mb-1 group-hover:text-primary-sky transition-colors">
-                      {project.title}
-                    </h3>
-                    <p className="text-sm text-muted-foreground">{project.description}</p>
-                  </div>
-                  <ArrowUpRight className="w-4 h-4 text-muted-foreground shrink-0 mt-1" />
-                </div>
+                  </CardContent>
+                </Card>
               </Link>
             </motion.div>
           ))}
