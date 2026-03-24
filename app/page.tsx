@@ -191,16 +191,18 @@ const contactLinks = [
 ];
 
 const SectionHeader = ({ children, href }: { children: React.ReactNode; href?: string }) => {
-  const heading = <h2 className="text-lg font-semibold text-foreground tracking-tight">{children}</h2>;
+  const heading = (
+    <h2 className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground/60">{children}</h2>
+  );
   if (href) {
     return (
-      <Link href={href} className="group flex items-center gap-1.5 mb-8 w-fit">
+      <Link href={href} className="group flex items-center gap-1.5 mb-4 w-fit">
         {heading}
-        <ArrowUpRight className="w-4 h-4 text-muted-foreground opacity-0 -translate-y-0.5 -translate-x-0.5 transition-all group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0" />
+        <ArrowUpRight className="w-3 h-3 text-muted-foreground opacity-0 -translate-y-0.5 -translate-x-0.5 transition-all group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0" />
       </Link>
     );
   }
-  return <div className="mb-8">{heading}</div>;
+  return <div className="mb-4">{heading}</div>;
 };
 
 const viewportConfig = { once: true, margin: "-80px" as const };
@@ -209,20 +211,23 @@ const HomePage = () => {
   return (
     <PageContainer>
       {/* Hero Section */}
-      <motion.section variants={sectionReveal} initial="hidden" animate="visible" className="mb-20">
-        <div className="flex items-center gap-4 mb-4">
-          <div className="relative w-14 h-14 rounded-full overflow-hidden border-2 border-border shrink-0">
-            <Image src="/profile.webp" alt="안성진 프로필" fill className="object-cover" priority />
+      <motion.section variants={sectionReveal} initial="hidden" animate="visible" className="mb-10">
+        <div className="flex items-center gap-4">
+          <div className="relative shrink-0">
+            <div className="relative w-12 h-12 rounded-full overflow-hidden ring-2 ring-primary-sky/20">
+              <Image src="/profile.webp" alt="안성진 프로필" fill className="object-cover" priority />
+            </div>
+            <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-primary-sky rounded-full border-2 border-background flex items-center justify-center">
+              <Code className="w-2 h-2 text-white" />
+            </div>
           </div>
-          <div>
-            <h1 className="text-2xl font-bold text-foreground">안성진</h1>
-            <p className="text-sm text-muted-foreground">Full-Stack Developer, UX Team Lead (Manager)</p>
+          <div className="flex flex-col gap-0.5">
+            <div className="flex items-center gap-2">
+              <h1 className="text-xl font-bold text-foreground tracking-tight">안성진</h1>
+            </div>
+            <p className="text-xs font-semibold text-muted-foreground">Full-Stack Developer, UX Team Lead</p>
+            <p className="text-[11px] text-muted-foreground/80 italic tracking-tight">언어로 세상을 표현하는 개발자</p>
           </div>
-        </div>
-        <div className="space-y-2 text-muted-foreground leading-relaxed">
-          <p>언어로 세상을 표현하는 개발자입니다.</p>
-          <p>Next.js, TypeScript, Prisma를 중심으로 사용자 경험에 집중하는 풀스택 개발을 합니다.</p>
-          <p>최근에는 LangGraph와 벡터 검색을 활용한 AI 파이프라인 구축에 관심을 두고 있습니다.</p>
         </div>
       </motion.section>
 
@@ -232,28 +237,13 @@ const HomePage = () => {
         initial="hidden"
         whileInView="visible"
         viewport={viewportConfig}
-        className="mb-20"
+        className="mb-10"
       >
-        <SectionHeader href="/about">About</SectionHeader>
-        <div className="space-y-4">
-          <div className="space-y-2 text-muted-foreground leading-relaxed">
-            <p>
-              기술을 학습하는데 있어 빠른 습득 속도를 자부합니다. 개발의 시작은 Java로 시작하였지만, 현재는 Next.js,
-              Typescript, Prisma를 가장 잘 사용합니다.
-            </p>
-            <p>
-              판매사·공급사·어드민 다중 플랫폼 설계·개발 경험과 멀티테넌트 기반 다중 도메인 플랫폼 개발 경험이 있습니다.
-              안드로이드 Kotlin(Jetpack Compose) 개발과 Vanilla JS 웹 개발, PHP에서 React/Remix.js 마이그레이션 경험이
-              있습니다.
-            </p>
-          </div>
-          <p className="text-sm text-muted-foreground">
-            <span className="text-primary-sky font-medium">(주) TILS AI</span> UX개발팀 과장 2023.03 ~{" · "}
-            정보처리기사
-            {" · "}SQLD
-          </p>
-          <p className="text-sm text-muted-foreground">{interests.join(" / ")}</p>
-        </div>
+        <p className="text-sm leading-relaxed text-foreground">
+          Next.js, TypeScript, Prisma를 주력으로 다루며{" "}
+          <span className="font-semibold text-primary-sky">(주) TILS AI</span>에서 UX Team Lead로서 사용자 중심의
+          인터페이스를 설계하고 개발합니다. 효율적인 코드와 뛰어난 사용자 경험의 교차점을 탐구합니다.
+        </p>
       </motion.section>
 
       {/* Skills Section */}
@@ -262,33 +252,28 @@ const HomePage = () => {
         initial="hidden"
         whileInView="visible"
         viewport={viewportConfig}
-        className="mb-20"
+        className="mb-10"
       >
-        <SectionHeader href="/skills">Skills</SectionHeader>
-        <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewportConfig}
-          className="space-y-4"
-        >
+        <SectionHeader href="/skills">Technical Stack</SectionHeader>
+        <div className="flex flex-col gap-3">
           {skillCategories.map((category) => (
-            <motion.div
-              key={category.title}
-              variants={staggerItem}
-              className="flex flex-col sm:flex-row gap-2 sm:gap-4"
-            >
-              <span className="text-sm font-medium text-foreground w-28 sm:text-right shrink-0 pt-0.5">
+            <div key={category.title} className="flex items-center gap-3">
+              <span className="w-20 text-[10px] font-bold text-primary-sky shrink-0 uppercase">
                 {category.title}
               </span>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-1.5">
                 {category.skills.map((skill) => (
-                  <SkillBadge key={skill.name} skill={skill} />
+                  <span
+                    key={skill.name}
+                    className="px-2 py-0.5 bg-secondary text-[10px] font-medium text-muted-foreground rounded"
+                  >
+                    {skill.name}
+                  </span>
                 ))}
               </div>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
       </motion.section>
 
       {/* Experience & Education Section — Compact Timeline */}
@@ -297,36 +282,24 @@ const HomePage = () => {
         initial="hidden"
         whileInView="visible"
         viewport={viewportConfig}
-        className="mb-20"
+        className="mb-10"
       >
-        <SectionHeader href="/education">Experience & Education</SectionHeader>
-        <div className="space-y-3 border-l-2 border-border ml-1 pl-6">
+        <SectionHeader href="/education">Milestones</SectionHeader>
+        <div className="flex flex-col border-l border-border/30 ml-1 pl-4 gap-4">
           {timeline.map((item, index) => (
             <div key={`${item.title}-${index}`} className="relative">
               <div
                 className={cn(
-                  "absolute -left-[29px] top-1.5 w-3 h-3 rounded-full",
-                  index === 0 ? "bg-primary-sky ring-4 ring-primary-sky/20" : "bg-muted-foreground/30"
+                  "absolute -left-[21px] top-1 w-2.5 h-2.5 rounded-full ring-4 ring-background",
+                  index === 0 ? "bg-primary-sky" : "bg-muted-foreground/30"
                 )}
               />
-              <p className="text-sm text-foreground">
-                <span className="font-bold">{item.title}</span>
-                <span className="text-muted-foreground"> · </span>
-                <span className="text-primary-sky">{item.organization}</span>
-                <span className="text-muted-foreground"> · </span>
-                <span className={cn("tabular-nums", index === 0 ? "text-primary-sky font-semibold" : "text-muted-foreground")}>
-                  {item.period}
-                </span>
+              <p className="text-[11px] font-bold text-foreground leading-none">
+                {item.title} · {item.organization}
               </p>
-              {item.badges && (
-                <div className="flex flex-wrap gap-1 mt-1">
-                  {item.badges.map((badge) => (
-                    <Badge key={badge} variant="secondary" className="text-[10px] px-1.5 py-0">
-                      {badge}
-                    </Badge>
-                  ))}
-                </div>
-              )}
+              <p className={cn("text-[10px] mt-1", index === 0 ? "text-primary-sky" : "text-muted-foreground")}>
+                {item.period}
+              </p>
             </div>
           ))}
         </div>
@@ -338,9 +311,9 @@ const HomePage = () => {
         initial="hidden"
         whileInView="visible"
         viewport={viewportConfig}
-        className="mb-20"
+        className="mb-10"
       >
-        <SectionHeader href="/projects">Projects</SectionHeader>
+        <SectionHeader href="/projects">Featured Projects</SectionHeader>
         <motion.div
           variants={staggerContainer}
           initial="hidden"
@@ -388,19 +361,18 @@ const HomePage = () => {
 
       {/* Contact Section */}
       <motion.section variants={sectionReveal} initial="hidden" whileInView="visible" viewport={viewportConfig}>
-        <SectionHeader>Contact</SectionHeader>
-        <div className="space-y-3">
+        <SectionHeader>Connect</SectionHeader>
+        <div className="flex flex-col gap-2">
           {contactLinks.map((link) => (
-            <div key={link.title} className="flex items-center gap-4">
-              <span className="text-sm font-medium text-foreground w-16">{link.title}</span>
-              <a
-                href={link.href}
-                {...(link.title !== "Email" ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                className="text-sm text-muted-foreground underline underline-offset-4 hover:text-foreground transition-colors"
-              >
-                {link.value}
-              </a>
-            </div>
+            <a
+              key={link.title}
+              href={link.href}
+              {...(link.title !== "Email" ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+              className="flex items-center gap-3 p-3 bg-secondary rounded-lg hover:bg-accent transition-colors"
+            >
+              <span className="text-[11px] font-medium text-foreground">{link.value}</span>
+              <ArrowUpRight className="w-3 h-3 text-muted-foreground/40 ml-auto" />
+            </a>
           ))}
         </div>
       </motion.section>
