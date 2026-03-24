@@ -263,7 +263,12 @@ const HomePage = () => {
                 {category.skills.map((skill) => (
                   <span
                     key={skill.name}
-                    className="px-2 md:px-3 py-0.5 md:py-1 bg-secondary text-[10px] md:text-xs font-medium text-muted-foreground rounded"
+                    className={cn(
+                      "px-2 md:px-3 py-0.5 md:py-1 text-[10px] md:text-xs font-medium rounded",
+                      skill.level === 3 && "bg-primary-sky/20 text-primary-sky font-bold",
+                      skill.level === 2 && "bg-primary-sky/10 text-foreground",
+                      skill.level === 1 && "bg-secondary text-muted-foreground"
+                    )}
                   >
                     {skill.name}
                   </span>
