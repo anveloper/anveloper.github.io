@@ -291,7 +291,7 @@ const HomePage = () => {
         </motion.div>
       </motion.section>
 
-      {/* Experience & Education Section — Editorial Timeline */}
+      {/* Experience & Education Section — Compact Timeline */}
       <motion.section
         variants={sectionReveal}
         initial="hidden"
@@ -300,45 +300,28 @@ const HomePage = () => {
         className="mb-20"
       >
         <SectionHeader href="/education">Experience & Education</SectionHeader>
-        <div className="space-y-10">
+        <div className="space-y-3 border-l-2 border-border ml-1 pl-6">
           {timeline.map((item, index) => (
-            <div
-              key={`${item.title}-${index}`}
-              className={cn(
-                "relative pl-8",
-                index < timeline.length - 1 &&
-                  "before:content-[''] before:absolute before:left-0 before:top-2 before:bottom-0 before:w-[2px] before:bg-border"
-              )}
-            >
+            <div key={`${item.title}-${index}`} className="relative">
               <div
                 className={cn(
-                  "absolute left-[-5px] top-2 w-3 h-3 rounded-full",
+                  "absolute -left-[29px] top-1.5 w-3 h-3 rounded-full",
                   index === 0 ? "bg-primary-sky ring-4 ring-primary-sky/20" : "bg-muted-foreground/30"
                 )}
               />
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-3">
-                <h3 className="text-lg font-bold text-foreground">{item.title}</h3>
-                <span
-                  className={cn(
-                    "text-xs font-bold px-3 py-1 rounded-full mt-1 sm:mt-0 w-fit",
-                    index === 0
-                      ? "text-primary-sky bg-primary-sky/10"
-                      : "text-muted-foreground bg-secondary"
-                  )}
-                >
+              <p className="text-sm text-foreground">
+                <span className="font-bold">{item.title}</span>
+                <span className="text-muted-foreground"> · </span>
+                <span className="text-primary-sky">{item.organization}</span>
+                <span className="text-muted-foreground"> · </span>
+                <span className={cn("tabular-nums", index === 0 ? "text-primary-sky font-semibold" : "text-muted-foreground")}>
                   {item.period}
                 </span>
-              </div>
-              <p className="text-sm font-semibold text-primary-sky mb-2">{item.organization}</p>
-              {item.description && (
-                <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">
-                  {item.description}
-                </p>
-              )}
+              </p>
               {item.badges && (
-                <div className="flex flex-wrap gap-1.5 mt-3">
+                <div className="flex flex-wrap gap-1 mt-1">
                   {item.badges.map((badge) => (
-                    <Badge key={badge} variant="secondary" className="text-xs">
+                    <Badge key={badge} variant="secondary" className="text-[10px] px-1.5 py-0">
                       {badge}
                     </Badge>
                   ))}
