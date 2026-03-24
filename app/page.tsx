@@ -291,7 +291,7 @@ const HomePage = () => {
         </motion.div>
       </motion.section>
 
-      {/* Experience & Education Section */}
+      {/* Experience & Education Section — Editorial Timeline */}
       <motion.section
         variants={sectionReveal}
         initial="hidden"
@@ -300,40 +300,56 @@ const HomePage = () => {
         className="mb-20"
       >
         <SectionHeader href="/education">Experience & Education</SectionHeader>
-        <div className="space-y-0">
+        <div className="space-y-10">
           {timeline.map((item, index) => (
             <div
               key={`${item.title}-${index}`}
               className={cn(
-                "flex flex-col sm:flex-row gap-1 sm:gap-6 py-4",
-                index < timeline.length - 1 && "border-b border-border/60"
+                "relative pl-8",
+                index < timeline.length - 1 &&
+                  "before:content-[''] before:absolute before:left-0 before:top-2 before:bottom-0 before:w-[2px] before:bg-border"
               )}
             >
-              <span className="text-sm text-muted-foreground tabular-nums w-36 shrink-0">{item.period}</span>
-              <div className="flex-1 min-w-0">
-                <div className="flex flex-col sm:flex-row sm:items-center gap-1">
-                  <h3 className="font-semibold text-foreground">{item.title}</h3>
-                  <span className="text-sm text-primary-sky">{item.organization}</span>
-                </div>
-                {item.description && (
-                  <p className="text-sm text-muted-foreground mt-1 whitespace-pre-line">{item.description}</p>
+              <div
+                className={cn(
+                  "absolute left-[-5px] top-2 w-3 h-3 rounded-full",
+                  index === 0 ? "bg-primary-sky ring-4 ring-primary-sky/20" : "bg-muted-foreground/30"
                 )}
-                {item.badges && (
-                  <div className="flex flex-wrap gap-1 mt-2">
-                    {item.badges.map((badge) => (
-                      <Badge key={badge} variant="secondary" className="text-xs">
-                        {badge}
-                      </Badge>
-                    ))}
-                  </div>
-                )}
+              />
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-3">
+                <h3 className="text-lg font-bold text-foreground">{item.title}</h3>
+                <span
+                  className={cn(
+                    "text-xs font-bold px-3 py-1 rounded-full mt-1 sm:mt-0 w-fit",
+                    index === 0
+                      ? "text-primary-sky bg-primary-sky/10"
+                      : "text-muted-foreground bg-secondary"
+                  )}
+                >
+                  {item.period}
+                </span>
               </div>
+              <p className="text-sm font-semibold text-primary-sky mb-2">{item.organization}</p>
+              {item.description && (
+                <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">
+                  {item.description}
+                </p>
+              )}
+              {item.badges && (
+                <div className="flex flex-wrap gap-1.5 mt-3">
+                  {item.badges.map((badge) => (
+                    <Badge key={badge} variant="secondary" className="text-xs">
+                      {badge}
+                    </Badge>
+                  ))}
+                </div>
+              )}
             </div>
           ))}
         </div>
       </motion.section>
 
-      {/* Projects Section */}
+      {/* Projects Section — Editorial Cards */}
       <motion.section
         variants={sectionReveal}
         initial="hidden"
@@ -347,25 +363,44 @@ const HomePage = () => {
           initial="hidden"
           whileInView="visible"
           viewport={viewportConfig}
-          className="grid gap-3 sm:grid-cols-2"
+          className="grid gap-8 sm:grid-cols-2"
         >
           {projects.map((project) => (
             <motion.div key={project.slug} variants={staggerItem}>
               <Link href={`/projects/${project.slug}`} className="block group">
-                <Card className="hover:border-foreground/20 transition-colors h-full">
-                  <CardContent className="p-4">
-                    <div className="flex items-center gap-2">
-                      {project.icon && <img src={project.icon} alt="" className="w-6 h-6 rounded" />}
-                      <h3 className="font-semibold group-hover:text-primary-sky transition-colors">{project.title}</h3>
-                    </div>
-                    <p className="text-sm text-muted-foreground mt-1">{project.description}</p>
-                    <div className="flex flex-wrap gap-1 mt-2">
-                      {project.tags.slice(0, 4).map((tag) => (
-                        <TechBadge key={tag} name={tag} />
+                <div className="aspect-[16/10] rounded-2xl overflow-hidden bg-secondary mb-4 relative flex items-center justify-center">
+                  {project.icon && (
+                    <img
+                      src={project.icon}
+                      alt=""
+                      className="w-20 h-20 group-hover:scale-110 transition-transform duration-500"
+                    />
+                  )}
+                  <div className="absolute inset-0 bg-foreground/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                    <span className="bg-card text-foreground px-5 py-2.5 rounded-full text-sm font-bold shadow-lg">
+                      View Project
+                    </span>
+                  </div>
+                </div>
+                <div className="flex justify-between items-start">
+                  <div>
+                    <div className="flex gap-1.5 mb-2">
+                      {project.tags.slice(0, 2).map((tag) => (
+                        <span
+                          key={tag}
+                          className="px-2 py-0.5 bg-primary-sky/10 text-primary-sky text-[10px] font-bold rounded uppercase tracking-wider"
+                        >
+                          {tag}
+                        </span>
                       ))}
                     </div>
-                  </CardContent>
-                </Card>
+                    <h3 className="text-lg font-bold text-foreground mb-1 group-hover:text-primary-sky transition-colors">
+                      {project.title}
+                    </h3>
+                    <p className="text-sm text-muted-foreground">{project.description}</p>
+                  </div>
+                  <ArrowUpRight className="w-4 h-4 text-muted-foreground shrink-0 mt-1" />
+                </div>
               </Link>
             </motion.div>
           ))}
