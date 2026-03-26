@@ -69,22 +69,28 @@ export const NavBar = () => {
 
         {/* Navigation Links */}
         <div className="flex items-center gap-1">
-          {navItems.map((item) => {
-            const isActive = item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
-            return (
-              <Link
-                key={item.label}
-                href={item.href}
-                className={cn(
-                  "p-2 md:px-3 text-sm font-medium rounded-md transition-colors",
-                  isActive ? "text-primary-sky" : "text-muted-foreground hover:text-foreground"
-                )}
-              >
-                <span className="hidden sm:inline">{item.label}</span>
-                <item.icon className="w-4 h-4 sm:hidden" />
-              </Link>
-            );
-          })}
+          {navItems
+            .filter((item) => {
+              const isSolutionsPage = pathname.startsWith("/solutions");
+              if (isSolutionsPage) return item.href === "/solutions";
+              return item.href !== "/solutions";
+            })
+            .map((item) => {
+              const isActive = item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
+              return (
+                <Link
+                  key={item.label}
+                  href={item.href}
+                  className={cn(
+                    "p-2 md:px-3 text-sm font-medium rounded-md transition-colors",
+                    isActive ? "text-primary-sky" : "text-muted-foreground hover:text-foreground"
+                  )}
+                >
+                  <span className="hidden sm:inline">{item.label}</span>
+                  <item.icon className="w-4 h-4 sm:hidden" />
+                </Link>
+              );
+            })}
 
           <div className="w-px h-4 bg-border mx-2" />
 
