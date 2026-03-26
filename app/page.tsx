@@ -224,7 +224,9 @@ const HomePage = () => {
           <div className="flex flex-col gap-0.5 md:gap-1">
             <h1 className="text-xl md:text-2xl font-bold text-foreground tracking-tight">안성진</h1>
             <p className="text-xs md:text-sm font-semibold text-muted-foreground">Full-Stack Developer, UX Team Lead</p>
-            <p className="text-[11px] md:text-xs text-muted-foreground/80 italic tracking-tight">언어로 세상을 표현하는 개발자</p>
+            <p className="text-[11px] md:text-xs text-muted-foreground/80 italic tracking-tight">
+              언어로 세상을 표현하는 개발자
+            </p>
           </div>
         </div>
       </motion.section>
@@ -293,14 +295,19 @@ const HomePage = () => {
             <div key={`${item.title}-${index}`} className="relative">
               <div
                 className={cn(
-                  "absolute -left-[21px] md:-left-[27px] top-1 w-2.5 h-2.5 md:w-3 md:h-3 rounded-full ring-4 ring-background",
+                  "absolute -left-5.25 md:-left-6.75 top-1 w-2.5 h-2.5 md:w-3 md:h-3 rounded-full ring-4 ring-background",
                   index === 0 ? "bg-primary-sky" : "bg-muted-foreground/30"
                 )}
               />
               <p className="text-[11px] md:text-sm font-bold text-foreground leading-none">
                 {item.title} · {item.organization}
               </p>
-              <p className={cn("text-[10px] md:text-xs mt-1", index === 0 ? "text-primary-sky" : "text-muted-foreground")}>
+              <p
+                className={cn(
+                  "text-[10px] md:text-xs mt-1",
+                  index === 0 ? "text-primary-sky" : "text-muted-foreground"
+                )}
+              >
                 {item.period}
               </p>
             </div>
