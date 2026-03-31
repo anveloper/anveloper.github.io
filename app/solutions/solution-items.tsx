@@ -27,7 +27,7 @@ export const SolutionItems = ({ solutions }: { solutions: Solution[] }) => {
       {solutions.map((solution) => (
         <Link key={solution.slug} href={`/solutions/${solution.slug}`} className="block py-5 group">
           <div className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4 mb-1">
-            <time className="text-sm text-muted-foreground shrink-0">{solution.frontmatter.date as string}</time>
+            <time dateTime={(solution.frontmatter.date as string).replace(/\./g, "-")} className="text-sm text-muted-foreground shrink-0">{solution.frontmatter.date as string}</time>
             <h2 className="text-lg font-medium text-foreground group-hover:text-primary-sky transition-colors">
               {solution.frontmatter.title as string}
             </h2>

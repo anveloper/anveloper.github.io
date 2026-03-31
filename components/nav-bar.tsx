@@ -59,6 +59,7 @@ export const NavBar = () => {
       )}
     >
       <nav
+        aria-label="주 네비게이션"
         className={cn(
           "w-full max-w-4xl mx-auto",
           "flex flex-col flex-wrap gap-1 items-start justify-center",

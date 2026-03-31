@@ -28,9 +28,10 @@ const HeaderLogo = ({ autoSwitch = true, interval = 3_000, activeIndex: controll
   return (
     <Link
       href="/"
+      aria-label="anveloper.dev 홈"
       className="w-full flex flex-1 font-semibold text-foreground hover:text-primary-sky transition-colors"
     >
-      <span className="w-full relative">
+      <span className="w-full relative" aria-hidden="true">
         {logoTexts.map((text, textIdx) => {
           const chars = text.split("");
           const isActive = textIdx === activeIndex;

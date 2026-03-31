@@ -11,7 +11,7 @@ export const Footer = () => {
     <footer className="border-t border-border">
       <div className="max-w-4xl mx-auto px-6 sm:px-8 md:px-12 lg:px-16 py-6 flex flex-col sm:flex-row items-center justify-between gap-2 text-sm text-muted-foreground">
         <span>© 2025 anveloper.dev</span>
-        <nav className="flex items-center gap-3">
+        <nav aria-label="푸터 링크" className="flex items-center gap-3">
           {links.map((link, i) => (
             <span key={link.label} className="flex items-center gap-3">
               {i > 0 && <span aria-hidden>·</span>}

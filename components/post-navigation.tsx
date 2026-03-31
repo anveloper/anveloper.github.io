@@ -11,7 +11,7 @@ export const PostNavigation = ({ prev, next, basePath }: PostNavigationProps) =>
   if (!prev && !next) return null;
 
   return (
-    <nav className="mt-12 border-t border-border pt-6 grid grid-cols-2 gap-4">
+    <nav aria-label="이전/다음 글 네비게이션" className="mt-12 border-t border-border pt-6 grid grid-cols-2 gap-4">
       {prev ? (
         <Link
           href={`${basePath}/${prev.slug}`}
