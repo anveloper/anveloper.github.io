@@ -4,7 +4,7 @@ import { type Theme, useThemeClass } from "@/hooks/use-theme-class";
 import { cn } from "@/lib/utils";
 import { Moon, Palette, SquareTerminal, Sun } from "lucide-react";
 import type React from "react";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 type ThemeOption = {
   value: Theme;
@@ -50,7 +50,9 @@ const currentIcon = (theme: Theme) => {
 export const ThemeSelector = () => {
   const { theme, setTheme } = useThemeClass();
   const [open, setOpen] = useState(false);
+  const [focusedIndex, setFocusedIndex] = useState(-1);
   const ref = useRef<HTMLDivElement>(null);
+  const optionRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
   useEffect(() => {
     const handler = (e: MouseEvent) => {
@@ -62,20 +64,76 @@ export const ThemeSelector = () => {
     return () => document.removeEventListener("mousedown", handler);
   }, []);
 
+  const handleToggle = useCallback(() => {
+    setOpen((prev) => {
+      const next = !prev;
+      if (next) {
+        const currentIdx = themeOptions.findIndex((o) => o.value === theme);
+        setFocusedIndex(currentIdx >= 0 ? currentIdx : 0);
+      }
+      return next;
+    });
+  }, [theme]);
+
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent) => {
+      if (!open) {
+        if (e.key === "ArrowDown" || e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          handleToggle();
+        }
+        return;
+      }
+
+      switch (e.key) {
+        case "ArrowDown":
+          e.preventDefault();
+          setFocusedIndex((prev) => (prev + 1) % themeOptions.length);
+          break;
+        case "ArrowUp":
+          e.preventDefault();
+          setFocusedIndex((prev) => (prev - 1 + themeOptions.length) % themeOptions.length);
+          break;
+        case "Home":
+          e.preventDefault();
+          setFocusedIndex(0);
+          break;
+        case "End":
+          e.preventDefault();
+          setFocusedIndex(themeOptions.length - 1);
+          break;
+        case "Enter":
+        case " ":
+          e.preventDefault();
+          if (focusedIndex >= 0) {
+            setTheme(themeOptions[focusedIndex].value);
+            setOpen(false);
+          }
+          break;
+        case "Escape":
+          e.preventDefault();
+          setOpen(false);
+          break;
+        case "Tab":
+          setOpen(false);
+          break;
+      }
+    },
+    [open, focusedIndex, handleToggle, setTheme]
+  );
+
   useEffect(() => {
-    const handler = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setOpen(false);
-    };
-    document.addEventListener("keydown", handler);
-    return () => document.removeEventListener("keydown", handler);
-  }, []);
+    if (open && focusedIndex >= 0) {
+      optionRefs.current[focusedIndex]?.focus();
+    }
+  }, [open, focusedIndex]);
 
   const Icon = currentIcon(theme);
 
   return (
-    <div ref={ref} className="relative">
+    <div ref={ref} className="relative" onKeyDown={handleKeyDown}>
       <button
-        onClick={() => setOpen((prev) => !prev)}
+        onClick={handleToggle}
         className="p-2 text-muted-foreground hover:text-foreground transition-colors"
         aria-label="테마 선택"
         aria-expanded={open}
@@ -88,22 +146,28 @@ export const ThemeSelector = () => {
         <div
           role="listbox"
           aria-label="테마 목록"
+          aria-activedescendant={focusedIndex >= 0 ? `theme-option-${themeOptions[focusedIndex].value}` : undefined}
           className={cn(
             "absolute right-1/2 translate-x-1/2 top-full mt-1 z-50",
             "flex flex-col items-center gap-1.5 p-2",
             "animate-in fade-in-0 zoom-in-95"
           )}
         >
-          {themeOptions.map((option) => {
+          {themeOptions.map((option, index) => {
             const OptionIcon = option.icon;
             const isActive = theme === option.value;
             return (
               <button
                 key={option.value}
+                id={`theme-option-${option.value}`}
+                ref={(el) => {
+                  optionRefs.current[index] = el;
+                }}
                 role="option"
                 aria-selected={isActive}
                 aria-label={option.label}
                 title={option.label}
+                tabIndex={focusedIndex === index ? 0 : -1}
                 onClick={() => {
                   setTheme(option.value);
                   setOpen(false);
