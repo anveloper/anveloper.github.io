@@ -7,22 +7,22 @@ export const mdxComponents: MDXComponents = {
   h1: (props) =>
     createElement("h1", {
       ...props,
-      className: "text-4xl font-bold mt-10 mb-5 text-foreground",
+      className: "text-2xl md:text-4xl font-bold mt-10 mb-5 text-foreground",
     }),
   h2: (props) =>
     createElement("h2", {
       ...props,
-      className: "text-3xl font-semibold mt-9 mb-4 text-foreground border-b border-border pb-2",
+      className: "text-xl md:text-3xl font-semibold mt-9 mb-4 text-foreground border-b border-border pb-2",
     }),
   h3: (props) =>
     createElement("h3", {
       ...props,
-      className: "text-2xl font-semibold mt-8 mb-3 text-foreground",
+      className: "text-lg md:text-2xl font-semibold mt-8 mb-3 text-foreground",
     }),
   h4: (props) =>
     createElement("h4", {
       ...props,
-      className: "text-xl font-semibold mt-6 mb-3 text-foreground",
+      className: "text-base md:text-xl font-semibold mt-6 mb-3 text-foreground",
     }),
   p: (props) =>
     createElement("p", {
