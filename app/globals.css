@@ -410,11 +410,93 @@
   }
 }
 
+/* ── Skip Navigation ── */
+.skip-nav {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  z-index: 9999;
+}
+
+.skip-nav:focus {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: auto;
+  height: auto;
+  padding: 1rem 1.5rem;
+  background: var(--background);
+  color: var(--foreground);
+  border: 2px solid var(--primary-sky);
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  z-index: 99999;
+}
+
 html {
   color-scheme: dark light;
 }
 
-/* Smooth transitions for theme switching */
+/* ── Focus Visible ── */
+:focus-visible {
+  outline: 2px solid var(--primary-sky);
+  outline-offset: 2px;
+}
+
+/* ── Reduced Motion ── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ── Forced Colors (High Contrast Mode) ── */
+@media (forced-colors: active) {
+  :root {
+    --background: Canvas;
+    --foreground: CanvasText;
+    --primary: LinkText;
+    --primary-sky: LinkText;
+    --border: CanvasText;
+    --muted-foreground: GrayText;
+  }
+
+  a {
+    color: LinkText;
+  }
+
+  button {
+    border: 1px solid ButtonText;
+  }
+
+  [data-rehype-pretty-code-figure] pre {
+    border: 1px solid CanvasText;
+  }
+}
+
+/* ── Prefers Contrast ── */
+@media (prefers-contrast: more) {
+  :root {
+    --muted-foreground: oklch(0.35 0.03 264);
+    --border: oklch(0.6 0.01 264);
+  }
+
+  .dark {
+    --muted-foreground: oklch(0.8 0.02 260);
+    --border: oklch(0.5 0.02 260);
+  }
+}
+
+/* Smooth transitions for theme switching (respects prefers-reduced-motion via media query above) */
 *,
 *::before,
 *::after {

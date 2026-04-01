@@ -9,13 +9,13 @@ export const SkillBadge = ({ skill }: { skill: Skill }) => {
   return (
     <span className="inline-flex items-center gap-1 rounded-md ring-1 ring-border/50 pr-1">
       {shieldUrl ? (
-        <img src={shieldUrl} alt={skill.name} className="h-5 w-auto" width={80} height={20} loading="lazy" />
+        <img src={shieldUrl} alt={`${skill.name} 기술 뱃지`} className="h-5 w-auto" width={80} height={20} loading="lazy" />
       ) : (
         <Badge variant="secondary">{skill.name}</Badge>
       )}
-      <span className="flex">
+      <span className="flex" aria-label={`숙련도 ${skill.level}단계`} role="img">
         {Array.from({ length: skill.level }).map((_, i) => (
-          <Flame key={i} className="w-3 h-3 text-orange-500 fill-orange-500" />
+          <Flame key={i} className="w-3 h-3 text-orange-500 fill-orange-500" aria-hidden="true" />
         ))}
       </span>
     </span>

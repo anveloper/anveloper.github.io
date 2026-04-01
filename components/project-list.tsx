@@ -41,6 +41,7 @@ export const ProjectList = ({ projects }: { projects: Project[] }) => {
               <button
                 type="button"
                 onClick={() => setSelectedTags([])}
+                aria-label="필터 초기화"
                 className="w-8 h-8 rounded-full flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted transition-colors cursor-pointer"
               >
                 <X className="w-4 h-4" />
@@ -49,6 +50,8 @@ export const ProjectList = ({ projects }: { projects: Project[] }) => {
             <button
               type="button"
               onClick={() => setShowFilter((v) => !v)}
+              aria-label={showFilter ? "필터 닫기" : "필터 열기"}
+              aria-expanded={showFilter}
               className="relative w-8 h-8 rounded-full flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted transition-colors cursor-pointer"
             >
               <ListFilter className="w-4 h-4" />
@@ -63,7 +66,7 @@ export const ProjectList = ({ projects }: { projects: Project[] }) => {
       </header>
 
       {showFilter && allTags.length > 0 && (
-        <div className="flex flex-wrap gap-1.5 mb-8">
+        <div role="group" aria-label="기술 태그 필터" className="flex flex-wrap gap-1.5 mb-8">
           {allTags.map((tag) => (
             <button key={tag} type="button" onClick={() => toggleTag(tag)}>
               <Badge variant={selectedTags.includes(tag) ? "default" : "outline"} className="cursor-pointer text-xs">
@@ -89,7 +92,7 @@ export const ProjectList = ({ projects }: { projects: Project[] }) => {
             <Link key={project.slug} href={`/projects/${project.slug}`} className="block group">
               <div className="py-6">
                 <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4 mb-2">
-                  <time className="text-sm text-muted-foreground shrink-0">{project.frontmatter.date as string}</time>
+                  <time dateTime={(project.frontmatter.date as string).replace(/\./g, "-")} className="text-sm text-muted-foreground shrink-0">{project.frontmatter.date as string}</time>
                   <div className="flex items-center gap-2">
                     {project.icon && <img src={project.icon} alt="" className="w-6 h-6 rounded" />}
                     <h2 className="text-lg font-medium text-foreground group-hover:text-primary-sky transition-colors">

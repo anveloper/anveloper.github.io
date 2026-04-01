@@ -89,7 +89,7 @@ export const mdxComponents: MDXComponents = {
   table: ({ children, ...props }) =>
     createElement(
       "div",
-      { className: "my-8 overflow-x-auto bg-card rounded-lg border border-border" },
+      { className: "my-8 overflow-x-auto bg-card rounded-lg border border-border", role: "region", "aria-label": "표", tabIndex: 0 },
       createElement("table", { ...props, className: "w-full border-collapse" }, children)
     ),
   thead: (props) =>
@@ -99,6 +99,7 @@ export const mdxComponents: MDXComponents = {
     }),
   th: (props) =>
     createElement("th", {
+      scope: "col",
       ...props,
       className: "border-b border-r border-border px-4 py-2 text-left font-semibold last:border-r-0",
     }),
@@ -110,6 +111,7 @@ export const mdxComponents: MDXComponents = {
   img: (props) =>
     createElement("img", {
       ...props,
+      alt: props.alt || "",
       className: "rounded-lg my-6 max-w-full h-auto",
     }),
   strong: (props) =>

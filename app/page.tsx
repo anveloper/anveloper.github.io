@@ -1,9 +1,8 @@
 "use client";
 
 import { PageContainer } from "@/components/page-container";
-import { SkillBadge, TechBadge } from "@/components/skill-badge";
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent } from "@/components/ui/card";
+import { TechBadge } from "@/components/skill-badge";
+import { TextType } from "@/components/text-type";
 import { sectionReveal, staggerContainer, staggerItem } from "@/lib/animation";
 import type { SkillCategory } from "@/lib/skill-data";
 import { cn } from "@/lib/utils";
@@ -13,7 +12,15 @@ import Image from "next/image";
 import Link from "next/link";
 
 // About Data
-const interests = ["풀스택 개발", "UX 최적화", "클린 아키텍처", "기술 리더십", "스마트 제조", "안드로이드 개발"];
+const aboutPhrases = [
+  "빠르게 습득하고, 확실하게 쓰는 개발자 안성진입니다.",
+  "교육·실무 어디서든 상급 이상을 달성해온 개발자 안성진입니다.",
+  "조기 출근, 야근, 긴급 소집에 익숙한 개발자 안성진입니다.😉",
+  "先入後出(선입후출), STACK처럼 가장 처음부터 끝까지 마무리하는 개발자 안성진입니다.",
+  "Java에서 시작해 Next.js·TypeScript·Prisma로 전환한 개발자 안성진입니다.",
+  "Vanilla JS만으로도 웹을 만들 수 있는 개발자 안성진입니다.",
+  "PHP를 React, Remix.js로 마이그레이션한 개발자 안성진입니다.",
+];
 
 // Skills Data
 const skillCategories: SkillCategory[] = [
@@ -223,7 +230,9 @@ const HomePage = () => {
           </div>
           <div className="flex flex-col gap-0.5 md:gap-1">
             <h1 className="text-xl md:text-2xl font-bold text-foreground tracking-tight">안성진</h1>
-            <p className="text-xs md:text-sm font-semibold text-muted-foreground">Full-Stack Developer, UX Team Lead</p>
+            <p className="text-xs md:text-sm font-semibold text-muted-foreground">
+              Full-Stack Developer, UX Team Lead / Manager
+            </p>
             <p className="text-[11px] md:text-xs text-muted-foreground/80 italic tracking-tight">
               언어로 세상을 표현하는 개발자
             </p>
@@ -240,9 +249,18 @@ const HomePage = () => {
         className="mb-10 md:mb-16"
       >
         <p className="text-sm md:text-base leading-relaxed text-foreground">
-          Next.js, TypeScript, Prisma를 주력으로 다루며{" "}
-          <span className="font-semibold text-primary-sky">(주) TILS AI</span>에서 UX Team Lead로서 사용자 중심의
-          인터페이스를 설계하고 개발합니다. 효율적인 코드와 뛰어난 사용자 경험의 교차점을 탐구합니다.
+          오늘의 쓸모를 다하는 사람,
+          <br />
+          <TextType
+            text={aboutPhrases}
+            typingSpeed={40}
+            deletingSpeed={25}
+            pauseDuration={2000}
+            className="font-semibold"
+            highlightText="개발자 안성진"
+            highlightClassName="text-primary-sky"
+            cursorClassName="text-primary-sky"
+          />
         </p>
       </motion.section>
 

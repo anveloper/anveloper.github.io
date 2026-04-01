@@ -19,7 +19,7 @@ export const GiscusComments = () => {
   const theme = useSyncExternalStore(subscribe, resolveGiscusTheme, () => "light" as const);
 
   return (
-    <section className="mt-12 pt-8 border-t border-border">
+    <section aria-label="댓글" className="mt-12 pt-8 border-t border-border">
       <Giscus
         repo="anveloper/anveloper.github.io"
         repoId="R_kgDOHCTsEQ"

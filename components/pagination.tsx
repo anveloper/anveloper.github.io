@@ -34,7 +34,12 @@ export const Pagination = ({ currentPage, totalPages, basePath }: PaginationProp
   return (
     <nav aria-label="페이지네이션" className="flex items-center justify-center gap-1 mt-12">
       {currentPage === 1 ? (
-        <span className="w-9 h-9 flex items-center justify-center rounded-md text-muted-foreground/40">
+        <span
+          role="link"
+          aria-disabled="true"
+          aria-label="이전 페이지"
+          className="w-9 h-9 flex items-center justify-center rounded-md text-muted-foreground/40"
+        >
           <ChevronLeft className="w-4 h-4" />
         </span>
       ) : (
@@ -51,6 +56,7 @@ export const Pagination = ({ currentPage, totalPages, basePath }: PaginationProp
         page === "..." ? (
           <span
             key={`ellipsis-${i}`}
+            aria-hidden="true"
             className="w-9 h-9 flex items-center justify-center text-muted-foreground text-sm"
           >
             ...
@@ -66,6 +72,7 @@ export const Pagination = ({ currentPage, totalPages, basePath }: PaginationProp
                 : "text-muted-foreground hover:text-foreground hover:bg-muted"
             )}
             aria-current={page === currentPage ? "page" : undefined}
+            aria-label={`${page} 페이지`}
           >
             {page}
           </Link>
@@ -73,7 +80,12 @@ export const Pagination = ({ currentPage, totalPages, basePath }: PaginationProp
       )}
 
       {currentPage === totalPages ? (
-        <span className="w-9 h-9 flex items-center justify-center rounded-md text-muted-foreground/40">
+        <span
+          role="link"
+          aria-disabled="true"
+          aria-label="다음 페이지"
+          className="w-9 h-9 flex items-center justify-center rounded-md text-muted-foreground/40"
+        >
           <ChevronRight className="w-4 h-4" />
         </span>
       ) : (

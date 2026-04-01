@@ -49,6 +49,8 @@ export function Mermaid({ chart }: { chart: string }) {
   return (
     <div
       ref={containerRef}
+      role="img"
+      aria-label="Mermaid 다이어그램"
       className="my-6 flex justify-center overflow-x-auto bg-card rounded-lg border border-border p-4 [&_svg]:max-w-full"
       dangerouslySetInnerHTML={{ __html: svg }}
     />

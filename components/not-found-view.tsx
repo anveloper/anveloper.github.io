@@ -15,7 +15,7 @@ export const NotFoundView = ({ icon: Icon, title, description, href, linkLabel }
   return (
     <PageContainer>
       <div className="py-24 flex flex-col items-center text-center">
-        <Icon className="w-12 h-12 text-muted-foreground mb-6" />
+        <Icon className="w-12 h-12 text-muted-foreground mb-6" aria-hidden="true" />
         <h1 className="text-2xl font-bold text-foreground mb-2">{title}</h1>
         <p className="text-muted-foreground mb-8">{description}</p>
         <Link

@@ -72,9 +72,14 @@ const RootLayout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
         <link rel="apple-touch-icon" href="/favicon-light.svg" />
       </head>
       <body className="min-h-screen flex flex-col bg-background text-foreground antialiased">
+        <a href="#main-content" className="skip-nav">
+          본문으로 건너뛰기
+        </a>
         <NavBar />
 
-        <main className="flex-1 flex flex-col">{children}</main>
+        <main id="main-content" className="flex-1 flex flex-col" tabIndex={-1}>
+          {children}
+        </main>
         <Footer />
         <FaviconSwitcher />
       </body>
