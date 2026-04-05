@@ -43,8 +43,7 @@ app/                 # Next.js App Router 페이지
 ├── contact/         # 연락처 페이지
 ├── not-found.tsx    # 글로벌 404 페이지
 ├── posts/[slug]/    # 블로그 포스트 (숫자 slug → 페이지네이션)
-├── projects/[slug]/ # 프로젝트
-└── solutions/[slug]/ # 알고리즘 풀이 (숫자 slug → 페이지네이션)
+└── projects/[slug]/ # 프로젝트
 
 components/          # 재사용 컴포넌트
 ├── ui/              # 기본 UI (Badge 등)
@@ -78,7 +77,6 @@ lib/                 # 유틸리티 함수
 └── skill-data.ts    # shields.io 뱃지 데이터
 _posts/              # 블로그 MDX 파일
 _projects/           # 프로젝트 MDX 파일
-_solutions/          # 알고리즘 풀이 MDX 파일
 public/              # 정적 파일 (폰트, 이미지, 파비콘)
 docs/                # 프로젝트 문서
 .claude/skills/      # Claude Code 스킬
