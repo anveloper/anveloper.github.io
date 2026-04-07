@@ -1,0 +1,167 @@
+---
+title: "Claude Code + Codex 듀얼 에이전트 협업 세팅기"
+date: "2026-04-07"
+description: "Claude Code 안에서 Codex를 서브 에이전트로 호출해 디버깅·보안 리뷰를 위임하는 듀얼 세팅 정리"
+tags: ["Claude Code", "Codex", "AI", "개발환경"]
+---
+
+# Claude Code + Codex 듀얼 에이전트 협업 세팅기
+
+## 왜 두 개를 같이 쓰나
+
+Claude Code 하나만으로도 충분한 작업이 많지만, 최근 두 가지 한계를 자주 느꼈다.
+
+1. **같은 버그를 두세 번 시도해도 못 푸는 케이스** — 한 모델의 사고 패턴에 갇히는 느낌
+2. **보안 민감 코드 변경 후 교차 검증이 필요한 케이스** — auth, oauth, payment 같은 영역
+
+마침 OpenAI Codex Plus가 출시되어 결제했고, [openai/codex-plugin-cc](https://github.com/openai/codex-plugin-cc) 플러그인을 통해 Claude Code 안에서 Codex를 서브 에이전트처럼 호출할 수 있다는 걸 알게 되어 듀얼 세팅을 구성했다.
+
+## 설치
+
+### 1. Codex CLI 설치 + 로그인
+
+```bash
+brew install codex
+codex login   # ChatGPT Plus 계정 OAuth 로그인
+```
+
+### 2. Claude Code에 플러그인 추가
+
+Claude Code 안에서 다음을 차례로 실행한다.
+
+```
+/plugin marketplace add openai/codex-plugin-cc
+/plugin install codex@openai-codex
+/reload-plugins
+/codex:setup
+```
+
+`/codex:setup`이 통과하면 `/codex:rescue`, `/codex:review` 명령을 바로 쓸 수 있다. 요구사항은 Node.js 18.18+ 와 ChatGPT 구독(또는 OpenAI API 키).
+
+## 역할 분담 설계
+
+두 에이전트를 그냥 같이 띄운다고 협업이 자동으로 되진 않는다. **누가 무엇을 하고, 언제 위임하는지**를 명확히 해야 충돌이 없다.
+
+### Claude (메인 오케스트레이터)
+
+- 파일 탐색, 리팩토링 계획
+- FSD 레이어 의존성 관리
+- i18n 메시지, Prisma 스키마/마이그레이션
+- UI 컴포넌트, Context 기반 페이지 작업
+- **커밋 전담** (커밋 규칙 일관성 유지)
+- 문서 작성
+
+### Codex (서브 위임 대상)
+
+- 알고리즘/성능 최적화
+- 복잡한 디버깅, 엣지 케이스 탐색
+- **보안 민감 코드 리뷰** (auth, oauth, payment)
+- 테스트 케이스 생성
+- 대규모 정규식·파서·데이터 변환
+- 장시간 분석 작업 (`--background`)
+
+### 위임 트리거
+
+| 상황 | 명령 |
+|---|---|
+| 같은 버그 2회 시도 후 미해결 | `/codex:rescue {파일}` |
+| auth/oauth/payment 변경 후 | `/codex:review {파일}` |
+| 30초+ 걸리는 분석 작업 | `/codex:rescue --background {범위}` |
+| 사용자가 "리뷰"/"교차검증" 언급 | `/codex:review` |
+
+### 충돌 방지 룰
+
+- 위임 시 **파일 경로 명시 필수**
+- Claude는 위임 중인 파일을 작업 완료 전까지 수정 금지
+- Codex 산출물도 Claude가 검토 → 통합 → 커밋
+- 동일 파일 동시 편집 절대 금지
+
+## 영구 세팅 (다음 세션에서도 유지)
+
+설정을 매번 알려주지 않으려면 두 레이어로 박아둬야 한다.
+
+### 레이어 1: 프로젝트 CLAUDE.md
+
+`CLAUDE.md`는 Claude Code가 매 메시지마다 시스템 프롬프트로 로드한다. git에 커밋되어 팀 공유도 된다.
+
+```markdown
+## Codex 협업 규칙
+
+이 프로젝트는 Claude Code + Codex(/codex:* 플러그인)를 함께 사용한다.
+
+### 역할 분담
+- Claude (메인): 파일 탐색, 리팩토링, i18n, 커밋, 문서
+- Codex (위임): 디버깅, 보안 리뷰, 테스트, 성능 최적화
+
+### 위임 트리거
+1. 같은 버그 2회 시도 후 미해결 → /codex:rescue
+2. auth/oauth/payment 변경 후 → /codex:review
+3. 30초+ 분석 → /codex:rescue --background
+
+### 충돌 방지
+- 위임 시 파일 경로 명시 필수
+- 위임 중인 파일은 Claude 수정 금지
+- 커밋은 항상 Claude
+```
+
+### 레이어 2: 사용자 메모리
+
+Claude Code의 사용자 메모리(`~/.claude/projects/.../memory/`)에 feedback 타입으로 등록하면, 프로젝트 단위로 영구 보존된다.
+
+```markdown
+---
+name: Codex 협업 규칙
+description: Claude/Codex 역할 분담, 위임 트리거, 충돌 방지
+type: feedback
+---
+
+DPS Store는 Claude Code + Codex를 병렬 사용. CLAUDE.md "Codex 협업 규칙" 참조.
+
+Why: 두 에이전트 동시 사용 시 같은 파일 충돌 방지와 일관된 커밋 흐름 유지.
+
+How to apply:
+- Claude는 메인 + 커밋 전담
+- Codex는 디버깅/보안 리뷰/장시간 분석 위임
+- 위임 시 파일 경로 명시, 위임 중 Claude 수정 금지
+```
+
+이렇게 두면 새 세션을 열어도 규칙이 그대로 적용된다.
+
+## 실제 워크플로 예시
+
+### 예시 1: OAuth 콜백 리뷰
+
+```
+나: 방금 SNS 콜백에 이메일 매칭 로직 추가했어. 보안적으로 문제 없어?
+
+Claude: 변경 내용 확인했습니다. CLAUDE.md 규칙에 따라 Codex 교차 리뷰를
+        제안합니다.
+        > /codex:review app/api/customer/oauth/[provider]/callback/route.ts
+
+Codex: [세션 하이재킹 가능성 1건 발견] ...
+Claude: Codex 지적 사항 반영해서 수정 후 커밋하겠습니다.
+```
+
+### 예시 2: 디버깅 위임
+
+```
+나: 결제 후 출력 큐가 가끔 PENDING에서 안 넘어가. 두 번 봤는데 못 찾겠어.
+
+Claude: 두 번 시도해도 미해결이라 Codex에 위임합니다.
+        > /codex:rescue app/api/cron/* entities/print/api/*
+
+Codex: [cron 락 경합 추정, 재현 케이스 + 패치 제안]
+Claude: 패치 적용 후 타입 체크 통과 확인, 커밋합니다.
+```
+
+## 느낀 점
+
+- **두 모델의 시각 차이가 실제로 도움된다.** 같은 코드에 대해 Claude는 구조/일관성 위주, Codex는 엣지 케이스/보안 위주로 보는 경향이 느껴진다.
+- **커밋 권한은 한쪽에 몰아두는 게 좋다.** 양쪽이 다 커밋하면 메시지 스타일이 흐트러지고, 협업 규칙이 있는 팀에서는 일관성이 깨진다.
+- **위임 시 파일 범위는 무조건 좁게.** 넓게 던지면 두 에이전트가 같은 파일을 건드려서 머지 충돌이 난다.
+- **백그라운드 위임이 의외로 유용하다.** Codex가 큰 분석을 도는 동안 Claude와 다른 작업을 병렬로 할 수 있어서 체감 속도가 빨라진다.
+
+## 참고
+
+- [openai/codex-plugin-cc](https://github.com/openai/codex-plugin-cc)
+- 프로젝트 `CLAUDE.md` 내 "Codex 협업 규칙" 섹션
