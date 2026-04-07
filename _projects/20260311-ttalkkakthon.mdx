@@ -1,0 +1,92 @@
+---
+title: "딸깍톤 (Ttalkkakthon)"
+date: "2026-03-11"
+description: "AI와 함께하는 해커톤 — 참가 신청·갤러리·디스코드 기반 AI 자동 심사를 지원하는 해커톤 운영 플랫폼"
+tags: ["Next.js", "React", "TypeScript", "Prisma", "PostgreSQL", "Neon", "Tailwind CSS", "Three.js", "Vercel"]
+github: "anveloper/ttalkkakthon"
+demo: "https://ttalkkakthon.vibecodingclub.kr/"
+---
+
+# 딸깍톤 (Ttalkkakthon)
+
+![딸깍톤 히어로](/images/projects/ttalkkakthon/hero.webp)
+
+## 개요
+
+딸깍톤은 "Hackathon with AI" 콘셉트의 해커톤 운영 플랫폼입니다. 참가자 등록, 팀/프로젝트 관리, 갤러리 노출, 디스코드 봇을 통한 AI 자동 심사까지 해커톤 진행에 필요한 흐름을 한 곳에서 처리합니다.
+
+랜딩 페이지는 Three.js 기반 인터랙티브 비주얼로 구성하고, 백오피스/심사 흐름은 Next.js App Router + Prisma 7 + Neon Postgres로 가볍게 구축했습니다.
+
+## 주요 기능
+
+- **참가 신청 / 팀 등록**: `/register` 흐름에서 팀과 프로젝트 정보를 수집하고 Prisma 스키마로 검증·저장
+- **프로젝트 갤러리**: `/gallery`에서 등록된 프로젝트와 데모/영상/GitHub 링크를 노출
+- **AI 자동 심사**: 디스코드에서 호출 가능한 `심사`, `냥심사`, `분석` 명령으로 `/api/evaluate` 엔드포인트를 호출, 평가 프롬프트와 GitHub 코드를 함께 검토하여 결과를 DB에 저장
+- **다중 프로젝트 처리**: 한 팀이 여러 프로젝트를 등록한 경우 `projectCount` 기반으로 선택 흐름을 제공
+- **인터랙티브 랜딩**: Three.js + postprocessing + motion 으로 비주얼/애니메이션 구성, `canvas-confetti`로 이벤트 연출
+
+![행사 소개](/images/projects/ttalkkakthon/about-001.webp)
+
+## 기술 스택
+
+| 분류        | 기술                                                              |
+| ----------- | ----------------------------------------------------------------- |
+| Framework   | Next.js 16 (App Router, Turbopack)                                |
+| Language    | TypeScript 5 (strict)                                             |
+| UI          | React 19, Tailwind CSS 4, `@tailwindcss/typography`, tailwind-merge |
+| 3D / 모션   | Three.js, postprocessing, motion                                  |
+| ORM / DB    | Prisma 7 + Neon 어댑터, Vercel Postgres (Neon)                    |
+| Auth        | NextAuth 5 (beta)                                                 |
+| Validation  | Zod 4                                                             |
+| Storage     | Vercel Blob                                                       |
+| 배포        | Vercel                                                            |
+| Pkg Manager | pnpm                                                              |
+
+## 프로젝트 구조
+
+```
+ttalkkakthon/
+├── app/
+│   ├── _components/      # 공용 UI 컴포넌트
+│   ├── _hooks/           # 커스텀 훅
+│   ├── actions/          # Server Actions
+│   ├── admin/            # 운영자 페이지
+│   ├── api/              # Route Handlers (evaluate 등)
+│   ├── gallery/          # 프로젝트 갤러리
+│   ├── register/         # 참가 신청 흐름
+│   ├── sections/         # 랜딩 섹션
+│   └── teams/            # 팀 페이지
+├── lib/
+│   ├── prisma.ts         # Neon 어댑터 + 싱글톤 클라이언트
+│   ├── utils.ts          # cn() 등 헬퍼
+│   └── validations/      # Zod 스키마
+├── prisma/schema.prisma
+└── docs/                 # 설계서/기획서 (design, event, feature, registration, voting)
+```
+
+### 주요 패턴
+
+- **Prisma Client 싱글톤**: Neon 서버리스 어댑터 기반, dev hot-reload 환경에서도 단일 인스턴스 유지
+- **환경 변수 자동 주입**: Vercel Postgres 연동 시 `POSTGRES_URL`, `POSTGRES_PRISMA_URL`, `POSTGRES_URL_NON_POOLING` 사용
+- **Server Components 우선**: 인터랙션이 필요한 곳만 `"use client"`
+- **컴포넌트 명세 문서화**: `docs/feature/components/register/` 하위에 컴포넌트별 Props/스타일/동작 명세 관리
+
+## 디스코드 AI 심사 흐름
+
+디스코드에서 `@ttalkkakthon 심사 {팀이름}` 형태로 호출하면 다음 흐름이 동작합니다.
+
+1. `GET /api/evaluate?team={팀이름}` 으로 프로젝트 데이터 조회
+2. 응답의 `evaluationPrompt`를 기반으로 AI가 심사 수행
+3. 등록된 GitHub/데모/영상 URL이 있으면 직접 접근하여 실제 결과물 확인
+4. `POST /api/evaluate` 로 `promptFeedback`을 DB에 저장
+5. 디스코드에 심사 결과 회신
+
+기본 심사(`promptFeedback`)와 별개로, 고양이 캐릭터 "나비"의 예능 보너스 심사(`catFeedback`)를 독립적으로 운영하는 **냥심사** 명령도 함께 제공합니다.
+
+![현장 컬처](/images/projects/ttalkkakthon/culture-001.webp)
+
+## 회고
+
+- Next.js 16 + Prisma 7 + Neon 조합을 짧은 기간 안에 안정적으로 묶어볼 수 있었던 좋은 실험장이었습니다.
+- 디스코드 봇 + API + AI 심사 프롬프트의 분리 덕분에, 심사 규칙이 바뀌어도 서버 코드 변경 없이 프롬프트만 갱신하면 되는 구조가 됐습니다.
+- Three.js 기반 인터랙티브 랜딩은 임팩트는 컸지만 모바일 성능 최적화가 다음 과제로 남았습니다.
