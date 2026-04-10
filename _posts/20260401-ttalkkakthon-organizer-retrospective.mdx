@@ -33,7 +33,7 @@ tags: ["해커톤", "딸깍톤", "AI", "운영", "후기"]
 | Auth       | NextAuth 5 (어드민 한정)                                   |
 | Validation | Zod 4                                                      |
 | Styling    | Tailwind CSS 4                                             |
-| 모션 / 3D  | motion, three.js, postprocessing                           |
+| 모션       | motion, canvas-confetti                                    |
 | Storage    | Vercel Blob (제출 자료 업로드)                             |
 
 DB는 Neon 서버리스 어댑터를 끼워 `lib/prisma.ts` 싱글톤으로 묶었다. dev 핫리로드에서 클라이언트가 중복 생성되는 이슈를 막기 위함이다. 폼 입력은 모두 Zod 스키마(`lib/validations`)를 통해 1차 검증한 뒤 Server Action으로 흘렸고, Route Handler는 디스코드 봇/AI 심사 같은 외부 호출 진입점으로만 남겼다.
