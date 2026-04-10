@@ -25,6 +25,19 @@ tags: ["해커톤", "딸깍톤", "AI", "운영", "후기"]
 
 기술 스택은 계속 사용하던 Next.js 16에 Vercel 레포 연동 자동 배포를 사용했다. 평소에는 직접 구축하는 스타일인데, 이번에는 속도를 위해 Vercel의 편의성을 그대로 활용했다. DB도 Vercel에서 제공하는 Neon을 무료 티어로 사용했다. 최초 환경 세팅은 2월 24일, 개발 기간은 약 한 달이었다.
 
+| 분류       | 선택                                                       |
+| ---------- | ---------------------------------------------------------- |
+| Framework  | Next.js 16 (App Router) + React 19                         |
+| Language   | TypeScript strict                                          |
+| ORM / DB   | Prisma 7 + `@prisma/adapter-neon` + Vercel Postgres (Neon) |
+| Auth       | NextAuth 5 (어드민 한정)                                   |
+| Validation | Zod 4                                                      |
+| Styling    | Tailwind CSS 4                                             |
+| 모션       | motion, canvas-confetti                                    |
+| Storage    | Vercel Blob (제출 자료 업로드)                             |
+
+DB는 Neon 서버리스 어댑터를 끼워 `lib/prisma.ts` 싱글톤으로 묶었다. dev 핫리로드에서 클라이언트가 중복 생성되는 이슈를 막기 위함이다. 폼 입력은 모두 Zod 스키마(`lib/validations`)를 통해 1차 검증한 뒤 Server Action으로 흘렸고, Route Handler는 디스코드 봇/AI 심사 같은 외부 호출 진입점으로만 남겼다.
+
 메인 페이지에 인터랙션이 부족하다고 느껴서 공개 1시간 전에 React Bitz를 급히 적용했다.
 
 - 웹사이트: [ttalkkakthon.vibecodingclub.kr](https://ttalkkakthon.vibecodingclub.kr/)
@@ -32,11 +45,12 @@ tags: ["해커톤", "딸깍톤", "AI", "운영", "후기"]
 
 ### 담당한 기능
 
-- 홈페이지 제작
-- DB 구축
-- 참가 신청 폼 로직 구성
-- 프로젝트 관리 어드민
+- 홈페이지 제작 (랜딩, 갤러리, 결과 페이지)
+- Prisma 스키마 설계 및 마이그레이션
+- 참가 신청 폼 로직 구성 (Zod 검증 + Server Action)
+- 프로젝트 관리 어드민 (NextAuth 보호)
 - 실시간 좋아요 기능 (서버 폴링)
+- 디스코드 봇 연동을 위한 `/api/evaluate` 엔드포인트
 - AI 프로젝트 심사 (Claude Channels 연동)
 
 ### 디자인
@@ -47,20 +61,24 @@ tags: ["해커톤", "딸깍톤", "AI", "운영", "후기"]
 
 대전에서 아침 6시 30분 기차를 타고 올라갔다. 택시로 8시 15분에 정보과학관에 도착했다.
 
-| 시간 | 내용 |
-| --- | --- |
-| ~10:30 | 참여자 입장 |
-| 10:30~11:00 | 대회 소개 |
+| 시간        | 내용                            |
+| ----------- | ------------------------------- |
+| ~10:30      | 참여자 입장                     |
+| 10:30~11:00 | 대회 소개                       |
 | 11:00~11:40 | 발표 세션 "바이브 코딩 하는 법" |
-| 11:50~15:50 | 딸깍톤 개발 (4시간) |
-| 15:50~16:50 | 예선 (23팀, 5그룹) |
-| 16:50~ | 본선 발표 (5팀) + AI 심사 |
-| | 최종 등수 공개, 시상, 단체 사진 |
+| 11:50~15:50 | 딸깍톤 개발 (4시간)             |
+| 15:50~16:50 | 예선 (23팀, 5그룹)              |
+| 16:50~      | 본선 발표 (5팀) + AI 심사       |
+|             | 최종 등수 공개, 시상, 단체 사진 |
 
 AI 바이브 코딩이 컨셉이어서 개발 시간은 딱 4시간으로 짧게 잡았다. 23개 팀이 5그룹으로 나뉘어 예선을 진행했고, 5개 팀이 본선에서 발표했다.
 
 <div align="center">
-  <img src="/images/posts/ttalkkakthon-organizer-retrospective/002.webp" alt="해커톤 굿즈 — 키캡, 일수 찌라시 스타일 스티커" width="360" />
+  <img
+    src="/images/posts/ttalkkakthon-organizer-retrospective/002.webp"
+    alt="해커톤 굿즈 — 키캡, 일수 찌라시 스타일 스티커"
+    width="360"
+  />
 </div>
 
 ## 발표 — "바이브 코딩 하는 법"
@@ -82,12 +100,29 @@ AI 바이브 코딩이 컨셉이어서 개발 시간은 딱 4시간으로 짧게
 만우절이 해커톤 모토라 일부 인원이 코스프레를 했는데, 나는 발표 준비 때문에 미처 챙기지 못했다. 그런데 발표 직전에 용기를 내라는 의미로 용기의 천사링을 착용하게 되었다.
 
 <div align="center">
-  <img src="/images/posts/ttalkkakthon-organizer-retrospective/003.webp" alt="용기의 천사링을 착용하고 발표 중" width="480" />
+  <img
+    src="/images/posts/ttalkkakthon-organizer-retrospective/003.webp"
+    alt="용기의 천사링을 착용하고 발표 중"
+    width="480"
+  />
 </div>
 
 ## AI 심사
 
 프로젝트 제출은 별도 저장소 없이 GitHub 링크와 배포 링크를 받는 방식이었다. 원래 AI 심사를 위해 모델 서버를 직접 띄워야 하나 고민했는데, 해커톤 1주 전에 나온 Claude Channels로 해결했다. DB에 접근 가능한 로컬 PC에서 Claude Channels를 통해 심사를 동작시키고, 결과를 직접 DB에 갱신하는 구조였다.
+
+흐름은 단순했다. 디스코드에서 `@ttalkkakthon 심사 {팀이름}` 을 호출하면 봇이 `/api/evaluate?team=...` 으로 프로젝트 데이터를 받아오고, 응답에 동봉된 `evaluationPrompt` 를 Claude Channels에 그대로 던진다. Claude는 GitHub/배포/영상 URL에 직접 접근해서 코드와 실제 결과물까지 본 다음 점수와 코멘트를 만들어내고, 그 결과를 다시 `POST /api/evaluate` 로 DB에 저장한다. 봇이 LLM을 직접 호출하지 않고 프롬프트만 운반하는 구조라, 평가 기준이 바뀌어도 `lib/prompts.ts` 만 갱신하면 됐다.
+
+평가 기준은 다음과 같이 100점 만점으로 잡았다.
+
+| 항목              | 배점 | 핵심 질문                                      |
+| ----------------- | ---- | ---------------------------------------------- |
+| 아이디어 / 기획력 | 25   | 문제 정의가 명확하고 해결 방안이 실현 가능한가 |
+| AI 활용도         | 30   | AI가 보조가 아닌 본질적 기능으로 쓰였는가      |
+| 완성도            | 25   | 데모 URL에서 핵심 기능이 실제로 동작하는가     |
+| 기술 구현력       | 20   | GitHub 코드 품질·구조·예외 처리가 적절한가     |
+
+여기에 더해 "이웃집 고양이 나비"라는 캐릭터가 진행하는 **냥심사**(15점 만점, 별도 보너스)를 따로 만들었다. 첫인상, 시각적 자극도, 졸음 유발 지수, 쫓고 싶은 요소를 3점 척도로 채점하는 예능용 트랙이다. 본심사와 DB 컬럼(`promptFeedback` / `catFeedback`)을 분리해서 점수에는 영향을 안 주되, 결과 페이지에서 따로 노출했다.
 
 AI 심사는 시간이 걸리다 보니 본선 발표와 동시에 진행할 수는 없었다. 5개 팀의 발표가 모두 끝난 뒤 결과 페이지에서 각자 확인할 수 있도록 공개했다. 최종 등수는 참여자 좋아요 비율(좋아요 / 총인원) × 50점과 AI 심사(100점 만점) × 50점을 합산해서 산출했다. 좋아요와 AI 심사 로직 모두 직접 개발했다.
 
@@ -101,11 +136,11 @@ AI 심사는 시간이 걸리다 보니 본선 발표와 동시에 진행할 수
 
 대회 자체가 이그노벨상 느낌이어서 상품도 그에 맞췄다. 온라인에서 구매한 금은동 메달과 함께 시상했다.
 
-| 등수 | 팀명 | 상품 |
-| --- | --- | --- |
-| 1등 | 딩코 | 스트레스 엔터키 |
-| 2등 | 관상은과학이다 | 짐바브웨 100조 달러 기념품 |
-| 3등 | 암쏘쏘리 | 벌레 티셔츠(?) |
+| 등수 | 팀명           | 상품                       |
+| ---- | -------------- | -------------------------- |
+| 1등  | 딩코           | 스트레스 엔터키            |
+| 2등  | 관상은과학이다 | 짐바브웨 100조 달러 기념품 |
+| 3등  | 암쏘쏘리       | 벌레 티셔츠(?)             |
 
 1등 팀 딩코는 프로젝트도 알찼지만, 4명이서 공룡옷을 입고 등장한 유일한 팀이었다.
 
@@ -117,8 +152,16 @@ AI 심사는 시간이 걸리다 보니 본선 발표와 동시에 진행할 수
 - [암쏘쏘리 GitHub](https://github.com/ttalkkak-and-pray/im-so-sorry-but-i-love-you) / [배포](https://im-so-sorry.kro.kr/)
 
 <div className="flex justify-center items-start gap-4">
-  <img src="/images/posts/ttalkkakthon-organizer-retrospective/004.webp" alt="나만의 4컷 기기" className="h-48 md:h-80 w-auto rounded-lg" />
-  <img src="/images/posts/ttalkkakthon-organizer-retrospective/005.webp" alt="나만의 4컷 결과물" className="h-48 md:h-80 w-auto rounded-lg" />
+  <img
+    src="/images/posts/ttalkkakthon-organizer-retrospective/004.webp"
+    alt="나만의 4컷 기기"
+    className="h-48 md:h-80 w-auto rounded-lg"
+  />
+  <img
+    src="/images/posts/ttalkkakthon-organizer-retrospective/005.webp"
+    alt="나만의 4컷 결과물"
+    className="h-48 md:h-80 w-auto rounded-lg"
+  />
 </div>
 
 뒷풀이에서 참가자들이 이번이 몇 회차 해커톤이냐고 물어볼 정도로 진행이 매끄러웠다. 1회차라고 하니 놀라는 반응이었다.

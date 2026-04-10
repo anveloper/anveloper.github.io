@@ -127,6 +127,13 @@ const timeline: TimelineItem[] = [
 // Projects Data
 const projects = [
   {
+    title: "딸깍톤 (Ttalkkakthon)",
+    description: "AI와 함께하는 해커톤 — 참가 신청·갤러리·디스코드 기반 AI 자동 심사를 지원하는 해커톤 운영 플랫폼",
+    tags: ["Next.js", "TypeScript", "Prisma", "Neon"],
+    slug: "ttalkkakthon",
+    icon: "/images/projects/ttalkkakthon/icon.svg",
+  },
+  {
     title: "DPS (Design Plug Shop)",
     description: "판매자와 제조사를 연결하는 B2B 주문형 굿즈·인쇄 제작 플랫폼",
     tags: ["Next.js", "TypeScript", "Prisma", "NextAuth"],

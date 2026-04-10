@@ -2,8 +2,8 @@
 title: "딸깍톤 (Ttalkkakthon)"
 date: "2026-03-11"
 description: "AI와 함께하는 해커톤 — 참가 신청·갤러리·디스코드 기반 AI 자동 심사를 지원하는 해커톤 운영 플랫폼"
-tags: ["Next.js", "React", "TypeScript", "Prisma", "PostgreSQL", "Neon", "Tailwind CSS", "Three.js", "Vercel"]
-github: "anveloper/ttalkkakthon"
+tags: ["Next.js", "React", "TypeScript", "Prisma", "PostgreSQL", "Neon", "Tailwind CSS", "Vercel"]
+github: "vibe-ai-coding-club/ttalkkakthon"
 demo: "https://ttalkkakthon.vibecodingclub.kr/"
 ---
 
@@ -15,7 +15,7 @@ demo: "https://ttalkkakthon.vibecodingclub.kr/"
 
 딸깍톤은 "Hackathon with AI" 콘셉트의 해커톤 운영 플랫폼입니다. 참가자 등록, 팀/프로젝트 관리, 갤러리 노출, 디스코드 봇을 통한 AI 자동 심사까지 해커톤 진행에 필요한 흐름을 한 곳에서 처리합니다.
 
-랜딩 페이지는 Three.js 기반 인터랙티브 비주얼로 구성하고, 백오피스/심사 흐름은 Next.js App Router + Prisma 7 + Neon Postgres로 가볍게 구축했습니다.
+백오피스/심사 흐름은 Next.js App Router + Prisma 7 + Neon Postgres로 가볍게 구축했습니다.
 
 ## 주요 기능
 
@@ -23,7 +23,7 @@ demo: "https://ttalkkakthon.vibecodingclub.kr/"
 - **프로젝트 갤러리**: `/gallery`에서 등록된 프로젝트와 데모/영상/GitHub 링크를 노출
 - **AI 자동 심사**: 디스코드에서 호출 가능한 `심사`, `냥심사`, `분석` 명령으로 `/api/evaluate` 엔드포인트를 호출, 평가 프롬프트와 GitHub 코드를 함께 검토하여 결과를 DB에 저장
 - **다중 프로젝트 처리**: 한 팀이 여러 프로젝트를 등록한 경우 `projectCount` 기반으로 선택 흐름을 제공
-- **인터랙티브 랜딩**: Three.js + postprocessing + motion 으로 비주얼/애니메이션 구성, `canvas-confetti`로 이벤트 연출
+- **인터랙티브 랜딩**: motion + `canvas-confetti`로 비주얼/애니메이션 구성
 
 ![행사 소개](/images/projects/ttalkkakthon/about-001.webp)
 
@@ -34,7 +34,7 @@ demo: "https://ttalkkakthon.vibecodingclub.kr/"
 | Framework   | Next.js 16 (App Router, Turbopack)                                |
 | Language    | TypeScript 5 (strict)                                             |
 | UI          | React 19, Tailwind CSS 4, `@tailwindcss/typography`, tailwind-merge |
-| 3D / 모션   | Three.js, postprocessing, motion                                  |
+| 모션        | motion, canvas-confetti                                           |
 | ORM / DB    | Prisma 7 + Neon 어댑터, Vercel Postgres (Neon)                    |
 | Auth        | NextAuth 5 (beta)                                                 |
 | Validation  | Zod 4                                                             |
@@ -89,4 +89,4 @@ ttalkkakthon/
 
 - Next.js 16 + Prisma 7 + Neon 조합을 짧은 기간 안에 안정적으로 묶어볼 수 있었던 좋은 실험장이었습니다.
 - 디스코드 봇 + API + AI 심사 프롬프트의 분리 덕분에, 심사 규칙이 바뀌어도 서버 코드 변경 없이 프롬프트만 갱신하면 되는 구조가 됐습니다.
-- Three.js 기반 인터랙티브 랜딩은 임팩트는 컸지만 모바일 성능 최적화가 다음 과제로 남았습니다.
+- 인터랙티브 랜딩은 임팩트는 컸지만 모바일 성능 최적화가 다음 과제로 남았습니다.
