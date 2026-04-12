@@ -89,7 +89,12 @@ export const mdxComponents: MDXComponents = {
   table: ({ children, ...props }) =>
     createElement(
       "div",
-      { className: "my-8 overflow-x-auto bg-card rounded-lg border border-border", role: "region", "aria-label": "표", tabIndex: 0 },
+      {
+        className: "my-8 overflow-x-auto bg-card rounded-lg border border-border",
+        role: "region",
+        "aria-label": "표",
+        tabIndex: 0,
+      },
       createElement("table", { ...props, className: "w-full border-collapse" }, children)
     ),
   thead: (props) =>

@@ -92,7 +92,12 @@ export const ProjectList = ({ projects }: { projects: Project[] }) => {
             <Link key={project.slug} href={`/projects/${project.slug}`} className="block group">
               <div className="py-6">
                 <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4 mb-2">
-                  <time dateTime={(project.frontmatter.date as string).replace(/\./g, "-")} className="text-sm text-muted-foreground shrink-0">{project.frontmatter.date as string}</time>
+                  <time
+                    dateTime={(project.frontmatter.date as string).replace(/\./g, "-")}
+                    className="text-sm text-muted-foreground shrink-0"
+                  >
+                    {project.frontmatter.date as string}
+                  </time>
                   <div className="flex items-center gap-2">
                     {project.icon && <img src={project.icon} alt="" className="w-6 h-6 rounded" />}
                     <h2 className="text-lg font-medium text-foreground group-hover:text-primary-sky transition-colors">

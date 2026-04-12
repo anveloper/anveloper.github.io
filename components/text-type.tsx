@@ -193,10 +193,7 @@ export const TextType = ({
     <span ref={containerRef} className={`inline-block whitespace-pre-wrap ${className}`}>
       {renderText()}
       {showCursor && (
-        <span
-          ref={cursorRef}
-          className={`ml-1 inline-block ${shouldHideCursor ? "hidden" : ""} ${cursorClassName}`}
-        >
+        <span ref={cursorRef} className={`ml-1 inline-block ${shouldHideCursor ? "hidden" : ""} ${cursorClassName}`}>
           {cursorCharacter}
         </span>
       )}
