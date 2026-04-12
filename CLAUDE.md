@@ -19,10 +19,10 @@
 
 | 분류            | 기술                                                 |
 | --------------- | ---------------------------------------------------- |
-| 프레임워크      | Next.js 16.1.6 (App Router, Turbopack)               |
-| UI              | React 19.2.4, TypeScript 5.9.3                       |
-| 스타일링        | Tailwind CSS v4.1.18, CVA (class-variance-authority) |
-| 애니메이션      | Motion 12.29.2 (Framer Motion)                       |
+| 프레임워크      | Next.js 16.2.3 (App Router, Turbopack)               |
+| UI              | React 19.2.5, TypeScript 5.9.3                       |
+| 스타일링        | Tailwind CSS v4.2.2, CVA (class-variance-authority)  |
+| 애니메이션      | Motion 12.38.0 (Framer Motion)                       |
 | UI 컴포넌트     | Radix UI, shadcn/ui                                  |
 | 콘텐츠          | MDX + gray-matter, remark-gfm, mermaid               |
 | 구문 하이라이팅 | rehype-pretty-code + shiki (듀얼 테마)               |
