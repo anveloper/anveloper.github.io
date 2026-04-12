@@ -165,9 +165,36 @@ EOF
 - Claude 협력 문구 제외
 - HEREDOC으로 본문 전달
 
-## 6단계: 결과 보고
+## 6단계: PR 머지
+
+PR 생성 후 머지를 진행합니다.
+
+```bash
+# PR 상태 확인 (checks 통과 여부)
+gh pr view --json number,mergeable,mergeStateStatus
+
+# 머지 실행 (squash 없이 merge commit)
+gh pr merge --merge --delete-branch=false
+```
+
+**주의사항:**
+
+- 머지 실패 시 원인을 분석하여 사용자에게 보고
+- `develop` 브랜치는 삭제하지 않음 (`--delete-branch=false`)
+
+### 머지 후 로컬 동기화
+
+```bash
+# main 브랜치 최신화
+git fetch origin main
+git checkout develop
+git merge origin/main --no-edit
+```
+
+## 7단계: 결과 보고
 
 - 정리된 커밋 목록 (1단계)
 - 동기화된 문서 목록 (3단계)
 - 푸시 결과 (4단계)
 - PR URL (5단계)
+- 머지 결과 (6단계)
