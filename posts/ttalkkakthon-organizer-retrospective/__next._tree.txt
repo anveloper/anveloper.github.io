@@ -7,4 +7,4 @@
 :HL["/images/posts/ttalkkakthon-organizer-retrospective/004.webp","image"]
 :HL["/images/posts/ttalkkakthon-organizer-retrospective/005.webp","image"]
 :HL["/images/posts/ttalkkakthon-organizer-retrospective/006.webp","image"]
-0:{"tree":{"name":"","param":null,"prefetchHints":20,"slots":{"children":{"name":"posts","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"ttalkkakthon-organizer-retrospective","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"xskQyzTaGJwrMaGOGAVcJ"}
+0:{"tree":{"name":"","param":null,"prefetchHints":20,"slots":{"children":{"name":"posts","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"ttalkkakthon-organizer-retrospective","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"2DcPrJo5ORzk0FUeJmLfL"}
