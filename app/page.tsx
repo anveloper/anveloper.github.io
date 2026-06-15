@@ -127,6 +127,20 @@ const timeline: TimelineItem[] = [
 // Projects Data
 const projects = [
   {
+    title: "육아밸 (yougabell)",
+    description: "워킹맘/워킹대디를 위한 육아 정보·기록·AI 챗봇 서비스",
+    tags: ["NestJS", "Next.js", "Expo", "Supabase"],
+    slug: "yougabell",
+    icon: "/images/projects/yougabell/icon.png",
+  },
+  {
+    title: "Reciflow",
+    description: "레시피 공유·관리 모바일 플랫폼 (Supabase 백엔드 중심)",
+    tags: ["Supabase", "PostgreSQL", "Expo", "Next.js"],
+    slug: "reciflow",
+    icon: "/images/projects/reciflow/icon.png",
+  },
+  {
     title: "딸깍톤 (Ttalkkakthon)",
     description: "AI와 함께하는 해커톤 — 참가 신청·갤러리·디스코드 기반 AI 자동 심사를 지원하는 해커톤 운영 플랫폼",
     tags: ["Next.js", "TypeScript", "Prisma", "Neon"],
