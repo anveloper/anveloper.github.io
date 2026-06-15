@@ -1,0 +1,94 @@
+---
+title: "Reciflow"
+date: "2026-03-13"
+description: "레시피 공유·관리 모바일 플랫폼 — Supabase(PostgreSQL) 백엔드를 중심으로 한 iOS/Android 앱 서비스"
+tags: ["Supabase", "PostgreSQL", "Deno", "Edge Functions", "React Native", "Expo", "Next.js", "TypeScript", "Cloudflare Images"]
+github: "Reciflow/ReciflowBackend"
+---
+
+# Reciflow
+
+<div align="center">
+  <img src="/images/projects/reciflow/hero.png" alt="Reciflow 앱 아이콘" width="200" />
+</div>
+
+## 개요
+
+Reciflow는 레시피를 등록·공유하고 요리 기록을 남기는 iOS/Android 모바일 플랫폼입니다. 사용자는 레시피를 만들어 공개/비공개로 공유하고, 북마크·별점·댓글·커뮤니티로 상호작용하며, 요리 이력을 누적합니다.
+
+백엔드는 **Supabase(PostgreSQL + Deno Edge Functions)** 기반으로, 도메인 로직을 RPC 함수로 구성하고 RLS(Row Level Security)로 접근을 통제합니다. 본인은 이 **ReciflowBackend를 주력으로 담당**했습니다. 프론트엔드는 초기 React Native 앱(`ReciflowFront`)으로 운영하다 최근 **Expo(`ReciflowFrontend`)로 마이그레이션**했습니다.
+
+## 주요 기능
+
+- **레시피 CRUD/공유**: 단계·재료·태그·출처(URL) 포함 레시피 등록, 공개/비공개 공유
+- **요리 기록·랭킹**: 레시피 완료 시 자동 기록(cook), 요리 통계·랭킹 제공
+- **소셜 상호작용**: 북마크, 별점(rating), 댓글, 좋아요, 팔로우/팔로잉
+- **커뮤니티**: 카테고리 기반 게시글·댓글·이미지·태그
+- **AI 레시피 생성**: `gemini-chat` Edge Function이 자유 텍스트(요리 설명)를 구조화된 레시피 JSON으로 변환
+- **이미지 파이프라인**: Cloudflare Images 연동(업로드/삭제) 및 DB image 테이블과 동기화
+- **인증**: Supabase Auth + 소셜 로그인(Apple, Kakao)
+
+## 기술 스택
+
+| 분류         | 기술                                                                  |
+| ------------ | --------------------------------------------------------------------- |
+| Backend (주) | Supabase, PostgreSQL (RLS), RPC 함수, Deno Edge Functions             |
+| AI / 외부    | Google Gemini (`gemini-chat`), Cloudflare Images                      |
+| Frontend     | Expo SDK 54 · expo-router 6 · React 19 (구: React Native 0.77)        |
+| 상태 관리    | Zustand (로컬), TanStack React Query (서버 상태)                      |
+| Admin        | Next.js 16 (운영자 CMS)                                               |
+| Schema 설계  | Prisma (ERD/DDL 생성용, `ReciflowDesign`)                            |
+| Language     | TypeScript                                                            |
+| Pkg Manager  | npm                                                                   |
+
+## 프로젝트 구조
+
+조직(`Reciflow`) 산하 멀티레포로 구성되며, 백엔드가 도메인의 중심입니다.
+
+```
+reciflow/
+├── ReciflowBackend/    # Supabase — 주 작업 대상 (RPC·RLS·Edge·마이그레이션)
+│   ├── supabase/
+│   │   ├── sql/
+│   │   │   ├── functions/   # 도메인별 RPC 함수 (단일 파일 단위)
+│   │   │   ├── tables/      # 테이블 스키마 + RLS 정책 코드화
+│   │   │   └── migrations/  # 타임스탬프 기반 마이그레이션
+│   │   └── functions/       # Edge Functions (gemini-chat, cf-images 등)
+│   └── docs/                # api 명세 · 마이그레이션 히스토리
+├── ReciflowFrontend/   # Expo 앱 (신규, RN에서 마이그레이션)
+├── ReciflowFront/      # React Native 앱 (구버전, ~v2.1.x)
+├── ReciflowAdmin/      # Next.js 운영자 CMS
+└── ReciflowDesign/     # Prisma 스키마 (ERD/DDL 참조)
+```
+
+규모: RPC 함수 62개, 테이블 33개, 마이그레이션 109개, 도메인 19개(user/recipe/comment/community/rating/cook/like/bookmark/follow/report/curated 등).
+
+## 담당 역할
+
+ReciflowBackend를 주력으로 담당하여 도메인 API·DB·인프라를 설계·구현했습니다.
+
+- **DB/스키마 설계**: PostgreSQL 테이블 33개, ENUM, FK/UNIQUE/인덱스, RLS 정책을 테이블별 파일로 코드 관리
+- **RPC API 구현**: 도메인별 RPC 함수 62개(레시피 CRUD, 요리 기록·랭킹, 별점, 북마크, 팔로우, 커뮤니티, 신고 등)
+- **Edge Functions**: `gemini-chat`(AI 레시피 생성), Cloudflare Images 업로드/삭제 연동
+- **마이그레이션 운영**: dev/prod Supabase 프로젝트 분리, 동일 마이그레이션 적용·검증 프로세스 정립
+- **API 문서화**: `docs/api/` 도메인별 스펙·에러 코드 정의(문서 우선 개발)
+
+## 트러블슈팅
+
+### 문제 1: dev/prod 환경 분리와 스키마 드리프트
+
+- **상황**: 개발/운영을 별도 Supabase 프로젝트로 운영하면서 스키마 불일치 위험
+- **원인**: 콘솔에서 직접 수정하면 코드와 원격 DB 상태가 어긋남
+- **해결**: 테이블 스키마(`sql/tables/`)와 RLS 정책을 코드로 관리하고, **문서 → SQL 함수 → 테이블 → 마이그레이션 → dev 배포 → 검증 → 운영 적용**의 7단계 프로세스를 고정. 동일 마이그레이션 파일을 양 환경에 순서대로 적용
+
+### 문제 2: AI 입력 토큰 폭증 방지
+
+- **상황**: `gemini-chat`에 사용자 자유 입력을 그대로 넣으면 토큰·비용이 불안정
+- **원인**: 입력 길이 제한·고정 프롬프트 합산 토큰 관리 부재
+- **해결**: transcript 글자수 상한(3000자 ≈ 약 4500토큰)을 두고 고정 프롬프트와 합산해 약 6500토큰으로 제한. 프론트 입력 `maxLength`와 동일하게 맞춰 일관성 확보
+
+## 회고
+
+- RPC + RLS 중심으로 도메인을 구성하니 별도 API 서버 없이도 권한·로직을 DB 가까이에서 일관되게 관리할 수 있었습니다.
+- "문서 먼저" 프로세스를 강제한 덕분에 프론트와의 API 계약 변경 추적이 쉬웠고, dev/prod 분리 운영의 사고 위험도 줄었습니다.
+- 프론트가 React Native에서 Expo로 옮겨가는 동안 백엔드 계약을 안정적으로 유지한 것이 마이그레이션 비용을 크게 낮췄습니다.
