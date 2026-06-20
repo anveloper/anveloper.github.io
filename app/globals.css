@@ -491,10 +491,12 @@ html {
   }
 }
 
-/* Smooth transitions for theme switching (respects prefers-reduced-motion via media query above) */
-*,
-*::before,
-*::after {
+/* Smooth transitions for theme switching only — scoped to .theme-transition (toggled by useThemeClass).
+   평소에는 컴포넌트별 transition-colors(150ms)만 적용되어 hover 반응성을 유지.
+   (respects prefers-reduced-motion via media query above) */
+.theme-transition *,
+.theme-transition *::before,
+.theme-transition *::after {
   transition:
     background-color 0.3s ease,
     color 0.3s ease,
