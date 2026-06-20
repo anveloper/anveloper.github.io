@@ -146,8 +146,9 @@ export const ThemeSelector = () => {
           aria-label="테마 목록"
           aria-activedescendant={focusedIndex >= 0 ? `theme-option-${themeOptions[focusedIndex].value}` : undefined}
           className={cn(
-            "absolute right-1/2 translate-x-1/2 top-full mt-1 z-50",
+            "absolute right-1/2 translate-x-1/2 top-full mt-2 z-50",
             "flex flex-col items-center gap-1.5 p-2",
+            "bg-popover/95 backdrop-blur-sm border border-border rounded-lg shadow-lg",
             "animate-in fade-in-0 zoom-in-95"
           )}
         >

@@ -1,4 +1,5 @@
 import { PageContainer } from "@/components/page-container";
+import { PageHeader } from "@/components/page-header";
 import { SkillBadge } from "@/components/skill-badge";
 import type { SkillCategory } from "@/lib/skill-data";
 
@@ -59,10 +60,7 @@ const skillCategories: SkillCategory[] = [
 const SkillsPage = () => {
   return (
     <PageContainer>
-      <header className="mb-10">
-        <h1 className="text-xl font-semibold text-foreground tracking-tight">Skills</h1>
-        <p className="text-sm text-muted-foreground mt-1">기술 스택 및 역량</p>
-      </header>
+      <PageHeader title="Skills" description="기술 스택 및 역량" />
 
       <div className="space-y-4">
         {skillCategories.map((category) => (

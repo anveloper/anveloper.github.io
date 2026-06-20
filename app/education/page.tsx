@@ -1,4 +1,5 @@
 import { PageContainer } from "@/components/page-container";
+import { PageHeader } from "@/components/page-header";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 
@@ -52,10 +53,7 @@ const timeline: TimelineItem[] = [
 const EducationPage = () => {
   return (
     <PageContainer>
-      <header className="mb-10">
-        <h1 className="text-xl font-semibold text-foreground tracking-tight">Education & Experience</h1>
-        <p className="text-sm text-muted-foreground mt-1">학력 및 경력 사항</p>
-      </header>
+      <PageHeader title="Education & Experience" description="학력 및 경력 사항" />
 
       <div className="space-y-0">
         {timeline.map((item, index) => (
