@@ -220,7 +220,7 @@ const contactLinks = [
 
 const SectionHeader = ({ children, href }: { children: React.ReactNode; href?: string }) => {
   const heading = (
-    <h2 className="text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground/60">{children}</h2>
+    <h2 className="text-[11px] md:text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground/60">{children}</h2>
   );
   if (href) {
     return (
@@ -242,7 +242,7 @@ const HomePage = () => {
       <motion.section variants={sectionReveal} initial="hidden" animate="visible" className="mb-10 md:mb-16">
         <div className="flex items-center gap-4 md:gap-6">
           <div className="relative shrink-0">
-            <div className="relative w-12 h-12 md:w-16 md:h-16 rounded-full overflow-hidden ring-2 ring-primary-sky/20">
+            <div className="relative w-14 h-14 md:w-16 md:h-16 rounded-full overflow-hidden ring-2 ring-primary-sky/20">
               <Image src="/profile.webp" alt="안성진 프로필" fill className="object-cover" priority />
             </div>
             <div className="absolute -bottom-1 -right-1 w-4 h-4 md:w-5 md:h-5 bg-primary-sky rounded-full border-2 border-background flex items-center justify-center">
@@ -250,7 +250,7 @@ const HomePage = () => {
             </div>
           </div>
           <div className="flex flex-col gap-0.5 md:gap-1">
-            <h1 className="text-xl md:text-2xl font-bold text-foreground tracking-tight">안성진</h1>
+            <h1 className="text-2xl md:text-3xl font-bold text-foreground tracking-tight">안성진</h1>
             <p className="text-xs md:text-sm font-semibold text-muted-foreground">
               Full-Stack Developer, UX Team Lead / Manager
             </p>
@@ -269,7 +269,7 @@ const HomePage = () => {
         viewport={viewportConfig}
         className="mb-10 md:mb-16"
       >
-        <p className="text-sm md:text-base leading-relaxed text-foreground">
+        <p className="text-sm md:text-base leading-relaxed text-foreground min-h-[7rem] sm:min-h-[5.5rem] md:min-h-[5rem]">
           오늘의 쓸모를 다하는 사람,
           <br />
           <TextType
@@ -297,7 +297,7 @@ const HomePage = () => {
         <div className="flex flex-col gap-3 md:gap-4">
           {skillCategories.map((category) => (
             <div key={category.title} className="flex items-start gap-3 md:gap-4">
-              <span className="w-20 md:w-28 pt-1 text-[10px] md:text-xs font-bold text-primary-sky shrink-0 uppercase">
+              <span className="w-20 md:w-28 pt-1 text-[11px] md:text-xs font-bold text-primary-sky shrink-0 uppercase">
                 {category.title}
               </span>
               <div className="flex flex-wrap gap-1.5 md:gap-2">
@@ -328,12 +328,12 @@ const HomePage = () => {
                   index === 0 ? "bg-primary-sky" : "bg-muted-foreground/30"
                 )}
               />
-              <p className="text-[11px] md:text-sm font-bold text-foreground leading-none">
+              <p className="text-xs md:text-sm font-bold text-foreground leading-snug">
                 {item.title} · {item.organization}
               </p>
               <p
                 className={cn(
-                  "text-[10px] md:text-xs mt-1",
+                  "text-[11px] md:text-xs mt-1",
                   index === 0 ? "text-primary-sky" : "text-muted-foreground"
                 )}
               >
@@ -358,7 +358,7 @@ const HomePage = () => {
           initial="hidden"
           whileInView="visible"
           viewport={viewportConfig}
-          className="grid grid-cols-2 gap-2 md:gap-3"
+          className="grid grid-cols-1 sm:grid-cols-2 gap-2 md:gap-3"
         >
           {projects.map((project, index) => (
             <motion.div
@@ -378,10 +378,10 @@ const HomePage = () => {
                   <img src={project.icon} alt="" className="w-8 h-8 md:w-9 md:h-9 rounded-md shrink-0" />
                 )}
                 <div className="flex-1 min-w-0">
-                  <h3 className="text-[11px] md:text-sm font-bold text-foreground group-hover:text-primary-sky transition-colors truncate">
+                  <h3 className="text-sm md:text-base font-bold text-foreground group-hover:text-primary-sky transition-colors truncate">
                     {project.title}
                   </h3>
-                  <p className="text-[9px] md:text-xs text-muted-foreground leading-tight mt-0.5 line-clamp-1">
+                  <p className="text-xs md:text-sm text-muted-foreground leading-snug mt-0.5 line-clamp-1">
                     {project.description}
                   </p>
                 </div>
@@ -389,7 +389,7 @@ const HomePage = () => {
                   {project.tags.slice(0, 3).map((tag) => (
                     <span
                       key={tag}
-                      className="text-[8px] md:text-[10px] px-1 md:px-1.5 py-0.5 bg-background text-muted-foreground rounded-md"
+                      className="text-[10px] md:text-xs px-1.5 py-0.5 bg-background text-muted-foreground rounded-md"
                     >
                       {tag}
                     </span>
