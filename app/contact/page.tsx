@@ -1,4 +1,5 @@
 import { PageContainer } from "@/components/page-container";
+import { PageHeader } from "@/components/page-header";
 
 const contactLinks = [
   {
@@ -25,12 +26,7 @@ const contactLinks = [
 const ContactPage = () => {
   return (
     <PageContainer>
-      <header className="mb-10">
-        <h1 className="text-xl font-semibold text-foreground tracking-tight">Contact</h1>
-        <p className="text-sm text-muted-foreground mt-1">
-          프로젝트 협업, 채용 문의, 기술적인 질문 등 편하게 연락주세요
-        </p>
-      </header>
+      <PageHeader title="Contact" description="프로젝트 협업, 채용 문의, 기술적인 질문 등 편하게 연락주세요" />
 
       <div className="space-y-3">
         {contactLinks.map((link) => (

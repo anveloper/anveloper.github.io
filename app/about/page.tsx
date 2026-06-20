@@ -1,14 +1,12 @@
 import { PageContainer } from "@/components/page-container";
+import { PageHeader } from "@/components/page-header";
 
 const interests = ["풀스택 개발", "UX 최적화", "클린 아키텍처", "기술 리더십", "스마트 제조", "안드로이드 개발"];
 
 const AboutPage = () => {
   return (
     <PageContainer>
-      <header className="mb-10">
-        <h1 className="text-xl font-semibold text-foreground tracking-tight">About</h1>
-        <p className="text-sm text-muted-foreground mt-1">언어로 세상을 표현하는 개발자</p>
-      </header>
+      <PageHeader title="About" description="언어로 세상을 표현하는 개발자" />
 
       <div className="space-y-0">
         {/* 자기소개 */}
