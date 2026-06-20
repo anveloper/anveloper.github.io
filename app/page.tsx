@@ -1,7 +1,7 @@
 "use client";
 
 import { PageContainer } from "@/components/page-container";
-import { TechBadge } from "@/components/skill-badge";
+import { SkillBadge } from "@/components/skill-badge";
 import { TextType } from "@/components/text-type";
 import { sectionReveal, staggerContainer, staggerItem } from "@/lib/animation";
 import type { SkillCategory } from "@/lib/skill-data";
@@ -296,23 +296,13 @@ const HomePage = () => {
         <SectionHeader href="/skills">Technical Stack</SectionHeader>
         <div className="flex flex-col gap-3 md:gap-4">
           {skillCategories.map((category) => (
-            <div key={category.title} className="flex items-center gap-3 md:gap-4">
-              <span className="w-20 md:w-28 text-[10px] md:text-xs font-bold text-primary-sky shrink-0 uppercase">
+            <div key={category.title} className="flex items-start gap-3 md:gap-4">
+              <span className="w-20 md:w-28 pt-1 text-[10px] md:text-xs font-bold text-primary-sky shrink-0 uppercase">
                 {category.title}
               </span>
               <div className="flex flex-wrap gap-1.5 md:gap-2">
                 {category.skills.map((skill) => (
-                  <span
-                    key={skill.name}
-                    className={cn(
-                      "px-2 md:px-3 py-0.5 md:py-1 text-[10px] md:text-xs font-medium rounded",
-                      skill.level === 3 && "bg-primary-sky/20 text-primary-sky font-bold",
-                      skill.level === 2 && "bg-primary-sky/10 text-foreground",
-                      skill.level === 1 && "bg-secondary text-muted-foreground"
-                    )}
-                  >
-                    {skill.name}
-                  </span>
+                  <SkillBadge key={skill.name} skill={skill} />
                 ))}
               </div>
             </div>
@@ -379,13 +369,13 @@ const HomePage = () => {
               <Link
                 href={`/projects/${project.slug}`}
                 className={cn(
-                  "block group p-3 md:p-4 bg-secondary/50 rounded-xl hover:bg-secondary transition-colors",
+                  "block group p-3 md:p-4 bg-secondary/50 rounded-lg hover:bg-accent transition-colors",
                   "flex flex-col gap-2",
                   index === projects.length - 1 && projects.length % 2 !== 0 && "flex-row items-center gap-4"
                 )}
               >
                 {project.icon && (
-                  <img src={project.icon} alt="" className="w-8 h-8 md:w-9 md:h-9 rounded-lg shrink-0" />
+                  <img src={project.icon} alt="" className="w-8 h-8 md:w-9 md:h-9 rounded-md shrink-0" />
                 )}
                 <div className="flex-1 min-w-0">
                   <h3 className="text-[11px] md:text-sm font-bold text-foreground group-hover:text-primary-sky transition-colors truncate">
@@ -399,7 +389,7 @@ const HomePage = () => {
                   {project.tags.slice(0, 3).map((tag) => (
                     <span
                       key={tag}
-                      className="text-[8px] md:text-[10px] px-1 md:px-1.5 py-0.5 bg-background text-muted-foreground rounded"
+                      className="text-[8px] md:text-[10px] px-1 md:px-1.5 py-0.5 bg-background text-muted-foreground rounded-md"
                     >
                       {tag}
                     </span>
