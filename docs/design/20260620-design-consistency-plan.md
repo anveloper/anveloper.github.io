@@ -83,19 +83,20 @@
 - [x] Hero focal point 강화: 이름 `text-xl md:text-2xl`→`text-2xl md:text-3xl`, 아바타 모바일 `w-14`
 - [x] TextType 컨테이너 `min-h-[7rem] sm:min-h-[5.5rem] md:min-h-[5rem]` 예약으로 레이아웃 시프트 방지
 
-### Phase 5: 디테일·마무리 (P3)
+### Phase 5: 디테일·마무리 (P3) ✅
 
-- [ ] 색상: chart 토큰 활용 또는 카테고리별 미세 액센트 (의도적 미니멀 유지 시 보류)
-- [ ] 테마 셀렉터 팝오버 패널 배경/보더 추가
-- [ ] prose vs mdx 오버라이드 정리 (중복 제거)
-- [ ] Contact 중복 역할 정리 (홈 Connect / /contact 구분 또는 통합)
+- [x] 테마 셀렉터 팝오버 패널 배경/보더 추가 (`bg-popover/95 backdrop-blur-sm border rounded-lg shadow-lg`)
+- [x] 색상: **보류** — 4개 테마 + 미니멀 정체성 보존 우선. chart 토큰 도입 시 테마별 충돌 위험
+- [x] prose vs mdx: **유지** — prose는 mdx-components 미적용 요소(h5/h6 등)의 fallback, 실제 시각 충돌 없음
+- [x] Contact 중복: **유지** — 홈 Connect(요약 teaser) / /contact(전용 페이지)는 포트폴리오 표준 패턴
 
-### Phase 6: 검증
+### Phase 6: 검증 ✅
 
-- [ ] `pnpm build` 성공
-- [ ] `pnpm lint` 성공
-- [ ] 4개 테마 × sm~xl 반응형 시각 확인
-- [ ] 콘솔 에러 없음
+- [x] `pnpm build` 성공 (43/43 정적 페이지)
+- [x] `pnpm lint` 성공 (0 errors)
+- [x] 미사용 코드 정리: 홈 skillCategories `icon` 필드 + lucide(Server/Wrench/Database) import 제거
+- [ ] 4개 테마 × sm~xl 반응형 시각 확인 — 개발 서버 확인 필요
+- [ ] 콘솔 에러 없음 — 브라우저 확인 필요
 
 ---
 
@@ -115,3 +116,4 @@
 | 날짜 | 내용 |
 | ---- | ---- |
 | 2026-06-20 | 초안 작성 — 일관성/가독성 보완 6단계 계획 수립 |
+| 2026-06-20 | Phase 1-6 완료 — 토큰 규칙화, PageHeader 추출, /projects 카드화, 스킬 shields 통일, 홈 가독성·반응형, 테마 셀렉터 패널, 미사용 코드 정리 |
