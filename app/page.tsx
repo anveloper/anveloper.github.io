@@ -6,7 +6,7 @@ import { TextType } from "@/components/text-type";
 import { sectionReveal, staggerContainer, staggerItem } from "@/lib/animation";
 import type { SkillCategory } from "@/lib/skill-data";
 import { cn } from "@/lib/utils";
-import { ArrowUpRight, Code, Database, Server, Wrench } from "lucide-react";
+import { ArrowUpRight, Code } from "lucide-react";
 import { motion } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
@@ -26,7 +26,6 @@ const aboutPhrases = [
 const skillCategories: SkillCategory[] = [
   {
     title: "Frontend",
-    icon: <Code className="w-5 h-5" />,
     skills: [
       { name: "Next.js", level: 3 },
       { name: "React", level: 3 },
@@ -37,7 +36,6 @@ const skillCategories: SkillCategory[] = [
   },
   {
     title: "Backend",
-    icon: <Server className="w-5 h-5" />,
     skills: [
       { name: "Prisma", level: 3 },
       { name: "Java", level: 2 },
@@ -50,7 +48,6 @@ const skillCategories: SkillCategory[] = [
   },
   {
     title: "DevOps & Tools",
-    icon: <Wrench className="w-5 h-5" />,
     skills: [
       { name: "AWS (EC2, S3)", level: 2 },
       { name: "Caddy", level: 2 },
@@ -63,7 +60,6 @@ const skillCategories: SkillCategory[] = [
   },
   {
     title: "Android",
-    icon: <Database className="w-5 h-5" />,
     skills: [
       { name: "Kotlin", level: 1 },
       { name: "Jetpack Compose", level: 1 },
