@@ -76,12 +76,12 @@
 - [x] `/projects` 리스트(divide-y 텍스트) → 아이콘 카드 그리드(`grid-cols-1 sm:grid-cols-2`)로 전환, 홈과 결 맞춤
 - [x] 스킬 시각화 단일화: **shields 뱃지로 통일** (사용자 결정) — 홈 그라데이션 칩 → `SkillBadge`(shields + 🔥)
 
-### Phase 4: 타이포그래피·반응형 (P2)
+### Phase 4: 타이포그래피·반응형 (P2) ✅
 
-- [ ] 홈 초소형 텍스트 상향 (본문 ≥ 12px, 라벨 ≥ 11px)
-- [ ] 홈 Featured Projects 그리드 `grid-cols-1 sm:grid-cols-2`
-- [ ] Hero focal point 강화 (이름/태그라인 사이즈 검토)
-- [ ] TextType 컨테이너 `min-h` 예약으로 레이아웃 시프트 방지
+- [x] 홈 초소형 텍스트 상향: 라벨 10px→11px, 카드 제목 `text-sm md:text-base`, 설명/태그 상향, Milestones 11px↑
+- [x] 홈 Featured Projects 그리드 `grid-cols-2`→`grid-cols-1 sm:grid-cols-2`
+- [x] Hero focal point 강화: 이름 `text-xl md:text-2xl`→`text-2xl md:text-3xl`, 아바타 모바일 `w-14`
+- [x] TextType 컨테이너 `min-h-[7rem] sm:min-h-[5.5rem] md:min-h-[5rem]` 예약으로 레이아웃 시프트 방지
 
 ### Phase 5: 디테일·마무리 (P3)
 
