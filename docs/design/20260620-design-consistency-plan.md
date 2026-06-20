@@ -111,9 +111,21 @@
 
 ---
 
+## 4-1. 후속 작업 (배포 후 추가 발견)
+
+배포 후 점검에서 드러난 데이터 중복·반응성 항목 보완.
+
+- [x] **데이터 중복 제거 (drift 방지)**
+  - 스킬: `lib/skill-data.ts`에 canonical `skillCategories` → 홈·/skills 공유 (`Frontend`↔`Front-End` 드리프트 해소)
+  - 타임라인: `lib/timeline-data.ts` 신설 → 홈·/education 공유
+  - 프로젝트: 홈 `page.tsx`를 서버 컴포넌트로 전환(본문은 `home-view.tsx` 분리), 제목·태그·아이콘은 `_projects` MDX 단일 소스에서, 홈 전용 순서·단축 설명만 `lib/featured-projects.ts`에서 관리
+- [x] **transition 범위 축소** — 전역 상시 → `.theme-transition`(테마 전환 350ms)에만 적용 (hover 반응성↑, 초기 로드 플래시 방지)
+- [ ] 보류: shields.io 외부 의존(빌드 캐싱/자가 호스팅), deploy.yml Node 20→24
+
 ## 5. 변경 이력
 
 | 날짜 | 내용 |
 | ---- | ---- |
 | 2026-06-20 | 초안 작성 — 일관성/가독성 보완 6단계 계획 수립 |
 | 2026-06-20 | Phase 1-6 완료 — 토큰 규칙화, PageHeader 추출, /projects 카드화, 스킬 shields 통일, 홈 가독성·반응형, 테마 셀렉터 패널, 미사용 코드 정리 |
+| 2026-06-20 | 후속 — 스킬·타임라인·프로젝트 데이터 단일 소스화, 색상 transition 범위 축소 |

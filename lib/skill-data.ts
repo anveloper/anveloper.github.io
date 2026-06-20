@@ -7,9 +7,63 @@ export type Skill = {
 
 export type SkillCategory = {
   title: string;
-  icon?: React.ReactNode;
   skills: Skill[];
 };
+
+/** 스킬 카테고리 단일 소스 — 홈(/)과 /skills가 공유 */
+export const skillCategories: SkillCategory[] = [
+  {
+    title: "Front-End",
+    skills: [
+      { name: "Next.js", level: 3 },
+      { name: "React", level: 3 },
+      { name: "TypeScript", level: 3 },
+      { name: "JavaScript (ES6)", level: 3 },
+      { name: "HTML5", level: 3 },
+      { name: "CSS3", level: 3 },
+      { name: "Tailwind CSS", level: 2 },
+    ],
+  },
+  {
+    title: "Back-End",
+    skills: [
+      { name: "Prisma", level: 3 },
+      { name: "Java", level: 2 },
+      { name: "Spring Boot", level: 2 },
+      { name: "JPA", level: 2 },
+      { name: "Node.js", level: 1 },
+      { name: "Nest.js", level: 1 },
+      { name: "Redis", level: 1 },
+      { name: "Kafka", level: 1 },
+    ],
+  },
+  {
+    title: "DevOps",
+    skills: [
+      { name: "AWS (EC2, S3)", level: 2 },
+      { name: "Caddy", level: 2 },
+      { name: "MySQL", level: 2 },
+      { name: "Naver Cloud", level: 1 },
+    ],
+  },
+  {
+    title: "Tools",
+    skills: [
+      { name: "VS Code", level: 2 },
+      { name: "IntelliJ IDEA", level: 2 },
+      { name: "Git", level: 2 },
+      { name: "Figma", level: 1 },
+      { name: "Notion", level: 1 },
+    ],
+  },
+  {
+    title: "Android",
+    skills: [
+      { name: "Kotlin", level: 1 },
+      { name: "Jetpack Compose", level: 1 },
+    ],
+  },
+];
 
 type BadgeInfo = {
   logo: string;

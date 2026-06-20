@@ -28,6 +28,10 @@ export const useThemeClass = () => {
   }, [theme]);
 
   const setTheme = (next: Theme) => {
+    // 테마 전환 순간에만 색상 transition을 활성화 (평소 hover 반응성·초기 로드 플래시 방지)
+    const root = document.documentElement;
+    root.classList.add("theme-transition");
+    window.setTimeout(() => root.classList.remove("theme-transition"), 350);
     setThemeState(next);
   };
 
