@@ -4,7 +4,8 @@ import { PageContainer } from "@/components/page-container";
 import { SkillBadge } from "@/components/skill-badge";
 import { TextType } from "@/components/text-type";
 import { sectionReveal, staggerContainer, staggerItem } from "@/lib/animation";
-import type { SkillCategory } from "@/lib/skill-data";
+import { skillCategories } from "@/lib/skill-data";
+import { timeline } from "@/lib/timeline-data";
 import { cn } from "@/lib/utils";
 import { ArrowUpRight, Code } from "lucide-react";
 import { motion } from "motion/react";
@@ -20,104 +21,6 @@ const aboutPhrases = [
   "Java에서 시작해 Next.js·TypeScript·Prisma로 전환한 개발자 안성진입니다.",
   "Vanilla JS만으로도 웹을 만들 수 있는 개발자 안성진입니다.",
   "PHP를 React, Remix.js로 마이그레이션한 개발자 안성진입니다.",
-];
-
-// Skills Data
-const skillCategories: SkillCategory[] = [
-  {
-    title: "Frontend",
-    skills: [
-      { name: "Next.js", level: 3 },
-      { name: "React", level: 3 },
-      { name: "TypeScript", level: 3 },
-      { name: "JavaScript (ES6)", level: 3 },
-      { name: "Tailwind CSS", level: 2 },
-    ],
-  },
-  {
-    title: "Backend",
-    skills: [
-      { name: "Prisma", level: 3 },
-      { name: "Java", level: 2 },
-      { name: "Spring Boot", level: 2 },
-      { name: "JPA", level: 2 },
-      { name: "Node.js", level: 1 },
-      { name: "Redis", level: 1 },
-      { name: "Kafka", level: 1 },
-    ],
-  },
-  {
-    title: "DevOps & Tools",
-    skills: [
-      { name: "AWS (EC2, S3)", level: 2 },
-      { name: "Caddy", level: 2 },
-      { name: "MySQL", level: 2 },
-      { name: "Git", level: 2 },
-      { name: "IntelliJ IDEA", level: 2 },
-      { name: "VS Code", level: 2 },
-      { name: "Naver Cloud", level: 1 },
-    ],
-  },
-  {
-    title: "Android",
-    skills: [
-      { name: "Kotlin", level: 1 },
-      { name: "Jetpack Compose", level: 1 },
-    ],
-  },
-];
-
-// Education Data
-type TimelineItem = {
-  type: "education" | "experience" | "military";
-  title: string;
-  organization: string;
-  period: string;
-  description?: string;
-  badges?: string[];
-};
-
-const timeline: TimelineItem[] = [
-  {
-    type: "experience",
-    title: "UX개발팀 과장 / 기술연구원",
-    organization: "(주) TILS AI",
-    period: "2023.03 ~ 재직중",
-    description:
-      "Next.js, Remix.js, Typescript 기반 플랫폼 PM, 개발 리드\n판매사·공급사·어드민 다중 플랫폼 설계·개발\n멀티테넌트 기반 다중 도메인 플랫폼 개발\nCafe24, Shopby, Shopify 플랫폼 사용자화, 유지보수",
-    badges: ["팀 리딩", "풀스택 개발", "다중 플랫폼", "멀티테넌트"],
-  },
-  {
-    type: "education",
-    title: "항해 플러스",
-    organization: "프론트엔드 5기 / 백엔드 9기",
-    period: "2025.03 ~ 2025.09",
-    description: "프론트엔드: 블랙배지(1%) 달성, 회고상 수상\n백엔드: 브라운배지 달성, 회고상 수상",
-    badges: ["블랙배지 1%", "회고상 2회"],
-  },
-  {
-    type: "education",
-    title: "삼성 청년 SW아카데미 (SSAFY)",
-    organization: "7기",
-    period: "2022.01 ~ 2022.12",
-    description: "삼성 주관 고용 노동부 후원 개발자 양성 과정",
-    badges: ["최우수상 1회", "우수상 3회"],
-  },
-  {
-    type: "military",
-    title: "대한민국 육군 장교",
-    organization: "대위 전역 (6년 4개월)",
-    period: "2015.03 ~ 2021.06",
-    description: "포대장, 인사과장, 정보과장, 작전보좌관 등 역임",
-    badges: ["인헌상", "충무상", "보안 상훈"],
-  },
-  {
-    type: "education",
-    title: "충남대학교",
-    organization: "천문우주과학 전공",
-    period: "2011.03 ~ 2015.02",
-    description: "ROTC 53기",
-  },
 ];
 
 // Projects Data
