@@ -31,9 +31,9 @@ export const featuredProjects: FeaturedProject[] = [
 
 // 홈 카드 그룹 (표시 순서대로). key는 MDX frontmatter의 category 값과 일치.
 export const categoryGroups: { key: string; label: string }[] = [
-  { key: "company", label: "회사" },
+  { key: "company", label: "TILS AI" },
   { key: "ssafy", label: "SSAFY" },
-  { key: "side", label: "사이드 프로젝트" },
+  { key: "side", label: "SIDE PROJECT" },
 ];
 
 export type HomeProject = {
