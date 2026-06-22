@@ -1,0 +1,111 @@
+---
+title: "날별 (Stars for me)"
+date: "2026-04-02"
+category: "side"
+description: "사주팔자와 별자리를 결합해 AI가 매일·주간·월간·절기 운세를 풀어주는 모바일 운세 서비스 — 사주 계산 엔진을 직접 구현한 pnpm 모노레포"
+tags: ["Next.js", "React", "Expo", "TypeScript", "Prisma", "PostgreSQL", "Gemini", "Tailwind CSS", "Vercel"]
+github: "anveloper/stars-for-me"
+demo: "https://stars-for.me"
+---
+
+# 날별 (Stars for me)
+
+<div align="center">
+  <img src="/images/projects/stars-for-me/hero.webp" alt="날별 로고" width="220" />
+</div>
+
+## 개요
+
+날별은 사주팔자(四柱)와 서양 별자리를 함께 풀어 "나를 위한 별"이라는 컨셉으로 운세를 제공하는 모바일 서비스입니다. 생년월일시·양음력 정보만 입력하면 사주 계산 엔진이 네 기둥(년·월·일·시)과 오행 분포·십성·신살·대운을 산출하고, 그 결과를 맥락으로 AI가 매일·주간·월간·절기 운세를 풀이합니다.
+
+운세 풀이를 AI에 통째로 맡기지 않고, **사주 계산은 결정론적 TypeScript 엔진**이 담당하고 AI는 그 산출물을 풀어 쓰는 역할만 맡도록 분리한 것이 핵심입니다. pnpm + Turbo 모노레포로 Next.js 웹과 Expo 모바일이 `packages/shared`의 사주 엔진을 공유하며, Claude Code와 Codex 두 에이전트 협업으로 진행했습니다.
+
+## 주요 기능
+
+- **온보딩 & 별 부여**: 생년월일시·양음력·성별을 입력하면 사주를 계산하고, 사용자에게 고유한 "별 이름"과 별자리를 부여
+- **사주 종합 분석**: 일간 해석, 오행 과다/결핍, 성격 패턴, 재물·연애·직업운, 대운 흐름, 개운 처방까지 AI가 한국어로 풀이
+- **운세 풀이 (일간/주간/월간/절기)**: 사주 기반 풀이와 별자리 기반 풀이를 분리해 각각 고유한 관점으로 제공
+- **별자리 모임(Constellation)**: 초대 코드로 그룹을 만들고 구성원 간 궁합·그룹 운세를 확인
+- **별 성장 시스템**: 출석·연속 접속 스트릭으로 별 레벨/포인트가 성장
+- **결제**: 사주 상세 풀이·궁합 분석·월간 상세는 단건 결제, 올스타 패스는 구독 (Toss / Apple IAP / Google Play)
+
+## 기술 스택
+
+| 분류        | 기술                                                              |
+| ----------- | ----------------------------------------------------------------- |
+| Language    | TypeScript 5 (전 영역 `strict: true`)                             |
+| Web         | Next.js 16.2 (App Router), React 19, Tailwind CSS 4, Motion       |
+| Mobile      | Expo SDK 54, expo-router 6, React Native 0.81                     |
+| Shared      | 자체 구현 사주 계산 엔진, `korean-lunar-calendar`(양↔음력 변환)   |
+| DB          | PostgreSQL 17, Prisma 7 (`@prisma/adapter-pg`, `pg`)              |
+| AI          | Gemini 2.5 Flash (우선) → GPT-4o-mini (폴백) → Mock               |
+| 인증        | Kakao / Google / Apple OAuth, `jose`(JWT), refresh token rotation |
+| 배포        | web → Vercel, mobile → Expo, DB는 Postgres                        |
+| Pkg / Build | pnpm 모노레포, Turborepo                                          |
+
+## 프로젝트 구조
+
+```
+stars-for-me/ (모노레포 루트)
+├── apps/
+│   ├── web/            # Next.js — 사용자 웹 + 모든 API 라우트
+│   │   └── src/
+│   │       ├── app/
+│   │       │   ├── (main)/      # home·saju·fortune·constellation·profile
+│   │       │   ├── onboarding/  # 온보딩 + 별 부여(reveal)
+│   │       │   └── api/         # auth·fortune·payments·constellation·cron …
+│   │       └── lib/             # ai-client·bucket·oauth·payments·rate-limit
+│   └── mobile/         # Expo RN — 온보딩·홈·운세 (PascalCase 유지)
+└── packages/
+    └── shared/         # 사주 엔진·오행/별자리 상수·공유 타입·디자인 토큰
+        └── src/engine/ # saju.ts·zodiac.ts·lunar.ts·seasonal.ts
+```
+
+### 주요 설계 패턴
+
+- **계산과 풀이의 분리**: 사주팔자·오행·십성·신살은 `packages/shared`의 결정론적 엔진이 산출하고, AI(`ai-client.ts`)는 그 결과를 system prompt로 받아 풀이 텍스트만 생성. 모델을 바꿔도 사주 산출 결과는 불변
+- **타입/엔진 공유**: web과 mobile이 `@stars-for-me/shared` 워크스페이스 패키지로 사주 엔진과 타입을 그대로 공유
+- **파일 네이밍 규칙 분리**: `apps/web`은 kebab-case, `apps/mobile`은 PascalCase, `packages/shared`는 kebab-case로 영역별 컨벤션 유지
+- **에이전트 협업 하네스**: `CLAUDE.md`(Claude용)·`AGENTS.md`(Codex용)로 진입점을 나누고, 파일 단위 write scope를 분리해 두 에이전트의 동시 작업 충돌을 방지
+
+## 사주 엔진 / AI 풀이 파이프라인
+
+사주 계산은 `packages/shared/src/engine/saju.ts`가 전담합니다.
+
+1. 양력 생년월일을 **율리우스적일(Julian Day Number)**로 변환해 일주(日柱)를 계산하고, 절기 기준으로 월주를 산출
+2. 음력 입력은 `korean-lunar-calendar`로 양력으로 환산한 뒤 동일 경로로 처리
+3. 천간·지지에서 오행 분포·십성·신살(도화·역마·화개·귀문관)·대운을 도출
+4. 산출된 네 기둥 + 오행 + 대운을 `ai-client.ts`의 system prompt로 합성, **운세 종류별 JSON 스키마**(SAJU/DAILY/WEEKLY/MONTHLY/SEASONAL/COMPATIBILITY)에 맞춰 Gemini가 응답
+5. Gemini 실패 시 GPT-4o-mini로 폴백, 둘 다 실패하면 Mock 텍스트로 항상 결과가 나오도록 설계
+
+운세 일괄 생성은 사용자를 **일간·지배오행·성별·절기 4차원으로 묶는 버킷팅**(`lib/fortune/bucket.ts`)으로 처리해, 같은 사주 특성을 가진 사용자군에 대한 중복 AI 호출을 줄입니다. 비가입자 포함 동일 생년월일시는 `SajuCache`(생년월일시 해시 키)로 캐싱합니다.
+
+## 담당 역할
+
+1인 풀스택으로 기획·디자인 연동부터 사주 엔진·웹·모바일·인프라까지 전 영역을 구현했습니다.
+
+- **사주 엔진**: 율리우스적일 기반 일주 계산, 절기·오행·십성·신살·대운 산출 로직을 TypeScript로 직접 구현
+- **Web/API**: Next.js App Router로 온보딩·운세·궁합·결제·인증 API 및 화면 전체 구현
+- **Mobile**: Expo 기반 온보딩·홈·운세 화면
+- **AI 파이프라인**: 운세 종류별 프롬프트 스키마 설계, Gemini→GPT 폴백, 버킷팅 배치 생성
+- **인프라/보안**: OAuth 3종, refresh token rotation, OAuthState replay 방지, DB 기반 rate limit, 보안 감사 문서화(`docs/security`)
+
+## 트러블슈팅
+
+### 문제 1: AI에 사주 계산을 맡기면 결과가 흔들린다
+
+- **상황**: 운세 풀이까지 AI에 한 번에 맡기면 동일 생년월일에도 사주팔자(네 기둥)·오행이 호출마다 달라져 결과 신뢰성이 떨어짐
+- **원인**: 사주 계산은 절기·율리우스적일 기반의 결정론적 연산인데, 이를 확률적 LLM에 위임한 것이 근본 원인
+- **해결**: 사주 산출을 `packages/shared` 엔진으로 분리해 결정론적으로 계산하고, AI에는 계산된 네 기둥·오행만 넘겨 풀이 텍스트만 생성하도록 역할을 나눔. 모델 교체와 무관하게 사주 결과가 고정됨
+
+### 문제 2: 사용자가 늘수록 운세 생성 AI 비용이 선형 증가
+
+- **상황**: 매일/주간 운세를 사용자 수만큼 개별 호출하면 AI 비용과 호출량이 사용자 수에 비례해 증가
+- **원인**: 운세 풀이가 사용자별로 완전히 독립적이라는 가정
+- **해결**: 일간·지배오행·성별·절기 4차원으로 사용자를 묶는 버킷팅을 도입(`bucket.ts`)하고, 동일 사주는 `SajuCache`로 캐싱해 중복 호출을 제거
+
+## 회고
+
+- 사주 계산(결정론)과 운세 풀이(확률론)를 분리한 설계가 핵심이었습니다. 덕분에 AI 모델을 환경변수로 교체해도 사주 결과가 흔들리지 않고, 프롬프트만 갱신해 풀이 품질을 개선할 수 있었습니다.
+- 율리우스적일·절기 기반 사주 엔진을 직접 구현하면서 도메인(명리학) 규칙을 코드로 옮기는 과정 자체가 흥미로운 도전이었습니다.
+- Claude Code와 Codex의 동시 작업을 위해 `CLAUDE.md`/`AGENTS.md`로 진입점과 write scope를 나눈 협업 하네스가 멀티 에이전트 환경에서 잘 작동했습니다.
