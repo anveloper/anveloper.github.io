@@ -33,7 +33,7 @@ export const featuredProjects: FeaturedProject[] = [
 export const categoryGroups: { key: string; label: string }[] = [
   { key: "company", label: "TILS AI" },
   { key: "ssafy", label: "SSAFY" },
-  { key: "side", label: "사이드 프로젝트" },
+  { key: "side", label: "SIDE PROJECT" },
 ];
 
 export type HomeProject = {
