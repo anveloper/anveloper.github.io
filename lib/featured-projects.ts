@@ -14,12 +14,12 @@ export type FeaturedProject = {
 export const featuredProjects: FeaturedProject[] = [
   { slug: "yougabell", summary: "워킹맘/워킹대디를 위한 육아 정보·기록·AI 챗봇 서비스" },
   { slug: "stars-for-me", summary: "사주팔자와 별자리를 결합해 AI가 운세를 풀어주는 모바일 운세 서비스" },
-  { slug: "reciflow", summary: "레시피 공유·관리 모바일 플랫폼 (Supabase 백엔드 중심)" },
   {
     slug: "ttalkkakthon",
     summary: "AI와 함께하는 해커톤 — 참가 신청·갤러리·디스코드 기반 AI 자동 심사를 지원하는 해커톤 운영 플랫폼",
   },
   { slug: "information-security-engineer", summary: "이론 학습, 문제 풀이, 모의고사 기능을 갖춘 PWA 웹 애플리케이션" },
+  { slug: "reciflow", summary: "레시피 공유·관리 모바일 플랫폼 (Supabase 백엔드 중심)" },
   { slug: "dps-store", summary: "멀티테넌트 팝업 스토어 플랫폼 — 출력장비·키오스크 등 현장 장비 연동까지 확장" },
   { slug: "dps", summary: "판매자와 제조사를 연결하는 B2B 주문형 굿즈·인쇄 제작 플랫폼" },
   { slug: "simple-thumbnail", summary: "3초 만에 커스텀 썸네일을 만드는 웹 애플리케이션" },
