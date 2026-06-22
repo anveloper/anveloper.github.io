@@ -4,7 +4,7 @@ import { PageContainer } from "@/components/page-container";
 import { SkillBadge } from "@/components/skill-badge";
 import { TextType } from "@/components/text-type";
 import { sectionReveal, staggerContainer, staggerItem } from "@/lib/animation";
-import type { HomeProject } from "@/lib/featured-projects";
+import type { HomeProjectGroup } from "@/lib/featured-projects";
 import { skillCategories } from "@/lib/skill-data";
 import { timeline } from "@/lib/timeline-data";
 import { cn } from "@/lib/utils";
@@ -55,7 +55,7 @@ const SectionHeader = ({ children, href }: { children: React.ReactNode; href?: s
 
 const viewportConfig = { once: true, margin: "-80px" as const };
 
-export const HomeView = ({ featuredProjects }: { featuredProjects: HomeProject[] }) => {
+export const HomeView = ({ groupedProjects }: { groupedProjects: HomeProjectGroup[] }) => {
   return (
     <PageContainer>
       {/* Hero Section */}
@@ -173,52 +173,60 @@ export const HomeView = ({ featuredProjects }: { featuredProjects: HomeProject[]
         className="mb-10 md:mb-16"
       >
         <SectionHeader href="/projects">Featured Projects</SectionHeader>
-        <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewportConfig}
-          className="grid grid-cols-1 sm:grid-cols-2 gap-2 md:gap-3"
-        >
-          {featuredProjects.map((project, index) => (
-            <motion.div
-              key={project.slug}
-              variants={staggerItem}
-              className={index === featuredProjects.length - 1 && featuredProjects.length % 2 !== 0 ? "col-span-2" : ""}
-            >
-              <Link
-                href={`/projects/${project.slug}`}
-                className={cn(
-                  "block group p-3 md:p-4 bg-secondary/50 rounded-lg hover:bg-accent transition-colors",
-                  "flex flex-col gap-2",
-                  index === featuredProjects.length - 1 && featuredProjects.length % 2 !== 0 && "flex-row items-center gap-4"
-                )}
+        <div className="flex flex-col gap-6 md:gap-8">
+          {groupedProjects.map((group) => (
+            <div key={group.key}>
+              <h3 className="mb-2 md:mb-3 text-[11px] md:text-xs font-bold uppercase tracking-[0.15em] text-primary-sky/80">
+                {group.label}
+              </h3>
+              <motion.div
+                variants={staggerContainer}
+                initial="hidden"
+                whileInView="visible"
+                viewport={viewportConfig}
+                className="grid grid-cols-1 sm:grid-cols-2 gap-2 md:gap-3"
               >
-                {project.icon && (
-                  <img src={project.icon} alt="" className="w-8 h-8 md:w-9 md:h-9 rounded-md shrink-0" />
-                )}
-                <div className="flex-1 min-w-0">
-                  <h3 className="text-sm md:text-base font-bold text-foreground group-hover:text-primary-sky transition-colors truncate">
-                    {project.title}
-                  </h3>
-                  <p className="text-xs md:text-sm text-muted-foreground leading-snug mt-0.5 line-clamp-1">
-                    {project.summary}
-                  </p>
-                </div>
-                <div className="flex flex-wrap gap-1">
-                  {project.tags.slice(0, 3).map((tag) => (
-                    <span
-                      key={tag}
-                      className="text-[10px] md:text-xs px-1.5 py-0.5 bg-background text-muted-foreground rounded-md"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </Link>
-            </motion.div>
+                {group.projects.map((project, index) => {
+                  const isLastOdd = index === group.projects.length - 1 && group.projects.length % 2 !== 0;
+                  return (
+                    <motion.div key={project.slug} variants={staggerItem} className={isLastOdd ? "sm:col-span-2" : ""}>
+                      <Link
+                        href={`/projects/${project.slug}`}
+                        className={cn(
+                          "block group p-3 md:p-4 bg-secondary/50 rounded-lg hover:bg-accent transition-colors",
+                          "flex flex-col gap-2",
+                          isLastOdd && "sm:flex-row sm:items-center sm:gap-4"
+                        )}
+                      >
+                        {project.icon && (
+                          <img src={project.icon} alt="" className="w-8 h-8 md:w-9 md:h-9 rounded-md shrink-0" />
+                        )}
+                        <div className="flex-1 min-w-0">
+                          <h4 className="text-sm md:text-base font-bold text-foreground group-hover:text-primary-sky transition-colors truncate">
+                            {project.title}
+                          </h4>
+                          <p className="text-xs md:text-sm text-muted-foreground leading-snug mt-0.5 line-clamp-1">
+                            {project.summary}
+                          </p>
+                        </div>
+                        <div className="flex flex-wrap gap-1">
+                          {project.tags.slice(0, 3).map((tag) => (
+                            <span
+                              key={tag}
+                              className="text-[10px] md:text-xs px-1.5 py-0.5 bg-background text-muted-foreground rounded-md"
+                            >
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                      </Link>
+                    </motion.div>
+                  );
+                })}
+              </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
       </motion.section>
 
       {/* Contact Section */}
