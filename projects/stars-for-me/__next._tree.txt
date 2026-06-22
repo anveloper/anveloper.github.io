@@ -1,0 +1,4 @@
+:HL["/_next/static/chunks/0~l7k9uaar7cu.css","style"]
+:HL["/fonts/PretendardVariable-subset.woff2","font",{"crossOrigin":"anonymous","type":"font/woff2"}]
+:HL["/images/projects/stars-for-me/hero.webp","image"]
+0:{"tree":{"name":"","param":null,"prefetchHints":20,"slots":{"children":{"name":"projects","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"stars-for-me","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"GWVIOyCHT4zAHNqHx2z0-"}
