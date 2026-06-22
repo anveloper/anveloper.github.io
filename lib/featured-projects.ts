@@ -20,7 +20,7 @@ export const featuredProjects: FeaturedProject[] = [
     summary: "AI와 함께하는 해커톤 — 참가 신청·갤러리·디스코드 기반 AI 자동 심사를 지원하는 해커톤 운영 플랫폼",
   },
   { slug: "information-security-engineer", summary: "이론 학습, 문제 풀이, 모의고사 기능을 갖춘 PWA 웹 애플리케이션" },
-  { slug: "dps-store", summary: "멀티테넌트 기반 팝업 스토어 플랫폼 — 테넌트별 독립 온라인 스토어 운영" },
+  { slug: "dps-store", summary: "멀티테넌트 팝업 스토어 플랫폼 — 출력장비·키오스크 등 현장 장비 연동까지 확장" },
   { slug: "dps", summary: "판매자와 제조사를 연결하는 B2B 주문형 굿즈·인쇄 제작 플랫폼" },
   { slug: "simple-thumbnail", summary: "3초 만에 커스텀 썸네일을 만드는 웹 애플리케이션" },
   { slug: "naya", summary: "멀티미디어 소개 카드와 명함을 제작·공유·관리하는 크로스 플랫폼 서비스" },
