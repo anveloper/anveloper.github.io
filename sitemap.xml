@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>https://anveloper.dev</loc>
-<lastmod>2026-06-22T08:39:05.909Z</lastmod>
+<lastmod>2026-06-22T09:00:07.208Z</lastmod>
 <changefreq>weekly</changefreq>
 <priority>1</priority>
 </url>
@@ -174,12 +174,6 @@
 <priority>0.7</priority>
 </url>
 <url>
-<loc>https://anveloper.dev/projects/reciflow</loc>
-<lastmod>2026-03-13T00:00:00.000Z</lastmod>
-<changefreq>monthly</changefreq>
-<priority>0.7</priority>
-</url>
-<url>
 <loc>https://anveloper.dev/projects/ttalkkakthon</loc>
 <lastmod>2026-03-11T00:00:00.000Z</lastmod>
 <changefreq>monthly</changefreq>
@@ -194,6 +188,12 @@
 <url>
 <loc>https://anveloper.dev/projects/dps-store</loc>
 <lastmod>2026-01-08T00:00:00.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.7</priority>
+</url>
+<url>
+<loc>https://anveloper.dev/projects/reciflow</loc>
+<lastmod>2025-08-11T00:00:00.000Z</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
