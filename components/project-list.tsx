@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { PageHeader } from "@/components/page-header";
 import { TechBadge } from "@/components/skill-badge";
+import { categoryGroups } from "@/lib/featured-projects";
 import { FolderKanban, ListFilter, X } from "lucide-react";
 
 type Project = {
@@ -28,6 +29,21 @@ export const ProjectList = ({ projects }: { projects: Project[] }) => {
     selectedTags.length === 0
       ? projects
       : projects.filter((p) => ((p.frontmatter.tags as string[]) ?? []).some((t) => selectedTags.includes(t)));
+
+  // 카테고리별 그룹화 (categoryGroups 순서 유지, 미분류는 마지막 ETC 그룹으로)
+  const knownKeys = new Set(categoryGroups.map((g) => g.key));
+  const grouped = [
+    ...categoryGroups.map((g) => ({
+      key: g.key,
+      label: g.label,
+      projects: filtered.filter((p) => p.frontmatter.category === g.key),
+    })),
+    {
+      key: "etc",
+      label: "ETC",
+      projects: filtered.filter((p) => !knownKeys.has(p.frontmatter.category as string)),
+    },
+  ].filter((g) => g.projects.length > 0);
 
   return (
     <>
@@ -88,40 +104,49 @@ export const ProjectList = ({ projects }: { projects: Project[] }) => {
           </p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          {filtered.map((project) => (
-            <Link
-              key={project.slug}
-              href={`/projects/${project.slug}`}
-              className="group flex flex-col gap-3 p-4 bg-secondary/50 rounded-lg hover:bg-accent transition-colors"
-            >
-              <div className="flex items-center gap-3">
-                {project.icon && <img src={project.icon} alt="" className="w-10 h-10 rounded-md shrink-0" />}
-                <div className="min-w-0 flex-1">
-                  <h2 className="text-base font-medium text-foreground group-hover:text-primary-sky transition-colors truncate">
-                    {project.frontmatter.title as string}
-                  </h2>
-                  <time
-                    dateTime={(project.frontmatter.date as string).replace(/\./g, "-")}
-                    className="text-xs text-muted-foreground"
+        <div className="flex flex-col gap-8">
+          {grouped.map((group) => (
+            <section key={group.key}>
+              <h2 className="mb-3 text-[11px] md:text-xs font-bold uppercase tracking-[0.15em] text-primary-sky/80">
+                {group.label}
+              </h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {group.projects.map((project) => (
+                  <Link
+                    key={project.slug}
+                    href={`/projects/${project.slug}`}
+                    className="group flex flex-col gap-3 p-4 bg-secondary/50 rounded-lg hover:bg-accent transition-colors"
                   >
-                    {project.frontmatter.date as string}
-                  </time>
-                </div>
+                    <div className="flex items-center gap-3">
+                      {project.icon && <img src={project.icon} alt="" className="w-10 h-10 rounded-md shrink-0" />}
+                      <div className="min-w-0 flex-1">
+                        <h3 className="text-base font-medium text-foreground group-hover:text-primary-sky transition-colors truncate">
+                          {project.frontmatter.title as string}
+                        </h3>
+                        <time
+                          dateTime={(project.frontmatter.date as string).replace(/\./g, "-")}
+                          className="text-xs text-muted-foreground"
+                        >
+                          {project.frontmatter.date as string}
+                        </time>
+                      </div>
+                    </div>
+                    {typeof project.frontmatter.description === "string" && (
+                      <p className="text-sm text-muted-foreground leading-relaxed line-clamp-2">
+                        {project.frontmatter.description}
+                      </p>
+                    )}
+                    {Array.isArray(project.frontmatter.tags) && (
+                      <div className="flex flex-wrap gap-1 mt-auto">
+                        {(project.frontmatter.tags as string[]).slice(0, 5).map((tag) => (
+                          <TechBadge key={tag} name={tag} />
+                        ))}
+                      </div>
+                    )}
+                  </Link>
+                ))}
               </div>
-              {typeof project.frontmatter.description === "string" && (
-                <p className="text-sm text-muted-foreground leading-relaxed line-clamp-2">
-                  {project.frontmatter.description}
-                </p>
-              )}
-              {Array.isArray(project.frontmatter.tags) && (
-                <div className="flex flex-wrap gap-1 mt-auto">
-                  {(project.frontmatter.tags as string[]).slice(0, 5).map((tag) => (
-                    <TechBadge key={tag} name={tag} />
-                  ))}
-                </div>
-              )}
-            </Link>
+            </section>
           ))}
         </div>
       )}
