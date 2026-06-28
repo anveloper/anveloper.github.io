@@ -16,7 +16,7 @@ demo: "https://yougabell-web-dev.vercel.app/"
 
 ## 개요
 
-육아밸은 워킹맘/워킹대디를 위한 육아 정보 검색·기록·AI 챗봇 서비스입니다. 사용자가 입력한 아이 정보(연령, 발달 단계, 알레르기 등)를 맥락으로 합성해 AI가 맞춤 답변을 제공하고, 일상 미션 기록을 모아 AI 주간 리포트로 정성 회고를 돌려줍니다.
+육아밸은 워킹맘/워킹대디를 위한 육아 정보 검색·기록·AI 챗봇 서비스입니다. 사용자가 입력한 아이 정보(연령, 발달 단계, 알레르기 등)를 맥락으로 합성해 AI가 맞춤 답변을 제공하고, 일상 미션 기록을 모아 AI 주간 리포트로 정성적 회고를 돌려줍니다.
 
 배포 형태는 Expo(React Native) 네이티브 셸 안에 Next.js 웹뷰를 띄우는 **하이브리드 구조**이며, 도메인 로직과 모든 LLM 호출은 NestJS API가 전담합니다. 기획자 1명, 디자이너 1명, 개발자 2명으로 구성된 `four-lovely-fairies` 팀에서 진행했습니다.
 
@@ -35,21 +35,21 @@ demo: "https://yougabell-web-dev.vercel.app/"
 
 ## 기술 스택
 
-| 분류          | 기술                                                          |
-| ------------- | ------------------------------------------------------------ |
-| Language      | TypeScript 5 (전 영역 `strict: true`)                        |
-| API           | NestJS 11, Prisma 7, `@nestjs/swagger` (OpenAPI)             |
-| AI            | Vercel AI SDK 6 (`ai`), Gemini 2.5 Flash, `gemini-embedding-001` (768d) |
-| Web / Admin   | Next.js 16.2 (App Router), React 19, Tailwind CSS 4, shadcn/ui |
-| Mobile        | Expo SDK 54, expo-router 6, React Native 0.81                |
-| DB / Auth     | Supabase Postgres, Supabase Auth                             |
-| Validation    | Zod 4                                                        |
-| 배포          | web/admin → Vercel, mobile → Expo EAS, api → Render          |
-| Pkg Manager   | pnpm                                                         |
+| 분류        | 기술                                                                    |
+| ----------- | ----------------------------------------------------------------------- |
+| Language    | TypeScript 5 (전 영역 `strict: true`)                                   |
+| API         | NestJS 11, Prisma 7, `@nestjs/swagger` (OpenAPI)                        |
+| AI          | Vercel AI SDK 6 (`ai`), Gemini 2.5 Flash, `gemini-embedding-001` (768d) |
+| Web / Admin | Next.js 16.2 (App Router), React 19, Tailwind CSS 4, shadcn/ui          |
+| Mobile      | Expo SDK 54, expo-router 6, React Native 0.81                           |
+| DB / Auth   | Supabase Postgres, Supabase Auth                                        |
+| Validation  | Zod 4                                                                   |
+| 배포        | web/admin → Vercel, mobile → Expo EAS, api → Render                     |
+| Pkg Manager | pnpm                                                                    |
 
 ## 프로젝트 구조
 
-단일 모노레포가 아니라, umbrella 레포가 5개 레포의 큰 그림을 인덱싱하는 **멀티레포 + umbrella** 전략을 씁니다.
+단일 모노레포가 아니라, umbrella 레포가 4개 서비스 레포(+임시 크론)의 큰 그림을 인덱싱하는 **멀티레포 + umbrella** 전략을 씁니다.
 
 ```
 youth/ (워크스페이스 루트)
@@ -87,7 +87,7 @@ youth/ (워크스페이스 루트)
 
 개발 2인이 기능별로 나눠 풀스택으로 구현했고, 본인은 API·웹·모바일·어드민·인프라 전반에 참여했습니다.
 
-- **API/백엔드 (~80% 기여)**: NestJS 도메인 모듈, Prisma 스키마(30+ 테이블), RAG 챗봇·AI 주간 리포트 파이프라인, Supabase Auth Guard
+- **API/백엔드 (~80% 기여)**: NestJS 도메인 모듈, Prisma 스키마(39개 모델, pgvector 임베딩 포함), RAG 챗봇·AI 주간 리포트 파이프라인, Supabase Auth Guard
 - **웹 프론트 (~50% 기여)**: Next.js 사용자 웹 UI/UX, 챗봇·미션·온보딩 화면
 - **모바일**: Expo RN 셸, 푸시·딥링크, WebView 컨테이너 및 네이티브 ↔ 웹 메시지 연동
 - **어드민/인프라·기획**: 운영자 CMS, 임시 크론(Render free cold start 웜업 겸용), umbrella 문서·아키텍처 설계
@@ -99,7 +99,7 @@ youth/ (워크스페이스 루트)
 
 - **상황**: API가 Render Free 플랜에 올라가 있어 15분 무트래픽 시 인스턴스가 슬립, 다음 요청이 cold start로 30초 안팎 대기
 - **원인**: 무료 플랜의 자동 슬립 정책 + 별도 스케줄러 인프라 미도입
-- **해결**: 어차피 5분 단위로 도래하는 미션 알림 디스패치 호출 자체를 웜업 핑으로 겸용. 별도 헬스체크 호출을 burn 하지 않고 한 번의 호출이 웜업과 알림 발송을 동시에 수행하는 임시 크론(`yougabell-cron`)으로 처리
+- **해결**: 어차피 5분 단위로 도래하는 미션 알림 디스패치 호출 자체를 웜업 핑으로 겸용. 별도 헬스체크 호출을 낭비하지 않고 한 번의 호출이 웜업과 알림 발송을 동시에 수행하는 임시 크론(`yougabell-cron`)으로 처리
 
 ### 문제 2: 멀티레포에서의 타입·계약 동기화
 
