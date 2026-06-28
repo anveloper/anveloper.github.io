@@ -3,7 +3,18 @@ title: "Reciflow"
 date: "2025-08-11"
 category: "side"
 description: "레시피 공유·관리 모바일 플랫폼 — Supabase(PostgreSQL) 백엔드를 중심으로 한 iOS/Android 앱 서비스"
-tags: ["Supabase", "PostgreSQL", "Deno", "Edge Functions", "React Native", "Expo", "Next.js", "TypeScript", "Cloudflare Images"]
+tags:
+  [
+    "Supabase",
+    "PostgreSQL",
+    "Deno",
+    "Edge Functions",
+    "React Native",
+    "Expo",
+    "Next.js",
+    "TypeScript",
+    "Cloudflare Images",
+  ]
 github: "Reciflow/ReciflowBackend"
 ---
 
@@ -27,20 +38,21 @@ Reciflow는 레시피를 등록·공유하고 요리 기록을 남기는 iOS/And
 - **커뮤니티**: 카테고리 기반 게시글·댓글·이미지·태그
 - **AI 레시피 생성**: `gemini-chat` Edge Function이 자유 텍스트(요리 설명)를 구조화된 레시피 JSON으로 변환
 - **이미지 파이프라인**: Cloudflare Images 연동(업로드/삭제) 및 DB image 테이블과 동기화
-- **인증**: Supabase Auth + 소셜 로그인(Apple, Kakao)
+- **인증**: Supabase Auth + 소셜 로그인(Apple, Kakao, Google)
+- **푸시 알림**: `push-send` Edge Function + 디바이스 토큰·알림 설정 테이블 기반 알림 발송
 
 ## 기술 스택
 
-| 분류         | 기술                                                                  |
-| ------------ | --------------------------------------------------------------------- |
-| Backend (주) | Supabase, PostgreSQL (RLS), RPC 함수, Deno Edge Functions             |
-| AI / 외부    | Google Gemini (`gemini-chat`), Cloudflare Images                      |
-| Frontend     | Expo SDK 54 · expo-router 6 · React 19 (구: React Native 0.77)        |
-| 상태 관리    | Zustand (로컬), TanStack React Query (서버 상태)                      |
-| Admin        | Next.js 16 (운영자 CMS)                                               |
-| Schema 설계  | Prisma (ERD/DDL 생성용, `ReciflowDesign`)                            |
-| Language     | TypeScript                                                            |
-| Pkg Manager  | npm                                                                   |
+| 분류         | 기술                                                           |
+| ------------ | -------------------------------------------------------------- |
+| Backend (주) | Supabase, PostgreSQL (RLS), RPC 함수, Deno Edge Functions      |
+| AI / 외부    | Google Gemini (`gemini-chat`), Cloudflare Images               |
+| Frontend     | Expo SDK 54 · expo-router 6 · React 19 (구: React Native 0.77) |
+| 상태 관리    | Zustand (로컬), TanStack React Query (서버 상태)               |
+| Admin        | Next.js 16 (운영자 CMS)                                        |
+| Schema 설계  | Prisma (ERD/DDL 생성용, `ReciflowDesign`)                      |
+| Language     | TypeScript                                                     |
+| Pkg Manager  | npm                                                            |
 
 ## 프로젝트 구조
 
@@ -52,9 +64,9 @@ reciflow/
 │   ├── supabase/
 │   │   ├── sql/
 │   │   │   ├── functions/   # 도메인별 RPC 함수 (단일 파일 단위)
-│   │   │   ├── tables/      # 테이블 스키마 + RLS 정책 코드화
-│   │   │   └── migrations/  # 타임스탬프 기반 마이그레이션
-│   │   └── functions/       # Edge Functions (gemini-chat, cf-images 등)
+│   │   │   └── tables/      # 테이블 스키마 + RLS 정책 코드화
+│   │   ├── functions/       # Edge Functions (gemini-chat, cf-images-ua/delete, push-send 등)
+│   │   └── migrations/      # 마이그레이션 (baseline + _archive)
 │   └── docs/                # api 명세 · 마이그레이션 히스토리
 ├── ReciflowFrontend/   # Expo 앱 (신규, RN에서 마이그레이션)
 ├── ReciflowFront/      # React Native 앱 (구버전, ~v2.1.x)
@@ -62,16 +74,16 @@ reciflow/
 └── ReciflowDesign/     # Prisma 스키마 (ERD/DDL 참조)
 ```
 
-규모: RPC 함수 62개, 테이블 33개, 마이그레이션 109개, 도메인 19개(user/recipe/comment/community/rating/cook/like/bookmark/follow/report/curated 등).
+규모: RPC 함수 78개, 테이블 36개, 도메인 20개(user/recipe/comment/community/rating/cook/like/bookmark/follow/report/notification/share 등). 마이그레이션 히스토리는 baseline squash로 단일 기준점으로 정리.
 
 ## 담당 역할
 
 ReciflowBackend를 주력으로 담당하여 도메인 API·DB·인프라를 설계·구현했습니다.
 
-- **DB/스키마 설계**: PostgreSQL 테이블 33개, ENUM, FK/UNIQUE/인덱스, RLS 정책을 테이블별 파일로 코드 관리
-- **RPC API 구현**: 도메인별 RPC 함수 62개(레시피 CRUD, 요리 기록·랭킹, 별점, 북마크, 팔로우, 커뮤니티, 신고 등)
+- **DB/스키마 설계**: PostgreSQL 테이블 36개, ENUM, FK/UNIQUE/인덱스, RLS 정책을 테이블별 파일로 코드 관리
+- **RPC API 구현**: 도메인별 RPC 함수 78개(레시피 CRUD, 요리 기록·랭킹, 별점, 북마크, 팔로우, 커뮤니티, 신고 등)
 - **Edge Functions**: `gemini-chat`(AI 레시피 생성), Cloudflare Images 업로드/삭제 연동
-- **마이그레이션 운영**: dev/prod Supabase 프로젝트 분리, 동일 마이그레이션 적용·검증 프로세스 정립
+- **마이그레이션 운영**: dev/prod Supabase 프로젝트 분리, 누적 마이그레이션을 단일 baseline으로 squash(스키마·데이터 무변경)하여 히스토리 정리, 동일 마이그레이션 적용·검증 프로세스 정립
 - **API 문서화**: `docs/api/` 도메인별 스펙·에러 코드 정의(문서 우선 개발)
 
 ## 트러블슈팅

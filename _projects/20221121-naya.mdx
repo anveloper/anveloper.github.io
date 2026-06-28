@@ -36,28 +36,28 @@ Android 앱을 중심으로 React 웹 뷰어와 Spring Boot 백엔드를 결합�
 - **QR코드**: ZXing 라이브러리로 생성, 웹 URL 연동
 - **카카오톡**: Kakao Link API 연동
 - **NFC**: 태그 쓰기로 오프라인 공유
-- **Facebook**: 소셜 공유 연동
+- **Instagram**: 스토리 공유 연동
 - 웹에서 3D 원근 효과로 공유된 카드 조회 (마우스/터치 기반 회전)
 
 ### 일정 관리
 
 - 커스텀 캘린더 UI (Kalendar 라이브러리)
 - 스케줄 생성·수정·삭제, 알람 설정
-- 참석자에 명함(Nuya) 연동
+- 일정 참석자에 소개 카드(Naya)·명함 연동
 - 위치 정보 연동 (Google Maps)
 
 ## 기술 스택
 
-| 분류      | 기술                                                                  |
-| --------- | --------------------------------------------------------------------- |
-| Android   | Kotlin, Jetpack Compose, CameraX, Room, Hilt, Navigation Compose      |
-| Frontend  | React 18, TypeScript, Redux Toolkit, Styled Components, Framer Motion |
-| Backend   | Java 8, Spring Boot 2.7, JPA, MySQL                                   |
-| OCR       | ML Kit (Korean Text Recognition), Tesseract                           |
-| 공유      | ZXing (QR), Kakao SDK, NFC, Facebook SDK                              |
-| 미디어    | ExoPlayer (Media3), Glide, Coil, DrawBox                              |
-| 인증/저장 | Firebase Auth, Firebase Storage                                       |
-| 인프라    | Docker, Jenkins CI/CD, Nginx, Let's Encrypt SSL                       |
+| 분류      | 기술                                                              |
+| --------- | ----------------------------------------------------------------- |
+| Android   | Kotlin, Jetpack Compose, CameraX, Room, Hilt, Navigation Compose  |
+| Frontend  | React 18, TypeScript, Redux Toolkit, React Router, Axios          |
+| Backend   | Java 8, Spring Boot 2.7, JPA, MySQL                               |
+| OCR       | ML Kit (Korean Text Recognition), Tesseract, OpenCV (스캔 전처리) |
+| 공유      | ZXing (QR), Kakao SDK, NFC, Instagram 스토리 (Facebook SDK)       |
+| 미디어    | ExoPlayer (Media3), Glide, Coil, DrawBox                          |
+| 인증/저장 | Firebase Auth, Firebase Storage                                   |
+| 인프라    | Docker, Jenkins CI/CD, Nginx, Let's Encrypt SSL                   |
 
 ## 아키텍처
 
