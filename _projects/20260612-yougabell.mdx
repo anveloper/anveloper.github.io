@@ -81,7 +81,7 @@ youth/ (워크스페이스 루트)
 3. 합성된 컨텍스트 + 검색 결과로 Gemini 2.5 Flash 호출, **SSE 스트리밍**으로 토큰 단위 응답
 4. 응답 완료 후 카드/출처 링크를 노출하고, 사용자/어시스턴트 메시지를 DB에 영속화 (사용자당 단일 세션)
 
-주간 리포트는 월요일 cron이 집계를 마친 뒤, 3개 AI 필드(headline body / bestMoment body / action suggestion)를 1회 호출로 생성합니다. LLM 실패 시 fallback 텍스트로 row는 항상 생성되도록 설계했습니다.
+주간 리포트는 월요일 cron이 집계를 마친 뒤, 3개 AI 필드(headline body / bestMoment body / action suggestion)를 1회 호출로 생성합니다. 응답은 Zod 스키마(`Output.object`)로 구조를 강제하고, AI 설정 누락이나 생성 실패는 리포트 생성 실패로 처리해 재실행(`forceRegenerate`)으로 복구합니다.
 
 ## 담당 역할
 
