@@ -2,7 +2,7 @@
 title: "날별 (Stars for me)"
 date: "2026-04-02"
 category: "side"
-description: "사주팔자와 별자리를 결합해 AI가 매일·주간·월간·절기 운세를 풀어주는 모바일 운세 서비스 — 사주 계산 엔진을 직접 구현한 pnpm 모노레포"
+description: "사주팔자와 별자리를 결합해 AI가 매일·주간·월간·절기 운세를 풀어주는 모바일 운세 서비스 — 결정론적 사주 엔진과 LLM 풀이 파이프라인을 분리 설계한 AI 사이드 프로젝트"
 tags: ["Next.js", "React", "Expo", "TypeScript", "Prisma", "PostgreSQL", "Gemini", "Tailwind CSS", "Vercel"]
 github: "anveloper/stars-for-me"
 demo: "https://stars-for.me"
@@ -18,7 +18,7 @@ demo: "https://stars-for.me"
 
 날별은 사주팔자(四柱)와 서양 별자리를 함께 풀어 "나를 위한 별"이라는 컨셉으로 운세를 제공하는 모바일 서비스입니다. 생년월일시·양음력 정보만 입력하면 사주 계산 엔진이 네 기둥(년·월·일·시)과 오행 분포·십성·신살·대운을 산출하고, 그 결과를 맥락으로 AI가 매일·주간·월간·절기 운세를 풀이합니다.
 
-운세 풀이를 AI에 통째로 맡기지 않고, **사주 계산은 결정론적 TypeScript 엔진**이 담당하고 AI는 그 산출물을 풀어 쓰는 역할만 맡도록 분리한 것이 핵심입니다. pnpm + Turbo 모노레포로 Next.js 웹과 Expo 모바일이 `packages/shared`의 사주 엔진을 공유하며, Claude Code와 Codex 두 에이전트 협업으로 진행했습니다.
+RAG·AI 챗봇 서비스 구축을 준비하며 **LLM 파이프라인 설계를 연습하기 위한 사이드 프로젝트**로 진행했습니다. 운세 풀이를 AI에 통째로 맡기지 않고, **사주 계산은 결정론적 TypeScript 엔진**이 담당하고 AI는 그 산출물을 풀어 쓰는 역할만 맡도록 분리한 것이 핵심입니다. pnpm + Turbo 모노레포로 Next.js 웹과 Expo 모바일이 `packages/shared`의 사주 엔진을 공유하며, Claude Code와 Codex 두 에이전트 협업으로 진행했습니다.
 
 ## 주요 기능
 
@@ -26,8 +26,9 @@ demo: "https://stars-for.me"
 - **사주 종합 분석**: 일간 해석, 오행 과다/결핍, 성격 패턴, 재물·연애·직업운, 대운 흐름, 개운 처방까지 AI가 한국어로 풀이
 - **운세 풀이 (일간/주간/월간/절기)**: 사주 기반 풀이와 별자리 기반 풀이를 분리해 각각 고유한 관점으로 제공
 - **별자리 모임(Constellation)**: 초대 코드로 그룹을 만들고 구성원 간 궁합·그룹 운세를 확인
-- **별 성장 시스템**: 출석·연속 접속 스트릭으로 별 레벨/포인트가 성장
-- **결제**: 사주 상세 풀이·궁합 분석·월간 상세는 단건 결제, 올스타 패스는 구독 (Toss / Apple IAP / Google Play)
+- **별 성장 시스템**: 출석·연속 접속 스트릭으로 별 레벨/포인트가 성장 (5단계 레벨)
+- **저장·공유**: 마음에 든 운세를 저장하고, 공유용 OG 이미지를 동적 생성(`api/og/fortune`)
+- **결제(설계만)**: 단건 상품·구독 상품을 스키마 수준으로 설계 — 실결제 연동은 구현하지 않음
 
 ## 기술 스택
 
@@ -37,7 +38,7 @@ demo: "https://stars-for.me"
 | Web         | Next.js 16.2 (App Router), React 19, Tailwind CSS 4, Motion       |
 | Mobile      | Expo SDK 54, expo-router 6, React Native 0.81                     |
 | Shared      | 자체 구현 사주 계산 엔진, `korean-lunar-calendar`(양↔음력 변환)   |
-| DB          | PostgreSQL 17, Prisma 7 (`@prisma/adapter-pg`, `pg`)              |
+| DB          | PostgreSQL 17, Prisma 7 (`@prisma/adapter-pg`, `pg`) — 15개 모델  |
 | AI          | Gemini 2.5 Flash (우선) → GPT-4o-mini (폴백) → Mock               |
 | 인증        | Kakao / Google / Apple OAuth, `jose`(JWT), refresh token rotation |
 | 배포        | web → Vercel, mobile → Expo, DB는 Postgres                        |
@@ -54,8 +55,8 @@ stars-for-me/ (모노레포 루트)
 │   │       │   ├── (main)/      # home·saju·fortune·constellation·profile
 │   │       │   ├── onboarding/  # 온보딩 + 별 부여(reveal)
 │   │       │   └── api/         # auth·fortune·payments·constellation·cron …
-│   │       └── lib/             # ai-client·bucket·oauth·payments·rate-limit
-│   └── mobile/         # Expo RN — 온보딩·홈·운세 (PascalCase 유지)
+│   │       └── lib/             # ai-client·fortune/bucket·oauth·payments·rate-limit
+│   └── mobile/         # Expo RN — 온보딩·홈·운세
 └── packages/
     └── shared/         # 사주 엔진·오행/별자리 상수·공유 타입·디자인 토큰
         └── src/engine/ # saju.ts·zodiac.ts·lunar.ts·seasonal.ts
@@ -65,7 +66,7 @@ stars-for-me/ (모노레포 루트)
 
 - **계산과 풀이의 분리**: 사주팔자·오행·십성·신살은 `packages/shared`의 결정론적 엔진이 산출하고, AI(`ai-client.ts`)는 그 결과를 system prompt로 받아 풀이 텍스트만 생성. 모델을 바꿔도 사주 산출 결과는 불변
 - **타입/엔진 공유**: web과 mobile이 `@stars-for-me/shared` 워크스페이스 패키지로 사주 엔진과 타입을 그대로 공유
-- **파일 네이밍 규칙 분리**: `apps/web`은 kebab-case, `apps/mobile`은 PascalCase, `packages/shared`는 kebab-case로 영역별 컨벤션 유지
+- **파일 네이밍 규칙 분리**: `apps/web`·`packages/shared`는 kebab-case, `apps/mobile`은 expo-router 라우트는 lowercase·컴포넌트/라이브러리는 PascalCase로 영역별 컨벤션 유지
 - **에이전트 협업 하네스**: `CLAUDE.md`(Claude용)·`AGENTS.md`(Codex용)로 진입점을 나누고, 파일 단위 write scope를 분리해 두 에이전트의 동시 작업 충돌을 방지
 
 ## 사주 엔진 / AI 풀이 파이프라인
@@ -75,20 +76,20 @@ stars-for-me/ (모노레포 루트)
 1. 양력 생년월일을 **율리우스적일(Julian Day Number)**로 변환해 일주(日柱)를 계산하고, 절기 기준으로 월주를 산출
 2. 음력 입력은 `korean-lunar-calendar`로 양력으로 환산한 뒤 동일 경로로 처리
 3. 천간·지지에서 오행 분포·십성·신살(도화·역마·화개·귀문관)·대운을 도출
-4. 산출된 네 기둥 + 오행 + 대운을 `ai-client.ts`의 system prompt로 합성, **운세 종류별 JSON 스키마**(SAJU/DAILY/WEEKLY/MONTHLY/SEASONAL/COMPATIBILITY)에 맞춰 Gemini가 응답
+4. 산출된 네 기둥 + 오행 + 대운을 `ai-client.ts`의 system prompt로 합성, **운세 종류별 JSON 스키마**(SAJU_ANALYSIS/DAILY/WEEKLY/MONTHLY/SEASONAL/COMPATIBILITY)에 맞춰 Gemini가 응답
 5. Gemini 실패 시 GPT-4o-mini로 폴백, 둘 다 실패하면 Mock 텍스트로 항상 결과가 나오도록 설계
 
-운세 일괄 생성은 사용자를 **일간·지배오행·성별·절기 4차원으로 묶는 버킷팅**(`lib/fortune/bucket.ts`)으로 처리해, 같은 사주 특성을 가진 사용자군에 대한 중복 AI 호출을 줄입니다. 비가입자 포함 동일 생년월일시는 `SajuCache`(생년월일시 해시 키)로 캐싱합니다.
+운세 일괄 생성은 사용자를 **일간·지배오행·성별·절기 4차원으로 묶는 버킷팅**(`lib/fortune/bucket.ts`)으로 처리해, 같은 사주 특성을 가진 사용자군에 대한 중복 AI 호출을 줄입니다. 비가입자 포함 동일 생년월일시는 `SajuCache`(생년월일시 해시 키)로 캐싱합니다. 일괄 생성은 `api/cron`의 배치 4종(일간·주간·월간 생성 + 정리)이 주기 실행하며, 실행 결과는 Discord 웹훅으로 운영 알림을 받습니다.
 
 ## 담당 역할
 
 1인 풀스택으로 기획·디자인 연동부터 사주 엔진·웹·모바일·인프라까지 전 영역을 구현했습니다.
 
 - **사주 엔진**: 율리우스적일 기반 일주 계산, 절기·오행·십성·신살·대운 산출 로직을 TypeScript로 직접 구현
-- **Web/API**: Next.js App Router로 온보딩·운세·궁합·결제·인증 API 및 화면 전체 구현
+- **Web/API**: Next.js App Router로 온보딩·운세·궁합·인증 API 및 화면 전체 구현
 - **Mobile**: Expo 기반 온보딩·홈·운세 화면
-- **AI 파이프라인**: 운세 종류별 프롬프트 스키마 설계, Gemini→GPT 폴백, 버킷팅 배치 생성
-- **인프라/보안**: OAuth 3종, refresh token rotation, OAuthState replay 방지, DB 기반 rate limit, 보안 감사 문서화(`docs/security`)
+- **AI 파이프라인**: 운세 종류별 JSON 스키마 프롬프트 설계, Gemini→GPT-4o-mini→Mock 3단 폴백, 버킷팅·캐싱으로 호출 비용 최적화, 크론 배치 일괄 생성
+- **인프라/보안**: OAuth 3종, refresh token rotation(탈취 시 체인 revoke), OAuthState 단일 사용 replay 방지, 엔드포인트별 DB rate limit, 클라이언트 포인트 적립 액션 화이트리스트, 보안 감사 사이클 문서화(`docs/security` — audit → P0/P1 fix → 시니어 리뷰 → 검증)
 
 ## 트러블슈팅
 
@@ -109,3 +110,4 @@ stars-for-me/ (모노레포 루트)
 - 사주 계산(결정론)과 운세 풀이(확률론)를 분리한 설계가 핵심이었습니다. 덕분에 AI 모델을 환경변수로 교체해도 사주 결과가 흔들리지 않고, 프롬프트만 갱신해 풀이 품질을 개선할 수 있었습니다.
 - 율리우스적일·절기 기반 사주 엔진을 직접 구현하면서 도메인(명리학) 규칙을 코드로 옮기는 과정 자체가 흥미로운 도전이었습니다.
 - Claude Code와 Codex의 동시 작업을 위해 `CLAUDE.md`/`AGENTS.md`로 진입점과 write scope를 나눈 협업 하네스가 멀티 에이전트 환경에서 잘 작동했습니다.
+- 프롬프트 스키마 설계, 모델 폴백, 비용 최적화(버킷팅·캐싱)까지 LLM 파이프라인을 처음부터 끝까지 직접 설계해 본 경험으로, 이후 RAG·AI 챗봇 프로젝트의 기반이 되었습니다.

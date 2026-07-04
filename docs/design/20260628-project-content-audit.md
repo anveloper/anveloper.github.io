@@ -22,6 +22,7 @@
 | 육아밸           | `four-lovely-fairies/yougabell`                 | PUBLIC        | ✅   |
 | DPS              | `tils-ai/dps`                                   | PRIVATE(인증) | ✅   |
 | DPS Store        | `tils-ai/dps-store`                             | PRIVATE(인증) | ✅   |
+| 날별(Stars for me) | `anveloper/stars-for-me`                      | PRIVATE(인증) | ✅   |
 
 > DPS / DPS Store는 MDX에 `github` 필드가 없지만(회사 비공개 레포), 본인 계정(`tils-ai` org)으로 접근 가능하여 검증함. 비공개라 사이트에 링크는 노출하지 않되 **수치/버전은 정정**한다.
 
@@ -97,11 +98,15 @@ L64·L70-71의 "규모" 수치 4개가 모두 실제와 불일치:
   - OpenVidu 버전: 클라 2.19 / 서버 2.22 혼재 → "OpenVidu 2.x" 권장.
 - **P3** L98 "3명의 팀원": FE 서브팀이 본인 포함 3명 → "프론트엔드 3인이" 권장.
 
-### 3.6 SSAFIT — `20220622-ssafit.mdx` 🟢 정확, 소폭 보완
+### 3.6 SSAFIT — `20220622-ssafit.mdx` ✅ 적용 완료 (2026-07-04, git 커밋 저자 기준 재검증)
 
-- **P2 역할 과소 기술**: 글은 "프론트엔드 담당"만, 실제 README 로그상 Spring 컨트롤러(Member/Video/Reply)·JWT 로그인·SQL 스키마 등 **백엔드 기여 상당**. 풀스택 성격 반영 고려.
-- **P3 Mermaid 줄바꿈** L60-61: 노드 라벨 내 `\n`은 Mermaid에서 줄바꿈 안 됨(`<br/>` 필요). → **사이트 `components/mermaid.tsx`가 `\n`을 전처리하는지 먼저 확인** 후, 안 하면 전 프로젝트 다이어그램 일괄 점검 필요(공통 이슈).
-- **P3**: "공공 데이터 API" → "식품안전나라 식품영양성분 API(I2790)"로 구체화 가능. 13개 테이블·3개 외부 API·MySQL 8.0·Spring Boot 2.6 등은 정확.
+- **P1 역할 서술 정정(양방향)**: 커밋 저자 분석(spring non-merge: 본인 20 vs 페어 20, vue: 본인 29 vs 페어 20) 결과 실제 구도는 **도메인 수직 분할** — 본인이 Member·Video·인증(JWT) 도메인을 백엔드~프론트 풀스택 담당, 페어가 Record·Food·Diet 담당.
+  - 백엔드 기여 추가: JWTUtil·JWTInterceptor·ApiMemberController(464줄)·찜/팔로우 API·ApiVideoController 확장. 단, 기존 추정 중 **Reply 컨트롤러는 페어 작성**으로 확인되어 제외.
+  - **페어 작업 오기재 제거**: Calendar·Food 뷰, Chart.js 차트(CalenderChart), 식품영양 API 클라이언트(foodSearch.js)는 페어 커밋 → 담당 역할에서 삭제.
+  - "Axios 인터셉터" → 실제는 `axios.create` 인스턴스 + 로그인 시 헤더 토큰 주입 방식으로 정정.
+  - 협업 프로세스(브랜치 전략 수립, PR 85건 리뷰-머지) 추가.
+- **P3 Mermaid 줄바꿈** — **해소(조치 불필요)**: mermaid 11.14.0의 `nonMarkdownToHTML`이 라벨 내 `\n` 시퀀스를 `<br />`로 변환함을 dist 소스에서 확인. `components/mermaid.tsx` 전처리·MDX 치환 모두 불필요.
+- **P3 적용**: "공공 데이터 API" → "식품안전나라 식품영양성분 API(I2790)" (`foodSearch.js`의 `openapi.foodsafetykorea.go.kr/api/{KEY}/I2790` 확인). 13개 테이블(init_v6.sql)·6회 스키마 이터레이션·MySQL 8.0(utf8mb4_0900_ai_ci)·Spring Boot 2.6.7·Java 8·Vue 2.6 재확인 완료.
 
 ### 3.7 README(NFT) — `20221007-readme-nft.mdx` 🟢 정확
 
@@ -171,11 +176,20 @@ L64·L70-71의 "규모" 수치 4개가 모두 실제와 불일치:
 - **P2 누락(강력 소재)**: **프린터 자동화 연동** — 스키마에 `MugTransferPrintQueue`/`ReceiptPrintQueue`/`GarmentPrintQueue`/`PrinterApiKey` 존재, org의 **`equip-sync-m-module`(머그 전사지 프린터 자동화)** 와 직결. 현장 하드웨어 연동은 차별화 포인트인데 글에 전무. **`dps-store-desktop`(Electron 키오스크)**, 소셜 로그인/멤버십(`CustomerSocialAccount`/`Membership`)도 누락.
 - **P3**: L156 "Caddy ACTIVE_PORT 환경변수 전환" → 실제 포트 파일에 기록 후 systemd EnvironmentFile 주입(L181과 일관되게).
 
+### 3.12 날별(Stars for me) — `20260402-stars-for-me.mdx` ✅ 적용 완료 (2026-07-04 추가 검수)
+
+초기 검수(6/28) 당시 목록에 없던 프로젝트. `anveloper/stars-for-me` 클론 대조 결과:
+
+- **P1 결제 과장(핵심)**: "단건 결제 + 구독 (Toss / Apple IAP / Google Play)" → 실제 결제 라우트는 사주 상세 confirm 1개뿐이고 Toss 서버측 검증은 TODO, **Apple IAP/Google Play는 스키마 주석에만 존재**, ALLSTAR_PASS는 상품 정의만 있고 구매 라우트 없음. → "설계 중심 + 멱등성 처리 구현" 수준으로 서술 완화.
+- **P1**: JSON 스키마 "SAJU" → **SAJU_ANALYSIS**(`ai-client.ts`, FortuneType enum). 구조 트리 `lib/bucket` → `lib/fortune/bucket.ts`. "mobile은 PascalCase" → expo-router 라우트는 lowercase, **컴포넌트/라이브러리만 PascalCase**로 한정.
+- **P2 보완 적용**: 크론 배치 4종(`api/cron`) + Discord 웹훅 운영 알림, Prisma 15개 모델, 저장·공유(SavedFortune + `api/og/fortune`), 레벨 5단계, refresh token 체인 revoke·포인트 적립 화이트리스트·보안 감사 사이클(`docs/security` 6종).
+- **정확 확인(전부 일치)**: Next.js 16.2.2/React 19.2.4/Tailwind 4/Expo 54/expo-router 6/RN 0.81.5/Prisma 7.6/PostgreSQL 17(docker-compose)/jose/korean-lunar-calendar, AI 폴백 체인(gemini-2.5-flash→gpt-4o-mini→Mock), 버킷팅 4차원, SajuCache(sha256 16자), 신살 4종, OAuth 3종, CLAUDE.md/AGENTS.md write scope 분리, 단건 상품 3종 가격.
+
 ---
 
 ## 4. 공통 점검 항목
 
-1. **Mermaid `\n` 줄바꿈** (전 프로젝트 다이어그램) — `components/mermaid.tsx` 전처리 여부 확인이 선행. 미처리 시 `<br/>` 일괄 치환.
+1. **Mermaid `\n` 줄바꿈** — ✅ 해소(2026-07-04). mermaid 11.14.0이 라벨 내 `\n`을 `<br />`로 자체 변환(`nonMarkdownToHTML`) 확인. 치환 불필요.
 2. **제품명 최신화** — "Vercel Postgres"(→Neon), 구버전 표기 점검.
 3. **수치 표기 원칙** — "N여 개/N+"가 실제와 어긋나지 않게. 과장보다 정확/보수가 신뢰에 유리(정보보안기사·Reciflow 교훈).
 4. **검증 불가 주장** — NAYA 수상·팀 규모 등 외부 증빙 없는 수치는 본인 확인 후 유지.
@@ -200,3 +214,7 @@ L64·L70-71의 "규모" 수치 4개가 모두 실제와 불일치:
 | 2026-06-28 | 초안 — 9개 레포 대조 검증, 프로젝트별 정정/보완 항목 정리                                 |
 | 2026-06-28 | DPS/DPS Store(`tils-ai`) 추가 검증 — 11개 전 프로젝트 커버, 모듈/버전/언어 수치 정정 반영 |
 | 2026-06-28 | P1~P3 정정 MDX 적용 완료(`pnpm build` 통과). 단, Mermaid `\n` 줄바꿈은 시각 확인 보류     |
+| 2026-07-04 | SSAFIT 커밋 저자 기준 재검증·적용(도메인 수직 분할, 페어 작업 오기재 제거), Mermaid `\n` 이슈 해소 확인 |
+| 2026-07-04 | 날별(Stars for me) 추가 검수·적용 — 스키마명/구조 정정, P2 보완(크론·모델 수·저장/공유·보안) |
+| 2026-07-04 | 날별 AI 중심 재구성(사용자 피드백) — 결제는 "설계만·실결제 미구현"으로 축소, LLM 파이프라인 연습 취지·비용 최적화 중심으로 서술 |
+| 2026-07-04 | 전 프로젝트 2차 재검수(레포 재클론 대조). 정정: DPS admin 17모듈·ja-JP 추가, Reciflow 구 RN 0.83, 육아밸 리포트 "fallback으로 row 항상 생성" → "AI 실패는 생성 실패 처리·forceRegenerate 복구"(코드와 반대였음), 딸깍톤 최종 점수 = 좋아요50+기본심사50(투표는 합산 미사용)·`분석` 명령 DB 저장 없음·POSTGRES_URL 미사용, 정보보안기사 과목별 문제 수 실측(250/135/130/125/120, 합계 760 일치)·실기 "약어/용어·서술형·실무형", Simple Thumbnail axios 미사용 제거·"캐러셀"→가로 스크롤 버튼 그룹, NAYA Styled Components/Framer Motion 복원(6/28 과잉 정정 롤백). 불일치 없음: your-seasons, readme-nft, DPS Store |
