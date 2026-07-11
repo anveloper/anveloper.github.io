@@ -2,4 +2,4 @@
 :HL["/fonts/PretendardVariable-subset.woff2","font",{"crossOrigin":"anonymous","type":"font/woff2"}]
 :HL["/images/projects/yougabell/hero.png","image"]
 :HL["/images/projects/yougabell/cheer.svg","image"]
-0:{"tree":{"name":"","param":null,"prefetchHints":20,"slots":{"children":{"name":"projects","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"yougabell","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"uAz9OAuB78gn1Wj75o1kM"}
+0:{"tree":{"name":"","param":null,"prefetchHints":20,"slots":{"children":{"name":"projects","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"yougabell","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"cwsl0j2gauZbRCs4YoUqe"}
