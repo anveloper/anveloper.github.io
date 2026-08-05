@@ -2,8 +2,13 @@
 title: "딸깍톤 (Ttalkkakthon)"
 date: "2026-03-11"
 category: "side"
+period: "2026.02 ~ 2026.04 (약 6주)"
+team: "운영팀 7인 · 웹 개발 4인 (기획 1 · 디자인 1 · 프론트엔드 1 · 풀스택 1)"
+contribution: "풀스택 · 개발 커밋 약 85%"
+role: "풀스택 (백엔드 · AI 파이프라인 중심)"
+ai: "해커톤 자동 심사 LLM 파이프라인 — 디스코드 명령 호출, GitHub 코드 검토, 심사 기준을 프롬프트로 분리"
 description: "AI와 함께하는 해커톤 — 참가 신청·갤러리·참가자 투표·디스코드 기반 AI 자동 심사를 지원하는 해커톤 운영 플랫폼"
-tags: ["Next.js", "React", "TypeScript", "Prisma", "PostgreSQL", "Neon", "Tailwind CSS", "Vercel"]
+tags: ["LLM", "Next.js", "React", "TypeScript", "Prisma", "PostgreSQL", "Neon", "Tailwind CSS", "Vercel"]
 github: "vibe-ai-coding-club/ttalkkakthon"
 demo: "https://ttalkkakthon.vibecodingclub.kr/"
 ---
@@ -92,6 +97,16 @@ ttalkkakthon/
 <div align="center">
   <img src="/images/projects/ttalkkakthon/culture-001.webp" alt="현장 컬처" />
 </div>
+
+## 담당 역할
+
+해커톤 운영팀은 7명 규모였고, 그중 홈페이지 개발은 기획 1 · 디자인 1 · 프론트엔드 전담 개발자 1 · 풀스택 1(본인)로 진행했습니다. **풀스택으로 참여해 백엔드와 AI 파이프라인을 중심으로 프론트엔드까지** 다뤘고, 개발 커밋의 약 85%를 작성했습니다.
+
+- **심사 파이프라인 설계**: 프로젝트 조회 → GitHub 코드·제출 정보 검토 → 평가 → 파싱 → DB 저장 → 디스코드 회신으로 이어지는 흐름 전체를 설계·구현
+- **심사 규칙 분리**: 평가 기준을 코드가 아닌 프롬프트로 분리해, 기준이 바뀌어도 서버 코드 수정 없이 대응할 수 있도록 구성
+- **백엔드**: Next.js API 라우트, Prisma 7 + Neon Postgres 스키마 설계, 참가 신청·투표 자격 검증
+- **현장 연출**: 심사 결과를 마크다운 타이핑 효과 + TTS로 행사장 스크린에 출력하는 몰입 요소 구현
+- **실제 행사 운영**: 판단은 AI가, 조회·저장·회신 흐름은 코드가 통제하는 구조로 행사 중 안정적으로 동작
 
 ## 회고
 
