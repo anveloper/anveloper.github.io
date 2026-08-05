@@ -14,7 +14,8 @@ import Image from "next/image";
 import Link from "next/link";
 
 export async function generateStaticParams() {
-  const projects = await getAllProjects();
+  // unlisted 프로젝트도 정적 페이지는 만들어야 URL 직접 접근이 동작한다
+  const projects = await getAllProjects({ includeUnlisted: true });
   return projects.map((project) => ({ slug: project.slug }));
 }
 
@@ -135,6 +136,8 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
 
       {(() => {
         const idx = projects.findIndex((p) => p.slug === slug);
+        // unlisted 프로젝트는 목록에 없어 idx가 -1이다. 엉뚱한 이웃이 붙지 않도록 네비게이션을 생략한다
+        if (idx === -1) return null;
         const prev = projects[idx + 1] ?? null;
         const next = projects[idx - 1] ?? null;
         return (
