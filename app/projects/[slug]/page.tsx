@@ -130,12 +130,13 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
         )}
 
         {(() => {
-          // 기간·인원·기여도·역할 — frontmatter에 있는 항목만 노출한다
+          // 기간·인원·기여도·역할·AI — frontmatter에 있는 항목만 노출한다
           const meta = [
             { label: "개발 기간", value: project.frontmatter.period },
             { label: "개발 인원", value: project.frontmatter.team },
             { label: "기여도", value: project.frontmatter.contribution },
             { label: "담당 역할", value: project.frontmatter.role },
+            { label: "AI 적용", value: project.frontmatter.ai },
           ].filter((m): m is { label: string; value: string } => typeof m.value === "string" && m.value.length > 0);
 
           if (meta.length === 0) return null;

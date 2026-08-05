@@ -123,12 +123,24 @@ export const ProjectList = ({ projects }: { projects: Project[] }) => {
                         <h3 className="text-base font-medium text-foreground group-hover:text-primary-sky transition-colors truncate">
                           {project.frontmatter.title as string}
                         </h3>
-                        <time
-                          dateTime={(project.frontmatter.date as string).replace(/\./g, "-")}
-                          className="text-xs text-muted-foreground"
-                        >
-                          {project.frontmatter.date as string}
-                        </time>
+                        <div className="flex items-center gap-1.5">
+                          <time
+                            dateTime={(project.frontmatter.date as string).replace(/\./g, "-")}
+                            className="text-xs text-muted-foreground"
+                          >
+                            {project.frontmatter.date as string}
+                          </time>
+                          {/* LLM·RAG가 실제 서비스에 들어간 프로젝트 표기 */}
+                          {typeof project.frontmatter.ai === "string" && (
+                            <Badge
+                              variant="outline"
+                              className="h-4 px-1.5 text-[10px] font-bold border-primary-sky/50 text-primary-sky"
+                              title={project.frontmatter.ai}
+                            >
+                              AI
+                            </Badge>
+                          )}
+                        </div>
                       </div>
                     </div>
                     {typeof project.frontmatter.description === "string" && (
