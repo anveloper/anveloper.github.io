@@ -2,5 +2,7 @@
 :HL["/fonts/PretendardVariable-subset.woff2","font",{"crossOrigin":"anonymous","type":"font/woff2"}]
 :HL["/images/projects/ttalkkakthon/hero.webp","image"]
 :HL["/images/projects/ttalkkakthon/about-001.webp","image"]
+:HL["/images/projects/ttalkkakthon/ai-review.webp","image"]
+:HL["/images/projects/ttalkkakthon/admin-vote.webp","image"]
 :HL["/images/projects/ttalkkakthon/culture-001.webp","image"]
-0:{"tree":{"name":"","param":null,"prefetchHints":4116,"slots":{"children":{"name":"projects","param":null,"prefetchHints":4160,"slots":{"children":{"name":"slug","param":{"type":"d","key":"ttalkkakthon","siblings":[]},"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}}}},"staleTime":300,"buildId":"MMez1eSl7JFSnMwi0YK8A"}
+0:{"tree":{"name":"","param":null,"prefetchHints":4116,"slots":{"children":{"name":"projects","param":null,"prefetchHints":4160,"slots":{"children":{"name":"slug","param":{"type":"d","key":"ttalkkakthon","siblings":[]},"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}}}},"staleTime":300,"buildId":"FC6OfCgWqos4QxtqYvxsD"}
