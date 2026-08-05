@@ -62,3 +62,45 @@ js-yaml: ">=4.3.1 <5" # → 4.3.1 (@eslint/eslintrc, cosmiconfig)
 - `pnpm build` → 통과 (45 페이지 정적 생성)
 
 빌드 중 `.next/dev/types/validator.ts`가 이미 삭제된 `app/overview`, `app/solutions` 라우트를 참조해 타입 에러가 발생했다. 이번 변경과 무관한 stale 캐시로, `.next` 삭제 후 정상 빌드됐다.
+
+---
+
+# 20260805 (2) - 회사 프로젝트 문서 재대조 및 unlisted 플래그
+
+## docs
+
+로컬 레포 기준 `category: "company"` 프로젝트 문서 재검증. 상세 내역은 [재대조 검증 문서](../design/20260805-local-repo-reverify.md).
+
+직전 대조(7/28) 이후 커밋이 있는 `dps`(8/4) · `dps-store`(8/3) · `estimator-manager`(8/5) 3개만 대상으로 잡았다. 장비 클라이언트 4종은 변동이 없어 그대로 뒀다.
+
+### 정정
+
+- **Estimator 퀵 지오코딩 제공자 오기** — "카카오 지오코딩" → 브이월드. 레포 전체에서 `kakao` 문자열 0건이고, 코드 주석에 "카카오는 앱 등록 시 과금 대상이라 무료 공공 API로 전환"한 사유가 남아 있었다. 기재 스택이 실제로 쓰지 않는 외부 서비스를 가리키던 유일한 사례
+- **Estimator "미구현" 서술 3건** — 일주일 사이 구현이 진행돼 문서가 실제보다 축소돼 있었다
+  - 일반 타입 상품 렌더러: "설계만 존재" → 7종 골격 완료(PR #386~#393), 단가만 임시값
+  - 퀵 실제 배차: "미연동" → `DverDispatch` + 접수·취소·상태 동기화 구현, 실호출 검증만 잔여
+  - 라우팅 provider stub: 해소(브이월드 좌표 + 하버사인 + 도로보정 1.3 + 30일 캐시)
+- **Estimator Cafe24 주문 API 래핑** 43 → 38 (레포 체크리스트의 2026-07-28 코드 실측치)
+- **규모 수치** — DPS services 29→28, DPS Store 42→43 모델·124→129 라우트, Estimator 1,472→1,761 커밋·94→97 모델·42→46 라우트·16→18 단가·기여율 85%→88%
+- **TypeScript 메이저 버전 명시** — DPS·DPS Store 6, Estimator 5 (기존엔 버전 없이 "TypeScript (strict mode)")
+
+### 추가
+
+- DPS: Jarvis 고정 템플릿 동결(freeze)·해제, 삭제 템플릿 참조 상품 자동 재매핑
+- DPS Store: 다면 디자인 미리보기, 접수 라인 매핑(`TerminalLineMapping`)
+- Estimator: "상품 타입 확장" 절 신설, 규격 직접입력 서버 재검증
+
+과장이 아니라 **과소 기재**가 주된 낙차였다. 잔여 목록은 레포 인수인계 문서와 갱신 주기를 맞출 필요가 있다.
+
+## feat
+
+프로젝트 `unlisted` 플래그 추가. frontmatter에 `unlisted: true`면 목록·sitemap·홈·이전/다음 네비게이션에서 빠지되, 상세 페이지는 계속 생성돼 URL 직접 접근은 살아 있다.
+
+- `getAllProjects({ includeUnlisted })` — 기본 제외, `generateStaticParams`만 `true`로 호출해 정적 페이지 보존
+- 목록에 없는 slug는 `findIndex`가 -1을 반환해 엉뚱한 이웃이 붙으므로, 이전/다음 네비게이션을 생략하는 가드 추가
+- Estimator를 `unlisted` 처리
+
+## 검증
+
+- `pnpm lint` / `pnpm build` 통과
+- 빌드 산출물 대조 — `out/projects/estimator-manager/index.html` 생성됨(제목 정상), `out/projects/index.html`·`out/index.html`·`out/sitemap.xml`에서 `estimator-manager` 0건
