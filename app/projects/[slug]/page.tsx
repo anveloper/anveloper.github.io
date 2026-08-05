@@ -128,6 +128,29 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
             ))}
           </div>
         )}
+
+        {(() => {
+          // 기간·인원·기여도·역할 — frontmatter에 있는 항목만 노출한다
+          const meta = [
+            { label: "개발 기간", value: project.frontmatter.period },
+            { label: "개발 인원", value: project.frontmatter.team },
+            { label: "기여도", value: project.frontmatter.contribution },
+            { label: "담당 역할", value: project.frontmatter.role },
+          ].filter((m): m is { label: string; value: string } => typeof m.value === "string" && m.value.length > 0);
+
+          if (meta.length === 0) return null;
+
+          return (
+            <dl className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-3 border-t border-border pt-5">
+              {meta.map((m) => (
+                <div key={m.label} className="flex gap-3 text-sm">
+                  <dt className="shrink-0 w-20 font-semibold text-muted-foreground">{m.label}</dt>
+                  <dd className="text-foreground">{m.value}</dd>
+                </div>
+              ))}
+            </dl>
+          );
+        })()}
       </header>
 
       <article className="prose prose-neutral dark:prose-invert max-w-none">
