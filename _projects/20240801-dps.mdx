@@ -3,7 +3,19 @@ title: "DPS (Design Plug Shop)"
 date: "2024-08-01"
 category: "company"
 description: "판매자와 제조사를 연결하는 B2B 주문형 굿즈·인쇄 제작 플랫폼"
-tags: ["Next.js", "React", "TypeScript", "Prisma", "MySQL", "Zustand", "TanStack Query", "NextAuth", "Tailwind CSS", "AWS S3"]
+tags:
+  [
+    "Next.js",
+    "React",
+    "TypeScript",
+    "Prisma",
+    "MySQL",
+    "Zustand",
+    "TanStack Query",
+    "NextAuth",
+    "Tailwind CSS",
+    "AWS S3",
+  ]
 ---
 
 # DPS (Design Plug Shop)
@@ -44,19 +56,19 @@ DPS는 판매자와 제조사를 연결하는 B2B 주문형 굿즈·인쇄 제�
 
 `batch.cron.mjs`(node-cron)를 PM2 전용 프로세스로 띄워 운영/개발 환경별로 다른 주기를 적용합니다.
 
-| 작업                          | 운영 주기      | 목적                                   |
-| ----------------------------- | -------------- | -------------------------------------- |
-| APPROVAL / PAYMENT / MAIL     | 매 1분         | 자동 승인, Innopay 자동 결제, 메일 발송 |
-| EXTERNAL                      | 매 10분        | 외부 제조사(레드프린팅·와우프레스) 발주 |
-| DELIVERY                      | 매 10분        | 배송 정보 동기화                       |
-| DELIVERY_TRACKING             | 매시 30분      | 운송장 추적 (정각 부하 분산)           |
-| SMARTSTORE                    | 매 5분         | 스마트스토어 주문 동기화               |
-| ORDER_SYNC                    | 매시 30분      | 외부 채널 주문 수집                    |
-| CONFIRM                       | 매시 정각      | 구매확정 처리                          |
-| SELLER_SETTLE / SUPPLIER_SETTLE | 매 1시간     | 판매사·공급사 정산 집계                |
-| RATINGS / STATISTICS / TOKEN_REFRESH | 매일 01시 | 평점 산출, 통계 집계, 외부 토큰 갱신  |
-| ORDER_NOTIFICATION            | 판매사 14시 / 공급사 10시 | 일일 주문 알림톡·메일        |
-| ORDER_SYNC_CLEANUP            | 매일 14시      | 동기화 이력 정리                       |
+| 작업                                 | 운영 주기                 | 목적                                    |
+| ------------------------------------ | ------------------------- | --------------------------------------- |
+| APPROVAL / PAYMENT / MAIL            | 매 1분                    | 자동 승인, Innopay 자동 결제, 메일 발송 |
+| EXTERNAL                             | 매 10분                   | 외부 제조사(레드프린팅·와우프레스) 발주 |
+| DELIVERY                             | 매 10분                   | 배송 정보 동기화                        |
+| DELIVERY_TRACKING                    | 매시 30분                 | 운송장 추적 (정각 부하 분산)            |
+| SMARTSTORE                           | 매 5분                    | 스마트스토어 주문 동기화                |
+| ORDER_SYNC                           | 매시 30분                 | 외부 채널 주문 수집                     |
+| CONFIRM                              | 매시 정각                 | 구매확정 처리                           |
+| SELLER_SETTLE / SUPPLIER_SETTLE      | 매 1시간                  | 판매사·공급사 정산 집계                 |
+| RATINGS / STATISTICS / TOKEN_REFRESH | 매일 01시                 | 평점 산출, 통계 집계, 외부 토큰 갱신    |
+| ORDER_NOTIFICATION                   | 판매사 14시 / 공급사 10시 | 일일 주문 알림톡·메일                   |
+| ORDER_SYNC_CLEANUP                   | 매일 14시                 | 동기화 이력 정리                        |
 
 ### 외부 서비스 연동
 
@@ -64,7 +76,7 @@ DPS는 판매자와 제조사를 연결하는 B2B 주문형 굿즈·인쇄 제�
 - **Cafe24**: 앱 설치·토큰 갱신, 멀티샵(`shop_no`)·멀티디자인 주문 인입, ScriptTag 주입
 - **고도몰**: 배송 정보 연동
 - **레드프린팅 / 와우프레스**: 외부 제조사 자동 발주 API (EXTERNAL 스케줄러)
-- **Jarvis(CIPOD)**: 디자인 에디터 연동 + Jarvis 계정 기반 SSO 로그인·토큰 갱신
+- **Jarvis(CIPOD)**: 디자인 에디터 연동 + Jarvis 계정 기반 SSO 로그인·토큰 갱신, 고정 템플릿 디자인 동결(freeze)·해제, 삭제된 에디터 템플릿을 참조하는 상품의 자동 재매핑
 - **파일봇**: PDF 메타 추출·옵션별 가이드 파일 처리
 - **카카오 알림톡**: 주문·승인·배송 알림 발송 (Lunasoft 연동)
 - **Innopay**: PG 결제·자동 결제 처리
@@ -80,21 +92,21 @@ KPI 요약, 일별 매출, 채널 분류·채널별 상세, 베스트셀러, 신
 
 ## 기술 스택
 
-| 분류              | 기술                                          |
-| ----------------- | --------------------------------------------- |
-| Framework         | Next.js 16 (App Router)                       |
-| Language          | TypeScript (strict mode)                      |
-| UI                | React 19, Tailwind CSS 4, clsx + tailwind-merge |
-| 상태 관리         | Zustand 5, TanStack Query 5                   |
-| 폼 처리           | React Hook Form 7 + Zod 4                     |
-| ORM               | Prisma 7 (MySQL/MariaDB, 멀티 DB)             |
-| 인증              | NextAuth 5 (Credentials, 3역할 분리)          |
-| 에디터            | Tiptap 3 (리치 텍스트), Monaco (코드/HTML)    |
-| 차트              | Recharts 3                                    |
-| 국제화            | next-intl 4 (ko-KR, en-US, ja-JP)             |
-| 파일 처리         | ExcelJS 4, jsPDF 4                            |
-| 로깅              | Winston 3 (Daily Rotate)                      |
-| 프로세스·스케줄링 | PM2, node-cron (배치 전용 프로세스 분리)      |
+| 분류              | 기술                                                     |
+| ----------------- | -------------------------------------------------------- |
+| Framework         | Next.js 16 (App Router)                                  |
+| Language          | TypeScript 6 (strict mode)                               |
+| UI                | React 19, Tailwind CSS 4, clsx + tailwind-merge          |
+| 상태 관리         | Zustand 5, TanStack Query 5                              |
+| 폼 처리           | React Hook Form 7 + Zod 4                                |
+| ORM               | Prisma 7 (MySQL/MariaDB, 멀티 DB)                        |
+| 인증              | NextAuth 5 (Credentials, 3역할 분리)                     |
+| 에디터            | Tiptap 3 (리치 텍스트), Monaco (코드/HTML)               |
+| 차트              | Recharts 3                                               |
+| 국제화            | next-intl 4 (ko-KR, en-US, ja-JP)                        |
+| 파일 처리         | ExcelJS 4, jsPDF 4                                       |
+| 로깅              | Winston 3 (Daily Rotate)                                 |
+| 프로세스·스케줄링 | PM2, node-cron (배치 전용 프로세스 분리)                 |
 | 배포              | PM2 Blue-Green 무중단 배포 (`deploy.sh` / `rollback.sh`) |
 
 ## 아키텍처
@@ -117,7 +129,7 @@ app/
 └── auth/           # 외부 인증 (Innopay, NHN, 스마트스토어, Cafe24)
 
 components/         # 재사용 컴포넌트
-services/           # 비즈니스 로직 (29개 도메인 — order, settle, jarvis, filebot, external 등)
+services/           # 비즈니스 로직 (28개 도메인 — order, seller-settle, jarvis, filebot, external, editor-template 등)
 lib/
 ├── repositories/   # Prisma 데이터 레포지토리
 ├── providers/      # React Context Providers
