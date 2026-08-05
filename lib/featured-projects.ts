@@ -22,6 +22,10 @@ export const featuredProjects: FeaturedProject[] = [
   { slug: "reciflow", summary: "레시피 공유·관리 모바일 플랫폼 (Supabase 백엔드 중심)" },
   { slug: "dps-store", summary: "멀티테넌트 팝업 스토어 플랫폼 — 출력장비·키오스크 등 현장 장비 연동까지 확장" },
   { slug: "dps", summary: "판매자와 제조사를 연결하는 B2B 주문형 굿즈·인쇄 제작 플랫폼" },
+  {
+    slug: "legacy-migration",
+    summary: "15년 된 PHP 레거시를 Remix·React·TypeScript로 재구현해 조직 전체의 Next.js 전환을 이끈 프로젝트",
+  },
   { slug: "simple-thumbnail", summary: "3초 만에 커스텀 썸네일을 만드는 웹 애플리케이션" },
   { slug: "naya", summary: "멀티미디어 소개 카드와 명함을 제작·공유·관리하는 크로스 플랫폼 서비스" },
   { slug: "readme-nft", summary: "그림 퀴즈 게임으로 NFT를 생성하고 거래하는 블록체인 기반 플랫폼" },
