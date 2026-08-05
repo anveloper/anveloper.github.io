@@ -3,7 +3,8 @@ title: "Reciflow"
 date: "2025-08-11"
 category: "side"
 period: "2025.08 ~ 진행 중"
-contribution: "백엔드(ReciflowBackend) 주력 담당"
+team: "2인 (RN 프론트엔드 1 · 백엔드 1)"
+contribution: "백엔드 전담"
 role: "백엔드 · DB · 인프라"
 description: "레시피 공유·관리 모바일 플랫폼 — Supabase(PostgreSQL) 백엔드를 중심으로 한 iOS/Android 앱 서비스"
 tags:
@@ -31,7 +32,7 @@ github: "Reciflow/ReciflowBackend"
 
 Reciflow는 레시피를 등록·공유하고 요리 기록을 남기는 iOS/Android 모바일 플랫폼입니다. 사용자는 레시피를 만들어 공개/비공개로 공유하고, 북마크·별점·댓글·커뮤니티로 상호작용하며, 요리 이력을 누적합니다.
 
-백엔드는 **Supabase(PostgreSQL + Deno Edge Functions)** 기반으로, 도메인 로직을 RPC 함수로 구성하고 RLS(Row Level Security)로 접근을 통제합니다. 본인은 이 **ReciflowBackend를 주력으로 담당**했습니다. 프론트엔드는 초기 React Native 앱(`ReciflowFront`)으로 운영하다 최근 **Expo(`ReciflowFrontend`)로 마이그레이션**했습니다.
+백엔드는 **Supabase(PostgreSQL + Deno Edge Functions)** 기반으로, 도메인 로직을 RPC 함수로 구성하고 RLS(Row Level Security)로 접근을 통제합니다. 개발 2인 체제에서 본인은 이 **ReciflowBackend를 전담**했고, 다른 1인이 React Native 프론트엔드를 맡았습니다. 프론트엔드는 초기 React Native 앱(`ReciflowFront`)으로 운영하다 최근 **Expo(`ReciflowFrontend`)로 마이그레이션**했습니다.
 
 ## 주요 기능
 
@@ -81,7 +82,7 @@ reciflow/
 
 ## 담당 역할
 
-ReciflowBackend를 주력으로 담당하여 도메인 API·DB·인프라를 설계·구현했습니다.
+개발 2인 중 **백엔드를 전담**해 도메인 API·DB·인프라를 설계·구현했습니다. (다른 1인은 React Native 프론트엔드 담당)
 
 - **DB/스키마 설계**: PostgreSQL 테이블 36개, ENUM, FK/UNIQUE/인덱스, RLS 정책을 테이블별 파일로 코드 관리
 - **RPC API 구현**: 도메인별 RPC 함수 78개(레시피 CRUD, 요리 기록·랭킹, 별점, 북마크, 팔로우, 커뮤니티, 신고 등)
