@@ -19,7 +19,12 @@ function toSlug(filename: string): string {
   return filename.replace(/\.mdx$/, "").replace(/^\d{8}-/, "");
 }
 
-export async function getAllProjects() {
+/**
+ * frontmatter에 `unlisted: true`면 목록·sitemap·이전/다음 네비게이션에서 제외된다.
+ * 상세 페이지 자체는 계속 빌드되므로 URL로 직접 접근하면 열린다.
+ * 정적 페이지를 만드는 generateStaticParams만 `includeUnlisted: true`로 호출한다.
+ */
+export async function getAllProjects({ includeUnlisted = false }: { includeUnlisted?: boolean } = {}) {
   const filenames = await fs.readdir(directory);
   const projects = await Promise.all(
     filenames
@@ -31,7 +36,9 @@ export async function getAllProjects() {
         return { slug, frontmatter: data, thumbnail: findImage(slug, "thumbnail"), icon: findImage(slug, "icon") };
       })
   );
-  return projects.sort((a, b) => (a.frontmatter.date < b.frontmatter.date ? 1 : -1));
+  return projects
+    .filter((p) => includeUnlisted || !p.frontmatter.unlisted)
+    .sort((a, b) => (a.frontmatter.date < b.frontmatter.date ? 1 : -1));
 }
 
 export async function getProjectBySlug(slug: string) {

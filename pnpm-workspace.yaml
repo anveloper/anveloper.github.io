@@ -1,0 +1,28 @@
+onlyBuiltDependencies:
+  - msw
+  - sharp
+  - unrs-resolver
+
+overrides:
+  flatted: ">=3.4.2"
+  picomatch: ">=4.0.4"
+  path-to-regexp: ">=8.4.0"
+  lodash-es: ">=4.18.0"
+  yaml: ">=2.8.3"
+  uuid: ">=14.0.0"
+  hono: ">=4.12.34 <5"
+  "@hono/node-server": ">=2.0.5 <3"
+  fast-uri: ">=3.1.5 <4"
+  dompurify: ">=3.4.12 <4"
+  ip-address: ">=10.3.1 <11"
+  postcss: ">=8.5.23 <9"
+  sharp: ">=0.35.0 <0.36"
+  qs: ">=6.15.2 <7"
+  body-parser: ">=2.3.0 <3"
+  "@babel/core": ">=7.29.6 <8"
+  # brace-expansion / js-yaml 은 메이저 라인이 공존하므로 경로별로 고정
+  "minimatch@3>brace-expansion": ">=1.1.18 <2"
+  "minimatch@10>brace-expansion": ">=5.0.9 <6"
+  js-yaml: ">=4.3.1 <5"
+  "gray-matter>js-yaml": ">=3.15.1 <4"
+  "@eslint/eslintrc>js-yaml": ">=4.3.1 <5"

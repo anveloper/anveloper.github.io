@@ -3,7 +3,22 @@ title: "DPS Store (디플샵 스토어)"
 date: "2026-01-08"
 category: "company"
 description: "멀티테넌트 기반 팝업 스토어 플랫폼 — 테넌트별 독립 온라인 스토어 운영, DPS API 연동, 출력장비·키오스크 등 현장 장비 연동"
-tags: ["Next.js", "React", "TypeScript", "Prisma", "MariaDB", "NextAuth", "Tailwind CSS", "S3", "Caddy", "PM2", "PWA", "Python", "Electron"]
+tags:
+  [
+    "Next.js",
+    "React",
+    "TypeScript",
+    "Prisma",
+    "MariaDB",
+    "NextAuth",
+    "Tailwind CSS",
+    "S3",
+    "Caddy",
+    "PM2",
+    "PWA",
+    "Python",
+    "Electron",
+  ]
 ---
 
 # DPS Store (디플샵 스토어)
@@ -12,7 +27,7 @@ tags: ["Next.js", "React", "TypeScript", "Prisma", "MariaDB", "NextAuth", "Tailw
 
 DPS Store는 업체(테넌트)별 독립적인 온라인 스토어를 운영할 수 있는 멀티테넌트 팝업 스토어 플랫폼입니다. DPS API와 연동하여 상품·주문을 실시간으로 동기화하며, 테넌트별로 테마·페이지·정책을 자유롭게 커스터마이징할 수 있습니다.
 
-고정형(JSON 레이아웃)과 자유형(노드 기반 비주얼 빌더) 두 가지 방식으로 스토어를 구축합니다. 현재 42개 Prisma 모델 / 124개 API 라우트 규모입니다.
+고정형(JSON 레이아웃)과 자유형(노드 기반 비주얼 빌더) 두 가지 방식으로 스토어를 구축합니다. 현재 43개 Prisma 모델 / 129개 API 라우트 규모입니다.
 
 온라인 스토어를 넘어, 팝업 매장 현장에서 운영되는 **출력장비(접수증·가먼트·머그 프린터)와 키오스크**까지 연동하는 방향으로 최근 크게 확장했습니다. 웹 주문이 현장 장비에서 자동으로 출력·제작으로 이어지는 O2O 운영 파이프라인을 구축했습니다.
 
@@ -21,7 +36,7 @@ DPS Store는 업체(테넌트)별 독립적인 온라인 스토어를 운영할 
 ### 멀티테넌트 아키텍처
 
 - 테넌트별 독립적인 테마(로고, 컬러, 폰트), 정책, 페이지, 약관 설정
-- 42개 DB 테이블로 테넌트·상품·주문·결제·고객·스탬프·출력큐 데이터 분리 관리
+- 43개 DB 테이블로 테넌트·상품·주문·결제·고객·스탬프·출력큐 데이터 분리 관리
 - 4가지 도메인 접근 방식 지원:
 
 | 방식           | 예시                     | 설명                           |
@@ -76,6 +91,8 @@ DPS Store는 업체(테넌트)별 독립적인 온라인 스토어를 운영할 
 - 작업지시서 PDF 생성 + 디자인 파일 일괄 다운로드 (ZIP)
 - 주문 항목(OrderItem)별 제작 상태를 주문 상태와 분리 관리하고, 상태 이력을 남겨 주문 상태에 자동 반영
 - 배송·수령 완료 주문의 자동 구매확정 (cron)
+- **다면 디자인 미리보기**: 양면·목뒤·어깨처럼 인쇄 면이 여러 개인 디자인을 정규화 유틸(`parsePreviewImages`)과 순환 표시 컴포넌트로 통일 처리. 장바구니·주문서·내 주문·작업자·캐셔·관리자·작업지시서 PDF까지 전 표면에서 인쇄 면 전부를 노출
+- **접수 라인 매핑**(`TerminalLineMapping`): 주문 단말(키오스크)과 가먼트 PC를 라인으로 묶어, 접수한 단말 기준으로 출력 장비를 배정. 주문 목록·상세에 접수 장비명을 표기하고 라인별 탭으로 조회
 
 ### 고객 인증
 
@@ -112,12 +129,12 @@ DPS Store는 업체(테넌트)별 독립적인 온라인 스토어를 운영할 
 
 현장 장비 쪽은 DPS Store 서버와 짝을 이루는 별도 레포로 개발하고, 설계·운영 문서는 `dps-store`에서 통합 관리합니다.
 
-| 레포                   | 장비                          | 구현                                                                                   |
-| ---------------------- | ----------------------------- | -------------------------------------------------------------------------------------- |
-| `equip-sync-l-module`  | SLK TS200 감열 라벨 프린터    | 접수증 자동 출력. 담당자 수기 기입란, 고객 사본에 주문 상세 QR 렌더링                  |
-| `equip-sync-g-module`  | Brother GTX-4 가먼트 프린터   | GTX4CMD 연동(direct/gtx4cmd 모드), 다중 프린터·플래튼/잉크 파라미터, 작업지시서 A4 출력 병행 |
-| `equip-sync-m-module`  | 머그 전사지 프린터            | 좌우 반전 출력, A4 가로 2-up 합본 배치(전사지 절약), `_qtyN` 수량 규칙, 합본 오버레이   |
-| `dps-store-desktop`    | 현장 PC 설치형 셸             | Electron 기반, 테넌트 고정 접속·부팅 시 프린터 자가복구/워밍업·캐시 무력화 단축키       |
+| 레포                  | 장비                        | 구현                                                                                         |
+| --------------------- | --------------------------- | -------------------------------------------------------------------------------------------- |
+| `equip-sync-l-module` | SLK TS200 감열 라벨 프린터  | 접수증 자동 출력. 담당자 수기 기입란, 고객 사본에 주문 상세 QR 렌더링                        |
+| `equip-sync-g-module` | Brother GTX-4 가먼트 프린터 | GTX4CMD 연동(direct/gtx4cmd 모드), 다중 프린터·플래튼/잉크 파라미터, 작업지시서 A4 출력 병행 |
+| `equip-sync-m-module` | 머그 전사지 프린터          | 좌우 반전 출력, A4 가로 2-up 합본 배치(전사지 절약), `_qtyN` 수량 규칙, 합본 오버레이        |
+| `dps-store-desktop`   | 현장 PC 설치형 셸           | Electron 기반, 테넌트 고정 접속·부팅 시 프린터 자가복구/워밍업·캐시 무력화 단축키            |
 
 - 3개 장비 모듈은 Python + PyInstaller로 **Watcher와 Agent를 단일 EXE**로 통합했고, GUI(설정·실시간 큐 대시보드·테마)를 공통 규칙으로 통일했습니다.
 - 태그 push 시 GitHub Actions가 자동 빌드·릴리즈하여 현장 배포를 단순화했습니다.
@@ -176,20 +193,20 @@ DPS Store는 업체(테넌트)별 독립적인 온라인 스토어를 운영할 
 
 ## 기술 스택
 
-| 분류        | 기술                                                     |
-| ----------- | -------------------------------------------------------- |
-| Framework   | Next.js 16 (App Router, Turbopack)                       |
-| Language    | TypeScript (strict mode)                                 |
-| UI          | React 19, Tailwind CSS 4, lucide-react                   |
-| ORM         | Prisma 7 (MariaDB 어댑터)                                |
-| 인증        | NextAuth 5 (관리자·작업자·캐셔·고객 세션 분리)           |
-| 결제        | Innopay 간편결제(Epay)                                   |
-| 스토리지    | Object Storage (S3 호환, AWS SDK) + sharp 이미지 처리    |
-| QR          | qrcode(생성), html5-qrcode·jsQR(스캔)                    |
-| 인프라      | Caddy (리버스 프록시, On-Demand TLS)                     |
-| PDF         | jsPDF, html-to-image                                     |
-| 배포        | PM2 (Blue-Green 무중단 배포)                             |
-| PWA         | Service Worker, 멀티테넌트 Manifest                      |
+| 분류            | 기술                                                                |
+| --------------- | ------------------------------------------------------------------- |
+| Framework       | Next.js 16 (App Router, Turbopack)                                  |
+| Language        | TypeScript 6 (strict mode)                                          |
+| UI              | React 19, Tailwind CSS 4, lucide-react                              |
+| ORM             | Prisma 7 (MariaDB 어댑터)                                           |
+| 인증            | NextAuth 5 (관리자·작업자·캐셔·고객 세션 분리)                      |
+| 결제            | Innopay 간편결제(Epay)                                              |
+| 스토리지        | Object Storage (S3 호환, AWS SDK) + sharp 이미지 처리               |
+| QR              | qrcode(생성), html5-qrcode·jsQR(스캔)                               |
+| 인프라          | Caddy (리버스 프록시, On-Demand TLS)                                |
+| PDF             | jsPDF, html-to-image                                                |
+| 배포            | PM2 (Blue-Green 무중단 배포)                                        |
+| PWA             | Service Worker, 멀티테넌트 Manifest                                 |
 | 장비 클라이언트 | Python + PyInstaller (Watcher/Agent 단일 EXE), Electron (설치형 셸) |
 
 ## 아키텍처
@@ -227,7 +244,7 @@ Blue-Green 무중단 배포 방식을 적용했습니다.
 
 1인 풀스택 개발로 기획부터 설계, 개발, 배포까지 전체를 담당했습니다. 웹 서버(전체 커밋의 약 96%)와 장비 클라이언트 4개 레포를 함께 개발했습니다.
 
-- **시스템 설계**: 멀티테넌트 아키텍처 설계, DB 스키마 설계 (42개 테이블), API 설계 (124개 라우트)
+- **시스템 설계**: 멀티테넌트 아키텍처 설계, DB 스키마 설계 (43개 테이블), API 설계 (129개 라우트)
 - **프론트엔드**: 8개 페이지 타입별 고객 UI, 관리자 에디터, 노드 기반 비주얼 빌더, 5개 언어 다국어 대응
 - **백엔드**: Next.js API 라우트, DPS API 양방향 동기화, 소셜 로그인·게스트 세션, Innopay 결제·취소 연동, 파일 업로드/다운로드, 스탬프/알림 시스템
 - **장비 연동**: 접수증·가먼트·머그 3종 출력 큐 설계, 장비 Device Auth(API 키) 플로우, 장비 클라이언트 3종(Python)과 설치형 데스크톱 앱(Electron) 직접 개발 — 웹 주문과 현장 출력장비를 잇는 O2O 파이프라인 구축

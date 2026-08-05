@@ -19,7 +19,7 @@
 
 | 분류            | 기술                                                |
 | --------------- | --------------------------------------------------- |
-| 프레임워크      | Next.js 16.2.3 (App Router, Turbopack)              |
+| 프레임워크      | Next.js 16.3.0 (App Router, Turbopack)              |
 | UI              | React 19.2.5, TypeScript 5.9.3                      |
 | 스타일링        | Tailwind CSS v4.2.2, CVA (class-variance-authority) |
 | 애니메이션      | Motion 12.38.0 (Framer Motion)                      |
@@ -224,7 +224,32 @@ pnpm dev      # 개발 서버 (Turbopack)
 pnpm build    # 정적 빌드
 pnpm start    # 빌드된 사이트 실행
 pnpm lint     # ESLint 검사
+pnpm audit    # 의존성 취약점 검사
 ```
+
+## 의존성 관리
+
+pnpm 설정은 `package.json`의 `pnpm` 필드가 아니라 **`pnpm-workspace.yaml`** 에 둡니다 (pnpm 10.6+ 권장 위치). `overrides`, `onlyBuiltDependencies`가 여기에 있습니다.
+
+`pnpm audit` 취약점은 다음 순서로 해결합니다.
+
+1. 직접 의존성이면 `package.json` 버전을 올린다.
+2. 트랜지티브 의존성이면 `pnpm-workspace.yaml`의 `overrides`로 패치 버전을 강제한다.
+
+### overrides 작성 규칙
+
+- **항상 상한을 명시한다.** `">=3.1.5"` 처럼 열린 범위를 쓰면 메이저를 넘어가 버린다. `">=3.1.5 <4"` 로 적는다.
+- **메이저 라인이 공존하는 패키지는 경로별로 고정한다.** 예를 들어 `brace-expansion`은 `minimatch@3`이 1.x를, `minimatch@10`이 5.x를 요구하므로 전역 override를 쓰면 한쪽이 깨진다.
+
+  ```yaml
+  "minimatch@3>brace-expansion": ">=1.1.18 <2"
+  "minimatch@10>brace-expansion": ">=5.0.9 <6"
+  js-yaml: ">=4.3.1 <5" # 기본값
+  "gray-matter>js-yaml": ">=3.15.1 <4" # 예외 (더 구체적인 선택자가 우선)
+  ```
+
+- 적용 후 `pnpm ls --depth Infinity <pkg>`로 **실제 해석된 버전**을 확인한다. audit 통과만으로는 부족하다.
+- 불필요해진 override(상위 패키지가 스스로 패치된 경우)는 제거해 트리를 정상화한다.
 
 ## 주요 작업 지침
 
