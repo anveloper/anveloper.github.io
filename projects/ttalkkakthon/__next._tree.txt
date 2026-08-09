@@ -5,4 +5,4 @@
 :HL["/images/projects/ttalkkakthon/ai-review.webp","image"]
 :HL["/images/projects/ttalkkakthon/admin-vote.webp","image"]
 :HL["/images/projects/ttalkkakthon/culture-001.webp","image"]
-0:{"tree":{"name":"","param":null,"prefetchHints":4116,"slots":{"children":{"name":"projects","param":null,"prefetchHints":4160,"slots":{"children":{"name":"slug","param":{"type":"d","key":"ttalkkakthon","siblings":[]},"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}}}},"staleTime":300,"buildId":"FC6OfCgWqos4QxtqYvxsD"}
+0:{"tree":{"name":"","param":null,"prefetchHints":4116,"slots":{"children":{"name":"projects","param":null,"prefetchHints":4160,"slots":{"children":{"name":"slug","param":{"type":"d","key":"ttalkkakthon","siblings":[]},"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}}}},"staleTime":300,"buildId":"2b0-EvG6jtQir9ibQ1DiQ"}
