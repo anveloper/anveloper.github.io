@@ -73,12 +73,14 @@ flowchart TD
 
 2인 페어에서 도메인을 수직 분할해, **회원·영상·인증(JWT) 도메인을 백엔드부터 프론트엔드까지 풀스택으로 담당**했습니다. (페어는 운동 기록·식단 도메인 담당)
 
-- **백엔드 — 인증 인프라**: JWT 발급/검증(JWTUtil·JWTInterceptor), 회원 CRUD API(ApiMemberController), CORS·인터셉터 설정, 커스텀 예외 처리. 회원 정보 수정/삭제 시 토큰의 id와 요청 id를 비교해 타인 리소스 접근 차단
-- **백엔드 — 영상·소셜**: YouTube 영상 DB 저장, 미분류 영상 partCode 분류, 조회수·검색 API(ApiVideoController), 찜(zzim)·팔로우 API 및 MyBatis 매퍼
+- **백엔드(인증 인프라)**: JWT 발급/검증(JWTUtil·JWTInterceptor), 회원 CRUD API(ApiMemberController), CORS·인터셉터 설정, 커스텀 예외 처리. 회원 정보 수정/삭제 시 토큰의 id와 요청 id를 비교해 타인 리소스 접근 차단
+- **백엔드(영상·소셜)**: YouTube 영상 DB 저장, 미분류 영상 partCode 분류, 조회수·검색 API(ApiVideoController), 찜(zzim)·팔로우 API 및 MyBatis 매퍼
 - **프론트엔드**: Home·Video·Member 뷰와 회원 컴포넌트, 찜 사이드바, Kakao Map 주변 체육시설 뷰
 - **상태 관리·인증 플로우**: Vuex 스토어 설계(videos, logonMember 등), 로그인 시 Axios 인스턴스 헤더 토큰 주입, 라우터 가드(checkLogin·beforeEnter)
 - **협업 프로세스**: 첫날 브랜치 전략(master > develop > feature) 수립·문서화, 2인 프로젝트에 PR 85건의 리뷰-머지 플로우 운영
 
 ## 회고
 
-SSAFY 관통 프로젝트로 Vue.js와 Spring Boot를 연동한 첫 풀스택 프로젝트입니다. JWT 인증을 백엔드(인터셉터·토큰 검증)부터 프론트엔드(라우터 가드·헤더 주입)까지 직접 구현하며 인증 플로우 전체를 관통하는 경험을 쌓았고, YouTube API·Kakao Map API 연동과 Vuex 상태 관리로 SPA 아키텍처의 기본기를 익혔습니다.
+프론트와 백엔드를 처음으로 둘 다 만들어 본 프로젝트입니다. JWT를 백엔드 인터셉터·토큰 검증부터 프론트 라우터 가드·헤더 주입까지 직접 붙였는데, 토큰이 어디서 만들어져 어디까지 흘러가는지 한 번 끝까지 따라가 본 것이 남았습니다. 회원 정보를 수정할 때 토큰의 id와 요청의 id를 비교하는 처리도 이때 넣었습니다.
+
+2인 페어였지만 기능을 반씩 나누지 않고 회원·영상·인증 도메인을 통째로 맡는 방식으로 갈랐습니다. 화면만 만들거나 API만 만들면 중간에서 계속 서로를 기다리게 돼서, 한 도메인을 DB부터 화면까지 혼자 끌고 가는 편이 빨랐습니다.
