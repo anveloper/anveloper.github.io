@@ -6,8 +6,8 @@ period: "2026.04 ~ 진행 중"
 team: "1인"
 contribution: "단독"
 role: "풀스택 (사주 엔진 · 웹 · 모바일 · 인프라)"
-ai: "운세 풀이 LLM 파이프라인 (Gemini) — 결정론적 사주 엔진과 분리, 4차원 버킷팅 배치 생성"
-description: "사주팔자와 별자리를 결합해 AI가 매일·주간·월간·절기 운세를 풀어주는 모바일 운세 서비스 — 결정론적 사주 엔진과 LLM 풀이 파이프라인을 분리 설계한 AI 사이드 프로젝트"
+ai: "운세 풀이 LLM 파이프라인 (Gemini). 결정론적 사주 엔진과 분리, 4차원 버킷팅 배치 생성"
+description: "사주팔자와 별자리를 결합해 AI가 매일·주간·월간·절기 운세를 풀어주는 모바일 운세 서비스. 결정론적 사주 엔진과 LLM 풀이 파이프라인을 분리 설계한 AI 사이드 프로젝트"
 tags: ["LLM", "Gemini", "Next.js", "React", "Expo", "TypeScript", "Prisma", "PostgreSQL", "Tailwind CSS", "Vercel"]
 github: "anveloper/stars-for-me"
 demo: "https://stars-for.me"
@@ -33,7 +33,7 @@ RAG·AI 챗봇 서비스 구축을 준비하며 **LLM 파이프라인 설계를 
 - **별자리 모임(Constellation)**: 초대 코드로 그룹을 만들고 구성원 간 궁합·그룹 운세를 확인
 - **별 성장 시스템**: 출석·연속 접속 스트릭으로 별 레벨/포인트가 성장 (5단계 레벨)
 - **저장·공유**: 마음에 든 운세를 저장하고, 공유용 OG 이미지를 동적 생성(`api/og/fortune`)
-- **결제(설계만)**: 단건 상품·구독 상품을 스키마 수준으로 설계 — 실결제 연동은 구현하지 않음
+- **결제(설계만)**: 단건 상품·구독 상품을 스키마 수준으로 설계. 실결제 연동은 구현하지 않음
 
 ## 기술 스택
 
@@ -43,7 +43,7 @@ RAG·AI 챗봇 서비스 구축을 준비하며 **LLM 파이프라인 설계를 
 | Web         | Next.js 16.2 (App Router), React 19, Tailwind CSS 4, Motion       |
 | Mobile      | Expo SDK 54, expo-router 6, React Native 0.81                     |
 | Shared      | 자체 구현 사주 계산 엔진, `korean-lunar-calendar`(양↔음력 변환)   |
-| DB          | PostgreSQL 17, Prisma 7 (`@prisma/adapter-pg`, `pg`) — 15개 모델  |
+| DB          | PostgreSQL 17, Prisma 7 (`@prisma/adapter-pg`, `pg`), 15개 모델  |
 | AI          | Gemini 2.5 Flash (우선) → GPT-4o-mini (폴백) → Mock               |
 | 인증        | Kakao / Google / Apple OAuth, `jose`(JWT), refresh token rotation |
 | 배포        | web → Vercel, mobile → Expo, DB는 Postgres                        |
@@ -54,14 +54,14 @@ RAG·AI 챗봇 서비스 구축을 준비하며 **LLM 파이프라인 설계를 
 ```
 stars-for-me/ (모노레포 루트)
 ├── apps/
-│   ├── web/            # Next.js — 사용자 웹 + 모든 API 라우트
+│   ├── web/            # Next.js: 사용자 웹 + 모든 API 라우트
 │   │   └── src/
 │   │       ├── app/
 │   │       │   ├── (main)/      # home·saju·fortune·constellation·profile
 │   │       │   ├── onboarding/  # 온보딩 + 별 부여(reveal)
-│   │       │   └── api/         # auth·fortune·payments·constellation·cron …
+│   │       │   └── api/         # auth·fortune·payments·constellation·cron 등
 │   │       └── lib/             # ai-client·fortune/bucket·oauth·payments·rate-limit
-│   └── mobile/         # Expo RN — 온보딩·홈·운세
+│   └── mobile/         # Expo RN: 온보딩·홈·운세
 └── packages/
     └── shared/         # 사주 엔진·오행/별자리 상수·공유 타입·디자인 토큰
         └── src/engine/ # saju.ts·zodiac.ts·lunar.ts·seasonal.ts
@@ -94,7 +94,7 @@ stars-for-me/ (모노레포 루트)
 - **Web/API**: Next.js App Router로 온보딩·운세·궁합·인증 API 및 화면 전체 구현
 - **Mobile**: Expo 기반 온보딩·홈·운세 화면
 - **AI 파이프라인**: 운세 종류별 JSON 스키마 프롬프트 설계, Gemini→GPT-4o-mini→Mock 3단 폴백, 버킷팅·캐싱으로 호출 비용 최적화, 크론 배치 일괄 생성
-- **인프라/보안**: OAuth 3종, refresh token rotation(탈취 시 체인 revoke), OAuthState 단일 사용 replay 방지, 엔드포인트별 DB rate limit, 클라이언트 포인트 적립 액션 화이트리스트, 보안 감사 사이클 문서화(`docs/security` — audit → P0/P1 fix → 시니어 리뷰 → 검증)
+- **인프라/보안**: OAuth 3종, refresh token rotation(탈취 시 체인 revoke), OAuthState 단일 사용 replay 방지, 엔드포인트별 DB rate limit, 클라이언트 포인트 적립 액션 화이트리스트, 보안 감사 사이클 문서화(`docs/security`: audit → P0/P1 fix → 시니어 리뷰 → 검증)
 
 ## 트러블슈팅
 

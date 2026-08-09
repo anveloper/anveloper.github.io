@@ -6,8 +6,8 @@ period: "2026.06 (iOS·Android 양대 스토어 출시)"
 team: "4인 (기획 1 · 디자인 1 · 개발 2)"
 contribution: "API·백엔드 약 80% (커밋 약 80%)"
 role: "API · 백엔드 · 인프라"
-ai: "RAG 챗봇 (pgvector 임베딩 검색) · AI 주간 리포트 — SSE 스트리밍, Zod 구조 강제, 토큰 사용량 적재"
-description: "워킹맘/워킹대디를 위한 육아 정보·기록·AI 챗봇 서비스 — RAG 챗봇과 AI 주간 리포트를 갖춘 하이브리드 앱"
+ai: "RAG 챗봇 (pgvector 임베딩 검색) · AI 주간 리포트. SSE 스트리밍, Zod 구조 강제, 토큰 사용량 적재"
+description: "워킹맘/워킹대디를 위한 RAG 챗봇과 AI 주간 리포트를 갖춘 워킹맘/워킹대디용 육아 정보·기록 하이브리드 앱"
 tags:
   [
     "RAG",
@@ -42,7 +42,7 @@ demo: "https://yougabell-web-dev.vercel.app/"
 <div align="center">
   <img
     src="/images/projects/yougabell/appstore-screens.webp"
-    alt="육아밸 App Store 스크린샷 — 미션·AI 상담·주간 확인·발달 지표"
+    alt="육아밸 App Store 스크린샷: 미션·AI 상담·주간 확인·발달 지표"
   />
 </div>
 
@@ -79,16 +79,16 @@ demo: "https://yougabell-web-dev.vercel.app/"
 
 ```
 youth/ (워크스페이스 루트)
-├── yougabell/          # umbrella — 기획·스키마·결정의 진실의 소스 (docs only)
+├── yougabell/          # umbrella: 기획·스키마·결정의 진실의 소스 (docs only)
 │   └── docs/
 │       ├── design/     # 레포 전략·인증·크론 결정
 │       ├── schema/     # 도메인 스키마 11개
 │       └── features/   # 기능 기획서 (신규 기능은 여기서 시작)
-├── yougabell-api/      # NestJS + Prisma — 구현 anchor (도메인·챗봇·LLM)
-├── yougabell-web/      # Next.js — 사용자 웹 (Expo WebView 타깃)
-├── yougabell-admin/    # Next.js — 운영자 CMS
-├── yougabell-mobile/   # Expo — RN 셸 (푸시·인증·WebView 컨테이너)
-└── yougabell-cron/     # tsx + node-cron — 임시 크론 (웜업 + 알림 디스패치)
+├── yougabell-api/      # NestJS + Prisma: 구현 anchor (도메인·챗봇·LLM)
+├── yougabell-web/      # Next.js: 사용자 웹 (Expo WebView 타깃)
+├── yougabell-admin/    # Next.js: 운영자 CMS
+├── yougabell-mobile/   # Expo: RN 셸 (푸시·인증·WebView 컨테이너)
+└── yougabell-cron/     # tsx + node-cron: 임시 크론 (웜업 + 알림 디스패치)
 ```
 
 ### 주요 설계 패턴
@@ -96,7 +96,7 @@ youth/ (워크스페이스 루트)
 - **Umbrella / Anchor 분리**: 기획·결정은 umbrella(`yougabell`)에서, 도메인 구현은 anchor(`yougabell-api`)에서. Prisma schema와 OpenAPI 스펙이 코드의 단일 진실
 - **타입 공유 = OpenAPI codegen**: 별도 공유 패키지 대신 NestJS OpenAPI 스펙을 클라이언트 3개(web/admin/mobile)로 코드젠
 - **에이전트 문서 단일 소스**: 5개 레포가 동일하게 `AGENTS.md`(진실의 소스) + `@AGENTS.md`만 import하는 얇은 `CLAUDE.md` 패턴 유지
-- **파일 크기 규칙**: `.ts`/`.tsx`는 400줄을 넘기면 동일 이름 디렉토리로 전환하고 `index.ts`에서 re-export — 호출부 경로는 불변
+- **파일 크기 규칙**: `.ts`/`.tsx`는 400줄을 넘기면 동일 이름 디렉토리로 전환하고 `index.ts`에서 re-export. 호출부 경로는 불변
 
 ## RAG 챗봇 / AI 주간 리포트
 
