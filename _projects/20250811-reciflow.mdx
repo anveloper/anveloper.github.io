@@ -6,8 +6,8 @@ period: "2025.08 ~ 진행 중"
 team: "2인 (RN 프론트엔드 1 · 백엔드 1)"
 contribution: "백엔드 전담"
 role: "백엔드 · DB · 인프라"
-ai: "AI 레시피 생성 (Gemini Edge Function) — 자유 텍스트를 구조화 JSON으로 변환, 입력 토큰 상한 제어"
-description: "레시피 공유·관리 모바일 플랫폼 — Supabase(PostgreSQL) 백엔드를 중심으로 한 iOS/Android 앱 서비스"
+ai: "AI 레시피 생성 (Gemini Edge Function). 자유 텍스트를 구조화 JSON으로 변환, 입력 토큰 상한 제어"
+description: "Supabase(PostgreSQL) 백엔드를 중심으로 만든 레시피 공유·관리 iOS/Android 앱 서비스"
 tags:
   [
     "LLM",
@@ -67,7 +67,7 @@ Reciflow는 레시피를 등록·공유하고 요리 기록을 남기는 iOS/And
 
 ```
 reciflow/
-├── ReciflowBackend/    # Supabase — 주 작업 대상 (RPC·RLS·Edge·마이그레이션)
+├── ReciflowBackend/    # Supabase: 주 작업 대상 (RPC·RLS·Edge·마이그레이션)
 │   ├── supabase/
 │   │   ├── sql/
 │   │   │   ├── functions/   # 도메인별 RPC 함수 (단일 파일 단위)
